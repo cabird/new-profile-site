@@ -1,0 +1,15 @@
+{
+  "tldr": "Analyzes how build teams form and operate at Microsoft, showing that social factors (role ambiguity, knowledge sharing, trust/conflict) — more than technical issues — limit build effectiveness and proposing practical organizational and tool-based interventions to improve reliability.",
+  "details": {
+    "topic": "Build teams and team effectiveness in software engineering",
+    "problem": "Large-scale build processes are complex and often managed by emergent 'build teams'; the core problem is understanding how these teams form and why builds are unreliable or slow, particularly when social issues between builders and developers undermine effectiveness.",
+    "approach": "Three sequential studies at Microsoft: semi-structured interviews with 7 experienced builders (grounded theory coding), an online survey of 132 build practitioners (quantitative and open-ended analysis), and an 8-person focus group to evaluate and refine proposed tools and practices; analysis was framed by Cohen and Bailey's team effectiveness model and literature from organization science.",
+    "key_insights": [
+      "Most impediments to build-team effectiveness are social rather than purely technical: role ambiguity, uneven knowledge transfer, poor intergroup communication, mistrust, and conflict.",
+      "The builder role is heterogeneous and often ambiguous (operations vs. engineering); builders frequently act as developers, testers, and managers, causing evaluation and retention issues.",
+      "'Tribal knowledge' and build logs are the most used resources for failure investigation; current documentation (wikis) is often ignored because developers must actively search for relevant guidance.",
+      "Practical interventions — role redefinition (build operator vs. build engineer), socialized desktop warnings with contact info, selective process transparency, and early face-to-face or targeted meetings — were validated and refined by practitioners as feasible ways to reduce conflict and improve outcomes."
+    ],
+    "implications": "For researchers: validates applying organization and group-dynamics theories to software engineering and motivates socio-technical studies of build ecosystems; for practitioners and tool-builders: suggests low-risk, actionable changes (clear role definitions, push-based contextual guidance, transparency with careful wording, and selective early contact) that can improve build reliability, developer trust, and retention without major technical overhaul."
+  }
+}

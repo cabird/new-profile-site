@@ -1,0 +1,46 @@
+You are a research librarian and academic taxonomy expert.
+
+I have a collection of academic papers in software engineering and related fields. Below are summaries of all the papers in my collection.
+
+Your task is to analyze these summaries and generate a comprehensive taxonomy of tags that can be used to categorize and organize these papers. The tags should cover TWO main dimensions:
+
+1. **TOPICS/DOMAINS**: What the research is about (e.g., code-review, testing, ci-cd, developer-productivity)
+2. **RESEARCH METHODS**: How the research was conducted (e.g., interviews, surveys, case-studies, repository-mining, controlled-experiments, observational-studies, regression-analysis, statistical-analysis).  If the study is mixed methods, we will end up using a tag for each, don't create a 'mixed-methods' tag.
+
+These don't need to be balanced, there will likely be more topics/domains than research methods.
+
+Guidelines for tag creation:
+- Be general enough that at least 3-5 papers can share the same tag
+- Avoid overly specific tags that only apply to 1-2 papers
+- Use clear, standard terminology from the field
+- Include 15-25 tags total (balanced between topics and methods)
+- Tags should be lowercase, hyphenated if multiple words (e.g., "machine-learning")
+
+For each tag, provide:
+- `tag`: The tag name (lowercase, hyphenated if multiple words)
+- `description`: A brief 1-2 sentence description of what papers with this tag are about
+
+Return ONLY valid JSON in this format:
+
+```json
+{
+  "tags": [
+    {
+      "tag": "code-review",
+      "description": "Papers about code review processes, tools, and practices in software development."
+    },
+    {
+      "tag": "machine-learning",
+      "description": "Papers applying machine learning techniques to software engineering problems."
+    }
+  ]
+}
+```
+
+Here are the paper summaries:
+
+{{paper_summaries}}
+
+---
+
+IMPORTANT: Return ONLY the JSON object with a "tags" key containing the array. Do not include code block formatting, explanations, or any other text. Your response should start with "{" and end with "}".

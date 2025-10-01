@@ -1,0 +1,15 @@
+{
+  "tldr": "A 797-respondent survey at a large software company links Big Five personality traits to developers' beliefs and practices and finds a few robust associations (e.g., managers are more conscientious and extraverted; tool-builders show high openness/conscientiousness/extraversion and lower neuroticism) while many hypothesized differences disappear after multiple-testing correction.",
+  "details": {
+    "topic": "Personality, beliefs, and work practices of software engineers",
+    "problem": "We lack clear, empirically grounded knowledge about how software engineers' personality traits relate to their day-to-day practices and opinions, which limits understanding of team composition, tool adoption, and development culture.",
+    "approach": "The authors ran an anonymous electronic survey sent to 3,000 employees at a large software company (797 responses). Participants completed a 50-item IPIP Big Five inventory and answered 23 questions on demographics, beliefs, and practices. The authors analyzed response distributions and used Kruskal–Wallis tests (115 trait-question comparisons) with Benjamini–Hochberg correction to identify statistically significant personality differences.",
+    "key_insights": [
+      "Managers scored higher on conscientiousness and extraversion (significant after multiple-testing correction).",
+      "Engineers who built homegrown tools tended to be more open, more conscientious, more extraverted and less neurotic (several associations, some robust after correction, e.g., conscientiousness).",
+      "Listening to music while working correlated with higher openness and extraversion but lower conscientiousness, and advocates of 'Agile development is awesome' were more extraverted and less neurotic (some effects weakened after correction).",
+      "Many expected differences were absent (no personality difference between developers and testers), and only a small fraction of the 115 tests remained significant after p-value adjustment, indicating generally weak or sparse trait–practice links in this sample."
+    ],
+    "implications": "Personality has limited but non-negligible associations with certain roles, practices, and beliefs; practitioners should be cautious about using personality tests for hiring or rigid team assignment given weak and context-specific effects, and researchers should replicate this work across companies and contexts to validate which trait–practice links are reliable and practically meaningful."
+  }
+}

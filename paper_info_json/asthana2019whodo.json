@@ -1,0 +1,15 @@
+{
+  "tldr": "The authors build, deploy, and evaluate WhoDo, an interpretable reviewer-recommendation system that uses past commit/review history plus a load‑balancing penalty to automatically suggest reviewers at scale and reduce review latency.",
+  "details": {
+    "topic": "Automated code-reviewer recommendation and load balancing",
+    "problem": "Manually selecting reviewers is time-consuming and scales poorly in large repositories, often overloading a small set of experienced reviewers and increasing review latency.",
+    "approach": "They designed WhoDo, a simple, interpretable scoring model that ranks candidate reviewers by past commits and review activity on the changed files and directories with time decay and tunable weights; added a load‑balancing penalty based on a reviewer’s open review count (controlled by a θ parameter); deployed the service to 123 Microsoft repositories and evaluated it quantitatively on five repos (metrics: hit rate, average reviews per PR, PR completion time, per-reviewer active load), ran a 75-person user study to understand manual additions, and performed retrospective comparisons to prior methods.",
+    "key_insights": [
+      "WhoDo increased the average number of reviews per PR across repositories and achieved high PR-hit rates (many PRs included at least one suggested reviewer), with precision/recall comparable to prior systems.",
+      "In small repositories WhoDo reduced PR completion time substantially; in large repositories recommending without load balancing overloaded senior reviewers and increased latency, but adding load balancing reduced median/upper-bound completion time and halved per-reviewer active load.",
+      "Load balancing trades some reviewer expertise for better distribution and lower latency—more available reviewers reduce long-tail review delays.",
+      "Owners still manually add reviewers due to team/author affinity and reviewer availability, indicating future models should incorporate organizational proximity and availability signals."
+    ],
+    "implications": "A lightweight, history-based recommender can be deployed at scale to reduce reviewer discovery effort and improve review throughput, but production systems should include load‑balancing to avoid overloading experts and augment recommendations with team/affinity and availability information to increase acceptance and quality."
+  }
+}

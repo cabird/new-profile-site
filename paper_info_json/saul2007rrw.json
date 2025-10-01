@@ -1,0 +1,15 @@
+{
+  "tldr": "Use random-walk (HITS-like) ranking on an enriched callgraph neighborhood to recommend related API functions, outperforming prior structural (Suade) and frequent-itemset methods on an Apache dataset.",
+  "details": {
+    "topic": "Callgraph-based API recommendation / program understanding",
+    "problem": "Given a single function in a large codebase, help developers find other related functions when documentation or history data may be absent or unreliable.",
+    "approach": "Introduce FRAN, which builds an enriched base set around a query function (parents, siblings, spouses) and ranks nodes using a random-walk/HITS eigenvector approach; compare it to a frequent-itemset recommender (FRIAR, association-rule mining on call targets) and a reimplementation of Suade; evaluate quantitatively on a CodeSurfer-generated callgraph of Apache httpd-2.0 using the portability-layer module grouping as an oracle, plus case studies and statistical tests (p-values, F1, Wilcoxon).",
+    "key_insights": [
+      "A purely structural random-walk ranking (FRAN) on an enriched neighborhood returns more and better-ranked related functions than Suade and often outperforms a frequent-itemset mining approach.",
+      "Structural information alone (callgraph links) is a reliable signal: FRAN's rankings are statistically significant compared to random selection from the candidate set.",
+      "FRAN and FRIAR are complementary: FRAN works better for small base sets (few callers), FRIAR for large base sets; a simple switch (CAR-B) combining them improves overall F1.",
+      "FRAN is computationally fast and practical for interactive use, and generalizes to other program relationship graphs."
+    ],
+    "implications": "Developers and tool builders can use callgraph-only, random-walk ranking to produce accurate, fast API/function recommendations even when textual or historical artifacts are missing; combining structural and data-mining signals yields further gains and can be integrated into IDEs or analysis tools to speed program understanding and reduce errors."
+  }
+}

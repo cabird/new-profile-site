@@ -1,0 +1,14 @@
+{
+  "tldr": "A parody study that uses 256-character frequency vectors and logistic regression on Eclipse releases to (apparently) predict defect-prone files and isolate four correlated letters, then uses that result to demonstrate how empirical findings can be misleading when misinterpreted.",
+  "details": {
+    "topic": "Defect prediction and empirical research methodology (parody)",
+    "problem": "Empirical defect predictors often report correlations that are not actionable or causal; the paper explores how trivial features can produce seemingly strong but misleading results and highlights common research mistakes.",
+    "approach": "The authors used the public Eclipse bug datasets (releases 2.0, 2.1, 3.0), represented each source file as a 256-dimensional count vector of ASCII characters (a proxy for keystrokes), trained logistic regression models to predict whether files had post-release defects, computed Spearman correlations (with Benjamini–Hochberg correction) between individual characters and defects, reported precision/recall across train/test combinations, isolated the most correlated letters (i,r,o,p in Eclipse 3.0), proposed absurd remediation (removing letters/keyboard changes), and then unpacked methodological errors as a didactic critique.",
+    "key_insights": [
+      "Simple character-frequency features can yield non-trivial predictive performance (up to 74% precision when training and testing within the same release) but low recall (~20% average; up to 32% within one release).",
+      "Specific correlations (the 'IROP' letters i,r,o,p) were strong in one release but are dataset- and release-specific, illustrating spurious or non-generalizable findings.",
+      "The study intentionally demonstrates common empirical pitfalls: interpreting correlation as causation, cherry-picking results, lacking baselines and external validation, and overstating actionable recommendations."
+    ],
+    "implications": "Serves as a cautionary example for researchers, reviewers, and practitioners: validate models across projects/releases, compare to sensible baselines, seek causal explanations and domain theory before proposing interventions, report all relevant results (avoid cherry-picking), and be skeptical of seemingly actionable recommendations derived solely from large datasets and simple correlations."
+  }
+}

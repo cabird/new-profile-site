@@ -1,0 +1,15 @@
+{
+  "tldr": "Automatically recommends reviewers for modern code review by mining past review histories and scoring reviewer expertise using comment counts, workdays, and recency, yielding higher accuracy than commit- or path-based methods.",
+  "details": {
+    "topic": "Automatic reviewer recommendation for modern code review",
+    "problem": "Authors of code changes need to find appropriate, timely, and expert reviewers but selecting reviewers manually is hard, especially when expertise is not reflected in commit history and expertise changes over time.",
+    "approach": "cHRev mines historical code review data (Gerrit/CodeFlow) to compute per-file reviewer expertise using three normalized metrics—number of review comments, number of workdays with comments, and recency—combines these into an xFactor per reviewer-file, aggregates scores across files (with package/system fallbacks), and returns ranked recommendations; evaluated on Android, Eclipse, Mylyn and a Microsoft Office codebase and compared to REVFINDER (path/name similarity), xFinder (commit-based), and a combined RevCom, using precision, recall, F-score, and MRR with statistical testing.",
+    "key_insights": [
+      "Using review-specific signals (comment count, workdays, recency) to measure reviewer expertise yields substantially better precision, recall, F-score and MRR than path/name similarity (REVFINDER) or commit-based (xFinder) recommenders across open-source and commercial datasets.",
+      "Review history captures valuable reviewers who do not appear in commit history (e.g., testers, managers, project leads, contributors of unaccepted patches), so commit-only approaches miss many suitable reviewers.",
+      "Combining commit and review signals (RevCom) did not consistently improve results and can degrade precision/recall; depth/specificity of review contributions is more informative than breadth alone.",
+      "cHRev achieves practical ranking performance (MRR > 0.5), meaning the first or second recommendation typically contains a correct reviewer, reducing search/assignment effort."
+    ],
+    "implications": "For tool builders and teams, incorporate review-history features (comments, active review days, and recency) into reviewer recommendation systems to improve assignment accuracy and speed up reviews; for researchers, prioritize review-derived signals over commit-derived signals when modeling reviewer expertise and further explore text/issue-level features and deployment across varied projects, while noting dataset-period and generalization caveats."
+  }
+}

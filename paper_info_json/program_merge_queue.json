@@ -1,0 +1,15 @@
+{
+  "tldr": "DeepMerge uses token-level transformer models fine-tuned on mined Git and internal merge histories, combined with token alignment and careful UX, to propose and explain nontrivial program merge resolutions and reduce developer merge burden.",
+  "details": {
+    "topic": "Machine learning for program merge / merge conflict resolution",
+    "problem": "Merge conflicts in large collaborative codebases are frequent, time-consuming, and often lack intelligent tooling; existing approaches either drop changes, rely on brittle symbolic methods, or provide poor user experience for complex, token-level conflicts.",
+    "approach": "The team mined merge conflicts and their human resolutions from GitHub and Microsoft repositories, curated datasets (excluding trivial one-sided merges and noisy edits), represented edits at token level (using Tree-sitter and language tokenizers), fine-tuned pretrained transformer models for classification/generation of merges, ran user studies with developers using real conflicts from their work to guide UI design and evaluate suggestions, and explored prompt-driven LLM approaches (e.g., GPT-4) and explainability features.",
+    "key_insights": [
+      "Token-level granularity is crucial: many complex merges require token-level alignment and insertion/deletion handling rather than line-level or purely syntactic approaches.",
+      "A large fraction of merges are trivial (often choosing one side), so careful dataset curation is necessary to focus models on meaningful, nontrivial conflicts.",
+      "User experience and explainability matter as much as model accuracy: developers need provenance, the base context, and editable suggestions; multiple ranked suggestions improve acceptance.",
+      "Empirical (data-driven) correctness from developer resolutions is a practical ground truth but semantic/correctness ambiguity remains, motivating future work on semantic/silent conflicts and correlated conflict resolution."
+    ],
+    "implications": "For researchers: combining token-level representations, pretrained transformers, and curated real-world data is a promising direction for automated merging and invites further work on semantics and correlated conflicts; for tool builders and practitioners: integrating ML merge suggestions with clear provenance, editable UI, and explainability can significantly reduce merge friction but requires careful dataset engineering and UX design to gain developer trust and adoption."
+  }
+}

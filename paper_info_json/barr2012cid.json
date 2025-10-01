@@ -1,0 +1,15 @@
+{
+  "tldr": "Analyzes why OSS projects switched to distributed version control and quantitatively shows that history-preserving branching (not distribution) drove adoption because branches are used for cohesive, isolated work that reduces integration interruptions.",
+  "details": {
+    "topic": "Branching and version control practices in software development",
+    "problem": "Why did open-source projects rapidly adopt distributed version control (DVC), and how well do DVC branches provide cohesion (group related changes) and isolation (reduce interruptions and integration work) in practice?",
+    "approach": "Mixed-methods study: semi-structured interviews with lead developers to identify motivations, quantitative mining of version-control histories from 60 OSS projects to measure changes in branch usage after switching to DVC, and an in-depth analysis of the Linux Git history using a linearization technique, Monte Carlo simulation of simulated branches, a directory-distance metric for branch cohesion, and a distracted-commit metric to estimate integration interruptions.",
+    "key_insights": [
+      "Adoption driver: Projects largely kept a centralized workflow but dramatically increased branch usage after switching to DVC—branching and improved merge support, not distribution, mainly motivated adoption.",
+      "Branches are cohesive: Actual branches in Linux modify files that are significantly closer in the directory hierarchy than equivalent-length simulated sequences from a linearized history, and cohesion increases with branch length.",
+      "Branches reduce interruptions: Linearized-history analysis shows concurrent edits to the same files are non-trivial (non-empty overlap roughly once every 22 commits; full overlap ~1 in 35), and branching defers much of the semantic integration work that would otherwise interrupt developers (estimated avoided distractions ≈ once every ~24 commits under conservative assumptions).",
+      "New measures: The paper defines branch cohesion (via directory distance) and distracted commits (an index-based measure of potential integration interruption) to quantify branch benefits."
+    ],
+    "implications": "For researchers: provides measurable metrics and methods (linearization, cohesion, distracted commits) to study branching effects; for practitioners and tool builders: validates that lightweight, history-preserving branching improves modular development and reduces integration interruptions, suggesting investment in fast, reliable merging and branch-management practices and tools to help detect and manage cross-branch coupling; for project managers: encourages use of cohesive feature branches but highlights the need to balance isolation with timely integration to avoid wasted work."
+  }
+}

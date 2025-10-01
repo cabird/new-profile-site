@@ -1,0 +1,15 @@
+{
+  "tldr": "Using interviews and a large survey at Microsoft, the authors identify fifteen attributes that engineers and managers perceive as defining great software engineering managers and show that people-management skills (not peak technical skill) are the most important.",
+  "details": {
+    "topic": "Management of software engineering teams",
+    "problem": "There is little domain-specific, empirical evidence about what makes a great manager for software engineers, leaving practitioners without clear, research-backed guidance on which manager attributes matter in software development contexts.",
+    "approach": "Mixed methods: 37 semi-structured interviews with engineers and managers to elicit attributes and examples, followed by a confirmatory survey (3,646 invited; 563 responses) that rated the emergent 15 attributes on a 1–10 importance scale; additional cross-domain survey (7,100 invited; 1,082 responses) compared perceptions across knowledge-worker groups; analysis used qualitative coding and card-sorting to form a conceptual framework, descriptive statistics, PCA, regression models, and a scenario hiring question.",
+    "key_insights": [
+      "Fifteen attributes grouped into three manager functions (cultivates engineering wisdom, motivates engineers, mediates communication) capture what respondents view as great; top-rated attributes include maintaining a positive working environment, growing talent, and enabling autonomy.",
+      "Being sufficiently technical is useful (for respect, comprehension, and advocacy) but technical excellence is not the primary determinant of a great engineering manager—social/people skills are more critical, and 75% preferred a candidate with excellent social skills over one with excellent technical skills in a hiring scenario.",
+      "Engineers and managers largely agree on important attributes, but managers value team-level, motivational attributes (inspiring, building culture, relationships) more highly than engineers do.",
+      "Comparing domains, software engineers place relatively higher importance on clearing the path to execution and technical comprehension but lower importance on building team culture and driving alignment than several other knowledge-worker groups."
+    ],
+    "implications": "For researchers: the 15-attribute framework suggests measurable constructs to study how manager behaviors affect developer productivity, quality, and retention and to integrate organizational-psychology constructs into SE research; for practitioners and organizations: hiring, promotion, and training should emphasize people-management skills (coaching, autonomy, feedback, shielding teams) alongside ‘sufficient’ technical understanding, and management-development programs should be tailored to software engineering's specific priorities (e.g., protecting flow, enabling experimentation); for multi-disciplinary coordination, recognize domain differences when transferring management practices across functions."
+  }
+}

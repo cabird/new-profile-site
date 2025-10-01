@@ -1,0 +1,15 @@
+{
+  "tldr": "Class size explains most of the variation in class change-proneness; design-pattern and metapattern roles add little additional predictive power once size is accounted for.",
+  "details": {
+    "topic": "Design patterns, metapatterns, and change-proneness in object-oriented software",
+    "problem": "People expect certain classes (those playing particular design-pattern roles) to be more or less stable, but it is unclear whether role/structure or simple class size is the real driver of change-proneness.",
+    "approach": "Empirical analysis of three Java systems (JHotDraw, Xerces, Eclipse JDT): detect design patterns with DeMIMA and structural metapatterns with Thex, identify stable pattern/metapattern instances across releases, measure class size (LOC) and number of changes (distinct commits and semantic changes via Change Distiller), then run multiple linear regression models (log-transformed variables, release fixed effects, weighted effect coding for roles) to quantify how much variance in change-proneness is explained by roles versus size.",
+    "key_insights": [
+      "Class size (LOC) is the dominant predictor of change-proneness across projects and patterns; size is significant and positively related to changes in every model.",
+      "When controlling for size, design-pattern and metapattern role predictors add very little explanatory power (typically under a few percent of variance); many role effects become insignificant or change sign after size control.",
+      "Pattern and metapattern roles are strongly associated with class size (roles partially mediate change-proneness through size), so previously observed role differences can often be traced to size differences of the classes playing those roles.",
+      "Metapatterns (purely structural groupings) reproduce the same qualitative role trends as design patterns and are easier to detect, but they do not materially improve prediction of change-proneness beyond size."
+    ],
+    "implications": "Researchers should control for class size when studying pattern-related stability claims (to avoid confounding); practitioners and tool-builders who need quick indicators of change-proneness can rely on class size as a simple, fast proxy rather than expensive/fragile pattern detection; however, pattern/metapattern information remains valuable for design reasoning and early prediction of future class size and behavior."
+  }
+}

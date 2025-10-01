@@ -1,0 +1,15 @@
+{
+  "tldr": "Paired interviews of 54 developers show that differences in GenAI tool use arise from individual mindsets and strategies (e.g., seeing the tool as a collaborator vs a feature, experimenting vs conserving) and from team/organizational support, producing a 'Productivity Pressure Paradox' where managerial expectations for immediate gains block the learning needed to realize those gains.",
+  "details": {
+    "topic": "Developer adoption and integration of generative AI tools in software engineering",
+    "problem": "Despite broad availability of GenAI tools, adoption is uneven and it's unclear why developers on the same team adopt tools differently or why organizational push for productivity often fails to deliver expected gains.",
+    "approach": "Sequential semi-structured paired interviews with 54 developers (27 pairs) from the same teams selected using internal telemetry (GitHub Copilot usage) were analyzed via iterative thematic qualitative analysis and member checking to compare frequent vs. infrequent users within matched team contexts.",
+    "key_insights": [
+      "Mindset divides: frequent users often frame GenAI as a collaborator with realistic expectations, while infrequent users treat it as a utility feature and hold misaligned expectations.",
+      "Engagement patterns differ: frequent users adopt experimental, continuous integration and self-directed learning approaches; infrequent users take conservative, task-limited approaches and engage minimally in learning.",
+      "Responses to failure diverge: frequent users show adaptive persistence (refining prompts, breaking tasks down), whereas infrequent users are more likely to quickly abandon GenAI approaches.",
+      "Organizational effects and the 'Productivity Pressure Paradox': leadership messaging, context-specific resources, social learning, and protected time can amplify or dampen individual adoption, and expecting immediate productivity without scaffolding prevents the skill development required to realize productivity gains."
+    ],
+    "implications": "Organizations should shift responsibility from individual developers to systematic support—providing clear messaging, team-specific demos, shared learning structures, and protected experimentation time—to realize GenAI productivity benefits; researchers should study temporal adoption dynamics, mental-model interventions, and pedagogical changes to cultivate AI-fluency among developers."
+  }
+}

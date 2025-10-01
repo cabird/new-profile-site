@@ -1,0 +1,15 @@
+{
+  "tldr": "Leverages a large heterogeneous socio-technical graph and a 2-layer graph convolutional network to recommend code reviewers, surfacing qualified reviewers that file-history heuristics miss and improving recommendations particularly for large projects.",
+  "details": {
+    "topic": "Code reviewer recommendation via graph neural networks",
+    "problem": "Existing reviewer recommenders rely mainly on historical file-change information and therefore miss developers who have relevant expertise but have never touched the exact files; this can slow development and concentrate review load on a few people.",
+    "approach": "Build a large socio-technical graph (authors, reviewers, PRs, files, work items, tokenized text) from 332 Microsoft repositories (5.86M nodes, 23.8M edges, ~2.5 years of history), augment with text tokens and word co-occurrence, train a 2-layer relational Graph Convolutional Network as a link-prediction task to produce embeddings, perform inductive inference for new PRs by aggregating neighbor embeddings, and evaluate via retrospective tests on 254K PR-review pairs, comparison with a production rule-based baseline, a 500-PR user study (287 responses), and an ablation study.",
+    "key_insights": [
+      "CORAL reproduces historical reviewer choices well (73% top-3 accuracy; strong MRR) and models complex socio-technical relations beyond file authorship.",
+      "CORAL outperforms a rule-based file-history baseline on large and medium projects, while the baseline performs better on small projects, indicating complementary strengths.",
+      "A large user study found 67.6% positive relevance feedback (59% willing to act), showing CORAL surfaces qualified reviewers who were not previously invited.",
+      "Ablation shows both file-change information and natural-language tokens are important; files give a larger boost but combining files+words yields the best performance."
+    ],
+    "implications": "Heterogeneous repository graphs plus GNNs can broaden and improve reviewer recommendations (reducing bottlenecks and discovering latent expertise across projects), suggesting production systems should combine graph-based ML with heuristics; practical deployment needs to handle user role/movement, edge decay and noisy automated PRs, and may benefit from project-size or domain-specific models."
+  }
+}

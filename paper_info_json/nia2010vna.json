@@ -1,0 +1,14 @@
+{
+  "tldr": "Quantitatively evaluates how temporal aggregation (transitive faults) and missing links in mailing-list reply-to networks affect common social network metrics in three OSS projects and finds those metrics are largely robust.",
+  "details": {
+    "topic": "Validity of social network analysis on open-source mailing-list data",
+    "problem": "Network metrics computed from reply-to email archives may be distorted by temporal aggregation (causing spurious inferred information flow) and by unobserved/missing links, raising questions about the validity of SNA-based findings.",
+    "approach": "The authors mined reply-to email archives from three OSS projects (Apache, Perl, MySQL), built directed information-flow networks, varied aggregation intervals from 1 hour to project lifespan to measure 'transitive faults' (2-paths with decreasing timestamps), and evaluated metric stability (number of 2-paths, betweenness, clustering) via Spearman rank correlations; they also simulated missing links using three models (Time Window, Erdős–Rényi, Preferential Attachment) with Monte Carlo trials and measured changes in top-10% node rankings.",
+    "key_insights": [
+      "Transitive faults can be common (worst-case ≈ 50%) and increase with aggregation, but node rankings based on 2-path counts remain highly correlated with and without those faults for non-trivial aggregation intervals.",
+      "Augmenting networks with many 'missing' edges under Time Window, ER, and PA models does not substantially change top-ranked nodes by betweenness or clustering (high Spearman correlations), i.e., those metrics are robust to modeled missing links.",
+      "Stability depends on activity density and time-window choice: very small aggregation intervals and sparse projects (e.g., MySQL at hourly granularity) reduce stability, so selection of epoch size and per-project robustness checks matter."
+    ],
+    "implications": "The results give empirical support that commonly used SNA measures (clustering coefficient, 2-path counts, betweenness) can be resilient to realistic data deficiencies in mailing-list–derived OSS networks, so prior and future studies using these metrics can have greater confidence—but researchers should still validate metric robustness for their specific data, remember that metric stability does not guarantee task utility, and apply the authors' transitive-fault and augmentation tests when feasible."
+  }
+}

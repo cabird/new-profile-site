@@ -1,0 +1,15 @@
+{
+  "tldr": "Compares how preexisting and newly-formed teams operate in a large corporate hackathon and identifies coordination styles, factors that influence whether projects are sustained, and the event's perceived benefits for participants.",
+  "details": {
+    "topic": "Corporate hackathons — team coordination, project sustainability, and participant impacts",
+    "problem": "Corporate hackathons are widespread but poorly understood: it's unclear how team familiarity (preexisting vs newly-formed teams) shapes coordination, project selection, goal setting, continuation after the event, and individual outcomes.",
+    "approach": "A mixed-methods multiple-case study of five teams (three flash teams, two preexisting teams) at the 2017 Microsoft OneWeek Hackathon using ethnographic observation (15–24.5 hours per team), 39 semi-structured interviews (pre-event, post-event, and 4-month follow-up), and grounded coding (open and axial) with cross-case comparison.",
+    "key_insights": [
+      "Different coordination styles: preexisting teams (PETs) worked much like 'another day at the office' leveraging shared norms to produce more complete, immediately useful artifacts; flash teams (FTs) used role-based coordination (developer/UX/PM/marketing roles) to produce lighter prototypes and demos aimed at external audiences.",
+      "Project sustainability depended on leadership and preparation: career-oriented leaders, project-focused pre-event preparation, matching tasks to existing skills, active promotion (science fair + outreach), and alignment with existing product portfolios increased the chance a project would be continued.",
+      "Tradeoffs exist: FTs offered stronger networking, learning, and opportunities to try new roles (valuable for horizontal career moves), but pursuing novel roles/ideas and focusing on demos reduced likelihood of continuation compared with PETs working on in-scope extensions of existing work.",
+      "Hackathon participation produced perceived benefits including technical and project-management skill gains, expanded internal networks, and career impacts (both promotions and lateral moves), even when projects themselves were not continued."
+    ],
+    "implications": "For organizers and managers: enable and incentivize pre-event team preparation, improve matchmaking and mentor/apprentice role slots for flash teams, and help teams find 'homes' (product groups) to boost continuation; for practitioners: align hackathon goals (learning vs productization) with team composition and leader orientation; for researchers: test generalizability across companies and analyze long-term effects on innovation pipelines and social networks."
+  }
+}

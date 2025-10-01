@@ -1,0 +1,15 @@
+{
+  "tldr": "Analyzes how specific hackathon design choices (competition vs collaboration, participant selection, project/team formation, pre/post work) influence outcomes such as product innovation, learning, networking, and workforce development, based on empirical studies and literature.",
+  "details": {
+    "topic": "Design and outcomes of hackathons in organizational contexts",
+    "problem": "Organizations run hackathons for many purposes (innovation, learning, networking, culture change), but it is unclear which design choices best achieve particular goals and what tradeoffs those choices introduce.",
+    "approach": "Mixed-methods empirical study and literature synthesis: ethnographic observation of 10 hackathons across scientific communities, a large corporate event, and universities; 103 interviews with organizers and participants; four post-hackathon surveys; and a review of published research to identify goals, design options, and tradeoffs—with a focus on corporate hackathons.",
+    "key_insights": [
+      "Hackathons can serve multiple distinct goals beyond prototyping (enriching intracompany networks, collaborative learning, culture change, workforce development), and organizers and participants often have different priorities.",
+      "Core design choices—competitive vs. collaborative incentives, attendee skill mix, project selection method, team formation, and pre/post work—strongly shape which goals are achieved and produce tradeoffs.",
+      "Skill diversity and open idea generation increase creativity and learning but can slow technical progress and coordination; mentoring and manageable novice-to-expert ratios help mitigate this.",
+      "Competition increases effort and distinct solutions but can reduce cross-team communication and demotivate many participants; sustained impact of prototypes typically requires organizational follow-up and support."
+    ],
+    "implications": "Design hackathons intentionally to match stated goals: choose incentives (competition or collaboration), recruitment/selection, and team formation practices that align with desired outcomes; provide mentorship, encourage appropriate prework, and plan post-event support and evaluation so prototypes and social learning persist—insights useful for researchers studying organizing forms and practitioners implementing hackathons in companies and universities."
+  }
+}

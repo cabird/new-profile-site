@@ -1,0 +1,15 @@
+{
+  "tldr": "Develops and validates a theory that developer job satisfaction and perceived productivity are bidirectionally linked and mediated by specific social and technical factors and by work-context variables.",
+  "details": {
+    "topic": "Software developer job satisfaction and perceived productivity",
+    "problem": "Organizations and researchers often assume satisfaction and productivity are interchangeable or directly correlated, but which factors drive each construct and how they relate across development contexts is unclear.",
+    "approach": "Combined literature review and a three-month site visit at Microsoft to derive candidate factors, then iteratively designed and deployed surveys (final N=465 developers) measuring importance and satisfaction for 44 factors, impact of 24 challenges, and self-reported time on activities; used Spearman correlations (with Bonferroni correction), hierarchical clustering to form composite factors, PAM clustering for work-type groups, and stepwise linear regression (with subgroup analyses by tenure and work-type) to build and instantiate a descriptive theory.",
+    "key_insights": [
+      "Overall job satisfaction and perceived productivity exhibit a bidirectional relationship, but that relationship is mediated by multiple social and technical composite factors (e.g., impactful work, work culture, autonomy, and engineering systems) so one cannot substitute for the other.",
+      "Manager quality and team/work culture strongly influence many satisfaction dimensions: when 'manager' is reported as a challenge it correlates with lower satisfaction across numerous factors.",
+      "High-impact challenges for developers are poor software architecture, legacy code, and lack of documentation; engineering tools/processes, interruptions, and many external dependencies also substantially reduce perceived productivity and satisfaction.",
+      "Work context (seniority and developer 'type of work' clusters) changes which factors explain satisfaction and perceived productivity: juniors, seniors, heavy coders and those spending more time in meetings have different significant predictors."
+    ],
+    "implications": "Researchers should treat satisfaction and perceived productivity as related but distinct constructs, adopt multi-factor models and context-aware analyses, and can reuse the survey/instrument to instantiate the theory in other settings; practitioners should address both technical issues (architecture, legacy code, documentation, tools/processes) and non-technical ones (manager behavior, work culture, meaningful/impactful tasks, autonomy) and tailor interventions to developer experience and time-allocation profiles rather than relying on a single proxy metric."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "tldr": "A what-if analysis and developer survey quantify the cost (delay) and benefit (isolation) of source-control branches and show that removing low-benefit/high-cost branches in Windows would cut transit time substantially while adding very few conflicts.",
+  "details": {
+    "topic": "Branching in version control / SCM",
+    "problem": "Branches enable parallel development but can introduce long delays and costly integrations; teams lack quantitative, per-branch measures to decide which branches help and which hinder progress.",
+    "approach": "Surveyed 124 experienced Microsoft engineers about branch usage and anti-patterns, then developed a what-if analysis that replays historical SCM activity while simulating branch-removal scenarios to compute two metrics — delay (change in transit time to root) and isolation (conflicts avoided) — both raw and normalized; applied the technique to Windows (and other products) to evaluate single-branch, subtree, and max-depth scenarios and to support mid-cycle decision experiments.",
+    "key_insights": [
+      "Branches produce a measurable tradeoff between isolation and liveness: some branches (\"sheep\") provide isolation with low delay, while others (\"goats\") incur high delay but little isolation.",
+      "Simulated removal of goat branches in Windows would have saved about 8.9 days of delay per edit while adding only ~0.04 conflicts per edit; this decision approach achieves ≈92% of the optimal time savings with modest extra conflicts.",
+      "Deep branch levels contribute little to overall delay; most transit-time cost comes from shallower branches, so limiting maximum depth has limited benefit unless made very shallow.",
+      "Branch categorizations made mid-release are stable (85% unchanged, Kendall's τ ≈ 0.86), so earlier metric-driven actions are reliable."
+    ],
+    "implications": "Provides a practical, data-driven framework for monitoring branch health and making branch-refactoring decisions (remove/split/merge branches, change integration cadence); enables tooling and research for branch optimization, recommender systems, and predictive models, and helps teams balance isolation versus rapid integration to improve developer productivity and reduce integration overhead."
+  }
+}

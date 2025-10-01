@@ -1,0 +1,14 @@
+{
+  "tldr": "A mixed survey and observational study at Microsoft finds developers form opinions mostly from personal experience and peer opinion, and those beliefs often do not correspond closely to archived project evidence.",
+  "details": {
+    "topic": "Evidence-based software engineering; developer beliefs versus empirical evidence",
+    "problem": "Developers hold strongly held beliefs about software practices, but it's unclear whether those beliefs come from rigorous evidence or from personal and social sources, and whether they match actual project data.",
+    "approach": "The authors ran a triangulated study: a survey of ~2,500 Microsoft developers (564 responses) asking agreement and source of belief on a set of software-engineering propositions, collected demographics and project identifiers, and carried out observational analyses on archived repository data from two large projects (A and B) to test one controversial proposition (effects of geographic distribution on defect occurrence) while controlling for confounders.",
+    "key_insights": [
+      "Developers rank personal experience and peer opinion as the primary sources of their beliefs, with research papers ranked low.",
+      "In the two-project observational study, geographic distribution had a statistically significant but practically negligible effect on defect rates after controlling for confounders.",
+      "Developers' subjective beliefs sometimes matched project-level evidence (project B) but often did not (project A), indicating beliefs are frequently formed subjectively rather than from rigorous evidence."
+    ],
+    "implications": "Promoting evidence-based software engineering (through better dissemination of research, data-driven process improvement, and curricular change) is necessary to align practitioner beliefs with empirical findings; researchers should make results more accessible and actionable and practitioners should rely less on anecdote and more on controlled evidence when shaping practices."
+  }
+}

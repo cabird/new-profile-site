@@ -1,0 +1,15 @@
+{
+  "tldr": "An empirical study of Windows Vista shows that geographically distributed in-house development had little to no effect on post-release failure rates once team size and other factors are controlled.",
+  "details": {
+    "topic": "Geographically distributed software development and software quality",
+    "problem": "Conventional wisdom holds that geographically distributed teams produce lower-quality software (more post-release failures) than collocated teams; the study asks whether distribution within a single company increases post-release failures and whether distributed components differ in complexity or other characteristics.",
+    "approach": "The authors analyzed development and post-release data from Windows Vista: thousands of binaries and developers, commit locations (59 buildings, 21 campuses across continents), and six months of post-release failure records. Binaries were categorized by geographic dispersion (building → world) using commit shares (75% threshold for level assignment) and also binarized into distributed vs collocated at multiple levels. They computed code metrics (size, complexity, churn, dependencies, test coverage), team metrics (number of developers, ownership), performed manual inspections, and applied statistical tests (Mann–Whitney, Spearman correlations, logistic and linear regression) including models that control for number of developers.",
+    "key_insights": [
+      "Distributed binaries had only a small raw increase in failures (~8–10%), and that effect largely disappears or becomes negligible when controlling for the number of developers on a binary.",
+      "Component characteristics (complexity, churn, dependencies, test coverage) were very similar between distributed and collocated binaries; managers did not systematically assign simpler or less critical components to distributed teams.",
+      "Organizational practices—shared tools/processes, strong code ownership, common schedules, liaisons and travel, and organizational integration across sites—likely mitigated many pitfalls of geographic distribution.",
+      "Organizational distribution matters more than geographic distribution: how work is organized and owned is a stronger predictor of post-release defects than physical location."
+    ],
+    "implications": "For researchers: distribution alone is not a reliable predictor of post-release defects—future work should isolate causal mechanisms and test generalizability beyond single-company, in-house projects. For practitioners and managers: in-house global development can achieve collocated-quality outcomes by investing in common tools and processes, clear end-to-end ownership, frequent synchronous communication (rotating schedules/liaisons/travel), and organizational integration; also monitor team size and coordination overhead since they drive much of the observed quality differences."
+  }
+}

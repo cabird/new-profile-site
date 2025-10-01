@@ -1,0 +1,14 @@
+{
+  "tldr": "Mined Postgres mailing-list and CVS history to construct an email-based social network and show that social-network metrics strongly correlate with development activity and that developers occupy higher-status network positions.",
+  "details": {
+    "topic": "Social network analysis of open-source developer communication",
+    "problem": "Understand how mailing-list communication and social-network position relate to actual development activity in an open-source project, and handle noisy data such as multiple email aliases.",
+    "approach": "Parsed ~110k Postgres mailing-list messages (restricted to period with message-ID headers), resolved email aliases with heuristic clustering and manual verification to produce ~3,293 identities, built a reply-based social network, computed node metrics (in-degree, out-degree, betweenness), matched identities to CVS accounts and 83k source/document changes, and ran statistical analyses (Spearman correlations, significance tests) plus distributional analysis.",
+    "key_insights": [
+      "Developers have markedly higher in-degree, out-degree, and betweenness (about an order of magnitude) than non-developers, indicating higher social status in the mailing-list network.",
+      "Social-network metrics are highly correlated with CVS activity (source changes) — for Postgres document changes also correlate strongly, unlike in prior Apache results.",
+      "Message- and developer-level activity distributions exhibit power-law behavior, supporting the validity of the mining approach."
+    ],
+    "implications": "For researchers, the work validates cross-project mining methods and shows social metrics can serve as proxies or predictors of development activity; for project managers and tool builders, monitoring mailing-list interactions can help identify central contributors and coordination patterns; practically, accurate alias resolution and awareness of project-specific practices (e.g., docs vs. source roles) are crucial when applying these analyses."
+  }
+}

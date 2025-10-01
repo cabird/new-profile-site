@@ -1,0 +1,15 @@
+{
+  "tldr": "Quantitatively analyzes how tenure, demonstrated technical contribution, and social status affect the timing and likelihood that mailing-list participants become committers in open-source projects using hazard-rate models on Apache, Postgres, and Python.",
+  "details": {
+    "topic": "Open-source project immigration / onboarding",
+    "problem": "Volunteer-led projects must attract, evaluate and admit external contributors into the core developer group, but prior work is mostly qualitative and we lack statistical evidence about which behaviors (time on list, patching, social standing) influence who gets admitted and when.",
+    "approach": "Developed a theory of immigration and applied piecewise-constant proportional hazard (survival) models to mined mailing-list and repository data from Apache, Postgres, and Python; constructed monthly social networks (normalized indegree), counted patch submissions and messages, controlled for project age and developer population, and tested effects on time from first mailing-list post to first commit.",
+    "key_insights": [
+      "Tenure dependence is often non‑monotonic: in Apache and Postgres the immigration hazard rises then falls with time (peak around ~1 year), while Python showed no significant tenure effect.",
+      "Demonstrated technical contributions (patch submissions) significantly increase immigration probability in Postgres and especially Python (≈10% per patch in Python), but were not significant in Apache.",
+      "Social status/activity (normalized indegree) positively and significantly increases the chance of becoming a developer across all three projects, though effect sizes vary by project.",
+      "Effects vary by project governance, formality of immigration norms and technical complexity, implying institutional context shapes which signals matter most."
+    ],
+    "implications": "For researchers: demonstrates survival analysis as a rigorous method to study role migration in FLOSS and highlights the need to consider project-level institutional differences; for project stewards: suggests formalizing signals (encouraging visible patch submissions and social engagement) can improve newcomer selection and retention; for potential contributors: active, visible technical contributions and community engagement materially increase the odds of gaining commit access, though the importance of each signal depends on project culture."
+  }
+}

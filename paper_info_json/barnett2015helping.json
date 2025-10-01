@@ -1,0 +1,15 @@
+{
+  "tldr": "An automated static-analysis tool (CLUSTERCHANGES) groups diff-regions in code review changesets by def-use relationships to decompose large, tangled changes into independent partitions that help authors and reviewers understand and manage reviews.",
+  "details": {
+    "topic": "Automated code-review decomposition / program analysis",
+    "problem": "Changesets often contain multiple independent edits (bug fixes, refactorings, tests, etc.) that make code reviews hard to understand and slow down reviewers, but developers rarely annotate or split such changes manually.",
+    "approach": "The authors implemented CLUSTERCHANGES, a prototype that parses C# after-files from a changeset using Roslyn, extracts definitions and uses, projects def-use and use-use relations onto diff-regions, computes partitions via the transitive closure of related diff-regions, visualizes partitions in a tool, and evaluated it quantitatively on 1000 Microsoft changesets and qualitatively via manual inspection and a 20-developer user study.",
+    "key_insights": [
+      "Using def-use relationships alone yields precise groupings with no observed false positives in non-trivial partitions (i.e., grouped regions were not incorrectly combined).",
+      "Around 42% of analyzed changesets contain more than one non-trivial partition, and on average 66% of changed methods belong to non-trivial partitions, indicating substantial potential for decomposition.",
+      "Most developers in the user study (16/20) agreed the non-trivial partitions matched their intent and found the decomposition useful for reviewing, prioritizing, and assigning expertise-based reviewers.",
+      "The approach has false negatives: many trivial partitions should be merged but are missed due to unmodeled relationships (custom attributes, overrides, cross-language or dynamic links, renames), suggesting extensions are needed."
+    ],
+    "implications": "A lightweight, compiler-driven def-use partitioning can meaningfully reduce reviewer cognitive load and enable targeted reviews, reviewer assignment, and better commit hygiene; integrating such tooling into review systems (and extending it to capture additional relations) could improve review effectiveness and workflow in practice."
+  }
+}

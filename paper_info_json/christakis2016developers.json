@@ -1,0 +1,15 @@
+{
+  "tldr": "An empirical study at Microsoft (interviews, a 375‑response survey, and analysis of 256 live‑site incidents) finds that developers want static analyzers that integrate into workflow, are fast or staged, have low false positive rates and configurable rules, and that there is a mismatch between the issues developers request and the high‑severity defects that occur in production.",
+  "details": {
+    "topic": "Program (static) analysis adoption and developer needs",
+    "problem": "Researchers produce many static analysis tools, but it is unclear which designs practitioners will actually adopt and what features, tradeoffs, and reporting styles developers need for tools to be useful in real-world development.",
+    "approach": "Multi-method empirical study at Microsoft including interviews, a pilot and beta then a final anonymous survey sent to 2,000 developers (375 responses, median 9 years experience), analysis of 256 live‑site incidents from 17 services, and an inventory/comparison of industry analyzers; quantitative ranking, statistical tests, and qualitative coding were used.",
+    "key_insights": [
+      "Top barriers to adoption are mismatched default rules, poor/wrongly phrased warnings, and high false positive rates; developers prefer configurable defaults and good suppression mechanisms (source annotations favored).",
+      "Developers want incremental/changelist and directed (method/file) analyses and favor a two-stage model: fast editor feedback plus slower, deeper offline analysis; most will tolerate minutes of analysis but prefer false positive rates under ~15–20%.",
+      "There is a mismatch between developer preferences and production pain: 65% of live‑site incidents are reliability errors, yet developers rank reliability relatively low as what they want analyzers to find—indicating limited trust in analyzers to find intricate defects.",
+      "Many developers are willing to add lightweight, language‑level annotations/specifications to improve analysis, but most do not want to author custom analyzer rules; determinism, integration into workflow, and suggested fixes increase trust and uptake."
+    ],
+    "implications": "To increase real‑world impact, program analysis research and tool builders should prioritize incremental/compositional analyses that integrate seamlessly (IDE/build/review), provide sensible, configurable default rule sets, produce clear deterministic warnings with low false positive rates, and adopt a two‑stage (fast editor + deep offline) deployment model; researchers should also address the gap by improving analyzers' ability to detect reliability issues and by focusing on usability (good messages, suppression, and easy annotations) so practitioners will trust and act on findings."
+  }
+}

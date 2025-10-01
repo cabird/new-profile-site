@@ -1,0 +1,14 @@
+{
+  "tldr": "Automatic methods to detect patch submissions on project mailing lists and determine whether those patches were applied to source repositories, demonstrated on Apache, Python, PostgreSQL and (submission-only) MySQL.",
+  "details": {
+    "topic": "Mining patch submission and acceptance in open source projects",
+    "problem": "Patch submission via mailing lists is a key entry path for newcomers to OSS, but there has been little automated extraction and matching of those mailed patches to repository changes to study who submits patches and which are accepted.",
+    "approach": "The authors mined full mailing-list archives and repository histories, used regular expressions and heuristics to extract patch hunks from emails, tokenized patches and candidate files (with language-specific scanners), applied matching that tolerates comment changes and identifier renamings, set a tunable hunk-match threshold (≈75%) to mark acceptance, and evaluated the tool on Apache, Python, PostgreSQL and MySQL (submission-only) datasets with manual precision checks and recall estimates against CVS acknowledgements.",
+    "key_insights": [
+      "The extraction + matching pipeline achieves high precision (97% on a random sample of identified applications) but recall is limited (lower-bound ~46% when compared to CVS acknowledgements) because many accepted patches are modified prior to commit.",
+      "Non-developers submit a large share of patches (e.g., across studied projects many submissions came from non-devs) and a substantial subset of those are accepted (hundreds of acceptances in Apache, Python, PostgreSQL).",
+      "Robust matching requires token-level comparison, comment-insensitive matching, and handling identifier-renaming; naive line-based reverse-apply approaches miss many real applications."
+    ],
+    "implications": "Providing an automated, reasonably-precise way to link mailed patches to repository commits enables quantitative study of newcomer onboarding, reviewer/contributor roles, hotspot files/areas in codebases, and release-time dynamics; it also supports tools for provenance, contributor metrics, and improving patch-review workflows, while future work should focus on improving recall for modified/renamed commits."
+  }
+}

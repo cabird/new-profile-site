@@ -1,0 +1,14 @@
+{
+  "tldr": "Manually map top contributors to organizations and locations for Firefox and Eclipse, quantify geographic and organizational distribution per component, and analyze how those distribution measures relate to pre- and post-release defects.",
+  "details": {
+    "topic": "Geographic and organizational distribution in open source software",
+    "problem": "There is little empirical knowledge about how geographically and organizationally distributed development occurs in large open source projects and what effect such distribution has on software quality.",
+    "approach": "The authors manually identified the top contributors (accounting for 95% of commits) in FIREFOX and ECLIPSE, determined their organizations and geographic locations using email, web, social profiles, and direct contact; mined CVS and Bugzilla histories; computed distribution measures (LEVEL, spatial/temporal dispersion, number of organizations, ownership); and used linear regression (with controls like LOC and churn and log transforms to satisfy assumptions) to relate distribution measures to pre- and post-release defects.",
+    "key_insights": [
+      "FIREFOX is both geographically and organizationally distributed (Mozilla Corp ~47% of commits, many other orgs contribute); components that are globally distributed tend to be larger, have more commits and contributors, and show increased pre-release defects even after controlling for size and churn.",
+      "ECLIPSE is organizationally centralized (IBM ~91% of commits) and at the component/plugin level is largely single-site; when components are geographically or organizationally distributed they often have substantially more defects, but effects vary across releases and sample sizes for distributed components are small.",
+      "Distribution effects are context-dependent: geographic distribution (spatial/level/worldwide) is more consistently associated with higher defects prior to release than after release, and organizational ownership/number of organizations show complex relationships (bivariate vs. multivariate results can differ)."
+    ],
+    "implications": "Researchers should account for organization, geographic granularity, and component size when studying distributed development because distribution can increase defects but effects depend on project context and release phase; practitioners should consider stronger coordination, ownership, testing, or centralization strategies for components that will be developed across multiple sites or organizations to mitigate quality risks."
+  }
+}

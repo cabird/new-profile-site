@@ -1,0 +1,14 @@
+{
+  "tldr": "ConE is a scalable Azure DevOps service that detects concurrently edited files in active pull requests using lightweight heuristics (Extent of Overlap and Rarely Concurrently Edited files), showing concurrent edits correlate with higher bug risk and providing actionable, low-noise warnings in a large industrial deployment.",
+  "details": {
+    "topic": "Concurrent edit detection for pull-request-based software development",
+    "problem": "Developers working in large, distributed teams often edit the same files in overlapping pull requests, which can cause merge conflicts, semantic bugs, duplicated effort, and lost developer productivity, and existing tools either generate too many false alarms or do not scale.",
+    "approach": "The authors performed an empirical study on six large Microsoft repositories (six months of pull-request data, ~67K bug-tagged PRs after filtering) to show correlations between concurrent edits and bug fixes, designed the ConE algorithm based on two heuristics—Extent of Overlap (EOO) and Rarely Concurrently Edited files (RCEs)—tuned conservative thresholds (e.g., EOO ≥ 50%, ≥2 overlapping files, RCE ≥ 2), implemented ConE on Azure DevOps, ran a shadow deployment and then enabled it on 234 repositories, analyzed 26,000 PRs, generated 775 notifications, collected telemetry and developer interviews for evaluation.",
+    "key_insights": [
+      "Files edited concurrently across active pull requests are more likely to appear in later bug-fix PRs, and concurrent-edit counts correlate with bug fixes more strongly than non-concurrent edits.",
+      "Simple, language-agnostic heuristics (EOO and RCE) plus conservative thresholds can drastically reduce false alarms while still surfacing relevant conflicting changes at scale.",
+      "Operational deployment (234 repos) yielded 775 recommendations with 71.5% explicitly positive feedback and high interaction (≈2.8 clicks/notification); developers—especially on large, distributed repos—report time savings and reduced duplicate work."
+    ],
+    "implications": "For researchers: validates lightweight, scalable heuristics as a foundation for more advanced semantic/diff or learned models; for tool builders and platform providers: demonstrates a non-intrusive, configurable service design that integrates into existing workflows and scales to tens of thousands of PRs; for practitioners and developers: offers an actionable early-warning mechanism to reduce merge conflicts, prevent duplicated effort, and save developer time, with tunable thresholds to balance precision and coverage."
+  }
+}

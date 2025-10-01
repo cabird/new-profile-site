@@ -1,0 +1,15 @@
+{
+  "tldr": "A mixed-method study of modern, tool-based code review finds that although developers expect reviews to find defects, reviews more often produce code-improvement and social outcomes, and the primary obstacle is reviewers' lack of context/understanding which current tools do not adequately address.",
+  "details": {
+    "topic": "Modern (tool-based) code review practices",
+    "problem": "Organizations use lightweight, tool-supported code reviews expecting defect detection and quality assurance, but it's unclear whether those expectations match actual outcomes and what challenges prevent reviews from meeting those goals.",
+    "approach": "Mixed-method empirical study at Microsoft: 17 in‑field observations, semi-structured interviews, open card-sorting and affinity analysis of 570 comments from 200 CodeFlow threads, and surveys of 165 managers and 873 developers, with manual classification and triangulation across data sources.",
+    "key_insights": [
+      "Finding defects is the top stated motivation, but defect-related comments are relatively rare and mainly address low-level, micro issues; the most common reviewer feedback is code-improvement (readability, dead code, style).",
+      "Understanding the change and its context is reviewers' main challenge; reviewers who already know the code provide deeper, more insightful feedback and are more likely to find subtle defects.",
+      "Code review delivers important social benefits — knowledge transfer, team awareness/transparency, and shared code ownership — that are often as valued as defect finding but are harder to observe in review traces.",
+      "Current review tools focus on diffs and inline comments and fail to support reviewers' comprehension needs or to automate low-level checks, leaving opportunities for tooling and program-comprehension research."
+    ],
+    "implications": "Practitioners should not rely on modern reviews as the sole QA mechanism, should involve code owners and provide richer contextual information (and synchronous channels) when defect discovery is a goal, and should treat review policies to capture social benefits; researchers and tool builders should prioritize automating routine/style checks to free reviewer time, and build review-centric program-comprehension and socio-technical support to improve deep-review outcomes."
+  }
+}

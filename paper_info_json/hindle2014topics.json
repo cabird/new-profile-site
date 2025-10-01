@@ -1,0 +1,15 @@
+{
+  "tldr": "Evaluates whether topics extracted with LDA from requirements and issue reports can be linked to version-control commits and whether those topics and time-series of topic-relevant commits make sense to program managers and developers.",
+  "details": {
+    "topic": "Topic modeling (LDA) for requirements/issue-to-commit traceability",
+    "problem": "Researchers often assume LDA topics are interpretable and useful for traceability and effort-overview, but it is unclear whether practitioners recognize, label, and accept topics and topic-based commit trends as reflecting real development effort.",
+    "approach": "Extracted LDA topics from a large Microsoft requirements corpus (75 documents, ~285k words) and from issue trackers of FLOSS projects (extracted from 209 projects, 13 used), inferred those topics onto commit messages from ~650k commits (Microsoft) and various git repos, generated per-topic time-series ('topic-plots') at global, team and personal levels, and validated topic labels and plots via interviews and surveys with Microsoft program managers/developers and 13 FLOSS developers; used CVB0 LDA (α=0.1, β=0.1, 1000 iterations) for the industrial case and Vowpal Wabbit online LDA for FLOSS, comparing non-expert vs expert labels and measuring perceptual agreement.",
+    "key_insights": [
+      "Many LDA topics and their inferred commit-time trends corresponded to real features or events and were perceived by stakeholders as reflecting effort (around 46–48% of topic-plot ratings agreed/strongly agreed with perceived effort).",
+      "Developers found personalized/topic-per-author plots more useful and easier to validate, while managers benefited from global/topic-plots for spotting cross-team trends and milestones.",
+      "Labeling topics is difficult and domain-sensitive: non-expert labels matched expert labels only about half the time, and tokenization/stemming and presentation materially affect interpretability.",
+      "Topic–document relationships (which commits relate to which topics) are more reliable for traceability/overview than raw topic word lists, so topics should be pruned, labeled by domain experts, and presented with drill-down support."
+    ],
+    "implications": "For researchers: validate topic-model outputs with domain experts and prefer evaluating document-topic links over relying solely on topic word lists; for tool builders/managers: topic-based commit-plots can augment dashboards and effort estimation but require expert labeling, pruning of noisy topics, good tokenization, and drill-down to source artifacts; for practitioners: topics can surface real development trends and historical effort but should be interpreted cautiously and with domain context."
+  }
+}

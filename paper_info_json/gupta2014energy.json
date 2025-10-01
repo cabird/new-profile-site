@@ -1,0 +1,15 @@
+{
+  "tldr": "Analyzes Windows Phone power traces and execution logs to attribute energy use to software modules, discover anomalous energy patterns, and predict power spikes using decision trees, clustering, and regression.",
+  "details": {
+    "topic": "Energy-aware software development for mobile devices",
+    "problem": "Mobile apps and OS components can drain battery unpredictably; developers need methods to quantify which modules consume energy, detect energy-related bugs, and estimate power use to meet power budgets.",
+    "approach": "Collect high-frequency power traces and coarse-grained execution logs from 12-hour idle tests on Windows Phone devices, extract power 'spikes' and associated active modules, store spike metadata in a database, then (1) use decision trees to associate module presence with average power, (2) cluster spike shapes using Kullback–Leibler divergence and Ward hierarchical clustering to find characteristic patterns and outliers, and (3) build linear regression models (evaluated via repeated train/test splits and Spearman correlation) to predict/high-rank power-consuming spikes from module presence; anomalies were validated with platform engineers and linked to real defects.",
+    "key_insights": [
+      "Decision trees on module-presence flags reveal specific modules (or combinations) that drastically increase spike energy, giving actionable pointers to developers.",
+      "Clustering spike shapes reduces developer effort by summarizing common energy patterns and reliably surfaces anomalous outliers that corresponded to confirmed bugs (e.g., sockets left open causing long/high-power spikes).",
+      "Linear regression models using only module presence produce strong ranking predictions of high-power spikes (median Spearman correlation ~0.75–0.86 across datasets), enabling useful power-budget estimates early in development.",
+      "Coarse-grained profiling (module presence at context switches) is sufficiently informative for analysis while limiting profiling overhead, and the methodology generalizes across mobile platforms."
+    ],
+    "implications": "Provides a practical, data-driven toolset for developers and OS engineers to prioritize energy optimizations, detect energy defects during testing, and estimate application power use for budgeting; researchers can extend these techniques for finer-grained tracing, automated repair, and energy-aware test selection, while practitioners gain a replicable methodology applicable to other mobile platforms (with attention to profiling overhead and device-specific power characteristics)."
+  }
+}

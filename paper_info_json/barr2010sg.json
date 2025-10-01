@@ -1,0 +1,15 @@
+{
+  "tldr": "Argues that software engineering research should facilitate broader sharing of data and tools to improve reproducibility, reduce redundant work, and accelerate innovation, and proposes practical mechanisms (partial sharing, registry, escrow, market) plus standards and hosting options to mitigate costs and risks.",
+  "details": {
+    "topic": "Data and tool sharing / reproducibility in software engineering",
+    "problem": "Although sharing of methods is expected, researchers rarely publish the raw data and usable tools needed for replication because preparing artifacts is costly and risks being scooped, which hinders replication, reuse, and faster progress in the field.",
+    "approach": "A position and analysis paper: reviews the current state (citing empirical audits like Robles' MSR replication study), compares practices in other fields, catalogs costs and benefits of sharing, and proposes concrete, practical mechanisms (partial sharing, public registry, escrow with embargo, market-based access), plus standards and hosting suggestions and discussion of IP/sanitization issues.",
+    "key_insights": [
+      "Actual sharing is rare and replication is therefore difficult—e.g., only a tiny fraction of MSR experimental papers provided data/tools for replication.",
+      "Researchers' main barriers are the cost of preparing usable artifacts and the risk of losing publication opportunities; these are real but addressable.",
+      "Incremental and mixed solutions (binary-only or restricted analysis, public registries, escrow with timed release, or paid-access markets) can balance societal benefit and individual incentives.",
+      "Standards for packaging (VMs, compendia), reliable hosting, and clear policies from publishers/funders materially reduce friction and increase the impact of shared artifacts."
+    ],
+    "implications": "Adopting the proposed mechanisms and policies could increase confidence in empirical results, lower barriers to entry for new researchers, reduce duplicated effort, and promote evidence-based software engineering and technology transfer; doing so will require community decisions on embargo lengths, hosting responsibilities, formats, IP handling, and further research into effective V&V and sanitization practices."
+  }
+}

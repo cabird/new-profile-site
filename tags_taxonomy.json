@@ -1,0 +1,94 @@
+[
+  {
+    "tag": "code-review",
+    "description": "Papers about modern peer code review practices, effectiveness, tooling, analytics, and process improvements."
+  },
+  {
+    "tag": "recommendation-systems",
+    "description": " Papers that build or evaluate automated recommenders for software engineering tasks (e.g., reviewer/developer recommendation, change suggestions, naming and typing suggestions)."
+  },
+  {
+    "tag": "version-control-and-branching",
+    "description": "Studies of SCM history, branching strategies, DVCS migration, merge processes, and their effects on quality and coordination."
+  },
+  {
+    "tag": "open-source-software",
+    "description": "Research on OSS communities, governance, onboarding, communication, geographic/organizational distribution, and project migrations."
+  },
+  {
+    "tag": "release-engineering",
+    "description": "Work on release processes and tooling, including differential testing, staged rollouts, continuous delivery, and RE 3.0 directions."
+  },
+  {
+    "tag": "ai-for-software-engineering",
+    "description": "Applications of machine learning/LLMs to SE tasks such as merge resolution, type inference, reviewer recommendation, API suggestion, and code convention inference."
+  },
+  {
+    "tag": "ai-assisted-programming",
+    "description": "Papers examining developer use of generative AI (e.g., Copilot), impacts on workflows and productivity, and trust/responsibility concerns."
+  },
+  {
+    "tag": "program-analysis",
+    "description": "Research on static/dynamic analysis techniques, idiom mining, heap structure, typing for dynamic languages, and automated review decomposition."
+  },
+  {
+    "tag": "developer-productivity",
+    "description": "Studies of what drives developers' productivity and satisfaction, including workday factors, remote work, and measurement."
+  },
+  {
+    "tag": "engineering-management",
+    "description": "Findings on management and team practices: manager attributes, coordination, build teams, agile adoption, and OKR use."
+  },
+  {
+    "tag": "developer-social-networks",
+    "description": "Analyses of communication and collaboration networks (mailing lists, reviews), community structure, and links to code activity."
+  },
+  {
+    "tag": "defect-prediction-and-quality",
+    "description": "Empirical work on factors and models predicting defects and failures, including socio-technical metrics, ownership, clones, branching, and environmental effects."
+  },
+  {
+    "tag": "devops-and-infrastructure-as-code",
+    "description": "Research on DevOps artifacts and practices (e.g., Dockerfiles), best-practice mining/enforcement, and correlated code/config changes."
+  },
+  {
+    "tag": "tool-adoption-and-trust",
+    "description": "Studies of how developers adopt, trust, and integrate tools (static analyzers, homegrown tools, DVCS, AI-enabled tools) into workflows."
+  },
+  {
+    "tag": "interviews",
+    "description": "Research that collects qualitative data through semi-structured or structured interviews with practitioners."
+  },
+  {
+    "tag": "surveys",
+    "description": "Studies that gather quantitative or mixed-method data via questionnaires from developers or teams."
+  },
+  {
+    "tag": "repository-mining",
+    "description": "Analyses that mine version-control histories, issue trackers, or review systems to derive empirical insights."
+  },
+  {
+    "tag": "social-network-analysis",
+    "description": "Methods that construct and analyze networks from communication, review, or collaboration data to study structure and dynamics."
+  },
+  {
+    "tag": "case-study",
+    "description": "In-depth investigations of one or a small number of projects/organizations to understand practices, effects, or phenomena."
+  },
+  {
+    "tag": "field-deployment",
+    "description": "In-vivo evaluations or production deployments of tools/services in real development environments."
+  },
+  {
+    "tag": "statistical-analysis",
+    "description": "Use of statistical modeling and inference (e.g., regression, hazard models, hypothesis testing, effect sizes) to analyze empirical data."
+  },
+  {
+    "tag": "telemetry-analysis",
+    "description": "Studies that instrument and analyze large-scale runtime, usage, or operational logs/telemetry from software and development tools."
+  },
+  {
+    "tag": "dataset-and-tooling",
+    "description": "Papers that create or curate datasets, platforms, or research tools to enable empirical SE studies and reproducibility."
+  }
+]

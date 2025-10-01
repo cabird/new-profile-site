@@ -1,0 +1,15 @@
+{
+  "tldr": "CFar adds an automated, program-analysis-based reviewer into code-review systems and—via a production implementation and mixed field/lab evaluation—shows it can increase reviewer communication, save reviewers time, and help find defects while surfacing challenges around noise and configuration.",
+  "details": {
+    "topic": "Automated program-analysis in collaborative code review",
+    "problem": "Human code reviewers often miss shallow defects or spend time on clerical checks, which reduces review quality and reviewer productivity and limits useful discussion of deeper design issues.",
+    "approach": "Designed and implemented CFar (CodeFlow Automated Reviewer) by integrating program analyses (OACR/CloudBuild) into CodeFlow; deployed the production-quality extension at Microsoft (98 programmers across three teams for 15 weeks; 354 reviews, 149 analysis comments) and ran a controlled lab study (7 professional programmers) collecting usage logs, surveys, videos, and interviews for a mixed-method evaluation.",
+    "key_insights": [
+      "Automated comments increased collaboration and conversations: 61% of respondents said comments enhanced collaboration and 45% said CFar inspired more conversations, often prompting both shallow and deeper discussions.",
+      "Productivity gains from automation: 38% reported increased productivity because CFar handled many shallow/clerical issues and delivered earlier feedback, letting humans focus on higher-level review tasks.",
+      "Quality improvements and uptake: 48% reported improved code quality; 97% of CFar comments were marked resolved (either by humans or automatically) and users often acted on automated warnings.",
+      "Practical limitations: some users experienced information overload and perceived noise; proper per-team configuration and filtering of analyses is required to maintain relevance and usability."
+    ],
+    "implications": "Integrating program-analysis warnings directly into the review UI can improve communication, speed, and defect detection in real-world teams, but successful deployment requires per-team tuning, good filtering and presentation to avoid overload; researchers should explore adaptive filtering, richer automated-human interactions, and ways to surface more context or suggested fixes to increase relevance and reduce noise."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "tldr": "Argues that attending to the 'felt-life' or dwelling of engineers reveals emotional, ethical and social dynamics in large-scale software projects that are overlooked by dominant scientific and CSCW research perspectives.",
+  "details": {
+    "topic": "Sociotechnical and ethnographic study of software engineers' lived experience in large projects",
+    "problem": "Existing SE research often frames engineers as either process-limited actors or creative reasoners and therefore misses the emotional, ethical and everyday social practices ('felt-life') that shape decisions, coordination and code ownership in large code bases.",
+    "approach": "Contrast two common views in the literature (a quantitative 'scientific' vision and a CSCW-informed 'creative reasoner' view), then present qualitative, ethnographic evidence from 17 semi-structured interviews with Microsoft Windows engineers analyzed through an Ingold-inspired 'dwelling' lens to surface embodied, affective and moral dimensions of engineering practice.",
+    "key_insights": [
+      "Research methods and assumptions effectively construct different 'types' of software engineer; what is emphasized (process metrics, reasoning rules, or dwelling) shapes what phenomena are visible.",
+      "Interviews reveal a dense felt-life: engineers treat information as risky, negotiate code ownership through moral claims of 'good faith', experience anger and resentment, and manage tacit boundaries and territoriality around code.",
+      "Emotional and ethical concerns materially affect coordination, branching decisions and integration outcomes—phenomena that quantitative/processual or purely cognitive accounts can miss or underplay.",
+      "Bringing together dwelling-oriented findings and quantitative/processual data is difficult and requires care; tooling or SNS that surface more social visibility can both help coordination and amplify conflict."
+    ],
+    "implications": "Researchers should incorporate lived-experience methods to complement quantitative SE studies and be explicit about how methods shape the constructed subject; tool designers and managers should account for emotional, ethical and social negotiation (e.g., visibility of timelines, support for mediated negotiation, attention to code 'ownership' norms); and training should include interpersonal and ethical skills because coordination failures are as much moral and social as technical."
+  }
+}

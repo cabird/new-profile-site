@@ -1,0 +1,15 @@
+{
+  "tldr": "LINKSTER is a Python/PyQt tool that integrates source code repositories, mailing lists, and bug trackers to make manual inspection, linking, and annotation of mined software engineering data faster and more practical.",
+  "details": {
+    "topic": "Manual inspection and annotation of mined software engineering data",
+    "problem": "Manual inspection and labeling of mined software engineering artifacts is time-consuming, error-prone, and awkward because data necessary for understanding changes (commits, blame history, mailing-list discussion, and bug reports) live in separate systems and existing tooling focuses on automated mining rather than manual annotation.",
+    "approach": "The authors implemented LINKSTER, a desktop application (Python + PyQt) that connects to a repository and a database containing mined repository, mailing-list, and bug-tracking records; it presents synchronized commit, blame/diff, bug, and email views, supports drag-and-drop linking and structured/free-form annotations, records annotations back to the database, and was evaluated via usage in real work (an Apache developer annotated 677 commits in one day) and use in empirical studies.",
+    "key_insights": [
+      "Integrating multiple artifacts (commits, blame, bug reports, emails) in a single interactive UI substantially reduces the friction of manual linking and annotation.",
+      "Synchronized blame/diff views and per-line provenance make it practical to identify bug-introducing commits and annotate their status (guilty/innocent/unsure), improving label quality for studies.",
+      "Drag-and-drop linking and stored annotations enable faster, repeatable manual curation that complements automatic heuristics and supports evaluation of those heuristics.",
+      "The tool scales to substantial manual effort (example: 677 commits linked/annotated in one day), indicating manual methods become feasible when supported by appropriate tooling."
+    ],
+    "implications": "Providing an integrated, annotation-friendly environment lowers the cost of producing high-quality labeled datasets, helps researchers validate and refine heuristic or predictive methods, enables more accurate empirical studies of development processes, and gives practitioners a practical way to inspect historical changes and create curated provenance that can feed tools or training data."
+  }
+}

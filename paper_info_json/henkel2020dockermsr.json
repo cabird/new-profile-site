@@ -1,0 +1,15 @@
+{
+  "tldr": "A curated corpus of ~178,000 GitHub Dockerfiles is provided in five progressively richer representations (from raw source to abstracted, three-level ASTs) together with parsers and schemas to enable structured mining, static checking, and analysis of nested shell commands and common utilities.",
+  "details": {
+    "topic": "Dataset and tooling for Dockerfile analysis",
+    "problem": "Dockerfiles are widely used but hard to analyze semantically because they contain nested languages (Dockerfile syntax, embedded shell scripts, and command-specific options), and existing tooling often only handles shallow syntactic checks.",
+    "approach": "The authors collected Dockerfiles from GitHub (initially ~250k, filtered to ~219k then deduplicated to ~178k unique), captured metadata and a Gold subset of expert-maintained files, and produced five dataset representations: raw sources, deduplicated sources, Phase-I ASTs (Docker ASTs), Phase-II ASTs (embedded shell parsed with ShellCheck), Phase-III ASTs (third-level parsers for the 50 most common shell commands generated from hand-crafted schemas), and an abstracted Phase-III with regex-based literal annotations; all artifacts and tools (parsers, schemas, metadata, JSONL outputs) were released for mining and static checking experiments.",
+    "key_insights": [
+      "Providing three nested levels of structured parsing (Dockerfile → shell script → command-specific options) makes semantic mining and static checking tractable for many real-world Dockerfiles.",
+      "Manually encoding schemas and generating parsers for the 50 most used commands (15–30 minutes per schema) yields fast, reusable third-level parsers that enable fine-grained checks (e.g., enforcing specific npm flags).",
+      "A Gold set of 432 expert Dockerfiles allows comparative studies; the authors found ~5× more rule violations in the general corpus than in Gold files using mined/static rules.",
+      "Lightweight abstractions (regex-based literal annotations) on top of ASTs make exploratory analyses—like detecting URLs or package references—straightforward without further deep parsing."
+    ],
+    "implications": "The dataset and tooling lower the barrier for researchers to mine tree-based rules, build semantics-aware linters/static analyzers, and explore automated repair or dependency analyses for containerized software; practitioners and tool developers can use the provided ASTs, parsers, and Gold rules to improve IDE support, detect common misconfigurations, and prioritize fixes, though findings are limited to Dockerfiles sourced from GitHub."
+  }
+}

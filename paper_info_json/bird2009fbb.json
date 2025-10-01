@@ -1,0 +1,15 @@
+{
+  "tldr": "Empirical bug-fix datasets extracted from version control and bug trackers are systematically biased (over- or under-representing certain bug types, fixers, and process attributes), and that bias can degrade the validity of hypothesis tests and the performance of defect-prediction models.",
+  "details": {
+    "topic": "Bias and data quality in bug-fix/defect datasets",
+    "problem": "Researchers and tools rely on historical bug-fix records linked between bug trackers and source-control commits, but only a subset of actual bug fixes are linked; if the linked subset is unrepresentative, conclusions and predictive models built from it may be invalid or perform poorly.",
+    "approach": "The authors mined and linked SCM and bug-tracker data for multiple open-source projects (Eclipse variants, Apache, NetBeans, OpenOffice, Gnome, AspectJ), improved pattern-matching of commit messages to bug IDs with manual validation, defined formal notions of 'bug feature bias' and 'commit feature bias', ran statistical tests (χ², Fisher exact, Kolmogorov–Smirnov) to detect bias over features (severity, fixer experience, verification, etc.), and evaluated the impact of observed bias by training/testing the BugCache defect predictor on intentionally biased sub-samples.",
+    "key_insights": [
+      "Strong, repeatable bug-feature bias: linked fixes tend to over-represent less-severe bugs and fixes by more experienced closers and are more likely to be verified in several projects (statistically significant across datasets).",
+      "Bias is dataset-specific: AspectJ's linked set showed little bias because most fixes were closed by a few disciplined developers who linked consistently.",
+      "Commit-feature bias (bias in the originating commits identified by blame) cannot be determined automatically without expensive post-hoc effort, limiting full bias assessment.",
+      "Defect-prediction performance (tested with BugCache) is affected by training-set bias: models trained on samples biased toward particular severities or closers perform better on similar bug types and worse on under-represented types."
+    ],
+    "implications": "Biased linked bug-fix datasets threaten the external validity of empirical findings and the generalizability and fairness of automated defect predictors; practitioners and researchers should (a) treat linked datasets cautiously, (b) improve linking practices or curate unbiased or corrected samples (manual linking, enforced tooling), and (c) develop and apply bias-correction or robust modelling techniques (simulation, joint models of linking and defect occurrence) before drawing conclusions or deploying predictors."
+  }
+}

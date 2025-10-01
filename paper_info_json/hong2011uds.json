@@ -1,0 +1,15 @@
+{
+  "tldr": "Analyzes developer social networks extracted from Mozilla bug reports (2000–2009), compares their topology to general social networks, and traces how communities form and evolve over time.",
+  "details": {
+    "topic": "Developer social network analysis in open source software",
+    "problem": "We lack a clear understanding of whether and how social-network properties and community dynamics observed in general social networks apply to developer collaboration networks in large open source projects.",
+    "approach": "Mine Mozilla Bugzilla (2000–2009) to build undirected developer networks from co-commenting on bugs (weighted edges, low-activity edges pruned), run Louvain community detection (50 randomized runs per network), compare DSN metrics (degree distribution/power law, path lengths, modularity, community size) against several general social networks, analyze evolution using six-month windows, validate communities against Mozilla BOF meetings and known core developers, and trace community evolution patterns (expand, shrink, merge, split, extinct, emerge).",
+    "key_insights": [
+      "Degree distribution in DSNs does not follow a power-law (unlike many GSNs), though most nodes have low degree and a few have high degree.",
+      "DSNs exhibit a strong small-world property with shorter average path lengths than GSNs (about 2.9–3.4) and stable connectivity over time.",
+      "Developer networks have clear, stable community structure (modularity > 0.3) with generally small community sizes (median 23–55; largest community ≈21–36%), and modularity increases over the study period.",
+      "Community evolution reflects project events (e.g., Firefox 1.0 release and developer departures around 2004), showing patterns of expansion, shrinkage, merges, splits, emergence, and extinction tied to real project activity."
+    ],
+    "implications": "Researchers and tool builders should not assume GSN degree distributions when modeling developer networks; DSNs’ strong, small, and stabilizing communities can be used to identify teams, target information/notifications, and study the effects of leadership or release events, and features or algorithms designed for GSNs (e.g., influence or recommendation mechanisms) may need adaptation for DSN characteristics."
+  }
+}

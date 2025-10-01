@@ -1,0 +1,15 @@
+{
+  "tldr": "An empirical analysis of four large open-source C projects shows that cloned code is not more defect-prone — most bugs do not involve clones and cloned regions often have lower defect density than non-cloned code.",
+  "details": {
+    "topic": "Code cloning and software defect proneness",
+    "problem": "Cloned (duplicated) code is widely considered a 'bad smell' believed to increase defects, maintenance effort, and project cost, but that conventional wisdom has not been directly validated against bug-fix data.",
+    "approach": "Run the Deckard clone detector on monthly snapshots of four medium-to-large open‑source C projects (Apache, Evolution, Gimp, Nautilus); link bug-fix commits from issue trackers to SCM revisions; map changed (buggy) lines to staging snapshots to determine whether they are cloned; compute bug-clone ratios, defect densities for clone groups (prolific vs non‑prolific, scattered vs collocated) and compare distributions using nonparametric tests with multiple-test correction; supplement with manual case studies and false-positive sampling.",
+    "key_insights": [
+      "Most bugs have little or no cloned code: in three projects over 80% of bugs contained no cloned lines and overall bug-clone ratios are lower than project clone ratios.",
+      "Cloned code tends to be less defect-prone: defect density per cloned line is lower than for non-cloned code, and prolific clone groups (many copies) show lower defect density than small clone groups.",
+      "Scattered clones (across files or directories) are not demonstrably more error-prone than collocated clones.",
+      "Bugs with higher clone content do not require more effort to fix (measured as lines changed); in fact they often require smaller fixes."
+    ],
+    "implications": "For researchers and tool builders: aggressive wholesale refactoring to remove clones may be unnecessary — prioritize clone-maintenance tooling (tracking, simultaneous editing, inconsistency detection) and consider cloned content as a potential negative indicator in bug‑prediction; for practitioners: cloning may be an acceptable pragmatic practice in many contexts, so focus quality/maintenance effort on other risky code rather than treating all duplicates as high-priority 'bad smells.'"
+  }
+}

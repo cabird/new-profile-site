@@ -1,0 +1,15 @@
+{
+  "tldr": "Rechecked file-level effects of distributed versus collocated development on Microsoft Office 2010 and found statistically significant differences that are almost all negligibly small, so distributed development is not considered harmful in this context.",
+  "details": {
+    "topic": "Distributed software development and code ownership effects on software quality",
+    "problem": "Prior studies disagree about whether geographically distributed development degrades software quality; a recent critique suggested binary-level analyses can hide file-level effects, so practitioners need a recheck and clearer communication of practical impact.",
+    "approach": "File-level empirical study of Microsoft Office 2010: mined commit histories, developer geographic locations, and post-release bug-fix change-lists (RTM to SP1) for tens of thousands of files and 1,500+ developers; computed distribution (building/city/state/country/world), ownership (edit frequency, major developer count, top ownership, total developers), change (added/deleted/edited LOC) and size (functions/classes) metrics; compared collocated vs distributed files under four scenarios using Wilcoxon rank-sum tests for significance and Hedges' g for effect-size analysis.",
+    "key_insights": [
+      "Hypothesis tests found statistically significant differences for bug counts, change/size, and ownership metrics in several scenarios (H3–H5 rejected), while files with/without major developers showed no significant difference (H1 and H2 not rejected).",
+      "Effect-size analysis (Hedges' g) showed almost all differences are small or negligible, so the practical impact on post-release defects and code characteristics is minimal (one notable large effect on TOP in one scenario is an exception).",
+      "A file-level recheck initially appears to challenge earlier binary-level optimism, but reflecting on effect sizes shows that distributed development did not meaningfully harm Office 2010 quality.",
+      "Researchers should report effect sizes and recheck prior results at different granularities; practitioners should interpret p-values alongside effect sizes before changing engineering practices."
+    ],
+    "implications": "For researchers: complement significance testing with effect-size measures and re-evaluate past findings at multiple granularities before issuing practitioner guidance; for practitioners and managers: in this Microsoft Office 2010 case, distributed teams did not produce meaningfully worse files, so organizational decisions about distribution should weigh practical effect sizes (and contextual differences) rather than p-values alone; for tool/build engineers: use ownership and distribution metrics as diagnostics but avoid overreacting to small statistical differences given potential external validity limits."
+  }
+}

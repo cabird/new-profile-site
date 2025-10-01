@@ -1,0 +1,67 @@
+You are a helpful academic assistant.
+Given the following paper in markdown format, produce a JSON object that summarizes it.
+
+Requirements:
+
+* Return **only valid JSON**, no extra commentary.
+* Keep the **TL;DR to one sentence**.  (Just explain the research, don't start with "This paper...")
+* In the `details` section:
+
+  * `topic` → main area/domain (short phrase).
+  * `problem` → describe the core research problem/motivation in plain English.
+  * `approach` → summarize what the authors did (method, dataset, experiment, analysis, etc.).
+  * `key_insights` → 2–4 bullet points of the most important findings/results.
+  * `implications` → explain why the work matters (for researchers, developers, or practitioners).
+
+Here is the paper in markdown:
+
+```
+{{paper_markdown}}
+```
+
+Respond with JSON in this exact schema:
+
+```json
+{
+  "tldr": "...",
+  "details": {
+    "topic": "...",
+    "problem": "...",
+    "approach": "...",
+    "key_insights": [
+      "...",
+      "..."
+    ],
+    "implications": "..."
+  }
+}
+```
+
+---
+
+## Example Output
+
+Let’s say you ran it on Christian Bird’s *Cohesive and Isolated Development with Branches* paper. You might get:
+
+```json
+{
+  "tldr": "This paper examines how branching strategies impact developer productivity and collaboration in software projects.",
+  "details": {
+    "topic": "Branching strategies in software development",
+    "problem": "Developers use branching to manage parallel work, but the effects on productivity, isolation, and integration are poorly understood.",
+    "approach": "The authors analyzed data from large-scale open source repositories to study how different branching patterns correlate with integration frequency and development outcomes.",
+    "key_insights": [
+      "Frequent branching helps isolate work but can delay integration if branches are long-lived.",
+      "Short-lived branches encourage cohesion and reduce merge complexity.",
+      "Teams benefit from balancing isolation and rapid integration depending on project context."
+    ],
+    "implications": "Understanding branching tradeoffs can help software teams adopt practices that improve collaboration efficiency and reduce integration costs."
+  }
+}
+```
+
+---
+
+ONLY respond with the json.  DO NOT include the code block formatting or any extra text outside of the json. Your response should start with the open brace "{" and end with the closing brace "}" and that is it.
+
+

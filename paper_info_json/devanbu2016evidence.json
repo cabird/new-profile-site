@@ -1,0 +1,14 @@
+{
+  "tldr": "Surveying Microsoft developers and analyzing two large projects, the authors compare programmers' strongly held beliefs with empirical project data and find beliefs are mainly formed from personal experience and often diverge from measured evidence (e.g., geographic distribution has only a minimal effect on defect rates).",
+  "details": {
+    "topic": "Practitioner beliefs versus empirical evidence in software engineering",
+    "problem": "Developers hold strong a priori beliefs about software practices that influence their decisions, but it is unclear how those beliefs align with empirical evidence and whether research findings are effectively disseminated to practitioners.",
+    "approach": "The authors ran a Likert-scale survey (564 responses) of Microsoft developers about several empirically falsifiable claims (e.g., effect of language, distribution, defect risk) including ranked sources of opinion; they then performed a case study on two large Microsoft projects (Pr-A and Pr-B) using per-file defect-repair counts and regression models controlling for size, churn, number of developers, and ownership to measure the effect of geographic distribution, reporting statistical significance and effect sizes (Cohen's f2).",
+    "key_insights": [
+      "Developers often hold strong and diverse opinions on key SE claims; some common, well-supported findings (e.g., code reviews improve quality) have been widely adopted, but many beliefs do not track available empirical evidence.",
+      "Personal experience, peers, and managers are the dominant sources of developer beliefs; research papers rank near the bottom as an influence on opinions.",
+      "In the two-project case study, geographic distribution produced statistically significant but minuscule effect sizes on defect rates (f2 well below the threshold for a small effect), and effects were sometimes in the opposite direction, so practitioners' beliefs about distribution did not consistently match project evidence."
+    ],
+    "implications": "Empirical SE must invest more in systematic dissemination (summaries, syntheses, practitioner-facing outlets) and incorporate practitioner priors into experimental design (e.g., higher power when results contradict strong beliefs); researchers and tool builders should be cautious of anecdotal belief-driven practice and prioritize high-quality, context-aware evidence to influence real-world adoption."
+  }
+}

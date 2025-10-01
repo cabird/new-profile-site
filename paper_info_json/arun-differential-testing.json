@@ -1,0 +1,15 @@
+{
+  "tldr": "Integrating fine-tuned LLMs (for diff-label prediction and summarization) with a redesigned UI can automate much of differential testing work and reduce cognitive load, but engineers require transparent rationales and careful UX design to trust and adopt these features.",
+  "details": {
+    "topic": "LLM-enhanced tooling for differential testing / release engineering",
+    "problem": "On-call release engineers must manually inspect large, repetitive textual artifacts (logs, comments, code changes) to label behavioral differences between production and test builds, a time-consuming and cognitively demanding process prone to inefficiencies.",
+    "approach": "Partnered with an Azure release team to design a prototype DiffViewer that adds LLM-based diff label prediction (fine-tuned on thousands of historical diffs), AI-generated log/comment summaries, embedding-based clustering (k-means with cached OpenAI embeddings), and UI improvements (tile/block layout, flagging, progress/inbox views); elicited feedback via design-probe interviews, transcripts and a post-demo survey with five experienced on-call engineers.",
+    "key_insights": [
+      "LLM-based label prediction (model fine-tuned on historical diffs) can be highly accurate (reported 97.38%) and would save significant manual effort, but engineers demand explicit rationales and links to supporting artifacts to trust and act on predictions.",
+      "AI-generated summaries and comment summarization reduce manual search and interpretation work and are useful starting points, though participants noted some summaries are wordy and want concise, actionable context.",
+      "Non-AI UX changes (clustering/grouping, tile-based layout, flagging, progress/inbox views, reduced mouse travel) were immediately valued and often preferred; participants favored hybrid solutions that combine reliable UI affordances with AI assistance.",
+      "Study results are promising but preliminary: small participant pool (5 of 30), single-team deployment, and a prototype system limit generalizability and highlight the need for longitudinal evaluation and improved explainability."
+    ],
+    "implications": "For researchers: explore hybrid AI+HCI designs, transparency/explainability techniques, and longitudinal field studies to measure real productivity and trust effects; for tool builders and practitioners: prioritize combining strong UX improvements with ML assistance (predictive labels, summaries, clustering), expose supporting evidence/rationale for AI outputs, and roll out incrementally to build trust and safely reduce on-call workload and release-cycle costs."
+  }
+}

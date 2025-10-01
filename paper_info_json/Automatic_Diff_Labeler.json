@@ -1,0 +1,15 @@
+{
+  "tldr": "Automating labeling of behavioral differences (diffs) between test and production using LLMs (in-context and fine-tuned) greatly speeds release engineering workflows and reduces on-call engineer effort.",
+  "details": {
+    "topic": "LLM-based automation for differential testing / release engineering",
+    "problem": "On-call engineers must manually inspect and label thousands of diffs produced by differential testing (UserMarkedNoise, NewFeature, Regression), a time-consuming, error-prone bottleneck in release workflows.",
+    "approach": "Collected labeled diff datasets from Microsoft IDNA (3.9k and 12.7k diffs), represented each diff with seven attributes (category, description, calls, tags, comments, test logs, prod logs, plus an automated 'OCE Insight'), and evaluated two LLM strategies: few-shot in-context prompting (static and dynamic example retrieval via embeddings) and LoRA fine-tuning of GPT-3.5 and GPT-4; performed offline and four-week online evaluations and an ablation study removing comments.",
+    "key_insights": [
+      "Dynamic few-shot retrieval (retrieve similar examples per test diff) improved in-context accuracy from ~50% to ~71%, showing example selection matters.",
+      "Fine-tuning GPT-4 with a larger labeled dataset produced strong offline performance (≈97.4% overall accuracy; Regression accuracy improved to 81.25%), whereas GPT-3.5 struggled on the rare but critical Regression class.",
+      "Textual metadata (especially engineer comments) materially improves labeling quality; removing comments degrades NewFeature and Regression performance substantially.",
+      "In online snapshots the model consistently labeled UserMarkedNoise and NewFeature with high accuracy (>90% and mostly >80%), but Regression remained less reliable, so human verification remains desirable."
+    ],
+    "implications": "LLMs can meaningfully automate diff labeling in release engineering—reducing weekly on-call labeling from hours to minutes, speeding releases and lowering burnout—while fine-tuning on in-domain labeled data and preserving rich textual metadata are key; however, teams should combine automated labels with confidence measures, human-in-the-loop verification for critical (Regression) cases, and continued data collection to improve rare-class performance and generalize across teams."
+  }
+}

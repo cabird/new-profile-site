@@ -1,0 +1,15 @@
+{
+  "tldr": "Analyzed Apache developer mailing-list email archives, resolved aliasing, constructed a reply-based social network and matched it to CVS commits to show that email activity and network centrality strongly correlate with source-code contributions and that developers occupy higher-status positions than non-developers.",
+  "details": {
+    "topic": "Mining email social networks in open-source software",
+    "problem": "Communication and coordination in software projects are hard to observe in closed settings; the authors aim to use public mailing-list archives to study social interactions, relate them to development activity, and overcome practical challenges such as alias resolution and linking email identities to CVS accounts.",
+    "approach": "Parsed ~101k messages from the Apache HTTP Server developer mailing list (1999 onwards), extracted reply relationships to build a directed social network, resolved aliases using an automated name/email similarity clustering followed by manual post-processing, matched email identities to CVS commit accounts, and computed network measures (in-/out-degree, betweenness) and Spearman/t-test correlations between email activity and source/document change activity.",
+    "key_insights": [
+      "Email participation and reply-based in-/out-degree distributions are long-tailed (small-world/scale-free): a few people generate and attract most activity.",
+      "There is a very strong correlation between number of messages sent and number of distinct respondents (Spearman ≈ 0.97).",
+      "Among committers (n=73), message volume and social-centrality (especially betweenness) strongly correlate with source-code changes (Spearman ≈ 0.80 for messages vs source changes; betweenness ≈ 0.757 with source changes).",
+      "Developers have significantly higher centrality than non-developers (large, significant differences in betweenness, in-degree and out-degree); document changes correlate less strongly with social measures than source changes."
+    ],
+    "implications": "Public mailing-list archives can be reliably mined (with careful alias resolution) to reveal coordination structures and identify key contributors; social-network metrics from email can serve researchers and project managers as proxies for developer status and activity, help detect brokers or bottlenecks, and guide interventions or further causal/time-series studies linking communication and code evolution."
+  }
+}

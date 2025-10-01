@@ -1,0 +1,15 @@
+{
+  "tldr": "Identifies persuasion- and survey-design factors that appear to increase software developers' survey response rates and analyzes 11 past invitation emails to assess qualitative associations.",
+  "details": {
+    "topic": "Survey response rates for software developers",
+    "problem": "Developer surveys often suffer low response rates that can introduce bias and limit the usefulness of research; researchers need actionable guidance to increase participation.",
+    "approach": "Derived candidate factors from persuasion research (reciprocity, consistency, authority, liking, scarcity) and survey literature (brevity, social benefit, compensation, timing); coded 11 previously conducted developer survey invitation emails (10 at Microsoft, 1 at another company) for presence/absence of these cues, collected metadata (send time, personalization, selection criteria, incentives) and compared features qualitatively against observed response rates.",
+    "key_insights": [
+      "Personalized/directly addressed invitations tended to have higher response rates than BCC/blind mailings, suggesting personalization matters.",
+      "Similarity cues (e.g., shared affiliation), offers of compensation (typically raffle entries), and explicit brevity estimates correlated with higher responses in the sample.",
+      "Most invitations used only a few persuasive cues (about three on average); messages with more cues sometimes achieved higher rates but evidence is preliminary.",
+      "Findings are qualitative and exploratory (N=11); factors may interact, produce bias (e.g., authority effects), and require larger or controlled studies to establish causal effects."
+    ],
+    "implications": "Provides a practical checklist and initial evidence for researchers to prioritize personalization, relevance (similarity), clear brevity, and appropriate incentives when recruiting developer participants; however, practitioners should weigh potential sampling bias and ethical considerations and validate tactics with larger or controlled experiments."
+  }
+}

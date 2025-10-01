@@ -1,0 +1,14 @@
+{
+  "tldr": "Empirical study of Microsoft developers that identifies common code review challenges and synthesizes practical best practices and trade-offs for code authors, reviewers, and organizations.",
+  "details": {
+    "topic": "Code review practices and best practices in industry",
+    "problem": "Lessons about effective code review are dispersed and context-dependent, leaving practitioners unsure which challenges to expect and which practices or tools to adopt in large industrial teams.",
+    "approach": "Ethnographic observations with four Microsoft teams, 18 semi-structured contextual interviews, and a company-wide survey (4,300 distributed, 911 responses) complemented by analysis of tool usage (e.g., CodeFlow) to synthesize challenges, best practices, and trade-offs for authors, reviewers, and organizations.",
+    "key_insights": [
+      "Code review is valued for defect detection, knowledge transfer, and confidence building, but common pain points are slow or missing feedback, difficulty finding willing/appropriate reviewers, and reviews that are too large or hard to understand.",
+      "Concrete, actionable practices reduce friction: authors should prepare small, well-documented, tested changes and choose reviewers carefully; reviewers should allocate bounded review time, prioritize core issues, use checklists, and pick appropriate communication channels for contentious vs. traceable issues.",
+      "Organizational support matters: clear policies, tooling that fits team workflow, recognition of review work, training, and continuous measurement are necessary—while balancing trade-offs such as speed vs. rigor and traceability vs. richer communication."
+    ],
+    "implications": "Provides practitioners with a synthesized, evidence-based set of practices and trade-offs to improve review speed, quality, and knowledge sharing; guides tool builders and researchers to focus on reviewer selection, reducing review size, better notifications/integration with informal channels, and measuring the organizational effects of review policies."
+  }
+}

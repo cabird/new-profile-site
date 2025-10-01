@@ -1,0 +1,15 @@
+{
+  "tldr": "Examines where, why, and how software developers want generative AI support across different engineering tasks, showing that developers' task appraisals predict AI adoption and shape context-sensitive Responsible AI priorities.",
+  "details": {
+    "topic": "Generative AI in software engineering (developer tools)",
+    "problem": "There is limited, task-aware guidance about which parts of developers' work should be supported or left human, and how to design AI tools responsibly so they augment rather than undermine developer agency, expertise, and safety.",
+    "approach": "A large-scale mixed-methods study of 860 Microsoft developers: a grounded taxonomy of software engineering tasks, a survey measuring four task appraisals (value, identity, accountability, demands), forced-choice prioritization of Responsible AI (RAI) principles, mixed-effects regression to link appraisals to openness/use, hierarchical clustering to group tasks, and reflexive thematic analysis of free-text responses (with member checking).",
+    "key_insights": [
+      "Task appraisals predict AI adoption: higher perceived value, accountability, and task demands increase openness to and use of AI, while identity alignment reduces openness but can increase selective, complementary use.",
+      "Tasks cluster into distinct groups (Core work; People & AI-building; Ops & Coordination) and fall into four zones (Build, Improve, Sustain, De-prioritize), revealing where need outpaces current use and where AI should focus on augmentation versus abstention.",
+      "Responsible-AI priorities are context-dependent: systems-facing work demands reliability, safety, privacy/security, transparency, goal maintenance, and steerability, while human-facing tasks elevate fairness and inclusiveness and often remain human-led.",
+      "Individual differences matter: juniors and AI-experienced, risk-tolerant, and technophilic developers are more receptive to AI, and experience shifts priorities toward steerability, reliability, and transparency."
+    ],
+    "implications": "Designers and teams should take a task-aware, augmentation-first approach: prioritize reliability, security, transparency/provenance, goal maintenance and steerability for system-facing and high-stakes tasks; use AI to reduce toil in ops while preserving human oversight for identity- and relationship-centric work; instrument task-aware personas and adjustable autonomy, and focus research on useful transparency, goal-drift prevention, and interruption/rollback mechanisms to preserve developer agency and meaningful work."
+  }
+}

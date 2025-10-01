@@ -1,0 +1,15 @@
+{
+  "tldr": "Analyzes code-review data from multiple commercial and open-source projects to show modern peer review has converged on lightweight, pre-commit, fast reviews that emphasize discussion and substantially spread knowledge among developers.",
+  "details": {
+    "topic": "Contemporary software code review / peer review practices",
+    "problem": "There is little systematic, cross-project evidence about how modern, tool-supported peer review in firms compares to traditional inspections and open-source practices, and what parameters (speed, size, participants, effectiveness, knowledge transfer) characterize effective contemporary review.",
+    "approach": "Multiple-case study and empirical analysis: mined and normalized review data from Google-led projects (Android, Chromium OS), Microsoft projects (Bing, Office, SQL Server), AMD, and compared with six OSS projects and a Lucent inspection study; measured review interval, change size, number of reviewers, comment/thread/resubmission proxies for defects, and introduced a metric for knowledge spread (files modified ∪ reviewed).",
+    "key_insights": [
+      "Contemporary reviews are lightweight, performed pre-commit, frequent and fast (median completion on the order of hours to a day) across disparate projects.",
+      "Change sizes tend to be small, enabling short review intervals, and a median of two active reviewers is effective in practice (authors often invite 3–4 but typically two participate).",
+      "Modern review shifts from strict defect-counting to group problem-solving and discussion; while defects are not explicitly recorded, proxies (comments, threads, resubmissions) indicate defect-finding comparable to traditional inspections.",
+      "Review substantially increases developers' system knowledge: reviewing raises the number of distinct files a developer knows about by roughly 66%–150% depending on the project."
+    ],
+    "implications": "The findings provide evidence-based guidance for teams and tool builders: adopt lightweight pre-commit reviews with small changes and a small number of reviewers, instrument reviews to capture discussion-based proxies for effectiveness, and recognize knowledge sharing as a key benefit and potential quality metric when evaluating review practices and tooling."
+  }
+}

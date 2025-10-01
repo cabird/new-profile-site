@@ -1,0 +1,14 @@
+{
+  "tldr": "iHDev recommends developers for incoming change requests by mining IDE interaction histories (Mylyn) to locate relevant source files and rank likely fixers, achieving substantially higher recall and better ranking than commit- or authorship-based baselines.",
+  "details": {
+    "topic": "Developer recommendation / issue triage using IDE interaction data",
+    "problem": "Automatically assign incoming change requests to the developers most likely to resolve them; prior approaches rely mainly on commit history or code authorship and may miss developer activity recorded only as IDE interactions.",
+    "approach": "Use ML (ML‑KNN with tf–idf and cosine similarity) to map a change request's text to the top-K relevant source files from a snapshot, parse Mylyn interaction trace attachments to build an interaction log, compute an xFactor per (attacher, file) from interaction count, active workdays, and recency, sum xFactors across relevant files to score and rank candidate developers, and evaluate on Mylyn and Eclipse Project benchmarks against two commit/authorship-based baselines using recall@k and MRR with statistical tests.",
+    "key_insights": [
+      "Mining IDE interaction histories yields substantially better developer recommendation accuracy than commit- or authorship-based methods (recall gains up to ~127% and MRR gains up to ~112.5% in the studied datasets).",
+      "Interaction data captures micro-level attempts, peer-reviewed or uncommitted work, and more temporal detail (recency/activity) than commits, which helps identify expertise earlier and more accurately.",
+      "iHDev typically recommends the correct developer at higher ranks (improved MRR) and does so without degrading rank quality compared to baselines."
+    ],
+    "implications": "Incorporating IDE interaction traces into triage and recommendation systems can improve automatic assignment accuracy and reduce latency (interactions appear before commits), so tool builders and researchers should harvest and integrate interaction logs (e.g., Mylyn traces) alongside commit/authorship data to build more effective, timely developer-recommendation and maintenance-support tools; further validation on more projects and fusion with other signals is a natural next step."
+  }
+}

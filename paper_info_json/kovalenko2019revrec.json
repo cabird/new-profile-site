@@ -1,0 +1,15 @@
+{
+  "tldr": "An in vivo study at JetBrains and Microsoft shows that historical reviewer recommenders are accurate by offline metrics but rarely influence reviewer choice or provide added value for most developers, who usually already know whom to ask.",
+  "details": {
+    "topic": "Reviewer recommendation for code review tools",
+    "problem": "Academic evaluations of reviewer recommenders focus on offline accuracy against historical reviewers and ignore whether recommendations influence users, are perceived as helpful, or meet developers' information needs in real-world contexts.",
+    "approach": "Mixed-method in vivo study: reproduced recommendations for over 21,000 JetBrains reviews (comparing two deployed models: Recency and Recency+Size) to measure accuracy, coverage, and any change around a model switch; conducted 4 interviews and a 16-person survey at JetBrains; validated and broadened findings with a 507-response survey at Microsoft; analyzed developers' information needs and difficult reviewer-selection scenarios.",
+    "key_insights": [
+      "No measurable influence of the deployed recommender on reviewers chosen—accuracy did not shift when the production model changed, suggesting users rarely follow recommendations in this setting.",
+      "Developers generally perceive recommendations as relevant but often find them unhelpful because they typically already know the appropriate reviewer (high prior knowledge/code ownership).",
+      "A more conservative model (Recency+Size) produced fewer, more focused recommendations and higher 'intersection/recommended' ratios, highlighting that coverage and candidate quality matter beyond raw accuracy metrics.",
+      "Developers need additional information (review history, ownership, code-dependency context, reviewer qualities and availability), and certain contexts (legacy code, unfamiliar areas, new team members, unclear ownership) make reviewer selection harder and where recommenders could be more useful."
+    ],
+    "implications": "Evaluation and design of reviewer recommenders should be user- and context-centric: researchers should measure impact on behavior and UX (not only offline accuracy) and explore metrics like coverage, sparsity, and situational usefulness; tool builders should surface richer signals (review history, ownership, dependencies, reviewer reputation/availability), trigger recommendations only when helpful (e.g., newcomers or unfamiliar code), and consider objectives beyond matching past reviewers (knowledge transfer, shared ownership); practitioners should not assume out-of-the-box recommenders are universally valuable—their benefit is likely higher in large teams, onboarding, or open-source contexts."
+  }
+}

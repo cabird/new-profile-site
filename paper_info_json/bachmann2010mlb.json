@@ -1,0 +1,15 @@
+{
+  "tldr": "Empirically evaluates the correctness and bias of automated links between bug reports and commits by manually annotating 493 Apache commits with a tool (Linkster), revealing many unlinked bug-fixes and developer-driven linking bias that can distort research and prediction models.",
+  "details": {
+    "topic": "Bias and data quality in bug-report-to-commit linking",
+    "problem": "Studies that rely on automatically linking bug reports to source-code commits assume those links are complete and representative, but developers do not always record bug-fix references in commit logs and project practices (mailing lists, backports, cross-project fixes) may hide or misattribute fixes, producing biased and incomplete datasets.",
+    "approach": "Built Linkster to support manual reverse-engineering of links, engaged an Apache core developer to exhaustively annotate all commits in a representative six-week period (493 commits), compared manual annotations to an automated linking algorithm, analyzed sources of missing links (mailing lists, backports, cross-project fixes), and evaluated effects of linking bias on a defect-prediction algorithm (BugCache).",
+    "key_insights": [
+      "Many bug fixes are not recorded in the bug tracker: a substantial fraction are discussed only on mailing lists or not documented anywhere, so automated linking misses important fixes.",
+      "Automated heuristics reliably find explicit bug-ID references in commit messages but suffer false-negatives due to time-window constraints, backports, and absent references.",
+      "Developers vary significantly in whether they link commits to bug reports, and factors like experience, ownership, and size of change appear to influence linking behavior, producing commit-feature bias.",
+      "Linking bias materially affects downstream tools (e.g., BugCache): adding manually discovered fixes changes prediction accuracy and can both reveal and improve predictive performance."
+    ],
+    "implications": "Researchers and practitioners should treat linked bug-commit datasets as incomplete and potentially biased: studies using them need validation against ground truth, tooling should ingest additional sources (mailing lists, cross-project trackers) and support manual annotation, and defect-prediction or empirical conclusions must account for reporting and commit-feature bias or risk invalid inferences."
+  }
+}

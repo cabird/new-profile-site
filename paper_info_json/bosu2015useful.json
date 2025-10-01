@@ -1,0 +1,15 @@
+{
+  "tldr": "Identifies characteristics and predictors of useful code review comments at Microsoft and builds an automated classifier applied to ~1.5M comments to quantify how reviewer experience, change size, and other factors affect comment usefulness.",
+  "details": {
+    "topic": "Code review effectiveness / empirical software engineering",
+    "problem": "Developers spend substantial time on code review, but teams lack evidence-based signals and tools to determine which review comments are actually useful to authors and what factors increase review effectiveness.",
+    "approach": "A three-stage mixed-method study: semi-structured interviews with developers to define 'useful' and identify signals (145 comments), manual labeling of an additional 844 comments to build an oracle, development of a decision-tree classifier (with features such as change-trigger proximity, thread status, participants, iterations, sentiment and keyword features) validated via cross-validation and author checks, and large-scale application of the classifier to ≈1.5 million comments across five Microsoft projects to analyze relationships between usefulness and reviewer/change characteristics.",
+    "key_insights": [
+      "Change-trigger and thread status are the strongest predictors: comments that induce code changes within one line and comments marked Resolved/Closed are far more likely to be useful.",
+      "Reviewer experience matters: prior changes or prior reviews on the same file and organizational tenure (ramping up in the first year) substantially increase the density of useful comments.",
+      "Change characteristics matter: larger changesets (more files) reduce the proportion of useful comments; source code files elicit more useful feedback than build/config files.",
+      "Same-team vs cross-team reviewers show negligible practical difference in usefulness density, and many useful comments are concise (single-comment threads) rather than extended discussions."
+    ],
+    "implications": "Provides an empirically validated classifier and actionable insights for tooling and process: teams can monitor 'usefulness density' to find weak areas, prefer including experienced reviewers (while retaining novices for knowledge transfer), encourage smaller/incremental changesets and better review focus on non-code files, and researchers can use the classifier and signals to build reviewer-recommendation, monitoring, and training tools to improve code-review ROI."
+  }
+}

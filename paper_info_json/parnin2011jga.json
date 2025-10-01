@@ -1,0 +1,15 @@
+{
+  "tldr": "An empirical study mining the full histories of 20 popular open-source Java projects finds that Java generics were unevenly adopted, mostly used for collections (especially List<String>), often championed by one developer, only partially reduced code duplication, and did not reliably reduce type casts.",
+  "details": {
+    "topic": "Empirical study of Java generics adoption",
+    "problem": "Language designers claimed generics would improve type safety, reduce casts and duplication, and be widely adopted, but it's unclear how generics were actually used in real-world projects and who adopts them.",
+    "approach": "Automatically mined and analyzed every revision of 20 large open-source Java projects (548M+ LOC) using Eclipse JDT to extract generic usage, tracked parameterized vs raw types, identified 'generifications', measured casts and duplicated-code estimates, correlated adoption with contributors and IDE/tool support, and applied statistical tests.",
+    "key_insights": [
+      "Adoption was uneven: about half the projects and a minority of developers used generics extensively; in most projects one or two contributors 'championed' generics rather than broad community uptake.",
+      "Generics usage was narrow and dominated by Java collections (Lists and Maps); Lists of Strings were the single most common pattern and advanced features (wildcards, nesting, bounds) were rarely used.",
+      "Generics did reduce code duplication in concentrated cases (preventing many duplicated lines for a few highly parameterized types), but most user-defined generic types had few unique parameterizations, limiting overall impact.",
+      "Introduction of generics did not consistently reduce the number of casts across projects; only a minority showed a strong inverse relationship, and IDE support timing did not clearly drive adoption."
+    ],
+    "implications": "Designers and researchers should temper expectations that large, complex language features will be broadly or immediately adopted or will uniformly realize advertised benefits; adoption is social as well as technical (often driven by a few champions), practical benefits may concentrate on a small set of use cases (collections), and measuring feature impact requires longitudinal, repository-scale analysis to inform future language design and tooling priorities."
+  }
+}

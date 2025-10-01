@@ -1,0 +1,14 @@
+{
+  "tldr": "Combining developer contribution and code dependency information into a single socio-technical network yields substantially better prediction of which software components will have post-release failures.",
+  "details": {
+    "topic": "Socio-technical networks for software defect prediction",
+    "problem": "Identifying which components are likely to fail after release is expensive and prior automated predictors used either code dependency structure or developer-contribution data in isolation, missing interactions between who works on what and how components depend on each other.",
+    "approach": "The authors build three graph views (dependency network, developer contribution bipartite network, and a merged socio-technical network) for binaries/plugins, compute a range of social-network metrics (e.g., betweenness, degree, closeness, eigenvector, structural-hole and ego measures, weighted/unweighted variants), apply PCA to address multicollinearity, and train logistic regression models to predict post-release failure-proneness. They evaluate on Windows Vista (thousands of binaries) and six releases of Eclipse (plugins), using repeated random train/test splits and cross-release prediction, and report precision, recall, F-score, AUC and Nagelkerke R^2.",
+    "key_insights": [
+      "Network measures computed on the combined socio-technical graph correlate with post-release failures more strongly than measures from dependency-only or contribution-only graphs.",
+      "Prediction models using socio-technical (or combined) metrics consistently achieve higher precision, recall and F-scores (precision/recall up to ~85% in some releases) than prior single-view approaches across both Windows Vista and Eclipse.",
+      "Models trained on one release can be used to predict fault-prone components in the next release when metrics are standardized, showing practical applicability for release-to-release risk prediction."
+    ],
+    "implications": "For researchers: socio-technical topology is a valuable signal beyond traditional code metrics and should be incorporated into defect-prediction models; for practitioners and developers: using combined developer–dependency graphs lets teams better prioritize testing, code review and resource allocation (including training or coordination interventions), and models can be trained on past releases to prospectively identify high-risk components in new releases."
+  }
+}

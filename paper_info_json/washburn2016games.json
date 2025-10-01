@@ -1,0 +1,15 @@
+{
+  "tldr": "An empirical study of 18 interviews and a 464-respondent survey characterizes practitioners' views and practices around energy-aware software engineering, finding that developers care about energy but lack measurement, tooling, and concrete requirements.",
+  "details": {
+    "topic": "Green software engineering (energy-aware development)",
+    "problem": "As software increasingly runs on mobile, embedded, and cloud platforms, developers need to consider energy usage, but little is known about current practitioner practices, requirements, and barriers to building energy-efficient software.",
+    "approach": "Mixed-methods empirical study: 18 semi-structured qualitative interviews with Microsoft practitioners (transcribed and coded via grounded theory) followed by a targeted quantitative survey of 464 developers/testers from ABB, Google, IBM, and Microsoft using 36 Likert statements and free-response prompts to generalize interview themes and analyze perspectives across requirements, design, construction, testing/fixing, and maintenance.",
+    "key_insights": [
+      "Energy goals are often informal desires or expressed via proxies (e.g., runtime, radio usage) rather than precise energy metrics or targets, making requirements vague and hard to verify.",
+      "Mobile and many traditional app teams report energy concerns more frequently than expected, while embedded and data-center application teams reported fewer explicit application-level energy requirements; responsibilities for energy are perceived as shared across apps, libraries, OS, and hardware.",
+      "Practitioners consider energy in design and when writing new code and are willing to trade other qualities for energy savings, but they generally lack accurate intuitions about energy, lack fine-grained measurement/debugging tools, and find energy issues harder to discover and diagnose than other performance problems.",
+      "Energy is largely ignored during maintenance and documentation, and practitioners express strong demand for effective profiling and static-analysis tools, scenario-aware metrics, and educational resources."
+    ],
+    "implications": "Researchers and tool-builders should prioritize practical measurement and debugging tools (fine-grained profiling, scenario-aware benchmarks, and static analyses that map to energy impact), methods for eliciting concrete energy requirements and trade-off analyses, empirical validation of design/architecture patterns, and educational and process support so teams can specify, detect, and maintain energy behavior across the software lifecycle; integrating energy considerations earlier and providing usable oracles will make energy-aware practices more adoptable in industry."
+  }
+}

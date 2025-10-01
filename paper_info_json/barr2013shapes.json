@@ -1,0 +1,15 @@
+{
+  "tldr": "Empirical analysis of real-world object-oriented heaps shows they are much simpler than the type system allows: most components are atomic, most pointer sets are injective, and remaining sharing follows a few common idioms (immutable, unique, global, contained).",
+  "details": {
+    "topic": "Runtime heap structure and sharing in object-oriented programs",
+    "problem": "Type systems and theoretical models admit a wide range of complex heap shapes, but it is unclear which of those shapes actually appear in real programs and therefore which assumptions analyses, annotations, and memory systems should target.",
+    "approach": "Dynamically sampled runtime heaps using HeapDbg to build an abstraction of 'conceptual components' (grouping objects by role and storage), measured shape (atomic/tree/dag/cyclic), injectivity (aliasing), ownership and sharing idioms, and statistically analyzed results on 10 DaCapo Java benchmarks (compiled to .NET) with validation on C# programs.",
+    "key_insights": [
+      "Most heap components are atomic: about 85% of types (±12%) and ~98.5% of conceptual components (±1%) are non-recursive (no internal pointers).",
+      "Pointers are frequently injective and tree-like: roughly 87%–96% of fields and 90%–99% of edges are injective in the samples, and tree edges form the majority of pointer relationships.",
+      "Local ownership is common but not dominant (≈51% of types, 39%–63% CI); when sharing occurs it is more often between components than within them (the majority of sharing spans different components).",
+      "Most sharing can be classified by a few idioms—immutable objects are the largest source of sharing, with contained, unique (singletons/interns), and global patterns covering most of the rest; only a small fraction of sharing remains unclassified (≈8%–15% of fields)."
+    ],
+    "implications": "Because real-world heaps are dominated by simple shapes and a few predictable sharing idioms, designers of type/annotation systems, static/dynamic heap analyses, allocators, and garbage collectors can favor lightweight, idiom-aware mechanisms (e.g., injectivity/ownership annotations, region/pool allocation, optimizations for immutable/shared singletons) instead of supporting worst-case arbitrary heap structure, enabling more precise and efficient tools that match programmer intent."
+  }
+}

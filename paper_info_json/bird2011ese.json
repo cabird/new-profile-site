@@ -1,0 +1,15 @@
+{
+  "tldr": "The Empirical Software Engineering group at Microsoft Research studies how social, organizational, and technical data from large industrial and open-source projects can predict defects, improve bug triage, and guide development practices.",
+  "details": {
+    "topic": "Empirical/software engineering and socio-technical analysis",
+    "problem": "Traditional defect prediction and development guidance focus on code metrics, but the effects of developer behavior, organizational structure, collaboration, and bug-report practices on software quality and triage are not well understood or operationalized at scale.",
+    "approach": "Leveraged large industrial datasets (primarily Windows Vista/Windows 7 and other Microsoft products) and open-source projects (Eclipse, Apache, Mozilla) to apply socio-technical network analysis, organizational metrics, logistic/regression models and PCA, surveys, qualitative categorization of bug report information needs, bug tossing graphs with Markov models, and industrial case studies of TDD and unit-test automation to predict failures, characterize bug triage, and evaluate development practices.",
+    "key_insights": [
+      "Combining developer contribution edges with module dependency edges (socio-technical networks) yields stronger defect prediction than using code or social relationships alone, with good transfer across releases and projects.",
+      "Organizational metrics (team size, staff turnover, ownership cohesion, reporting hierarchy) can predict post-release faults better than many traditional code-based predictors like churn or complexity.",
+      "Geographic distribution has a surprisingly small negative impact on defect rates once team size and organizational reporting structure are accounted for.",
+      "Bug-report quality suffers from a mismatch between what developers want (repro steps, stack traces, test cases) and what reporters supply; tooling, guided UIs, reputation, and automated information capture can improve triage and fix likelihood."
+    ],
+    "implications": "For researchers: highlights the importance of socio-technical and organizational variables and the value of industrial-scale data for generalizable studies; for product teams and managers: suggests using socio-technical and org metrics to prioritize testing, staffing, and risk mitigation; for tool builders: motivates bug-reporting UIs that guide reporters and automatically collect diagnostic data, and analytics platforms that surface actionable socio-technical signals to improve triage and development decisions."
+  }
+}

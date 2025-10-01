@@ -1,0 +1,15 @@
+{
+  "tldr": "Applying Flow or TypeScript with minimal, localized annotations to historical JavaScript bug commits shows static typing would have flagged about 15% of public bugs.",
+  "details": {
+    "topic": "Static type systems for JavaScript",
+    "problem": "JavaScript is dynamically typed and widely used in large projects, but it is unclear how many real-world bugs static type systems (Flow, TypeScript) would have detected and thus potentially prevented.",
+    "approach": "Uniformly sampled 400 linked, fixed public bug reports from 398 GitHub JavaScript projects; for each buggy parent commit the authors manually added minimal, consistent type annotations (localized to regions changed by the fix, using type shims and module interfaces as needed) and ran Flow 0.30 and TypeScript 2.0 to see if the checkers reported errors. They recorded detectability, categorized undetectable bugs, measured annotation \"tax\" (tokens and time), resolved unknowns, and computed confidence intervals.",
+    "key_insights": [
+      "Both Flow 0.30 and TypeScript 2.0 detect about 15% of public bugs (mean 15%, 95% CI ≈ [11.5%, 18.5%]); the two tools largely overlap in which bugs they catch.",
+      "Most undetectable bugs are specification/logic errors (SpecError ≈ 55%; spec-related errors ≈ 78%), so static typing cannot address a large class of public defects.",
+      "Annotation cost to reveal a detectable bug is modest in this experiment: average token tax ≈ 1.7 for Flow and 2.4 for TypeScript; average time tax ≈ 231s (Flow) vs 307s (TypeScript), reflecting Flow's stronger inference and more compact nullable syntax.",
+      "TypeScript 2.0's strict null handling substantially improved detection (22 additional bugs, a 58% increase over 1.8), highlighting nullability design as an important language feature for catching bugs."
+    ],
+    "implications": "Static typing can meaningfully reduce checked-in bugs in real projects (around a 10–15% immediate reduction in public bugs in this study) while incurring a modest, often local annotation cost; tool and language design choices (null handling, module/library annotation support, and richer string refinements) materially affect effectiveness; researchers can extend the historical \"what-if\" methodology to other type systems and private-development bugs, and practitioners should weigh the bug-reduction benefits and modest annotation effort when considering adoption."
+  }
+}

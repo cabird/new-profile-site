@@ -1,0 +1,14 @@
+{
+  "tldr": "Evaluated how the choice of training corpus (application-wide, developer-specific, or time-limited) affects n-gram language model quality for source code and found that application- and developer-specific models are superior while temporal scope usually has little impact.",
+  "details": {
+    "topic": "n-gram language models for source code / software engineering",
+    "problem": "Practitioners need guidance on which slices of code (large general corpora vs. smaller application-, developer-, or time-specific corpora) produce the most effective language models for tasks like code completion and style detection.",
+    "approach": "Built 28 trigram language models from Microsoft Office 2013 C# code (using Roslyn tokenization) including one general Office model, three application-specific models (Word, Excel, PowerPoint), developer-specific models for the five most active developers across apps, and time-specific models for the last milestone; used additive smoothing, held-out test sets (distinct files/changes), and cross-entropy to compare model quality; statistical tests (paired t-test) were applied where appropriate.",
+    "key_insights": [
+      "Application-specific models consistently achieve lower cross-entropy (better predictions) than a single general Office model for the same application.",
+      "Developer-specific models vary by application: per-developer per-application models outperform a single per-developer model, indicating developers use different idioms in different parts of the codebase (statistically significant, p < 0.01).",
+      "Temporal scope usually has little effect: models trained on the last milestone often perform as well as models trained on the entire development cycle, though there are exceptions (e.g., Word)."
+    ],
+    "implications": "For tooling (code completion, anomaly detection, naming suggestions) prefer smaller, context-aware models (application-level or developer+application-level) rather than one large cross-project model; updating models can often be done per milestone rather than continuously, which reduces cost, but teams should validate temporality per project and be mindful of limited external validity since results come from a single large product (Office)."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "tldr": "Analyzes a large corporate hackathon to identify how leader motivations, team preparation and post-event dissemination influence whether hackathon projects are continued and how participation affects individuals' skills, networks and careers.",
+  "details": {
+    "topic": "Corporate hackathons and innovation outcomes",
+    "problem": "Companies run internal hackathons expecting sustained innovation and employee development, but we lack detailed knowledge about which activities and motivations before, during, and after events lead to projects being continued or to tangible individual benefits.",
+    "approach": "Mixed-method case study of Microsoft's One Week hackathon (Redmond site): selected five teams varying in member familiarity and relation to day-to-day work; performed pre-hackathon interviews with leaders, continuous observation during the event, post-event interviews and questionnaires, and follow-up interviews four months later; qualitative open-coding analysis reconstructed project trajectories and perceived individual impacts.",
+    "key_insights": [
+      "Career-oriented leadership plus active stakeholder outreach and thorough pre-event preparation correlated with project continuation.",
+      "Matching tasks to team skills, domain-focused learning, and 'hitting the ground running' (producing a mature prototype and dissemination materials by ~day 2) increased the chance a project found a home.",
+      "Projects that fit or extended existing product lines and that teams actively promoted (science fair + outside dissemination) were more likely to be adopted; radical or novel ideas often attracted attention but less reliably continued and sometimes exposed 'fatal attraction' risks.",
+      "Participants reported clear individual benefits (technical and project-management skills, expanded networks, and even promotions), but there is a trade-off between pursuing personal learning/networking goals and producing a project optimized for continuation."
+    ],
+    "implications": "For practitioners: decide early whether the goal is project continuation or personal learning, and if continuation is desired invest in weeks of preparation, skill-aligned team formation, and post-hackathon dissemination to find a product home; for organizers: enable pre-event stakeholder discovery and post-event matchmaking to product groups and provide tools to surface relevant product lines and contacts; for researchers: examine generalizability across companies, design interventions that balance radical innovation with continuity, and explore tooling to better match motivations, skills and project fit."
+  }
+}

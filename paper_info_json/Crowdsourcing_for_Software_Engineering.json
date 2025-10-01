@@ -1,0 +1,15 @@
+{
+  "tldr": "A synthesis of how crowdsourcing is being used and can be applied across the software-engineering lifecycle, offering a task taxonomy, motivating reasons, platform examples, and an overview of six studies that highlight benefits and challenges.",
+  "details": {
+    "topic": "Crowdsourcing in software engineering",
+    "problem": "Software organizations can benefit from tapping large, diverse, and distributed contributors for development, testing, requirements, and knowledge, but they face questions about when to use crowds, how to structure tasks and incentives, how to integrate contributions, and how to onboard and manage crowd participants.",
+    "approach": "An editorial review that synthesizes historical and contemporary examples, proposes and explains a 2×2 taxonomy of crowdsourcing tasks (emergent vs nonemergent and homogeneous vs heterogeneous → rating, processing, creation, problem solving), surveys platforms and use cases (Mechanical Turk, Topcoder, Netflix Prize, Stack Overflow, GitHub, app stores), and introduces six selected articles from a theme issue that empirically and practically examine barriers to newcomers, requirements elicitation, Stack Overflow uses, crowdsourced testing, crowd-generated code summaries, and app-store feedback architectures.",
+    "key_insights": [
+      "Crowdsourcing maps to four task types—rating, processing, creation, and problem solving—each with different requirements for crowd size, incentives, and integration strategy.",
+      "Practical crowdsourcing applications exist across the development lifecycle (requirements, testing, code summarization, feedback) and can accelerate time-to-market, bring diverse solutions, and provide specialized expertise.",
+      "Successful crowdsourcing depends on platform design choices (locus of control, incentives, context provided) and addressing social/organizational barriers such as newcomer onboarding and contribution quality.",
+      "Hybrid and recombination strategies (e.g., combining intermediate results or using crowd evaluations) can help leverage partial contributions and balance reward structures."
+    ],
+    "implications": "For researchers: a structured agenda to study task types, incentives, integration methods, and socio-technical barriers; for practitioners and platform designers: guidance to choose appropriate crowdsourcing approaches for specific lifecycle tasks, to design incentives and context to improve participation and quality, and to expect crowdsourcing to be a disruptive but complementary alternative to traditional outsourcing and open-source practices."
+  }
+}

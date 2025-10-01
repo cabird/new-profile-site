@@ -1,0 +1,15 @@
+{
+  "tldr": "Analyzed 155 Gamasutra postmortems to identify common causes of success and failure in game development and distilled an empirically derived taxonomy, best practices, and pitfalls.",
+  "details": {
+    "topic": "Empirical analysis of game development postmortems",
+    "problem": "Game development practices are under-studied yet differ from traditional software engineering, so practitioners lack an evidence-based understanding of what typically goes right or wrong in game projects.",
+    "approach": "Qualitative and quantitative analysis of 155 publicly posted game development postmortems (collected from Gamasutra spanning ~1998–2015); two authors iteratively coded items in 'what went right' and 'what went wrong' sections into an emergent taxonomy (expanded from 12 to 22 categories), extracted contextual metadata (platform, team size, duration, publisher), computed category frequencies, and compared subgroups (small vs large teams, publisher vs self-published, single vs multi-platform).",
+    "key_insights": [
+      "Most frequently cited positives: strong game design, an effective development process (planning, prototyping, iteration), cohesive/motivated teams, and good art; these correlate with successful outcomes.",
+      "Most frequent pitfalls: obstacles (team formation, unexpected events), optimistic or underestimated schedules, weak development processes (lack of upfront planning or poor management), and overly ambitious or confusing game design.",
+      "Context matters: small teams reported design successes more often but faced more obstacles; self-published teams reported better testing but more obstacles and weaker tooling versus publisher-backed teams; multiplatform projects tended to report stronger art and marketing outcomes.",
+      "Actionable practices distilled: invest in pre-production and prototypes, adopt iterative development, apply risk management, scope conservatively, and use realistic scheduling, testing, documentation, and effective communication."
+    ],
+    "implications": "Provides an evidence-based taxonomy and empirical frequency data that researchers can use to target studies and tool development, and gives practitioners concrete, peer-reported recommendations (plan and prototype early, manage risk, avoid over-ambition, prioritize team experience and testing); educators can use the findings to prepare students for game-specific tradeoffs, and the community is encouraged to publish postmortems to broaden empirical knowledge in software engineering."
+  }
+}

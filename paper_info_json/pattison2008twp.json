@@ -1,0 +1,14 @@
+{
+  "tldr": "Mining four open-source projects, the authors show a strong cumulative correlation between how often software entities are mentioned in developer mailing-list emails and how often they are modified in the repository, but that correlation is much weaker when measured over short (three-month) intervals.",
+  "details": {
+    "topic": "Developer communication vs. code changes in open-source software",
+    "problem": "Do the amount of discussions about software entities (functions, methods, classes) remain independent of how much those entities are used or changed, and how does the relationship between discussion and code change behave over time?",
+    "approach": "The authors mined version-control hunks and archived mailing-list messages from four OSS projects (Ant, Apache, Postgres, Python); extracted software entity names (keyterms) using a static-analysis tool; filtered out email patches; counted keyterm occurrences in hunks and emails; applied frequency culling; and analyzed correlations between talk (email mentions) and work (hunk mentions) both cumulatively over each project's lifetime and across successive three-month intervals.",
+    "key_insights": [
+      "Cumulatively over a project's life there is a striking, consistent positive correlation across projects: keyterms that appear more often in code changes are also mentioned more often in mailing-list discussions.",
+      "When analyzed in three-month intervals the talk–work correlation weakens substantially and varies by project (stronger in Ant and Python, weaker in Apache and Postgres), indicating temporal mismatch between discussion and change activity.",
+      "A plausible explanation is that important functions receive concentrated design/discussion early (or conversely receive discussion later if initially under-reviewed), producing strong cumulative correlation even when short-term correlations are inconsistent."
+    ],
+    "implications": "For researchers and practitioners, email mention counts can be a useful cumulative indicator of which software entities attract attention or risk, but short-term analysis must account for temporal shifts; the results suggest the value of early design discussion and documentation to reduce later coordination costs and imply that temporal granularity matters when using communication data to predict or prioritize maintenance effort."
+  }
+}

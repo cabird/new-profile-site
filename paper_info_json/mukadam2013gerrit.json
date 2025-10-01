@@ -1,0 +1,15 @@
+{
+  "tldr": "Extracts and publishes a cleaned dataset of ~19k Android Gerrit code reviews by reverse-engineering Gerrit's JSON endpoints, describes the extraction and schema, and demonstrates basic analyses of review practices.",
+  "details": {
+    "topic": "Tool-supported code review data mining / software engineering dataset",
+    "problem": "Tool-supported (Gerrit) peer review is understudied because there are few available mining scripts and datasets, making it hard to analyze how review tools affect development practices and outcomes.",
+    "approach": "Reverse-engineered Gerrit's JSON requests, implemented a Python miner (throttled to avoid server overload) to collect ~19k Android reviews and raw JSON responses, cleaned and stored the data in a Microsoft SQL Server schema (and XML dump), documented data fields and anomalies (bots, missing IDs, API changes), and illustrated usage with an analysis of review timing across weekdays.",
+    "key_insights": [
+      "A reusable dataset of ~19,000 Android Gerrit reviews was produced and made available along with a documented database schema.",
+      "Mining required reverse-engineering Gerrit's undocumented JSON API and multiple per-review requests (patch sets, comments), plus careful throttling and cleaning.",
+      "Automated accounts (e.g., 'Deckard Autoverifier') account for many verification events but not all; manual verifications by humans create annotation biases.",
+      "Empirical example: submissions are concentrated on weekdays (Mon–Fri) with significantly fewer reviews on weekends, and Saturday > Sunday."
+    ],
+    "implications": "Provides researchers and practitioners with a ready-to-use, well-documented trace of Gerrit-based code review to study reviewer behavior, improve defect prediction and review workflows, compare review practices across contexts, and build tools or policies informed by real review data; also demonstrates practical challenges (API fragility, bots, missing records) that future miners must handle."
+  }
+}

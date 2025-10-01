@@ -1,0 +1,14 @@
+{
+  "tldr": "The authors evaluate GPT-4's ability to replicate quantitative empirical software engineering studies by generating assumptions, analysis plans, and code for seven papers and finding it can capture high-level structure but lacks domain-specific knowledge and reliable low-level implementation correctness.",
+  "details": {
+    "topic": "Using large language models to replicate empirical software engineering research",
+    "problem": "Empirical SE analyses are valuable but rarely replicated on new production data because doing so requires methodological expertise and engineering effort; LLMs might democratize replication but their capability to extract assumptions, design pipelines, and write correct analysis code is unknown.",
+    "approach": "Selected seven quantitative empirical SE papers, prompted GPT-4 to produce (1) assumptions underlying each methodology, (2) analysis plans as modular specifications, and (3) Python code implementing modules; evaluated assumptions and plans in a user study with 14 SE researchers and performed a manual code review of 23 GPT-4-generated code snippets by three authors, with quantitative and qualitative analyses of correctness, relevance, and descriptiveness.",
+    "key_insights": [
+      "GPT-4 reliably surfaces many explicit assumptions and produces analysis plans that capture correct high-level structure (86% of assumptions and 89% of plans rated partially or fully correct), but often misses implicit domain knowledge.",
+      "Generated analysis plans lack descriptive detail needed for autonomous replication and sometimes contain ordering or input/output errors; modules were rated descriptive only ~38% of the time.",
+      "Code shows correct high-level logic and common API usage but frequent low-level errors (wrong data sources, missing methodology steps, guessed or hallucinated implementations/APIs); only ~30% of generated code modules executed without modification."
+    ],
+    "implications": "LLMs like GPT-4 can scaffold study replications and help brainstorm assumptions or pipeline structure, but human oversight is required for correctness; improving performance will need domain-adaptation (fine-tuning or specialized datasets), richer context input (data schemas, replication artifacts), and clearer methodology reporting so tools can produce executable, trustworthy analysis pipelines for researchers and practitioners."
+  }
+}

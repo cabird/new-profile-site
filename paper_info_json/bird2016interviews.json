@@ -1,0 +1,15 @@
+{
+  "tldr": "Practical guidance and best practices for designing, conducting, transcribing, and analyzing qualitative interviews to support exploratory and mixed-methods software engineering research.",
+  "details": {
+    "topic": "Qualitative interview methods for software engineering research",
+    "problem": "Researchers and practitioners often misinterpret or lack contextual information in recorded development data and need clear, practical guidance on when and how to use interviews effectively despite their costs and biases.",
+    "approach": "The author draws on Microsoft software-engineering research experience and a motivating anecdote about code review data to present concrete, phase-by-phase advice: create a concise interview guide; select diverse or saturation-based samples; recruit and prepare participants; collect background artifacts; conduct interviews (preferably two interviewers, record and take notes); perform prompt post-interview discussion and notes; choose transcription strategies (including chunked transcription); and analyze responses with card-sorting to derive themes.",
+    "key_insights": [
+      "Interviews can reveal critical contextual information and practices not captured in recorded data (e.g., in-person code reviews causing misleading timestamps).",
+      "Purposeful sampling targeting variation (or saturation) yields richer, more relevant perspectives than random sampling for small interview studies.",
+      "Practical conduct techniques—use of an interview guide, two interviewers, recordings plus notes, time awareness, and small tokens—improve data quality and rapport.",
+      "Chunked transcription and card-sorting are efficient, effective analysis approaches for turning interview content into themes that can inform further quantitative studies."
+    ],
+    "implications": "Following these practices helps researchers design higher-quality qualitative studies that uncover hidden processes, triangulate and interpret quantitative findings, and generate hypotheses for larger-scale work; practitioners and tool builders can use interview-derived insights to better align data collection and tooling with actual developer practices."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "tldr": "Quantifies how code ownership—especially the number of low‑expertise (minor) contributors and the proportion held by the top owner—relates to pre- and post-release failures in Windows Vista and Windows 7 and how ownership affects defect prediction.",
+  "details": {
+    "topic": "Code ownership and software quality",
+    "problem": "When many low-expertise developers make small contributions to a component or ownership is fragmented, coordination and domain-knowledge gaps may increase defects; organizations need evidence about how ownership affects quality so they can change process and policy.",
+    "approach": "Analyzed commit histories, source metrics, and pre-/post-release failure records for Windows Vista and Windows 7; defined ownership metrics (Minor, Major, Total, Ownership), ran correlation and multiple linear regression models controlling for size/churn/complexity, performed dependency analysis with a static tool (MaX) and randomized graph rewiring to test major-minor-dependency significance, and evaluated network-based defect prediction while removing minor or major contribution edges.",
+    "key_insights": [
+      "The number of minor (low‑ownership) contributors strongly and positively correlates with both pre-release and post-release failures even after controlling for size, churn, and complexity.",
+      "Higher top-owner proportion (Ownership) is associated with fewer failures but has a smaller effect than the count of minor contributors.",
+      "Minor-contributor edges carry most of the predictive signal in contribution-network based defect predictors; removing them drastically reduces performance (e.g., recall dropped from ~90% to ~58% and precision from ~85% to ~44% in one evaluation).",
+      "A large fraction of minor contributions occur because developers who are major contributors to one binary make minor edits to dependent binaries (observed ~52% vs ~24% expected by chance), explaining part of why minor contributors appear."
+    ],
+    "implications": "Ownership metrics are cheap, actionable indicators that teams and managers can use to prioritize code review and QA (focus inspections on changes by minor contributors, route changes through major owners, prioritize low-ownership components), inform defect-prediction models and resourcing, and motivate process changes; results are most directly applicable to industrial settings with strong ownership practices but suggest broader value in measuring and managing ownership across projects."
+  }
+}

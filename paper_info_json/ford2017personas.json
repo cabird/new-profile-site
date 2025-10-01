@@ -1,0 +1,15 @@
+{
+  "tldr": "Identifies seven empirically-derived software engineer personas by clustering how engineers allocate weekly time across adapted knowledge-worker actions using interviews and a large company survey.",
+  "details": {
+    "topic": "Software engineering work styles and personas",
+    "problem": "Organizations often treat software engineers as a single homogeneous group, which can lead to poor task assignment and mismatches between engineers' skills/styles and work demands.",
+    "approach": "Mixed-methods study: 21 semi-structured interviews and a survey of 868 software engineers at one large company; adapted Reinhardt et al.'s knowledge-worker actions to software engineering (11 actions), asked respondents to estimate weekly hours per action, normalized time distributions, applied k-means clustering (k=7), validated clusters with statistical tests and interview quotes, produced seven personas and performed member checking.",
+    "key_insights": [
+      "Engineers cluster into seven distinct personas (Autonomist, Continuous Learner, Investigator, Communicator, Interactive, Advisor, Team Coder) characterized by different time allocations across actions such as Authoring, Co-authoring, Analyzing, Feedback, and Learning.",
+      "Collaboration partner roles are broadly similar (mostly other engineers, managers, scientists), but personas differ materially in collaborative activities and frequency (e.g., Advisors spend much more time on code review, meetings, and interruptions; Team Coders spend much more time co-authoring and fixing bugs).",
+      "Common coordination costs are measurable and persona-dependent: average weekly time ~3.2 hours in code review, ~5 hours in meetings, ~6 hours in email and interruptions, with substantial variation by persona.",
+      "Personas are fluid—engineers can shift modes across projects—suggesting time-allocation profiles reflect roles/modes rather than immutable categories."
+    ],
+    "implications": "For researchers: report and consider engineer personas when designing studies or tools; for tool-builders and product teams: tailor features and workflows to distinct time-allocation profiles (e.g., debugging support for Investigators, collaboration tooling for Team Coders, mentoring resources for Learners); for managers and orgs: assign tasks, training, and workflows to better match engineers' working styles and plan for transitions between personas; note generalizability is limited by single-company sampling and self-reported data."
+  }
+}

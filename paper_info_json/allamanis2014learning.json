@@ -1,0 +1,15 @@
+{
+  "tldr": "NATURALIZE uses statistical language models trained on a codebase to learn its identifier naming and formatting conventions and suggest stylistically consistent renamings and formatting changes with high accuracy.",
+  "details": {
+    "topic": "Automated inference of coding conventions using language models",
+    "problem": "Coding conventions (especially emergent, unspoken 'mores') are hard for developers to infer and enforce across a codebase, leading to frequent review feedback and inconsistency that harms readability and maintainability.",
+    "approach": "Introduce NATURALIZE, a language-agnostic framework that trains n-gram language models (5-gram with Katz smoothing) on a project's source corpus, tokenizes identifiers and whitespace (including INDENT/SPACE metadata), proposes alternative identifier names and formatting variants from similar contexts, ranks candidates by a naturalness (log-probability) score, and exposes tools (Eclipse plugin 'devstyle', 'styleprofile', 'genrule' rule generator, and 'stylish?' pre-commit) — evaluated with leave-one-out cross validation on popular open-source Java projects, automatic perturbation tests, manual human evaluation, and by submitting real patches to projects.",
+    "key_insights": [
+      "Statistical language models capture project-specific naming and formatting conventions (code is 'natural') and can suggest changes that align with those conventions with high accuracy (≈94% top-1 name accuracy; ≈98% formatting accuracy in many settings).",
+      "The sympathetic uniqueness principle (using an UNK token) preserves meaningful rare identifiers by allowing the model to prefer 'unknown' when unusual contexts demand uniqueness.",
+      "NATURALIZE can convert learned soft conventions into concrete formatter rules and support multiple release-management tools (dev-time suggestions, review profiling, rule generation, pre-commit filtering).",
+      "Practical validation: automatic and human evaluations show useful suggestions and real-world acceptance — 18 submitted patches to popular projects with 14 accepted."
+    ],
+    "implications": "Researchers can extend code-aware language models for richer semantic suggestions; practitioners and tool builders can deploy NATURALIZE-style, human-in-the-loop tools to reduce convention-related review churn, generate formatter rules, filter commits, and improve code consistency across languages and projects while avoiding harmful renamings of semantically important rare identifiers."
+  }
+}

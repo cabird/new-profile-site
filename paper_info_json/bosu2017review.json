@@ -1,0 +1,15 @@
+{
+  "tldr": "Surveys of open-source and Microsoft developers characterize contemporary code review as a tool-intensive practice that consumes about 10–15% of developer time and provides substantial non-technical benefits (knowledge sharing, maintainability, and impression formation) beyond defect detection.",
+  "details": {
+    "topic": "Contemporary peer code review practices",
+    "problem": "Developers widely use lightweight, tool-based code review, but its costs, how developers use it, and its non-technical benefits and social effects are not well understood across open-source and commercial settings.",
+    "approach": "The authors designed and validated a survey instrument and ran two large surveys (287 responses from 36 popular OSS projects and 416 responses from Microsoft developers, including collocated and distributed teams), analyzed quantitative responses (behavioral scales, rankings, time estimates) and coded 2,626 open-ended responses to compare practices, motivations, and perceived impacts.",
+    "key_insights": [
+      "Developers spend roughly 10–15% of their work time on code reviews (median ~5 hours/week OSS, ~4 hours/week Microsoft), with more experienced and paid contributors spending more time.",
+      "Finding defects is important but secondary; primary perceived benefits are maintainability, knowledge dissemination, community building, mentorship, and building impressions of peers' expertise and reliability.",
+      "Author identity, reputation, relationship, and perceived expertise strongly influence whether reviewers accept requests and how much scrutiny a change receives; high-quality submissions increase trust and collaboration while low-quality ones harm impressions and future interactions.",
+      "OSS and Microsoft respondents show broad agreement on many points, but OSS emphasizes impression formation and relationship-building more, whereas Microsoft emphasizes knowledge transfer, expertise alignment, and time/effort constraints; distributed vs. collocated Microsoft teams showed little difference."
+    ],
+    "implications": "For researchers: prioritize study of non-technical effects of code review (impression formation, knowledge transfer), reviewer-comment sentiment, and program-comprehension support; for practitioners and tool builders: recognize code review as valuable for more than defect detection, encourage simple self-documenting patches, provide guidance/templates to help reviewers phrase constructive comments, and invest in tooling and practices that reduce comprehension effort and support mentorship during reviews."
+  }
+}

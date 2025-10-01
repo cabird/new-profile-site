@@ -1,0 +1,15 @@
+{
+  "tldr": "Built and deployed CodeFlow Analytics, an enterprise code-review data platform at Microsoft, and report its architecture, adoption, technical solutions, usage patterns, challenges, and lessons learned from interviews and research enabled by the platform.",
+  "details": {
+    "topic": "Code review analytics / software engineering data platforms",
+    "problem": "Code review tools produce rich activity traces but provide no convenient way to aggregate, analyze, and act on that data at scale inside an enterprise, and building a reliable analytics platform raises technical, UX, and organizational adoption challenges.",
+    "approach": "Implemented CodeFlow Analytics (CFA): a Kimball-style data warehouse on Azure/SQL Server that ingests CodeFlow activity via a polling service, stores raw relational data, runs ETL into an Analysis Services tabular model with 200+ facts and dimensions, and exposes data via Excel templates, natural-language queries (Power Q&A), a REST API and raw SQL. The team developed heuristics (branch-path splitting) and a logistic-regression model to link reviews to checkins, interviewed nine product teams (11 people) about CFA use and impact, and surveyed research projects enabled by CFA.",
+    "key_insights": [
+      "Common consumption patterns: managers and developers used CFA to empirically confirm beliefs, create dashboards/reports, educate teams, increase review participation, and monitor metrics such as time-to-first-response, time-to-completion, participation rates, and resolved comments.",
+      "Practical engineering solutions worked well: a simple branch-path heuristic correctly split >97% of file paths and a logistic-regression model linked reviews to checkins with >95% precision/recall, enabling richer metrics.",
+      "Adoption and impact are real but uneven: some teams (e.g., Bing) increased review coverage from ~60% to >80% using CFA-driven dashboards and management attention; many teams saw attitude changes or training outcomes but few had formal quantitative impact measurements.",
+      "Major challenges are non-technical and technical: translating questions into correct metrics, discoverability of data, permissions/access hurdles, interpretation differences between teams, and need for analyst support and clear metric definitions."
+    ],
+    "implications": "Enterprise analytics platforms for development processes should provide both curated metrics and raw data, multiple easy entry points (Excel, natural language, APIs, SQL), clear definitions and examples, mechanisms to link heterogeneous artifacts, and support/consulting for teams; doing so can enable measurable process improvements, drive dashboards and training, and support research and tooling (e.g., comment usefulness classifiers and reviewer recommenders)."
+  }
+}

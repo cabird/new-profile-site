@@ -1,0 +1,15 @@
+{
+  "tldr": "Validates whether LDA topics extracted from requirements can be linked to version-control commits and whether those topics and time-series plots make sense to developers and program managers.",
+  "details": {
+    "topic": "Requirements traceability via topic modeling (LDA)",
+    "problem": "Requirements and implementation frequently lose explicit links over a product's lifetime, and common topic-analysis techniques (like LDA) are used for traceability without sufficient validation that the extracted topics and inferred links are meaningful to practitioners.",
+    "approach": "The authors extracted 75 requirements documents (≈285k words) from a large Microsoft product, preprocessed text, ran LDA (experimenting with topic counts and choosing 20 topics), had the first author label topics, and used LDA inference to map ≈650k version-control commit messages (10 years, ~4000 authors) to those topics. They generated global and personal topic-time plots and validated topic interpretability and plot accuracy through two in-depth interviews and an administered developer survey (in-person and email), then performed a qualitative analysis of responses.",
+    "key_insights": [
+      "Many topics extracted from requirements were meaningful to practitioners familiar with the domain, and commit-topic time-plots often matched developers' and managers' perceptions of effort and historical events.",
+      "Topic labelling is difficult: non-expert labels agreed with expert labels only about 50%, and familiarity with the underlying requirements strongly affects the ability to interpret topics.",
+      "Global topic plots are more useful for managers (spotting cross-team trends), while personal/topic-per-author plots are more useful and interpretable for developers.",
+      "Unlabelled or noisy topics reduce utility—topics should be pruned, labeled by domain experts, and presented with drill-down support for practical use."
+    ],
+    "implications": "For researchers: empirical validation is needed when applying LDA to software artifacts and evaluations should include domain experts; for tool builders and managers: LDA-derived topics can provide high-level traceability and dashboard views of effort but require expert labeling, pruning, and drill-down capabilities; for practitioners: personal topic-plots can help developers recall and verify their own work, while managers can use global trends to monitor feature effort and evolution, but care is needed because ambiguous topics can mislead."
+  }
+}

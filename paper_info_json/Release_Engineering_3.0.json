@@ -1,0 +1,15 @@
+{
+  "tldr": "Defines Release Engineering 3.0 as the next iteration of release engineering focused on enabling safe, automated, and tailored release practices for small organizations, civic bodies, safety-critical domains, and emerging platforms (IoT, robotic swarms), and surveys challenges and example solutions across build systems, experimentation, government adoption, and over-the-air updates.",
+  "details": {
+    "topic": "Release engineering for new domains (Release Engineering 3.0)",
+    "problem": "Current automated release engineering practices (continuous delivery/deployment) were developed largely for large cloud and mobile vendors and don't yet provide out-of-the-box, empirically validated processes, tools, or guidance suited to small organizations, civic institutions, safety-critical industries, IoT, and robotic swarms, which present unique technical and organizational risks.",
+    "approach": "An editorial overview curating four peer-reviewed articles that (1) review continuous experimentation techniques and challenges, (2) survey advances and future needs in build systems, (3) report on continuous-delivery adoption in a large government organization, and (4) propose gossip-based over-the-air update approaches for robotic swarms; the issue frames open challenges and research directions for Release Engineering 3.0.",
+    "key_insights": [
+      "Release Engineering 3.0 emphasizes safe, tailored, and repeatable pipelines for the 'other 80%' of software (small orgs, civic and safety-critical systems, IoT, swarms) rather than only large cloud/mobile providers.",
+      "Scaling CI/CD requires not just automation but infrastructure-as-code, robust rollback mechanisms, API/DB compatibility practices (for canary/dark launches), and improved dependency management across autonomous microservices.",
+      "There is a shortage of validated, out-of-the-box process/tool chains and empirical best practices for many real-world domains; targeted research and experience reports (build systems, experimentation, government case studies, swarm updates) begin to fill this gap.",
+      "Emerging domains (government, robotic swarms, IoT) demand new technical approaches (e.g., gossip-based OTA updates) and organizational strategies to balance rapid delivery with safety, auditability, and regulatory constraints."
+    ],
+    "implications": "Researchers should investigate domain-specific safety, dependency, and experiment design challenges and build validated tooling; tool vendors and practitioners need to develop configurable, auditable pipelines and build-system optimizations tailored to small and safety-critical deployments; and organizations (including governments and startups) can use the lessons and case studies to begin adopting continuous practices while accounting for regulatory, reliability, and connectivity constraints."
+  }
+}

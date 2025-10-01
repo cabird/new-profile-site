@@ -1,0 +1,15 @@
+{
+  "tldr": "Analyzes why and how six large Microsoft projects moved from closed to open source on GitHub, documenting the preparation steps, process changes, developer perceptions, and community response.",
+  "details": {
+    "topic": "Transition from closed-source to open-source development (GitHub migrations)",
+    "problem": "Organizations frequently consider open-sourcing internal projects but there is little systematic knowledge about the motivations, engineering and organizational steps required, the challenges encountered, and how communities respond.",
+    "approach": "Mixed-method study of six Microsoft projects (CoreFX, CoreCLR, Roslyn, Entity Framework, MVC, Orleans) using 11 internal developer interviews, 5 manager interviews, 11 external contributor interviews, a survey of Microsoft developers (62 valid responses), and quantitative analysis of GitHub activity (issues, pull requests, comments) before and after open-sourcing.",
+    "key_insights": [
+      "Primary motivations to open-source included engaging and building trust with the community, getting faster feedback/bug reports, improving developer skills and recruiting potential hires, and gaining business/trust benefits.",
+      "Successful transition requires substantial preparation: sanitizing code, changing build systems, adding documentation, enabling cross-platform support, and moving from internal tools/TFS to Git/GitHub with CI and test frameworks.",
+      "Outcomes are mixed: Git/GitHub and CI improved speed, transparency, and community participation, but testing, deep code reviews, and some internal tooling/bug-tracking features became harder and required new processes.",
+      "The community responded actively with issues and pull requests that improved bug quality and features, but maintaining two code copies, triaging contributions, and setting clear contribution expectations are ongoing challenges."
+    ],
+    "implications": "Teams planning to open-source should invest in infrastructure (build/test/CI), sanitize and document code, harmonize processes across projects, choose an accessible hosting platform (e.g., GitHub), communicate clear goals and contribution guidelines, and be prepared for increased community engagement and both benefits (faster feedback, talent pipeline) and costs (review/testing overhead, permission management)."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "tldr": "Hidden sampling and recording biases in software engineering datasets (for example, unequal linking of bug reports to fixing commits by severity) can distort analyses and predictive models; the paper demonstrates detection methods, shows how bias altered defect-prediction results, and gives practical guidance to assess and report bias.",
+  "details": {
+    "topic": "Bias in software engineering datasets / empirical software engineering",
+    "problem": "Data collected from software repositories and defect trackers can be systematically unrepresentative of the true population (e.g., some severities or developer groups are over- or under-represented), causing misleading conclusions and biased models.",
+    "approach": "Illustrated the problem with historical and software-engineering examples, analyzed defect-link datasets across multiple projects (showing severity-dependent link rates), trained defect-prediction models to demonstrate biased outcomes, and described practical detection and assessment techniques (visualization, chi-squared/Fisher tests, K–S test, subsampling) and guidance on which features to prioritize and report.",
+    "key_insights": [
+      "Software-engineering datasets can contain strong, non-obvious biases (e.g., low-severity bugs were far more likely to be linked to commits than high-severity bugs in several projects).",
+      "Models and empirical conclusions built on biased samples inherit those biases (the defect predictor performed better on the over-represented severity class).",
+      "Bias can be detected via visualization and statistical tests (histograms, chi-squared/Fisher for categorical data, Kolmogorov–Smirnov for numeric data) but also requires domain knowledge to interpret.",
+      "When a bias is found, its practical impact should be assessed (e.g., create differently biased or balanced subsets) and investigators should prioritize and report checks for the features most likely to affect their outcomes."
+    ],
+    "implications": "Researchers and practitioners must evaluate and report dataset biases before drawing conclusions or deploying models: doing so improves the validity of empirical findings, guides data collection and model evaluation, helps prioritize which features to audit, and ensures consumers of studies/tools understand limitations and potential failure modes."
+  }
+}

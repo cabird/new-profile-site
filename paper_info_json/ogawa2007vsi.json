@@ -1,0 +1,15 @@
+{
+  "tldr": "A visualization technique that clusters monthly email reply networks and uses a modified Sankey diagram linked to repository sparklines to reveal how social groups form, split, merge and relate to development activity in open-source projects.",
+  "details": {
+    "topic": "Visualization of evolving social networks in open-source software",
+    "problem": "Open-source projects generate large, long-running email and repository histories; existing visualizations either show isolated snapshots or cluttered layers and do not emphasize how social groups transition over time or how communication relates to code changes.",
+    "approach": "Construct monthly time-slice reply networks from mailing-list archives, cluster each timestep with the MCL algorithm, and display clusters as discretized nodes in a vertically flowing Sankey diagram whose edges show people moving between clusters; link that view to a file-repository view (CVS) with per-file sparklines showing edits and provide interactive selection, highlighting and message inspection; validate and explore the method via case studies of Apache and PostgreSQL email/repository archives.",
+    "key_insights": [
+      "A cluster-based Sankey representation emphasizes transitions (splits, merges, persistence) between social groups better than small-multiples or layered approaches and can reveal temporal dynamics across many timesteps at once.",
+      "Case studies showed meaningful correspondences between communication structure and development events: Apache exhibited fragmentation during Apache 2.0 development followed by re-convergence at alpha release, while PostgreSQL displayed a stable core of persistent contributors with many casual posters aggregated into the core.",
+      "Interactive linking of mailing-list clusters to repository sparklines and message headers enables rapid exploration of who worked on which files, when conversations were about particular features/releases, and how code and communication relate.",
+      "The method exposes limitations: per-timestep (greedy) clustering can break temporal continuity and drawing many crossing flows raises scalability/layout challenges requiring improved ordering or edge-rendering strategies."
+    ],
+    "implications": "Researchers and project managers can use this technique to detect and interpret formation, fragmentation, and reassembly of developer communities, correlate communication bursts with releases or development milestones, and identify core vs. peripheral contributors; the approach is generalizable to other evolving networks but needs enhancements (smoother temporal clustering and improved layout/edge handling) for larger-scale datasets and automated event detection."
+  }
+}

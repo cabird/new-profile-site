@@ -1,0 +1,15 @@
+{
+  "tldr": "A mixed qualitative–quantitative study of Microsoft developers shows that offline/local commits and lightweight branching drive migration from centralized to distributed VCSs, but the transition is often impeded by a steep learning curve, immature bridging/tool integration, and scaling issues for large codebases.",
+  "details": {
+    "topic": "Migration from centralized to distributed version control systems in enterprise software development",
+    "problem": "Why and how developers in a large commercial company transition from centralized VCSs (CVCS) to distributed or bridged DVCSs, and what barriers and outcomes they experience during that transition.",
+    "approach": "Ten semi-structured interviews with developers who transitioned within the same project were coded and card-sorted to identify themes, and findings were quantified with an anonymous survey of 70 Microsoft developers; the study analyzes motivations, technical/organizational barriers, scaling and tooling problems, and perceived productivity outcomes, then offers mitigation strategies and recommendations.",
+    "key_insights": [
+      "Primary motivations are the ability to work offline, make frequent local/incremental commits, and use lightweight branches for fast context switching and exploratory coding—features that DVCSs (or bridged DVCSs) enable.",
+      "Common transition barriers are a higher DVCS learning curve (new concepts and conflicting terminology), immature or incomplete bridge/tooling and lack of integration with existing workflows (e.g., quality gates, check-in tools), and scaling issues for large products caused by checked-in binaries, composite repositories, and long histories.",
+      "Outcomes: most developers report improved ability to work offline, more frequent commits, faster implementation and higher code velocity for many, but little consistent change in perceived code correctness; some teams reverted due to tooling/integration or scaling problems.",
+      "Practical mitigations include using dependency managers (to remove binaries), repository decomposition (submodules), shallow clones or advanced DVCS workflows (with caveats), and adopting BVCS for feature incubation or team-wide transitions rather than piecemeal adoption."
+    ],
+    "implications": "For researchers, the study fills a gap in empirical evidence on CVCS→DVCS migration in large commercial settings and highlights areas for further study (tool integration, scaling, security models); for practitioners and managers, it shows the need to weigh benefits (offline work, branching) against costs (training, tooling, repository rearchitecture), plan tooling and CI integration, consider BVCS or targeted use (incubation), and address access-control and scaling before a broad migration."
+  }
+}

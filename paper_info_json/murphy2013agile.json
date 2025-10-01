@@ -1,0 +1,15 @@
+{
+  "tldr": "Longitudinal surveys of ~1,969 Microsoft developers, testers, and PMs (2006–2012) find slow and uneven agile adoption, with many agile practices used regardless of whether teams self-identify as agile, and scalability, tooling, and incentives limiting broader adoption.",
+  "details": {
+    "topic": "Agile adoption and practices in large-scale software development",
+    "problem": "Determine whether market pressure for faster, frequent releases has driven Microsoft toward agile methodologies, which agile practices are actually used, and how perceptions of benefits and problems affect adoption across roles and time.",
+    "approach": "Five annual internal surveys (2006–2012) of 1,969 respondents in developer/tester/PM roles, benchmarked against VersionOne industry surveys, plus five follow-up interviews; analysis grouped respondents by self-identified agile vs non-agile, examined practice usage, perceived benefits/problems, role differences, and temporal trends.",
+    "key_insights": [
+      "Agile adoption at Microsoft rose only slowly and unevenly over six years; no single agile practice showed consistent growth across roles and time.",
+      "Many core engineering practices (code reviews, unit tests, automated builds) are widely used by both agile and non-agile teams, suggesting tool availability often drives practice adoption more than explicit methodology.",
+      "Agile practitioners report stronger perceived benefits but also acknowledge agile's problems; non-agile practitioners are more likely to view scalability, distributed development, and management buy-in as significant barriers.",
+      "Scale, geographic distribution, tooling, incentive structures, and practice interdependencies (order and team buy-in) are principal constraints on successful agile adoption in large organizations."
+    ],
+    "implications": "For researchers: study scaling solutions, tooling effects, and socio-technical incentives for agile at enterprise scale; for practitioners and managers: don't assume agile is a universal silver bullet—prioritize tool support for desirable practices, align incentives to reward collaboration, educate teams on practice interdependencies and adopt technical core practices first; for tool and process designers: focus on features that enable coordination across large, distributed teams to increase practical adoption."
+  }
+}

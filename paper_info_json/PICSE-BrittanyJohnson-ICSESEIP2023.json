@@ -1,0 +1,14 @@
+{
+  "tldr": "Introduces the PICSE framework—Personal, Interaction, Control, System, Expectations—derived from interviews with 18 engineers to identify the factors that shape trust in software tools (including AI-assisted tools) and to guide building more trustworthy tools.",
+  "details": {
+    "topic": "Trust in software tools",
+    "problem": "Engineers depend on many software tools but adoption and effective use hinge on trust, and there's limited understanding of which factors create, erode, or rebuild trust—especially for newer AI-assisted tools.",
+    "approach": "Semi-structured interviews with 18 engineers (internal and external to Microsoft), iterative deductive+inductive coding and thematic analysis using ATLAS.ti, validation by an external auditor, and synthesis of findings into the PICSE framework plus practical guidance and comparisons between traditional and AI-assisted tools.",
+    "key_insights": [
+      "Trust is multi-dimensional and organized into five categories (PICSE): Personal (community, source reputation, clear advantages), Interaction (contribution validation, feedback loops, educational value), Control (ownership, autonomy, workflow integration), System (ease of use, polish, security, correctness, consistency, performance), and Expectations (transparent data practices, style/goal matching, meeting expectations).",
+      "Initial adoption is driven more by Personal and System signals (community, reputation, ease of installation, polished presentation), whereas sustained or rebuilt trust depends on Interaction, Control, and Expectations (validation support, autonomy, goal matching, transparency).",
+      "AI-assisted tools amplify the need for transparent data practices, contribution validation and explainability, and higher expectation of improvement—engineers may accept AI for boilerplate but require extra vigilance for project-specific or debugging tasks."
+    ],
+    "implications": "Provides a practical taxonomy for researchers to measure and extend studies of trust and for tool developers to prioritize design and engineering decisions (community/reputation building, easy setup, polished UI, security/privacy transparency, validation/explanation mechanisms, and seamless workflow integration) to increase adoption and safe use of both traditional and AI-assisted software tools."
+  }
+}

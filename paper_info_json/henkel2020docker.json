@@ -1,0 +1,14 @@
+{
+  "tldr": "Introduces binnacle, a toolset that uses phased parsing to build structured ASTs for Dockerfiles, automatically mines semantic Tree Association Rules from a large GitHub corpus, and enforces those rules to detect and reduce best‑practice and bug-prone patterns.",
+  "details": {
+    "topic": "Static analysis and rule mining for DevOps artifacts (Dockerfiles)",
+    "problem": "DevOps artifacts like Dockerfiles embed nested languages (e.g., shell and command‑specific option grammars) and lack semantics-aware tooling; as a result, many Dockerfiles on GitHub (and in industry) violate expert best practices, causing build failures, larger images, and longer builds.",
+    "approach": "Built binnacle: a distributed data ingestor and toolset that (1) collected ~900k GitHub repos and 178k unique Dockerfiles (with a 400-file Gold Set from docker-library), (2) introduced phased parsing (three phases: top-level, embedded shell, command-option grammars) and abstraction via regexes to resolve nested language structure, (3) encoded rules as Tree Association Rules (TARs), (4) implemented a frequent sub-tree based rule miner (CMTreeMiner) to mine local TARs, and (5) implemented a static TAR enforcement engine; evaluated phased parsing effectiveness, miner recall against 15 filtered Gold Rules (9 local), and corpus violation rates.",
+    "key_insights": [
+      "Phased parsing (including parsers for top-50 command tools) reduced effectively-uninterpretable AST leaves by over 80%: Phase I had ~19.3% EU leaves, Phase II rose to ~33.2% EU, and Phase III left only ~3.7% unresolved on average.",
+      "Automated mining returned 26 local TARs, recovering 6 of 9 local Gold Rules (≈67% recall) and discovering 16 previously uncollected rules (including 4 novel semantic rules), showing practical automated discovery of actionable patterns.",
+      "Dockerfiles in the wild violate expert-derived Gold Rules about five times more often than Docker's official Gold Set (average violation rate ~33.15% vs ~6.65%), and industrial Dockerfiles showed similarly poor quality."
+    ],
+    "implications": "For researchers: demonstrates that semantic rule mining over nested DevOps artifacts is tractable with staged parsing and frequent subtree mining and provides a dataset and encoding (TARs) for further work; for tool builders and practitioners: mined rules and the enforcement engine can be integrated into IDEs, linters, and CI to prevent build failures, reduce image size and latency, and raise Dockerfile quality across open-source and industrial codebases."
+  }
+}

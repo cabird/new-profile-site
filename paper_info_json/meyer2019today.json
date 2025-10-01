@@ -1,0 +1,15 @@
+{
+  "tldr": "A large-scale survey of 5,971 Microsoft developers identifies what makes a workday feel good or typical, showing that developer agency and a balance between focused coding and collaboration are central while meetings and email have nuanced effects.",
+  "details": {
+    "topic": "Developer workdays, productivity, and job satisfaction",
+    "problem": "Software teams lack a clear, evidence-based understanding of what makes a developer's workday 'good' or 'typical', which limits informed choices about processes, tools, scheduling and evaluation that could improve productivity and job satisfaction.",
+    "approach": "Mixed-method study: preliminary interviews to build an activity taxonomy, then a large anonymous survey (37,792 invitations, 5,971 responses) asking about the previous workday (time-use in minutes, binary good/typical ratings and free-text explanations). Qualitative analysis used grounded-theory coding to build conceptual frameworks for 'good' and 'typical' days; quantitative analysis computed time-use statistics, tested relationships (interruptions, meetings), and clustered days into six workday types using PAM.",
+    "key_insights": [
+      "Agency (developers' control over their day) is a primary driver: when workdays align with expectations and developers can avoid unwanted disruptions they are more likely to report good and typical days.",
+      "Good workdays are defined by creating value and making visible progress plus efficient, uninterrupted time—successful days balance focused development work and necessary collaboration.",
+      "Meetings and interruptions are not uniformly negative: they harm productivity during coding-focused phases but are often constructive and acceptable during planning, specification and release phases; scheduling and phase-awareness matter.",
+      "Contrary to common assumptions, email was rarely cited as a cause of bad or atypical days; clustering of time-use revealed six distinct day types (e.g., Coding Day, Meeting Day) and development-heavy days were rated better more often."
+    ],
+    "implications": "For managers: increase developer agency (flexible hours, veto power over meeting placement, no-meeting days, support work-from-home for focused tasks), prioritize reducing administrative and infrastructure friction, and evaluate collaborative contributions alongside coding output; for developers and teams: schedule collaboration when phases benefit from it and protect uninterrupted coding blocks during development phases; for researchers: account for project phase, day type and autonomy when measuring and modeling developer productivity and well‑being rather than assuming uniform effects (e.g., of meetings or email)."
+  }
+}

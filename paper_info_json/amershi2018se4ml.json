@@ -1,0 +1,15 @@
+{
+  "tldr": "An empirical case study of Microsoft teams showing how ML is integrated into software engineering, cataloging a nine-stage workflow, common challenges, best practices, and a proposed ML process maturity metric.",
+  "details": {
+    "topic": "Software engineering for machine learning",
+    "problem": "As organizations add machine learning to products and platforms, existing development processes must evolve but practical, repeatable engineering practices and tools for data, models, and team workflows are poorly understood.",
+    "approach": "Qualitative and quantitative case study at Microsoft: 14 semi-structured interviews and a wide internal survey (551 responses); card-sorted open responses, logistic regression analyses, synthesis of best practices, and construction/validation of a six-dimension Activity Maturity Index (AMI) for ML workflow stages.",
+    "key_insights": [
+      "Data is the central engineering challenge: discovery, collection, cleaning, versioning, provenance, and continual evolution of datasets are more complex and persistent problems than code management.",
+      "Three domain-specific differences from traditional software engineering: (1) data complexity and lifecycle, (2) model customization/reuse requires ML expertise beyond typical software skills, and (3) ML components are hard to modularize because of entanglement and non-monotonic error interactions.",
+      "Effective practices include integrated end-to-end automated pipelines, rigorous data and model provenance/versioning, combo-flighting with human-in-the-loop evaluation and scorecards, and company-wide education/training; tooling needs change as teams gain ML experience.",
+      "The proposed ML process maturity model (AMI) — combining defined goals, consistency, documentation, automation, measurement, and continuous improvement — correlates with perceived effectiveness and helps distinguish maturity across teams and domains."
+    ],
+    "implications": "Teams and tool builders should prioritize scalable data management, provenance/versioning, integrated pipelines, and training to operationalize ML; researchers should address modularity, model composability, and objective maturity measures, while practitioners can use the proposed maturity metric and best practices to plan investments and process improvements."
+  }
+}

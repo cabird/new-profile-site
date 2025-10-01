@@ -1,0 +1,15 @@
+{
+  "tldr": "A mixed-method study of 1,159 Microsoft employees finds that the ability to work privately and to communicate with team members are the strongest predictors of software engineers' satisfaction and self‑reported productivity, and that private offices, easy access to focus rooms, ergonomic furniture, and team-centered open spaces with social norms improve outcomes.",
+  "details": {
+    "topic": "Physical work environments and software engineer productivity",
+    "problem": "Organizations have adopted many office layouts (open, private, hybrid) but there is little empirical evidence about which physical-environment factors specifically affect software engineers' satisfaction and productivity compared with other office workers.",
+    "approach": "Mixed methods at Microsoft: an anonymous recruitment survey (297 responses), 19 semi-structured interviews with card-sorted qualitative analysis (589 quote cards → six themes), and a large follow-up survey (843 responses) for a total of 1,159 participants across five job disciplines; used regression models (linear and logistic) to relate survey factors (e.g., privacy, communication, furniture, social norms, room availability) and demographics to self-reported satisfaction and perceived productivity.",
+    "key_insights": [
+      "Ability to work privately with few interruptions and ability to communicate with team/leads are the strongest, consistent predictors of overall satisfaction across disciplines.",
+      "Overall satisfaction and the ability to work privately are the largest contributors to self‑assessed productivity; private offices are associated with higher perceived productivity across all groups.",
+      "For software engineers specifically, proximity to team members (room composition), social norms/signaling, ergonomic furniture, and access to windows/decoration additionally influence satisfaction and productivity.",
+      "Open/shared spaces can work when teams are colocated and supportive social norms exist, but productivity declines in larger shared spaces or when teammates are not nearby; easy access to focus/meeting rooms improves both satisfaction and perceived productivity."
+    ],
+    "implications": "Designers and managers should balance private and collaborative spaces (team-centric pods, private offices or focus rooms), invest in ergonomics and meeting/focus room availability, and cultivate explicit social norms to reduce interruptions; researchers should not assume general office findings transfer to software engineering and should combine qualitative and quantitative measures (including objective productivity metrics) in future work."
+  }
+}

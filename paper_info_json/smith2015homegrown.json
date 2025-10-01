@@ -1,0 +1,14 @@
+{
+  "tldr": "Mixed-method study of \"homegrown\" developer tools at Microsoft characterizing who builds them, why and when they are created, how they spread, and their organizational impact.",
+  "details": {
+    "topic": "Homegrown developer tools in large software organizations",
+    "problem": "Developers frequently create informal, in-house tools outside official processes, but it is unclear who builds them, what motivates them, what types of tools appear, how they spread, and what value they bring to teams and companies.",
+    "approach": "Exploratory mixed-methods study: Phase I open survey of ~138 Microsoft engineers about tools, Phase II semi-structured interviews (16 interviews covering 12 tools), and Phase III a personality survey (3,000 invited, 797 responses); qualitative coding and open card-sorts to derive categories, plus quantitative tests (Mann–Whitney) and a decision tree to relate tenure, role, and Big Five traits to toolbuilding behavior.",
+    "key_insights": [
+      "Homegrown toolbuilding is common: ~75% of survey respondents reported building tools; toolbuilders tend to have longer tenure (median 6 vs 2 years) and small but significant differences on Big Five traits (higher openness, conscientiousness, extraversion; lower neuroticism).",
+      "Tools are diverse (testing, debugging, IDE extensions, deployment, monitoring, info retrieval, etc.); many deliver high impact for modest effort (examples: xAuto, MemSpect, CodeFlow), yet most remain local to a team even though many have multiple users or collaborators.",
+      "Spread depends on organizational factors: supportive management, low barriers to entry, sanctioned channels (hackdays, science fairs, internal repos), and social/hierarchical networks promote adoption; discoverability, maintenance cost, environment incompatibility, and policy/legal uncertainty impede spread."
+    ],
+    "implications": "Organizations can magnify the value of homegrown tools by encouraging a tool-building culture (hackdays, recognition), improving discoverability and curation of internal tools, planning for tooling during technology/process transitions, and providing pathways for maintenance or formal adoption; researchers should measure tool impact and design tools and dissemination strategies that lower adoption barriers."
+  }
+}

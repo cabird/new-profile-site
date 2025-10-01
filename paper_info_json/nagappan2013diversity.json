@@ -1,0 +1,15 @@
+{
+  "tldr": "Defines a formal measure called sample coverage and provides algorithms and an R implementation to measure and maximize how well a chosen set of software projects represents a target population, demonstrated on 20,000 Ohloh projects and ICSE/FSE papers.",
+  "details": {
+    "topic": "Representativeness and diversity of software engineering empirical samples",
+    "problem": "Researchers often select convenient or large samples of software projects without quantifying how well those samples represent the broader population, which undermines claims of generality and external validity.",
+    "approach": "Define universe, space, and configuration; formalize sample coverage as the percentage of projects in a universe similar to a sample; implement algorithms to compute coverage and to greedily select projects that maximize coverage; provide an R package and demonstrate the method on a universe of 20,028 active Ohloh projects and by measuring coverage of projects used in ICSE/FSE papers.",
+    "key_insights": [
+      "Sample coverage quantifies representativeness by counting how many projects in a universe are similar (across chosen dimensions) to at least one sample project, enabling per-dimension and overall scores.",
+      "A greedy selection strategy can efficiently maximize coverage — e.g., first 50 projects cover 15.3% of the 20k Ohloh universe, 392 projects cover 50%, and 5,030 projects cover 100%.",
+      "ICSE/FSE papers (mapped to 207 Ohloh projects) covered only ~9.15% of the Ohloh universe overall under the default configuration, but per-dimension coverage (size, activity, contributors, commits) was often very high (>98%), revealing narrow multi-dimensional overlap.",
+      "Top coverage-increasing projects tend to be small, active projects in dynamic languages, showing that small projects can collectively represent large portions of the space and are inexpensive targets for evaluation."
+    ],
+    "implications": "Provides researchers and practitioners a repeatable way to (1) quantify how representative their study samples are for a stated universe and space, (2) guide selection of additional projects to improve coverage, (3) report coverage alongside universe/space/configuration to improve transparency and external validity, and (4) support replication and tailoring of empirical studies (including within companies) by comparing coverage against customized universes."
+  }
+}
