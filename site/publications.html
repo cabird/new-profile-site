@@ -56,7 +56,7 @@
                     .then(response => response.json())
                     .then(data => {
                         // Extract publications from bibtex entries
-                        const pubsArray = Object.entries(data.bibtex)
+                        const pubsArray = Object.entries(data.papers)
                             .filter(([key, pub]) => pub.status === 'MAPPED')
                             .map(([key, pub]) => ({
                                 id: key,
