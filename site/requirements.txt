@@ -4,3 +4,4 @@ openai>=1.0.0
 python-dotenv
 tiktoken
 Flask-APScheduler
+psycopg2-binary

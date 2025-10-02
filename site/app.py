@@ -10,6 +10,8 @@ import secrets
 import tiktoken
 import json
 import os
+import psycopg2
+from psycopg2.extras import RealDictCursor
 
 # Load environment variables
 load_dotenv()
@@ -230,6 +232,103 @@ class InMemoryChatStore(ChatStore):
 
 
 # ============================================================================
+# PostgreSQL Analytics Logging
+# ============================================================================
+
+def get_db_connection():
+    """Get database connection using DATABASE_URL from environment."""
+    database_url = os.getenv('DATABASE_URL')
+    if not database_url:
+        logger.warning("DATABASE_URL not set - analytics logging disabled")
+        return None
+
+    try:
+        conn = psycopg2.connect(database_url)
+        return conn
+    except Exception as e:
+        logger.error(f"Failed to connect to database: {e}")
+        return None
+
+
+def init_analytics_db():
+    """Initialize database tables for analytics."""
+    conn = get_db_connection()
+    if not conn:
+        return
+
+    try:
+        with conn.cursor() as cur:
+            # Chat messages table
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS chat_messages (
+                    id SERIAL PRIMARY KEY,
+                    session_id VARCHAR(255) NOT NULL,
+                    paper_id VARCHAR(255) NOT NULL,
+                    role VARCHAR(50) NOT NULL,
+                    content TEXT NOT NULL,
+                    token_count INTEGER,
+                    ip_address VARCHAR(45),
+                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+
+            # Create indexes
+            cur.execute("""
+                CREATE INDEX IF NOT EXISTS idx_session_paper
+                ON chat_messages (session_id, paper_id)
+            """)
+
+            cur.execute("""
+                CREATE INDEX IF NOT EXISTS idx_timestamp
+                ON chat_messages (timestamp)
+            """)
+
+            conn.commit()
+            logger.info("Analytics database tables initialized")
+    except Exception as e:
+        logger.error(f"Failed to initialize analytics database: {e}")
+        conn.rollback()
+    finally:
+        conn.close()
+
+
+def get_client_ip():
+    """Get client IP address, handling proxies and load balancers."""
+    # Check for X-Forwarded-For header (Render, Cloudflare, etc.)
+    if request.headers.get('X-Forwarded-For'):
+        # X-Forwarded-For can be a list: "client, proxy1, proxy2"
+        # First IP is the original client
+        return request.headers.get('X-Forwarded-For').split(',')[0].strip()
+
+    # Check for X-Real-IP header
+    if request.headers.get('X-Real-IP'):
+        return request.headers.get('X-Real-IP')
+
+    # Fall back to remote_addr
+    return request.remote_addr
+
+
+def log_chat_message(session_id, paper_id, role, content, token_count=None, ip_address=None):
+    """Log a chat message to the database."""
+    conn = get_db_connection()
+    if not conn:
+        return
+
+    try:
+        with conn.cursor() as cur:
+            cur.execute("""
+                INSERT INTO chat_messages (session_id, paper_id, role, content, token_count, ip_address)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (session_id, paper_id, role, content, token_count, ip_address))
+            conn.commit()
+    except Exception as e:
+        logger.error(f"Failed to log chat message: {e}")
+        conn.rollback()
+    finally:
+        conn.close()
+
+
+# ============================================================================
 # Flask App Initialization
 # ============================================================================
 
@@ -368,7 +467,10 @@ def initialize_app():
     logger.warning("Using in-memory chat store - requires single worker (gunicorn --workers=1)")
     logger.warning("For multi-worker deployments, migrate to RedisChatStore")
 
-    # 5. Initialize cleanup scheduler
+    # 5. Initialize analytics database
+    init_analytics_db()
+
+    # 6. Initialize cleanup scheduler
     scheduler.init_app(app)
     scheduler.start()
     scheduler.add_job(
@@ -444,6 +546,9 @@ def chat_with_paper(paper_id):
             'error': f'Message too long. Maximum {MAX_MESSAGE_TOKENS} tokens, got {token_count}'
         }), 400
 
+    # Get client IP for logging
+    client_ip = get_client_ip()
+
     # Check rate limit
     allowed, remaining, reset_time = chat_store.check_rate_limit(session_id)
     if not allowed:
@@ -497,6 +602,9 @@ def chat_with_paper(paper_id):
     # Add user message
     chat_store.add_message(session_id, paper_id, 'user', user_message)
 
+    # Log user message to database
+    log_chat_message(session_id, paper_id, 'user', user_message, token_count, client_ip)
+
     # Increment rate limit counter
     chat_store.increment_rate_limit(session_id)
 
@@ -524,6 +632,10 @@ def chat_with_paper(paper_id):
 
             # Add assistant response to conversation
             chat_store.add_message(session_id, paper_id, 'assistant', full_response)
+
+            # Log assistant response to database
+            response_token_count = count_tokens(full_response)
+            log_chat_message(session_id, paper_id, 'assistant', full_response, response_token_count, client_ip)
 
             # Send completion with metadata
             _, remaining, _ = chat_store.check_rate_limit(session_id)

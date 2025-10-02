@@ -48,7 +48,20 @@ const PublicationCard = ({ publication, onViewDetails, onViewBibtex, onChatWithP
             )}
 
             <div className="card-actions">
-                <button className="btn btn-secondary btn-sm" onClick={() => onViewDetails(publication)}>
+                <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => {
+                        // Log to Google Analytics
+                        if (window.gtag) {
+                            window.gtag('event', 'view_publication_summary', {
+                                paper_id: publication.id,
+                                paper_title: publication.title,
+                                event_category: 'publications'
+                            });
+                        }
+                        onViewDetails(publication);
+                    }}
+                >
                     View Summary
                 </button>
                 {publication.mapped_pdf && (
@@ -57,12 +70,35 @@ const PublicationCard = ({ publication, onViewDetails, onViewBibtex, onChatWithP
                         className="btn btn-secondary btn-sm"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => {
+                            // Log to Google Analytics
+                            if (window.gtag) {
+                                window.gtag('event', 'download_pdf', {
+                                    paper_id: publication.id,
+                                    paper_title: publication.title,
+                                    event_category: 'publications'
+                                });
+                            }
+                        }}
                     >
                         PDF
                     </a>
                 )}
                 {publication.raw_bibtex && (
-                    <button className="btn btn-secondary btn-sm" onClick={() => onViewBibtex(publication)}>
+                    <button
+                        className="btn btn-secondary btn-sm"
+                        onClick={() => {
+                            // Log to Google Analytics
+                            if (window.gtag) {
+                                window.gtag('event', 'view_bibtex', {
+                                    paper_id: publication.id,
+                                    paper_title: publication.title,
+                                    event_category: 'publications'
+                                });
+                            }
+                            onViewBibtex(publication);
+                        }}
+                    >
                         BibTeX
                     </button>
                 )}
@@ -70,6 +106,14 @@ const PublicationCard = ({ publication, onViewDetails, onViewBibtex, onChatWithP
                     <button
                         className="btn btn-secondary btn-sm btn-chat"
                         onClick={() => {
+                            // Log to Google Analytics
+                            if (window.gtag) {
+                                window.gtag('event', 'open_chat', {
+                                    paper_id: publication.id,
+                                    paper_title: publication.title,
+                                    event_category: 'publications'
+                                });
+                            }
                             console.log('CHAT BUTTON CLICKED!', publication.id);
                             if (onChatWithPaper) {
                                 onChatWithPaper(publication);

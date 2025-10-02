@@ -60,6 +60,16 @@ const ChatModal = ({ paper, onClose }) => {
         setInput('');
         setError(null);
 
+        // Log chat message to Google Analytics (not the content, just the event)
+        if (window.gtag) {
+            window.gtag('event', 'send_chat_message', {
+                paper_id: paper.id,
+                paper_title: paper.title,
+                message_count: messages.length + 1,
+                event_category: 'chat'
+            });
+        }
+
         // Add user message to UI
         setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
 
@@ -249,6 +259,14 @@ const ChatModal = ({ paper, onClose }) => {
                             className="canned-questions-select"
                             onChange={(e) => {
                                 if (e.target.value) {
+                                    // Log canned question selection to Google Analytics
+                                    if (window.gtag) {
+                                        window.gtag('event', 'select_canned_question', {
+                                            paper_id: paper.id,
+                                            paper_title: paper.title,
+                                            event_category: 'chat'
+                                        });
+                                    }
                                     setInput(e.target.value);
                                     e.target.value = '';
                                 }
