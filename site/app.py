@@ -672,6 +672,17 @@ def clear_paper_chat(paper_id):
     return jsonify({'message': 'Chat cleared successfully'})
 
 
+@app.route('/AI_where_it_matters/')
+@app.route('/AI_where_it_matters')
+def ai_matters_index():
+    """Serve AI_where_it_matters index page"""
+    return send_from_directory('AI_where_it_matters', 'index.html')
+
+@app.route('/AI_where_it_matters/<path:path>')
+def serve_ai_matters(path):
+    """Serve static content from AI_where_it_matters directory"""
+    return send_from_directory('AI_where_it_matters', path)
+
 @app.route('/<path:path>')
 def serve_static(path):
     """Serve all other static files (JS, CSS, JSON, PDFs, etc.)"""

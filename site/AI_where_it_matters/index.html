@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Where It Matters - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 900px;
+            width: 100%;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .icon svg {
+            width: 45px;
+            height: 45px;
+            stroke: white;
+        }
+        
+        h1 {
+            color: #1a202c;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .authors {
+            color: #4a5568;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .subtitle {
+            color: #4a5568;
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        
+        .status {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .status-text {
+            color: #2d3748;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .study-info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            color: #718096;
+            font-weight: 600;
+        }
+        
+        .info-value {
+            color: #2d3748;
+            font-weight: 500;
+        }
+        
+        .paper-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+        
+        .paper-link svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+        }
+        
+        .paper-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .loading-dots {
+            display: inline-flex;
+            gap: 5px;
+            margin-left: 8px;
+        }
+        
+        .loading-dots span {
+            width: 8px;
+            height: 8px;
+            background: #92400e;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+        
+        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        .tasks-section {
+            text-align: left;
+            margin-top: 40px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+        }
+        
+        .tasks-section h2 {
+            color: #1a202c;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .task-category {
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .task-category:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .task-category h3 {
+            color: #2d3748;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .task-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .task-tag {
+            background: white;
+            color: #4a5568;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 25px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .info-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .task-tag {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 8V4H8"/>
+                <rect width="16" height="12" x="4" y="8" rx="2"/>
+                <path d="M2 14h2"/>
+                <path d="M20 14h2"/>
+                <path d="M15 13v2"/>
+                <path d="M9 13v2"/>
+            </svg>
+        </div>
+        
+        <h1>AI Where It Matters</h1>
+        <p class="authors">
+            Rudrajit Choudhuri, Carmen Badea, Christian Bird, Jenna L. Butler, Robert DeLine, Brian Houck
+        </p>
+        <p class="subtitle">Where, Why, and How Developers Want AI Support in Daily Work</p>
+        
+        <div class="status">
+            <div class="status-badge">
+                Dashboard In Development
+                <span class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </div>
+            <p class="status-text">
+                We're building an interactive dashboard to visualize findings from our large-scale study of 860 developers at Microsoft. Check back soon to explore task appraisals, AI adoption patterns, and Responsible AI priorities across software engineering tasks.
+            </p>
+        </div>
+        
+        <div class="study-info">
+            <div class="info-row">
+                <span class="info-label">Participants</span>
+                <span class="info-value">860 developers</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Organization</span>
+                <span class="info-value">Microsoft</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Tasks Analyzed</span>
+                <span class="info-value">20 SE task categories</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Study Date</span>
+                <span class="info-value">July 2025</span>
+            </div>
+        </div>
+        
+        <a href="paper.pdf" class="paper-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Read the Full Paper
+        </a>
+        
+        <div class="tasks-section">
+            <h2>Software Engineering Tasks Studied</h2>
+            
+            <div class="task-category">
+                <h3>Development</h3>
+                <div class="task-list">
+                    <span class="task-tag">Coding/Programming</span>
+                    <span class="task-tag">Bug Fixing/Debugging</span>
+                    <span class="task-tag">Performance Optimization</span>
+                    <span class="task-tag">Refactoring & Maintenance</span>
+                    <span class="task-tag">AI Integration</span>
+                </div>
+            </div>
+            
+            <div class="task-category">
+                <h3>Design & Planning</h3>
+                <div class="task-list">
+                    <span class="task-tag">System Design</span>
+                    <span class="task-tag">Requirements Engineering</span>
+                    <span class="task-tag">Project Planning & Management</span>
+                </div>
+            </div>
+            
+            <div class="task-category">
+                <h3>Quality & Risk Management</h3>
+                <div class="task-list">
+                    <span class="task-tag">Testing & QA</span>
+                    <span class="task-tag">Code Review/Pull Requests</span>
+                    <span class="task-tag">Security & Compliance</span>
+                </div>
+            </div>
+            
+            <div class="task-category">
+                <h3>Infrastructure & Operations</h3>
+                <div class="task-list">
+                    <span class="task-tag">DevOps (CI/CD)</span>
+                    <span class="task-tag">Environment Setup & Maintenance</span>
+                    <span class="task-tag">Infrastructure Monitoring</span>
+                    <span class="task-tag">Customer Support</span>
+                </div>
+            </div>
+            
+            <div class="task-category">
+                <h3>Meta-work</h3>
+                <div class="task-list">
+                    <span class="task-tag">Documentation</span>
+                    <span class="task-tag">Stakeholder Communication</span>
+                    <span class="task-tag">Mentoring & Onboarding</span>
+                    <span class="task-tag">Learning</span>
+                    <span class="task-tag">Research & Brainstorming</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
