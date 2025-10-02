@@ -240,6 +240,7 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY') or secrets.token_hex(32)
 paper_chat_client = None
 chat_store = None
 paper_data_cache = None
+canned_questions = []
 scheduler = APScheduler()
 
 
@@ -326,6 +327,20 @@ def load_paper_markdown(paper_id):
         return None, None
 
 
+def load_canned_questions():
+    """Load canned questions from JSON file."""
+    global canned_questions
+
+    try:
+        with open('canned_questions.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            canned_questions = data.get('questions', [])
+            logger.info(f"Loaded {len(canned_questions)} canned questions")
+    except Exception as e:
+        logger.error(f"Failed to load canned questions: {e}")
+        canned_questions = []
+
+
 def initialize_app():
     """Initialize all components at app startup."""
     global paper_chat_client, chat_store, paper_data_cache
@@ -333,7 +348,10 @@ def initialize_app():
     # 1. Load and cache paper data with availability
     paper_data_cache = initialize_paper_data()
 
-    # 2. Initialize Azure OpenAI client
+    # 2. Load canned questions
+    load_canned_questions()
+
+    # 3. Initialize Azure OpenAI client
     try:
         paper_chat_client = AzureOpenAI(
             azure_endpoint=os.getenv('AZURE_OPENAI_PAPER_CHAT_ENDPOINT'),
@@ -345,12 +363,12 @@ def initialize_app():
         logger.error(f"Failed to initialize paper chat client: {e}")
         paper_chat_client = None
 
-    # 3. Initialize chat store (easy to swap for Redis later)
+    # 4. Initialize chat store (easy to swap for Redis later)
     chat_store = InMemoryChatStore()
     logger.warning("Using in-memory chat store - requires single worker (gunicorn --workers=1)")
     logger.warning("For multi-worker deployments, migrate to RedisChatStore")
 
-    # 4. Initialize cleanup scheduler
+    # 5. Initialize cleanup scheduler
     scheduler.init_app(app)
     scheduler.start()
     scheduler.add_job(
@@ -384,6 +402,11 @@ def publications():
 def get_paper_data():
     """Serve paper data with pre-computed chat availability"""
     return jsonify(paper_data_cache)
+
+@app.route('/api/canned_questions')
+def get_canned_questions():
+    """Serve canned questions for chat"""
+    return jsonify({'questions': canned_questions})
 
 
 # ============================================================================

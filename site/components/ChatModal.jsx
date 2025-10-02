@@ -6,12 +6,25 @@ const ChatModal = ({ paper, onClose }) => {
     const [streamingMessage, setStreamingMessage] = React.useState('');
     const [remainingMessages, setRemainingMessages] = React.useState(null);
     const [messageCount, setMessageCount] = React.useState(0);
+    const [cannedQuestions, setCannedQuestions] = React.useState([]);
     const messagesEndRef = React.useRef(null);
 
     // Auto-scroll to bottom when messages change
     React.useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages, streamingMessage]);
+
+    // Load canned questions on mount
+    React.useEffect(() => {
+        fetch('/api/canned_questions')
+            .then(response => response.json())
+            .then(data => {
+                setCannedQuestions(data.questions || []);
+            })
+            .catch(err => {
+                console.error('Failed to load canned questions:', err);
+            });
+    }, []);
 
     // Cleanup on unmount
     React.useEffect(() => {
@@ -174,7 +187,7 @@ const ChatModal = ({ paper, onClose }) => {
                 <div className="chat-messages">
                     {messages.length === 0 && !streamingMessage && (
                         <div className="chat-empty-state">
-                            <p>Ask questions about this paper</p>
+                            <p>Ask me anything about the paper</p>
                         </div>
                     )}
 
@@ -224,6 +237,29 @@ const ChatModal = ({ paper, onClose }) => {
                 {error && (
                     <div className="chat-error">
                         ⚠ {error}
+                    </div>
+                )}
+
+                {/* Canned questions dropdown - only show when no messages */}
+                {messages.length === 0 && !streamingMessage && cannedQuestions.length > 0 && (
+                    <div className="canned-questions-container">
+                        <select
+                            className="canned-questions-select"
+                            onChange={(e) => {
+                                if (e.target.value) {
+                                    setInput(e.target.value);
+                                    e.target.value = '';
+                                }
+                            }}
+                            defaultValue=""
+                        >
+                            <option value="" disabled>Select a question below or ask your own...</option>
+                            {cannedQuestions.map((question, idx) => (
+                                <option key={idx} value={question}>
+                                    {question}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                 )}
 
