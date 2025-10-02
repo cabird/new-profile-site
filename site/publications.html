@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - Dr. Christian Bird</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- React -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel Standalone -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">Dr. Christian Bird</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="publications.html" class="nav-link active">Publications</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <!-- Load components with UMD transform -->
+    <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/TagFilter.jsx"></script>
+    <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/PublicationCard.jsx"></script>
+    <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/PublicationModal.jsx"></script>
+    <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/BibtexModal.jsx"></script>
+
+    <!-- Main App -->
+    <script type="text/babel" data-type="module" data-plugins="transform-modules-umd">
+        import TagFilter from './components/TagFilter.jsx';
+        import PublicationCard from './components/PublicationCard.jsx';
+        import PublicationModal from './components/PublicationModal.jsx';
+        import BibtexModal from './components/BibtexModal.jsx';
+
+        const { useState, useEffect } = React;
+
+        function PublicationsApp() {
+            const [publications, setPublications] = useState([]);
+            const [allTags, setAllTags] = useState([]);
+            const [selectedTags, setSelectedTags] = useState([]);
+            const [showAwardsOnly, setShowAwardsOnly] = useState(false);
+            const [selectedPublication, setSelectedPublication] = useState(null);
+            const [bibtexPublication, setBibtexPublication] = useState(null);
+            const [loading, setLoading] = useState(true);
+
+            useEffect(() => {
+                fetch('paper_data.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Extract publications from bibtex entries
+                        const pubsArray = Object.entries(data.bibtex)
+                            .filter(([key, pub]) => pub.status === 'MAPPED')
+                            .map(([key, pub]) => ({
+                                id: key,
+                                ...pub
+                            }));
+
+                        // Sort by year (reverse chronological)
+                        pubsArray.sort((a, b) => {
+                            const yearA = parseInt(a.year) || 0;
+                            const yearB = parseInt(b.year) || 0;
+                            return yearB - yearA;
+                        });
+
+                        setPublications(pubsArray);
+
+                        // Collect all unique tags
+                        const tagsSet = new Set();
+                        pubsArray.forEach(pub => {
+                            if (pub.tags && Array.isArray(pub.tags)) {
+                                pub.tags.forEach(tag => tagsSet.add(tag));
+                            }
+                        });
+                        const sortedTags = Array.from(tagsSet).sort();
+                        setAllTags(sortedTags);
+
+                        setLoading(false);
+                    })
+                    .catch(error => {
+                        console.error('Error loading publications:', error);
+                        setLoading(false);
+                    });
+            }, []);
+
+            const handleToggleTag = (tag) => {
+                setSelectedTags(prev => {
+                    if (prev.includes(tag)) {
+                        return prev.filter(t => t !== tag);
+                    } else {
+                        return [...prev, tag];
+                    }
+                });
+            };
+
+            const handleClearTags = () => {
+                setSelectedTags([]);
+                setShowAwardsOnly(false);
+            };
+
+            const handleToggleAwards = () => {
+                setShowAwardsOnly(prev => !prev);
+            };
+
+            const handleViewDetails = (publication) => {
+                setSelectedPublication(publication);
+            };
+
+            const handleCloseModal = () => {
+                setSelectedPublication(null);
+            };
+
+            const handleViewBibtex = (publication) => {
+                setBibtexPublication(publication);
+            };
+
+            const handleCloseBibtex = () => {
+                setBibtexPublication(null);
+            };
+
+            // Filter publications by selected tags and awards (must match ALL selected criteria)
+            const filteredPublications = publications.filter(pub => {
+                // Check awards filter
+                if (showAwardsOnly) {
+                    if (!pub.awards || !Array.isArray(pub.awards) || pub.awards.length === 0) {
+                        return false;
+                    }
+                }
+
+                // Check tags filter
+                if (selectedTags.length > 0) {
+                    if (!pub.tags || !Array.isArray(pub.tags)) return false;
+                    if (!selectedTags.every(tag => pub.tags.includes(tag))) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+
+            if (loading) {
+                return <div className="container"><p>Loading publications...</p></div>;
+            }
+
+            return (
+                <div className="container">
+                    <h1>Publications</h1>
+
+                    {allTags.length > 0 && (
+                        <TagFilter
+                            allTags={allTags}
+                            selectedTags={selectedTags}
+                            onToggleTag={handleToggleTag}
+                            onClearTags={handleClearTags}
+                            showAwardsOnly={showAwardsOnly}
+                            onToggleAwards={handleToggleAwards}
+                        />
+                    )}
+
+                    <div className="mb-md" style={{ color: 'var(--text-secondary)' }}>
+                        Showing {filteredPublications.length} of {publications.length} publications
+                    </div>
+
+                    {filteredPublications.length === 0 ? (
+                        <p style={{ color: 'var(--text-secondary)' }}>
+                            No publications match the selected tags.
+                        </p>
+                    ) : (
+                        <div>
+                            {filteredPublications.map((pub) => (
+                                <PublicationCard
+                                    key={pub.id}
+                                    publication={pub}
+                                    onViewDetails={handleViewDetails}
+                                    onViewBibtex={handleViewBibtex}
+                                />
+                            ))}
+                        </div>
+                    )}
+
+                    {selectedPublication && (
+                        <PublicationModal
+                            publication={selectedPublication}
+                            onClose={handleCloseModal}
+                        />
+                    )}
+
+                    {bibtexPublication && (
+                        <BibtexModal
+                            bibtex={bibtexPublication.raw_bibtex}
+                            onClose={handleCloseBibtex}
+                        />
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<PublicationsApp />);
+    </script>
+</body>
+</html>

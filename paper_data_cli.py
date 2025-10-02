@@ -145,6 +145,43 @@ class WorklistManager:
             self.save()
         return count
 
+    def add_awards(self, bib_key: str, awards: List[str]) -> bool:
+        """Add awards to a bibtex entry (appends to existing awards, avoiding duplicates)."""
+        if bib_key in self.data['bibtex']:
+            if 'awards' not in self.data['bibtex'][bib_key]:
+                self.data['bibtex'][bib_key]['awards'] = []
+            # Add awards, avoiding duplicates
+            existing_awards = set(self.data['bibtex'][bib_key]['awards'])
+            for award in awards:
+                if award not in existing_awards:
+                    self.data['bibtex'][bib_key]['awards'].append(award)
+            self.save()
+            return True
+        return False
+
+    def remove_awards(self, bib_key: str, awards: List[str]) -> bool:
+        """Remove awards from a bibtex entry."""
+        if bib_key in self.data['bibtex']:
+            if 'awards' in self.data['bibtex'][bib_key]:
+                self.data['bibtex'][bib_key]['awards'] = [a for a in self.data['bibtex'][bib_key]['awards'] if a not in awards]
+            self.save()
+            return True
+        return False
+
+    def set_awards(self, bib_key: str, awards: List[str]) -> bool:
+        """Set awards for a bibtex entry (replaces existing awards)."""
+        if bib_key in self.data['bibtex']:
+            self.data['bibtex'][bib_key]['awards'] = awards
+            self.save()
+            return True
+        return False
+
+    def get_awards(self, bib_key: str) -> Optional[List[str]]:
+        """Get awards for a bibtex entry."""
+        if bib_key in self.data['bibtex']:
+            return self.data['bibtex'][bib_key].get('awards', [])
+        return None
+
     def get_bibtex_by_pdf_stem(self, pdf_stem: str) -> Optional[str]:
         """Find bibtex key by PDF filename stem (without extension)."""
         # Look for PDF files that match the stem
@@ -767,6 +804,62 @@ def tags_rename(ctx, item_type, old_tag, new_tag):
         click.echo(f"Renamed tag '{old_tag}' to '{new_tag}' in {count} {item_type} items")
     else:
         click.echo(f"No {item_type} items found with tag: {old_tag}")
+
+@cli.group()
+def awards():
+    """Award management commands for bibtex entries."""
+    pass
+
+@awards.command('add')
+@click.argument('bib_key')
+@click.argument('awards', nargs=-1, required=True)
+@click.pass_context
+def awards_add(ctx, bib_key, awards):
+    """Add awards to a bibtex entry (avoids duplicates)."""
+    manager = ctx.obj['manager']
+    if manager.add_awards(bib_key, list(awards)):
+        click.echo(f"Added awards to {bib_key}: {', '.join(awards)}")
+    else:
+        click.echo(f"Error: {bib_key} not found in bibtex", err=True)
+
+@awards.command('remove')
+@click.argument('bib_key')
+@click.argument('awards', nargs=-1, required=True)
+@click.pass_context
+def awards_remove(ctx, bib_key, awards):
+    """Remove awards from a bibtex entry."""
+    manager = ctx.obj['manager']
+    if manager.remove_awards(bib_key, list(awards)):
+        click.echo(f"Removed awards from {bib_key}: {', '.join(awards)}")
+    else:
+        click.echo(f"Error: {bib_key} not found in bibtex", err=True)
+
+@awards.command('set')
+@click.argument('bib_key')
+@click.argument('awards', nargs=-1, required=True)
+@click.pass_context
+def awards_set(ctx, bib_key, awards):
+    """Set awards for a bibtex entry (replaces existing awards)."""
+    manager = ctx.obj['manager']
+    if manager.set_awards(bib_key, list(awards)):
+        click.echo(f"Set awards for {bib_key}: {', '.join(awards)}")
+    else:
+        click.echo(f"Error: {bib_key} not found in bibtex", err=True)
+
+@awards.command('get')
+@click.argument('bib_key')
+@click.pass_context
+def awards_get(ctx, bib_key):
+    """Get awards for a bibtex entry."""
+    manager = ctx.obj['manager']
+    awards = manager.get_awards(bib_key)
+    if awards is not None:
+        if awards:
+            click.echo(', '.join(awards))
+        else:
+            click.echo("No awards")
+    else:
+        click.echo(f"Error: {bib_key} not found in bibtex", err=True)
 
 @cli.group()
 def status():

@@ -1,0 +1,39 @@
+{
+  "name": "Dr. Christian Bird",
+  "title": "Senior Principal Researcher",
+  "affiliation": "Microsoft Research",
+  "bio": "Dr. Christian Bird is a Senior Principal Researcher at Microsoft Research, where he studies software engineering practices, developer productivity, and the intersection of AI and software development. His work combines empirical software engineering, large-scale data analysis, and human factors to understand how developers work and how tools can better support them.",
+  "about": "Christian's research focuses on understanding and improving software development processes through empirical studies of real-world development practices. He has published extensively on topics including code review, branching strategies, testing practices, and more recently, AI-assisted programming. His work bridges academic research and industrial practice, often using data from large-scale software projects to inform both tool design and process improvements.",
+  "current_projects": [
+    {
+      "title": "AI-Assisted Development",
+      "description": "Investigating how developers work with AI coding assistants, examining trust, adoption patterns, and the evolution of programming practices in the age of generative AI."
+    },
+    {
+      "title": "Developer Productivity & Experience",
+      "description": "Understanding what makes developers productive and satisfied, developing metrics and tools to measure and improve developer experience across large organizations."
+    },
+    {
+      "title": "Software Engineering at Scale",
+      "description": "Studying practices and challenges in large-scale software development, including code review, testing, continuous integration, and collaborative workflows."
+    }
+  ],
+  "cv_link": "cv.pdf",
+  "contact": {
+    "email": "cbird@microsoft.com",
+    "links": [
+      {
+        "label": "Google Scholar",
+        "url": "https://scholar.google.com"
+      },
+      {
+        "label": "GitHub",
+        "url": "https://github.com"
+      },
+      {
+        "label": "Twitter",
+        "url": "https://twitter.com"
+      }
+    ]
+  }
+}

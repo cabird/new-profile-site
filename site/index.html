@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Christian Bird - Academic Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- React -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel Standalone -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">Dr. Christian Bird</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="publications.html" class="nav-link">Publications</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function HomePage() {
+            const [data, setData] = useState(null);
+            const [loading, setLoading] = useState(true);
+
+            useEffect(() => {
+                fetch('site_data.json')
+                    .then(response => response.json())
+                    .then(json => {
+                        setData(json);
+                        setLoading(false);
+                    })
+                    .catch(error => {
+                        console.error('Error loading site data:', error);
+                        setLoading(false);
+                    });
+            }, []);
+
+            if (loading) {
+                return <div className="container"><p>Loading...</p></div>;
+            }
+
+            if (!data) {
+                return <div className="container"><p>Error loading data.</p></div>;
+            }
+
+            return (
+                <div className="container-narrow">
+                    {/* Bio Section */}
+                    <section className="section">
+                        <h1>{data.name}</h1>
+                        <h2 className="mb-sm">{data.title}</h2>
+                        <h3 className="mb-lg" style={{ color: 'var(--text-secondary)', fontWeight: 400 }}>
+                            {data.affiliation}
+                        </h3>
+                        <p>{data.bio}</p>
+
+                        {/* Contact Links */}
+                        <ul className="link-list">
+                            {data.contact.links.map((link, idx) => (
+                                <li key={idx} className="link-item">
+                                    <a href={link.url} target="_blank" rel="noopener noreferrer">
+                                        {link.label}
+                                    </a>
+                                </li>
+                            ))}
+                            <li className="link-item">
+                                <a href={data.cv_link}>CV (PDF)</a>
+                            </li>
+                        </ul>
+                    </section>
+
+                    {/* About Section */}
+                    <section className="section">
+                        <h2 className="section-title">About</h2>
+                        <p>{data.about}</p>
+                    </section>
+
+                    {/* Current Projects Section */}
+                    <section className="section">
+                        <h2 className="section-title">Current Projects</h2>
+                        {data.current_projects.map((project, idx) => (
+                            <div key={idx} className="project-card">
+                                <h3 className="project-title">{project.title}</h3>
+                                <p className="project-description">{project.description}</p>
+                            </div>
+                        ))}
+                    </section>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<HomePage />);
+    </script>
+</body>
+</html>
