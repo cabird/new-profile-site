@@ -1,4 +1,6 @@
-const PublicationCard = ({ publication, onViewDetails, onViewBibtex }) => {
+const PublicationCard = ({ publication, onViewDetails, onViewBibtex, onChatWithPaper }) => {
+    console.log('PublicationCard rendered for:', publication.id, 'chat_available:', publication.chat_available, 'onChatWithPaper:', typeof onChatWithPaper);
+
     // Determine venue based on publication type
     const getVenue = () => {
         if (publication.type === 'inproceedings') {
@@ -58,6 +60,29 @@ const PublicationCard = ({ publication, onViewDetails, onViewBibtex }) => {
                 {publication.raw_bibtex && (
                     <button className="btn btn-secondary btn-sm" onClick={() => onViewBibtex(publication)}>
                         BibTeX
+                    </button>
+                )}
+                {publication.chat_available ? (
+                    <button
+                        className="btn btn-secondary btn-sm btn-chat"
+                        onClick={() => {
+                            console.log('CHAT BUTTON CLICKED!', publication.id);
+                            if (onChatWithPaper) {
+                                onChatWithPaper(publication);
+                            } else {
+                                console.error('onChatWithPaper is not defined!');
+                            }
+                        }}
+                    >
+                        Chat
+                    </button>
+                ) : (
+                    <button
+                        className="btn btn-secondary btn-sm"
+                        disabled
+                        title="Chat unavailable - markdown not found"
+                    >
+                        Chat
                     </button>
                 )}
             </div>

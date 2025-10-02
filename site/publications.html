@@ -10,6 +10,10 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <!-- Babel Standalone -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Marked.js for markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- DOMPurify for XSS protection -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
 </head>
 <body>
     <nav class="nav">
@@ -30,6 +34,7 @@
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/PublicationCard.jsx"></script>
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/PublicationModal.jsx"></script>
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/BibtexModal.jsx"></script>
+    <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/ChatModal.jsx"></script>
 
     <!-- Main App -->
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd">
@@ -38,6 +43,7 @@
         import PublicationCard from './components/PublicationCard.jsx';
         import PublicationModal from './components/PublicationModal.jsx';
         import BibtexModal from './components/BibtexModal.jsx';
+        import ChatModal from './components/ChatModal.jsx';
 
         const { useState, useEffect } = React;
 
@@ -49,10 +55,11 @@
             const [searchQuery, setSearchQuery] = useState('');
             const [selectedPublication, setSelectedPublication] = useState(null);
             const [bibtexPublication, setBibtexPublication] = useState(null);
+            const [chatPaper, setChatPaper] = useState(null);
             const [loading, setLoading] = useState(true);
 
             useEffect(() => {
-                fetch('paper_data.json')
+                fetch('/api/paper_data.json')
                     .then(response => response.json())
                     .then(data => {
                         // Extract publications from bibtex entries
@@ -136,6 +143,16 @@
 
             const handleCloseBibtex = () => {
                 setBibtexPublication(null);
+            };
+
+            const handleChatWithPaper = (publication) => {
+                console.log('Chat button clicked for:', publication.title);
+                setChatPaper(publication);
+                console.log('chatPaper state set to:', publication.id);
+            };
+
+            const handleCloseChat = () => {
+                setChatPaper(null);
             };
 
             // Helper function to get venue text
@@ -223,6 +240,7 @@
                                     publication={pub}
                                     onViewDetails={handleViewDetails}
                                     onViewBibtex={handleViewBibtex}
+                                    onChatWithPaper={handleChatWithPaper}
                                 />
                             ))}
                         </div>
@@ -240,6 +258,16 @@
                             bibtex={bibtexPublication.raw_bibtex}
                             onClose={handleCloseBibtex}
                         />
+                    )}
+
+                    {chatPaper && (
+                        <>
+                            {console.log('Rendering ChatModal for:', chatPaper.title)}
+                            <ChatModal
+                                paper={chatPaper}
+                                onClose={handleCloseChat}
+                            />
+                        </>
                     )}
                 </div>
             );
