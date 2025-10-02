@@ -1,3 +1,5 @@
+import { AwardIcon } from './Icons.jsx';
+
 const PublicationCard = ({ publication, onViewDetails, onViewBibtex, onChatWithPaper }) => {
     console.log('PublicationCard rendered for:', publication.id, 'chat_available:', publication.chat_available, 'onChatWithPaper:', typeof onChatWithPaper);
 
@@ -26,7 +28,9 @@ const PublicationCard = ({ publication, onViewDetails, onViewBibtex, onChatWithP
             {publication.awards && publication.awards.length > 0 && (
                 <div className="awards">
                     {publication.awards.map((award, idx) => (
-                        <span key={idx} className="award-badge">🏆 {award}</span>
+                        <span key={idx} className="award-badge">
+                            <AwardIcon size={14} /> {award}
+                        </span>
                     ))}
                 </div>
             )}
@@ -44,7 +48,7 @@ const PublicationCard = ({ publication, onViewDetails, onViewBibtex, onChatWithP
             )}
 
             <div className="card-actions">
-                <button className="btn btn-primary btn-sm" onClick={() => onViewDetails(publication)}>
+                <button className="btn btn-secondary btn-sm" onClick={() => onViewDetails(publication)}>
                     View Summary
                 </button>
                 {publication.mapped_pdf && (

@@ -1,3 +1,5 @@
+import { XIcon, SendIcon, UserIcon, BotIcon, AlertCircleIcon } from './Icons.jsx';
+
 const ChatModal = ({ paper, onClose }) => {
     const [messages, setMessages] = React.useState([]);
     const [input, setInput] = React.useState('');
@@ -164,7 +166,7 @@ const ChatModal = ({ paper, onClose }) => {
                         <p className="chat-paper-title">{paper.title}</p>
                     </div>
                     <button className="btn-close" onClick={onClose} aria-label="Close">
-                        ✕
+                        <XIcon size={24} />
                     </button>
                 </div>
 
@@ -194,7 +196,7 @@ const ChatModal = ({ paper, onClose }) => {
                     {messages.map((msg, idx) => (
                         <div key={idx} className={`chat-message chat-message-${msg.role}`}>
                             <div className="chat-message-icon">
-                                {msg.role === 'user' ? 'You' : 'AI'}
+                                {msg.role === 'user' ? <UserIcon size={18} /> : <BotIcon size={18} />}
                             </div>
                             <div
                                 className="chat-message-content"
@@ -206,7 +208,7 @@ const ChatModal = ({ paper, onClose }) => {
                     {streamingMessage && (
                         <div className="chat-message chat-message-assistant">
                             <div className="chat-message-icon">
-                                AI
+                                <BotIcon size={18} />
                             </div>
                             <div
                                 className="chat-message-content"
@@ -218,7 +220,7 @@ const ChatModal = ({ paper, onClose }) => {
                     {loading && !streamingMessage && (
                         <div className="chat-message chat-message-assistant">
                             <div className="chat-message-icon">
-                                AI
+                                <BotIcon size={18} />
                             </div>
                             <div className="chat-message-content">
                                 <div className="chat-typing-indicator">
@@ -236,7 +238,7 @@ const ChatModal = ({ paper, onClose }) => {
                 {/* Error display */}
                 {error && (
                     <div className="chat-error">
-                        ⚠ {error}
+                        <AlertCircleIcon size={16} /> {error}
                     </div>
                 )}
 
@@ -279,6 +281,7 @@ const ChatModal = ({ paper, onClose }) => {
                         onClick={handleSend}
                         disabled={!input.trim() || loading}
                     >
+                        <SendIcon size={16} />
                         Send
                     </button>
                 </div>

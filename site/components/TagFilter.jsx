@@ -1,4 +1,5 @@
 import SearchBar from './SearchBar.jsx';
+import { AwardIcon } from './Icons.jsx';
 
 const TagFilter = ({ allTags, selectedTags, onToggleTag, onClearTags, showAwardsOnly, onToggleAwards, searchQuery, onSearchChange }) => {
     const hasFilters = selectedTags.length > 0 || showAwardsOnly || searchQuery.trim();
@@ -21,7 +22,7 @@ const TagFilter = ({ allTags, selectedTags, onToggleTag, onClearTags, showAwards
                     className={`btn-pill-award ${showAwardsOnly ? 'active' : ''}`}
                     onClick={onToggleAwards}
                 >
-                    🏆 Awards
+                     <AwardIcon size={14} /> Awards
                 </button>
                 {allTags.map((tag) => (
                     <button

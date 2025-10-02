@@ -4,10 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr. Christian Bird - Academic Profile</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HJJ7J67F5Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HJJ7J67F5Y');
+    </script>
+
     <link rel="stylesheet" href="styles.css">
     <!-- React -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <!-- Babel Standalone -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
@@ -44,8 +56,23 @@
         });
     </script>
 
-    <script type="text/babel">
+    <!-- Load Icons component -->
+    <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/Icons.jsx"></script>
+
+    <script type="text/babel" data-type="module" data-plugins="transform-modules-umd">
+        import { GithubIcon, LinkedinIcon, GraduationCapIcon, Building2Icon, FileTextIcon } from './components/Icons.jsx';
+
         const { useState, useEffect } = React;
+
+        // Helper function to get icon for link label
+        const getLinkIcon = (label) => {
+            const labelLower = label.toLowerCase();
+            if (labelLower.includes('github')) return GithubIcon;
+            if (labelLower.includes('linkedin')) return LinkedinIcon;
+            if (labelLower.includes('scholar')) return GraduationCapIcon;
+            if (labelLower.includes('microsoft') || labelLower.includes('research')) return Building2Icon;
+            return null;
+        };
 
         function HomePage() {
             const [data, setData] = useState(null);
@@ -85,15 +112,22 @@
 
                         {/* Contact Links */}
                         <ul className="link-list">
-                            {data.contact.links.map((link, idx) => (
-                                <li key={idx} className="link-item">
-                                    <a href={link.url} target="_blank" rel="noopener noreferrer">
-                                        {link.label}
-                                    </a>
-                                </li>
-                            ))}
+                            {data.contact.links.map((link, idx) => {
+                                const IconComponent = getLinkIcon(link.label);
+                                return (
+                                    <li key={idx} className="link-item">
+                                        <a href={link.url} target="_blank" rel="noopener noreferrer">
+                                            {IconComponent && <IconComponent size={18} />}
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                );
+                            })}
                             <li className="link-item">
-                                <a href={data.cv_link} target="_blank" rel="noopener noreferrer">CV (PDF)</a>
+                                <a href={data.cv_link} target="_blank" rel="noopener noreferrer">
+                                    <FileTextIcon size={18} />
+                                    CV (PDF)
+                                </a>
                             </li>
                         </ul>
                     </section>

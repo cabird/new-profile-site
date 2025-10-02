@@ -1,3 +1,5 @@
+import { XIcon, AwardIcon } from './Icons.jsx';
+
 const PublicationModal = ({ publication, onClose }) => {
     if (!publication) return null;
 
@@ -18,7 +20,9 @@ const PublicationModal = ({ publication, onClose }) => {
             <div className="modal" onClick={(e) => e.stopPropagation()}>
                 <div className="modal-header">
                     <h2 className="modal-title">{publication.title}</h2>
-                    <button className="modal-close" onClick={onClose}>&times;</button>
+                    <button className="modal-close" onClick={onClose}>
+                        <XIcon size={24} />
+                    </button>
                     <div className="card-meta">
                         {publication.year} | {publication.under_submission ? (
                             <span className="badge-under-submission">[Under Submission]</span>
@@ -30,7 +34,9 @@ const PublicationModal = ({ publication, onClose }) => {
                     {publication.awards && publication.awards.length > 0 && (
                         <div className="awards" style={{ marginTop: 'var(--spacing-md)' }}>
                             {publication.awards.map((award, idx) => (
-                                <span key={idx} className="award-badge">🏆 {award}</span>
+                                <span key={idx} className="award-badge">
+                                    <AwardIcon size={14} /> {award}
+                                </span>
                             ))}
                         </div>
                     )}

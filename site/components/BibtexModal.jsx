@@ -1,3 +1,5 @@
+import { XIcon, CopyIcon } from './Icons.jsx';
+
 const BibtexModal = ({ bibtex, onClose }) => {
     if (!bibtex) return null;
 
@@ -12,7 +14,9 @@ const BibtexModal = ({ bibtex, onClose }) => {
             <div className="modal" onClick={(e) => e.stopPropagation()}>
                 <div className="modal-header">
                     <h2 className="modal-title">BibTeX Citation</h2>
-                    <button className="modal-close" onClick={onClose}>&times;</button>
+                    <button className="modal-close" onClick={onClose}>
+                        <XIcon size={24} />
+                    </button>
                 </div>
 
                 <div className="modal-body">
@@ -27,6 +31,7 @@ const BibtexModal = ({ bibtex, onClose }) => {
                         {bibtex}
                     </pre>
                     <button className="btn btn-primary" onClick={handleCopy}>
+                        <CopyIcon size={16} />
                         Copy to Clipboard
                     </button>
                 </div>
