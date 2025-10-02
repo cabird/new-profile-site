@@ -63,8 +63,16 @@
                                 ...pub
                             }));
 
-                        // Sort by year (reverse chronological)
+                        // Sort: under_submission papers first, then by year (reverse chronological)
                         pubsArray.sort((a, b) => {
+                            // First, sort by submission status (under_submission = true comes first)
+                            const aSubmission = a.under_submission ? 1 : 0;
+                            const bSubmission = b.under_submission ? 1 : 0;
+                            if (aSubmission !== bSubmission) {
+                                return bSubmission - aSubmission;
+                            }
+
+                            // Then sort by year (reverse chronological)
                             const yearA = parseInt(a.year) || 0;
                             const yearB = parseInt(b.year) || 0;
                             return yearB - yearA;
