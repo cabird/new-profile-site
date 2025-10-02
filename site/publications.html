@@ -19,7 +19,12 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="index.html" class="nav-brand">Dr. Christian Bird</a>
-            <ul class="nav-links">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="publications.html" class="nav-link active">Publications</a></li>
             </ul>
@@ -27,6 +32,21 @@
     </nav>
 
     <div id="root"></div>
+
+    <script>
+        // Mobile nav toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const navToggle = document.getElementById('navToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            if (navToggle && navLinks) {
+                navToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    navToggle.classList.toggle('active');
+                });
+            }
+        });
+    </script>
 
     <!-- Load components with UMD transform -->
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/SearchBar.jsx"></script>

@@ -15,7 +15,12 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="index.html" class="nav-brand">Dr. Christian Bird</a>
-            <ul class="nav-links">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="nav-link active">Home</a></li>
                 <li><a href="publications.html" class="nav-link">Publications</a></li>
             </ul>
@@ -26,6 +31,19 @@
 
     <script type="text/babel">
         const { useState, useEffect } = React;
+
+        // Mobile nav toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const navToggle = document.getElementById('navToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            if (navToggle && navLinks) {
+                navToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    navToggle.classList.toggle('active');
+                });
+            }
+        });
 
         function HomePage() {
             const [data, setData] = useState(null);
