@@ -1,16 +1,21 @@
-const TagFilter = ({ allTags, selectedTags, onToggleTag, onClearTags, showAwardsOnly, onToggleAwards }) => {
-    const hasFilters = selectedTags.length > 0 || showAwardsOnly;
+import SearchBar from './SearchBar.jsx';
+
+const TagFilter = ({ allTags, selectedTags, onToggleTag, onClearTags, showAwardsOnly, onToggleAwards, searchQuery, onSearchChange }) => {
+    const hasFilters = selectedTags.length > 0 || showAwardsOnly || searchQuery.trim();
 
     return (
         <div className="filter-section">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--spacing-md)' }}>
-                <h3 className="filter-title">Filter by Tags</h3>
+                <h3 className="filter-title">Filter Publications</h3>
                 {hasFilters && (
                     <button className="btn btn-secondary btn-sm" onClick={onClearTags}>
                         Clear All
                     </button>
                 )}
             </div>
+
+            <SearchBar searchQuery={searchQuery} onSearchChange={onSearchChange} />
+
             <div className="filter-tags">
                 <button
                     className={`btn-pill-award ${showAwardsOnly ? 'active' : ''}`}

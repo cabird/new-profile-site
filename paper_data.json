@@ -1,10 +1,9 @@
 {
   "metadata": {
     "created": "2025-10-01 09:38:35",
-    "total_bibtex": 114,
-    "total_pdfs": 99,
-    "mapped_count": 117,
-    "last_updated": "2025-10-01 20:52:37",
+    "total_pdfs": 122,
+    "mapped_count": 118,
+    "last_updated": "2025-10-01 22:42:27",
     "status_legend": {
       "NOT_INVESTIGATED": "Initial state - not yet examined",
       "INVESTIGATING": "Currently being examined",
@@ -12,9 +11,1623 @@
       "NO_PDF": "Investigated, no matching PDF found",
       "NO_BIBTEX": "PDF exists but no matching bib entry",
       "MULTIPLE_CANDIDATES": "Ambiguous, needs human review"
+    },
+    "total_papers": 116
+  },
+  "pdfs": {
+    "allamanis2014learning.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/allamanis2014learning.md",
+      "mapped_paper": "DBLP:conf/sigsoft/AllamanisBBS14"
+    },
+    "allamanis2015suggesting.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/allamanis2015suggesting.md",
+      "mapped_paper": "DBLP:conf/sigsoft/AllamanisBBS15"
+    },
+    "allamanis2018loopidioms.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/allamanis2018loopidioms.md",
+      "mapped_paper": "DBLP:journals/tse/AllamanisBBDMS18"
+    },
+    "amershi2018se4ml.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/amershi2018se4ml.md",
+      "mapped_paper": "DBLP:conf/icse/AmershiBBDGKNN019"
+    },
+    "asthana2019whodo.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/asthana2019whodo.md",
+      "mapped_paper": "DBLP:conf/sigsoft/AsthanaKBBBMMA19"
+    },
+    "bacchelli2013eoc.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bacchelli2013eoc.md",
+      "mapped_paper": "DBLP:conf/icse/BacchelliB13"
+    },
+    "bachmann2010mlb.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bachmann2010mlb.md",
+      "mapped_paper": "DBLP:conf/sigsoft/BachmannBRDB10"
+    },
+    "barnett2015helping.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/barnett2015helping.md",
+      "mapped_paper": "DBLP:conf/icse/BarnettBBL15"
+    },
+    "barr2010sg.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/barr2010sg.md",
+      "mapped_paper": "DBLP:conf/sigsoft/BarrBHMR10"
+    },
+    "barr2012cid.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/barr2012cid.md",
+      "mapped_paper": "DBLP:conf/fase/BarrBRHGD12"
+    },
+    "barr2013shapes.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/barr2013shapes.md",
+      "mapped_paper": "DBLP:conf/issta/BarrBM13"
+    },
+    "bird2006mes.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2006mes.md",
+      "mapped_paper": "DBLP:conf/msr/BirdGDGS06"
+    },
+    "bird2006mesp.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2006mesp.md",
+      "mapped_paper": "DBLP:conf/msr/BirdGDGS06a"
+    },
+    "bird2007dps.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2007dps.md",
+      "mapped_paper": "DBLP:conf/msr/BirdGD07"
+    },
+    "bird2007obi.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2007obi.md",
+      "mapped_paper": "DBLP:conf/msr/BirdGDSH07"
+    },
+    "bird2007qso.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2007qso.md",
+      "mapped_paper": "DBLP:conf/msr/BirdGDSH07"
+    },
+    "bird2008lss.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2008lss.md",
+      "mapped_paper": "DBLP:conf/sigsoft/BirdPDFD08"
+    },
+    "bird2009ddd.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2009ddd.md",
+      "mapped_paper": "DBLP:conf/icse/BirdNDGM09"
+    },
+    "bird2009dddb.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2009dddb.md",
+      "mapped_paper": "DBLP:conf/icse/BirdNDGM09"
+    },
+    "bird2009fbb.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2009fbb.md",
+      "mapped_paper": "DBLP:conf/sigsoft/BirdBADBFD09"
+    },
+    "bird2009pat.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2009pat.md",
+      "mapped_paper": "DBLP:conf/issre/BirdNGMD09"
+    },
+    "bird2009ppm.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2009ppm.md",
+      "mapped_paper": "DBLP:conf/msr/BirdRBHGD09"
+    },
+    "bird2009sdr.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2009sdr.md",
+      "mapped_paper": "DBLP:conf/sdm/BirdBN09"
+    },
+    "bird2010lee.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2010lee.md",
+      "mapped_paper": "DBLP:conf/sigsoft/BirdBRB10"
+    },
+    "bird2011dtm.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2011dtm.md",
+      "mapped_paper": "DBLP:conf/sigsoft/BirdNMGD11"
+    },
+    "bird2011ese.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2011ese.md",
+      "mapped_paper": "DBLP:conf/cscw/BirdMNZ11"
+    },
+    "bird2011scc.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2011scc.md",
+      "mapped_paper": "DBLP:conf/icsm/Bird11"
+    },
+    "bird2011tbg.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2011tbg.md",
+      "mapped_paper": "DBLP:conf/icse/BirdZT11"
+    },
+    "bird2012avb.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2012avb.md",
+      "mapped_paper": "DBLP:conf/sigsoft/BirdZ12"
+    },
+    "bird2012www.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2012www.md",
+      "mapped_paper": "DBLP:conf/msr/BirdN12"
+    },
+    "bird2014rac.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2014rac.md",
+      "mapped_paper": "DBLP:conf/icse/BirdRZNZ14"
+    },
+    "bird2015cfa.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2015cfa.md",
+      "mapped_paper": "DBLP:conf/msr/BirdCG15"
+    },
+    "bird2016bias.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bird2016bias.md",
+      "mapped_paper": "DBLP:books/el/16/Bird16a"
+    },
+    "bird2016interviews.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 12:24:28",
+      "markdown_file": "markdowns/bird2016interviews.md",
+      "mapped_paper": "DBLP:books/el/16/Bird16"
+    },
+    "bird_cv.pdf": {
+      "status": "NO_BIBTEX",
+      "has_text": true,
+      "notes": null,
+      "mapped_paper": null
+    },
+    "bosu2015useful.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bosu2015useful.md",
+      "mapped_paper": "DBLP:conf/msr/BosuGB15"
+    },
+    "bosu2017review.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/bosu2017review.md",
+      "mapped_paper": "DBLP:journals/tse/BosuCBOC17"
+    },
+    "christakis2016developers.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/christakis2016developers.md",
+      "mapped_paper": "DBLP:conf/kbse/ChristakisB16"
+    },
+    "codeflow2018.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/codeflow2018.md",
+      "mapped_paper": "DBLP:journals/queue/CzerwonkaGBPC18"
+    },
+    "devanbu2016evidence.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/devanbu2016evidence.md",
+      "mapped_paper": "DBLP:conf/icse/Devanbu0B16"
+    },
+    "devanbu2018belief.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/devanbu2018belief.md",
+      "mapped_paper": "DBLP:journals/software/DevanbuZB18"
+    },
+    "ford2017personas.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/ford2017personas.md",
+      "mapped_paper": "DBLP:conf/esem/FordZBN17"
+    },
+    "gao2017javascript.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/gao2017javascript.md",
+      "mapped_paper": "DBLP:conf/icse/GaoBB17"
+    },
+    "gupta2014energy.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/gupta2014energy.md",
+      "mapped_paper": "DBLP:conf/esem/GuptaZBNBE14"
+    },
+    "harper2013ecscw.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/harper2013ecscw.md",
+      "mapped_paper": "DBLP:conf/ecscw/HarperBZM13"
+    },
+    "hellendoorn2018deep.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/hellendoorn2018deep.md",
+      "mapped_paper": "DBLP:conf/sigsoft/HellendoornBBA18"
+    },
+    "henkel2020docker.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/henkel2020docker.md",
+      "mapped_paper": "DBLP:conf/icse/HenkelBLR20"
+    },
+    "henkel2020dockermsr.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/henkel2020dockermsr.md",
+      "mapped_paper": "DBLP:conf/msr/HenkelBLR20"
+    },
+    "henley2018cfar.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/henley2018cfar.md",
+      "mapped_paper": "DBLP:conf/chi/HenleyMCFB18"
+    },
+    "hindle2012rri.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/hindle2012rri.md",
+      "mapped_paper": "DBLP:conf/icsm/HindleBZN12"
+    },
+    "hindle2014topics.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/hindle2014topics.md",
+      "mapped_paper": "DBLP:journals/ese/HindleBZN15"
+    },
+    "hong2011uds.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "notes": "PDF extraction failed",
+      "markdown_file": "markdowns/hong2011uds.md",
+      "mapped_paper": "DBLP:conf/icsm/HongKCB11"
+    },
+    "johnson2019environment.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/johnson2019environment.md",
+      "mapped_paper": "DBLP:journals/tse/JohnsonZB21"
+    },
+    "kalliamvakou2018managers.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/kalliamvakou2018managers.md",
+      "mapped_paper": "DBLP:journals/tse/KalliamvakouBZB19"
+    },
+    "kocaguneli2013distributed.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/kocaguneli2013distributed.md",
+      "mapped_paper": "DBLP:conf/icse/KocaguneliZBNM13"
+    },
+    "kochhar2020moving.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/kochhar2020moving.md",
+      "mapped_paper": "DBLP:journals/tse/KochharKNZB21"
+    },
+    "kovalenko2019revrec.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/kovalenko2019revrec.md",
+      "mapped_paper": "DBLP:journals/tse/KovalenkoTPBB20"
+    },
+    "macleod2018codereviewing.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/macleod2018codereviewing.md",
+      "mapped_paper": "DBLP:journals/software/MacLeodGSBC18"
+    },
+    "manotas2016green.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/manotas2016green.md",
+      "mapped_paper": "DBLP:conf/icse/ManotasBZSJSPC16"
+    },
+    "mehta2020rex.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/mehta2020rex.md",
+      "mapped_paper": "DBLP:conf/nsdi/MehtaB0BMAABK20"
+    },
+    "menzies2011ise.pdf": {
+      "status": "NO_BIBTEX",
+      "has_text": true,
+      "notes": null,
+      "mapped_paper": null
+    },
+    "meyer2019today.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/meyer2019today.md",
+      "mapped_paper": "DBLP:journals/tse/MeyerBBZ21"
+    },
+    "mlpaper.pdf": {
+      "status": "NO_BIBTEX",
+      "has_text": true,
+      "notes": null,
+      "mapped_paper": null
+    },
+    "mukadam2013gerrit.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/mukadam2013gerrit.md",
+      "mapped_paper": "DBLP:conf/msr/MukadamBR13"
+    },
+    "murphy2013agile.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/murphy2013agile.md",
+      "mapped_paper": "DBLP:conf/esem/MurphyBZWNB13"
+    },
+    "murphyhill2013dbf.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/murphyhill2013dbf.md",
+      "mapped_paper": "DBLP:conf/icse/Murphy-HillZBN13"
+    },
+    "murphyhill2015design.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/murphyhill2015design.md",
+      "mapped_paper": "DBLP:journals/tse/Murphy-HillZBN15"
+    },
+    "muslu2014dvcs.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/muslu2014dvcs.md",
+      "mapped_paper": "DBLP:conf/icse/MusluBNC14"
+    },
+    "musson2013software.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/musson2013software.md",
+      "mapped_paper": "DBLP:journals/software/MussonRFBBG13"
+    },
+    "nagappan2013diversity.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/nagappan2013diversity.md",
+      "mapped_paper": "DBLP:conf/sigsoft/NagappanZB13"
+    },
+    "nia2010vna.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/nia2010vna.md",
+      "mapped_paper": "DBLP:conf/msr/NiaBDF10"
+    },
+    "nolte2018you-slides.pdf": {
+      "status": "NO_BIBTEX",
+      "has_text": true,
+      "notes": null,
+      "mapped_paper": null
+    },
+    "nolte2018you.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/nolte2018you.md",
+      "mapped_paper": "DBLP:journals/pacmhci/NoltePFBSH18"
+    },
+    "ogawa2007vsi.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/ogawa2007vsi.md",
+      "mapped_paper": "DBLP:conf/apvis/OgawaMBDG07"
+    },
+    "parnin2011jga.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/parnin2011jga.md",
+      "mapped_paper": "DBLP:conf/msr/ParninBM11"
+    },
+    "parnin2012auj.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/parnin2012auj.md",
+      "mapped_paper": "DBLP:journals/ese/ParninBM13"
+    },
+    "pattison2008twp.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/pattison2008twp.md",
+      "mapped_paper": "DBLP:conf/msr/PattisonBD08"
+    },
+    "phillips2014build.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/phillips2014build.md",
+      "mapped_paper": "DBLP:conf/icse/PhillipsZB14"
+    },
+    "posnett2010esi.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/posnett2010esi.md",
+      "mapped_paper": "DBLP:journals/ese/PosnettBD11"
+    },
+    "posnett2010tmm.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/posnett2010tmm.md",
+      "mapped_paper": "DBLP:conf/msr/PosnettBD10"
+    },
+    "rahman2010cws.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/rahman2010cws.md",
+      "mapped_paper": "DBLP:conf/msr/RahmanBD10"
+    },
+    "rahman2012cwt.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/rahman2012cwt.md",
+      "mapped_paper": "DBLP:journals/ese/RahmanBD12"
+    },
+    "ray2015uniqueness.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/ray2015uniqueness.md",
+      "mapped_paper": "DBLP:conf/msr/RayNBNZ15"
+    },
+    "rigby2013convergent.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/rigby2013convergent.md",
+      "mapped_paper": "DBLP:conf/sigsoft/RigbyB13"
+    },
+    "rigby2013releng.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/rigby2013releng.md",
+      "mapped_paper": "DBLP:conf/icse/RigbyBBDG13"
+    },
+    "saraiva2015ngram.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/saraiva2015ngram.md",
+      "mapped_paper": "DBLP:conf/sigsoft/SaraivaBZ15"
+    },
+    "saul2007rrw.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/saul2007rrw.md",
+      "mapped_paper": "DBLP:conf/sigsoft/SaulFDB07"
+    },
+    "shihab2012ebs.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/shihab2012ebs.md",
+      "mapped_paper": "DBLP:conf/esem/ShihabBZ12"
+    },
+    "smith2013chase.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/smith2013chase.md",
+      "mapped_paper": "DBLP:conf/icse/SmithLMBZ13"
+    },
+    "smith2015homegrown.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/smith2015homegrown.md",
+      "mapped_paper": "DBLP:conf/icse/SmithBZ15"
+    },
+    "smith2016beliefs.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/smith2016beliefs.md",
+      "mapped_paper": "DBLP:conf/icse/SmithB016"
+    },
+    "storey2020productivity.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/storey2020productivity.md",
+      "mapped_paper": "DBLP:journals/tse/StoreyZBCMK21"
+    },
+    "than2018designing.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/than2018designing.md",
+      "mapped_paper": "DBLP:journals/software/Pe-ThanNFBSH19"
+    },
+    "than2020hackathon.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/than2020hackathon.md",
+      "mapped_paper": "DBLP:journals/hhci/Pe-ThanNFBSH22"
+    },
+    "washburn2016games.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/washburn2016games.md",
+      "mapped_paper": "DBLP:conf/icse/ManotasBZSJSPC16"
+    },
+    "zanjani2015developer.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/zanjani2015developer.md",
+      "mapped_paper": "DBLP:conf/msr/ZanjaniKB15"
+    },
+    "zanjani2016recommending.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/zanjani2016recommending.md",
+      "mapped_paper": "DBLP:journals/tse/ZanjaniKB16"
+    },
+    "zeller2011ffl.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "notes": null,
+      "markdown_file": "markdowns/zeller2011ffl.md",
+      "mapped_paper": "DBLP:conf/promise/ZellerZB11"
+    },
+    "zimmermann2012ccs.pdf": {
+      "status": "NO_BIBTEX",
+      "has_text": true,
+      "notes": null,
+      "mapped_paper": null
+    },
+    "kim2013jot.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 10:43:31",
+      "markdown_file": "markdowns/kim2013jot.md",
+      "mapped_paper": "DBLP:journals/jot/KimMPBG13"
+    },
+    "adams2015releng.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 10:44:27",
+      "markdown_file": "markdowns/adams2015releng.md",
+      "mapped_paper": "DBLP:journals/software/AdamsBBMKM15"
+    },
+    "svyatkovskiy2022merge.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 10:49:29",
+      "markdown_file": "markdowns/svyatkovskiy2022merge.md",
+      "mapped_paper": "DBLP:conf/sigsoft/SvyatkovskiyFGM22"
+    },
+    "ford2022covid.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 10:50:18",
+      "markdown_file": "markdowns/ford2022covid.md",
+      "mapped_paper": "DBLP:journals/tosem/FordSZBJMBHN22"
+    },
+    "maddila2022cone.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 10:51:45",
+      "markdown_file": "markdowns/maddila2022cone.md",
+      "mapped_paper": "DBLP:journals/tosem/MaddilaNBGD22"
+    },
+    "taking_flight.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 10:54:45",
+      "markdown_file": "markdowns/taking_flight.md",
+      "mapped_paper": "DBLP:journals/queue/BirdFZFKLG22"
+    },
+    "taking_flight_cacm.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 10:56:52",
+      "markdown_file": "markdowns/taking_flight_cacm.md",
+      "mapped_paper": "DBLP:journals/cacm/BirdFZFKLG23"
+    },
+    "PICSE-BrittanyJohnson-ICSESEIP2023.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 11:00:08",
+      "markdown_file": "markdowns/PICSE-BrittanyJohnson-ICSESEIP2023.md",
+      "mapped_paper": "DBLP:conf/icse/JohnsonBFFZ23"
+    },
+    "zhang2023coral.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 11:00:47",
+      "markdown_file": "markdowns/zhang2023coral.md",
+      "mapped_paper": "DBLP:conf/icse/ZhangMBBRAJHD23"
+    },
+    "dinella2023deepmerge.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 11:01:26",
+      "markdown_file": "markdowns/dinella2023deepmerge.md",
+      "mapped_paper": "DBLP:journals/tse/DinellaMSBNL23"
+    },
+    "butler2024okr.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 11:02:15",
+      "markdown_file": "markdowns/butler2024okr.md",
+      "mapped_paper": "DBLP:conf/icse/Butler0B24"
+    },
+    "washburn2016postmortems.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 11:05:45",
+      "markdown_file": "markdowns/washburn2016postmortems.md",
+      "mapped_paper": "DBLP:conf/icse/WashburnSN0B16"
+    },
+    "Crowdsourcing_for_Software_Engineering.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 11:44:38",
+      "markdown_file": "markdowns/Crowdsourcing_for_Software_Engineering.md",
+      "mapped_paper": "DBLP:journals/software/StolLB17"
+    },
+    "Release_Engineering_3.0.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 11:47:49",
+      "markdown_file": "markdowns/Release_Engineering_3.0.md",
+      "mapped_paper": "DBLP:journals/software/AdamsBBDKMO18"
+    },
+    "nahar.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 11:49:26",
+      "markdown_file": "markdowns/nahar.md",
+      "mapped_paper": "DBLP:conf/icse-seip/NaharKBPZB25"
+    },
+    "program_merge_cacm.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 12:04:51",
+      "markdown_file": "markdowns/program_merge_cacm.md",
+      "mapped_paper": "DBLP:journals/cacm/LahiriSBMC25"
+    },
+    "program_merge_queue.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 12:06:10",
+      "markdown_file": "markdowns/program_merge_queue.md",
+      "mapped_paper": "DBLP:journals/queue/LahiriSBMC24"
+    },
+    "arun-differential-testing.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 12:18:47",
+      "markdown_file": "markdowns/arun-differential-testing.md",
+      "mapped_paper": "DBLP:conf/sigsoft/VajjalaVBBDDDEF25"
+    },
+    "Automatic_Diff_Labeler.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 12:21:24",
+      "markdown_file": "markdowns/Automatic_Diff_Labeler.md",
+      "mapped_paper": "DBLP:conf/icse-seip/VajjalaVBBDDDEFHMSSZ25"
+    },
+    "_FSE_24__Replicating_Software_Engineering_Research_with_LLMs.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 12:23:08",
+      "markdown_file": "markdowns/_FSE_24__Replicating_Software_Engineering_Research_with_LLMs.md",
+      "mapped_paper": "DBLP:journals/pacmse/LiangBBDFF024"
+    },
+    "Miller2026MaybeWe.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 12:55:04",
+      "markdown_file": "markdowns/Miller2026MaybeWe.md",
+      "mapped_paper": "Miller2026MaybeWe"
+    },
+    "AI-Where-It_Matters.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "newly_found": true,
+      "found_date": "2025-10-01 12:58:41",
+      "markdown_file": "markdowns/AI-Where-It_Matters.md",
+      "mapped_paper": "Choudhuri2026AIWhere"
+    },
+    "pimenova2025vibe.pdf": {
+      "status": "MAPPED",
+      "has_text": true,
+      "markdown_file": "markdowns/pimenova2025vibe.md",
+      "mapped_paper": "pimenova2025vibe"
     }
   },
-  "bibtex": {
+  "mappings": [
+    {
+      "pdf_file": "henkel2020docker.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/icse/HenkelBLR20"
+    },
+    {
+      "pdf_file": "henkel2020dockermsr.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/msr/HenkelBLR20"
+    },
+    {
+      "pdf_file": "mehta2020rex.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/nsdi/MehtaB0BMAABK20"
+    },
+    {
+      "pdf_file": "asthana2019whodo.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/sigsoft/AsthanaKBBBMMA19"
+    },
+    {
+      "pdf_file": "macleod2018codereviewing.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:journals/software/MacLeodGSBC18"
+    },
+    {
+      "pdf_file": "devanbu2018belief.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:journals/software/DevanbuZB18"
+    },
+    {
+      "pdf_file": "allamanis2018loopidioms.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:journals/tse/AllamanisBBDMS18"
+    },
+    {
+      "pdf_file": "hellendoorn2018deep.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/sigsoft/HellendoornBBA18"
+    },
+    {
+      "pdf_file": "bosu2017review.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:journals/tse/BosuCBOC17"
+    },
+    {
+      "pdf_file": "ford2017personas.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/esem/FordZBN17"
+    },
+    {
+      "pdf_file": "gao2017javascript.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/icse/GaoBB17"
+    },
+    {
+      "pdf_file": "zanjani2016recommending.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:journals/tse/ZanjaniKB16"
+    },
+    {
+      "pdf_file": "smith2016beliefs.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/icse/SmithB016"
+    },
+    {
+      "pdf_file": "manotas2016green.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/icse/ManotasBZSJSPC16"
+    },
+    {
+      "pdf_file": "christakis2016developers.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/kbse/ChristakisB16"
+    },
+    {
+      "pdf_file": "bird2016bias.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:books/el/16/Bird16a"
+    },
+    {
+      "pdf_file": "barnett2015helping.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/icse/BarnettBBL15"
+    },
+    {
+      "pdf_file": "smith2015homegrown.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/icse/SmithBZ15"
+    },
+    {
+      "pdf_file": "ray2015uniqueness.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/msr/RayNBNZ15"
+    },
+    {
+      "pdf_file": "zanjani2015developer.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/msr/ZanjaniKB15"
+    },
+    {
+      "pdf_file": "bosu2015useful.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/msr/BosuGB15"
+    },
+    {
+      "pdf_file": "bird2015cfa.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/msr/BirdCG15"
+    },
+    {
+      "pdf_file": "allamanis2015suggesting.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/sigsoft/AllamanisBBS15"
+    },
+    {
+      "pdf_file": "saraiva2015ngram.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/sigsoft/SaraivaBZ15"
+    },
+    {
+      "pdf_file": "gupta2014energy.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/esem/GuptaZBNBE14"
+    },
+    {
+      "pdf_file": "bird2014rac.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/icse/BirdRZNZ14"
+    },
+    {
+      "pdf_file": "phillips2014build.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/icse/PhillipsZB14"
+    },
+    {
+      "pdf_file": "allamanis2014learning.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/sigsoft/AllamanisBBS14"
+    },
+    {
+      "pdf_file": "musson2013software.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:journals/software/MussonRFBBG13"
+    },
+    {
+      "pdf_file": "harper2013ecscw.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/ecscw/HarperBZM13"
+    },
+    {
+      "pdf_file": "murphy2013agile.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/esem/MurphyBZWNB13"
+    },
+    {
+      "pdf_file": "rigby2013releng.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/icse/RigbyBBDG13"
+    },
+    {
+      "pdf_file": "smith2013chase.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/icse/SmithLMBZ13"
+    },
+    {
+      "pdf_file": "bacchelli2013eoc.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/icse/BacchelliB13"
+    },
+    {
+      "pdf_file": "kocaguneli2013distributed.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/icse/KocaguneliZBNM13"
+    },
+    {
+      "pdf_file": "barr2013shapes.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:46",
+      "paper_key": "DBLP:conf/issta/BarrBM13"
+    },
+    {
+      "pdf_file": "mukadam2013gerrit.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/msr/MukadamBR13"
+    },
+    {
+      "pdf_file": "rigby2013convergent.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/sigsoft/RigbyB13"
+    },
+    {
+      "pdf_file": "nagappan2013diversity.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/sigsoft/NagappanZB13"
+    },
+    {
+      "pdf_file": "rahman2012cwt.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:journals/ese/RahmanBD12"
+    },
+    {
+      "pdf_file": "shihab2012ebs.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/esem/ShihabBZ12"
+    },
+    {
+      "pdf_file": "barr2012cid.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/fase/BarrBRHGD12"
+    },
+    {
+      "pdf_file": "hindle2012rri.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/icsm/HindleBZN12"
+    },
+    {
+      "pdf_file": "bird2012www.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/msr/BirdN12"
+    },
+    {
+      "pdf_file": "bird2012avb.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/sigsoft/BirdZ12"
+    },
+    {
+      "pdf_file": "bird2011ese.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/cscw/BirdMNZ11"
+    },
+    {
+      "pdf_file": "bird2011tbg.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/icse/BirdZT11"
+    },
+    {
+      "pdf_file": "bird2011scc.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/icsm/Bird11"
+    },
+    {
+      "pdf_file": "parnin2011jga.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/msr/ParninBM11"
+    },
+    {
+      "pdf_file": "zeller2011ffl.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/promise/ZellerZB11"
+    },
+    {
+      "pdf_file": "rahman2010cws.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/msr/RahmanBD10"
+    },
+    {
+      "pdf_file": "nia2010vna.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/msr/NiaBDF10"
+    },
+    {
+      "pdf_file": "barr2010sg.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/sigsoft/BarrBHMR10"
+    },
+    {
+      "pdf_file": "bachmann2010mlb.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/sigsoft/BachmannBRDB10"
+    },
+    {
+      "pdf_file": "bird2009ddd.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/icse/BirdNDGM09"
+    },
+    {
+      "pdf_file": "bird2009pat.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/issre/BirdNGMD09"
+    },
+    {
+      "pdf_file": "bird2009ppm.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/msr/BirdRBHGD09"
+    },
+    {
+      "pdf_file": "bird2009sdr.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/sdm/BirdBN09"
+    },
+    {
+      "pdf_file": "bird2009fbb.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/sigsoft/BirdBADBFD09"
+    },
+    {
+      "pdf_file": "pattison2008twp.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/msr/PattisonBD08"
+    },
+    {
+      "pdf_file": "bird2008lss.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/sigsoft/BirdPDFD08"
+    },
+    {
+      "pdf_file": "ogawa2007vsi.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/apvis/OgawaMBDG07"
+    },
+    {
+      "pdf_file": "bird2007obi.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/msr/BirdGDSH07"
+    },
+    {
+      "pdf_file": "bird2007dps.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/msr/BirdGD07"
+    },
+    {
+      "pdf_file": "saul2007rrw.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/sigsoft/SaulFDB07"
+    },
+    {
+      "pdf_file": "bird2006mes.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/msr/BirdGDGS06"
+    },
+    {
+      "pdf_file": "bird2006mesp.pdf",
+      "confidence": "auto-high",
+      "verified_date": "2025-10-01 09:47:47",
+      "paper_key": "DBLP:conf/msr/BirdGDGS06a"
+    },
+    {
+      "pdf_file": "amershi2018se4ml.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:06:06",
+      "paper_key": "DBLP:conf/icse/AmershiBBDGKNN019"
+    },
+    {
+      "pdf_file": "codeflow2018.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:06:46",
+      "paper_key": "DBLP:journals/queue/CzerwonkaGBPC18"
+    },
+    {
+      "pdf_file": "devanbu2016evidence.pdf",
+      "confidence": "medium",
+      "verified_date": "2025-10-01 10:08:28",
+      "paper_key": "DBLP:conf/icse/Devanbu0B16"
+    },
+    {
+      "pdf_file": "johnson2019environment.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:08:36",
+      "notes": "Auto-mapped via PDF investigation, score: 2.10",
+      "paper_key": "DBLP:journals/tse/JohnsonZB21"
+    },
+    {
+      "pdf_file": "bird2011dtm.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:08:49",
+      "notes": "Auto-mapped via PDF investigation, score: 1.50",
+      "paper_key": "DBLP:conf/sigsoft/BirdNMGD11"
+    },
+    {
+      "pdf_file": "hindle2014topics.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:08:49",
+      "notes": "Auto-mapped via PDF investigation, score: 1.80",
+      "paper_key": "DBLP:journals/ese/HindleBZN15"
+    },
+    {
+      "pdf_file": "bird2010lee.pdf",
+      "confidence": "medium",
+      "verified_date": "2025-10-01 10:09:12",
+      "paper_key": "DBLP:conf/sigsoft/BirdBRB10"
+    },
+    {
+      "pdf_file": "bird2009dddb.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:09:28",
+      "paper_key": "DBLP:conf/icse/BirdNDGM09"
+    },
+    {
+      "pdf_file": "bird2007qso.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:09:52",
+      "paper_key": "DBLP:conf/msr/BirdGDSH07"
+    },
+    {
+      "pdf_file": "kalliamvakou2018managers.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:14:47",
+      "notes": "Auto-mapped via PDF investigation, score: 2.10",
+      "paper_key": "DBLP:journals/tse/KalliamvakouBZB19"
+    },
+    {
+      "pdf_file": "kochhar2020moving.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:14:54",
+      "notes": "Auto-mapped via PDF investigation, score: 2.10",
+      "paper_key": "DBLP:journals/tse/KochharKNZB21"
+    },
+    {
+      "pdf_file": "kovalenko2019revrec.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:15:01",
+      "notes": "Auto-mapped via PDF investigation, score: 1.50",
+      "paper_key": "DBLP:journals/tse/KovalenkoTPBB20"
+    },
+    {
+      "pdf_file": "meyer2019today.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:15:07",
+      "notes": "Auto-mapped via PDF investigation, score: 1.40",
+      "paper_key": "DBLP:journals/tse/MeyerBBZ21"
+    },
+    {
+      "pdf_file": "meyer2019today.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:17:35",
+      "paper_key": "DBLP:journals/tse/MeyerBBZ21"
+    },
+    {
+      "pdf_file": "murphyhill2013dbf.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:21:18",
+      "paper_key": "DBLP:conf/icse/Murphy-HillZBN13"
+    },
+    {
+      "pdf_file": "murphyhill2015design.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:21:39",
+      "paper_key": "DBLP:journals/tse/Murphy-HillZBN15"
+    },
+    {
+      "pdf_file": "muslu2014dvcs.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:22:24",
+      "paper_key": "DBLP:conf/icse/MusluBNC14"
+    },
+    {
+      "pdf_file": "nolte2018you.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:23:05",
+      "paper_key": "DBLP:journals/pacmhci/NoltePFBSH18"
+    },
+    {
+      "pdf_file": "parnin2012auj.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:23:37",
+      "paper_key": "DBLP:journals/ese/ParninBM13"
+    },
+    {
+      "pdf_file": "hong2011uds.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:31:11",
+      "paper_key": "DBLP:conf/icsm/HongKCB11"
+    },
+    {
+      "pdf_file": "posnett2010esi.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:33:13",
+      "paper_key": "DBLP:journals/ese/PosnettBD11"
+    },
+    {
+      "pdf_file": "posnett2010tmm.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:33:44",
+      "paper_key": "DBLP:conf/msr/PosnettBD10"
+    },
+    {
+      "pdf_file": "storey2020productivity.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:34:00",
+      "paper_key": "DBLP:journals/tse/StoreyZBCMK21"
+    },
+    {
+      "pdf_file": "than2018designing.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:34:15",
+      "paper_key": "DBLP:journals/software/Pe-ThanNFBSH19"
+    },
+    {
+      "pdf_file": "than2020hackathon.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:34:38",
+      "paper_key": "DBLP:journals/hhci/Pe-ThanNFBSH22"
+    },
+    {
+      "pdf_file": "washburn2016games.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:34:53",
+      "paper_key": "DBLP:conf/icse/ManotasBZSJSPC16"
+    },
+    {
+      "pdf_file": "kim2013jot.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:43:31",
+      "found": true,
+      "paper_key": "DBLP:journals/jot/KimMPBG13"
+    },
+    {
+      "pdf_file": "adams2015releng.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:44:27",
+      "found": true,
+      "paper_key": "DBLP:journals/software/AdamsBBMKM15"
+    },
+    {
+      "pdf_file": "henley2018cfar.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:48:49",
+      "paper_key": "DBLP:conf/chi/HenleyMCFB18"
+    },
+    {
+      "pdf_file": "svyatkovskiy2022merge.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:49:29",
+      "found": true,
+      "paper_key": "DBLP:conf/sigsoft/SvyatkovskiyFGM22"
+    },
+    {
+      "pdf_file": "ford2022covid.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:50:18",
+      "found": true,
+      "paper_key": "DBLP:journals/tosem/FordSZBJMBHN22"
+    },
+    {
+      "pdf_file": "maddila2022cone.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:51:45",
+      "found": true,
+      "paper_key": "DBLP:journals/tosem/MaddilaNBGD22"
+    },
+    {
+      "pdf_file": "taking_flight.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:54:45",
+      "found": true,
+      "paper_key": "DBLP:journals/queue/BirdFZFKLG22"
+    },
+    {
+      "pdf_file": "taking_flight_cacm.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 10:56:52",
+      "found": true,
+      "paper_key": "DBLP:journals/cacm/BirdFZFKLG23"
+    },
+    {
+      "pdf_file": "PICSE-BrittanyJohnson-ICSESEIP2023.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 11:00:08",
+      "found": true,
+      "paper_key": "DBLP:conf/icse/JohnsonBFFZ23"
+    },
+    {
+      "pdf_file": "zhang2023coral.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 11:00:47",
+      "found": true,
+      "paper_key": "DBLP:conf/icse/ZhangMBBRAJHD23"
+    },
+    {
+      "pdf_file": "dinella2023deepmerge.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 11:01:26",
+      "found": true,
+      "paper_key": "DBLP:journals/tse/DinellaMSBNL23"
+    },
+    {
+      "pdf_file": "butler2024okr.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 11:02:15",
+      "found": true,
+      "paper_key": "DBLP:conf/icse/Butler0B24"
+    },
+    {
+      "pdf_file": "washburn2016postmortems.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 11:05:45",
+      "found": true,
+      "paper_key": "DBLP:conf/icse/WashburnSN0B16"
+    },
+    {
+      "pdf_file": "Crowdsourcing_for_Software_Engineering.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 11:44:38",
+      "found": true,
+      "paper_key": "DBLP:journals/software/StolLB17"
+    },
+    {
+      "pdf_file": "Release_Engineering_3.0.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 11:47:49",
+      "found": true,
+      "paper_key": "DBLP:journals/software/AdamsBBDKMO18"
+    },
+    {
+      "pdf_file": "nahar.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 11:49:26",
+      "found": true,
+      "paper_key": "DBLP:conf/icse-seip/NaharKBPZB25"
+    },
+    {
+      "pdf_file": "program_merge_cacm.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 12:04:51",
+      "found": true,
+      "paper_key": "DBLP:journals/cacm/LahiriSBMC25"
+    },
+    {
+      "pdf_file": "program_merge_queue.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 12:06:10",
+      "found": true,
+      "paper_key": "DBLP:journals/queue/LahiriSBMC24"
+    },
+    {
+      "pdf_file": "arun-differential-testing.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 12:18:47",
+      "found": true,
+      "paper_key": "DBLP:conf/sigsoft/VajjalaVBBDDDEF25"
+    },
+    {
+      "pdf_file": "Automatic_Diff_Labeler.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 12:21:24",
+      "found": true,
+      "paper_key": "DBLP:conf/icse-seip/VajjalaVBBDDDEFHMSSZ25"
+    },
+    {
+      "pdf_file": "_FSE_24__Replicating_Software_Engineering_Research_with_LLMs.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 12:23:08",
+      "found": true,
+      "paper_key": "DBLP:journals/pacmse/LiangBBDFF024"
+    },
+    {
+      "pdf_file": "bird2016interviews.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 12:24:28",
+      "found": true,
+      "paper_key": "DBLP:books/el/16/Bird16"
+    },
+    {
+      "pdf_file": "Miller2026MaybeWe.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 12:55:04",
+      "found": true,
+      "paper_key": "Miller2026MaybeWe"
+    },
+    {
+      "pdf_file": "AI-Where-It_Matters.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 12:58:41",
+      "found": true,
+      "paper_key": "Choudhuri2026AIWhere"
+    },
+    {
+      "pdf_file": "pimenova2025vibe.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-01 22:29:52",
+      "paper_key": "pimenova2025vibe"
+    }
+  ],
+  "papers": {
     "DBLP:journals/cacm/LahiriSBMC25": {
       "status": "MAPPED",
       "type": "article",
@@ -2235,7 +3848,10 @@
       "doi": "10.1145/2786805.2786849",
       "url": "https://doi.org/10.1145/2786805.2786849",
       "editor": "Elisabetta Di Nitto and Mark Harman and Patrick Heymans",
-      "raw_bibtex": "@inproceedings{DBLP:conf/sigsoft/AllamanisBBS15,\n  author       = {Miltiadis Allamanis and\n                  Earl T. Barr and\n                  Christian Bird and\n                  Charles Sutton},\n  editor       = {Elisabetta Di Nitto and\n                  Mark Harman and\n                  Patrick Heymans},\n  title        = {Suggesting accurate method and class names},\n  booktitle    = {Proceedings of the 2015 10th Joint Meeting on Foundations of Software\n                  Engineering, {ESEC/FSE} 2015, Bergamo, Italy, August 30 - September\n                  4, 2015},\n  pages        = {38--49},\n  publisher    = {{ACM}},\n  year         = {2015},\n  url          = {https://doi.org/10.1145/2786805.2786849},\n  doi          = {10.1145/2786805.2786849},\n  timestamp    = {Sun, 19 Jan 2025 00:00:00 +0100},\n  biburl       = {https://dblp.org/rec/conf/sigsoft/AllamanisBBS15.bib},\n  bibsource    = {dblp computer science bibliography, https://dblp.org}\n}"
+      "raw_bibtex": "@inproceedings{DBLP:conf/sigsoft/AllamanisBBS15,\n  author       = {Miltiadis Allamanis and\n                  Earl T. Barr and\n                  Christian Bird and\n                  Charles Sutton},\n  editor       = {Elisabetta Di Nitto and\n                  Mark Harman and\n                  Patrick Heymans},\n  title        = {Suggesting accurate method and class names},\n  booktitle    = {Proceedings of the 2015 10th Joint Meeting on Foundations of Software\n                  Engineering, {ESEC/FSE} 2015, Bergamo, Italy, August 30 - September\n                  4, 2015},\n  pages        = {38--49},\n  publisher    = {{ACM}},\n  year         = {2015},\n  url          = {https://doi.org/10.1145/2786805.2786849},\n  doi          = {10.1145/2786805.2786849},\n  timestamp    = {Sun, 19 Jan 2025 00:00:00 +0100},\n  biburl       = {https://dblp.org/rec/conf/sigsoft/AllamanisBBS15.bib},\n  bibsource    = {dblp computer science bibliography, https://dblp.org}\n}",
+      "awards": [
+        "FSE Test of Time Honorable Mention"
+      ]
     },
     "DBLP:conf/sigsoft/SaraivaBZ15": {
       "status": "MAPPED",
@@ -4352,1609 +5968,42 @@
         "surveys",
         "tool-adoption-and-trust"
       ],
-      "raw_bibtex": "@misc{choudhuri2026aiwhereitmatters,\n  author    = {Rudrajit Choudhuri and Carmen Badea and Christian Bird and Jenna L. Butler and Robert DeLine and Brian Houck},\n  title     = {AI Where It Matters: Where, Why, and How Developers Want AI Support in Daily Work},\n  year      = {2025},\n  note      = {Manuscript under submission},\n  url       = {https://www.cabird.com/AI_where_it_matters/paper.pdf}\n}",
-      "under_submission": true
+      "raw_bibtex": "@misc{choudhuri2026aiwhereitmatters,\n  author    = {Rudrajit Choudhuri and Carmen Badea and Christian Bird and Jenna L. Butler and Robert DeLine and Brian Houck},\n  title     = {AI Where It Matters: Where, Why, and How Developers Want AI Support in Daily Work},\n  year      = {2025},\n  note      = {Manuscript under submission},\n  url       = {https://arxiv.org/abs/2510.00762}\n}",
+      "under_submission": true,
+      "url": "https://arxiv.org/abs/2510.00762"
+    },
+    "pimenova2025vibe": {
+      "status": "MAPPED",
+      "type": "misc",
+      "title": "Good Vibrations? A Qualitative Study of Co-Creation, Communication, Flow, and Trust in Vibe Coding",
+      "authors": "Veronica Pimenova and Sarah Fakhoury and Christian Bird and Margaret-Anne Storey and Madeline Endres",
+      "year": "2025",
+      "raw_bibtex": "@misc{pimenova2025goodvibrationsqualitativestudy,\n      title={Good Vibrations? A Qualitative Study of Co-Creation, Communication, Flow, and Trust in Vibe Coding},\n      author={Veronica Pimenova and Sarah Fakhoury and Christian Bird and Margaret-Anne Storey and Madeline Endres},\n      year={2025},\n      eprint={2509.12491},\n      archivePrefix={arXiv},\n      primaryClass={cs.SE},\n      url={https://arxiv.org/abs/2509.12491},\n}",
+      "url": "https://arxiv.org/abs/2509.12491",
+      "eprint": "2509.12491",
+      "under_submission": true,
+      "mapped_pdf": "pimenova2025vibe.pdf",
+      "extracted_paper_info": {
+        "tldr": "A qualitative study characterizing 'vibe coding' as a high-interaction, natural-language co-creation paradigm with AI that prioritizes developer flow and joy while trust mediates a continuum between delegation and co-creation and creates specific reliability, review, and collaboration risks.",
+        "details": {
+          "topic": "Vibe coding — AI-driven conversational co-creation in software development",
+          "problem": "Developers are increasingly using LLMs to 'vibe code' via conversational prompts, but there is little grounded empirical understanding of what vibe coding means in practice, why and when developers use it, what pain points and risks arise, and which emergent practices support it.",
+          "approach": "A qualitative grounded analysis of over 190,000 words drawn from 46 Reddit threads, 88 LinkedIn posts, and 11 semi-structured interviews (30–60 min each); applied flexible/grounded coding and iterative axial coding to build a theory linking AI interaction, co-creation, flow, and trust and to surface pain points and best practices.",
+          "key_insights": [
+            "Vibe coding is an emergent paradigm defined by frequent conversational interaction with LLMs, co-creation of design/implementation, and an emphasis on developer flow and joy rather than upfront formal specification.",
+            "Trust in the AI mediates a spectrum from delegation to co-creation: higher trust increases flow and willingness to cede authority but raises software, developer, and societal risks (bugs, technical debt, security, skill atrophy).",
+            "Common pain points are imprecise intent specification, model memory and knowledge-cutoff limits, slow/costly responses, large untracked changes causing review/debugging burdens, and collaboration/maintenance challenges.",
+            "Practitioners are developing best practices (prompt/persona engineering, conversation management, selective model/tool choice, external memory and version-control practices, breaking tasks into steps, testing and planning) to preserve flow while mitigating risks."
+          ],
+          "implications": "For researchers: study empirical effectiveness of emerging best practices, longitudinal effects on skills and trust, and security/privacy impacts; for tool builders: design faster, memory-rich, reviewable IDEs and provenance/versioning affordances that preserve flow while enabling verification; for educators and teams: teach AI-collaboration skills alongside core CS principles and create processes to calibrate when vibe coding is appropriate (prototyping/personal projects) versus when stricter engineering rigor is required."
+        }
+      },
+      "tags": [
+        "interviews",
+        "ai-assisted-programming",
+        "developer-productivity",
+        "tool-adoption-and-trust"
+      ]
     }
-  },
-  "pdfs": {
-    "allamanis2014learning.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/AllamanisBBS14",
-      "notes": null,
-      "markdown_file": "markdowns/allamanis2014learning.md"
-    },
-    "allamanis2015suggesting.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/AllamanisBBS15",
-      "notes": null,
-      "markdown_file": "markdowns/allamanis2015suggesting.md"
-    },
-    "allamanis2018loopidioms.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/tse/AllamanisBBDMS18",
-      "notes": null,
-      "markdown_file": "markdowns/allamanis2018loopidioms.md"
-    },
-    "amershi2018se4ml.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/AmershiBBDGKNN019",
-      "notes": null,
-      "markdown_file": "markdowns/amershi2018se4ml.md"
-    },
-    "asthana2019whodo.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/AsthanaKBBBMMA19",
-      "notes": null,
-      "markdown_file": "markdowns/asthana2019whodo.md"
-    },
-    "bacchelli2013eoc.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/BacchelliB13",
-      "notes": null,
-      "markdown_file": "markdowns/bacchelli2013eoc.md"
-    },
-    "bachmann2010mlb.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/BachmannBRDB10",
-      "notes": null,
-      "markdown_file": "markdowns/bachmann2010mlb.md"
-    },
-    "barnett2015helping.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/BarnettBBL15",
-      "notes": null,
-      "markdown_file": "markdowns/barnett2015helping.md"
-    },
-    "barr2010sg.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/BarrBHMR10",
-      "notes": null,
-      "markdown_file": "markdowns/barr2010sg.md"
-    },
-    "barr2012cid.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/fase/BarrBRHGD12",
-      "notes": null,
-      "markdown_file": "markdowns/barr2012cid.md"
-    },
-    "barr2013shapes.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/issta/BarrBM13",
-      "notes": null,
-      "markdown_file": "markdowns/barr2013shapes.md"
-    },
-    "bird2006mes.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/BirdGDGS06",
-      "notes": null,
-      "markdown_file": "markdowns/bird2006mes.md"
-    },
-    "bird2006mesp.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/BirdGDGS06a",
-      "notes": null,
-      "markdown_file": "markdowns/bird2006mesp.md"
-    },
-    "bird2007dps.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/BirdGD07",
-      "notes": null,
-      "markdown_file": "markdowns/bird2007dps.md"
-    },
-    "bird2007obi.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/BirdGDSH07",
-      "notes": null,
-      "markdown_file": "markdowns/bird2007obi.md"
-    },
-    "bird2007qso.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/BirdGDSH07",
-      "notes": null,
-      "markdown_file": "markdowns/bird2007qso.md"
-    },
-    "bird2008lss.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/BirdPDFD08",
-      "notes": null,
-      "markdown_file": "markdowns/bird2008lss.md"
-    },
-    "bird2009ddd.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/BirdNDGM09",
-      "notes": null,
-      "markdown_file": "markdowns/bird2009ddd.md"
-    },
-    "bird2009dddb.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/BirdNDGM09",
-      "notes": null,
-      "markdown_file": "markdowns/bird2009dddb.md"
-    },
-    "bird2009fbb.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/BirdBADBFD09",
-      "notes": null,
-      "markdown_file": "markdowns/bird2009fbb.md"
-    },
-    "bird2009pat.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/issre/BirdNGMD09",
-      "notes": null,
-      "markdown_file": "markdowns/bird2009pat.md"
-    },
-    "bird2009ppm.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/BirdRBHGD09",
-      "notes": null,
-      "markdown_file": "markdowns/bird2009ppm.md"
-    },
-    "bird2009sdr.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sdm/BirdBN09",
-      "notes": null,
-      "markdown_file": "markdowns/bird2009sdr.md"
-    },
-    "bird2010lee.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/BirdBRB10",
-      "notes": null,
-      "markdown_file": "markdowns/bird2010lee.md"
-    },
-    "bird2011dtm.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/BirdNMGD11",
-      "notes": null,
-      "markdown_file": "markdowns/bird2011dtm.md"
-    },
-    "bird2011ese.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/cscw/BirdMNZ11",
-      "notes": null,
-      "markdown_file": "markdowns/bird2011ese.md"
-    },
-    "bird2011scc.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icsm/Bird11",
-      "notes": null,
-      "markdown_file": "markdowns/bird2011scc.md"
-    },
-    "bird2011tbg.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/BirdZT11",
-      "notes": null,
-      "markdown_file": "markdowns/bird2011tbg.md"
-    },
-    "bird2012avb.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/BirdZ12",
-      "notes": null,
-      "markdown_file": "markdowns/bird2012avb.md"
-    },
-    "bird2012www.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/BirdN12",
-      "notes": null,
-      "markdown_file": "markdowns/bird2012www.md"
-    },
-    "bird2014rac.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/BirdRZNZ14",
-      "notes": null,
-      "markdown_file": "markdowns/bird2014rac.md"
-    },
-    "bird2015cfa.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/BirdCG15",
-      "notes": null,
-      "markdown_file": "markdowns/bird2015cfa.md"
-    },
-    "bird2016bias.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:books/el/16/Bird16a",
-      "notes": null,
-      "markdown_file": "markdowns/bird2016bias.md"
-    },
-    "bird2016interviews.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:books/el/16/Bird16",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 12:24:28",
-      "markdown_file": "markdowns/bird2016interviews.md"
-    },
-    "bird_cv.pdf": {
-      "status": "NO_BIBTEX",
-      "has_text": true,
-      "mapped_bibtex": null,
-      "notes": null
-    },
-    "bosu2015useful.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/BosuGB15",
-      "notes": null,
-      "markdown_file": "markdowns/bosu2015useful.md"
-    },
-    "bosu2017review.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/tse/BosuCBOC17",
-      "notes": null,
-      "markdown_file": "markdowns/bosu2017review.md"
-    },
-    "christakis2016developers.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/kbse/ChristakisB16",
-      "notes": null,
-      "markdown_file": "markdowns/christakis2016developers.md"
-    },
-    "codeflow2018.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/queue/CzerwonkaGBPC18",
-      "notes": null,
-      "markdown_file": "markdowns/codeflow2018.md"
-    },
-    "devanbu2016evidence.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/Devanbu0B16",
-      "notes": null,
-      "markdown_file": "markdowns/devanbu2016evidence.md"
-    },
-    "devanbu2018belief.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/software/DevanbuZB18",
-      "notes": null,
-      "markdown_file": "markdowns/devanbu2018belief.md"
-    },
-    "ford2017personas.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/esem/FordZBN17",
-      "notes": null,
-      "markdown_file": "markdowns/ford2017personas.md"
-    },
-    "gao2017javascript.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/GaoBB17",
-      "notes": null,
-      "markdown_file": "markdowns/gao2017javascript.md"
-    },
-    "gupta2014energy.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/esem/GuptaZBNBE14",
-      "notes": null,
-      "markdown_file": "markdowns/gupta2014energy.md"
-    },
-    "harper2013ecscw.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/ecscw/HarperBZM13",
-      "notes": null,
-      "markdown_file": "markdowns/harper2013ecscw.md"
-    },
-    "hellendoorn2018deep.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/HellendoornBBA18",
-      "notes": null,
-      "markdown_file": "markdowns/hellendoorn2018deep.md"
-    },
-    "henkel2020docker.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/HenkelBLR20",
-      "notes": null,
-      "markdown_file": "markdowns/henkel2020docker.md"
-    },
-    "henkel2020dockermsr.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/HenkelBLR20",
-      "notes": null,
-      "markdown_file": "markdowns/henkel2020dockermsr.md"
-    },
-    "henley2018cfar.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/chi/HenleyMCFB18",
-      "notes": null,
-      "markdown_file": "markdowns/henley2018cfar.md"
-    },
-    "hindle2012rri.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icsm/HindleBZN12",
-      "notes": null,
-      "markdown_file": "markdowns/hindle2012rri.md"
-    },
-    "hindle2014topics.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/ese/HindleBZN15",
-      "notes": null,
-      "markdown_file": "markdowns/hindle2014topics.md"
-    },
-    "hong2011uds.pdf": {
-      "status": "MAPPED",
-      "has_text": false,
-      "mapped_bibtex": "DBLP:conf/icsm/HongKCB11",
-      "notes": "PDF extraction failed",
-      "markdown_file": "markdowns/hong2011uds.md"
-    },
-    "johnson2019environment.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/tse/JohnsonZB21",
-      "notes": null,
-      "markdown_file": "markdowns/johnson2019environment.md"
-    },
-    "kalliamvakou2018managers.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/tse/KalliamvakouBZB19",
-      "notes": null,
-      "markdown_file": "markdowns/kalliamvakou2018managers.md"
-    },
-    "kocaguneli2013distributed.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/KocaguneliZBNM13",
-      "notes": null,
-      "markdown_file": "markdowns/kocaguneli2013distributed.md"
-    },
-    "kochhar2020moving.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/tse/KochharKNZB21",
-      "notes": null,
-      "markdown_file": "markdowns/kochhar2020moving.md"
-    },
-    "kovalenko2019revrec.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/tse/KovalenkoTPBB20",
-      "notes": null,
-      "markdown_file": "markdowns/kovalenko2019revrec.md"
-    },
-    "macleod2018codereviewing.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/software/MacLeodGSBC18",
-      "notes": null,
-      "markdown_file": "markdowns/macleod2018codereviewing.md"
-    },
-    "manotas2016green.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/ManotasBZSJSPC16",
-      "notes": null,
-      "markdown_file": "markdowns/manotas2016green.md"
-    },
-    "mehta2020rex.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/nsdi/MehtaB0BMAABK20",
-      "notes": null,
-      "markdown_file": "markdowns/mehta2020rex.md"
-    },
-    "menzies2011ise.pdf": {
-      "status": "NO_BIBTEX",
-      "has_text": true,
-      "mapped_bibtex": null,
-      "notes": null
-    },
-    "meyer2019today.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/tse/MeyerBBZ21",
-      "notes": null,
-      "markdown_file": "markdowns/meyer2019today.md"
-    },
-    "mlpaper.pdf": {
-      "status": "NO_BIBTEX",
-      "has_text": true,
-      "mapped_bibtex": null,
-      "notes": null
-    },
-    "mukadam2013gerrit.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/MukadamBR13",
-      "notes": null,
-      "markdown_file": "markdowns/mukadam2013gerrit.md"
-    },
-    "murphy2013agile.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/esem/MurphyBZWNB13",
-      "notes": null,
-      "markdown_file": "markdowns/murphy2013agile.md"
-    },
-    "murphyhill2013dbf.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/Murphy-HillZBN13",
-      "notes": null,
-      "markdown_file": "markdowns/murphyhill2013dbf.md"
-    },
-    "murphyhill2015design.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/tse/Murphy-HillZBN15",
-      "notes": null,
-      "markdown_file": "markdowns/murphyhill2015design.md"
-    },
-    "muslu2014dvcs.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/MusluBNC14",
-      "notes": null,
-      "markdown_file": "markdowns/muslu2014dvcs.md"
-    },
-    "musson2013software.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/software/MussonRFBBG13",
-      "notes": null,
-      "markdown_file": "markdowns/musson2013software.md"
-    },
-    "nagappan2013diversity.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/NagappanZB13",
-      "notes": null,
-      "markdown_file": "markdowns/nagappan2013diversity.md"
-    },
-    "nia2010vna.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/NiaBDF10",
-      "notes": null,
-      "markdown_file": "markdowns/nia2010vna.md"
-    },
-    "nolte2018you-slides.pdf": {
-      "status": "NO_BIBTEX",
-      "has_text": true,
-      "mapped_bibtex": null,
-      "notes": null
-    },
-    "nolte2018you.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/pacmhci/NoltePFBSH18",
-      "notes": null,
-      "markdown_file": "markdowns/nolte2018you.md"
-    },
-    "ogawa2007vsi.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/apvis/OgawaMBDG07",
-      "notes": null,
-      "markdown_file": "markdowns/ogawa2007vsi.md"
-    },
-    "parnin2011jga.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/ParninBM11",
-      "notes": null,
-      "markdown_file": "markdowns/parnin2011jga.md"
-    },
-    "parnin2012auj.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/ese/ParninBM13",
-      "notes": null,
-      "markdown_file": "markdowns/parnin2012auj.md"
-    },
-    "pattison2008twp.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/PattisonBD08",
-      "notes": null,
-      "markdown_file": "markdowns/pattison2008twp.md"
-    },
-    "phillips2014build.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/PhillipsZB14",
-      "notes": null,
-      "markdown_file": "markdowns/phillips2014build.md"
-    },
-    "posnett2010esi.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/ese/PosnettBD11",
-      "notes": null,
-      "markdown_file": "markdowns/posnett2010esi.md"
-    },
-    "posnett2010tmm.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/PosnettBD10",
-      "notes": null,
-      "markdown_file": "markdowns/posnett2010tmm.md"
-    },
-    "rahman2010cws.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/RahmanBD10",
-      "notes": null,
-      "markdown_file": "markdowns/rahman2010cws.md"
-    },
-    "rahman2012cwt.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/ese/RahmanBD12",
-      "notes": null,
-      "markdown_file": "markdowns/rahman2012cwt.md"
-    },
-    "ray2015uniqueness.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/RayNBNZ15",
-      "notes": null,
-      "markdown_file": "markdowns/ray2015uniqueness.md"
-    },
-    "rigby2013convergent.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/RigbyB13",
-      "notes": null,
-      "markdown_file": "markdowns/rigby2013convergent.md"
-    },
-    "rigby2013releng.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/RigbyBBDG13",
-      "notes": null,
-      "markdown_file": "markdowns/rigby2013releng.md"
-    },
-    "saraiva2015ngram.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/SaraivaBZ15",
-      "notes": null,
-      "markdown_file": "markdowns/saraiva2015ngram.md"
-    },
-    "saul2007rrw.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/sigsoft/SaulFDB07",
-      "notes": null,
-      "markdown_file": "markdowns/saul2007rrw.md"
-    },
-    "shihab2012ebs.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/esem/ShihabBZ12",
-      "notes": null,
-      "markdown_file": "markdowns/shihab2012ebs.md"
-    },
-    "smith2013chase.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/SmithLMBZ13",
-      "notes": null,
-      "markdown_file": "markdowns/smith2013chase.md"
-    },
-    "smith2015homegrown.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/SmithBZ15",
-      "notes": null,
-      "markdown_file": "markdowns/smith2015homegrown.md"
-    },
-    "smith2016beliefs.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/SmithB016",
-      "notes": null,
-      "markdown_file": "markdowns/smith2016beliefs.md"
-    },
-    "storey2020productivity.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/tse/StoreyZBCMK21",
-      "notes": null,
-      "markdown_file": "markdowns/storey2020productivity.md"
-    },
-    "than2018designing.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/software/Pe-ThanNFBSH19",
-      "notes": null,
-      "markdown_file": "markdowns/than2018designing.md"
-    },
-    "than2020hackathon.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/hhci/Pe-ThanNFBSH22",
-      "notes": null,
-      "markdown_file": "markdowns/than2020hackathon.md"
-    },
-    "washburn2016games.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/icse/ManotasBZSJSPC16",
-      "notes": null,
-      "markdown_file": "markdowns/washburn2016games.md"
-    },
-    "zanjani2015developer.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/msr/ZanjaniKB15",
-      "notes": null,
-      "markdown_file": "markdowns/zanjani2015developer.md"
-    },
-    "zanjani2016recommending.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:journals/tse/ZanjaniKB16",
-      "notes": null,
-      "markdown_file": "markdowns/zanjani2016recommending.md"
-    },
-    "zeller2011ffl.pdf": {
-      "status": "MAPPED",
-      "has_text": true,
-      "mapped_bibtex": "DBLP:conf/promise/ZellerZB11",
-      "notes": null,
-      "markdown_file": "markdowns/zeller2011ffl.md"
-    },
-    "zimmermann2012ccs.pdf": {
-      "status": "NO_BIBTEX",
-      "has_text": true,
-      "mapped_bibtex": null,
-      "notes": null
-    },
-    "kim2013jot.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:journals/jot/KimMPBG13",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 10:43:31",
-      "markdown_file": "markdowns/kim2013jot.md"
-    },
-    "adams2015releng.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:journals/software/AdamsBBMKM15",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 10:44:27",
-      "markdown_file": "markdowns/adams2015releng.md"
-    },
-    "svyatkovskiy2022merge.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:conf/sigsoft/SvyatkovskiyFGM22",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 10:49:29",
-      "markdown_file": "markdowns/svyatkovskiy2022merge.md"
-    },
-    "ford2022covid.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:journals/tosem/FordSZBJMBHN22",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 10:50:18",
-      "markdown_file": "markdowns/ford2022covid.md"
-    },
-    "maddila2022cone.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:journals/tosem/MaddilaNBGD22",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 10:51:45",
-      "markdown_file": "markdowns/maddila2022cone.md"
-    },
-    "taking_flight.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:journals/queue/BirdFZFKLG22",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 10:54:45",
-      "markdown_file": "markdowns/taking_flight.md"
-    },
-    "taking_flight_cacm.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:journals/cacm/BirdFZFKLG23",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 10:56:52",
-      "markdown_file": "markdowns/taking_flight_cacm.md"
-    },
-    "PICSE-BrittanyJohnson-ICSESEIP2023.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:conf/icse/JohnsonBFFZ23",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 11:00:08",
-      "markdown_file": "markdowns/PICSE-BrittanyJohnson-ICSESEIP2023.md"
-    },
-    "zhang2023coral.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:conf/icse/ZhangMBBRAJHD23",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 11:00:47",
-      "markdown_file": "markdowns/zhang2023coral.md"
-    },
-    "dinella2023deepmerge.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:journals/tse/DinellaMSBNL23",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 11:01:26",
-      "markdown_file": "markdowns/dinella2023deepmerge.md"
-    },
-    "butler2024okr.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:conf/icse/Butler0B24",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 11:02:15",
-      "markdown_file": "markdowns/butler2024okr.md"
-    },
-    "washburn2016postmortems.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:conf/icse/WashburnSN0B16",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 11:05:45",
-      "markdown_file": "markdowns/washburn2016postmortems.md"
-    },
-    "Crowdsourcing_for_Software_Engineering.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:journals/software/StolLB17",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 11:44:38",
-      "markdown_file": "markdowns/Crowdsourcing_for_Software_Engineering.md"
-    },
-    "Release_Engineering_3.0.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:journals/software/AdamsBBDKMO18",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 11:47:49",
-      "markdown_file": "markdowns/Release_Engineering_3.0.md"
-    },
-    "nahar.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:conf/icse-seip/NaharKBPZB25",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 11:49:26",
-      "markdown_file": "markdowns/nahar.md"
-    },
-    "program_merge_cacm.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:journals/cacm/LahiriSBMC25",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 12:04:51",
-      "markdown_file": "markdowns/program_merge_cacm.md"
-    },
-    "program_merge_queue.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:journals/queue/LahiriSBMC24",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 12:06:10",
-      "markdown_file": "markdowns/program_merge_queue.md"
-    },
-    "arun-differential-testing.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:conf/sigsoft/VajjalaVBBDDDEF25",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 12:18:47",
-      "markdown_file": "markdowns/arun-differential-testing.md"
-    },
-    "Automatic_Diff_Labeler.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:conf/icse-seip/VajjalaVBBDDDEFHMSSZ25",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 12:21:24",
-      "markdown_file": "markdowns/Automatic_Diff_Labeler.md"
-    },
-    "_FSE_24__Replicating_Software_Engineering_Research_with_LLMs.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "DBLP:journals/pacmse/LiangBBDFF024",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 12:23:08",
-      "markdown_file": "markdowns/_FSE_24__Replicating_Software_Engineering_Research_with_LLMs.md"
-    },
-    "Miller2026MaybeWe.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "Miller2026MaybeWe",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 12:55:04",
-      "markdown_file": "markdowns/Miller2026MaybeWe.md"
-    },
-    "AI-Where-It_Matters.pdf": {
-      "status": "MAPPED",
-      "mapped_bibtex": "Choudhuri2026AIWhere",
-      "has_text": false,
-      "newly_found": true,
-      "found_date": "2025-10-01 12:58:41",
-      "markdown_file": "markdowns/AI-Where-It_Matters.md"
-    }
-  },
-  "mappings": [
-    {
-      "bib_key": "DBLP:conf/icse/HenkelBLR20",
-      "pdf_file": "henkel2020docker.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/HenkelBLR20",
-      "pdf_file": "henkel2020dockermsr.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/nsdi/MehtaB0BMAABK20",
-      "pdf_file": "mehta2020rex.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/AsthanaKBBBMMA19",
-      "pdf_file": "asthana2019whodo.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:journals/software/MacLeodGSBC18",
-      "pdf_file": "macleod2018codereviewing.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:journals/software/DevanbuZB18",
-      "pdf_file": "devanbu2018belief.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:journals/tse/AllamanisBBDMS18",
-      "pdf_file": "allamanis2018loopidioms.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/HellendoornBBA18",
-      "pdf_file": "hellendoorn2018deep.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:journals/tse/BosuCBOC17",
-      "pdf_file": "bosu2017review.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/esem/FordZBN17",
-      "pdf_file": "ford2017personas.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/GaoBB17",
-      "pdf_file": "gao2017javascript.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:journals/tse/ZanjaniKB16",
-      "pdf_file": "zanjani2016recommending.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/SmithB016",
-      "pdf_file": "smith2016beliefs.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/ManotasBZSJSPC16",
-      "pdf_file": "manotas2016green.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/kbse/ChristakisB16",
-      "pdf_file": "christakis2016developers.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:books/el/16/Bird16a",
-      "pdf_file": "bird2016bias.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/BarnettBBL15",
-      "pdf_file": "barnett2015helping.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/SmithBZ15",
-      "pdf_file": "smith2015homegrown.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/RayNBNZ15",
-      "pdf_file": "ray2015uniqueness.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/ZanjaniKB15",
-      "pdf_file": "zanjani2015developer.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/BosuGB15",
-      "pdf_file": "bosu2015useful.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/BirdCG15",
-      "pdf_file": "bird2015cfa.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/AllamanisBBS15",
-      "pdf_file": "allamanis2015suggesting.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/SaraivaBZ15",
-      "pdf_file": "saraiva2015ngram.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/esem/GuptaZBNBE14",
-      "pdf_file": "gupta2014energy.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/BirdRZNZ14",
-      "pdf_file": "bird2014rac.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/PhillipsZB14",
-      "pdf_file": "phillips2014build.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/AllamanisBBS14",
-      "pdf_file": "allamanis2014learning.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:journals/software/MussonRFBBG13",
-      "pdf_file": "musson2013software.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/ecscw/HarperBZM13",
-      "pdf_file": "harper2013ecscw.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/esem/MurphyBZWNB13",
-      "pdf_file": "murphy2013agile.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/RigbyBBDG13",
-      "pdf_file": "rigby2013releng.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/SmithLMBZ13",
-      "pdf_file": "smith2013chase.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/BacchelliB13",
-      "pdf_file": "bacchelli2013eoc.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/KocaguneliZBNM13",
-      "pdf_file": "kocaguneli2013distributed.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/issta/BarrBM13",
-      "pdf_file": "barr2013shapes.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:46"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/MukadamBR13",
-      "pdf_file": "mukadam2013gerrit.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/RigbyB13",
-      "pdf_file": "rigby2013convergent.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/NagappanZB13",
-      "pdf_file": "nagappan2013diversity.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:journals/ese/RahmanBD12",
-      "pdf_file": "rahman2012cwt.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/esem/ShihabBZ12",
-      "pdf_file": "shihab2012ebs.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/fase/BarrBRHGD12",
-      "pdf_file": "barr2012cid.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/icsm/HindleBZN12",
-      "pdf_file": "hindle2012rri.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/BirdN12",
-      "pdf_file": "bird2012www.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/BirdZ12",
-      "pdf_file": "bird2012avb.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/cscw/BirdMNZ11",
-      "pdf_file": "bird2011ese.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/BirdZT11",
-      "pdf_file": "bird2011tbg.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/icsm/Bird11",
-      "pdf_file": "bird2011scc.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/ParninBM11",
-      "pdf_file": "parnin2011jga.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/promise/ZellerZB11",
-      "pdf_file": "zeller2011ffl.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/RahmanBD10",
-      "pdf_file": "rahman2010cws.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/NiaBDF10",
-      "pdf_file": "nia2010vna.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/BarrBHMR10",
-      "pdf_file": "barr2010sg.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/BachmannBRDB10",
-      "pdf_file": "bachmann2010mlb.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/BirdNDGM09",
-      "pdf_file": "bird2009ddd.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/issre/BirdNGMD09",
-      "pdf_file": "bird2009pat.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/BirdRBHGD09",
-      "pdf_file": "bird2009ppm.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/sdm/BirdBN09",
-      "pdf_file": "bird2009sdr.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/BirdBADBFD09",
-      "pdf_file": "bird2009fbb.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/PattisonBD08",
-      "pdf_file": "pattison2008twp.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/BirdPDFD08",
-      "pdf_file": "bird2008lss.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/apvis/OgawaMBDG07",
-      "pdf_file": "ogawa2007vsi.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/BirdGDSH07",
-      "pdf_file": "bird2007obi.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/BirdGD07",
-      "pdf_file": "bird2007dps.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/SaulFDB07",
-      "pdf_file": "saul2007rrw.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/BirdGDGS06",
-      "pdf_file": "bird2006mes.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/BirdGDGS06a",
-      "pdf_file": "bird2006mesp.pdf",
-      "confidence": "auto-high",
-      "verified_date": "2025-10-01 09:47:47"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/AmershiBBDGKNN019",
-      "pdf_file": "amershi2018se4ml.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:06:06"
-    },
-    {
-      "bib_key": "DBLP:journals/queue/CzerwonkaGBPC18",
-      "pdf_file": "codeflow2018.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:06:46"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/Devanbu0B16",
-      "pdf_file": "devanbu2016evidence.pdf",
-      "confidence": "medium",
-      "verified_date": "2025-10-01 10:08:28"
-    },
-    {
-      "bib_key": "DBLP:journals/tse/JohnsonZB21",
-      "pdf_file": "johnson2019environment.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:08:36",
-      "notes": "Auto-mapped via PDF investigation, score: 2.10"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/BirdNMGD11",
-      "pdf_file": "bird2011dtm.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:08:49",
-      "notes": "Auto-mapped via PDF investigation, score: 1.50"
-    },
-    {
-      "bib_key": "DBLP:journals/ese/HindleBZN15",
-      "pdf_file": "hindle2014topics.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:08:49",
-      "notes": "Auto-mapped via PDF investigation, score: 1.80"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/BirdBRB10",
-      "pdf_file": "bird2010lee.pdf",
-      "confidence": "medium",
-      "verified_date": "2025-10-01 10:09:12"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/BirdNDGM09",
-      "pdf_file": "bird2009dddb.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:09:28"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/BirdGDSH07",
-      "pdf_file": "bird2007qso.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:09:52"
-    },
-    {
-      "bib_key": "DBLP:journals/tse/KalliamvakouBZB19",
-      "pdf_file": "kalliamvakou2018managers.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:14:47",
-      "notes": "Auto-mapped via PDF investigation, score: 2.10"
-    },
-    {
-      "bib_key": "DBLP:journals/tse/KochharKNZB21",
-      "pdf_file": "kochhar2020moving.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:14:54",
-      "notes": "Auto-mapped via PDF investigation, score: 2.10"
-    },
-    {
-      "bib_key": "DBLP:journals/tse/KovalenkoTPBB20",
-      "pdf_file": "kovalenko2019revrec.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:15:01",
-      "notes": "Auto-mapped via PDF investigation, score: 1.50"
-    },
-    {
-      "bib_key": "DBLP:journals/tse/MeyerBBZ21",
-      "pdf_file": "meyer2019today.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:15:07",
-      "notes": "Auto-mapped via PDF investigation, score: 1.40"
-    },
-    {
-      "bib_key": "DBLP:journals/tse/MeyerBBZ21",
-      "pdf_file": "meyer2019today.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:17:35"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/Murphy-HillZBN13",
-      "pdf_file": "murphyhill2013dbf.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:21:18"
-    },
-    {
-      "bib_key": "DBLP:journals/tse/Murphy-HillZBN15",
-      "pdf_file": "murphyhill2015design.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:21:39"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/MusluBNC14",
-      "pdf_file": "muslu2014dvcs.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:22:24"
-    },
-    {
-      "bib_key": "DBLP:journals/pacmhci/NoltePFBSH18",
-      "pdf_file": "nolte2018you.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:23:05"
-    },
-    {
-      "bib_key": "DBLP:journals/ese/ParninBM13",
-      "pdf_file": "parnin2012auj.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:23:37"
-    },
-    {
-      "bib_key": "DBLP:conf/icsm/HongKCB11",
-      "pdf_file": "hong2011uds.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:31:11"
-    },
-    {
-      "bib_key": "DBLP:journals/ese/PosnettBD11",
-      "pdf_file": "posnett2010esi.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:33:13"
-    },
-    {
-      "bib_key": "DBLP:conf/msr/PosnettBD10",
-      "pdf_file": "posnett2010tmm.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:33:44"
-    },
-    {
-      "bib_key": "DBLP:journals/tse/StoreyZBCMK21",
-      "pdf_file": "storey2020productivity.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:34:00"
-    },
-    {
-      "bib_key": "DBLP:journals/software/Pe-ThanNFBSH19",
-      "pdf_file": "than2018designing.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:34:15"
-    },
-    {
-      "bib_key": "DBLP:journals/hhci/Pe-ThanNFBSH22",
-      "pdf_file": "than2020hackathon.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:34:38"
-    },
-    {
-      "bib_key": "DBLP:conf/icse/ManotasBZSJSPC16",
-      "pdf_file": "washburn2016games.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:34:53"
-    },
-    {
-      "bib_key": "DBLP:journals/jot/KimMPBG13",
-      "pdf_file": "kim2013jot.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:43:31",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:journals/software/AdamsBBMKM15",
-      "pdf_file": "adams2015releng.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:44:27",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:conf/chi/HenleyMCFB18",
-      "pdf_file": "henley2018cfar.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:48:49"
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/SvyatkovskiyFGM22",
-      "pdf_file": "svyatkovskiy2022merge.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:49:29",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:journals/tosem/FordSZBJMBHN22",
-      "pdf_file": "ford2022covid.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:50:18",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:journals/tosem/MaddilaNBGD22",
-      "pdf_file": "maddila2022cone.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:51:45",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:journals/queue/BirdFZFKLG22",
-      "pdf_file": "taking_flight.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:54:45",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:journals/cacm/BirdFZFKLG23",
-      "pdf_file": "taking_flight_cacm.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 10:56:52",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:conf/icse/JohnsonBFFZ23",
-      "pdf_file": "PICSE-BrittanyJohnson-ICSESEIP2023.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 11:00:08",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:conf/icse/ZhangMBBRAJHD23",
-      "pdf_file": "zhang2023coral.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 11:00:47",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:journals/tse/DinellaMSBNL23",
-      "pdf_file": "dinella2023deepmerge.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 11:01:26",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:conf/icse/Butler0B24",
-      "pdf_file": "butler2024okr.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 11:02:15",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:conf/icse/WashburnSN0B16",
-      "pdf_file": "washburn2016postmortems.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 11:05:45",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:journals/software/StolLB17",
-      "pdf_file": "Crowdsourcing_for_Software_Engineering.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 11:44:38",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:journals/software/AdamsBBDKMO18",
-      "pdf_file": "Release_Engineering_3.0.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 11:47:49",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:conf/icse-seip/NaharKBPZB25",
-      "pdf_file": "nahar.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 11:49:26",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:journals/cacm/LahiriSBMC25",
-      "pdf_file": "program_merge_cacm.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 12:04:51",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:journals/queue/LahiriSBMC24",
-      "pdf_file": "program_merge_queue.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 12:06:10",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:conf/sigsoft/VajjalaVBBDDDEF25",
-      "pdf_file": "arun-differential-testing.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 12:18:47",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:conf/icse-seip/VajjalaVBBDDDEFHMSSZ25",
-      "pdf_file": "Automatic_Diff_Labeler.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 12:21:24",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:journals/pacmse/LiangBBDFF024",
-      "pdf_file": "_FSE_24__Replicating_Software_Engineering_Research_with_LLMs.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 12:23:08",
-      "found": true
-    },
-    {
-      "bib_key": "DBLP:books/el/16/Bird16",
-      "pdf_file": "bird2016interviews.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 12:24:28",
-      "found": true
-    },
-    {
-      "bib_key": "Miller2026MaybeWe",
-      "pdf_file": "Miller2026MaybeWe.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 12:55:04",
-      "found": true
-    },
-    {
-      "bib_key": "Choudhuri2026AIWhere",
-      "pdf_file": "AI-Where-It_Matters.pdf",
-      "confidence": "high",
-      "verified_date": "2025-10-01 12:58:41",
-      "found": true
-    }
-  ]
+  }
 }

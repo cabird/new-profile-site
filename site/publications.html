@@ -25,6 +25,7 @@
     <div id="root"></div>
 
     <!-- Load components with UMD transform -->
+    <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/SearchBar.jsx"></script>
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/TagFilter.jsx"></script>
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/PublicationCard.jsx"></script>
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/PublicationModal.jsx"></script>
@@ -32,6 +33,7 @@
 
     <!-- Main App -->
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd">
+        import SearchBar from './components/SearchBar.jsx';
         import TagFilter from './components/TagFilter.jsx';
         import PublicationCard from './components/PublicationCard.jsx';
         import PublicationModal from './components/PublicationModal.jsx';
@@ -44,6 +46,7 @@
             const [allTags, setAllTags] = useState([]);
             const [selectedTags, setSelectedTags] = useState([]);
             const [showAwardsOnly, setShowAwardsOnly] = useState(false);
+            const [searchQuery, setSearchQuery] = useState('');
             const [selectedPublication, setSelectedPublication] = useState(null);
             const [bibtexPublication, setBibtexPublication] = useState(null);
             const [loading, setLoading] = useState(true);
@@ -100,10 +103,15 @@
             const handleClearTags = () => {
                 setSelectedTags([]);
                 setShowAwardsOnly(false);
+                setSearchQuery('');
             };
 
             const handleToggleAwards = () => {
                 setShowAwardsOnly(prev => !prev);
+            };
+
+            const handleSearchChange = (query) => {
+                setSearchQuery(query);
             };
 
             const handleViewDetails = (publication) => {
@@ -122,8 +130,36 @@
                 setBibtexPublication(null);
             };
 
-            // Filter publications by selected tags and awards (must match ALL selected criteria)
+            // Helper function to get venue text
+            const getVenueText = (pub) => {
+                if (pub.type === 'inproceedings') {
+                    return pub.booktitle || pub.venue || '';
+                } else if (pub.type === 'article') {
+                    return pub.journal || pub.venue || '';
+                }
+                return pub.venue || '';
+            };
+
+            // Filter publications by search query, tags, and awards (must match ALL selected criteria)
             const filteredPublications = publications.filter(pub => {
+                // Check search query
+                if (searchQuery.trim()) {
+                    const query = searchQuery.toLowerCase();
+                    const title = (pub.title || '').toLowerCase();
+                    const authors = (pub.authors || '').toLowerCase();
+                    const venue = getVenueText(pub).toLowerCase();
+                    const awards = pub.awards ? pub.awards.join(' ').toLowerCase() : '';
+
+                    const matchesSearch = title.includes(query) ||
+                                         authors.includes(query) ||
+                                         venue.includes(query) ||
+                                         awards.includes(query);
+
+                    if (!matchesSearch) {
+                        return false;
+                    }
+                }
+
                 // Check awards filter
                 if (showAwardsOnly) {
                     if (!pub.awards || !Array.isArray(pub.awards) || pub.awards.length === 0) {
@@ -158,6 +194,8 @@
                             onClearTags={handleClearTags}
                             showAwardsOnly={showAwardsOnly}
                             onToggleAwards={handleToggleAwards}
+                            searchQuery={searchQuery}
+                            onSearchChange={handleSearchChange}
                         />
                     )}
 

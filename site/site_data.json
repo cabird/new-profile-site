@@ -18,21 +18,25 @@
       "description": "Studying practices and challenges in large-scale software development, including code review, testing, continuous integration, and collaborative workflows."
     }
   ],
-  "cv_link": "cv.pdf",
+  "cv_link": "https://www.cabird.com/pubs/bird_cv.pdf",
   "contact": {
     "email": "cbird@microsoft.com",
     "links": [
       {
         "label": "Google Scholar",
-        "url": "https://scholar.google.com"
+        "url": "https://scholar.google.com/citations?user=aDVlS-wAAAAJ"
       },
       {
         "label": "GitHub",
-        "url": "https://github.com"
+        "url": "https://github.com/cabird"
       },
       {
-        "label": "Twitter",
-        "url": "https://twitter.com"
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/christian-bird-1896494/"
+      },
+      {
+        "label": "Microsoft Research Profile",
+        "url": "https://www.microsoft.com/en-us/research/people/cbird/"
       }
     ]
   }

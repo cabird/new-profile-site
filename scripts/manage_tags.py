@@ -162,12 +162,12 @@ def format_taxonomy_for_assignment(taxonomy):
     return "\n".join(formatted)
 
 
-def get_bibtex_key_by_stem(pdf_stem):
-    """Get bibtex key using the CLI."""
+def get_paper_key_by_stem(pdf_stem):
+    """Get paper key using the CLI."""
     cmd = [
         sys.executable,
         '../paper_data_cli.py',
-        'bibtex', 'get-by-pdf-stem',
+        'paper', 'get-by-pdf-stem',
         pdf_stem
     ]
 
@@ -179,8 +179,8 @@ def get_bibtex_key_by_stem(pdf_stem):
     return result.stdout.strip()
 
 
-def set_tags_for_bibtex(bib_key, tags):
-    """Set tags for a bibtex entry using the CLI."""
+def set_tags_for_paper(bib_key, tags):
+    """Set tags for a paper entry using the CLI."""
     if not tags:
         print(f"  Warning: No tags to set for {bib_key}")
         return False
@@ -189,7 +189,7 @@ def set_tags_for_bibtex(bib_key, tags):
         sys.executable,
         '../paper_data_cli.py',
         'tags', 'set',
-        'bibtex',
+        'papers',
         bib_key
     ] + tags
 
@@ -285,14 +285,14 @@ def assign_tags_to_all_papers(api_key, model):
 
         print(f"[{i}/{len(summaries)}] Processing {pdf_stem}")
 
-        # Get bibtex key
-        bib_key = get_bibtex_key_by_stem(pdf_stem)
+        # Get paper key
+        bib_key = get_paper_key_by_stem(pdf_stem)
         if not bib_key:
-            print(f"  Warning: No bibtex key found for PDF stem '{pdf_stem}', skipping")
+            print(f"  Warning: No paper key found for PDF stem '{pdf_stem}', skipping")
             skipped += 1
             continue
 
-        print(f"  Found bibtex key: {bib_key}")
+        print(f"  Found paper key: {bib_key}")
 
         # Assign tags
         print(f"  Calling LLM to assign tags...")
@@ -306,7 +306,7 @@ def assign_tags_to_all_papers(api_key, model):
         print(f"  Assigned tags: {', '.join(tags)}")
 
         # Set tags via CLI
-        if set_tags_for_bibtex(bib_key, tags):
+        if set_tags_for_paper(bib_key, tags):
             print(f"  Success!")
             successful += 1
         else:

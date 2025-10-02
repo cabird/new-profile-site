@@ -1,0 +1,15 @@
+{
+  "tldr": "A qualitative study characterizing 'vibe coding' as a high-interaction, natural-language co-creation paradigm with AI that prioritizes developer flow and joy while trust mediates a continuum between delegation and co-creation and creates specific reliability, review, and collaboration risks.",
+  "details": {
+    "topic": "Vibe coding — AI-driven conversational co-creation in software development",
+    "problem": "Developers are increasingly using LLMs to 'vibe code' via conversational prompts, but there is little grounded empirical understanding of what vibe coding means in practice, why and when developers use it, what pain points and risks arise, and which emergent practices support it.",
+    "approach": "A qualitative grounded analysis of over 190,000 words drawn from 46 Reddit threads, 88 LinkedIn posts, and 11 semi-structured interviews (30–60 min each); applied flexible/grounded coding and iterative axial coding to build a theory linking AI interaction, co-creation, flow, and trust and to surface pain points and best practices.",
+    "key_insights": [
+      "Vibe coding is an emergent paradigm defined by frequent conversational interaction with LLMs, co-creation of design/implementation, and an emphasis on developer flow and joy rather than upfront formal specification.",
+      "Trust in the AI mediates a spectrum from delegation to co-creation: higher trust increases flow and willingness to cede authority but raises software, developer, and societal risks (bugs, technical debt, security, skill atrophy).",
+      "Common pain points are imprecise intent specification, model memory and knowledge-cutoff limits, slow/costly responses, large untracked changes causing review/debugging burdens, and collaboration/maintenance challenges.",
+      "Practitioners are developing best practices (prompt/persona engineering, conversation management, selective model/tool choice, external memory and version-control practices, breaking tasks into steps, testing and planning) to preserve flow while mitigating risks."
+    ],
+    "implications": "For researchers: study empirical effectiveness of emerging best practices, longitudinal effects on skills and trust, and security/privacy impacts; for tool builders: design faster, memory-rich, reviewable IDEs and provenance/versioning affordances that preserve flow while enabling verification; for educators and teams: teach AI-collaboration skills alongside core CS principles and create processes to calibrate when vibe coding is appropriate (prototyping/personal projects) versus when stricter engineering rigor is required."
+  }
+}

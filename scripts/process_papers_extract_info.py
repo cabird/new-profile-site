@@ -4,13 +4,13 @@ Process all mapped papers to extract structured information using OpenAI.
 
 This script:
 1. Creates paper_info_json/ directory if it doesn't exist
-2. Uses CLI to find all bibtex entries that have associated markdown files
+2. Uses CLI to find all paper entries that have associated markdown files
 3. For each entry:
    - Checks if extracted_paper_info already exists (skip unless --force)
    - Gets the markdown file path from the associated PDF
    - Calls extract_paper_info.py to generate JSON summary
    - Verifies the output JSON is valid
-   - Updates the bibtex entry with the extracted info using CLI
+   - Updates the paper entry with the extracted info using CLI
 4. Reports success/failure statistics
 
 Usage: python process_papers_extract_info.py [--force]
@@ -31,19 +31,19 @@ def ensure_paper_info_json_dir():
     return paper_info_dir
 
 
-def get_bibtex_entries_with_markdown():
-    """Get list of bibtex keys that have associated markdown files."""
+def get_paper_entries_with_markdown():
+    """Get list of paper keys that have associated markdown files."""
     cmd = [
         sys.executable,
         '../paper_data_cli.py',
-        'bibtex', 'list-with-markdown',
+        'paper', 'list-with-markdown',
         '--status', 'MAPPED'
     ]
 
     result = subprocess.run(cmd, capture_output=True, text=True)
 
     if result.returncode != 0:
-        print(f"Error getting bibtex entries: {result.stderr}", file=sys.stderr)
+        print(f"Error getting paper entries: {result.stderr}", file=sys.stderr)
         sys.exit(1)
 
     # Parse output - one bib_key per line
@@ -51,13 +51,13 @@ def get_bibtex_entries_with_markdown():
     return bib_keys
 
 
-def get_bibtex_entry_details(bib_key):
-    """Get full details of a bibtex entry."""
+def get_paper_entry_details(bib_key):
+    """Get full details of a paper entry."""
     cmd = [
         sys.executable,
         '../paper_data_cli.py',
         'get',
-        'bibtex',
+        'papers',
         bib_key
     ]
 
@@ -135,12 +135,12 @@ def extract_paper_info(markdown_path, output_json_path):
     return True
 
 
-def update_bibtex_with_extracted_info(bib_key, json_file_path):
-    """Update bibtex entry with extracted info using CLI."""
+def update_paper_with_extracted_info(bib_key, json_file_path):
+    """Update paper entry with extracted info using CLI."""
     cmd = [
         sys.executable,
         '../paper_data_cli.py',
-        'bibtex', 'set-extracted-info',
+        'paper', 'set-extracted-info',
         bib_key,
         str(json_file_path)
     ]
@@ -164,20 +164,20 @@ def main():
     print("Setting up paper_info_json directory...")
     paper_info_dir = ensure_paper_info_json_dir()
 
-    # Get all bibtex entries with markdown
-    print("Finding bibtex entries with markdown...")
-    bib_keys = get_bibtex_entries_with_markdown()
+    # Get all paper entries with markdown
+    print("Finding paper entries with markdown...")
+    bib_keys = get_paper_entries_with_markdown()
 
     if not bib_keys:
-        print("No bibtex entries with markdown found")
+        print("No paper entries with markdown found")
         return
 
-    print(f"Found {len(bib_keys)} bibtex entries with markdown")
+    print(f"Found {len(bib_keys)} paper entries with markdown")
 
     # Filter entries that need processing
     entries_to_process = []
     for bib_key in bib_keys:
-        bib_entry = get_bibtex_entry_details(bib_key)
+        bib_entry = get_paper_entry_details(bib_key)
         if not bib_entry:
             print(f"Warning: Could not get details for {bib_key}, skipping")
             continue
@@ -237,7 +237,7 @@ def main():
             continue
 
         # Update worklist
-        if not update_bibtex_with_extracted_info(bib_key, output_json_path):
+        if not update_paper_with_extracted_info(bib_key, output_json_path):
             print(f"  Failed to update worklist")
             failed += 1
             continue
