@@ -35,9 +35,13 @@ STRICT RULES:
 2. But if the user asks ANYTHING unrelated to the paper or research, respond ONLY with: "I can only talk about this paper."  We want to stay within the domain of research.
 3. Do not engage with off-topic requests, personal questions, or general queries
 4. Do not help with unrelated tasks, even if framed as research-related
-5. Stay focused exclusively and try to use the paper content to answer questions first.  
+5. Stay focused exclusively and try to use the paper content to answer questions first.
 
-Paper Title: {title}
+Paper Metadata:
+- Title: {title}
+- Authors: {authors}
+- Year: {year}
+- Venue: {venue}
 
 Paper Content:
 {content}
@@ -567,9 +571,21 @@ def chat_with_paper(paper_id):
         if not paper or not content:
             return jsonify({'error': 'Paper or markdown not found'}), 404
 
-        # Create system message
+        # Determine venue based on publication type
+        venue = 'Unknown'
+        if paper.get('type') == 'inproceedings':
+            venue = paper.get('booktitle') or paper.get('venue', 'Unknown')
+        elif paper.get('type') == 'article':
+            venue = paper.get('journal') or paper.get('venue', 'Unknown')
+        else:
+            venue = paper.get('venue', 'Unknown')
+
+        # Create system message with full metadata
         system_message = SYSTEM_PROMPT_TEMPLATE.format(
             title=paper.get('title', 'Unknown'),
+            authors=paper.get('authors', 'Unknown'),
+            year=paper.get('year', 'Unknown'),
+            venue=venue,
             content=content
         )
 

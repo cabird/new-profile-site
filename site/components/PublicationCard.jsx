@@ -122,7 +122,7 @@ const PublicationCard = ({ publication, onViewDetails, onViewBibtex, onChatWithP
                             }
                         }}
                     >
-                        Chat
+                        Chat with Paper
                     </button>
                 ) : (
                     <button
@@ -130,7 +130,7 @@ const PublicationCard = ({ publication, onViewDetails, onViewBibtex, onChatWithP
                         disabled
                         title="Chat unavailable - markdown not found"
                     >
-                        Chat
+                        Chat with Paper
                     </button>
                 )}
             </div>
