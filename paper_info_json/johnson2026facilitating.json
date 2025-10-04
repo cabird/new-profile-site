@@ -1,0 +1,15 @@
+{
+  "tldr": "Introduces the PICSE framework and quantifies which personal, interaction, control, system, and expectation factors shape engineers' trust in traditional and AI-assisted software tools using interviews and a large internal survey.",
+  "details": {
+    "topic": "Trust in software tools / AI-assisted developer tools",
+    "problem": "Engineers only adopt and rely on tools they trust, but we lack a systematic understanding of which factors build, sustain, and erode trust—especially for emerging AI-assisted tools.",
+    "approach": "Mixed methods: semi-structured interviews with 18 practitioners (internal and external to Microsoft) to derive the PICSE framework (Personal, Interaction, Control, System, Expectations), followed by a survey of 368 Microsoft employees rating the influence of 22 trust factors for traditional and AI-assisted tools; qualitative thematic coding (deductive+inductive), LLM-assisted code generation for open responses, and descriptive and inferential analyses.",
+    "key_insights": [
+      "PICSE framework organizes 19 specific trust factors into five dimensions (Personal, Interaction, Control, System, Expectations) that collectively influence trust decisions.",
+      "Surveyed engineers prioritize the ability to validate recommendations, control over applying tool output, and consistent accuracy/reliability—these cross-cut multiple PICSE dimensions and are especially critical for AI-assisted tools.",
+      "Major developer concerns about AI tools center on accuracy/hallucinations, data privacy/transparency, unpredictable behavior, and workflow integration; these concerns drive the need for validation, explainability, and data-use guarantees.",
+      "Trust is dynamic: initial trust depends on reputation, polish, and safety signals, while sustaining and evolving trust require demonstrable, consistent performance, feedback loops/personalization, and mechanisms to surface confidence and provenance."
+    ],
+    "implications": "For tool builders: design features that enable user-facing validation, user control over applying recommendations, transparent data practices, provenance/citations, and seamless workflow integration to increase adoption; for researchers: PICSE provides a testable taxonomy to operationalize and measure trust, compare contexts (e.g., regulated domains), and build predictive models; for practitioners and organizations: use the framework to evaluate risk, set expectations, and select or govern AI-assisted tools where accuracy, explainability, and data handling are prioritized."
+  }
+}

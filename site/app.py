@@ -1,6 +1,5 @@
 from flask import Flask, send_from_directory, send_file, request, Response, stream_with_context, session, jsonify
 from flask_apscheduler import APScheduler
-from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from openai import AzureOpenAI
@@ -12,6 +11,11 @@ import json
 import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
+
+# Import chat storage implementations
+from chat_store_base import ChatStore
+from chat_store_memory import InMemoryChatStore
+from chat_store_redis import RedisChatStore
 
 # Load environment variables
 load_dotenv()
@@ -52,187 +56,8 @@ Paper Content:
 # Chat Storage Abstraction Layer
 # ============================================================================
 
-class ChatStore(ABC):
-    """Abstract storage interface for chat conversations and rate limiting."""
-
-    @abstractmethod
-    def get_conversation(self, session_id, paper_id):
-        """Get conversation dict or None."""
-        pass
-
-    @abstractmethod
-    def init_conversation(self, session_id, paper_id, messages, message_count=0):
-        """Initialize new conversation. Clears other conversations for session."""
-        pass
-
-    @abstractmethod
-    def add_message(self, session_id, paper_id, role, content):
-        """Add message to conversation and increment count."""
-        pass
-
-    @abstractmethod
-    def delete_conversation(self, session_id, paper_id=None):
-        """Delete conversation(s). If paper_id is None, delete all for session."""
-        pass
-
-    @abstractmethod
-    def update_activity(self, session_id, paper_id):
-        """Update last activity timestamp."""
-        pass
-
-    @abstractmethod
-    def get_message_count(self, session_id, paper_id):
-        """Get message count for conversation."""
-        pass
-
-    @abstractmethod
-    def check_rate_limit(self, session_id):
-        """Returns (allowed: bool, remaining: int, reset_time: datetime|None)."""
-        pass
-
-    @abstractmethod
-    def increment_rate_limit(self, session_id):
-        """Increment hourly message counter."""
-        pass
-
-    @abstractmethod
-    def cleanup_inactive(self):
-        """Remove inactive conversations (>10 minutes)."""
-        pass
-
-
-class InMemoryChatStore(ChatStore):
-    """In-memory implementation with thread safety.
-
-    ⚠️ DEPLOYMENT NOTE: Requires single-worker mode (gunicorn --workers=1)
-    For multi-worker deployments, migrate to RedisChatStore.
-    """
-
-    def __init__(self):
-        self.conversations = {}  # {session_id: {paper_id: {...}}}
-        self.rate_limits = {}    # {session_id: {count, window_start}}
-        self.lock = threading.Lock()
-        self.timeout = timedelta(minutes=INACTIVITY_TIMEOUT_MINUTES)
-
-    def get_conversation(self, session_id, paper_id):
-        with self.lock:
-            if session_id not in self.conversations:
-                return None
-            return self.conversations[session_id].get(paper_id)
-
-    def init_conversation(self, session_id, paper_id, messages, message_count=0):
-        with self.lock:
-            # Clear all other conversations for this session (one chat at a time)
-            self.conversations[session_id] = {}
-
-            # Create new conversation
-            self.conversations[session_id][paper_id] = {
-                'messages': messages,
-                'message_count': message_count,
-                'last_activity': datetime.now()
-            }
-
-    def add_message(self, session_id, paper_id, role, content):
-        with self.lock:
-            conv = self.conversations.get(session_id, {}).get(paper_id)
-            if conv:
-                conv['messages'].append({'role': role, 'content': content})
-                conv['message_count'] += 1
-                conv['last_activity'] = datetime.now()
-
-    def delete_conversation(self, session_id, paper_id=None):
-        with self.lock:
-            if session_id not in self.conversations:
-                return
-
-            if paper_id:
-                # Delete specific conversation
-                if paper_id in self.conversations[session_id]:
-                    del self.conversations[session_id][paper_id]
-            else:
-                # Delete all conversations for session
-                del self.conversations[session_id]
-
-    def update_activity(self, session_id, paper_id):
-        with self.lock:
-            conv = self.conversations.get(session_id, {}).get(paper_id)
-            if conv:
-                conv['last_activity'] = datetime.now()
-
-    def get_message_count(self, session_id, paper_id):
-        with self.lock:
-            conv = self.conversations.get(session_id, {}).get(paper_id)
-            return conv['message_count'] if conv else 0
-
-    def check_rate_limit(self, session_id):
-        with self.lock:
-            now = datetime.now()
-
-            # Initialize if not exists
-            if session_id not in self.rate_limits:
-                self.rate_limits[session_id] = {
-                    'count': 0,
-                    'window_start': now
-                }
-
-            user_data = self.rate_limits[session_id]
-            window_age = now - user_data['window_start']
-
-            # Reset if window expired (>1 hour)
-            if window_age > timedelta(hours=1):
-                user_data['count'] = 0
-                user_data['window_start'] = now
-
-            # Check limit
-            if user_data['count'] >= MAX_MESSAGES_PER_HOUR:
-                reset_time = user_data['window_start'] + timedelta(hours=1)
-                return False, 0, reset_time
-
-            remaining = MAX_MESSAGES_PER_HOUR - user_data['count']
-            return True, remaining, None
-
-    def increment_rate_limit(self, session_id):
-        with self.lock:
-            if session_id in self.rate_limits:
-                self.rate_limits[session_id]['count'] += 1
-
-    def cleanup_inactive(self):
-        """Remove conversations inactive for >10 minutes."""
-        with self.lock:
-            now = datetime.now()
-
-            sessions_to_delete = []
-
-            for session_id, papers in list(self.conversations.items()):
-                papers_to_delete = []
-
-                for paper_id, conv in list(papers.items()):
-                    age = now - conv['last_activity']
-                    if age > self.timeout:
-                        papers_to_delete.append(paper_id)
-
-                for paper_id in papers_to_delete:
-                    del self.conversations[session_id][paper_id]
-                    logger.info(f"Cleaned up inactive conversation: session={session_id}, paper={paper_id}")
-
-                # Clean up empty sessions
-                if not self.conversations[session_id]:
-                    sessions_to_delete.append(session_id)
-
-            for session_id in sessions_to_delete:
-                del self.conversations[session_id]
-
-            # Cleanup old rate limiting data (>2 hours old)
-            old_threshold = timedelta(hours=2)
-            sessions_to_cleanup = []
-
-            for session_id, data in list(self.rate_limits.items()):
-                age = now - data['window_start']
-                if age > old_threshold:
-                    sessions_to_cleanup.append(session_id)
-
-            for session_id in sessions_to_cleanup:
-                del self.rate_limits[session_id]
+# Chat storage classes are now imported from separate modules
+# See: chat_store_base.py, chat_store_memory.py, chat_store_redis.py
 
 
 # ============================================================================
@@ -466,24 +291,47 @@ def initialize_app():
         logger.error(f"Failed to initialize paper chat client: {e}")
         paper_chat_client = None
 
-    # 4. Initialize chat store (easy to swap for Redis later)
-    chat_store = InMemoryChatStore()
-    logger.warning("Using in-memory chat store - requires single worker (gunicorn --workers=1)")
-    logger.warning("For multi-worker deployments, migrate to RedisChatStore")
+    # 4. Initialize chat store based on environment configuration
+    chat_storage_backend = os.getenv('CHAT_STORAGE_BACKEND', 'memory').lower()
+
+    if chat_storage_backend == 'redis':
+        # Use Redis for multi-worker deployments
+        try:
+            chat_store = RedisChatStore(
+                max_messages_per_hour=MAX_MESSAGES_PER_HOUR,
+                inactivity_timeout_minutes=INACTIVITY_TIMEOUT_MINUTES
+            )
+            logger.info("✅ Using Redis chat store - supports multiple workers!")
+        except Exception as e:
+            logger.error(f"Failed to initialize Redis chat store: {e}")
+            logger.error("Redis is required when CHAT_STORAGE_BACKEND=redis")
+            logger.error("Please ensure Redis is running and REDIS_URL is correctly configured")
+            chat_store = None  # Chat will be disabled
+    else:
+        # Default to in-memory for backward compatibility
+        chat_store = InMemoryChatStore(
+            max_messages_per_hour=MAX_MESSAGES_PER_HOUR,
+            inactivity_timeout_minutes=INACTIVITY_TIMEOUT_MINUTES
+        )
+        logger.warning("Using in-memory chat store - requires single worker (gunicorn --workers=1)")
+        logger.info("Set CHAT_STORAGE_BACKEND=redis for multi-worker support")
 
     # 5. Initialize analytics database
     init_analytics_db()
 
-    # 6. Initialize cleanup scheduler
-    scheduler.init_app(app)
-    scheduler.start()
-    scheduler.add_job(
-        id='cleanup_conversations',
-        func=lambda: chat_store.cleanup_inactive(),
-        trigger='interval',
-        minutes=CLEANUP_INTERVAL_MINUTES
-    )
-    logger.info("Chat cleanup scheduler started")
+    # 6. Initialize cleanup scheduler (only needed for in-memory storage)
+    if chat_store and isinstance(chat_store, InMemoryChatStore):
+        scheduler.init_app(app)
+        scheduler.start()
+        scheduler.add_job(
+            id='cleanup_conversations',
+            func=lambda: chat_store.cleanup_inactive(),
+            trigger='interval',
+            minutes=CLEANUP_INTERVAL_MINUTES
+        )
+        logger.info("Chat cleanup scheduler started for in-memory storage")
+    elif chat_store and isinstance(chat_store, RedisChatStore):
+        logger.info("Redis TTL handles cleanup automatically - scheduler not needed")
 
 
 # Run initialization

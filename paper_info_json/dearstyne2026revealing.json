@@ -1,0 +1,15 @@
+{
+  "tldr": "Proposes and prototyped a knowledge-network approach that links tacit human knowledge and structured system artifacts to improve human–AI collaboration in software engineering, using differential testing as a motivating case.",
+  "details": {
+    "topic": "Integrating tacit and system knowledge for human–AI collaboration in software engineering",
+    "problem": "Software engineering relies on both structured system artifacts (code, logs, commits) and tacit human knowledge (rationale, practices, meeting discussions), but these sources are often disconnected, making automated assistance brittle, non-transparent, and hard to reuse across time and tasks.",
+    "approach": "Built an initial agentic prototype for differential testing that provides an LLM agent with access to nine knowledge sources (team docs, wiki, commits, code, historical labeled diffs, etc.), GraphRAG-style retrieval, UUID-tagged artifact references, and synchronous/asynchronous human feedback; evaluated the prototype to surface practical challenges and then outlined a broader research vision centered on dynamic knowledge networks, process-pattern analysis, multi-agent hypothesis architectures, and a roadmap for storage, analysis, and validation.",
+    "key_insights": [
+      "Agentic integration of tacit and system knowledge improves context and traceability but reveals an accuracy/transparency trade-off compared with fine-tuned black-box models.",
+      "Knowledge retention and reuse are critical gaps: agents need mechanisms to store, reference, and reuse prior investigations in human-interpretable ways to avoid repeating work.",
+      "Scaling relevant context is hard—summarization and agent specialization reduce context load but risk information loss, creating a trade-off between completeness and efficiency.",
+      "Multi-agent competing-hypothesis designs and process-pattern analysis can reduce confirmation bias, surface reusable workflows, and make tacit expert behavior explicit for both humans and agents."
+    ],
+    "implications": "Creating dynamic, evolving knowledge networks that connect artifacts and recorded human communications can make AI assistance more transparent, reusable, and accountable; for researchers this opens directions in retrieval, traceability, and multi-agent evaluation, and for practitioners it promises faster, more reliable automation (e.g., in regression/diff triage), better onboarding, and improved human oversight of agent decisions."
+  }
+}

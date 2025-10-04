@@ -7,10 +7,11 @@ A static academic profile website built with React (in-browser with Babel Standa
 - **Frontend**: React 18 (via CDN), Babel Standalone for in-browser JSX transpilation
 - **Backend**: Flask (Python) with gunicorn for production
 - **AI/Chat**: Azure OpenAI with streaming responses (SSE), tiktoken for token counting
+- **Storage**: In-memory (default) or Redis (for multi-worker deployments)
 - **Libraries**: marked.js (markdown rendering), DOMPurify (XSS protection)
 - **Styling**: Custom CSS with CSS variables for easy theming
-- **Scheduling**: Flask-APScheduler for background cleanup tasks
-- **Deployment**: Render.com (single-worker mode required for in-memory chat storage)
+- **Scheduling**: Flask-APScheduler for background cleanup tasks (in-memory mode only)
+- **Deployment**: Render.com (single or multi-worker mode depending on storage backend)
 
 ## Architecture
 - **No build step** - Uses Babel Standalone to transpile JSX in the browser
@@ -164,13 +165,19 @@ Parent directory:
    - `AZURE_OPENAI_PAPER_CHAT_DEPLOYMENT` - Model deployment name
    - `AZURE_OPENAI_PAPER_CHAT_API_VERSION` - API version (default: 2024-02-01)
    - `SECRET_KEY` - Flask session secret (auto-generated if not set)
+   - `CHAT_STORAGE_BACKEND` - 'memory' (default) or 'redis' for multi-worker support
+   - `REDIS_URL` - Redis connection URL (required if using redis backend)
+   - `DATABASE_URL` - PostgreSQL URL for analytics (optional)
 3. **Local**: `python app.py` (port 5000)
 4. **Production**: Render.com with:
    - Build Command: `./build.sh && pip install -r requirements.txt`
-   - Start Command: `gunicorn app:app --workers=1` (single worker required for in-memory chat)
+   - Start Command (memory mode): `gunicorn app:app --workers=1`
+   - Start Command (redis mode): `gunicorn app:app --workers=4`
    - Environment Variables: Set in Render dashboard
 
-**Important**: The current implementation uses `InMemoryChatStore` which requires single-worker mode. For multi-worker deployments, migrate to Redis-based storage.
+**Storage Backends**:
+- **InMemoryChatStore** (default): Requires single-worker mode, data lost on restart
+- **RedisChatStore**: Supports multi-worker, data persists, auto-expiration via TTL
 
 ## Important Implementation Details
 
@@ -284,6 +291,16 @@ Edit `canned_questions.json`:
 - No build step means slower initial page load (Babel transpiles in browser)
 - All publications loaded upfront (no pagination)
 - Search is client-side only (fine for ~100-200 papers)
-- **Chat storage is in-memory** - requires single-worker mode (data lost on restart)
 - Chat only available for papers with markdown files
 - Rate limiting is per-session (cookies), can be cleared by user
+
+### Storage-Specific Limitations
+**In-Memory Mode (default)**:
+- Requires single-worker mode
+- Data lost on server restart
+- No horizontal scaling
+
+**Redis Mode**:
+- Requires Redis server
+- Additional infrastructure dependency
+- Must configure REDIS_URL environment variable

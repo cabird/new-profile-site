@@ -1,9 +1,9 @@
 {
   "metadata": {
     "created": "2025-10-01 09:38:35",
-    "total_pdfs": 122,
-    "mapped_count": 118,
-    "last_updated": "2025-10-01 22:42:27",
+    "total_pdfs": 124,
+    "mapped_count": 120,
+    "last_updated": "2025-10-03 23:46:09",
     "status_legend": {
       "NOT_INVESTIGATED": "Initial state - not yet examined",
       "INVESTIGATING": "Currently being examined",
@@ -12,7 +12,7 @@
       "NO_BIBTEX": "PDF exists but no matching bib entry",
       "MULTIPLE_CANDIDATES": "Ambiguous, needs human review"
     },
-    "total_papers": 116
+    "total_papers": 118
   },
   "pdfs": {
     "allamanis2014learning.pdf": {
@@ -885,6 +885,18 @@
       "has_text": true,
       "markdown_file": "markdowns/pimenova2025vibe.md",
       "mapped_paper": "pimenova2025vibe"
+    },
+    "dearstyne2026revealing.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "mapped_paper": "dearstyne2026revealing",
+      "markdown_file": "markdowns/dearstyne2026revealing.md"
+    },
+    "johnson2026facilitating.pdf": {
+      "status": "MAPPED",
+      "has_text": false,
+      "mapped_paper": "johnson2026facilitating",
+      "markdown_file": "markdowns/johnson2026facilitating.md"
     }
   },
   "mappings": [
@@ -1625,6 +1637,18 @@
       "confidence": "high",
       "verified_date": "2025-10-01 22:29:52",
       "paper_key": "pimenova2025vibe"
+    },
+    {
+      "bib_key": "dearstyne2026revealing",
+      "pdf_file": "dearstyne2026revealing.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-03 23:04:26"
+    },
+    {
+      "bib_key": "johnson2026facilitating",
+      "pdf_file": "johnson2026facilitating.pdf",
+      "confidence": "high",
+      "verified_date": "2025-10-03 23:43:13"
     }
   ],
   "papers": {
@@ -6003,6 +6027,70 @@
         "ai-assisted-programming",
         "developer-productivity",
         "tool-adoption-and-trust"
+      ]
+    },
+    "dearstyne2026revealing": {
+      "status": "MAPPED",
+      "type": "misc",
+      "title": "Revealing the Dark Matter: Connecting Tacit and System Knowledge in Human-AI Collaborations",
+      "authors": "Katherine R. Dearstyne and Carmen Badea and Christian Bird and Robert DeLine",
+      "year": "2026",
+      "raw_bibtex": "@misc{dearstyne2026revealing,\n  author    = {Katherine R. Dearstyne and Carmen Badea and Christian Bird and Robert DeLine},\n  title     = {Revealing the Dark Matter: Connecting Tacit and System Knowledge in Human-AI Collaborations},\n  year      = {2026},\n  note      = {Under submission.}\n}",
+      "note": "Under submission.",
+      "under_submission": true,
+      "mapped_pdf": "dearstyne2026revealing.pdf",
+      "extracted_paper_info": {
+        "tldr": "Proposes and prototyped a knowledge-network approach that links tacit human knowledge and structured system artifacts to improve human–AI collaboration in software engineering, using differential testing as a motivating case.",
+        "details": {
+          "topic": "Integrating tacit and system knowledge for human–AI collaboration in software engineering",
+          "problem": "Software engineering relies on both structured system artifacts (code, logs, commits) and tacit human knowledge (rationale, practices, meeting discussions), but these sources are often disconnected, making automated assistance brittle, non-transparent, and hard to reuse across time and tasks.",
+          "approach": "Built an initial agentic prototype for differential testing that provides an LLM agent with access to nine knowledge sources (team docs, wiki, commits, code, historical labeled diffs, etc.), GraphRAG-style retrieval, UUID-tagged artifact references, and synchronous/asynchronous human feedback; evaluated the prototype to surface practical challenges and then outlined a broader research vision centered on dynamic knowledge networks, process-pattern analysis, multi-agent hypothesis architectures, and a roadmap for storage, analysis, and validation.",
+          "key_insights": [
+            "Agentic integration of tacit and system knowledge improves context and traceability but reveals an accuracy/transparency trade-off compared with fine-tuned black-box models.",
+            "Knowledge retention and reuse are critical gaps: agents need mechanisms to store, reference, and reuse prior investigations in human-interpretable ways to avoid repeating work.",
+            "Scaling relevant context is hard—summarization and agent specialization reduce context load but risk information loss, creating a trade-off between completeness and efficiency.",
+            "Multi-agent competing-hypothesis designs and process-pattern analysis can reduce confirmation bias, surface reusable workflows, and make tacit expert behavior explicit for both humans and agents."
+          ],
+          "implications": "Creating dynamic, evolving knowledge networks that connect artifacts and recorded human communications can make AI assistance more transparent, reusable, and accountable; for researchers this opens directions in retrieval, traceability, and multi-agent evaluation, and for practitioners it promises faster, more reliable automation (e.g., in regression/diff triage), better onboarding, and improved human oversight of agent decisions."
+        }
+      },
+      "tags": [
+        "ai-for-software-engineering",
+        "tool-adoption-and-trust",
+        "ai-assisted-programming"
+      ]
+    },
+    "johnson2026facilitating": {
+      "status": "MAPPED",
+      "type": "article",
+      "title": "Facilitating Trust in AI-assisted Software Tools",
+      "authors": "Brittany Johnson and Christian Bird and Denae Ford and Ebtesam Al Haque and Nicole Forsgren and Thomas Zimmermann",
+      "year": "2026",
+      "raw_bibtex": "@article{johnson2026facilitating,\n  author    = {Brittany Johnson and Christian Bird and Denae Ford and Ebtesam Al Haque and Nicole Forsgren and Thomas Zimmermann},\n  title     = {Facilitating Trust in AI-assisted Software Tools},\n  journal   = {ACM Transactions on Software Engineering and Methodology (TOSEM)},\n  year      = {2026},\n  note      = {To appear.}\n}",
+      "journal": "ACM Transactions on Software Engineering and Methodology (TOSEM)",
+      "note": "To appear.",
+      "venue": "ACM Transactions on Software Engineering and Methodology (TOSEM)",
+      "mapped_pdf": "johnson2026facilitating.pdf",
+      "extracted_paper_info": {
+        "tldr": "Introduces the PICSE framework and quantifies which personal, interaction, control, system, and expectation factors shape engineers' trust in traditional and AI-assisted software tools using interviews and a large internal survey.",
+        "details": {
+          "topic": "Trust in software tools / AI-assisted developer tools",
+          "problem": "Engineers only adopt and rely on tools they trust, but we lack a systematic understanding of which factors build, sustain, and erode trust—especially for emerging AI-assisted tools.",
+          "approach": "Mixed methods: semi-structured interviews with 18 practitioners (internal and external to Microsoft) to derive the PICSE framework (Personal, Interaction, Control, System, Expectations), followed by a survey of 368 Microsoft employees rating the influence of 22 trust factors for traditional and AI-assisted tools; qualitative thematic coding (deductive+inductive), LLM-assisted code generation for open responses, and descriptive and inferential analyses.",
+          "key_insights": [
+            "PICSE framework organizes 19 specific trust factors into five dimensions (Personal, Interaction, Control, System, Expectations) that collectively influence trust decisions.",
+            "Surveyed engineers prioritize the ability to validate recommendations, control over applying tool output, and consistent accuracy/reliability—these cross-cut multiple PICSE dimensions and are especially critical for AI-assisted tools.",
+            "Major developer concerns about AI tools center on accuracy/hallucinations, data privacy/transparency, unpredictable behavior, and workflow integration; these concerns drive the need for validation, explainability, and data-use guarantees.",
+            "Trust is dynamic: initial trust depends on reputation, polish, and safety signals, while sustaining and evolving trust require demonstrable, consistent performance, feedback loops/personalization, and mechanisms to surface confidence and provenance."
+          ],
+          "implications": "For tool builders: design features that enable user-facing validation, user control over applying recommendations, transparent data practices, provenance/citations, and seamless workflow integration to increase adoption; for researchers: PICSE provides a testable taxonomy to operationalize and measure trust, compare contexts (e.g., regulated domains), and build predictive models; for practitioners and organizations: use the framework to evaluate risk, set expectations, and select or govern AI-assisted tools where accuracy, explainability, and data handling are prioritized."
+        }
+      },
+      "tags": [
+        "tool-adoption-and-trust",
+        "ai-assisted-programming",
+        "interviews",
+        "surveys"
       ]
     }
   }

@@ -24,6 +24,14 @@ from openai import OpenAI
 def load_prompt_template(prompt_path):
     """Load a prompt template file."""
     prompt_path = Path(prompt_path)
+
+    # If path doesn't exist and starts with ../prompts, try from repo root
+    if not prompt_path.exists() and str(prompt_path).startswith('../prompts'):
+        # Try from repo root
+        alt_path = Path(str(prompt_path).replace('../', ''))
+        if alt_path.exists():
+            prompt_path = alt_path
+
     if not prompt_path.exists():
         print(f"Error: Prompt template not found at {prompt_path}", file=sys.stderr)
         sys.exit(1)
@@ -164,9 +172,18 @@ def format_taxonomy_for_assignment(taxonomy):
 
 def get_paper_key_by_stem(pdf_stem):
     """Get paper key using the CLI."""
+    # Determine the correct path to paper_data_cli.py
+    # If running from scripts dir, use ../paper_data_cli.py
+    # If running from repo root, use paper_data_cli.py
+    script_dir = Path(__file__).parent
+    if script_dir.name == 'scripts':
+        cli_path = script_dir.parent / 'paper_data_cli.py'
+    else:
+        cli_path = Path('paper_data_cli.py')
+
     cmd = [
         sys.executable,
-        '../paper_data_cli.py',
+        str(cli_path),
         'paper', 'get-by-pdf-stem',
         pdf_stem
     ]
@@ -185,9 +202,16 @@ def set_tags_for_paper(bib_key, tags):
         print(f"  Warning: No tags to set for {bib_key}")
         return False
 
+    # Determine the correct path to paper_data_cli.py
+    script_dir = Path(__file__).parent
+    if script_dir.name == 'scripts':
+        cli_path = script_dir.parent / 'paper_data_cli.py'
+    else:
+        cli_path = Path('paper_data_cli.py')
+
     cmd = [
         sys.executable,
-        '../paper_data_cli.py',
+        str(cli_path),
         'tags', 'set',
         'papers',
         bib_key
@@ -322,10 +346,55 @@ def assign_tags_to_all_papers(api_key, model):
     print(f"  Total processed: {successful + failed + skipped}")
 
 
+def assign_tags_to_single_paper(paper_key, api_key, model):
+    """Assign tags to a single paper based on taxonomy."""
+    print(f"Loading tag taxonomy...")
+    taxonomy = load_tag_taxonomy()
+    taxonomy_text = format_taxonomy_for_assignment(taxonomy)
+
+    print(f"Loaded {len(taxonomy)} tags from taxonomy")
+
+    # Find the paper's JSON file
+    paper_info_dir = Path('paper_info_json')
+    json_file = paper_info_dir / f"{paper_key}.json"
+
+    if not json_file.exists():
+        print(f"Error: Paper info file not found: {json_file}", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"\nLoading paper info for {paper_key}...")
+    try:
+        with open(json_file, 'r', encoding='utf-8') as f:
+            paper_data = json.load(f)
+    except json.JSONDecodeError as e:
+        print(f"Error: Failed to parse {json_file}: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    # Assign tags
+    print(f"Calling LLM to assign tags...")
+    tags = assign_tags_to_paper(paper_data, taxonomy_text, api_key, model)
+
+    if not tags:
+        print(f"Warning: No tags assigned")
+        return False
+
+    print(f"Assigned tags: {', '.join(tags)}")
+
+    # Set tags via CLI
+    if set_tags_for_paper(paper_key, tags):
+        print(f"Success! Tags set for {paper_key}")
+        return True
+    else:
+        print(f"Failed to set tags for {paper_key}")
+        return False
+
+
 def main():
     parser = argparse.ArgumentParser(description='Manage tags for papers using LLM')
     parser.add_argument('mode', choices=['generate', 'assign'],
                         help='Mode: generate taxonomy or assign tags to papers')
+    parser.add_argument('--paper',
+                        help='For assign mode: assign tags to a single paper by key (e.g., dearstyne2026revealing)')
     args = parser.parse_args()
 
     # Load environment variables
@@ -349,8 +418,13 @@ def main():
         if not model:
             print("Error: OPENAI_TAG_ASSIGNMENT_MODEL not found in environment", file=sys.stderr)
             sys.exit(1)
-        print(f"Assigning tags to papers using model: {model}\n")
-        assign_tags_to_all_papers(api_key, model)
+
+        if args.paper:
+            print(f"Assigning tags to paper '{args.paper}' using model: {model}\n")
+            assign_tags_to_single_paper(args.paper, api_key, model)
+        else:
+            print(f"Assigning tags to all papers using model: {model}\n")
+            assign_tags_to_all_papers(api_key, model)
 
 
 if __name__ == "__main__":
