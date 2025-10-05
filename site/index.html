@@ -103,12 +103,21 @@
                 <div className="container-narrow">
                     {/* Bio Section */}
                     <section className="section">
-                        <h1>{data.name}</h1>
-                        <h2 className="mb-sm">{data.title}</h2>
-                        <h3 className="mb-lg" style={{ color: 'var(--text-secondary)', fontWeight: 400 }}>
-                            {data.affiliation}
-                        </h3>
-                        <p>{data.bio}</p>
+                        <div className="bio-header">
+                            <img
+                                src="images/profile_pic_medium.jpeg"
+                                alt={data.name}
+                                className="profile-photo"
+                            />
+                            <div className="bio-content">
+                                <h1>{data.name}</h1>
+                                <h2 className="mb-sm">{data.title}</h2>
+                                <h3 className="mb-lg" style={{ color: 'var(--text-secondary)', fontWeight: 400 }}>
+                                    {data.affiliation}
+                                </h3>
+                                <p>{data.bio}</p>
+                            </div>
+                        </div>
 
                         {/* Contact Links */}
                         <ul className="link-list">

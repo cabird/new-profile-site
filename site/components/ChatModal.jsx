@@ -252,8 +252,8 @@ const ChatModal = ({ paper, onClose }) => {
                     </div>
                 )}
 
-                {/* Canned questions dropdown - only show when no messages */}
-                {messages.length === 0 && !streamingMessage && cannedQuestions.length > 0 && (
+                {/* Canned questions dropdown - always show when questions available */}
+                {cannedQuestions.length > 0 && (
                     <div className="canned-questions-container">
                         <select
                             className="canned-questions-select"
@@ -273,7 +273,7 @@ const ChatModal = ({ paper, onClose }) => {
                             }}
                             defaultValue=""
                         >
-                            <option value="" disabled>Select a question below or ask your own...</option>
+                            <option value="" disabled>Select a question or ask your own...</option>
                             {cannedQuestions.map((question, idx) => (
                                 <option key={idx} value={question}>
                                     {question}
@@ -300,7 +300,7 @@ const ChatModal = ({ paper, onClose }) => {
                         disabled={!input.trim() || loading}
                     >
                         <SendIcon size={16} />
-                        Send
+                        <span className="chat-send-btn-text">Send</span>
                     </button>
                 </div>
             </div>

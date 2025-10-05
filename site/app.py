@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, send_file, request, Response, stream_with_context, session, jsonify
+from flask import Flask, send_from_directory, send_file, request, Response, stream_with_context, session, jsonify, redirect
 from flask_apscheduler import APScheduler
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
@@ -346,6 +346,17 @@ initialize_app()
 def index():
     """Serve the main index.html page"""
     return send_file('index.html')
+
+@app.route('/pages/about/')
+@app.route('/pages/about')
+def redirect_old_about():
+    """Redirect old about page URL to the home page"""
+    return redirect('/', code=301)  # 301 for permanent redirect
+
+@app.route('/publications')
+def redirect_publications():
+    """Redirect /publications to /publications.html"""
+    return redirect('/publications.html', code=301)
 
 @app.route('/publications.html')
 def publications():

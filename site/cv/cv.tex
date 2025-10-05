@@ -1,0 +1,677 @@
+\documentclass[11pt,letterpaper,roman]{moderncv} % Font sizes: 10, 11, or 12; paper sizes: a4paper, letterpaper, a5paper, legalpaper, executivepaper or landscape; font families: sans or roman
+
+\moderncvstyle{classic} % CV theme - options include: 'casual' (default), 'classic', 'oldstyle' and 'banking'
+\moderncvcolor{blue} % CV color - options include: 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage[scale=0.75]{geometry} % Reduce document margins
+
+%\allsectionsfont{\sffamily}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage{bibentry}
+\usepackage{fontspec}
+
+
+\setmainfont[
+Path=./fonts/,
+Extension=.ttf,
+BoldFont={seguisb},
+ItalicFont={seguisli},
+BoldItalicFont={seguisbi}
+]{segoeuisl}
+
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{revnum}
+\usepackage{color}
+
+\name{Christian}{Bird}
+
+\title{Senior Principal Researcher}
+\address{One Microsoft Way}{Redmond, WA 98052}
+\email{cbird [at] microsoft [dot] com}
+\homepage{www.cabird.com}
+\photo[64pt][0.4pt]{ProfilePic_Medium}
+
+
+\newcommand{\showpaper}[2][]
+{
+	\cvitem{#1}{\textcolor{white}{m}\hspace{-8px}\bibentry{#2}}
+}
+
+\begin{document}
+
+\makecvtitle
+
+%\begin{resume}
+%\section{Contact Information}
+
+ 
+\section{Research Interests}
+\cvitem{}{Dr. Christian Bird is a Senior Principal Researcher at Microsoft Research, where he studies software 
+engineering practices, developer productivity, and the intersection of AI and software development. His 
+work combines empirical software engineering, large-scale data analysis, and human factors to understand 
+how developers work and how tools can better support them.}
+
+\begin{comment}
+
+\section{Test}
+\cventry{cventry: first}{second thing}{third thing}{fourth thing}{fifth thing}{sixth thing}
+\cvitem{cvitem: first}{second thing}
+\cvitemwithcomment{cvitem withcomment: first}{second thing}{third thing}
+\cvlistitem{cvlistitem first}
+\cvlistitem{cvlistitem second}
+
+\end{comment}
+
+\section{Education}
+
+\cventry{2010}{Ph.D. Computer Science}{University of California}{Davis, California}{}{}
+\cvitem{}{Advisor: Premkumar Devanbu}
+\cvitem{}{Thesis: ``Sociotechnical Collaboration and Coordination in Open Source Software''}
+\cventry{2008}{M.S. Computer Science}{University of California}{Davis, California}{}{Advisor: Premkumar Devanbu}
+\cventry{2003}{B.S. Computer Science}{Brigham Young University}{Provo, Utah}{}{}
+
+\section{Honors and Awards}
+
+\cventry{}{Distinguished Scientist}{Association for Computing Machinery (ACM)}{2024}{}{}
+
+\cventry{}{ACM SIGSOFT Impact Paper Award (11+ years)}{Awarded at ICSE 2025}{``Expectations, Outcomes, and Challenges of Modern Code Review''}{2025}{}
+
+\cventry{}{Test of Time Honorable Mention (10 years)}{ESEC/FSE}{``Suggesting Accurate Method and Class Names''}{2025}{}
+
+\cventry{}{Test of Time Award (10 years)}{ESEC/FSE}{``Don't Touch My Code! Examining the Effects of Ownership on Software Quality''}{2021}{}
+
+\cventry{}{30 Year Highlight (26 most influential papers in the past 30 years)}{ISSRE}{``Putting It All Together: Using Socio-Technical Networks to Predict Failures''}{2019}{}
+
+\cventry{}{Test of Time Award (10 years)}{ESEC/FSE}{``Fair and balanced?: bias in bug-fix datasets''}{2019}{}
+
+\cventry{}{Most Influential Paper Award (10 years)}{International Conference on Mining Software Repositories}{``The Promises and Perils of Mining Git''}{2019}{}
+
+\cventry{}{IEEE Software ICSE Software Engineering in Practice Best Paper Award}{International Conference on Software Engineering}{``Software Engineering for Machine Learning: A Case Study''}{2019}{}
+
+\cventry{}{Distinguished Reviewer}{International Conference on Software Engineering}{2019}{}{}
+
+\cventry{}{Test of Time Award (10 years)}{ESEC/FSE}{``Latent Social Structure in Open Source Projects''}{2018}{}
+
+\cventry{}{ACM SIGSOFT Early Career Research Award}{Awarded at ICSE 2017}{}{}{}
+
+\cventry{}{Most Influential Paper Award (10 years)}{International Conference on Mining Software Repositories}{``Mining Email Social Networks''}{2016}{}
+
+\cventry{}{Distinguished Reviewer}{International Conference on Software Engineering}{2016}{}{}
+
+\cventry{}{Distinguished Reviewer}{IEEE/ACM International Conference on Automated Software Engineering}{2015}{}{}
+
+\cventry{}{ACM SIGSOFT Distinguished Paper}{ACM SigSoft Symposium on Foundations of Software Engineering}{``Learning Natural Coding Conventions''}{2014}{}
+
+\cventry{}{ACM SIGSOFT Distinguished Paper and ISSTA Best Paper}{ACM SigSoft International Symposium on Software Testing and Analysis}
+	{``Collecting a Heap of Shapes''}{2013}{}
+
+\cventry{}{Distinguished Referee}{ACM Transactions on Software Engineering and Methodology}{2011-2012}{}{}
+
+\cventry{}{ACM SIGSOFT Distinguished Paper}{ACM SigSoft Symposium on Foundations of Software Engineering}
+	{``Assessing the Value of Branches with What-If Analysis''}{2012}{}
+
+\cventry{}{ACM SIGSOFT Distinguished Paper}{International Conference on Software Engineering}
+	{``Does Distributed Development Affect Software Quality? An Empirical Case Study of Windows Vista''}{2009}{}
+
+
+\cventry{}{Mining Software Repositories Best Paper Award}{International Working Conference on Mining Software Repositories}
+	{``Clones: What \emph{is} that smell?''}{2010}{}
+
+\cventry{}{Best Student Talk}{Mining Software Archives}{``The Effect of Change Semantics on Coordination Requirements''}{2010}{}
+
+\cventry{}{Best Graduate Researcher Award}{U.C. Davis, Dept. of Computer Science}{2008 -- 2009}{}{}
+
+\cventry{}{Dean's List}{Brigham Young University}{1996, 2001, 2002}{}{}
+
+%Golden Key Honor Society
+%\begin{list2}
+%\item Member, 2000 -- present
+%\end{list2}
+
+\cventry{}{US National Merit Scholar and Scholarship}{}{Awarded for complete undergraduate career}{1996}{}
+
+\cventry{}{Boy Scouts of America: Eagle Scout Rank}{}{}{1996}{}
+
+\section{Books}
+
+\nobibliography{cv}
+
+\showpaper{bird2015artandscience}
+
+\section{Special Issues Editted}
+
+
+\cventry{}{Special Issue on Mining Software Repositories 2015}{Journal of Empirical Software Engineering}{2018}{}{}
+
+\cventry{}{Special Issue on Release Engineering 3.0}{IEEE Software}{2018}{}{}
+
+\cventry{}{Special Issue on Program Comprehension 2014}{Journal of Empirical Software Engineering}{2017}{}{}
+
+\cventry{}{Special Issue on Crowdsourcing}{IEEE Software}{2017}{}{}
+
+\cventry{}{Special Issue on Release Engineering}{IEEE Software}{2015}{}{}
+
+
+\section{Book Chapters}
+
+\showpaper{bird2016interviews}
+
+\showpaper{bird2016bias}
+
+\showpaper{bird2010cc}
+
+
+\section{Refereed Publications}
+
+\showpaper[TOSEM 2026]{johnson2026facilitating}
+
+\showpaper[ICSE 2025]{DBLP:conf/icse-seip/NaharKBPZB25}
+
+\showpaper[ICSE 2025]{DBLP:conf/icse-seip/VajjalaVBBDDDEFHMSSZ25}
+
+\showpaper[FSE 2025]{DBLP:conf/sigsoft/VajjalaVBBDDDEF25}
+
+\showpaper[CACM 2025]{DBLP:journals/cacm/LahiriSBMC25}
+
+\showpaper[ICSE 2024]{DBLP:conf/icse/Butler0B24}
+
+\showpaper[FSE 2024]{DBLP:journals/pacmse/LiangBBDFF024}
+
+\showpaper[ACM Queue 2024]{DBLP:journals/queue/LahiriSBMC24}
+
+\showpaper[ICSE 2023]{DBLP:conf/icse/JohnsonBFFZ23}
+
+\showpaper[ICSE 2023]{DBLP:conf/icse/ZhangMBBRAJHD23}
+
+\showpaper[CACM 2023]{DBLP:journals/cacm/BirdFZFKLG23}
+
+\showpaper[TSE 2023]{DBLP:journals/tse/DinellaMSBNL23}
+
+\showpaper[FSE 2022]{DBLP:conf/sigsoft/SvyatkovskiyFGM22}
+
+\showpaper[HCI 2022]{DBLP:journals/hhci/Pe-ThanNFBSH22}
+
+\showpaper[ACM Queue 2022]{DBLP:journals/queue/BirdFZFKLG22}
+
+\showpaper[TOSEM 2022]{DBLP:journals/tosem/FordSZBJMBHN22}
+
+\showpaper[TOSEM 2022]{DBLP:journals/tosem/MaddilaNBGD22}
+
+\showpaper[TSE 2021]{DBLP:journals/tse/StoreyZBCMK21}
+
+\showpaper[TSE 2021]{DBLP:journals/tse/KochharKNZB21}
+
+\showpaper[TSE 2021]{DBLP:journals/tse/MeyerBBZ21}
+
+\showpaper[TSE 2021]{DBLP:journals/tse/JohnsonZB21}
+
+\showpaper[ICSE 2020]{henkel2020docker}
+
+\showpaper[MSR 2020]{henkel2020dockermsr}
+
+\showpaper[NSDI 2020]{mehta2020rex}
+
+\showpaper[FSE 2019]{asthana2019whodo}
+
+\showpaper[ICSE 2019]{amershi2018se4ml}
+
+\showpaper[TSE 2019]{kovalenko2019revrec}
+
+
+
+\showpaper[CHI 2018]{nolte2018you}
+
+\showpaper[ACM Queue 2018]{codeflow2018}
+
+\showpaper[IEEE Software 2018]{than2018designing}
+
+\showpaper[FSE 2018]{hellendoorn2018deep}
+
+\showpaper[IEEE Software 2018]{macleod2018codereviewing}
+
+\showpaper[TSE 2018]{allamanis2018loopidioms}
+
+\showpaper[CHI 2018]{henley2018cfar}
+
+\showpaper[TSE 2018]{kalliamvakou2018managers}
+
+\showpaper[ESEM 2017]{ford2017personas}
+
+\showpaper[ICSE 2017]{gao2017javascript}
+
+\showpaper[TSE 2017]{bosu2017review}
+
+\showpaper[ASE 2016]{christakis2016developers}
+
+\showpaper[ICSE 2016]{manotas2016green}
+
+\showpaper[ICSE 2016]{devanbu2016evidence}
+
+\showpaper[ICSE 2016]{washburn2016games}
+
+\showpaper[CHASE 2016]{smith2016beliefs}
+
+\showpaper[TSE 2016]{zanjani2016recommending}
+
+\showpaper[FSE 2015]{allamanis2015suggesting}
+
+\showpaper[FSE 2015]{saraiva2015ngram}
+
+\showpaper[ICSE 2015]{smith2015homegrown}
+
+\showpaper[ICSE 2015]{barnett2015helping}
+
+\showpaper[MSR 2015]{bird2015cfa}
+
+\showpaper[MSR 2015]{bosu2015useful}
+
+\showpaper[MSR 2015]{ray2015uniqueness}
+
+\showpaper[MSR 2015]{zanjani2015developer}
+
+\showpaper[TSE 2015]{murphyhill2015design}
+
+\showpaper[FSE 2014]{allamanis2014learning}
+
+\showpaper[ESEM 2014]{gupta2014energy}
+
+\showpaper[ESE 2014]{hindle2014topics}
+
+\showpaper[ICSE 2014]{phillips2014build}
+
+\showpaper[ICSE 2014]{muslu2014dvcs}
+
+\showpaper[ICSE 2014]{bird2014rac}
+
+\showpaper[FSE 2013]{nagappan2013diversity}
+
+\showpaper[FSE 2013]{rigby2013convergent}
+
+\showpaper[ESEM 2013]{murphy2013agile}
+
+\showpaper[ISSTA 2013]{barr2013shapes}
+
+\showpaper[IEEE Software 2013]{musson2013software}
+
+\showpaper[ECSCW 2013]{harper2013ecscw}
+
+\showpaper[ICSE 2013]{bacchelli2013eoc}
+
+\showpaper[ICSE 2013]{murphyhill2013dbf}
+
+\showpaper[ICSE 2013]{kocaguneli2013distributed}
+
+\showpaper[RELENG 2013]{rigby2013releng}
+
+\showpaper[MSR 2013]{mukadam2013gerrit}
+
+\showpaper[CHASE 2013]{smith2013chase}
+
+\showpaper[ESE 2012]{parnin2012auj}
+
+\showpaper[FSE 2012]{bird2012avb}
+
+\showpaper[ICSM 2012]{hindle2012rri}
+
+\showpaper[ESEM 2012]{shihab2012ebs}
+
+\showpaper[MSR 2012]{bird2012www}
+
+\showpaper[FASE 2012]{barr2012cid}
+
+\showpaper[CSD 2012]{zimmermann2012ccs}
+
+\showpaper[ESE 2012]{rahman2012cwt}
+
+\showpaper[MLT 2011]{menzies2011ise}
+
+\showpaper[PROMISE 2011]{zeller2011ffl}
+
+\showpaper[ICSM 2011]{hong2011uds}
+
+\showpaper[FSE 2011]{bird2011dtm}
+
+\showpaper[MSR 2011]{parnin2011jga}
+
+\showpaper[CHASE 2011]{bird2011tbg}
+
+\showpaper[ESE 2010]{posnett2010esi}
+
+\showpaper[FOSE 2010]{barr2010sg}
+
+\showpaper[FSE 2010]{bachmann2010mlb}
+
+\showpaper[MSR 2010]{posnett2010tmm}
+
+\showpaper[MSR 2010]{nia2010vna}
+
+\showpaper[MSR 2010]{rahman2010cws}
+
+\showpaper[ISSRE 2009]{bird2009pat}
+
+\showpaper[FSE 2009]{bird2009fbb}
+
+\showpaper[CACM 2009]{bird2009dddb}
+
+\showpaper[ICSE 2009]{bird2009ddd}
+
+\showpaper[MSR 2009]{bird2009ppm}
+
+\showpaper[SDM 2009]{bird2009sdr}
+
+\showpaper[FSE 2008]{bird2008lss}
+
+\showpaper[MSR 2008]{pattison2008twp}
+
+\showpaper[FSE 2007]{saul2007rrw}
+
+\showpaper[MSR 2007]{bird2007dps}
+
+\showpaper[MSR 2007]{bird2007obi}
+
+\showpaper[APVIS 2007]{ogawa2007vsi}
+
+\showpaper[MSR 2006]{bird2006mes}
+
+\showpaper[MSR 2006]{bird2006mesp}
+
+%\end{revnumerate}
+
+
+\section{Invited Papers, Demo papers, etc.}
+
+%\begin{revnumerate}[4]
+
+\showpaper[IEEE Software 2018]{devanbu2018belief}
+
+\showpaper[ICSM 2011]{bird2011scc}
+
+\showpaper[CSCW 2011]{bird2011ese}
+
+\showpaper[ESEM 2010]{rahman2010cws-esem}
+
+\showpaper[FSE 2010]{bird2010lee}
+
+\bibliographystyle{myacm}
+
+\section{Invited Talks}
+
+\cventry{2020}{Lessons and Insights from Tech Transfers at Microsoft}
+	{Keynote, The 27th IEEE International Conference on Software Analysis, Evolution and Reengineering}
+	{London, Ontario Canada}{}{}
+
+\cventry{2019}{Lessons and Insights from Tech Transfers at Microsoft}
+	{Keynote, The 10th Brazilian Conference on Software}
+	{Salvador, Bahia, Brazil}{}{}
+
+\cventry{2019}{Lessons and Insights from Tech Transfers at Microsoft}
+	{Keynote, The 15th International Conference on Predictive Models and Data Analytics in Software Engineering}
+	{Porto de Galinhas, Brazil}{}{}
+
+\cventry{2014}{Lessons and Insights from Tech Transfers at Microsoft}
+	{Keynote, 4th Workshop on Mining Unstructured Data (colocated with ICSME 2014)}
+	{Victoria, British Columbia, Canada}{}{}
+
+\cventry{2014}{Empirical Investigations into Code Review at Microsoft and Beyond}
+{Carnegie Mellon University}{Pittsburgh, Pennsylvania}{}{}
+	
+\cventry{2013}{Investigations into Code Review at Microsoft and Beyond}
+{University of Victoria}{Victoria, British Columbia, Canada}{}{}
+
+\cventry{2012}{Branch Analytics at Microsoft}
+{University of Victoria}{Victoria, British Columbia, Canada}{}{}
+
+\cventry{2011}{Empirical Software Engineering at Microsoft Research: Transitioning Research into practice}
+{Brigham Young University}{Provo, Utah}{}{}
+
+\cventry{2011}{SocioTechnical Effects in Software Teams}
+{Hong Kong University of Science and Technology}{Hong Kong}{}{}
+
+\cventry{2010}{SocioTechnical Effects in Software Teams}
+{Microsoft Research}{Bangalore, India}{}{}
+
+\cventry{2010}{Does Distributed Development Affect Software Quality?}
+{Third India Software Engineering Conference}{Mysore, India}{}{}
+
+\cventry{2010}{Jazz Anthropology}{T. J. Watson Research Center, IBM}
+{Hawthorne, New York}{}{}
+
+\cventry{2009}{On the Effect of Ownership in Varying Software Processes}
+{Microsoft Research}{Redmond, Washington}{}{}
+
+\cventry{2008}{Latent Social Structure in Open Source Projects}
+{INFORMS Annual Meeting}{Washington, D.C..}{}{}
+
+\cventry{2008}{Does Distributed Development Affect Software Quality?}
+{Microsoft Research}{Redmond, Washington}{}{}
+
+\cventry{2008}{Social Organization in Open Source Software}
+{T. J. Watson Research Center, IBM}{Hawthorne, New York, U.S.A.}{}{}
+
+\cventry{2006}{Social Network Analysis in Software Teams}
+{Guest Lecture, MAE 298, Understanding Networks: Theory and Applications}
+{University of California, Davis, U.S.A.}{}{}
+
+\section{Research Experience}
+
+\cventry{2022 - present}{Senior Principal Researcher}{Empirical Software Engineering Group}{Microsoft, Research}{Redmond, Washington}{}
+\cventry{2017 - 2022}{Principal Researcher}{Empirical Software Engineering Group}{Microsoft, Research}{Redmond, Washington}{}
+\cventry{2013 - 2017}{Senior Researcher}{Empirical Software Engineering Group}{Microsoft, Research}{Redmond, Washington}{}
+\cventry{2011 - 2013}{Researcher}{Empirical Software Engineering Group}{Microsoft, Research}{Redmond, Washington}{}
+\cventry{2011 - }{Senior Researcher}{Empirical Software Engineering Group}{Microsoft, Research}{Redmond, Washington}{}
+
+\cventry{2010 - 2011}{Postdoctoral Researcher}{Empirical Software Engineering Group}{Microsoft, Research}{Redmond, Washington}{}
+
+\cventry{2005-2010}{Research Assistant}{Software Engineering Lab under Prof. Premkumar Devanbu}{University of California, Davis}{Davis, California}{}
+
+\cventry{2009}{Research Intern}{Governance Science Research Group under Clay Williams}{T. J. Watson Research Center, IBM}{Hawthorne, New York}{}
+
+\cventry{2009}{Research Intern}{Software Engineering Group under Nachiappan Nagappan}{Microsoft Research}{Redmond, Washington}{}
+
+\cventry{2008}{Research Intern}{Software Engineering Group under Nachiappan Nagappan}{Microsoft Research}{Redmond, Washington}{}
+
+\cventry{2004}{Research Assistant}{Software Engineering Lab under Prof. Raju Pandey}{University of California, Davis}{Davis, California}{}
+
+\section{Teaching Experience}
+
+\cventry{2004 - 2005}{Teaching Assistant}{Programming Languages under Prof. Ronald Olsson and Prof. Raju Pandey}{University of California, Davis}{Davis, California}{}
+
+\cventry{1997}{Teaching Assistant}{Advanced Data Structures under Prof. Theodore Norman}{Brigham Young University}{Provo, Utah}{}
+
+\section{Industry Experience}
+
+\cventry{2000-2005}{Software Engineer}{Embedded Software Tools Group}{Motorola}{Lindon, Utah}{}
+
+\cventry{1997}{Technical Support Engineer}{Technical Support Department}{Caldera Systems Inc.}{Provo, Utah}{}
+
+\section{Academic Service}
+
+\cvitem{\textbf{PC Chair}}{International Conference on Automated Software Engineering, 2023}
+\cvitem{}{International Conference on Automated Software Engineering, Demonstrations Track, 2022}
+\cvitem{}{International Conference on Software Analysis, Evolution and Reengineering, Industry Track, 2020}
+\cvitem{}{ACM Sigsoft Symposium on Foundations of Software Engineering, Journal First Track, 2020}
+\cvitem{}{International Symposium on Empirical Software Engineering and Measurement, Industry Track, 2018}
+\cvitem{}{International Conference on Software Maintenance and Evolution, Industry Track, 2018}
+\cvitem{}{International Conference on Mining Software Repositories, 2016}
+\cvitem{}{International Conference on Program Comprehension, 2015}
+\cvitem{}{International Workshop on Replications in Software Engineering, 2013}
+\cvitem{}{International Workshop on Data Analysis Patterns in Software Engineering (DAPSE), 2013}
+\cvitem{}{International Workshop on Release Engineering (RelEng), 2013}
+\cvitem{}{International Conference on Program Comprehension, Industry Track, 2013}
+\cvitem{}{Challenge Track of Mining Software Repositories, 2009}
+
+\vspace{8pt}
+
+\cvitem{\textbf{Journal}}{Review Board, IEEE Transactions on Software Engineering, 2017-present}
+\cvitem{\textbf{Positions}}{Associate Editor, Journal of Systems and Software, 2017-2018}
+\cvitem{}{Academic Editor, PeerJ Computer Science, 2016-present}
+\cvitem{}{Editorial Board, Journal of Information and Software Technology, 2016-present}
+
+\begin{comment}
+\cvitem{\textbf{Associate Editor}}{Journal of Systems and Software, 2017-present}
+\cvitem{\textbf{Academic Editor}}{PeerJ Computer Science, 2016-present}
+\cvitem{\textbf{Editorial Board}}{Journal of Information and Software Technology, 2016-present}
+\cvitem{\textbf{Review Board}}{IEEE Transactions on Software Engineering, 2017-present}
+\end{comment}
+\cvitem{\textbf{Guest Editor}}{Journal of Empirical Software Engineering Special Issue for International Conference on Program Comprehension 2015, published in 2017}
+\cvitem{}{Journal of Empirical Software Engineering Special Issue for Mining Software Repositories 2016, in progress}
+\cvitem{}{IEEE Software Special Issue on Crowdsourcing in Software Engineering, 2017}
+\cvitem{}{IEEE Software Special Issue on Release Engineering, 2015}
+\cvitem{}{IEEE Software 2nd Special Issue on Release Engineering, 2016}
+\cvitem{}{IEEE Software 3rd Special Issue on Release Engineering, 2017}
+
+
+\vspace{8pt}
+
+\cvitem{\textbf{Steering}}{International Conference on Mining Software Repositories {MSR}, 2015-present}
+\cvitem{\textbf{Committee}}{International Conference on Program Comprehension (ICPC), 2015-2018}
+
+\vspace{8pt}
+
+\cvitem{\textbf{Organizing Committee}}{International Workshop on Data Analysis Patterns in Software Engineering (DAPSE), 2013}
+\cvitem{}{International Workshop on Release Engineering (RelEng), 2013, 2014, 2015, 2016}
+\cvitem{}{International Workshop on Replications in Software Engineering, 2013}
+
+\vspace{8pt}
+
+\cvitem{\textbf{PC Member}}{International Conference on Software Engineering, 2014, 2016, 2017, 2019, 2020, 2022}
+\cvitem{}{ACM Sigsoft Symposium on Foundations of Software Engineering, 2012, 2016, 2018, 2022}
+\cvitem{}{International Symposium on Software Testing and Analysis, 2019}
+\cvitem{}{International Conference on Automated Software Engineering, 2014, 2015, 2018, 2020, 2022, 2023}
+\cvitem{}{International Symposium on Empirical Software Engineering and Measurement, 2015, 2017}
+\cvitem{}{Indian Software Engineering Conference, 2015, 2016}
+\cvitem{}{International Symposium on Software Reliability Engineering, Industrial track, 2013}
+\cvitem{}{International Conference on Software Maintenance and Engineering, 2012, 2013, 2014, 2022}
+\cvitem{}{International Conference on Program Comprehension, 2012, 2014, 2016, 2018, 2022}
+\cvitem{}{International Conference on Predictor Models in Software Engineering, 2013}
+\cvitem{}{International Conference on Software Engineering Advances, 2013}
+\cvitem{}{International Conference on Mining Software Repositories, 2010, 2011, 2012, 2013, 2015, 2017, 2018, 2022}
+\cvitem{}{International Conference on Global Software Engineering, 2015, 2016}
+\cvitem{}{International Conference on Software Enginering and Applications, 2014}
+\cvitem{}{International Conference on Software Analysis, Evolution and Reengineering, 2015, 2016, 2017, 2018, 2019, 2020}
+\cvitem{}{International Conference on Software Maintenance and Evolution, Early Research Achievements track, 2016}
+\cvitem{}{International Symposium on Software Crowdsourcing, 2015, 2016}
+\cvitem{}{ACM Student Research Competition (at ICSE), 2012}
+\cvitem{}{Formal Research Demonstrations track at ICSE, 2014}
+\cvitem{}{ACM Sigsoft Symposium on Foundations of Sofware Engineering, Tool Demonstration Track, 2017}
+\cvitem{}{International Conference on Software Analysis, Evolution, and Reengineering, Early Research Achievements track, 2016}
+\cvitem{}{International Conference on Software Analysis, Evolution, and Reengineering, Reproducibility and Negative Results track, 2018}
+\cvitem{}{International Symposium on Empirical Software Engineering and Measurement, Industrial track, 2011}
+\cvitem{}{International Conference on Software Maintenance, Early Achievements track, 2011}
+\cvitem{}{European Soft. Eng. Conf./Foundations of Soft. Eng., Artifact Evaluation Committee, 2011}
+\cvitem{}{Euromicro Conference on Software Engineering and Advanced Applications Special Session on Estimation and Prediction in Software \& Systems Engineering, 2012, 2014}
+\cvitem{}{2nd SEMAT Workshop on a General Theory of Software Engineering (GTSE) 2013, }
+\cvitem{}{International Workshop on Software Refactoring, 2016}
+\cvitem{}{International Workshop on Alternative Workforces for Software Engineering 2015}
+\cvitem{}{International Workshop on Regression Testing, 2012, 2013}
+\cvitem{}{International Workshop on Machine Learning Technologies in Software Engineering, 2011}
+\cvitem{}{International Workshop on Empirical Software Engineering in Practice, 2010, 2011, 2012, 2013}
+\cvitem{}{International Workshop on Replications in Empirical Software Engineering Research, 2010, 2011}
+\cvitem{}{International Workshop on Emerging Trends in FLOSS Research and Development, 2010}
+\cvitem{}{International Workshop on the General Theory of Software Engineering, 2013}
+\cvitem{}{Challenge Track of Mining Software Repositories, 2008, 2009}
+\cvitem{}{Data Track of Mining Software Repositories, 2014}
+
+\vspace{8pt}
+
+\cvitem{\textbf{Reviewer}}{Communications of the ACM}
+\cvitem{}{ACM Transactions on Software Engineering and Methodology}
+\cvitem{}{IEEE Transactions on Software Engineering}
+\cvitem{}{Journal of Empirical Software Engineering}
+\cvitem{}{IEEE Software}
+\cvitem{}{IEEE Intelligent Systems}
+\cvitem{}{Journal of Systems and Software}
+\cvitem{}{Journal of Information and Software Technology}
+\cvitem{}{Journal of Software: Evolution and Process}
+\cvitem{}{Journal of Software Testing, Verification \& Reliability}
+\cvitem{}{Software Quality Journal}
+\cvitem{}{International Symposium on Software Testing and Analysis, 2012}
+\cvitem{}{International Conference on Software Engineering, 2008, 2009, 2013}
+\cvitem{}{International Conference on Software Engineering (SEIP Track), 2015}
+\cvitem{}{ACM Conference on Computer Supported Cooperative Work, 2008, 2012, 2013}
+\cvitem{}{International Working Conference on Mining Software Repositories, 2007, 2008, 2009}
+\cvitem{}{European Conference on Object Oriented Programming, 2009}
+\cvitem{}{Haifa Verification conference, 2011}
+\cvitem{}{ACM Conference on Recommender Systems, 2009}
+\cvitem{}{Science of Computer Programming, 2011}
+
+\vspace{8pt}
+
+\cvitem{\textbf{Other}}{Student Volunteer Chair, Sigsoft Symposium on Foundations of Software Engineering, 2014}
+
+\section{Thesis Committees}
+\cvitem{}{Katherine Dearstyne, Ph.D., Notre Dame University, 2025}
+\cvitem{}{Farhshad Kazemi, Ph.D., University of Waterloo, 2024}
+\cvitem{}{Emad Aghayi, Ph.D., George Mason University,  2020}
+\cvitem{}{Motahareh (Sara) Bahrami Zanjani, Ph.D., Wichita State University, 2017}
+\cvitem{}{Jordan Ell, M.S., University of Victoria, 2014}
+\cvitem{}{Adrian Schr\"{o}ter, Ph.D., University of Victoria, 2012}
+
+\section{Memberships}
+\cvitem{}{Senior Member, Institute of Electrical and Electronics Engineers (IEEE)}
+\cvitem{}{Distinguished Scientist, Association for Computing Machinery (ACM)}
+\cvitem{}{ACM Special Interest Group on Software Engineering (ACM SIGSOFT)}
+
+\section{References}
+
+\cvitem{}{Available upon request}
+
+\begin{comment}
+Premkumar Devanbu
+\begin{list1}
+\item Professor
+\item University of California, Davis
+\item Dept. of Computer Science
+\item Kemper Hall
+\item 1 Shields Avenue
+\item Davis, CA, USA 95616
+\item \texttt{ptdevanbu@ucdavis.edu}
+\end{list1}
+
+Nachiappan Nagappan
+\begin{list1}
+\item Researcher
+\item Microsoft Research
+\item One Microsoft Way
+\item Redmond, WA, USA 98052
+\item \texttt{nachin@microsoft.com}
+\end{list1}
+
+Harald Gall
+\begin{list1}
+\item Professor
+\item University of Z\"urich
+\item Dept. of Computer Science
+\item Binzm\"uhlestrasse 14
+\item CH-8050 Z\"urich, Switzerland
+\item \texttt{gall@ifi.uzh.ch}
+\end{list1}
+
+James Herbsleb
+\begin{list1}
+\item Professor, Institute for Software Research
+\item Director, Software Industry Center
+\item School of Computer Science
+\item 5321 Wean Hall
+\item Carnegie Mellon University
+\item 5000 Forbes Avenue
+\item Pittsburgh, PA 15213
+\item \texttt{jdh@cs.cmu.edu}
+\end{list1}
+
+Audris Mockus
+\begin{list1}
+\item Researcher
+%\item Software Technology Research Department
+\item Avaya Labs Research
+\item Rm 2D-30
+\item 233 Mt. Airy Road
+\item Basking Ridge, NJ 07920
+\item \texttt{audris@research.avayalabs.com}
+\end{list1}
+
+\end{comment}
+\end{document}
