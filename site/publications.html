@@ -77,13 +77,27 @@
         import PublicationModal from './components/PublicationModal.jsx';
         import BibtexModal from './components/BibtexModal.jsx';
         import ChatModal from './components/ChatModal.jsx';
+        import { MessagesSquareIcon } from './components/Icons.jsx';
 
         const { useState, useEffect } = React;
 
         function PublicationsApp() {
+            // Check for tag filter in URL query params
+            const urlParams = new URLSearchParams(window.location.search);
+            const tagFromUrl = urlParams.get('tag');
+            const isFilteredView = !!tagFromUrl;
+
+            // Format tag name for display (capitalize words, replace dashes, special case for AI)
+            const formatTagName = (tag) => {
+                return tag
+                    .split('-')
+                    .map(word => word.toLowerCase() === 'ai' ? 'AI' : word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ');
+            };
+
             const [publications, setPublications] = useState([]);
             const [allTags, setAllTags] = useState([]);
-            const [selectedTags, setSelectedTags] = useState([]);
+            const [selectedTags, setSelectedTags] = useState(tagFromUrl ? [tagFromUrl] : []);
             const [showAwardsOnly, setShowAwardsOnly] = useState(false);
             const [searchQuery, setSearchQuery] = useState('');
             const [selectedPublication, setSelectedPublication] = useState(null);
@@ -242,9 +256,33 @@
 
             return (
                 <div className="container">
-                    <h1>Publications</h1>
+                    <h1>{isFilteredView ? `${formatTagName(tagFromUrl)} Publications` : 'Publications'}</h1>
 
-                    {allTags.length > 0 && (
+                    {/* Chat feature callout */}
+                    <div style={{
+                        backgroundColor: '#eff6ff',
+                        border: '1px solid #bfdbfe',
+                        borderRadius: '8px',
+                        padding: 'var(--spacing-md)',
+                        marginBottom: 'var(--spacing-lg)',
+                        display: 'flex',
+                        gap: 'var(--spacing-md)',
+                        alignItems: 'flex-start'
+                    }}>
+                        <div style={{ flexShrink: 0, color: 'var(--primary-color)' }}>
+                            <MessagesSquareIcon size={24} />
+                        </div>
+                        <div>
+                            <div style={{ fontSize: '1.1em', fontWeight: '600', color: 'var(--primary-color)', marginBottom: '0.25rem' }}>
+                                Try chatting with my papers using AI!
+                            </div>
+                            <div style={{ color: 'var(--text-secondary)', fontSize: '0.95em' }}>
+                                Click "Chat with Paper" to ask questions. If you're not an expert in the area, "Explain this paper to a fifth grader" works better than you'd think!
+                            </div>
+                        </div>
+                    </div>
+
+                    {!isFilteredView && allTags.length > 0 && (
                         <TagFilter
                             allTags={allTags}
                             selectedTags={selectedTags}
@@ -258,7 +296,11 @@
                     )}
 
                     <div className="mb-md" style={{ color: 'var(--text-secondary)' }}>
-                        Showing {filteredPublications.length} of {publications.length} publications
+                        {isFilteredView ? (
+                            <>Showing {filteredPublications.length} publication{filteredPublications.length !== 1 ? 's' : ''} tagged with "{tagFromUrl}"</>
+                        ) : (
+                            <>Showing {filteredPublications.length} of {publications.length} publications</>
+                        )}
                     </div>
 
                     {filteredPublications.length === 0 ? (

@@ -30,6 +30,7 @@ export const DownloadIcon = (props) => <Icon name="Download" {...props} />;
 export const FileTextIcon = (props) => <Icon name="FileText" {...props} />;
 export const CodeIcon = (props) => <Icon name="Code" {...props} />;
 export const MessageSquareIcon = (props) => <Icon name="MessageSquare" {...props} />;
+export const MessagesSquareIcon = (props) => <Icon name="MessagesSquare" {...props} />;
 export const SendIcon = (props) => <Icon name="Send" {...props} />;
 export const Trash2Icon = (props) => <Icon name="Trash2" {...props} />;
 export const CopyIcon = (props) => <Icon name="Copy" {...props} />;

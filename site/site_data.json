@@ -4,21 +4,24 @@
   "affiliation": "Microsoft Research",
   "bio": "Dr. Christian Bird is a Senior Principal Researcher at Microsoft Research, where he studies software engineering practices, developer productivity, and the intersection of AI and software development. His work combines empirical software engineering, large-scale data analysis, and human factors to understand how developers work and how tools can better support them.",
   "about": "Christian's research focuses on understanding and improving software development processes through empirical studies of real-world development practices. He has published extensively on topics including code review, branching strategies, testing practices, and more recently, AI-assisted programming. His work bridges academic research and industrial practice, often using data from large-scale software projects to inform both tool design and process improvements.",
-  "current_projects": [
+  "research_areas": [
     {
-      "title": "AI-Assisted Development",
-      "description": "Investigating how developers work with AI coding assistants, examining trust, adoption patterns, and the evolution of programming practices in the age of generative AI."
+      "title": "AI-Assisted Software Development",
+      "tag": "ai-for-software-engineering",
+      "description": "As AI tools become integral to software development, understanding how developers actually use them and what makes them trustworthy is critical. Recent work examines large-scale adoption of tools like GitHub Copilot, revealing how AI shifts developer work toward review and surfaces challenges around trust, control, and explainability. Studies identify the \"productivity pressure paradox\" where organizational expectations for immediate AI gains can block the learning needed to realize those gains and characterize emerging patterns like \"vibe coding\" where developers engage in high-interaction co-creation with AI. The research also explores practical challenges of integrating LLMs into software products and where developers want AI support in their daily work. Earlier work built neural systems for tasks like resolving merge conflicts, suggesting type annotations, and recommending code reviewers."
     },
     {
-      "title": "Developer Productivity & Experience",
-      "description": "Understanding what makes developers productive and satisfied, developing metrics and tools to measure and improve developer experience across large organizations."
+      "title": "Developer Productivity",
+      "tag": "developer-productivity",
+      "description": "Developer productivity depends on far more than individual coding skill—organizational factors, work environments, and management practices play critical roles. Through large-scale surveys and mixed-methods studies at Microsoft and beyond, this research identifies what makes great engineering managers (people skills matter more than peak technical ability), how work environments affect focus and collaboration, and what makes a \"good day\" for developers. It examines how practices like OKRs, agile methodologies, hackathons, and homegrown tools impact team effectiveness. The work reveals that productivity is deeply intertwined with agency, social dynamics, and the ability to balance focused work with collaboration."
     },
     {
-      "title": "Software Engineering at Scale",
-      "description": "Studying practices and challenges in large-scale software development, including code review, testing, continuous integration, and collaborative workflows."
+      "title": "Modern Code Review Practices",
+      "tag": "code-review",
+      "description": "Code review has become a cornerstone of modern software development, yet its practices and impacts are not well understood. This research characterizes how contemporary code review has evolved into a lightweight, tool-intensive practice that delivers value well beyond defect detection—including knowledge sharing, maintainability improvements, and team coordination. The work includes building and deploying reviewer recommendation systems at scale, identifying what makes code review comments useful, and uncovering challenges like reviewers' lack of context. It synthesizes evidence-based best practices for authors, reviewers, and organizations. The findings show that modern code review consumes 10-15% of developer time but produces substantial technical and social benefits when properly supported by tools and processes."
     }
   ],
-  "cv_link": "https://www.cabird.com/pubs/bird_cv.pdf",
+  "cv_link": "cv/cv.pdf",
   "contact": {
     "email": "cbird@microsoft.com",
     "links": [

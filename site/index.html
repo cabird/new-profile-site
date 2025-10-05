@@ -147,13 +147,20 @@
                         <p>{data.about}</p>
                     </section>
 
-                    {/* Current Projects Section */}
+                    {/* Research Areas Section */}
                     <section className="section">
-                        <h2 className="section-title">Current Projects</h2>
-                        {data.current_projects.map((project, idx) => (
+                        <h2 className="section-title">Research Areas</h2>
+                        {data.research_areas.map((area, idx) => (
                             <div key={idx} className="project-card">
-                                <h3 className="project-title">{project.title}</h3>
-                                <p className="project-description">{project.description}</p>
+                                <h3 className="project-title">
+                                    <a href={`/publications.html?tag=${area.tag}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        {area.title}
+                                    </a>
+                                </h3>
+                                <p className="project-description">{area.description}</p>
+                                <a href={`/publications.html?tag=${area.tag}`} className="btn-link">
+                                    View publications →
+                                </a>
                             </div>
                         ))}
                     </section>

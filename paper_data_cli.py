@@ -146,8 +146,16 @@ class WorklistManager:
         count = 0
         for key, entry in collection.items():
             if 'tags' in entry and old_tag in entry['tags']:
-                # Replace old tag with new tag
+                # Replace old tag with new tag and remove duplicates
                 entry['tags'] = [new_tag if t == old_tag else t for t in entry['tags']]
+                # Deduplicate while preserving order
+                seen = set()
+                deduped = []
+                for tag in entry['tags']:
+                    if tag not in seen:
+                        seen.add(tag)
+                        deduped.append(tag)
+                entry['tags'] = deduped
                 count += 1
 
         if count > 0:

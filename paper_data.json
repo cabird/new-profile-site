@@ -3,7 +3,7 @@
     "created": "2025-10-01 09:38:35",
     "total_pdfs": 124,
     "mapped_count": 120,
-    "last_updated": "2025-10-03 23:46:09",
+    "last_updated": "2025-10-05 00:02:33",
     "status_legend": {
       "NOT_INVESTIGATED": "Initial state - not yet examined",
       "INVESTIGATING": "Currently being examined",
@@ -1839,7 +1839,6 @@
       },
       "tags": [
         "ai-for-software-engineering",
-        "ai-assisted-programming",
         "tool-adoption-and-trust"
       ],
       "journal": "Proc. ACM Softw. Eng.",
@@ -1916,6 +1915,7 @@
         }
       },
       "tags": [
+        "developer-productivity",
         "engineering-management",
         "interviews",
         "surveys",
@@ -1955,7 +1955,7 @@
         }
       },
       "tags": [
-        "ai-assisted-programming",
+        "ai-for-software-engineering",
         "tool-adoption-and-trust",
         "surveys",
         "developer-productivity"
@@ -2075,7 +2075,7 @@
       "tags": [
         "tool-adoption-and-trust",
         "interviews",
-        "ai-assisted-programming"
+        "ai-for-software-engineering"
       ],
       "booktitle": "45th IEEE/ACM International Conference on Software Engineering: Software Engineering in Practice, SEIP@ICSE 2023, Melbourne, Australia, May 14-20, 2023",
       "publisher": "IEEE",
@@ -2109,6 +2109,7 @@
         }
       },
       "tags": [
+        "developer-productivity",
         "interviews",
         "case-study",
         "developer-social-networks",
@@ -2149,7 +2150,7 @@
         }
       },
       "tags": [
-        "ai-assisted-programming",
+        "ai-for-software-engineering",
         "surveys",
         "telemetry-analysis",
         "tool-adoption-and-trust"
@@ -2647,6 +2648,7 @@
         }
       },
       "tags": [
+        "developer-productivity",
         "engineering-management",
         "interviews",
         "surveys",
@@ -2878,6 +2880,7 @@
         }
       },
       "tags": [
+        "developer-productivity",
         "code-review",
         "interviews",
         "surveys",
@@ -3673,6 +3676,7 @@
         }
       },
       "tags": [
+        "developer-productivity",
         "tool-adoption-and-trust",
         "surveys",
         "interviews",
@@ -4067,6 +4071,7 @@
         }
       },
       "tags": [
+        "developer-productivity",
         "engineering-management",
         "interviews",
         "surveys",
@@ -4260,6 +4265,7 @@
         }
       },
       "tags": [
+        "developer-productivity",
         "interviews",
         "engineering-management",
         "developer-social-networks",
@@ -4298,6 +4304,7 @@
         }
       },
       "tags": [
+        "developer-productivity",
         "surveys",
         "interviews",
         "engineering-management",
@@ -5952,7 +5959,7 @@
         }
       },
       "tags": [
-        "ai-assisted-programming",
+        "ai-for-software-engineering",
         "tool-adoption-and-trust",
         "interviews",
         "developer-productivity"
@@ -5988,7 +5995,6 @@
       },
       "tags": [
         "ai-for-software-engineering",
-        "ai-assisted-programming",
         "surveys",
         "tool-adoption-and-trust"
       ],
@@ -6024,7 +6030,7 @@
       },
       "tags": [
         "interviews",
-        "ai-assisted-programming",
+        "ai-for-software-engineering",
         "developer-productivity",
         "tool-adoption-and-trust"
       ]
@@ -6056,8 +6062,7 @@
       },
       "tags": [
         "ai-for-software-engineering",
-        "tool-adoption-and-trust",
-        "ai-assisted-programming"
+        "tool-adoption-and-trust"
       ]
     },
     "johnson2026facilitating": {
@@ -6088,7 +6093,7 @@
       },
       "tags": [
         "tool-adoption-and-trust",
-        "ai-assisted-programming",
+        "ai-for-software-engineering",
         "interviews",
         "surveys"
       ]
