@@ -67,6 +67,9 @@
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/PublicationCard.jsx"></script>
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/PublicationModal.jsx"></script>
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/BibtexModal.jsx"></script>
+    <!-- Load hooks before ChatModal that uses them -->
+    <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="hooks/useBodyScrollLock.jsx"></script>
+    <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="hooks/useVirtualKeyboardHeight.jsx"></script>
     <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="components/ChatModal.jsx"></script>
 
     <!-- Main App -->

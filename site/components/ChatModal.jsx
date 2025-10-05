@@ -1,6 +1,11 @@
 import { XIcon, SendIcon, UserIcon, BotIcon, AlertCircleIcon } from './Icons.jsx';
+import { useVirtualKeyboardHeight } from '../hooks/useVirtualKeyboardHeight.jsx';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock.jsx';
 
 const ChatModal = ({ paper, onClose }) => {
+    // Prevent background scrolling and handle iOS keyboard
+    useBodyScrollLock();
+    useVirtualKeyboardHeight();
     const [messages, setMessages] = React.useState([]);
     const [input, setInput] = React.useState('');
     const [loading, setLoading] = React.useState(false);

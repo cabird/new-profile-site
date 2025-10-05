@@ -812,8 +812,10 @@ p {
   .modal-content.chat-modal {
     width: 100vw !important;
     max-width: 100vw !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
+    /* Use dvh (dynamic viewport height) instead of vh for iOS Safari */
+    /* This accounts for the dynamic browser chrome (address bar, etc.) */
+    height: 100dvh !important;
+    max-height: 100dvh !important;
     border-radius: 0 !important;
     margin: 0 !important;
   }
@@ -939,6 +941,8 @@ p {
   max-height: 85vh;
   display: flex;
   flex-direction: column;
+  /* Use CSS variable set by useVirtualKeyboardHeight hook */
+  padding-bottom: var(--keyboard-height, 0);
 }
 
 .chat-header {
@@ -1000,6 +1004,8 @@ p {
   flex-direction: column;
   gap: var(--spacing-md);
   max-height: 60vh;
+  /* Momentum scrolling for better iOS experience */
+  -webkit-overflow-scrolling: touch;
 }
 
 .chat-empty-state {
@@ -1211,6 +1217,8 @@ p {
   padding: var(--spacing-lg);
   border-top: 1px solid var(--border-color);
   background-color: var(--bg-primary);
+  /* Respect iPhone home bar area */
+  padding-bottom: max(var(--spacing-lg), env(safe-area-inset-bottom));
 }
 
 .chat-input {
