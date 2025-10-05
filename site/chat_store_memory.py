@@ -61,12 +61,14 @@ class InMemoryChatStore(ChatStore):
             }
 
     def add_message(self, session_id: str, paper_id: str, role: str, content: str) -> None:
-        """Add message to conversation and increment count."""
+        """Add message to conversation and increment count (only for user messages)."""
         with self.lock:
             conv = self.conversations.get(session_id, {}).get(paper_id)
             if conv:
                 conv['messages'].append({'role': role, 'content': content})
-                conv['message_count'] += 1
+                # Only count user messages toward the limit
+                if role == 'user':
+                    conv['message_count'] += 1
                 conv['last_activity'] = datetime.now()
 
     def delete_conversation(self, session_id: str, paper_id: Optional[str] = None) -> None:

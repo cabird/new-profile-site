@@ -1061,6 +1061,10 @@ p {
   align-items: flex-start;
 }
 
+.chat-message-user {
+  flex-direction: row-reverse;
+}
+
 .chat-message-icon {
   width: 32px;
   height: 32px;

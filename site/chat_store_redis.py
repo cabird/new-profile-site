@@ -145,7 +145,7 @@ class RedisChatStore(ChatStore):
             raise
 
     def add_message(self, session_id: str, paper_id: str, role: str, content: str) -> None:
-        """Add message to conversation and increment count."""
+        """Add message to conversation and increment count (only for user messages)."""
         try:
             key = self._conversation_key(session_id, paper_id)
 
@@ -159,7 +159,9 @@ class RedisChatStore(ChatStore):
 
             # Add message
             conversation['messages'].append({'role': role, 'content': content})
-            conversation['message_count'] += 1
+            # Only count user messages toward the limit
+            if role == 'user':
+                conversation['message_count'] += 1
             conversation['last_activity'] = datetime.now().isoformat()
 
             # Update with refreshed TTL
