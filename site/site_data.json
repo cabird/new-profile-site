@@ -13,7 +13,7 @@
     {
       "title": "Developer Productivity",
       "tag": "developer-productivity",
-      "description": "Developer productivity depends on far more than individual coding skill—organizational factors, work environments, and management practices play critical roles. Through large-scale surveys and mixed-methods studies at Microsoft and beyond, this research identifies what makes great engineering managers (people skills matter more than peak technical ability), how work environments affect focus and collaboration, and what makes a \"good day\" for developers. It examines how practices like OKRs, agile methodologies, hackathons, and homegrown tools impact team effectiveness. The work reveals that productivity is deeply intertwined with agency, social dynamics, and the ability to balance focused work with collaboration."
+      "description": "Developer productivity depends on far more than individual coding skill. This includes organizational factors, work environments, and management practices play critical roles. Through large-scale surveys and mixed-methods studies at Microsoft and beyond, this research identifies what makes great engineering managers (people skills matter more than peak technical ability), how work environments affect focus and collaboration, and what makes a \"good day\" for developers. It examines how practices like OKRs, agile methodologies, hackathons, and homegrown tools impact team effectiveness. The work reveals that productivity is deeply intertwined with agency, social dynamics, and the ability to balance focused work with collaboration."
     },
     {
       "title": "Modern Code Review Practices",
