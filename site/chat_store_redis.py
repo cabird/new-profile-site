@@ -53,16 +53,11 @@ class RedisChatStore(ChatStore):
 
         # Initialize Redis connection
         try:
+            # Simple connection for compatibility with Upstash and other cloud providers
             self.redis = redis.Redis.from_url(
                 self.redis_url,
                 decode_responses=True,
-                socket_connect_timeout=connection_timeout,
-                socket_keepalive=True,
-                socket_keepalive_options={
-                    1: 1,  # TCP_KEEPIDLE
-                    2: 3,  # TCP_KEEPINTVL
-                    3: 5,  # TCP_KEEPCNT
-                }
+                socket_connect_timeout=connection_timeout
             )
             # Test connection
             self.redis.ping()
