@@ -4,7 +4,9 @@
  */
 
 export function useVirtualKeyboardHeight() {
-    const { useEffect } = React;
+    const { useState, useEffect } = React;
+    const [keyboardHeight, setKeyboardHeight] = useState(0);
+
     useEffect(() => {
         // Check if visualViewport is supported (modern browsers)
         if (!window.visualViewport) {
@@ -18,12 +20,14 @@ export function useVirtualKeyboardHeight() {
             // Only treat as keyboard if difference is significant (> 150px)
             // This prevents false positives from orientation changes or browser chrome
             const isKeyboard = viewportHeight - visualViewportHeight > 150;
-            const keyboardHeight = isKeyboard ? viewportHeight - visualViewportHeight : 0;
+            const newKeyboardHeight = isKeyboard ? viewportHeight - visualViewportHeight : 0;
+
+            setKeyboardHeight(newKeyboardHeight);
 
             // Set CSS custom property that can be used in styles
             document.documentElement.style.setProperty(
                 '--keyboard-height',
-                `${keyboardHeight}px`
+                `${newKeyboardHeight}px`
             );
         };
 
@@ -40,4 +44,6 @@ export function useVirtualKeyboardHeight() {
             document.documentElement.style.setProperty('--keyboard-height', '0px');
         };
     }, []);
+
+    return keyboardHeight;
 }

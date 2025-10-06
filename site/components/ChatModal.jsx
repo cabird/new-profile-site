@@ -5,7 +5,7 @@ import { useBodyScrollLock } from '../hooks/useBodyScrollLock.jsx';
 const ChatModal = ({ paper, onClose }) => {
     // Prevent background scrolling and handle iOS keyboard
     useBodyScrollLock();
-    useVirtualKeyboardHeight();
+    const keyboardHeight = useVirtualKeyboardHeight();
     const [messages, setMessages] = React.useState([]);
     const [input, setInput] = React.useState('');
     const [loading, setLoading] = React.useState(false);
@@ -20,6 +20,19 @@ const ChatModal = ({ paper, onClose }) => {
     React.useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages, streamingMessage]);
+
+    // Correct scroll position after keyboard appears to prevent over-scrolling on iOS
+    React.useEffect(() => {
+        if (keyboardHeight > 0) {
+            // After a short delay to allow the layout to reflow, scroll to the bottom.
+            // 'auto' behavior ensures it's an instant correction.
+            const timer = setTimeout(() => {
+                messagesEndRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' });
+            }, 150);
+
+            return () => clearTimeout(timer);
+        }
+    }, [keyboardHeight]);
 
     // Load canned questions on mount
     React.useEffect(() => {
@@ -92,6 +105,17 @@ const ChatModal = ({ paper, onClose }) => {
 
             if (!response.ok) {
                 const errorData = await response.json();
+
+                // Handle conversation expired error
+                if (errorData.type === 'conversation_expired') {
+                    setMessages([]);
+                    setStreamingMessage('');
+                    setRemainingMessages(null);
+                    setMessageCount(0);
+                    setError(errorData.error);
+                    return; // Exit early, don't try to process stream
+                }
+
                 throw new Error(errorData.error || 'Failed to send message');
             }
 
@@ -126,7 +150,18 @@ const ChatModal = ({ paper, onClose }) => {
                             setRemainingMessages(data.remaining_messages);
                             setMessageCount(data.message_count);
                         } else if (data.type === 'error') {
-                            throw new Error(data.message);
+                            // Handle conversation expired separately
+                            if (data.error_type === 'conversation_expired') {
+                                // Clear chat state and show friendly message
+                                setMessages([]);
+                                setStreamingMessage('');
+                                setRemainingMessages(null);
+                                setMessageCount(0);
+                                setError(data.message);
+                                break; // Exit the stream processing loop
+                            } else {
+                                throw new Error(data.message);
+                            }
                         }
                     }
                 }

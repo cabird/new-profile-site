@@ -13,7 +13,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 
 # Import chat storage implementations
-from chat_store_base import ChatStore
+from chat_store_base import ChatStore, ConversationNotFoundError
 from chat_store_memory import InMemoryChatStore
 from chat_store_redis import RedisChatStore
 
@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 MAX_MESSAGE_TOKENS = 1000
 MAX_MESSAGES_PER_CONVERSATION = 10
 MAX_MESSAGES_PER_HOUR = 20
-INACTIVITY_TIMEOUT_MINUTES = 10
+INACTIVITY_TIMEOUT_MINUTES = 60
 CLEANUP_INTERVAL_MINUTES = 5
 
 # System prompt template
@@ -475,7 +475,14 @@ def chat_with_paper(paper_id):
         }), 408
 
     # Add user message
-    chat_store.add_message(session_id, paper_id, 'user', user_message)
+    try:
+        chat_store.add_message(session_id, paper_id, 'user', user_message)
+    except ConversationNotFoundError:
+        logger.warning(f"Conversation expired for {session_id}/{paper_id}")
+        return jsonify({
+            'error': 'Your chat session expired. Please start a new conversation.',
+            'type': 'conversation_expired'
+        }), 410
 
     # Log user message to database
     log_chat_message(session_id, paper_id, 'user', user_message, token_count, client_ip)
@@ -506,7 +513,12 @@ def chat_with_paper(paper_id):
                     yield f"data: {json.dumps({'type': 'chat_chunk', 'content': content})}\n\n"
 
             # Add assistant response to conversation
-            chat_store.add_message(session_id, paper_id, 'assistant', full_response)
+            try:
+                chat_store.add_message(session_id, paper_id, 'assistant', full_response)
+            except ConversationNotFoundError:
+                logger.warning(f"Conversation expired during response for {session_id}/{paper_id}")
+                yield f"data: {json.dumps({'type': 'error', 'message': 'Your chat session expired. Please start a new conversation.', 'error_type': 'conversation_expired'})}\n\n"
+                return
 
             # Log assistant response to database
             response_token_count = count_tokens(full_response)
@@ -518,6 +530,9 @@ def chat_with_paper(paper_id):
 
             yield f"data: {json.dumps({'type': 'chat_complete', 'remaining_messages': remaining, 'message_count': msg_count})}\n\n"
 
+        except ConversationNotFoundError:
+            logger.warning(f"Conversation expired during stream for {session_id}/{paper_id}")
+            yield f"data: {json.dumps({'type': 'error', 'message': 'Your chat session expired. Please start a new conversation.', 'error_type': 'conversation_expired'})}\n\n"
         except Exception as e:
             logger.error(f"Chat error: {e}")
             yield f"data: {json.dumps({'type': 'error', 'message': 'An error occurred. Please try again.'})}\n\n"

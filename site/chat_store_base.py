@@ -5,6 +5,11 @@ from datetime import datetime
 from typing import Optional, Tuple, List, Dict, Any
 
 
+class ConversationNotFoundError(Exception):
+    """Raised when attempting to add a message to a non-existent conversation."""
+    pass
+
+
 class ChatStore(ABC):
     """Abstract storage interface for chat conversations and rate limiting.
 

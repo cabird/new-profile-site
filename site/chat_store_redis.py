@@ -8,7 +8,7 @@ import time
 from datetime import datetime, timedelta
 from typing import Optional, Tuple, List, Dict, Any
 
-from chat_store_base import ChatStore
+from chat_store_base import ChatStore, ConversationNotFoundError
 
 logger = logging.getLogger(__name__)
 
@@ -165,7 +165,7 @@ class RedisChatStore(ChatStore):
 
             if not data:
                 logger.warning(f"Attempted to add message to non-existent conversation: {session_id}/{paper_id}")
-                return
+                raise ConversationNotFoundError(f"Conversation not found for {session_id}/{paper_id}")
 
             conversation = json.loads(data)
 
@@ -186,6 +186,7 @@ class RedisChatStore(ChatStore):
             set_elapsed_ms = (time.time() - set_start) * 1000
 
             # Refresh sessions set TTL
+            sessions_key = self._sessions_key(session_id)
             self.redis.expire(sessions_key, self.inactivity_timeout_seconds)
 
             total_elapsed_ms = (time.time() - start_time) * 1000

@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from typing import Optional, Tuple, List, Dict, Any
 import logging
 
-from chat_store_base import ChatStore
+from chat_store_base import ChatStore, ConversationNotFoundError
 
 logger = logging.getLogger(__name__)
 
@@ -64,12 +64,15 @@ class InMemoryChatStore(ChatStore):
         """Add message to conversation and increment count (only for user messages)."""
         with self.lock:
             conv = self.conversations.get(session_id, {}).get(paper_id)
-            if conv:
-                conv['messages'].append({'role': role, 'content': content})
-                # Only count user messages toward the limit
-                if role == 'user':
-                    conv['message_count'] += 1
-                conv['last_activity'] = datetime.now()
+            if not conv:
+                logger.warning(f"Attempted to add message to non-existent conversation: {session_id}/{paper_id}")
+                raise ConversationNotFoundError(f"Conversation not found for {session_id}/{paper_id}")
+
+            conv['messages'].append({'role': role, 'content': content})
+            # Only count user messages toward the limit
+            if role == 'user':
+                conv['message_count'] += 1
+            conv['last_activity'] = datetime.now()
 
     def delete_conversation(self, session_id: str, paper_id: Optional[str] = None) -> None:
         """Delete conversation(s)."""
