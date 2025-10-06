@@ -4,6 +4,7 @@ import redis
 import json
 import os
 import logging
+import time
 from datetime import datetime, timedelta
 from typing import Optional, Tuple, List, Dict, Any
 
@@ -82,11 +83,18 @@ class RedisChatStore(ChatStore):
         """Get conversation dict or None."""
         try:
             key = self._conversation_key(session_id, paper_id)
+
+            start_time = time.time()
             data = self.redis.get(key)
+            elapsed_ms = (time.time() - start_time) * 1000
+            logger.info(f"Redis GET conversation took {elapsed_ms:.2f}ms for {session_id}/{paper_id}")
 
             if data:
                 # Refresh TTL on access
+                start_time = time.time()
                 self.redis.expire(key, self.inactivity_timeout_seconds)
+                elapsed_ms = (time.time() - start_time) * 1000
+                logger.info(f"Redis EXPIRE took {elapsed_ms:.2f}ms for {session_id}/{paper_id}")
                 return json.loads(data)
 
             return None
@@ -99,6 +107,8 @@ class RedisChatStore(ChatStore):
                          messages: List[Dict[str, str]], message_count: int = 0) -> None:
         """Initialize new conversation. Clears other conversations for session."""
         try:
+            start_time = time.time()
+
             pipe = self.redis.pipeline()
 
             # Get list of existing conversations for this session
@@ -135,6 +145,9 @@ class RedisChatStore(ChatStore):
 
             pipe.execute()
 
+            elapsed_ms = (time.time() - start_time) * 1000
+            logger.info(f"Redis init_conversation took {elapsed_ms:.2f}ms for {session_id}/{paper_id}")
+
         except redis.RedisError as e:
             logger.error(f"Error initializing conversation: {e}")
             raise
@@ -142,10 +155,14 @@ class RedisChatStore(ChatStore):
     def add_message(self, session_id: str, paper_id: str, role: str, content: str) -> None:
         """Add message to conversation and increment count (only for user messages)."""
         try:
+            start_time = time.time()
             key = self._conversation_key(session_id, paper_id)
 
             # Get current conversation
+            get_start = time.time()
             data = self.redis.get(key)
+            get_elapsed_ms = (time.time() - get_start) * 1000
+
             if not data:
                 logger.warning(f"Attempted to add message to non-existent conversation: {session_id}/{paper_id}")
                 return
@@ -160,15 +177,19 @@ class RedisChatStore(ChatStore):
             conversation['last_activity'] = datetime.now().isoformat()
 
             # Update with refreshed TTL
+            set_start = time.time()
             self.redis.setex(
                 key,
                 self.inactivity_timeout_seconds,
                 json.dumps(conversation)
             )
+            set_elapsed_ms = (time.time() - set_start) * 1000
 
             # Refresh sessions set TTL
-            sessions_key = self._sessions_key(session_id)
             self.redis.expire(sessions_key, self.inactivity_timeout_seconds)
+
+            total_elapsed_ms = (time.time() - start_time) * 1000
+            logger.info(f"Redis add_message took {total_elapsed_ms:.2f}ms (GET: {get_elapsed_ms:.2f}ms, SET: {set_elapsed_ms:.2f}ms) for {session_id}/{paper_id}")
 
         except (redis.RedisError, json.JSONDecodeError) as e:
             logger.error(f"Error adding message: {e}")
