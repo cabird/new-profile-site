@@ -170,7 +170,16 @@ CORS(app,
      origins=['https://cabird.github.io'],
      supports_credentials=True,
      allow_headers=['Content-Type', 'X-Session-ID'],
-     expose_headers=['X-Session-ID'])
+     expose_headers=['X-Session-ID'],
+     methods=['GET', 'POST', 'DELETE', 'OPTIONS'])
+
+@app.before_request
+def handle_preflight():
+    """Handle CORS preflight requests before any redirects."""
+    if request.method == 'OPTIONS':
+        # Return early for OPTIONS requests to prevent redirects
+        response = app.make_default_options_response()
+        return response
 
 # Global instances
 paper_chat_client = None
