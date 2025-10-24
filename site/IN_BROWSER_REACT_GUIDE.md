@@ -14,24 +14,10 @@ This guide explains how to build React applications that run entirely in the bro
 Babel Standalone is a browser-ready version of Babel that can transpile JavaScript code on-the-fly. It processes modern JavaScript (ES6+) and JSX syntax into browser-compatible JavaScript.
 
 ### 2. Script Loading Strategy
-When using Babel Standalone, you have several options for loading modules:
 
-#### Option A: Simple Script Tags (No Modules)
-```html
-<script type="text/babel" src="component.jsx"></script>
-<script type="text/babel" src="app.jsx"></script>
-```
-- **Pros**: Simple, works everywhere
-- **Cons**: No module system, everything is global, must manually manage load order
+Use the following pattern to load the javascript components
 
-#### Option B: ES6 Modules with `data-type="module"`
-```html
-<script type="text/babel" data-type="module" src="app.jsx"></script>
-```
-- **Pros**: Can use ES6 import/export
-- **Cons**: Browser loads imports as native modules, bypassing Babel for imported files
-
-#### Option C: UMD Transform (Recommended for Module-like Development)
+### UMD Transform (Recommended for Module-like Development)
 ```html
 <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="component.jsx"></script>
 <script type="text/babel" data-type="module" data-plugins="transform-modules-umd" src="app.jsx"></script>

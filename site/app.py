@@ -1,4 +1,5 @@
 from flask import Flask, send_from_directory, send_file, request, Response, stream_with_context, session, jsonify, redirect
+from flask_cors import CORS
 from flask_apscheduler import APScheduler
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
@@ -164,6 +165,13 @@ def log_chat_message(session_id, paper_id, role, content, token_count=None, ip_a
 app = Flask(__name__, static_folder='.')
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY') or secrets.token_hex(32)
 
+# Configure CORS to allow GitHub Pages site to access the chat API
+CORS(app,
+     origins=['https://cabird.github.io'],
+     supports_credentials=True,
+     allow_headers=['Content-Type', 'X-Session-ID'],
+     expose_headers=['X-Session-ID'])
+
 # Global instances
 paper_chat_client = None
 chat_store = None
@@ -184,6 +192,19 @@ def count_tokens(text, model="gpt-4"):
     except:
         # Fallback: rough estimate
         return len(text) // 4
+
+
+def get_session_id():
+    """Get session ID from request header (cross-origin) or Flask session (same-origin)."""
+    session_id = request.headers.get('X-Session-ID')
+
+    if not session_id:
+        # Fall back to Flask session for same-origin requests
+        if 'id' not in session:
+            session['id'] = os.urandom(16).hex()
+        session_id = session['id']
+
+    return session_id
 
 
 def initialize_paper_data():
@@ -382,11 +403,8 @@ def get_canned_questions():
 def chat_with_paper(paper_id):
     """Chat with a specific paper using Azure OpenAI streaming."""
 
-    # Ensure session is initialized
-    if 'id' not in session:
-        session['id'] = os.urandom(16).hex()
-
-    session_id = session['id']
+    # Get session ID (handles both cross-origin and same-origin requests)
+    session_id = get_session_id()
 
     # Validate services available
     if not paper_chat_client:
@@ -551,10 +569,8 @@ def chat_with_paper(paper_id):
 @app.route('/api/papers/<path:paper_id>/chat', methods=['DELETE'])
 def clear_paper_chat(paper_id):
     """Clear chat for a specific paper."""
-    if 'id' not in session:
-        return jsonify({'message': 'No active session'})
-
-    session_id = session['id']
+    # Get session ID (handles both cross-origin and same-origin requests)
+    session_id = get_session_id()
 
     if chat_store:
         chat_store.delete_conversation(session_id, paper_id)
