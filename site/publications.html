@@ -353,5 +353,14 @@
 
         ReactDOM.createRoot(document.getElementById('root')).render(<PublicationsApp />);
     </script>
+
+    <footer class="site-version">
+        <span id="version-label"></span>
+    </footer>
+    <script>
+        fetch('/api/version').then(r => r.json()).then(d => {
+            document.getElementById('version-label').textContent = 'v' + d.version;
+        }).catch(() => {});
+    </script>
 </body>
 </html>

@@ -1,9 +1,7 @@
-Flask==3.0.0
-Flask-CORS==4.0.0
-gunicorn==21.2.0
+quart>=0.19.0
+quart-cors>=0.7.0
+hypercorn>=0.17.0
 openai>=1.0.0
 python-dotenv
 tiktoken
-Flask-APScheduler
 psycopg2-binary
-redis>=4.0.0

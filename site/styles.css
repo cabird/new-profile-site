@@ -1263,3 +1263,11 @@ p {
   gap: var(--spacing-xs);
 }
 
+.site-version {
+  text-align: center;
+  padding: var(--spacing-sm) 0;
+  color: var(--text-light);
+  font-size: 0.7rem;
+  opacity: 0.5;
+}
+
