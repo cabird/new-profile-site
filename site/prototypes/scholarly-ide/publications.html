@@ -462,7 +462,7 @@
             </div>
           </div>
 
-          <div className="terminal-panel-body" ref={bodyRef}>
+          <div className="terminal-panel-body" ref={bodyRef} onClick={() => { if (activeTab === 'terminal') inputRef.current?.focus(); }}>
             {activeTab === 'problems' && (
               <div className="terminal-problems">
                 {problemsList.length === 0 ? (
