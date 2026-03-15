@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Christian Bird — Scholarly IDE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    /* ─── Sidebar ─── */
+    function Sidebar({ siteData }) {
+      const contact = siteData?.contact;
+      return (
+        <nav className="sidebar">
+          <div className="sidebar-header">
+            <span className="name">{siteData?.name || 'Loading...'}</span>
+            <span className="role">{siteData?.title || ''}</span>
+          </div>
+          <div className="sidebar-nav">
+            <a href="index.html" className="active">&#128193; ./home</a>
+            <a href="publications.html">&#128193; ./publications</a>
+            {siteData?.cv_link && <a href={siteData.cv_link} target="_blank" rel="noopener">&#128193; ./cv</a>}
+          </div>
+          {contact && (
+            <div className="sidebar-contact">
+              <div className="prompt">$ cat contact.txt</div>
+              {contact.email && <a href={`mailto:${contact.email}`}>{contact.email}</a>}
+              {contact.links?.map((l, i) => (
+                <a key={i} href={l.url} target="_blank" rel="noopener">{l.label}</a>
+              ))}
+            </div>
+          )}
+        </nav>
+      );
+    }
+
+    /* ─── Metrics Row ─── */
+    function Metrics({ paperCount, areaCount, yearsActive }) {
+      return (
+        <div className="metrics-row">
+          <div className="metric">
+            <div className="metric-value">{paperCount}</div>
+            <div className="metric-label">publications</div>
+          </div>
+          <div className="metric">
+            <div className="metric-value">{areaCount}</div>
+            <div className="metric-label">research areas</div>
+          </div>
+          <div className="metric">
+            <div className="metric-value">{yearsActive}</div>
+            <div className="metric-label">years active</div>
+          </div>
+        </div>
+      );
+    }
+
+    /* ─── Research Areas ─── */
+    function ResearchAreas({ areas }) {
+      const [openIdx, setOpenIdx] = useState(null);
+      return (
+        <div className="research-list">
+          {areas.map((a, i) => (
+            <div className="research-item" key={i} onClick={() => setOpenIdx(openIdx === i ? null : i)}>
+              <div className="research-item-header">
+                <span className={`chevron ${openIdx === i ? 'open' : ''}`}>&#9654;</span>
+                <span className="folder">&#128194;</span>
+                <span className="title">{a.title}</span>
+                {a.tag && <span className="tag">{a.tag}</span>}
+              </div>
+              <div className={`research-item-desc ${openIdx === i ? 'open' : ''}`}>
+                {a.description}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    /* ─── Featured Publications ─── */
+    function FeaturedPubs({ papers }) {
+      return (
+        <div className="pub-teaser">
+          {papers.map(p => (
+            <div className="pub-teaser-item" key={p.id}>
+              <span className="pub-teaser-year">{p.year}</span>
+              <span className="pub-teaser-title">{p.title}</span>
+              <span className="pub-teaser-venue">{p.venue || ''}</span>
+            </div>
+          ))}
+          <div className="pub-teaser-more">
+            <a href="publications.html">→ view all publications</a>
+          </div>
+        </div>
+      );
+    }
+
+    /* ─── Main App ─── */
+    function App() {
+      const [siteData, setSiteData] = useState(null);
+      const [papers, setPapers] = useState([]);
+      const [error, setError] = useState(null);
+
+      useEffect(() => {
+        fetch('/site_data.json')
+          .then(r => r.json())
+          .then(setSiteData)
+          .catch(e => setError('Failed to load site data'));
+
+        fetch('/api/paper_data.json')
+          .then(r => r.json())
+          .then(data => {
+            const list = Object.entries(data.papers || {}).map(([id, p]) => ({ id, ...p }));
+            list.sort((a, b) => (b.year || 0) - (a.year || 0));
+            setPapers(list);
+          })
+          .catch(e => setError('Failed to load papers'));
+      }, []);
+
+      if (error) return <div className="main"><div className="loading">{error}</div></div>;
+
+      const paperCount = papers.length;
+      const areaCount = siteData?.research_areas?.length || 0;
+      const years = papers.map(p => p.year).filter(Boolean);
+      const yearsActive = years.length > 0 ? (Math.max(...years) - Math.min(...years)) : 0;
+      const featured = papers.slice(0, 6);
+
+      return (
+        <>
+          <Sidebar siteData={siteData} />
+          <main className="main">
+            {!siteData ? (
+              <div className="loading">Loading...</div>
+            ) : (
+              <>
+                <div className="hero-prompt">&gt; whoami</div>
+                <h1 className="hero-name">{siteData.name}</h1>
+                <div className="hero-title">{siteData.title} @ {siteData.affiliation}</div>
+
+                <div className="hero-section">
+                  <div className="hero-text">
+                    <p className="hero-bio">{siteData.about || siteData.bio}</p>
+                  </div>
+                </div>
+
+                <div className="section-header"><span>#</span> telemetry</div>
+                <Metrics paperCount={paperCount} areaCount={areaCount} yearsActive={yearsActive} />
+
+                {siteData.research_areas?.length > 0 && (
+                  <>
+                    <div className="section-header"><span>#</span> research_areas/</div>
+                    <ResearchAreas areas={siteData.research_areas} />
+                  </>
+                )}
+
+                {featured.length > 0 && (
+                  <>
+                    <div className="section-header"><span>#</span> recent_publications/</div>
+                    <FeaturedPubs papers={featured} />
+                  </>
+                )}
+
+                <footer className="page-footer">
+                  &copy; {new Date().getFullYear()} {siteData.name} — Scholarly IDE v1.0
+                </footer>
+              </>
+            )}
+          </main>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

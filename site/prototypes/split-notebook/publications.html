@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications — Dr. Christian Bird</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">C. Bird</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="publications.html" class="active">Publications</a>
+      </div>
+      <span class="nav-lens" id="navLens">Researcher + Leader</span>
+    </div>
+  </nav>
+
+  <!-- Search strip -->
+  <div class="search-strip">
+    <div class="search-strip-inner">
+      <label>Find in Archive</label>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search titles, authors, venues..." />
+      <span class="search-count" id="searchCount"></span>
+      <button class="filter-toggle-mobile" id="filterToggle">Filters</button>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div id="pubRoot"></div>
+
+  <!-- Chat overlay -->
+  <div id="chatRoot"></div>
+
+  <!-- React 18 + Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+    /* ==============================================================
+       DATA HOOKS
+       ============================================================== */
+    function usePapers() {
+      const [papers, setPapers] = useState([]);
+      useEffect(() => {
+        fetch('/api/paper_data.json')
+          .then(r => r.json())
+          .then(d => {
+            const arr = Object.entries(d.papers || {}).map(([id, p]) => {
+              let tags = [];
+              if (p.tags) {
+                try { tags = typeof p.tags === 'string' ? JSON.parse(p.tags) : p.tags; } catch { tags = []; }
+              }
+              let tldr = '';
+              if (p.extracted_paper_info) {
+                try {
+                  const info = typeof p.extracted_paper_info === 'string' ? JSON.parse(p.extracted_paper_info) : p.extracted_paper_info;
+                  tldr = info.tldr || '';
+                } catch {}
+              }
+              return { id, ...p, parsedTags: tags, tldr };
+            });
+            arr.sort((a, b) => (b.year || 0) - (a.year || 0));
+            setPapers(arr);
+          })
+          .catch(err => console.error('paper_data fetch error', err));
+      }, []);
+      return papers;
+    }
+
+    function useCannedQuestions() {
+      const [qs, setQs] = useState([]);
+      useEffect(() => {
+        fetch('/api/canned_questions')
+          .then(r => r.json())
+          .then(d => setQs(d.questions || []))
+          .catch(() => {});
+      }, []);
+      return qs;
+    }
+
+    /* ==============================================================
+       FILTER HELPERS
+       ============================================================== */
+    function buildFilterIndex(papers) {
+      const years = {};
+      const tags = {};
+      const venues = {};
+      papers.forEach(p => {
+        const y = p.year || 'Unknown';
+        years[y] = (years[y] || 0) + 1;
+        (p.parsedTags || []).forEach(t => { tags[t] = (tags[t] || 0) + 1; });
+        const v = p.venue || p.journal || '';
+        if (v) venues[v] = (venues[v] || 0) + 1;
+      });
+      return {
+        years: Object.entries(years).sort((a, b) => b[0] - a[0]),
+        tags: Object.entries(tags).sort((a, b) => b[1] - a[1]),
+        venues: Object.entries(venues).sort((a, b) => b[1] - a[1]).slice(0, 20)
+      };
+    }
+
+    /* ==============================================================
+       CHAT DRAWER
+       ============================================================== */
+    function ChatDrawer({ paper, onClose, cannedQuestions }) {
+      const [messages, setMessages] = useState([]);
+      const [input, setInput] = useState('');
+      const [streaming, setStreaming] = useState(false);
+      const [lens, setLens] = useState('researcher'); // 'researcher' | 'leader'
+      const [status, setStatus] = useState('');
+      const msgsEnd = useRef(null);
+      const abortRef = useRef(null);
+
+      useEffect(() => {
+        setMessages([]);
+        setStatus('');
+      }, [paper?.id]);
+
+      useEffect(() => {
+        msgsEnd.current?.scrollIntoView({ behavior: 'smooth' });
+      }, [messages]);
+
+      const sendMessage = useCallback(async (text) => {
+        if (!text.trim() || streaming || !paper) return;
+        const userMsg = text.trim();
+        setInput('');
+        setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
+        setStreaming(true);
+
+        // Add assistant placeholder
+        setMessages(prev => [...prev, { role: 'assistant', content: '', streaming: true }]);
+
+        try {
+          const abort = new AbortController();
+          abortRef.current = abort;
+          const resp = await fetch(`/api/papers/${paper.id}/chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              message: userMsg,
+              lens: lens
+            }),
+            signal: abort.signal
+          });
+
+          const reader = resp.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+
+            const lines = buffer.split('\n');
+            buffer = lines.pop(); // keep incomplete line in buffer
+
+            for (const line of lines) {
+              const trimmed = line.trim();
+              if (!trimmed || !trimmed.startsWith('data: ')) continue;
+              const jsonStr = trimmed.slice(6);
+              if (jsonStr === '[DONE]') continue;
+              try {
+                const evt = JSON.parse(jsonStr);
+                if (evt.type === 'chat_chunk') {
+                  setMessages(prev => {
+                    const copy = [...prev];
+                    const last = copy[copy.length - 1];
+                    if (last && last.role === 'assistant') {
+                      copy[copy.length - 1] = { ...last, content: last.content + (evt.content || '') };
+                    }
+                    return copy;
+                  });
+                } else if (evt.type === 'chat_complete') {
+                  setMessages(prev => {
+                    const copy = [...prev];
+                    const last = copy[copy.length - 1];
+                    if (last) copy[copy.length - 1] = { ...last, streaming: false };
+                    return copy;
+                  });
+                  if (evt.remaining_messages != null) {
+                    setStatus(`${evt.remaining_messages} messages remaining`);
+                  }
+                } else if (evt.type === 'error') {
+                  setMessages(prev => {
+                    const copy = [...prev];
+                    // replace streaming assistant msg with error
+                    if (copy[copy.length - 1]?.role === 'assistant' && copy[copy.length - 1]?.streaming) {
+                      copy[copy.length - 1] = { role: 'error', content: evt.message || 'An error occurred.' };
+                    } else {
+                      copy.push({ role: 'error', content: evt.message || 'An error occurred.' });
+                    }
+                    return copy;
+                  });
+                }
+              } catch {}
+            }
+          }
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            setMessages(prev => {
+              const copy = [...prev];
+              if (copy[copy.length - 1]?.streaming) {
+                copy[copy.length - 1] = { role: 'error', content: 'Connection lost. Please try again.' };
+              }
+              return copy;
+            });
+          }
+        }
+        setStreaming(false);
+        abortRef.current = null;
+      }, [paper, streaming, lens]);
+
+      const clearChat = useCallback(async () => {
+        if (!paper) return;
+        if (abortRef.current) abortRef.current.abort();
+        try {
+          await fetch(`/api/papers/${paper.id}/chat`, { method: 'DELETE' });
+        } catch {}
+        setMessages([]);
+        setStreaming(false);
+        setStatus('');
+      }, [paper]);
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage(input);
+        }
+      };
+
+      if (!paper) return null;
+
+      const placeholderText = lens === 'researcher'
+        ? 'Ask about study design, validity, findings...'
+        : 'Ask about implications, adoption, risks...';
+
+      return (
+        <div className={`chat-overlay ${paper ? 'open' : ''}`}>
+          <div className="chat-backdrop" onClick={onClose} />
+          <div className="chat-drawer">
+            <div className="chat-header" style={{position:'relative'}}>
+              <div className="chat-header-title">{paper.title}</div>
+              <div className="chat-lens-toggle">
+                <button
+                  className={`chat-lens-btn ${lens === 'researcher' ? 'active-researcher' : ''}`}
+                  onClick={() => setLens('researcher')}
+                >Researcher</button>
+                <span style={{fontFamily:'var(--font-mono)',fontSize:'.7rem',color:'var(--muted)'}}>&#8596;</span>
+                <button
+                  className={`chat-lens-btn ${lens === 'leader' ? 'active-leader' : ''}`}
+                  onClick={() => setLens('leader')}
+                >Eng. Leader</button>
+              </div>
+              <button className="chat-close" onClick={onClose}>&times;</button>
+            </div>
+
+            {/* Canned questions */}
+            {messages.length === 0 && cannedQuestions.length > 0 && (
+              <div className="chat-canned">
+                {cannedQuestions.slice(0, 5).map((q, i) => (
+                  <button className="canned-slip" key={i} onClick={() => sendMessage(q)}>{q}</button>
+                ))}
+              </div>
+            )}
+
+            <div className="chat-messages">
+              {messages.map((m, i) => (
+                <div
+                  key={i}
+                  className={`chat-msg ${m.role}${m.streaming ? ' streaming' : ''}`}
+                  style={{whiteSpace: 'pre-wrap'}}
+                >
+                  {m.content}
+                </div>
+              ))}
+              <div ref={msgsEnd} />
+            </div>
+
+            {status && <div className="chat-status">{status}</div>}
+
+            {messages.length > 0 && (
+              <div className="chat-actions">
+                <button className="chat-clear" onClick={clearChat}>Clear conversation</button>
+              </div>
+            )}
+
+            <div className="chat-input-area">
+              <textarea
+                className="chat-input"
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder={placeholderText}
+                rows={1}
+                disabled={streaming}
+              />
+              <button
+                className="chat-send"
+                onClick={() => sendMessage(input)}
+                disabled={streaming || !input.trim()}
+              >Send</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    /* ==============================================================
+       FILTER SIDEBAR
+       ============================================================== */
+    function FilterSidebar({ index, activeFilter, onFilter, mobileOpen }) {
+      return (
+        <div className={`filter-sidebar ${mobileOpen ? 'open' : ''}`}>
+          {/* All */}
+          <div className="filter-group">
+            <div className="filter-tabs">
+              <button
+                className={`filter-tab ${!activeFilter ? 'active' : ''}`}
+                onClick={() => onFilter(null)}
+              >All papers</button>
+            </div>
+          </div>
+
+          {/* Years */}
+          <div className="filter-group">
+            <div className="filter-group-title">Year</div>
+            <div className="filter-tabs">
+              {index.years.map(([yr, ct]) => (
+                <button
+                  key={yr}
+                  className={`filter-tab ${activeFilter?.type === 'year' && activeFilter.value === yr ? 'active' : ''}`}
+                  onClick={() => onFilter({ type: 'year', value: yr })}
+                >
+                  {yr} <span className="count">{ct}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Tags */}
+          <div className="filter-group">
+            <div className="filter-group-title">Topics</div>
+            <div className="filter-tabs">
+              {index.tags.slice(0, 15).map(([tag, ct]) => (
+                <button
+                  key={tag}
+                  className={`filter-tab ${activeFilter?.type === 'tag' && activeFilter.value === tag ? 'active' : ''}`}
+                  onClick={() => onFilter({ type: 'tag', value: tag })}
+                >
+                  {tag} <span className="count">{ct}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Venues */}
+          {index.venues.length > 0 && (
+            <div className="filter-group">
+              <div className="filter-group-title">Venue</div>
+              <div className="filter-tabs">
+                {index.venues.map(([v, ct]) => (
+                  <button
+                    key={v}
+                    className={`filter-tab ${activeFilter?.type === 'venue' && activeFilter.value === v ? 'active' : ''}`}
+                    onClick={() => onFilter({ type: 'venue', value: v })}
+                  >
+                    {v} <span className="count">{ct}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    /* ==============================================================
+       PAPER RECORD
+       ============================================================== */
+    function PaperRecord({ paper, expanded, onToggle, onChat }) {
+      let authors = paper.authors;
+      if (Array.isArray(authors)) authors = authors.join(', ');
+
+      return (
+        <div className={`paper-record ${expanded ? 'expanded' : ''}`}>
+          <div className="paper-record-top" onClick={onToggle}>
+            <span className="paper-record-title">{paper.title}</span>
+            <span className="paper-record-year">{paper.year}</span>
+          </div>
+          <div className="paper-record-authors" onClick={onToggle}>{authors}</div>
+          {(paper.venue || paper.journal) && (
+            <div className="paper-record-venue" onClick={onToggle}>{paper.venue || paper.journal}</div>
+          )}
+          <div className="paper-detail">
+            {paper.tldr && <div className="paper-abstract">{paper.tldr}</div>}
+            <div className="paper-links">
+              {paper.mapped_pdf && (
+                <a className="paper-link" href={paper.mapped_pdf} target="_blank" rel="noopener">PDF</a>
+              )}
+              {paper.doi && (
+                <a className="paper-link" href={paper.doi.startsWith('http') ? paper.doi : `https://doi.org/${paper.doi}`} target="_blank" rel="noopener">DOI</a>
+              )}
+              {paper.url && (
+                <a className="paper-link" href={paper.url} target="_blank" rel="noopener">Link</a>
+              )}
+              {paper.chat_available && (
+                <button className="paper-link chat-btn" onClick={(e) => { e.stopPropagation(); onChat(paper); }}>
+                  Chat with Paper
+                </button>
+              )}
+            </div>
+            {paper.parsedTags && paper.parsedTags.length > 0 && (
+              <div className="paper-tags">
+                {paper.parsedTags.map((t, i) => (
+                  <span className="paper-tag" key={i}>{t}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    /* ==============================================================
+       PUBLICATIONS APP
+       ============================================================== */
+    function PubApp() {
+      const papers = usePapers();
+      const cannedQuestions = useCannedQuestions();
+      const [search, setSearch] = useState('');
+      const [activeFilter, setActiveFilter] = useState(null);
+      const [expandedId, setExpandedId] = useState(null);
+      const [chatPaper, setChatPaper] = useState(null);
+      const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+
+      const filterIndex = useMemo(() => buildFilterIndex(papers), [papers]);
+
+      // Sync search input from DOM (it lives outside React)
+      useEffect(() => {
+        const el = document.getElementById('searchInput');
+        if (!el) return;
+        const handler = (e) => setSearch(e.target.value);
+        el.addEventListener('input', handler);
+        return () => el.removeEventListener('input', handler);
+      }, []);
+
+      // Mobile filter toggle
+      useEffect(() => {
+        const btn = document.getElementById('filterToggle');
+        if (!btn) return;
+        const handler = () => setMobileFilterOpen(prev => !prev);
+        btn.addEventListener('click', handler);
+        return () => btn.removeEventListener('click', handler);
+      }, []);
+
+      // Filter + search
+      const filtered = useMemo(() => {
+        let result = papers;
+        if (activeFilter) {
+          if (activeFilter.type === 'year') {
+            result = result.filter(p => String(p.year) === String(activeFilter.value));
+          } else if (activeFilter.type === 'tag') {
+            result = result.filter(p => (p.parsedTags || []).includes(activeFilter.value));
+          } else if (activeFilter.type === 'venue') {
+            result = result.filter(p => (p.venue || p.journal || '') === activeFilter.value);
+          }
+        }
+        if (search.trim()) {
+          const q = search.toLowerCase();
+          result = result.filter(p => {
+            const authors = Array.isArray(p.authors) ? p.authors.join(' ') : (p.authors || '');
+            return (p.title || '').toLowerCase().includes(q)
+              || authors.toLowerCase().includes(q)
+              || (p.venue || '').toLowerCase().includes(q)
+              || (p.journal || '').toLowerCase().includes(q)
+              || (p.parsedTags || []).some(t => t.toLowerCase().includes(q));
+          });
+        }
+        return result;
+      }, [papers, activeFilter, search]);
+
+      // Update count
+      useEffect(() => {
+        const el = document.getElementById('searchCount');
+        if (el) el.textContent = `${filtered.length} of ${papers.length}`;
+      }, [filtered.length, papers.length]);
+
+      const handleFilter = (f) => {
+        setActiveFilter(f);
+        setMobileFilterOpen(false);
+      };
+
+      return (
+        <>
+          <div className="pub-layout">
+            <FilterSidebar
+              index={filterIndex}
+              activeFilter={activeFilter}
+              onFilter={handleFilter}
+              mobileOpen={mobileFilterOpen}
+            />
+            <div className="paper-list">
+              {filtered.map(p => (
+                <PaperRecord
+                  key={p.id}
+                  paper={p}
+                  expanded={expandedId === p.id}
+                  onToggle={() => setExpandedId(prev => prev === p.id ? null : p.id)}
+                  onChat={(paper) => setChatPaper(paper)}
+                />
+              ))}
+              {filtered.length === 0 && papers.length > 0 && (
+                <div style={{padding:'2rem 0',fontFamily:'var(--font-mono)',fontSize:'.8rem',color:'var(--muted)'}}>
+                  No papers match your search.
+                </div>
+              )}
+              {papers.length === 0 && (
+                <div style={{padding:'2rem 0',fontFamily:'var(--font-mono)',fontSize:'.8rem',color:'var(--muted)'}}>
+                  Loading publications...
+                </div>
+              )}
+            </div>
+          </div>
+
+          <ChatDrawer
+            paper={chatPaper}
+            onClose={() => setChatPaper(null)}
+            cannedQuestions={cannedQuestions}
+          />
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('pubRoot')).render(<PubApp />);
+  </script>
+
+</body>
+</html>

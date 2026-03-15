@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Christian Bird — Split Notebook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">C. Bird</a>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="publications.html">Publications</a>
+      </div>
+      <span class="nav-lens" id="navLens">Researcher + Leader</span>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <div class="home-grid">
+
+      <!-- MAIN COLUMN -->
+      <div class="main-col" id="mainCol"></div>
+
+      <!-- MARGIN COLUMN -->
+      <div class="margin-col">
+        <div class="margin-col-inner" id="marginCol"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- React 18 + Babel standalone -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    /* ---- Data fetching ---- */
+    function useSiteData() {
+      const [data, setData] = useState(null);
+      useEffect(() => {
+        fetch('/site_data.json')
+          .then(r => r.json())
+          .then(setData)
+          .catch(err => console.error('site_data fetch error', err));
+      }, []);
+      return data;
+    }
+
+    function usePapers() {
+      const [papers, setPapers] = useState([]);
+      useEffect(() => {
+        fetch('/api/paper_data.json')
+          .then(r => r.json())
+          .then(d => {
+            const arr = Object.entries(d.papers || {}).map(([id, p]) => ({ id, ...p }));
+            arr.sort((a, b) => (b.year || 0) - (a.year || 0));
+            setPapers(arr);
+          })
+          .catch(err => console.error('paper_data fetch error', err));
+      }, []);
+      return papers;
+    }
+
+    /* ---- Research Questions (derived from about text) ---- */
+    const DEFAULT_QUESTIONS = [
+      "How do AI-powered developer tools change the way software teams collaborate and produce code?",
+      "What engineering practices and organizational structures best support the reliable deployment of large-scale software systems?",
+      "How can empirical methods from software engineering research be effectively translated into industry practice?"
+    ];
+
+    /* ---- Main Column ---- */
+    function MainColumn({ site, papers }) {
+      if (!site) return <div style={{padding:'2rem',color:'var(--muted)',fontFamily:'var(--font-mono)',fontSize:'.8rem'}}>Loading...</div>;
+
+      const researchAreas = site.research_areas || [];
+      const selectedPapers = papers.slice(0, 6);
+
+      return (
+        <>
+          {/* Hero */}
+          <h1 className="hero-name">{site.name}</h1>
+          <div className="hero-role">{site.title} &middot; {site.affiliation}</div>
+          <p className="hero-bio">{site.bio}</p>
+
+          {/* Current Questions */}
+          <h2 className="section-title">Current Questions</h2>
+          <div className="questions-list">
+            {DEFAULT_QUESTIONS.map((q, i) => (
+              <div className="question-item" key={i}>
+                <span className="question-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="question-text">{q}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Research Areas */}
+          <h2 className="section-title">Research Areas</h2>
+          <div className="research-areas">
+            {researchAreas.map((area, i) => (
+              <div className="research-area" data-tag={area.tag || ''} key={i}>
+                <div className="research-area-title">{area.title}</div>
+                <div className="research-area-desc">{area.description}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Selected Publications */}
+          <h2 className="section-title">Selected Publications</h2>
+          <div className="pub-teaser">
+            {selectedPapers.map(p => {
+              let authors = p.authors;
+              if (typeof authors === 'string') {
+                // keep as-is
+              } else if (Array.isArray(authors)) {
+                authors = authors.join(', ');
+              }
+              return (
+                <div className="pub-teaser-item" key={p.id}>
+                  <span className="pub-teaser-title">{p.title}</span>
+                  <span className="pub-teaser-meta">{p.year} &middot; {p.venue || p.journal || ''}</span>
+                  <div className="pub-teaser-authors">{authors}</div>
+                </div>
+              );
+            })}
+            {papers.length > 6 && (
+              <a href="publications.html" className="pub-teaser-more">View all {papers.length} publications &rarr;</a>
+            )}
+          </div>
+        </>
+      );
+    }
+
+    /* ---- Margin Column ---- */
+    function MarginColumn({ site, papers }) {
+      const [accordionOpen, setAccordionOpen] = useState(false);
+      if (!site) return null;
+      const contact = site.contact || {};
+      const links = contact.links || [];
+
+      return (
+        <>
+          <button
+            className="margin-accordion-toggle"
+            onClick={() => setAccordionOpen(!accordionOpen)}
+          >
+            {accordionOpen ? '− Hide sidebar' : '+ Show sidebar'}
+          </button>
+          <div className={`margin-accordion-content ${accordionOpen ? 'open' : ''}`}>
+            {/* Pinned photo */}
+            <div className="margin-photo-wrap">
+              <div className="margin-photo">
+                <img src="/static/images/christian_bird.jpg" alt="Dr. Christian Bird"
+                     onError={(e) => { e.target.style.display='none'; e.target.parentElement.textContent='[photo]'; }} />
+              </div>
+            </div>
+
+            {/* Contact stamps */}
+            <div className="contact-stamps">
+              {contact.email && (
+                <a className="contact-stamp" href={`mailto:${contact.email}`}>Email</a>
+              )}
+              {links.map((lk, i) => (
+                <a className="contact-stamp" href={lk.url} key={i} target="_blank" rel="noopener">{lk.label}</a>
+              ))}
+              {site.cv_link && (
+                <a className="contact-stamp" href={site.cv_link} target="_blank" rel="noopener">CV</a>
+              )}
+            </div>
+
+            {/* Quick facts */}
+            <div className="quick-facts">
+              <strong>{papers.length}+</strong> publications<br/>
+              {(site.research_areas || []).slice(0, 4).map((a, i) => (
+                <span key={i}>{a.title}{i < Math.min((site.research_areas || []).length, 4) - 1 ? ' · ' : ''}</span>
+              ))}
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    /* ---- App ---- */
+    function App() {
+      const site = useSiteData();
+      const papers = usePapers();
+      return <MainColumn site={site} papers={papers} />;
+    }
+
+    function Margin() {
+      const site = useSiteData();
+      const papers = usePapers();
+      return <MarginColumn site={site} papers={papers} />;
+    }
+
+    ReactDOM.createRoot(document.getElementById('mainCol')).render(<App />);
+    ReactDOM.createRoot(document.getElementById('marginCol')).render(<Margin />);
+  </script>
+
+</body>
+</html>

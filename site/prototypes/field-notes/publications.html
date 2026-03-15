@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications — Field Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo, useRef, useCallback } = React;
+
+    /* ---- Helpers ---- */
+    function parseTags(raw) {
+      if (!raw) return [];
+      if (Array.isArray(raw)) return raw;
+      try {
+        const parsed = JSON.parse(raw.replace(/'/g, '"'));
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return raw.split(',').map(s => s.trim()).filter(Boolean);
+      }
+    }
+
+    function parseTldr(paper) {
+      if (!paper.extracted_paper_info) return null;
+      try {
+        const info = typeof paper.extracted_paper_info === 'string'
+          ? JSON.parse(paper.extracted_paper_info.replace(/'/g, '"'))
+          : paper.extracted_paper_info;
+        return info.tldr || null;
+      } catch {
+        return null;
+      }
+    }
+
+    function renderMarkdown(text) {
+      if (!text) return '';
+      let html = text
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/`(.+?)`/g, '<code>$1</code>')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+      const paragraphs = html.split(/\n\n+/).filter(Boolean);
+      return paragraphs.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+    }
+
+    /* ---- Navigation ---- */
+    function Nav() {
+      return (
+        <nav className="site-nav">
+          <a href="index.html" className="nav-title">Field Notes</a>
+          <ul className="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="publications.html" className="active">Publications</a></li>
+          </ul>
+        </nav>
+      );
+    }
+
+    /* ---- Chat Panel ---- */
+    function ChatPanel({ paper, onClose }) {
+      const [messages, setMessages] = useState([]);
+      const [input, setInput] = useState('');
+      const [streaming, setStreaming] = useState(false);
+      const [cannedQs, setCannedQs] = useState([]);
+      const [status, setStatus] = useState('');
+      const messagesEndRef = useRef(null);
+      const abortRef = useRef(null);
+
+      useEffect(() => {
+        fetch('/api/canned_questions')
+          .then(r => r.json())
+          .then(d => setCannedQs(d.questions || []))
+          .catch(() => {});
+      }, []);
+
+      useEffect(() => {
+        // Reset when paper changes
+        setMessages([]);
+        setInput('');
+        setStreaming(false);
+        setStatus('');
+      }, [paper?.id]);
+
+      useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, [messages]);
+
+      const sendMessage = useCallback(async (text) => {
+        if (!text.trim() || streaming || !paper) return;
+        const userMsg = text.trim();
+        setInput('');
+        setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
+        setStreaming(true);
+        setStatus('');
+
+        // Add placeholder for assistant response
+        setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
+
+        try {
+          const controller = new AbortController();
+          abortRef.current = controller;
+
+          const response = await fetch(`/api/papers/${paper.id}/chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: userMsg }),
+            signal: controller.signal
+          });
+
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
+            buffer = lines.pop() || '';
+
+            for (const line of lines) {
+              if (!line.startsWith('data: ')) continue;
+              const dataStr = line.slice(6).trim();
+              if (!dataStr) continue;
+
+              try {
+                const evt = JSON.parse(dataStr);
+                if (evt.type === 'chat_chunk') {
+                  setMessages(prev => {
+                    const updated = [...prev];
+                    const last = updated[updated.length - 1];
+                    if (last && last.role === 'assistant') {
+                      updated[updated.length - 1] = {
+                        ...last,
+                        content: last.content + evt.content
+                      };
+                    }
+                    return updated;
+                  });
+                } else if (evt.type === 'chat_complete') {
+                  setStatus(
+                    evt.remaining_messages != null
+                      ? `${evt.remaining_messages} messages remaining`
+                      : ''
+                  );
+                } else if (evt.type === 'error') {
+                  setMessages(prev => {
+                    const updated = [...prev];
+                    const last = updated[updated.length - 1];
+                    if (last && last.role === 'assistant' && !last.content) {
+                      updated[updated.length - 1] = {
+                        ...last,
+                        content: `Error: ${evt.message}`
+                      };
+                    }
+                    return updated;
+                  });
+                }
+              } catch (e) {
+                // skip malformed JSON
+              }
+            }
+          }
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            setMessages(prev => {
+              const updated = [...prev];
+              const last = updated[updated.length - 1];
+              if (last && last.role === 'assistant' && !last.content) {
+                updated[updated.length - 1] = {
+                  ...last,
+                  content: 'Failed to connect. Please try again.'
+                };
+              }
+              return updated;
+            });
+          }
+        } finally {
+          setStreaming(false);
+          abortRef.current = null;
+        }
+      }, [paper, streaming]);
+
+      const clearChat = useCallback(async () => {
+        if (!paper) return;
+        if (abortRef.current) abortRef.current.abort();
+        try {
+          await fetch(`/api/papers/${paper.id}/chat`, { method: 'DELETE' });
+        } catch {}
+        setMessages([]);
+        setStatus('');
+        setStreaming(false);
+      }, [paper]);
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage(input);
+        }
+      };
+
+      if (!paper) return null;
+
+      return (
+        <>
+          <div
+            className={`chat-backdrop ${paper ? 'visible' : ''}`}
+            onClick={onClose}
+          />
+          <div className={`chat-overlay ${paper ? 'open' : ''}`}>
+            <div className="chat-header">
+              <div className="chat-header-top">
+                <div>
+                  <h3>Notes on: {paper.title}</h3>
+                  <div className="chat-subtitle">{paper.venue} {paper.year}</div>
+                </div>
+                <button className="chat-close" onClick={onClose}>&times;</button>
+              </div>
+            </div>
+
+            <div className="chat-messages">
+              {messages.length === 0 && (
+                <div>
+                  <p style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '12px',
+                    color: '#999',
+                    marginBottom: '16px'
+                  }}>
+                    Ask a question about this paper...
+                  </p>
+                  {cannedQs.length > 0 && (
+                    <div className="canned-questions">
+                      {cannedQs.map((q, i) => (
+                        <button
+                          key={i}
+                          className="canned-q"
+                          onClick={() => sendMessage(q)}
+                          disabled={streaming}
+                        >
+                          {q}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {messages.map((msg, i) => (
+                <div key={i} className={`chat-msg ${msg.role}`}>
+                  {msg.role === 'assistant' ? (
+                    <div dangerouslySetInnerHTML={{ __html: renderMarkdown(msg.content) }} />
+                  ) : (
+                    msg.content
+                  )}
+                  {msg.role === 'assistant' && !msg.content && streaming && i === messages.length - 1 && (
+                    <div className="typing-indicator">
+                      <span></span><span></span><span></span>
+                    </div>
+                  )}
+                </div>
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
+
+            <div className="chat-input-area">
+              <div className="chat-input-wrap">
+                <textarea
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Write in the margin..."
+                  rows={1}
+                  disabled={streaming}
+                />
+                <button
+                  className="chat-send-btn"
+                  onClick={() => sendMessage(input)}
+                  disabled={streaming || !input.trim()}
+                >
+                  Send
+                </button>
+              </div>
+              <div className="chat-actions">
+                {status && <span className="chat-status">{status}</span>}
+                {messages.length > 0 && (
+                  <button className="chat-clear-btn" onClick={clearChat}>Clear notes</button>
+                )}
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    /* ---- Publication Entry ---- */
+    function PubEntry({ paper, isExpanded, onToggle, onChat }) {
+      const tldr = useMemo(() => parseTldr(paper), [paper]);
+      const tags = useMemo(() => parseTags(paper.tags), [paper.tags]);
+      const isAward = paper.title && (
+        paper.title.toLowerCase().includes('award') ||
+        paper.title.toLowerCase().includes('distinguished') ||
+        paper.title.toLowerCase().includes('best paper')
+      );
+
+      return (
+        <li className={`pub-entry ${isAward ? 'award' : ''}`} id={`paper-${paper.id}`}>
+          <span className="pub-year">{paper.year}</span>
+          <span className="pub-title" onClick={onToggle}>{paper.title}</span>
+          {paper.type && <span className="pub-type-badge">{paper.type}</span>}
+          <div className="pub-authors">{paper.authors}</div>
+          <div className="pub-venue">
+            {paper.venue || paper.journal}
+          </div>
+
+          {isExpanded && (
+            <div className="pub-detail">
+              {tldr && <p className="pub-abstract">{tldr}</p>}
+              <div className="pub-links">
+                {paper.mapped_pdf && (
+                  <a href={paper.mapped_pdf} target="_blank" rel="noopener">PDF</a>
+                )}
+                {paper.doi && (
+                  <a href={paper.doi.startsWith('http') ? paper.doi : `https://doi.org/${paper.doi}`} target="_blank" rel="noopener">DOI</a>
+                )}
+                {paper.url && (
+                  <a href={paper.url} target="_blank" rel="noopener">Link</a>
+                )}
+                {paper.chat_available && (
+                  <button onClick={(e) => { e.stopPropagation(); onChat(paper); }}>
+                    Chat with Paper
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+        </li>
+      );
+    }
+
+    /* ---- Publications Page ---- */
+    function PublicationsPage() {
+      const [papers, setPapers] = useState([]);
+      const [loading, setLoading] = useState(true);
+      const [search, setSearch] = useState('');
+      const [activeTags, setActiveTags] = useState([]);
+      const [expandedId, setExpandedId] = useState(null);
+      const [chatPaper, setChatPaper] = useState(null);
+      const [allTags, setAllTags] = useState([]);
+
+      useEffect(() => {
+        fetch('/api/paper_data.json')
+          .then(r => r.json())
+          .then(data => {
+            const papersObj = data.papers || {};
+            const arr = Object.entries(papersObj).map(([id, p]) => ({ id, ...p }));
+            arr.sort((a, b) => (b.year || 0) - (a.year || 0));
+            setPapers(arr);
+
+            // Collect all tags
+            const tagSet = new Set();
+            arr.forEach(p => {
+              parseTags(p.tags).forEach(t => tagSet.add(t));
+            });
+            const sorted = [...tagSet].sort();
+            setAllTags(sorted);
+            setLoading(false);
+
+            // Check URL params for initial tag
+            const params = new URLSearchParams(window.location.search);
+            const tagParam = params.get('tag');
+            if (tagParam && sorted.includes(tagParam)) {
+              setActiveTags([tagParam]);
+            }
+
+            // Check hash for scrolling to a paper
+            if (window.location.hash) {
+              setTimeout(() => {
+                const el = document.querySelector(window.location.hash);
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  const paperId = window.location.hash.replace('#paper-', '');
+                  setExpandedId(paperId);
+                }
+              }, 300);
+            }
+          })
+          .catch(err => {
+            console.error('Failed to load papers:', err);
+            setLoading(false);
+          });
+      }, []);
+
+      const toggleTag = useCallback((tag) => {
+        setActiveTags(prev =>
+          prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
+        );
+      }, []);
+
+      const filtered = useMemo(() => {
+        let result = papers;
+
+        if (activeTags.length > 0) {
+          result = result.filter(p => {
+            const pTags = parseTags(p.tags);
+            return activeTags.some(t => pTags.includes(t));
+          });
+        }
+
+        if (search.trim()) {
+          const q = search.toLowerCase();
+          result = result.filter(p =>
+            (p.title || '').toLowerCase().includes(q) ||
+            (p.authors || '').toLowerCase().includes(q) ||
+            (p.venue || '').toLowerCase().includes(q) ||
+            (p.journal || '').toLowerCase().includes(q) ||
+            String(p.year).includes(q)
+          );
+        }
+
+        return result;
+      }, [papers, activeTags, search]);
+
+      // Group by year
+      const grouped = useMemo(() => {
+        const groups = [];
+        let currentYear = null;
+        filtered.forEach(p => {
+          if (p.year !== currentYear) {
+            currentYear = p.year;
+            groups.push({ year: currentYear, papers: [p] });
+          } else {
+            groups[groups.length - 1].papers.push(p);
+          }
+        });
+        return groups;
+      }, [filtered]);
+
+      return (
+        <div className="notebook-page">
+          <Nav />
+          <div className="page-container" style={{ maxWidth: '900px' }}>
+            <h1 style={{ marginBottom: '8px' }}>Publications</h1>
+            <p className="mono" style={{ marginBottom: '24px' }}>
+              A record of research contributions
+            </p>
+
+            {loading ? (
+              <div className="loading-state">Loading publications...</div>
+            ) : (
+              <>
+                <div className="pub-controls">
+                  <div className="search-box">
+                    <input
+                      type="text"
+                      placeholder="Find in notes..."
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                {allTags.length > 0 && (
+                  <div className="tag-filters">
+                    {allTags.map(tag => (
+                      <button
+                        key={tag}
+                        className={`tag-chip ${activeTags.includes(tag) ? 'active' : ''}`}
+                        onClick={() => toggleTag(tag)}
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                <div className="pub-count">
+                  {filtered.length} of {papers.length} publications
+                  {activeTags.length > 0 && ` (filtered by ${activeTags.length} tag${activeTags.length > 1 ? 's' : ''})`}
+                </div>
+
+                <ul className="pub-list">
+                  {grouped.map(group => (
+                    <React.Fragment key={group.year || 'unknown'}>
+                      <div className="year-group-header">{group.year || 'N/A'}</div>
+                      {group.papers.map(paper => (
+                        <PubEntry
+                          key={paper.id}
+                          paper={paper}
+                          isExpanded={expandedId === paper.id}
+                          onToggle={() => setExpandedId(expandedId === paper.id ? null : paper.id)}
+                          onChat={(p) => setChatPaper(p)}
+                        />
+                      ))}
+                    </React.Fragment>
+                  ))}
+                </ul>
+
+                {filtered.length === 0 && (
+                  <p style={{
+                    textAlign: 'center',
+                    padding: '40px 0',
+                    color: '#999',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '13px'
+                  }}>
+                    No matching publications found.
+                  </p>
+                )}
+              </>
+            )}
+          </div>
+
+          <footer className="site-footer">Field Notes</footer>
+
+          <ChatPanel
+            paper={chatPaper}
+            onClose={() => setChatPaper(null)}
+          />
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<PublicationsPage />);
+  </script>
+</body>
+</html>

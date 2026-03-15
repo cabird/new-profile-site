@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field Notes — Dr. Christian Bird</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    function Nav() {
+      return (
+        <nav className="site-nav">
+          <a href="index.html" className="nav-title">Field Notes</a>
+          <ul className="nav-links">
+            <li><a href="index.html" className="active">Home</a></li>
+            <li><a href="publications.html">Publications</a></li>
+          </ul>
+        </nav>
+      );
+    }
+
+    function Polaroid({ name }) {
+      return (
+        <div className="polaroid">
+          <img
+            src="/static/images/profile.jpg"
+            alt={name || 'Profile'}
+            onError={(e) => {
+              e.target.style.background = '#ddd';
+              e.target.alt = name || 'Photo';
+            }}
+          />
+          <div className="polaroid-caption">{name || ''}</div>
+        </div>
+      );
+    }
+
+    function MarginColumn({ data, recentPapers }) {
+      const contact = data.contact || {};
+      const links = contact.links || [];
+
+      return (
+        <aside className="margin-column">
+          <Polaroid name={data.name} />
+
+          <div className="margin-section">
+            <h4>Notes</h4>
+            <ul className="margin-notes-list">
+              {contact.email && (
+                <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
+              )}
+              {links.map((l, i) => (
+                <li key={i}><a href={l.url} target="_blank" rel="noopener">{l.label}</a></li>
+              ))}
+              {data.cv_link && (
+                <li><a href={data.cv_link} target="_blank" rel="noopener">Curriculum Vitae</a></li>
+              )}
+            </ul>
+          </div>
+
+          <div className="margin-section">
+            <h4>Quick Stats</h4>
+            <ul className="quick-stats">
+              <li><span className="stat-num">{recentPapers.total}</span> publications</li>
+              <li><span className="stat-num">{recentPapers.yearSpan}+</span> years of research</li>
+              <li><span className="stat-num">{data.research_areas ? data.research_areas.length : 0}</span> research areas</li>
+            </ul>
+          </div>
+
+          <div className="margin-section">
+            <h4>Paper Trail</h4>
+            {recentPapers.recent.map((p, i) => (
+              <div className="paper-trail-item" key={i}>
+                <a href={`publications.html#paper-${p.id}`} className="pt-title">{p.title}</a>
+                <span className="pt-meta">{p.venue} {p.year}</span>
+              </div>
+            ))}
+          </div>
+        </aside>
+      );
+    }
+
+    const TAB_COLORS = ['#1E3A8A','#9B2C2C','#2D6A4F','#7C3AED','#B45309','#0E7490','#F4D35E','#1E3A8A'];
+
+    function ResearchAreas({ areas }) {
+      if (!areas || areas.length === 0) return null;
+      return (
+        <section className="research-areas">
+          <h2>Research Areas</h2>
+          {areas.map((area, i) => (
+            <div className="research-tab" key={i} style={{'--tab-color': TAB_COLORS[i % TAB_COLORS.length]}}>
+              <h3>{area.title}</h3>
+              <p>{area.description}</p>
+              <a
+                className="view-pubs"
+                href={`publications.html?tag=${encodeURIComponent(area.tag || area.title)}`}
+              >
+                View publications
+              </a>
+            </div>
+          ))}
+        </section>
+      );
+    }
+
+    function HomePage() {
+      const [siteData, setSiteData] = useState(null);
+      const [paperStats, setPaperStats] = useState({ total: 0, yearSpan: 0, recent: [] });
+      const [loading, setLoading] = useState(true);
+
+      useEffect(() => {
+        Promise.all([
+          fetch('/site_data.json').then(r => r.json()),
+          fetch('/api/paper_data.json').then(r => r.json())
+        ]).then(([site, paperData]) => {
+          setSiteData(site);
+
+          const papers = paperData.papers || {};
+          const papersArr = Object.entries(papers).map(([id, p]) => ({ id, ...p }));
+          papersArr.sort((a, b) => (b.year || 0) - (a.year || 0));
+
+          const years = papersArr.map(p => p.year).filter(Boolean);
+          const minYear = years.length ? Math.min(...years) : 2000;
+          const maxYear = years.length ? Math.max(...years) : 2024;
+
+          setPaperStats({
+            total: papersArr.length,
+            yearSpan: maxYear - minYear,
+            recent: papersArr.slice(0, 4)
+          });
+
+          setLoading(false);
+        }).catch(err => {
+          console.error('Failed to load data:', err);
+          setLoading(false);
+        });
+      }, []);
+
+      if (loading) {
+        return (
+          <div className="notebook-page">
+            <Nav />
+            <div className="page-container">
+              <div className="loading-state">Loading field notes...</div>
+            </div>
+          </div>
+        );
+      }
+
+      if (!siteData) {
+        return (
+          <div className="notebook-page">
+            <Nav />
+            <div className="page-container">
+              <p>Unable to load site data.</p>
+            </div>
+          </div>
+        );
+      }
+
+      return (
+        <div className="notebook-page">
+          <Nav />
+          <div className="page-container">
+            <div className="two-col">
+              <main className="main-content">
+                <h1 className="hero-name">{siteData.name}</h1>
+                <div className="hero-role">{siteData.title}</div>
+                <div className="hero-affiliation">{siteData.affiliation}</div>
+                <p className="hero-bio">{siteData.bio || siteData.about}</p>
+                <ResearchAreas areas={siteData.research_areas} />
+              </main>
+              <MarginColumn data={siteData} recentPapers={paperStats} />
+            </div>
+          </div>
+          <footer className="site-footer">Field Notes &mdash; {siteData.name}</footer>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<HomePage />);
+  </script>
+</body>
+</html>
