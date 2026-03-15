@@ -546,7 +546,7 @@
     }
 
     /* ─── Sidebar ─── */
-    function Sidebar({ siteData, activePage }) {
+    function Sidebar({ siteData, activePage, onOpenImage }) {
       const [openSections, setOpenSections] = useState({ editors: true, project: true });
       const [openSubSections, setOpenSubSections] = useState({});
 
@@ -599,8 +599,8 @@
                     <span className="tree-item-label">cv.pdf</span>
                   </a>
                 )}
-                <div className="tree-item" style={{cursor:'pointer'}} onClick={() => setActiveEditorTab('profile')}>
-                  <span className="tree-item-icon file-img"><FileImgIcon /></span>
+                <div className="tree-item" style={{cursor:'pointer'}} onClick={() => { if (onOpenImage) onOpenImage(); }}>
+                  <span className="tree-item-icon"><FileIconSvg color="#a074c4" /></span>
                   <span className="tree-item-label">profile.jpg</span>
                 </div>
 
@@ -839,7 +839,7 @@
 
           <TitleBar name={siteData?.name} onCommandPalette={() => setCommandPaletteOpen(true)} />
           <ActivityBar active={activeActivity} onSelect={handleActivitySelect} />
-          <Sidebar siteData={siteData} activePage="home" />
+          <Sidebar siteData={siteData} activePage="home" onOpenImage={() => setActiveEditorTab('profile')} />
 
           <div className="editor-area">
             {/* Tab Bar */}
