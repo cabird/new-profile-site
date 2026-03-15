@@ -12,6 +12,10 @@ import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
+# Register .jsx MIME type before anything else
+import mimetypes
+mimetypes.add_type('application/javascript', '.jsx')
+
 # Load environment variables
 load_dotenv()
 
