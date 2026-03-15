@@ -33,6 +33,11 @@
     const FileMdIcon = () => <FileIconSvg color="#3794ff" />;
     const FilePdfIcon = () => <FileIconSvg color="#e06c75" />;
     const FileTxtIcon = () => <FileIconSvg color="#858585" />;
+    const FileImgIcon = () => (
+      <svg viewBox="0 0 16 16" fill="#a074c4" width="16" height="16">
+        <path d="M14 1H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V2a1 1 0 00-1-1zm0 13H2V2h12v12zM4 12l2.5-4 1.5 2 2-3L13 12H4z"/>
+      </svg>
+    );
     const FolderIcon = ({ open }) => (
       <svg viewBox="0 0 16 16" fill="#dcb67a" width="16" height="16">
         {open
@@ -97,6 +102,7 @@
       if (ext === '.md') return <FileMdIcon />;
       if (ext === '.pdf') return <FilePdfIcon />;
       if (ext === '.txt') return <FileTxtIcon />;
+      if (ext === '.jpg' || ext === '.jpeg' || ext === '.png') return <FileImgIcon />;
       return <FileIconSvg color="#569cd6" />;
     }
 
@@ -107,6 +113,9 @@
       // Static pages
       files.push({ name: 'home.md', path: 'home.md', ext: '.md', action: () => { window.location.href = 'index.html'; } });
       files.push({ name: 'publications.md', path: 'publications.md', ext: '.md', action: () => { window.location.href = 'publications.html'; } });
+
+      // Profile image
+      files.push({ name: 'profile.jpg', path: 'profile.jpg', ext: '.jpg', action: 'open-image' });
 
       // CV
       if (siteData?.cv_link) {
@@ -165,7 +174,7 @@
     }
 
     /* ─── Command Palette ─── */
-    function CommandPalette({ files, onClose }) {
+    function CommandPalette({ files, onClose, onAction }) {
       const [query, setQuery] = useState('');
       const [selectedIdx, setSelectedIdx] = useState(0);
       const inputRef = useRef(null);
@@ -202,7 +211,8 @@
         } else if (e.key === 'Enter') {
           e.preventDefault();
           if (filtered[selectedIdx]) {
-            filtered[selectedIdx].action();
+            const f = filtered[selectedIdx];
+            if (typeof f.action === 'string') { onAction(f.action); } else { f.action(); }
             onClose();
           }
         } else if (e.key === 'Escape') {
@@ -232,7 +242,7 @@
                 <div
                   key={f.path}
                   className={`command-palette-row ${i === selectedIdx ? 'selected' : ''}`}
-                  onClick={() => { f.action(); onClose(); }}
+                  onClick={() => { if (typeof f.action === 'string') { onAction(f.action); } else { f.action(); } onClose(); }}
                   onMouseEnter={() => setSelectedIdx(i)}
                 >
                   <span className="command-palette-row-icon"><PaletteFileIcon ext={f.ext} /></span>
@@ -589,6 +599,10 @@
                     <span className="tree-item-label">cv.pdf</span>
                   </a>
                 )}
+                <div className="tree-item" style={{cursor:'pointer'}} onClick={() => setActiveEditorTab('profile')}>
+                  <span className="tree-item-icon file-img"><FileImgIcon /></span>
+                  <span className="tree-item-label">profile.jpg</span>
+                </div>
 
                 {/* Contact folder */}
                 <div className="tree-item" onClick={() => toggleSub('contact')} style={{cursor:'pointer'}}>
@@ -739,6 +753,7 @@
       const [terminalOpen, setTerminalOpen] = useState(false);
       const [activeLine, setActiveLine] = useState(1);
       const [clickedLine, setClickedLine] = useState(null);
+      const [activeEditorTab, setActiveEditorTab] = useState('home');
 
       useEffect(() => {
         fetch('/site_data.json')
@@ -829,27 +844,47 @@
           <div className="editor-area">
             {/* Tab Bar */}
             <div className="tabbar">
-              <a href="index.html" className="tab active">
+              <div className={`tab ${activeEditorTab === 'home' ? 'active' : ''}`} onClick={() => setActiveEditorTab('home')}>
                 <span className="tab-icon"><TabFileIcon color="#3794ff" /></span>
                 home.md
                 <span className="tab-close">{'\u00D7'}</span>
-              </a>
+              </div>
               <a href="publications.html" className="tab">
                 <span className="tab-icon"><TabFileIcon color="#3794ff" /></span>
                 publications.md
                 <span className="tab-close">{'\u00D7'}</span>
               </a>
+              {activeEditorTab === 'profile' && (
+                <div className="tab active">
+                  <span className="tab-icon"><FileImgIcon /></span>
+                  profile.jpg
+                  <span className="tab-close" onClick={(e) => { e.stopPropagation(); setActiveEditorTab('home'); }}>{'\u00D7'}</span>
+                </div>
+              )}
             </div>
 
             {/* Breadcrumb */}
             <div className="breadcrumb">
               <a href="#">cbird-site</a>
               <span className="breadcrumb-sep">{'\u203A'}</span>
-              <span>home.md</span>
+              <span>{activeEditorTab === 'profile' ? 'profile.jpg' : 'home.md'}</span>
             </div>
 
+            {/* Image Viewer */}
+            {activeEditorTab === 'profile' && (
+              <div className="image-viewer">
+                <div className="image-viewer-container">
+                  <img src="/images/profile_pic_medium.jpeg" alt="Profile" />
+                </div>
+                <div className="image-viewer-info">
+                  profile.jpg —
+                  <span style={{color: '#858585'}}> Click to zoom</span>
+                </div>
+              </div>
+            )}
+
             {/* Editor content */}
-            <div className="editor-content">
+            {activeEditorTab === 'home' && <div className="editor-content">
               <div className="editor-body" onMouseLeave={() => { if (!clickedLine) setActiveLine(1); }}>
                 {!siteData ? (
                   <div className="loading">Loading...</div>
@@ -941,7 +976,7 @@
                   </>
                 )}
               </div>
-            </div>
+            </div>}
           </div>
 
           {terminalOpen && (
@@ -951,7 +986,9 @@
           <StatusBar paperCount={paperCount} activeLine={currentLine} terminalOpen={terminalOpen} onToggleTerminal={() => setTerminalOpen(prev => !prev)} />
 
           {commandPaletteOpen && (
-            <CommandPalette files={virtualFS} onClose={() => setCommandPaletteOpen(false)} />
+            <CommandPalette files={virtualFS} onClose={() => setCommandPaletteOpen(false)} onAction={(action) => {
+              if (action === 'open-image') setActiveEditorTab('profile');
+            }} />
           )}
         </div>
       );
