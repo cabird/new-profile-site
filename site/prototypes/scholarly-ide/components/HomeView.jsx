@@ -59,7 +59,7 @@ IDE.ResearchAreas = function ResearchAreas({ areas }) {
 };
 
 /* ─── Home View ─── */
-IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, setActiveLine, setClickedLine, onNavigatePublications }) {
+IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, setActiveLine, setClickedLine, onNavigatePublications, onSelectPaper }) {
   const { ContentLine, Metrics, ResearchAreas } = IDE;
   const paperCount = papers.length;
   const areaCount = siteData?.research_areas?.length || 0;
@@ -139,7 +139,7 @@ IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, se
             </ContentLine>
             {featured.map((p, i) => (
               <ContentLine key={p.id} num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
-                <div className="pub-teaser-item" style={{marginLeft: 0, borderLeft: '1px solid var(--border)', paddingLeft: 8}}>
+                <div className="pub-teaser-item" style={{marginLeft: 0, borderLeft: '1px solid var(--border)', paddingLeft: 8, cursor: 'pointer'}} onClick={(e) => { e.stopPropagation(); if (onSelectPaper) onSelectPaper(p.id); }}>
                   <span className="pub-teaser-year">{p.year}</span>
                   <span className="pub-teaser-title">{p.title}</span>
                 </div>

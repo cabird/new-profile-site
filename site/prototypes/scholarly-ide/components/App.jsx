@@ -57,16 +57,24 @@ IDE.App = function App() {
   // Alias for compatibility
   const setActiveTab = openTab;
 
-  // Select paper by id (used from command palette and URL params)
+  // Select paper by id — opens publications tab, expands peek, connects terminal
   const selectPaper = useCallback((paperId) => {
+    openTab('publications');
     setExpandedId(paperId);
+    // Find the paper object and connect terminal
+    const paper = papers.find(p => p.id === paperId);
+    if (paper) {
+      setChatPaper(paper);
+      setTerminalOpen(true);
+      logEvent('chat', `Connected to paper: ${paper.title}`);
+    }
     setTimeout(() => {
       const el = document.querySelector(`[data-paper-id="${paperId}"]`);
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }, 200);
-  }, []);
+  }, [papers, openTab]);
 
   // Load data
   useEffect(() => {
@@ -267,6 +275,7 @@ IDE.App = function App() {
             setActiveLine={setHomeActiveLine}
             setClickedLine={setHomeClickedLine}
             onNavigatePublications={() => openTab('publications')}
+            onSelectPaper={selectPaper}
           />
         )}
 

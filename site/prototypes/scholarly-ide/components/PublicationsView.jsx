@@ -89,7 +89,7 @@ IDE.PublicationsView = function PublicationsView({ papers, expandedId, setExpand
             paper={p}
             lineNum={idx + 1}
             isExpanded={expandedId === p.id}
-            onToggle={() => { const opening = expandedId !== p.id; setExpandedId(opening ? p.id : null); if (opening) logEvent('paper', `Peek: ${p.title}`); }}
+            onToggle={() => { const opening = expandedId !== p.id; setExpandedId(opening ? p.id : null); if (opening) { logEvent('paper', `Peek: ${p.title}`); onChatWithPaper(p); } }}
             onChat={onChatWithPaper}
             isHovered={hoveredLine === idx + 1}
             onHover={setHoveredLine}
