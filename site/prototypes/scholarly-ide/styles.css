@@ -1053,21 +1053,22 @@ a:hover { text-decoration: underline; }
   font-variant-numeric: tabular-nums;
 }
 
+.pub-teaser-venue {
+  font-size: 12px;
+  color: var(--string);
+  flex-shrink: 0;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .pub-teaser-title {
   font-family: 'Lora', Georgia, serif;
   font-size: 0.9rem;
   color: var(--text);
-  flex: 1;
-  min-width: 0;
-  white-space: normal;
-  word-break: normal;
-  overflow-wrap: normal;
-}
-
-.pub-teaser-venue {
-  font-size: 12px;
-  color: var(--text-muted);
-  flex-shrink: 0;
+  flex: 1 1 0;
+  min-width: 200px;
 }
 
 .pub-teaser-more {
