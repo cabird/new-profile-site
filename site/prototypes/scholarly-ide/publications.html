@@ -542,7 +542,7 @@
 
             {activeTab === 'terminal' && (
               <>
-                <div className="terminal-welcome">{`Welcome to Scholarly IDE Terminal\nType a question to chat with a paper.\nUse Ctrl+P to find and select a paper first.\n---`}</div>
+                <div className="terminal-welcome">{`Welcome to Scholarly IDE Terminal\nChat with any paper — click a paper and select "Chat with Paper",\nor press Ctrl+P to search and open one.\n---`}</div>
 
                 {chatPaper && (
                   <div className="terminal-connected">Connected to: {chatPaper.title}</div>
@@ -550,7 +550,7 @@
 
                 {!chatPaper && history.length === 0 && (
                   <div className="terminal-line">
-                    <span className="terminal-text" style={{ color: '#858585' }}>No paper selected. Use Ctrl+P to find a paper, then click 'Chat' to start.</span>
+                    <span className="terminal-text" style={{ color: '#858585' }}>No paper selected. Click a paper above and select "Chat with Paper", or press Ctrl+P to search.</span>
                   </div>
                 )}
 
@@ -960,7 +960,7 @@
       const [sidebarOpen, setSidebarOpen] = useState(true);
       const [mobileSidebar, setMobileSidebar] = useState(false);
       const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
-      const [terminalOpen, setTerminalOpen] = useState(false);
+      const [terminalOpen, setTerminalOpen] = useState(true);
       const [hoveredLine, setHoveredLine] = useState(null);
       const editorContentRef = useRef(null);
 
@@ -1215,15 +1215,13 @@
             </div>
           </div>
 
-          {/* Terminal Panel */}
-          {terminalOpen && (
-            <TerminalPanel
-              papers={allPapers}
-              chatPaper={chatPaper}
-              setChatPaper={setChatPaper}
-              onClose={() => setTerminalOpen(false)}
-            />
-          )}
+          {/* Terminal Panel — always mounted, hidden via CSS */}
+          <TerminalPanel
+            papers={allPapers}
+            chatPaper={chatPaper}
+            setChatPaper={setChatPaper}
+            onClose={() => setTerminalOpen(false)}
+          />
 
           <StatusBar
             paperCount={allPapers.length}
