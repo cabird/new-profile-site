@@ -17,7 +17,12 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
-    const { useState, useEffect } = React;
+    const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+    /* ─── Helpers ─── */
+    function slugify(text) {
+      return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }
 
     /* ─── Inline SVG Icons (no emoji) ─── */
     const FileIconSvg = ({ color = '#569cd6' }) => (
@@ -27,6 +32,7 @@
     );
     const FileMdIcon = () => <FileIconSvg color="#3794ff" />;
     const FilePdfIcon = () => <FileIconSvg color="#e06c75" />;
+    const FileTxtIcon = () => <FileIconSvg color="#858585" />;
     const FolderIcon = ({ open }) => (
       <svg viewBox="0 0 16 16" fill="#dcb67a" width="16" height="16">
         {open
@@ -73,6 +79,11 @@
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
       </svg>
     );
+    const TerminalIcon = () => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+      </svg>
+    );
 
     /* Tab file icon */
     const TabFileIcon = ({ color = '#569cd6' }) => (
@@ -81,8 +92,413 @@
       </svg>
     );
 
+    /* ─── File icon for command palette based on extension ─── */
+    function PaletteFileIcon({ ext }) {
+      if (ext === '.md') return <FileMdIcon />;
+      if (ext === '.pdf') return <FilePdfIcon />;
+      if (ext === '.txt') return <FileTxtIcon />;
+      return <FileIconSvg color="#569cd6" />;
+    }
+
+    /* ─── Build virtual filesystem ─── */
+    function buildVirtualFS(siteData, papers) {
+      const files = [];
+
+      // Static pages
+      files.push({ name: 'home.md', path: 'home.md', ext: '.md', action: () => { window.location.href = 'index.html'; } });
+      files.push({ name: 'publications.md', path: 'publications.md', ext: '.md', action: () => { window.location.href = 'publications.html'; } });
+
+      // CV
+      if (siteData?.cv_link) {
+        files.push({ name: 'cv.pdf', path: 'cv.pdf', ext: '.pdf', action: () => { window.open(siteData.cv_link, '_blank'); } });
+      }
+
+      // Contact files
+      const contact = siteData?.contact;
+      if (contact) {
+        if (contact.email) {
+          files.push({ name: 'email.txt', path: 'contact/email.txt', ext: '.txt', action: () => { window.location.href = `mailto:${contact.email}`; } });
+        }
+        if (contact.links) {
+          contact.links.forEach(l => {
+            const slug = slugify(l.label) + '.txt';
+            files.push({ name: slug, path: `contact/${slug}`, ext: '.txt', action: () => { window.open(l.url, '_blank'); } });
+          });
+        }
+      }
+
+      // Publication files
+      if (papers) {
+        papers.forEach(p => {
+          const year = p.year || 'unknown';
+          const slug = slugify(p.title || 'untitled') + '.md';
+          files.push({
+            name: slug,
+            path: `publications/${year}/${slug}`,
+            ext: '.md',
+            paperId: p.id,
+            action: () => {
+              // On index.html, navigate to publications with ?open param
+              window.location.href = `publications.html?open=${encodeURIComponent(p.id)}`;
+            }
+          });
+        });
+      }
+
+      return files;
+    }
+
+    /* ─── Fuzzy match highlight ─── */
+    function highlightMatch(text, query) {
+      if (!query) return text;
+      const lower = text.toLowerCase();
+      const qLower = query.toLowerCase();
+      const idx = lower.indexOf(qLower);
+      if (idx === -1) return text;
+      return (
+        <span>
+          {text.slice(0, idx)}
+          <span className="match-char">{text.slice(idx, idx + query.length)}</span>
+          {text.slice(idx + query.length)}
+        </span>
+      );
+    }
+
+    /* ─── Command Palette ─── */
+    function CommandPalette({ files, onClose }) {
+      const [query, setQuery] = useState('');
+      const [selectedIdx, setSelectedIdx] = useState(0);
+      const inputRef = useRef(null);
+      const listRef = useRef(null);
+
+      useEffect(() => {
+        inputRef.current?.focus();
+      }, []);
+
+      const filtered = useMemo(() => {
+        if (!query.trim()) return files;
+        const q = query.toLowerCase();
+        return files.filter(f => f.path.toLowerCase().includes(q));
+      }, [files, query]);
+
+      useEffect(() => {
+        setSelectedIdx(0);
+      }, [query]);
+
+      useEffect(() => {
+        if (listRef.current) {
+          const selected = listRef.current.children[selectedIdx];
+          if (selected) selected.scrollIntoView({ block: 'nearest' });
+        }
+      }, [selectedIdx]);
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          setSelectedIdx(prev => Math.min(prev + 1, filtered.length - 1));
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          setSelectedIdx(prev => Math.max(prev - 1, 0));
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          if (filtered[selectedIdx]) {
+            filtered[selectedIdx].action();
+            onClose();
+          }
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          onClose();
+        }
+      };
+
+      return (
+        <div className="command-palette-backdrop" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+          <div className="command-palette">
+            <div className="command-palette-input">
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="Go to File..."
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
+            </div>
+            <div className="command-palette-results" ref={listRef}>
+              {filtered.length === 0 && (
+                <div className="command-palette-empty">No matching files</div>
+              )}
+              {filtered.map((f, i) => (
+                <div
+                  key={f.path}
+                  className={`command-palette-row ${i === selectedIdx ? 'selected' : ''}`}
+                  onClick={() => { f.action(); onClose(); }}
+                  onMouseEnter={() => setSelectedIdx(i)}
+                >
+                  <span className="command-palette-row-icon"><PaletteFileIcon ext={f.ext} /></span>
+                  <span className="command-palette-row-name">{highlightMatch(f.name, query)}</span>
+                  <span className="command-palette-row-path">{highlightMatch(f.path, query)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    /* ─── Terminal Panel ─── */
+    function TerminalPanel({ papers, onClose }) {
+      const [activeTab, setActiveTab] = useState('terminal');
+      const [chatPaper, setChatPaper] = useState(null);
+      const [history, setHistory] = useState([]);
+      const [input, setInput] = useState('');
+      const [streaming, setStreaming] = useState(false);
+      const inputRef = useRef(null);
+      const bodyRef = useRef(null);
+      const abortRef = useRef(null);
+
+      // Count warnings: papers missing DOI or PDF
+      const warningCount = useMemo(() => {
+        return papers.filter(p => !p.doi || !p.mapped_pdf).length;
+      }, [papers]);
+
+      const problemsList = useMemo(() => {
+        const problems = [];
+        papers.forEach(p => {
+          if (!p.doi) problems.push({ text: `Missing DOI: ${p.title}`, source: p.id });
+          if (!p.mapped_pdf) problems.push({ text: `Missing PDF: ${p.title}`, source: p.id });
+        });
+        return problems;
+      }, [papers]);
+
+      useEffect(() => {
+        if (bodyRef.current) {
+          bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
+        }
+      }, [history, streaming]);
+
+      useEffect(() => {
+        if (activeTab === 'terminal') {
+          inputRef.current?.focus();
+        }
+      }, [activeTab]);
+
+      const sendMessage = useCallback(async (text) => {
+        if (!text.trim() || streaming) return;
+        if (!chatPaper) return;
+
+        setHistory(prev => [...prev, { type: 'user', content: text.trim() }]);
+        setInput('');
+        setStreaming(true);
+
+        let assistantContent = '';
+        setHistory(prev => [...prev, { type: 'assistant', content: '' }]);
+
+        try {
+          abortRef.current = new AbortController();
+          const resp = await fetch(`/api/papers/${chatPaper.id}/chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text.trim() }),
+            signal: abortRef.current.signal,
+          });
+
+          if (!resp.ok) {
+            const errData = await resp.json().catch(() => ({}));
+            throw new Error(errData.error || `HTTP ${resp.status}`);
+          }
+
+          const reader = resp.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+
+            const lines = buffer.split('\n');
+            buffer = lines.pop() || '';
+
+            for (const line of lines) {
+              const trimmed = line.trim();
+              if (!trimmed.startsWith('data:')) continue;
+              const jsonStr = trimmed.slice(5).trim();
+              if (!jsonStr || jsonStr === '[DONE]') continue;
+
+              try {
+                const evt = JSON.parse(jsonStr);
+                if (evt.type === 'chat_chunk') {
+                  assistantContent += evt.content;
+                  setHistory(prev => {
+                    const next = [...prev];
+                    next[next.length - 1] = { type: 'assistant', content: assistantContent };
+                    return next;
+                  });
+                } else if (evt.type === 'chat_complete') {
+                  setHistory(prev => [...prev, { type: 'status', content: `${evt.message_count} messages \u00B7 ${evt.remaining_messages} remaining` }]);
+                } else if (evt.type === 'error') {
+                  setHistory(prev => [...prev, { type: 'error', content: evt.message }]);
+                }
+              } catch {}
+            }
+          }
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            setHistory(prev => [...prev, { type: 'error', content: err.message }]);
+          }
+        }
+        setStreaming(false);
+        setTimeout(() => inputRef.current?.focus(), 50);
+      }, [streaming, chatPaper]);
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage(input);
+        }
+      };
+
+      // Expose setChatPaper globally so other components can connect
+      useEffect(() => {
+        window.__terminalSetChatPaper = (paper) => {
+          setChatPaper(paper);
+          setHistory([]);
+          setActiveTab('terminal');
+        };
+        return () => { delete window.__terminalSetChatPaper; };
+      }, []);
+
+      return (
+        <div className="terminal-panel">
+          <div className="terminal-panel-header">
+            <div className="terminal-panel-tabs">
+              <button
+                className={`terminal-panel-tab ${activeTab === 'problems' ? 'active' : ''}`}
+                onClick={() => setActiveTab('problems')}
+              >
+                Problems
+                {warningCount > 0 && <span className="tab-badge">{warningCount}</span>}
+              </button>
+              <button
+                className={`terminal-panel-tab ${activeTab === 'output' ? 'active' : ''}`}
+                onClick={() => setActiveTab('output')}
+              >
+                Output
+              </button>
+              <button
+                className={`terminal-panel-tab ${activeTab === 'terminal' ? 'active' : ''}`}
+                onClick={() => setActiveTab('terminal')}
+              >
+                Terminal
+              </button>
+            </div>
+            <div className="terminal-panel-actions">
+              <button className="terminal-panel-action-btn" onClick={onClose} title="Close panel">
+                <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+                  <path d="M8 8.71l3.65 3.64a.5.5 0 00.7-.7L8.71 8l3.64-3.65a.5.5 0 00-.7-.7L8 7.29 4.35 3.65a.5.5 0 00-.7.7L7.29 8l-3.64 3.65a.5.5 0 00.7.7L8 8.71z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div className="terminal-panel-body" ref={bodyRef}>
+            {activeTab === 'problems' && (
+              <div className="terminal-problems">
+                {problemsList.length === 0 ? (
+                  <div className="terminal-output-empty">No problems detected.</div>
+                ) : (
+                  problemsList.map((prob, i) => (
+                    <div className="terminal-problem-row" key={i}>
+                      <span className="terminal-problem-icon">{'\u26A0'}</span>
+                      <span className="terminal-problem-text">{prob.text}</span>
+                      <span className="terminal-problem-source">[{prob.source}]</span>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+
+            {activeTab === 'output' && (
+              <div className="terminal-output-empty">No output</div>
+            )}
+
+            {activeTab === 'terminal' && (
+              <>
+                <div className="terminal-welcome">{`Welcome to Scholarly IDE Terminal\nType a question to chat with a paper.\nUse Ctrl+P to find and select a paper first.\n---`}</div>
+
+                {chatPaper && (
+                  <div className="terminal-connected">Connected to: {chatPaper.title}</div>
+                )}
+
+                {!chatPaper && history.length === 0 && (
+                  <div className="terminal-line">
+                    <span className="terminal-text" style={{ color: '#858585' }}>No paper selected. Use Ctrl+P to find a paper, then click 'Chat' to start.</span>
+                  </div>
+                )}
+
+                {history.map((entry, i) => {
+                  if (entry.type === 'user') {
+                    return (
+                      <div className="terminal-line" key={i}>
+                        <span className="terminal-prompt">{'\u276F'}</span>
+                        <span className="terminal-text">{entry.content}</span>
+                      </div>
+                    );
+                  }
+                  if (entry.type === 'assistant') {
+                    return (
+                      <div className="terminal-line assistant-line" key={i}>
+                        <span className="terminal-text">{entry.content}</span>
+                      </div>
+                    );
+                  }
+                  if (entry.type === 'error') {
+                    return (
+                      <div className="terminal-line error-line" key={i}>
+                        <span className="terminal-text">Error: {entry.content}</span>
+                      </div>
+                    );
+                  }
+                  if (entry.type === 'status') {
+                    return (
+                      <div className="terminal-line" key={i} style={{ color: '#858585', fontSize: '11px' }}>
+                        <span className="terminal-text">{entry.content}</span>
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
+
+                {streaming && (
+                  <div className="terminal-line">
+                    <span className="terminal-spinner">{'\u2588'}</span>
+                  </div>
+                )}
+
+                {chatPaper && !streaming && (
+                  <div className="terminal-input-row">
+                    <span className="terminal-prompt">{'\u276F'}</span>
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={input}
+                      onChange={e => setInput(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      placeholder="Type a question..."
+                      disabled={streaming}
+                    />
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      );
+    }
+
     /* ─── Title Bar ─── */
-    function TitleBar({ name }) {
+    function TitleBar({ name, onCommandPalette }) {
       return (
         <div className="titlebar">
           <div className="titlebar-dots">
@@ -90,7 +506,7 @@
             <span className="titlebar-dot yellow"></span>
             <span className="titlebar-dot green"></span>
           </div>
-          <div className="titlebar-text">{name || 'Scholarly IDE'} — Scholarly IDE</div>
+          <div className="titlebar-text" onClick={onCommandPalette}>{name || 'Scholarly IDE'} — Scholarly IDE</div>
         </div>
       );
     }
@@ -101,7 +517,7 @@
         { id: 'explorer', icon: <ExplorerIcon />, label: 'Explorer' },
         { id: 'search', icon: <SearchIcon />, label: 'Search' },
         { id: 'publications', icon: <PubsIcon />, label: 'Publications' },
-        { id: 'chat', icon: <ChatIcon />, label: 'Chat' },
+        { id: 'terminal', icon: <TerminalIcon />, label: 'Terminal' },
       ];
       return (
         <div className="activitybar">
@@ -278,7 +694,7 @@
     }
 
     /* ─── Status Bar ─── */
-    function StatusBar({ paperCount }) {
+    function StatusBar({ paperCount, activeLine, terminalOpen, onToggleTerminal }) {
       return (
         <div className="statusbar">
           <div className="statusbar-left">
@@ -286,25 +702,27 @@
             <span className="statusbar-item">0 errors 0 warnings</span>
           </div>
           <div className="statusbar-right">
-            <span className="statusbar-item">Ln 1, Col 1</span>
+            <span className="statusbar-item">Ln {activeLine || 1}, Col 1</span>
             <span className="statusbar-item">UTF-8</span>
             <span className="statusbar-item">Markdown</span>
             <span className="statusbar-item">{paperCount} pubs</span>
+            <span className="statusbar-item clickable" onClick={onToggleTerminal} title="Toggle Terminal (Ctrl+`)">{terminalOpen ? 'Terminal: On' : 'Terminal: Off'}</span>
             <span className="statusbar-item">v2.0.0</span>
           </div>
         </div>
       );
     }
 
-    /* ─── Gutter line numbers ─── */
-    function GutterNumbers({ count }) {
-      const lines = [];
-      for (let i = 1; i <= count; i++) {
-        lines.push(i);
-      }
+    /* ─── Content Line (Feature 3) ─── */
+    function ContentLine({ num, active, onHover, onClick, children }) {
       return (
-        <div className="editor-gutter">
-          {lines.map(n => <div key={n}>{n}</div>)}
+        <div
+          className={`content-line ${active ? 'line-active' : ''}`}
+          onMouseEnter={() => onHover(num)}
+          onClick={() => onClick(num)}
+        >
+          <span className="line-number">{num}</span>
+          <div className="line-content">{children}</div>
         </div>
       );
     }
@@ -317,6 +735,10 @@
       const [activeActivity, setActiveActivity] = useState('explorer');
       const [sidebarOpen, setSidebarOpen] = useState(true);
       const [mobileSidebar, setMobileSidebar] = useState(false);
+      const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+      const [terminalOpen, setTerminalOpen] = useState(false);
+      const [activeLine, setActiveLine] = useState(1);
+      const [clickedLine, setClickedLine] = useState(null);
 
       useEffect(() => {
         fetch('/site_data.json')
@@ -334,9 +756,33 @@
           .catch(e => setError('Failed to load papers'));
       }, []);
 
+      // Keyboard shortcuts
+      useEffect(() => {
+        const handler = (e) => {
+          // Ctrl+P / Cmd+P - Command Palette
+          if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+            e.preventDefault();
+            setCommandPaletteOpen(prev => !prev);
+          }
+          // Ctrl+` - Toggle Terminal
+          if ((e.ctrlKey || e.metaKey) && e.key === '`') {
+            e.preventDefault();
+            setTerminalOpen(prev => !prev);
+          }
+        };
+        window.addEventListener('keydown', handler);
+        return () => window.removeEventListener('keydown', handler);
+      }, []);
+
+      const virtualFS = useMemo(() => buildVirtualFS(siteData, papers), [siteData, papers]);
+
       const handleActivitySelect = (id) => {
         if (id === 'publications') {
           window.location.href = 'publications.html';
+          return;
+        }
+        if (id === 'terminal') {
+          setTerminalOpen(prev => !prev);
           return;
         }
         if (id === activeActivity) {
@@ -347,15 +793,17 @@
         }
       };
 
+      const currentLine = clickedLine || activeLine;
+
       if (error) return (
         <div className={`vscode-shell`}>
-          <TitleBar name="" />
+          <TitleBar name="" onCommandPalette={() => setCommandPaletteOpen(true)} />
           <div className="activitybar"></div>
           <div className="sidebar"></div>
           <div className="editor-area">
             <div className="loading">{error}</div>
           </div>
-          <StatusBar paperCount={0} />
+          <StatusBar paperCount={0} activeLine={1} terminalOpen={false} onToggleTerminal={() => {}} />
         </div>
       );
 
@@ -365,15 +813,16 @@
       const yearsActive = years.length > 0 ? (Math.max(...years) - Math.min(...years)) : 0;
       const featured = papers.slice(0, 6);
 
-      // Count lines for gutter
-      const lineCount = 5 + (siteData ? 12 : 0) + (areaCount * 3) + (featured.length * 2) + 10;
+      // Build line-numbered content
+      let lineNum = 0;
+      const nextLine = () => ++lineNum;
 
       return (
-        <div className={`vscode-shell ${!sidebarOpen ? 'sidebar-collapsed' : ''} ${mobileSidebar ? 'mobile-sidebar-open' : ''}`}>
+        <div className={`vscode-shell ${!sidebarOpen ? 'sidebar-collapsed' : ''} ${mobileSidebar ? 'mobile-sidebar-open' : ''} ${terminalOpen ? 'terminal-open' : ''}`}>
           <button className="hamburger" onClick={() => setMobileSidebar(!mobileSidebar)}>{'\u2630'}</button>
           {mobileSidebar && <div className="mobile-overlay open" onClick={() => setMobileSidebar(false)}></div>}
 
-          <TitleBar name={siteData?.name} />
+          <TitleBar name={siteData?.name} onCommandPalette={() => setCommandPaletteOpen(true)} />
           <ActivityBar active={activeActivity} onSelect={handleActivitySelect} />
           <Sidebar siteData={siteData} activePage="home" />
 
@@ -401,56 +850,109 @@
 
             {/* Editor content */}
             <div className="editor-content">
-              <GutterNumbers count={lineCount} />
-              <div className="editor-body">
+              <div className="editor-body" onMouseLeave={() => { if (!clickedLine) setActiveLine(1); }}>
                 {!siteData ? (
                   <div className="loading">Loading...</div>
                 ) : (
                   <>
-                    <div className="md-h1">
-                      <span className="hash">#</span> {siteData.name}
-                    </div>
-                    <div className="md-meta">
-                      <span className="key">title</span>: <span className="val">"{siteData.title}"</span>
-                      &nbsp;&nbsp;
-                      <span className="key">affiliation</span>: <span className="val">"{siteData.affiliation}"</span>
-                    </div>
+                    <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                      <div className="md-h1">
+                        <span className="hash">#</span> {siteData.name}
+                      </div>
+                    </ContentLine>
+                    <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                      <div className="md-meta">
+                        <span className="key">title</span>: <span className="val">"{siteData.title}"</span>
+                        &nbsp;&nbsp;
+                        <span className="key">affiliation</span>: <span className="val">"{siteData.affiliation}"</span>
+                      </div>
+                    </ContentLine>
+                    <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                      <span>&nbsp;</span>
+                    </ContentLine>
+                    <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                      <p className="md-paragraph" style={{margin: 0}}>{siteData.about || siteData.bio}</p>
+                    </ContentLine>
+                    <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                      <span>&nbsp;</span>
+                    </ContentLine>
 
-                    <p className="md-paragraph">{siteData.about || siteData.bio}</p>
-
-                    <div className="md-h2">
-                      <span className="hash">##</span> Telemetry
-                    </div>
-                    <Metrics paperCount={paperCount} areaCount={areaCount} yearsActive={yearsActive} />
+                    <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                      <div className="md-h2" style={{margin: 0, marginBottom: 12}}>
+                        <span className="hash">##</span> Telemetry
+                      </div>
+                    </ContentLine>
+                    <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                      <Metrics paperCount={paperCount} areaCount={areaCount} yearsActive={yearsActive} />
+                    </ContentLine>
+                    <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                      <span>&nbsp;</span>
+                    </ContentLine>
 
                     {siteData.research_areas?.length > 0 && (
                       <>
-                        <div className="md-h2">
-                          <span className="hash">##</span> Research Areas
-                        </div>
-                        <ResearchAreas areas={siteData.research_areas} />
+                        <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                          <div className="md-h2" style={{margin: 0, marginBottom: 12}}>
+                            <span className="hash">##</span> Research Areas
+                          </div>
+                        </ContentLine>
+                        {siteData.research_areas.map((a, i) => (
+                          <ContentLine key={i} num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                            <ResearchAreas areas={[a]} />
+                          </ContentLine>
+                        ))}
+                        <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                          <span>&nbsp;</span>
+                        </ContentLine>
                       </>
                     )}
 
                     {featured.length > 0 && (
                       <>
-                        <div className="md-h2">
-                          <span className="hash">##</span> Recent Publications
-                        </div>
-                        <FeaturedPubs papers={featured} />
+                        <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                          <div className="md-h2" style={{margin: 0, marginBottom: 12}}>
+                            <span className="hash">##</span> Recent Publications
+                          </div>
+                        </ContentLine>
+                        {featured.map((p, i) => (
+                          <ContentLine key={p.id} num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                            <div className="pub-teaser-item" style={{marginLeft: 0, borderLeft: '1px solid var(--border)', paddingLeft: 8}}>
+                              <span className="pub-teaser-year">{p.year}</span>
+                              <span className="pub-teaser-title">{p.title}</span>
+                            </div>
+                          </ContentLine>
+                        ))}
+                        <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                          <div className="pub-teaser-more">
+                            <a href="publications.html">{'\u2192'} view all publications</a>
+                          </div>
+                        </ContentLine>
                       </>
                     )}
 
-                    <footer className="page-footer">
-                      &copy; {new Date().getFullYear()} {siteData.name} — Scholarly IDE v2.0
-                    </footer>
+                    <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                      <span>&nbsp;</span>
+                    </ContentLine>
+                    <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                      <footer className="page-footer" style={{margin: 0}}>
+                        &copy; {new Date().getFullYear()} {siteData.name} — Scholarly IDE v2.0
+                      </footer>
+                    </ContentLine>
                   </>
                 )}
               </div>
             </div>
           </div>
 
-          <StatusBar paperCount={paperCount} />
+          {terminalOpen && (
+            <TerminalPanel papers={papers} onClose={() => setTerminalOpen(false)} />
+          )}
+
+          <StatusBar paperCount={paperCount} activeLine={currentLine} terminalOpen={terminalOpen} onToggleTerminal={() => setTerminalOpen(prev => !prev)} />
+
+          {commandPaletteOpen && (
+            <CommandPalette files={virtualFS} onClose={() => setCommandPaletteOpen(false)} />
+          )}
         </div>
       );
     }

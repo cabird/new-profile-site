@@ -17,9 +17,13 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
-    const { useState, useEffect, useRef, useCallback } = React;
+    const { useState, useEffect, useRef, useCallback, useMemo } = React;
 
     /* ─── Helpers ─── */
+    function slugify(text) {
+      return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }
+
     function parseTags(raw) {
       if (!raw) return [];
       if (Array.isArray(raw)) return raw;
@@ -44,6 +48,7 @@
     );
     const FileMdIcon = () => <FileIconSvg color="#3794ff" />;
     const FilePdfIcon = () => <FileIconSvg color="#e06c75" />;
+    const FileTxtIcon = () => <FileIconSvg color="#858585" />;
     const FolderIcon = ({ open }) => (
       <svg viewBox="0 0 16 16" fill="#dcb67a" width="16" height="16">
         {open
@@ -73,11 +78,6 @@
         <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001l3.85 3.85a1 1 0 001.415-1.414l-3.867-3.834zM6.5 11a4.5 4.5 0 110-9 4.5 4.5 0 010 9z"/>
       </svg>
     );
-    const SendIcon = () => (
-      <svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16">
-        <path d="M1 1.91L7.2 8 1 14.09 1.91 15 15 8 1.91 1 1 1.91z"/>
-      </svg>
-    );
 
     /* ─── Activity bar SVG icons ─── */
     const ExplorerIcon = () => (
@@ -100,6 +100,11 @@
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
       </svg>
     );
+    const TerminalIcon = () => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+      </svg>
+    );
 
     /* Tab file icon */
     const TabFileIcon = ({ color = '#569cd6' }) => (
@@ -108,8 +113,406 @@
       </svg>
     );
 
+    /* ─── File icon for command palette based on extension ─── */
+    function PaletteFileIcon({ ext }) {
+      if (ext === '.md') return <FileMdIcon />;
+      if (ext === '.pdf') return <FilePdfIcon />;
+      if (ext === '.txt') return <FileTxtIcon />;
+      return <FileIconSvg color="#569cd6" />;
+    }
+
+    /* ─── Build virtual filesystem ─── */
+    function buildVirtualFS(siteData, papers, onSelectPaper) {
+      const files = [];
+
+      files.push({ name: 'home.md', path: 'home.md', ext: '.md', action: () => { window.location.href = 'index.html'; } });
+      files.push({ name: 'publications.md', path: 'publications.md', ext: '.md', action: () => { window.location.href = 'publications.html'; } });
+
+      if (siteData?.cv_link) {
+        files.push({ name: 'cv.pdf', path: 'cv.pdf', ext: '.pdf', action: () => { window.open(siteData.cv_link, '_blank'); } });
+      }
+
+      const contact = siteData?.contact;
+      if (contact) {
+        if (contact.email) {
+          files.push({ name: 'email.txt', path: 'contact/email.txt', ext: '.txt', action: () => { window.location.href = `mailto:${contact.email}`; } });
+        }
+        if (contact.links) {
+          contact.links.forEach(l => {
+            const slug = slugify(l.label) + '.txt';
+            files.push({ name: slug, path: `contact/${slug}`, ext: '.txt', action: () => { window.open(l.url, '_blank'); } });
+          });
+        }
+      }
+
+      if (papers) {
+        papers.forEach(p => {
+          const year = p.year || 'unknown';
+          const slug = slugify(p.title || 'untitled') + '.md';
+          files.push({
+            name: slug,
+            path: `publications/${year}/${slug}`,
+            ext: '.md',
+            paperId: p.id,
+            action: () => {
+              // On publications page, scroll to and expand the paper
+              onSelectPaper(p.id);
+            }
+          });
+        });
+      }
+
+      return files;
+    }
+
+    /* ─── Fuzzy match highlight ─── */
+    function highlightMatch(text, query) {
+      if (!query) return text;
+      const lower = text.toLowerCase();
+      const qLower = query.toLowerCase();
+      const idx = lower.indexOf(qLower);
+      if (idx === -1) return text;
+      return (
+        <span>
+          {text.slice(0, idx)}
+          <span className="match-char">{text.slice(idx, idx + query.length)}</span>
+          {text.slice(idx + query.length)}
+        </span>
+      );
+    }
+
+    /* ─── Command Palette ─── */
+    function CommandPalette({ files, onClose }) {
+      const [query, setQuery] = useState('');
+      const [selectedIdx, setSelectedIdx] = useState(0);
+      const inputRef = useRef(null);
+      const listRef = useRef(null);
+
+      useEffect(() => {
+        inputRef.current?.focus();
+      }, []);
+
+      const filtered = useMemo(() => {
+        if (!query.trim()) return files;
+        const q = query.toLowerCase();
+        return files.filter(f => f.path.toLowerCase().includes(q));
+      }, [files, query]);
+
+      useEffect(() => {
+        setSelectedIdx(0);
+      }, [query]);
+
+      useEffect(() => {
+        if (listRef.current) {
+          const selected = listRef.current.children[selectedIdx];
+          if (selected) selected.scrollIntoView({ block: 'nearest' });
+        }
+      }, [selectedIdx]);
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          setSelectedIdx(prev => Math.min(prev + 1, filtered.length - 1));
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          setSelectedIdx(prev => Math.max(prev - 1, 0));
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          if (filtered[selectedIdx]) {
+            filtered[selectedIdx].action();
+            onClose();
+          }
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          onClose();
+        }
+      };
+
+      return (
+        <div className="command-palette-backdrop" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+          <div className="command-palette">
+            <div className="command-palette-input">
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="Go to File..."
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
+            </div>
+            <div className="command-palette-results" ref={listRef}>
+              {filtered.length === 0 && (
+                <div className="command-palette-empty">No matching files</div>
+              )}
+              {filtered.map((f, i) => (
+                <div
+                  key={f.path}
+                  className={`command-palette-row ${i === selectedIdx ? 'selected' : ''}`}
+                  onClick={() => { f.action(); onClose(); }}
+                  onMouseEnter={() => setSelectedIdx(i)}
+                >
+                  <span className="command-palette-row-icon"><PaletteFileIcon ext={f.ext} /></span>
+                  <span className="command-palette-row-name">{highlightMatch(f.name, query)}</span>
+                  <span className="command-palette-row-path">{highlightMatch(f.path, query)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    /* ─── Terminal Panel ─── */
+    function TerminalPanel({ papers, chatPaper, setChatPaper, onClose }) {
+      const [activeTab, setActiveTab] = useState('terminal');
+      const [history, setHistory] = useState([]);
+      const [input, setInput] = useState('');
+      const [streaming, setStreaming] = useState(false);
+      const inputRef = useRef(null);
+      const bodyRef = useRef(null);
+      const abortRef = useRef(null);
+
+      const warningCount = useMemo(() => {
+        return papers.filter(p => !p.doi || !p.mapped_pdf).length;
+      }, [papers]);
+
+      const problemsList = useMemo(() => {
+        const problems = [];
+        papers.forEach(p => {
+          if (!p.doi) problems.push({ text: `Missing DOI: ${p.title}`, source: p.id });
+          if (!p.mapped_pdf) problems.push({ text: `Missing PDF: ${p.title}`, source: p.id });
+        });
+        return problems;
+      }, [papers]);
+
+      useEffect(() => {
+        if (bodyRef.current) {
+          bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
+        }
+      }, [history, streaming]);
+
+      useEffect(() => {
+        if (activeTab === 'terminal') {
+          inputRef.current?.focus();
+        }
+      }, [activeTab]);
+
+      // Reset history when paper changes
+      useEffect(() => {
+        setHistory([]);
+        setInput('');
+        return () => {
+          if (abortRef.current) abortRef.current.abort();
+        };
+      }, [chatPaper?.id]);
+
+      const sendMessage = useCallback(async (text) => {
+        if (!text.trim() || streaming) return;
+        if (!chatPaper) return;
+
+        setHistory(prev => [...prev, { type: 'user', content: text.trim() }]);
+        setInput('');
+        setStreaming(true);
+
+        let assistantContent = '';
+        setHistory(prev => [...prev, { type: 'assistant', content: '' }]);
+
+        try {
+          abortRef.current = new AbortController();
+          const resp = await fetch(`/api/papers/${chatPaper.id}/chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text.trim() }),
+            signal: abortRef.current.signal,
+          });
+
+          if (!resp.ok) {
+            const errData = await resp.json().catch(() => ({}));
+            throw new Error(errData.error || `HTTP ${resp.status}`);
+          }
+
+          const reader = resp.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+
+            const lines = buffer.split('\n');
+            buffer = lines.pop() || '';
+
+            for (const line of lines) {
+              const trimmed = line.trim();
+              if (!trimmed.startsWith('data:')) continue;
+              const jsonStr = trimmed.slice(5).trim();
+              if (!jsonStr || jsonStr === '[DONE]') continue;
+
+              try {
+                const evt = JSON.parse(jsonStr);
+                if (evt.type === 'chat_chunk') {
+                  assistantContent += evt.content;
+                  setHistory(prev => {
+                    const next = [...prev];
+                    next[next.length - 1] = { type: 'assistant', content: assistantContent };
+                    return next;
+                  });
+                } else if (evt.type === 'chat_complete') {
+                  setHistory(prev => [...prev, { type: 'status', content: `${evt.message_count} messages \u00B7 ${evt.remaining_messages} remaining` }]);
+                } else if (evt.type === 'error') {
+                  setHistory(prev => [...prev, { type: 'error', content: evt.message }]);
+                }
+              } catch {}
+            }
+          }
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            setHistory(prev => [...prev, { type: 'error', content: err.message }]);
+          }
+        }
+        setStreaming(false);
+        setTimeout(() => inputRef.current?.focus(), 50);
+      }, [streaming, chatPaper]);
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage(input);
+        }
+      };
+
+      return (
+        <div className="terminal-panel">
+          <div className="terminal-panel-header">
+            <div className="terminal-panel-tabs">
+              <button
+                className={`terminal-panel-tab ${activeTab === 'problems' ? 'active' : ''}`}
+                onClick={() => setActiveTab('problems')}
+              >
+                Problems
+                {warningCount > 0 && <span className="tab-badge">{warningCount}</span>}
+              </button>
+              <button
+                className={`terminal-panel-tab ${activeTab === 'output' ? 'active' : ''}`}
+                onClick={() => setActiveTab('output')}
+              >
+                Output
+              </button>
+              <button
+                className={`terminal-panel-tab ${activeTab === 'terminal' ? 'active' : ''}`}
+                onClick={() => setActiveTab('terminal')}
+              >
+                Terminal
+              </button>
+            </div>
+            <div className="terminal-panel-actions">
+              <button className="terminal-panel-action-btn" onClick={onClose} title="Close panel">
+                <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+                  <path d="M8 8.71l3.65 3.64a.5.5 0 00.7-.7L8.71 8l3.64-3.65a.5.5 0 00-.7-.7L8 7.29 4.35 3.65a.5.5 0 00-.7.7L7.29 8l-3.64 3.65a.5.5 0 00.7.7L8 8.71z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div className="terminal-panel-body" ref={bodyRef}>
+            {activeTab === 'problems' && (
+              <div className="terminal-problems">
+                {problemsList.length === 0 ? (
+                  <div className="terminal-output-empty">No problems detected.</div>
+                ) : (
+                  problemsList.map((prob, i) => (
+                    <div className="terminal-problem-row" key={i}>
+                      <span className="terminal-problem-icon">{'\u26A0'}</span>
+                      <span className="terminal-problem-text">{prob.text}</span>
+                      <span className="terminal-problem-source">[{prob.source}]</span>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+
+            {activeTab === 'output' && (
+              <div className="terminal-output-empty">No output</div>
+            )}
+
+            {activeTab === 'terminal' && (
+              <>
+                <div className="terminal-welcome">{`Welcome to Scholarly IDE Terminal\nType a question to chat with a paper.\nUse Ctrl+P to find and select a paper first.\n---`}</div>
+
+                {chatPaper && (
+                  <div className="terminal-connected">Connected to: {chatPaper.title}</div>
+                )}
+
+                {!chatPaper && history.length === 0 && (
+                  <div className="terminal-line">
+                    <span className="terminal-text" style={{ color: '#858585' }}>No paper selected. Use Ctrl+P to find a paper, then click 'Chat' to start.</span>
+                  </div>
+                )}
+
+                {history.map((entry, i) => {
+                  if (entry.type === 'user') {
+                    return (
+                      <div className="terminal-line" key={i}>
+                        <span className="terminal-prompt">{'\u276F'}</span>
+                        <span className="terminal-text">{entry.content}</span>
+                      </div>
+                    );
+                  }
+                  if (entry.type === 'assistant') {
+                    return (
+                      <div className="terminal-line assistant-line" key={i}>
+                        <span className="terminal-text">{entry.content}</span>
+                      </div>
+                    );
+                  }
+                  if (entry.type === 'error') {
+                    return (
+                      <div className="terminal-line error-line" key={i}>
+                        <span className="terminal-text">Error: {entry.content}</span>
+                      </div>
+                    );
+                  }
+                  if (entry.type === 'status') {
+                    return (
+                      <div className="terminal-line" key={i} style={{ color: '#858585', fontSize: '11px' }}>
+                        <span className="terminal-text">{entry.content}</span>
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
+
+                {streaming && (
+                  <div className="terminal-line">
+                    <span className="terminal-spinner">{'\u2588'}</span>
+                  </div>
+                )}
+
+                {chatPaper && !streaming && (
+                  <div className="terminal-input-row">
+                    <span className="terminal-prompt">{'\u276F'}</span>
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={input}
+                      onChange={e => setInput(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      placeholder="Type a question..."
+                      disabled={streaming}
+                    />
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      );
+    }
+
     /* ─── Title Bar ─── */
-    function TitleBar({ name }) {
+    function TitleBar({ name, onCommandPalette }) {
       return (
         <div className="titlebar">
           <div className="titlebar-dots">
@@ -117,7 +520,7 @@
             <span className="titlebar-dot yellow"></span>
             <span className="titlebar-dot green"></span>
           </div>
-          <div className="titlebar-text">{name || 'Scholarly IDE'} — publications.md</div>
+          <div className="titlebar-text" onClick={onCommandPalette}>{name || 'Scholarly IDE'} — publications.md</div>
         </div>
       );
     }
@@ -128,7 +531,7 @@
         { id: 'explorer', icon: <ExplorerIcon />, label: 'Explorer' },
         { id: 'search', icon: <SearchIcon />, label: 'Search' },
         { id: 'publications', icon: <PubsIcon />, label: 'Publications' },
-        { id: 'chat', icon: <ChatIcon />, label: 'Chat' },
+        { id: 'terminal', icon: <TerminalIcon />, label: 'Terminal' },
       ];
       return (
         <div className="activitybar">
@@ -239,254 +642,115 @@
       );
     }
 
-    /* ─── Copilot Chat Side Panel ─── */
-    function CopilotPanel({ paper, onClose }) {
-      const [messages, setMessages] = useState([]);
-      const [input, setInput] = useState('');
-      const [streaming, setStreaming] = useState(false);
-      const [cannedQuestions, setCannedQuestions] = useState([]);
-      const [status, setStatus] = useState('');
-      const messagesEndRef = useRef(null);
-      const abortRef = useRef(null);
+    /* ─── Peek Definition Widget ─── */
+    function PeekWidget({ paper, onClose, onChat }) {
+      const tags = parseTags(paper.tags);
+      const tldr = parseTldr(paper);
+      const slug = slugify(paper.title || 'untitled') + '.md';
+      const peekRef = useRef(null);
+      const [visible, setVisible] = useState(false);
 
       useEffect(() => {
-        fetch('/api/canned_questions')
-          .then(r => r.json())
-          .then(d => setCannedQuestions(d.questions || []))
-          .catch(() => {});
+        // Trigger open animation on next frame
+        requestAnimationFrame(() => setVisible(true));
       }, []);
 
       useEffect(() => {
-        setMessages([]);
-        setStatus('');
-        setInput('');
-        return () => {
-          if (abortRef.current) abortRef.current.abort();
-        };
-      }, [paper?.id]);
+        if (peekRef.current) {
+          peekRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, [visible]);
+
+      const handleClose = useCallback(() => {
+        setVisible(false);
+        setTimeout(() => onClose(), 150);
+      }, [onClose]);
 
       useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }, [messages, streaming]);
+        const handler = (e) => {
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            e.stopPropagation();
+            handleClose();
+          }
+        };
+        window.addEventListener('keydown', handler);
+        return () => window.removeEventListener('keydown', handler);
+      }, [handleClose]);
 
-      const sendMessage = useCallback(async (text) => {
-        if (!text.trim() || streaming || !paper) return;
-        const userMsg = { role: 'user', content: text.trim() };
-        setMessages(prev => [...prev, userMsg]);
-        setInput('');
-        setStreaming(true);
-        setStatus('');
-
-        let assistantContent = '';
-        setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
-
+      // Parse extracted_paper_info for extra metadata
+      let paperInfo = {};
+      if (paper.extracted_paper_info) {
         try {
-          abortRef.current = new AbortController();
-          const resp = await fetch(`/api/papers/${paper.id}/chat`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: userMsg.content }),
-            signal: abortRef.current.signal,
-          });
-
-          if (!resp.ok) {
-            const errData = await resp.json().catch(() => ({}));
-            throw new Error(errData.error || `HTTP ${resp.status}`);
-          }
-
-          const reader = resp.body.getReader();
-          const decoder = new TextDecoder();
-          let buffer = '';
-
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            buffer += decoder.decode(value, { stream: true });
-
-            const lines = buffer.split('\n');
-            buffer = lines.pop() || '';
-
-            for (const line of lines) {
-              const trimmed = line.trim();
-              if (!trimmed.startsWith('data:')) continue;
-              const jsonStr = trimmed.slice(5).trim();
-              if (!jsonStr || jsonStr === '[DONE]') continue;
-
-              try {
-                const evt = JSON.parse(jsonStr);
-                if (evt.type === 'chat_chunk') {
-                  assistantContent += evt.content;
-                  setMessages(prev => {
-                    const next = [...prev];
-                    next[next.length - 1] = { role: 'assistant', content: assistantContent };
-                    return next;
-                  });
-                } else if (evt.type === 'chat_complete') {
-                  const remaining = evt.remaining_messages;
-                  const count = evt.message_count;
-                  setStatus(`${count} messages \u00B7 ${remaining} remaining`);
-                } else if (evt.type === 'error') {
-                  setMessages(prev => [...prev, { role: 'error', content: evt.message }]);
-                }
-              } catch {}
-            }
-          }
-        } catch (err) {
-          if (err.name !== 'AbortError') {
-            setMessages(prev => [...prev, { role: 'error', content: err.message }]);
-          }
-        }
-        setStreaming(false);
-      }, [streaming, paper]);
-
-      const clearChat = useCallback(async () => {
-        if (!paper) return;
-        try {
-          await fetch(`/api/papers/${paper.id}/chat`, { method: 'DELETE' });
+          paperInfo = typeof paper.extracted_paper_info === 'string'
+            ? JSON.parse(paper.extracted_paper_info)
+            : paper.extracted_paper_info;
         } catch {}
-        setMessages([]);
-        setStatus('');
-      }, [paper]);
-
-      const handleKeyDown = (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-          e.preventDefault();
-          sendMessage(input);
-        }
-      };
-
-      if (!paper) return null;
+      }
 
       return (
-        <div className="copilot-panel">
-          {/* Header */}
-          <div className="copilot-header">
-            <div className="copilot-header-icon">{'\u2726'}</div>
-            <div className="copilot-header-text">
-              <div className="copilot-header-title">Paper Assistant</div>
-              <div className="copilot-header-subtitle">{paper.title}</div>
+        <div className={`peek-widget ${visible ? 'peek-open' : ''}`} ref={peekRef}>
+          <div className="peek-header">
+            <div className="peek-header-left">
+              <span className="peek-header-icon"><FileMdIcon /></span>
+              <span className="peek-header-filename">{slug}</span>
             </div>
-            <div className="copilot-header-actions">
-              <button className="copilot-header-btn" onClick={clearChat} title="Clear conversation">
-                <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
-                  <path d="M8 1a7 7 0 100 14A7 7 0 008 1zm3.11 9.11a.5.5 0 01-.71.71L8 8.71l-2.4 2.11a.5.5 0 01-.71-.71L7.29 8 4.89 5.6a.5.5 0 01.71-.71L8 7.29l2.4-2.4a.5.5 0 01.71.71L8.71 8l2.4 2.11z"/>
-                </svg>
-              </button>
-              <button className="copilot-header-btn" onClick={onClose} title="Close panel">
-                <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
-                  <path d="M8 8.71l3.65 3.64a.5.5 0 00.7-.7L8.71 8l3.64-3.65a.5.5 0 00-.7-.7L8 7.29 4.35 3.65a.5.5 0 00-.7.7L7.29 8l-3.64 3.65a.5.5 0 00.7.7L8 8.71z"/>
-                </svg>
-              </button>
-            </div>
+            <button className="peek-header-close" onClick={handleClose} title="Close (Escape)">
+              <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12">
+                <path d="M8 8.71l3.65 3.64a.5.5 0 00.7-.7L8.71 8l3.64-3.65a.5.5 0 00-.7-.7L8 7.29 4.35 3.65a.5.5 0 00-.7.7L7.29 8l-3.64 3.65a.5.5 0 00.7.7L8 8.71z"/>
+              </svg>
+            </button>
           </div>
-
-          {/* Panel tabs */}
-          <div className="copilot-tabs">
-            <button className="copilot-tab active">Chat</button>
-            <button className="copilot-tab" style={{opacity: 0.4, cursor: 'default'}}>History</button>
-          </div>
-
-          {/* Messages */}
-          <div className="copilot-messages">
-            {messages.length === 0 && (
-              <div className="copilot-welcome">
-                <div className="copilot-welcome-icon">{'\u2726'}</div>
-                <div className="copilot-welcome-title">Ask about this paper</div>
-                <div className="copilot-welcome-sub">I can help you understand the key findings, methods, and implications.</div>
-              </div>
-            )}
-            {messages.map((m, i) => (
-              <div key={i} className={`copilot-msg ${m.role}`}>
-                <div className="copilot-msg-avatar">
-                  {m.role === 'user' ? 'U' : m.role === 'error' ? '!' : '\u2726'}
-                </div>
-                <div className="copilot-msg-content">
-                  <div className="copilot-msg-text">{m.content}</div>
-                </div>
-              </div>
-            ))}
-            {streaming && messages[messages.length - 1]?.content === '' && (
-              <div className="copilot-thinking">
-                <div className="copilot-thinking-avatar">{'\u2726'}</div>
-                <div className="copilot-thinking-dots">
-                  <span></span><span></span><span></span>
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Canned question chips */}
-          {cannedQuestions.length > 0 && messages.length === 0 && (
-            <div className="copilot-suggestions">
-              {cannedQuestions.map((q, i) => (
-                <button
-                  key={i}
-                  className="copilot-chip"
-                  onClick={() => sendMessage(q)}
-                  disabled={streaming}
-                >
-                  {q}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {status && <div className="copilot-status">{status}</div>}
-
-          {/* Input area */}
-          <div className="copilot-input-area">
-            <div className="copilot-input-wrap">
-              <input
-                type="text"
-                placeholder="Ask about this paper..."
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                disabled={streaming}
-              />
-              <button
-                className="copilot-send-btn"
-                onClick={() => sendMessage(input)}
-                disabled={streaming || !input.trim()}
-              >
-                <SendIcon />
-              </button>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    /* ─── Publication Row ─── */
-    function PubRow({ paper, lineNum, isExpanded, onToggle, onChat }) {
-      const tags = parseTags(paper.tags);
-      const tldr = parseTldr(paper);
-
-      return (
-        <div className="pub-row">
-          <div className="pub-row-main" onClick={onToggle}>
-            <span className="pub-ln">{lineNum}</span>
-            <span className="pub-year">{paper.year || '\u2014'}</span>
-            <div className="pub-title-col">
-              <div className="pub-title">{paper.title}</div>
-              <div className="pub-authors">{paper.authors || ''}</div>
-            </div>
-            <span className="pub-venue">{paper.venue || paper.journal || ''}</span>
-            <div className="pub-tags">
-              {tags.slice(0, 3).map((t, i) => (
-                <span className="pub-tag" key={i}>{t}</span>
-              ))}
-            </div>
-          </div>
-          <div className={`pub-expanded ${isExpanded ? 'open' : ''}`}>
+          <div className="peek-content">
             {tldr && (
-              <div className="pub-abstract">
-                <div className="label">// tl;dr</div>
-                {tldr}
+              <div className="peek-tldr">
+                <div className="peek-comment">// tl;dr</div>
+                <div className="peek-tldr-text">{tldr}</div>
               </div>
             )}
-            <div className="pub-actions">
+
+            <div className="peek-metadata">
+              {paper.authors && (
+                <div className="peek-meta-row">
+                  <span className="peek-meta-key">authors:</span>
+                  <span className="peek-meta-val-string">{paper.authors}</span>
+                </div>
+              )}
+              {(paper.venue || paper.journal) && (
+                <div className="peek-meta-row">
+                  <span className="peek-meta-key">venue:</span>
+                  <span className="peek-meta-val-string">{paper.venue || paper.journal}</span>
+                </div>
+              )}
+              {paper.year && (
+                <div className="peek-meta-row">
+                  <span className="peek-meta-key">year:</span>
+                  <span className="peek-meta-val-number">{paper.year}</span>
+                </div>
+              )}
+              {paper.type && (
+                <div className="peek-meta-row">
+                  <span className="peek-meta-key">type:</span>
+                  <span className="peek-meta-val-tag">{paper.type}</span>
+                </div>
+              )}
+              {paper.doi && (
+                <div className="peek-meta-row">
+                  <span className="peek-meta-key">doi:</span>
+                  <a className="peek-meta-val-link" href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener">{paper.doi}</a>
+                </div>
+              )}
+            </div>
+
+            {tags.length > 0 && (
+              <div className="peek-tags">
+                {tags.map((t, i) => (
+                  <span className="pub-tag" key={i}>{t}</span>
+                ))}
+              </div>
+            )}
+
+            <div className="peek-actions">
               {paper.mapped_pdf && (
                 <a className="pub-action-btn" href={paper.mapped_pdf} target="_blank" rel="noopener">
                   <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><path d="M13.71 4.29l-3-3A1 1 0 0010 1H4a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V5a1 1 0 00-.29-.71zM12 14H4V2h5v3a1 1 0 001 1h3v8z"/></svg>
@@ -503,20 +767,64 @@
                   Link
                 </a>
               )}
-              {paper.chat_available && (
-                <button className="pub-action-btn chat-btn" onClick={(e) => { e.stopPropagation(); onChat(paper); }}>
-                  <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><path d="M14 1H2a1 1 0 00-1 1v9a1 1 0 001 1h3l3 3 3-3h3a1 1 0 001-1V2a1 1 0 00-1-1zm0 10h-3.6L8 13.4 5.6 11H2V2h12v9z"/></svg>
-                  Chat with Paper
-                </button>
-              )}
+              <button className="pub-action-btn chat-btn" onClick={(e) => { e.stopPropagation(); onChat(paper); }}>
+                <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><path d="M14 1H2a1 1 0 00-1 1v9a1 1 0 001 1h3l3 3 3-3h3a1 1 0 001-1V2a1 1 0 00-1-1zm0 10h-3.6L8 13.4 5.6 11H2V2h12v9z"/></svg>
+                Chat with Paper
+              </button>
             </div>
           </div>
         </div>
       );
     }
 
+    /* ─── Publication Row ─── */
+    function PubRow({ paper, lineNum, isExpanded, onToggle, onChat, isHovered, onHover }) {
+      const tags = parseTags(paper.tags);
+      const rowRef = useRef(null);
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'F12' || e.key === 'Enter') {
+          e.preventDefault();
+          onToggle();
+        }
+      };
+
+      return (
+        <div
+          className={`pub-row ${isHovered ? 'line-active' : ''}`}
+          ref={rowRef}
+          data-paper-id={paper.id}
+          onMouseEnter={() => onHover(lineNum)}
+          tabIndex={0}
+          onKeyDown={handleKeyDown}
+        >
+          <div className="pub-row-main" onClick={onToggle}>
+            <span className="pub-ln">{lineNum}</span>
+            <span className="pub-year">{paper.year || '\u2014'}</span>
+            <div className="pub-title-col">
+              <div className="pub-title">{paper.title}</div>
+              <div className="pub-authors">{paper.authors || ''}</div>
+            </div>
+            <span className="pub-venue">{paper.venue || paper.journal || ''}</span>
+            <div className="pub-tags">
+              {tags.slice(0, 3).map((t, i) => (
+                <span className="pub-tag" key={i}>{t}</span>
+              ))}
+            </div>
+          </div>
+          {isExpanded && (
+            <PeekWidget
+              paper={paper}
+              onClose={onToggle}
+              onChat={onChat}
+            />
+          )}
+        </div>
+      );
+    }
+
     /* ─── Status Bar ─── */
-    function StatusBar({ paperCount, filteredCount }) {
+    function StatusBar({ paperCount, filteredCount, activeLine, terminalOpen, onToggleTerminal }) {
       return (
         <div className="statusbar">
           <div className="statusbar-left">
@@ -524,10 +832,11 @@
             <span className="statusbar-item">0 errors 0 warnings</span>
           </div>
           <div className="statusbar-right">
-            <span className="statusbar-item">Ln 1, Col 1</span>
+            <span className="statusbar-item">Ln {activeLine || 1}, Col 1</span>
             <span className="statusbar-item">UTF-8</span>
             <span className="statusbar-item">Markdown</span>
             <span className="statusbar-item">{filteredCount}/{paperCount} pubs</span>
+            <span className="statusbar-item clickable" onClick={onToggleTerminal} title="Toggle Terminal (Ctrl+`)">{terminalOpen ? 'Terminal: On' : 'Terminal: Off'}</span>
             <span className="statusbar-item">v2.0.0</span>
           </div>
         </div>
@@ -546,6 +855,10 @@
       const [activeActivity, setActiveActivity] = useState('publications');
       const [sidebarOpen, setSidebarOpen] = useState(true);
       const [mobileSidebar, setMobileSidebar] = useState(false);
+      const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+      const [terminalOpen, setTerminalOpen] = useState(false);
+      const [hoveredLine, setHoveredLine] = useState(null);
+      const editorContentRef = useRef(null);
 
       useEffect(() => {
         Promise.all([
@@ -560,20 +873,58 @@
         }).catch(() => setLoading(false));
       }, []);
 
-      const handleActivitySelect = (id) => {
-        if (id === 'explorer' || id === 'search') {
-          if (id === activeActivity) {
-            setSidebarOpen(!sidebarOpen);
-          } else {
-            setActiveActivity(id);
-            setSidebarOpen(true);
+      // Handle ?open=paperid from URL
+      useEffect(() => {
+        if (loading || allPapers.length === 0) return;
+        const params = new URLSearchParams(window.location.search);
+        const openId = params.get('open');
+        if (openId) {
+          setExpandedId(openId);
+          // Scroll to paper after a short delay for rendering
+          setTimeout(() => {
+            const el = document.querySelector(`[data-paper-id="${openId}"]`);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }, 300);
+        }
+      }, [loading, allPapers]);
+
+      // Keyboard shortcuts
+      useEffect(() => {
+        const handler = (e) => {
+          if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+            e.preventDefault();
+            setCommandPaletteOpen(prev => !prev);
           }
+          if ((e.ctrlKey || e.metaKey) && e.key === '`') {
+            e.preventDefault();
+            setTerminalOpen(prev => !prev);
+          }
+        };
+        window.addEventListener('keydown', handler);
+        return () => window.removeEventListener('keydown', handler);
+      }, []);
+
+      // Handle selecting paper from command palette
+      const handleSelectPaperFromPalette = useCallback((paperId) => {
+        setExpandedId(paperId);
+        setTimeout(() => {
+          const el = document.querySelector(`[data-paper-id="${paperId}"]`);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 100);
+      }, []);
+
+      const virtualFS = useMemo(() => buildVirtualFS(siteData, allPapers, handleSelectPaperFromPalette), [siteData, allPapers, handleSelectPaperFromPalette]);
+
+      const handleActivitySelect = (id) => {
+        if (id === 'terminal') {
+          setTerminalOpen(prev => !prev);
           return;
         }
-        if (id === 'chat') {
-          if (chatPaper) {
-            setChatPaper(null);
-          }
+        if (id === 'explorer' || id === 'search') {
           if (id === activeActivity) {
             setSidebarOpen(!sidebarOpen);
           } else {
@@ -590,15 +941,29 @@
         }
       };
 
+      const handleChatWithPaper = useCallback((paper) => {
+        setChatPaper(paper);
+        setTerminalOpen(true);
+      }, []);
+
+      // Expose global for peek widget "Chat with Paper" button
+      useEffect(() => {
+        window.__terminalSetChatPaper = (paper) => {
+          setChatPaper(paper);
+          setTerminalOpen(true);
+        };
+        return () => { delete window.__terminalSetChatPaper; };
+      }, []);
+
       /* Collect all unique tags */
-      const allTags = React.useMemo(() => {
+      const allTags = useMemo(() => {
         const tagSet = new Set();
         allPapers.forEach(p => parseTags(p.tags).forEach(t => tagSet.add(t)));
         return [...tagSet].sort();
       }, [allPapers]);
 
       /* Filter papers */
-      const filtered = React.useMemo(() => {
+      const filtered = useMemo(() => {
         let list = allPapers;
         if (activeTag) {
           list = list.filter(p => parseTags(p.tags).includes(activeTag));
@@ -620,7 +985,7 @@
         'vscode-shell',
         !sidebarOpen ? 'sidebar-collapsed' : '',
         mobileSidebar ? 'mobile-sidebar-open' : '',
-        chatPaper ? 'copilot-open' : '',
+        terminalOpen ? 'terminal-open' : '',
       ].filter(Boolean).join(' ');
 
       return (
@@ -628,7 +993,7 @@
           <button className="hamburger" onClick={() => setMobileSidebar(!mobileSidebar)}>{'\u2630'}</button>
           {mobileSidebar && <div className="mobile-overlay open" onClick={() => setMobileSidebar(false)}></div>}
 
-          <TitleBar name={siteData?.name} />
+          <TitleBar name={siteData?.name} onCommandPalette={() => setCommandPaletteOpen(true)} />
           <ActivityBar active={activeActivity} onSelect={handleActivitySelect} />
           <SidebarComponent siteData={siteData} activePage="publications" />
 
@@ -655,7 +1020,7 @@
             </div>
 
             {/* Editor content */}
-            <div className="editor-content">
+            <div className="editor-content" ref={editorContentRef}>
               <div className="editor-body" style={{ flex: 1 }}>
                 {loading ? (
                   <div className="loading">Loading publications...</div>
@@ -713,7 +1078,9 @@
                         lineNum={idx + 1}
                         isExpanded={expandedId === p.id}
                         onToggle={() => setExpandedId(expandedId === p.id ? null : p.id)}
-                        onChat={(paper) => setChatPaper(paper)}
+                        onChat={handleChatWithPaper}
+                        isHovered={hoveredLine === idx + 1}
+                        onHover={setHoveredLine}
                       />
                     ))}
 
@@ -732,15 +1099,27 @@
             </div>
           </div>
 
-          {/* Copilot Chat Side Panel */}
-          {chatPaper && (
-            <CopilotPanel
-              paper={chatPaper}
-              onClose={() => setChatPaper(null)}
+          {/* Terminal Panel */}
+          {terminalOpen && (
+            <TerminalPanel
+              papers={allPapers}
+              chatPaper={chatPaper}
+              setChatPaper={setChatPaper}
+              onClose={() => setTerminalOpen(false)}
             />
           )}
 
-          <StatusBar paperCount={allPapers.length} filteredCount={filtered.length} />
+          <StatusBar
+            paperCount={allPapers.length}
+            filteredCount={filtered.length}
+            activeLine={hoveredLine || 1}
+            terminalOpen={terminalOpen}
+            onToggleTerminal={() => setTerminalOpen(prev => !prev)}
+          />
+
+          {commandPaletteOpen && (
+            <CommandPalette files={virtualFS} onClose={() => setCommandPaletteOpen(false)} />
+          )}
         </div>
       );
     }
