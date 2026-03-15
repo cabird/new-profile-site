@@ -661,7 +661,7 @@
     }
 
     /* ─── Sidebar ─── */
-    function Sidebar({ siteData, activeTab, onSetTab }) {
+    function Sidebar({ siteData, activeTab, onSetTab, openTabs }) {
       const [openSections, setOpenSections] = useState({ editors: true, project: true });
       const [openSubSections, setOpenSubSections] = useState({});
 
@@ -686,18 +686,23 @@
                 Open Editors
               </div>
               <div className={`tree-section-body ${openSections.editors ? 'open' : ''}`}>
-                <div className={`tree-item ${activeTab === 'home' ? 'active' : ''}`} style={{cursor:'pointer'}} onClick={() => onSetTab('home')}>
-                  <span className="tree-item-icon file-md"><FileMdIcon /></span>
-                  <span className="tree-item-label">home.md</span>
-                </div>
-                <div className={`tree-item ${activeTab === 'publications' ? 'active' : ''}`} style={{cursor:'pointer'}} onClick={() => onSetTab('publications')}>
-                  <span className="tree-item-icon file-md"><FileMdIcon /></span>
-                  <span className="tree-item-label">publications.md</span>
-                </div>
-                {activeTab === 'profile' && (
-                  <div className="tree-item active" style={{cursor:'pointer'}} onClick={() => onSetTab('profile')}>
-                    <span className="tree-item-icon"><FileIconSvg color="#a074c4" /></span>
-                    <span className="tree-item-label">profile.jpg</span>
+                {(openTabs || []).map(tab => {
+                  const info = {
+                    home: { label: 'home.md', icon: <FileMdIcon /> },
+                    publications: { label: 'publications.md', icon: <FileMdIcon /> },
+                    profile: { label: 'profile.jpg', icon: <FileIconSvg color="#a074c4" /> },
+                  };
+                  const t = info[tab] || { label: tab, icon: <FileMdIcon /> };
+                  return (
+                    <div key={tab} className={`tree-item ${activeTab === tab ? 'active' : ''}`} style={{cursor:'pointer'}} onClick={() => onSetTab(tab)}>
+                      <span className="tree-item-icon file-md">{t.icon}</span>
+                      <span className="tree-item-label">{t.label}</span>
+                    </div>
+                  );
+                })}
+                {(!openTabs || openTabs.length === 0) && (
+                  <div className="tree-item" style={{color:'#858585', fontSize: 12}}>
+                    <span className="tree-item-label">No open editors</span>
                   </div>
                 )}
               </div>
@@ -1267,9 +1272,9 @@
       const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
       const [terminalOpen, setTerminalOpen] = useState(false);
 
-      // Editor tab state: 'home' | 'publications' | 'profile'
+      // Tab management
+      const [openTabs, setOpenTabs] = useState(['home']);
       const [activeEditorTab, setActiveEditorTab] = useState('home');
-      const prevTabRef = useRef('home');
 
       // Home view line state
       const [homeActiveLine, setHomeActiveLine] = useState(1);
@@ -1280,14 +1285,32 @@
       const [chatPaper, setChatPaper] = useState(null);
       const [pubHoveredLine, setPubHoveredLine] = useState(null);
 
-      // Track previous tab for profile close behavior
-      const setActiveTab = useCallback((tab) => {
-        setActiveEditorTab(prev => {
-          if (prev !== 'profile') prevTabRef.current = prev;
-          return tab;
-        });
-        logEvent('tab', `Switch to: ${tab}`);
+      // Open a tab (add if not already open, switch to it)
+      const openTab = useCallback((tab) => {
+        setOpenTabs(prev => prev.includes(tab) ? prev : [...prev, tab]);
+        setActiveEditorTab(tab);
+        logEvent('tab', `Open: ${tab}`);
       }, []);
+
+      // Close a tab
+      const closeTab = useCallback((tab) => {
+        setOpenTabs(prev => {
+          const next = prev.filter(t => t !== tab);
+          // If we're closing the active tab, switch to an adjacent one
+          if (tab === activeEditorTab) {
+            const idx = prev.indexOf(tab);
+            const newActive = next.length > 0
+              ? (next[Math.min(idx, next.length - 1)])
+              : null;
+            setActiveEditorTab(newActive);
+          }
+          return next;
+        });
+        logEvent('tab', `Close: ${tab}`);
+      }, [activeEditorTab]);
+
+      // Alias for compatibility
+      const setActiveTab = openTab;
 
       // Select paper by id (used from command palette and URL params)
       const selectPaper = useCallback((paperId) => {
@@ -1413,36 +1436,68 @@
 
           <TitleBar name={siteData?.name} activeTab={activeEditorTab} onCommandPalette={() => { setCommandPaletteOpen(true); logEvent('command', 'Command Palette opened'); }} />
           <ActivityBar active={activeActivity} onSelect={handleActivitySelect} />
-          <Sidebar siteData={siteData} activeTab={activeEditorTab} onSetTab={setActiveTab} />
+          <Sidebar siteData={siteData} activeTab={activeEditorTab} onSetTab={openTab} openTabs={openTabs} />
 
           <div className="editor-area">
             {/* Tab Bar */}
             <div className="tabbar">
-              <div className={`tab ${activeEditorTab === 'home' ? 'active' : ''}`} onClick={() => setActiveTab('home')}>
-                <span className="tab-icon"><TabFileIcon color="#3794ff" /></span>
-                home.md
-                <span className="tab-close">{'\u00D7'}</span>
-              </div>
-              <div className={`tab ${activeEditorTab === 'publications' ? 'active' : ''}`} onClick={() => setActiveTab('publications')}>
-                <span className="tab-icon"><TabFileIcon color="#3794ff" /></span>
-                publications.md
-                <span className="tab-close">{'\u00D7'}</span>
-              </div>
-              {activeEditorTab === 'profile' && (
-                <div className="tab active">
-                  <span className="tab-icon"><FileImgIcon /></span>
-                  profile.jpg
-                  <span className="tab-close" onClick={(e) => { e.stopPropagation(); setActiveTab(prevTabRef.current); }}>{'\u00D7'}</span>
-                </div>
-              )}
+              {openTabs.map(tab => {
+                const tabInfo = {
+                  home: { label: 'home.md', icon: <TabFileIcon color="#3794ff" /> },
+                  publications: { label: 'publications.md', icon: <TabFileIcon color="#3794ff" /> },
+                  profile: { label: 'profile.jpg', icon: <FileImgIcon /> },
+                };
+                const info = tabInfo[tab] || { label: tab, icon: <TabFileIcon /> };
+                return (
+                  <div key={tab} className={`tab ${activeEditorTab === tab ? 'active' : ''}`} onClick={() => setActiveEditorTab(tab)}>
+                    <span className="tab-icon">{info.icon}</span>
+                    {info.label}
+                    <span className="tab-close" onClick={(e) => { e.stopPropagation(); closeTab(tab); }}>{'\u00D7'}</span>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Breadcrumb */}
-            <div className="breadcrumb">
-              <span style={{cursor:'default'}}>cbird-site</span>
-              <span className="breadcrumb-sep">{'\u203A'}</span>
-              <span>{activeEditorTab === 'profile' ? 'profile.jpg' : activeEditorTab === 'publications' ? 'publications.md' : 'home.md'}</span>
-            </div>
+            {activeEditorTab && (
+              <div className="breadcrumb">
+                <span style={{cursor:'default'}}>cbird-site</span>
+                <span className="breadcrumb-sep">{'\u203A'}</span>
+                <span>{activeEditorTab === 'profile' ? 'profile.jpg' : activeEditorTab === 'publications' ? 'publications.md' : 'home.md'}</span>
+              </div>
+            )}
+
+            {/* Welcome screen when no tabs are open */}
+            {!activeEditorTab && (
+              <div className="welcome-screen">
+                <div className="welcome-title">Scholarly IDE</div>
+                <div className="welcome-subtitle">{siteData?.name || ''}</div>
+                <div className="welcome-actions">
+                  <div className="welcome-section">Start</div>
+                  <div className="welcome-link" onClick={() => openTab('home')}>
+                    <span className="welcome-link-icon"><FileMdIcon /></span>
+                    Open home.md
+                  </div>
+                  <div className="welcome-link" onClick={() => openTab('publications')}>
+                    <span className="welcome-link-icon"><FileMdIcon /></span>
+                    Open publications.md
+                  </div>
+                  <div className="welcome-link" onClick={() => openTab('profile')}>
+                    <span className="welcome-link-icon"><FileIconSvg color="#a074c4" /></span>
+                    Open profile.jpg
+                  </div>
+                  <div className="welcome-section" style={{marginTop: 16}}>Help</div>
+                  <div className="welcome-link" onClick={() => { setCommandPaletteOpen(true); }}>
+                    <span className="welcome-link-shortcut">Ctrl+P</span>
+                    Go to File...
+                  </div>
+                  <div className="welcome-link" onClick={() => setTerminalOpen(prev => !prev)}>
+                    <span className="welcome-link-shortcut">Ctrl+`</span>
+                    Toggle Terminal
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Image Viewer */}
             {activeEditorTab === 'profile' && (
@@ -1466,7 +1521,7 @@
                 clickedLine={homeClickedLine}
                 setActiveLine={setHomeActiveLine}
                 setClickedLine={setHomeClickedLine}
-                onNavigatePublications={() => setActiveTab('publications')}
+                onNavigatePublications={() => openTab('publications')}
               />
             )}
 

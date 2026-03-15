@@ -538,6 +538,87 @@ a:hover { text-decoration: underline; }
 
 .file-img svg { color: #a074c4; }
 
+/* ---------- Welcome Screen ---------- */
+.welcome-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: var(--text-muted);
+}
+
+.welcome-title {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  opacity: 0.3;
+}
+
+.welcome-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  opacity: 0.5;
+}
+
+.welcome-actions {
+  width: 280px;
+}
+
+.welcome-section {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.welcome-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  margin: 2px 0;
+  cursor: pointer;
+  color: var(--vscode-link);
+  font-size: 13px;
+  font-family: 'Fira Code', monospace;
+  border-radius: 2px;
+}
+
+.welcome-link:hover {
+  background: var(--hover-bg);
+}
+
+.welcome-link-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.welcome-link-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.welcome-link-shortcut {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: #2d2d2d;
+  padding: 1px 6px;
+  border-radius: 2px;
+  border: 1px solid #3c3c3c;
+  flex-shrink: 0;
+}
+
 /* ---------- Line Highlight (Feature 3) ---------- */
 .content-line {
   display: flex;
