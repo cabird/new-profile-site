@@ -1,8 +1,8 @@
 /* ─── Sidebar ─── */
 const { useState } = React;
-const { FileMdIcon, FileIconSvg, FilePdfIcon, FolderIcon, LinkIcon, MailIcon, ChartIcon } = IDE;
+const { FileMdIcon, FileIconSvg, FilePdfIcon, FolderIcon, LinkIcon, MailIcon, ChartIcon, TagIcon, TabTagIcon } = IDE;
 
-IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs }) {
+IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTags }) {
   const [openSections, setOpenSections] = useState({ editors: true, project: true });
   const [openSubSections, setOpenSubSections] = useState({});
 
@@ -16,6 +16,21 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs }) {
 
   const contact = siteData?.contact;
 
+  // Helper to get tab display info
+  const getTabInfo = (tab) => {
+    const staticInfo = {
+      home: { label: 'home.md', icon: <FileMdIcon /> },
+      publications: { label: 'publications.md', icon: <FileMdIcon /> },
+      profile: { label: 'profile.jpg', icon: <FileIconSvg color="#a074c4" /> },
+    };
+    if (staticInfo[tab]) return staticInfo[tab];
+    if (tab.startsWith('tag:')) {
+      const tag = tab.slice(4);
+      return { label: tag + '.md', icon: <TagIcon /> };
+    }
+    return { label: tab, icon: <FileMdIcon /> };
+  };
+
   return (
     <nav className="sidebar">
       <div className="sidebar-title">Explorer</div>
@@ -28,12 +43,7 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs }) {
           </div>
           <div className={`tree-section-body ${openSections.editors ? 'open' : ''}`}>
             {(openTabs || []).map(tab => {
-              const info = {
-                home: { label: 'home.md', icon: <FileMdIcon /> },
-                publications: { label: 'publications.md', icon: <FileMdIcon /> },
-                profile: { label: 'profile.jpg', icon: <FileIconSvg color="#a074c4" /> },
-              };
-              const t = info[tab] || { label: tab, icon: <FileMdIcon /> };
+              const t = getTabInfo(tab);
               return (
                 <div key={tab} className={`tree-item ${activeTab === tab ? 'active' : ''}`} style={{cursor:'pointer'}} onClick={() => onSetTab(tab)}>
                   <span className="tree-item-icon file-md">{t.icon}</span>
@@ -97,17 +107,17 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs }) {
               </>
             )}
 
-            {/* Research areas folder */}
-            {siteData?.research_areas?.length > 0 && (
+            {/* Research areas folder — shows all unique tags from papers */}
+            {allTags && allTags.length > 0 && (
               <>
                 <div className="tree-item" onClick={() => toggleSub('research')} style={{cursor:'pointer'}}>
                   <span className="tree-item-icon folder"><FolderIcon open={openSubSections.research} /></span>
                   <span className="tree-item-label">research_areas/</span>
                 </div>
-                {openSubSections.research && siteData.research_areas.map((area, i) => (
-                  <div key={i} className="tree-item tree-sub-item" style={{cursor:'default'}}>
-                    <span className="tree-item-icon file-chart"><ChartIcon /></span>
-                    <span className="tree-item-label">{area.title}</span>
+                {openSubSections.research && allTags.map((tag, i) => (
+                  <div key={i} className={`tree-item tree-sub-item ${activeTab === 'tag:' + tag ? 'active' : ''}`} style={{cursor:'pointer'}} onClick={() => onSetTab('tag:' + tag)}>
+                    <span className="tree-item-icon file-chart"><TagIcon /></span>
+                    <span className="tree-item-label">{tag}.md</span>
                   </div>
                 ))}
               </>

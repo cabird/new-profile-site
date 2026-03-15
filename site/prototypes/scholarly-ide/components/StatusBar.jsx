@@ -4,15 +4,35 @@ const { useState, useEffect } = React;
 IDE.StatusBar = function StatusBar({ paperCount, activeLine, activeTab, terminalOpen, onToggleTerminal }) {
   const fileType = activeTab === 'profile' ? 'JPEG' : 'Markdown';
   const [filteredCount, setFilteredCount] = useState(paperCount);
+  const [tagFilteredCount, setTagFilteredCount] = useState(0);
+  const [tagTotalCount, setTagTotalCount] = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => {
       if (window.__pubsFilteredCount !== undefined) {
         setFilteredCount(window.__pubsFilteredCount);
       }
+      if (window.__tagFilteredCount !== undefined) {
+        setTagFilteredCount(window.__tagFilteredCount);
+      }
+      if (window.__tagTotalCount !== undefined) {
+        setTagTotalCount(window.__tagTotalCount);
+      }
     }, 200);
     return () => clearInterval(id);
   }, []);
+
+  const isTagTab = activeTab && activeTab.startsWith('tag:');
+
+  const getPubsDisplay = () => {
+    if (activeTab === 'publications') {
+      return `${filteredCount}/${paperCount} pubs`;
+    }
+    if (isTagTab) {
+      return `${tagFilteredCount}/${paperCount} pubs`;
+    }
+    return `${paperCount} pubs`;
+  };
 
   return (
     <div className="statusbar">
@@ -24,7 +44,7 @@ IDE.StatusBar = function StatusBar({ paperCount, activeLine, activeTab, terminal
         <span className="statusbar-item">Ln {activeLine || 1}, Col 1</span>
         <span className="statusbar-item">UTF-8</span>
         <span className="statusbar-item">{fileType}</span>
-        <span className="statusbar-item">{activeTab === 'publications' ? `${filteredCount}/` : ''}{paperCount} pubs</span>
+        <span className="statusbar-item">{getPubsDisplay()}</span>
         <span className="statusbar-item clickable" onClick={onToggleTerminal} title="Toggle Terminal (Ctrl+`)">{terminalOpen ? 'Terminal: On' : 'Terminal: Off'}</span>
         <span className="statusbar-item">v2.0.0</span>
       </div>

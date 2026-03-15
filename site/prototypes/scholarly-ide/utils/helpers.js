@@ -36,7 +36,7 @@ IDE.highlightMatch = function highlightMatch(text, query) {
 };
 
 IDE.buildVirtualFS = function buildVirtualFS(siteData, papers, callbacks) {
-  const { slugify } = IDE;
+  const { slugify, parseTags } = IDE;
   const files = [];
 
   files.push({ name: 'home.md', path: 'home.md', ext: '.md', action: () => callbacks.setActiveTab('home') });
@@ -58,6 +58,21 @@ IDE.buildVirtualFS = function buildVirtualFS(siteData, papers, callbacks) {
         files.push({ name: slug, path: `contact/${slug}`, ext: '.txt', action: () => { window.open(l.url, '_blank'); } });
       });
     }
+  }
+
+  // Research area tag files
+  if (papers) {
+    const tagSet = new Set();
+    papers.forEach(p => parseTags(p.tags).forEach(t => tagSet.add(t)));
+    [...tagSet].sort().forEach(tag => {
+      const fileName = tag + '.md';
+      files.push({
+        name: fileName,
+        path: `research_areas/${fileName}`,
+        ext: '.md',
+        action: () => callbacks.setActiveTab('tag:' + tag),
+      });
+    });
   }
 
   if (papers) {

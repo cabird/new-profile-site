@@ -2,9 +2,9 @@
 const { useState, useEffect, useCallback, useMemo } = React;
 const {
   TitleBar, ActivityBar, Sidebar, StatusBar,
-  HomeView, PublicationsView, TerminalPanel, CommandPalette,
-  TabFileIcon, FileImgIcon, FileMdIcon, FileIconSvg,
-  buildVirtualFS, logEvent
+  HomeView, PublicationsView, TagView, TerminalPanel, CommandPalette,
+  TabFileIcon, TabTagIcon, FileImgIcon, FileMdIcon, FileIconSvg,
+  buildVirtualFS, parseTags, logEvent
 } = IDE;
 
 IDE.App = function App() {
@@ -29,6 +29,13 @@ IDE.App = function App() {
   const [expandedId, setExpandedId] = useState(null);
   const [chatPaper, setChatPaper] = useState(null);
   const [pubHoveredLine, setPubHoveredLine] = useState(null);
+
+  // Compute all unique tags from papers
+  const allTags = useMemo(() => {
+    const tagSet = new Set();
+    papers.forEach(p => parseTags(p.tags).forEach(t => tagSet.add(t)));
+    return [...tagSet].sort();
+  }, [papers]);
 
   // Open a tab (add if not already open, switch to it)
   const openTab = useCallback((tab) => {
@@ -56,6 +63,11 @@ IDE.App = function App() {
 
   // Alias for compatibility
   const setActiveTab = openTab;
+
+  // Open a tag tab
+  const openTagTab = useCallback((tag) => {
+    openTab('tag:' + tag);
+  }, [openTab]);
 
   // Select paper by id — opens publications tab, expands peek, connects terminal
   const selectPaper = useCallback((paperId) => {
@@ -158,8 +170,48 @@ IDE.App = function App() {
     logEvent('chat', `Connected to paper: ${paper.title}`);
   }, []);
 
+  // Helper: get tab display info for tab bar
+  const getTabInfo = (tab) => {
+    const staticInfo = {
+      home: { label: 'home.md', icon: <TabFileIcon color="#3794ff" /> },
+      publications: { label: 'publications.md', icon: <TabFileIcon color="#3794ff" /> },
+      profile: { label: 'profile.jpg', icon: <FileImgIcon /> },
+    };
+    if (staticInfo[tab]) return staticInfo[tab];
+    if (tab.startsWith('tag:')) {
+      const tag = tab.slice(4);
+      return { label: tag + '.md', icon: <TabTagIcon color="#4ec9b0" /> };
+    }
+    return { label: tab, icon: <TabFileIcon /> };
+  };
+
+  // Helper: get breadcrumb for active tab
+  const getBreadcrumb = () => {
+    if (!activeEditorTab) return null;
+    if (activeEditorTab.startsWith('tag:')) {
+      const tag = activeEditorTab.slice(4);
+      return (
+        <>
+          <span style={{cursor:'default'}}>cbird-site</span>
+          <span className="breadcrumb-sep">{'\u203A'}</span>
+          <span>research_areas</span>
+          <span className="breadcrumb-sep">{'\u203A'}</span>
+          <span>{tag}.md</span>
+        </>
+      );
+    }
+    return (
+      <>
+        <span style={{cursor:'default'}}>cbird-site</span>
+        <span className="breadcrumb-sep">{'\u203A'}</span>
+        <span>{activeEditorTab === 'profile' ? 'profile.jpg' : activeEditorTab === 'publications' ? 'publications.md' : 'home.md'}</span>
+      </>
+    );
+  };
+
   // Compute active line for status bar
-  const activeLine = activeEditorTab === 'publications'
+  const isTagTab = activeEditorTab && activeEditorTab.startsWith('tag:');
+  const activeLine = activeEditorTab === 'publications' || isTagTab
     ? (pubHoveredLine || 1)
     : (homeClickedLine || homeActiveLine);
 
@@ -189,18 +241,13 @@ IDE.App = function App() {
 
       <TitleBar name={siteData?.name} activeTab={activeEditorTab} onCommandPalette={() => { setCommandPaletteOpen(true); logEvent('command', 'Command Palette opened'); }} />
       <ActivityBar active={activeActivity} onSelect={handleActivitySelect} />
-      <Sidebar siteData={siteData} activeTab={activeEditorTab} onSetTab={openTab} openTabs={openTabs} />
+      <Sidebar siteData={siteData} activeTab={activeEditorTab} onSetTab={openTab} openTabs={openTabs} allTags={allTags} />
 
       <div className="editor-area">
         {/* Tab Bar */}
         <div className="tabbar">
           {openTabs.map(tab => {
-            const tabInfo = {
-              home: { label: 'home.md', icon: <TabFileIcon color="#3794ff" /> },
-              publications: { label: 'publications.md', icon: <TabFileIcon color="#3794ff" /> },
-              profile: { label: 'profile.jpg', icon: <FileImgIcon /> },
-            };
-            const info = tabInfo[tab] || { label: tab, icon: <TabFileIcon /> };
+            const info = getTabInfo(tab);
             return (
               <div key={tab} className={`tab ${activeEditorTab === tab ? 'active' : ''}`} onClick={() => setActiveEditorTab(tab)}>
                 <span className="tab-icon">{info.icon}</span>
@@ -214,9 +261,7 @@ IDE.App = function App() {
         {/* Breadcrumb */}
         {activeEditorTab && (
           <div className="breadcrumb">
-            <span style={{cursor:'default'}}>cbird-site</span>
-            <span className="breadcrumb-sep">{'\u203A'}</span>
-            <span>{activeEditorTab === 'profile' ? 'profile.jpg' : activeEditorTab === 'publications' ? 'publications.md' : 'home.md'}</span>
+            {getBreadcrumb()}
           </div>
         )}
 
@@ -276,6 +321,7 @@ IDE.App = function App() {
             setClickedLine={setHomeClickedLine}
             onNavigatePublications={() => openTab('publications')}
             onSelectPaper={selectPaper}
+            onSelectTag={openTagTab}
           />
         )}
 
@@ -283,6 +329,19 @@ IDE.App = function App() {
         {activeEditorTab === 'publications' && (
           <PublicationsView
             papers={papers}
+            expandedId={expandedId}
+            setExpandedId={setExpandedId}
+            onChatWithPaper={handleChatWithPaper}
+            hoveredLine={pubHoveredLine}
+            setHoveredLine={setPubHoveredLine}
+          />
+        )}
+
+        {/* Tag Views */}
+        {isTagTab && (
+          <TagView
+            papers={papers}
+            tag={activeEditorTab.slice(4)}
             expandedId={expandedId}
             setExpandedId={setExpandedId}
             onChatWithPaper={handleChatWithPaper}

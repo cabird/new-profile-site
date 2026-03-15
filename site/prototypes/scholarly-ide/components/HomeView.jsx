@@ -37,7 +37,7 @@ IDE.Metrics = function Metrics({ paperCount, areaCount, yearsActive }) {
 };
 
 /* ─── Research Areas ─── */
-IDE.ResearchAreas = function ResearchAreas({ areas }) {
+IDE.ResearchAreas = function ResearchAreas({ areas, onSelectTag }) {
   const [openIdx, setOpenIdx] = useState(null);
   return (
     <div className="research-list">
@@ -47,7 +47,7 @@ IDE.ResearchAreas = function ResearchAreas({ areas }) {
             <span className={`chevron ${openIdx === i ? 'open' : ''}`}>{'\u25B8'}</span>
             <span className="folder-icon"><FolderIcon open={openIdx === i} /></span>
             <span className="title">{a.title}</span>
-            {a.tag && <span className="tag">{a.tag}</span>}
+            {a.tag && <span className="tag" style={{cursor: 'pointer'}} onClick={(e) => { e.stopPropagation(); if (onSelectTag) onSelectTag(a.tag); }}>{a.tag}</span>}
           </div>
           <div className={`research-item-desc ${openIdx === i ? 'open' : ''}`}>
             {a.description}
@@ -59,7 +59,7 @@ IDE.ResearchAreas = function ResearchAreas({ areas }) {
 };
 
 /* ─── Home View ─── */
-IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, setActiveLine, setClickedLine, onNavigatePublications, onSelectPaper }) {
+IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, setActiveLine, setClickedLine, onNavigatePublications, onSelectPaper, onSelectTag }) {
   const { ContentLine, Metrics, ResearchAreas } = IDE;
   const paperCount = papers.length;
   const areaCount = siteData?.research_areas?.length || 0;
@@ -121,7 +121,7 @@ IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, se
             </ContentLine>
             {siteData.research_areas.map((a, i) => (
               <ContentLine key={i} num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
-                <ResearchAreas areas={[a]} />
+                <ResearchAreas areas={[a]} onSelectTag={onSelectTag} />
               </ContentLine>
             ))}
             <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>

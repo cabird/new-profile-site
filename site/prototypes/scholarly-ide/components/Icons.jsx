@@ -64,6 +64,22 @@ IDE.ChartIcon = function ChartIcon() {
   );
 };
 
+IDE.TagIcon = function TagIcon({ color = '#4ec9b0' }) {
+  return (
+    <svg viewBox="0 0 16 16" fill={color} width="16" height="16">
+      <path d="M2 3v4.586l7 7L14.586 9l-7-7H2zm1.5 1a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
+    </svg>
+  );
+};
+
+IDE.TabTagIcon = function TabTagIcon({ color = '#4ec9b0' }) {
+  return (
+    <svg viewBox="0 0 16 16" fill={color} width="14" height="14">
+      <path d="M2 3v4.586l7 7L14.586 9l-7-7H2zm1.5 1a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
+    </svg>
+  );
+};
+
 IDE.SearchIconSmall = function SearchIconSmall() {
   return (
     <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
