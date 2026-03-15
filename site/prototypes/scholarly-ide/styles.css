@@ -538,10 +538,26 @@ a:hover { text-decoration: underline; }
   border-top: 1px solid var(--border);
   overflow: hidden;
   min-height: 0;
+  position: relative;
+}
+
+.terminal-resize-handle {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  cursor: row-resize;
+  z-index: 10;
+}
+
+.terminal-resize-handle:hover {
+  background: var(--vscode-accent);
+  opacity: 0.5;
 }
 
 .vscode-shell.terminal-open .terminal-panel {
-  height: var(--terminal-h);
+  /* height controlled by inline style from drag handler */
 }
 
 .terminal-panel-header {
