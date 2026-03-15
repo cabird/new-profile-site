@@ -394,17 +394,27 @@
         }
       };
 
-      const dragRef = useRef(null);
       const panelRef = useRef(null);
-      const [panelHeight, setPanelHeight] = useState(250);
+      const heightRef = useRef(250);
+
+      // Set the CSS variable on the shell element to control grid row height
+      useEffect(() => {
+        const shell = document.querySelector('.vscode-shell');
+        if (shell) {
+          shell.style.setProperty('--terminal-current-h', heightRef.current + 'px');
+        }
+      }, []);
 
       const handleDragStart = useCallback((e) => {
         e.preventDefault();
         const startY = e.clientY;
-        const startHeight = panelHeight;
+        const startHeight = heightRef.current;
+        const shell = document.querySelector('.vscode-shell');
         const onMove = (ev) => {
           const delta = startY - ev.clientY;
-          setPanelHeight(Math.max(100, Math.min(startHeight + delta, window.innerHeight - 200)));
+          const newHeight = Math.max(100, Math.min(startHeight + delta, window.innerHeight - 200));
+          heightRef.current = newHeight;
+          if (shell) shell.style.setProperty('--terminal-current-h', newHeight + 'px');
         };
         const onUp = () => {
           document.removeEventListener('mousemove', onMove);
@@ -416,10 +426,10 @@
         document.body.style.userSelect = 'none';
         document.addEventListener('mousemove', onMove);
         document.addEventListener('mouseup', onUp);
-      }, [panelHeight]);
+      }, []);
 
       return (
-        <div className="terminal-panel" ref={panelRef} style={{ height: panelHeight + 'px' }}>
+        <div className="terminal-panel" ref={panelRef}>
           <div className="terminal-resize-handle" onMouseDown={handleDragStart}></div>
           <div className="terminal-panel-header">
             <div className="terminal-panel-tabs">
@@ -896,6 +906,14 @@
       const [terminalOpen, setTerminalOpen] = useState(false);
       const [hoveredLine, setHoveredLine] = useState(null);
       const editorContentRef = useRef(null);
+
+      // Sync terminal height CSS variable with open/close state
+      useEffect(() => {
+        const shell = document.querySelector('.vscode-shell');
+        if (shell) {
+          shell.style.setProperty('--terminal-current-h', terminalOpen ? '250px' : '0px');
+        }
+      }, [terminalOpen]);
 
       useEffect(() => {
         Promise.all([

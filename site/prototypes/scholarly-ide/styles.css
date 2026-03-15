@@ -83,7 +83,7 @@ a:hover { text-decoration: underline; }
 /* ---------- VS Code Layout Shell ---------- */
 .vscode-shell {
   display: grid;
-  grid-template-rows: var(--titlebar-h) 1fr auto var(--statusbar-h);
+  grid-template-rows: var(--titlebar-h) 1fr var(--terminal-current-h, 0px) var(--statusbar-h);
   grid-template-columns: var(--activitybar-w) var(--sidebar-w) 1fr;
   grid-template-areas:
     "titlebar  titlebar  titlebar"
@@ -98,10 +98,7 @@ a:hover { text-decoration: underline; }
   grid-template-columns: var(--activitybar-w) 0px 1fr;
 }
 
-/* When terminal is closed, auto row collapses to 0 */
-.vscode-shell:not(.terminal-open) {
-  grid-template-rows: var(--titlebar-h) 1fr 0px var(--statusbar-h);
-}
+/* When terminal is closed, the CSS variable is 0px */
 
 /* ---------- Title Bar ---------- */
 .titlebar {
@@ -557,7 +554,7 @@ a:hover { text-decoration: underline; }
 }
 
 .vscode-shell.terminal-open .terminal-panel {
-  /* height controlled by inline style from drag handler */
+  height: 100%;
 }
 
 .terminal-panel-header {
