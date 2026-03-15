@@ -24,6 +24,26 @@
       return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     }
 
+    /* ─── Global Event Log (for OUTPUT tab) ─── */
+    const eventLog = [];
+    const eventListeners = new Set();
+    function logEvent(type, detail) {
+      const ts = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      eventLog.push({ ts, type, detail });
+      if (eventLog.length > 200) eventLog.shift();
+      eventListeners.forEach(fn => fn([...eventLog]));
+    }
+    function useEventLog() {
+      const [log, setLog] = useState(() => [...eventLog]);
+      useEffect(() => {
+        eventListeners.add(setLog);
+        return () => eventListeners.delete(setLog);
+      }, []);
+      return log;
+    }
+    // Fire initial event
+    logEvent('system', 'Scholarly IDE initialized');
+
     function parseTags(raw) {
       if (!raw) return [];
       if (Array.isArray(raw)) return raw;
@@ -249,7 +269,7 @@
                 <div
                   key={f.path}
                   className={`command-palette-row ${i === selectedIdx ? 'selected' : ''}`}
-                  onClick={() => { f.action(); onClose(); }}
+                  onClick={() => { logEvent('navigate', `Open: ${f.path}`); f.action(); onClose(); }}
                   onMouseEnter={() => setSelectedIdx(i)}
                 >
                   <span className="command-palette-row-icon"><PaletteFileIcon ext={f.ext} /></span>
@@ -265,6 +285,42 @@
 
     /* ─── Terminal Panel ─── */
     /* ─── ASCII Spinner (npm-style braille dots) ─── */
+    /* ─── Output Log Component ─── */
+    function OutputLog() {
+      const log = useEventLog();
+      const bottomRef = useRef(null);
+      useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, [log]);
+
+      const typeColors = {
+        system: '#569cd6',
+        navigate: '#4ec9b0',
+        explorer: '#dcb67a',
+        tab: '#c586c0',
+        paper: '#dcdcaa',
+        search: '#ce9178',
+        filter: '#b5cea8',
+        chat: '#6a9955',
+        command: '#d29922',
+        error: '#f85149',
+      };
+
+      return (
+        <div className="output-log">
+          {log.map((entry, i) => (
+            <div className="output-log-line" key={i}>
+              <span className="output-log-ts">[{entry.ts}]</span>
+              <span className="output-log-type" style={{color: typeColors[entry.type] || '#858585'}}>[{entry.type}]</span>
+              <span className="output-log-detail">{entry.detail}</span>
+            </div>
+          ))}
+          {log.length === 0 && <div style={{color:'#858585'}}>No output</div>}
+          <div ref={bottomRef} />
+        </div>
+      );
+    }
+
     function AsciiSpinner() {
       const frames = ['\u280B','\u2819','\u2839','\u2838','\u283C','\u2834','\u2826','\u2827','\u2807','\u280F'];
       const [idx, setIdx] = useState(0);
@@ -325,6 +381,7 @@
         setHistory(prev => [...prev, { type: 'user', content: text.trim() }]);
         setInput('');
         setStreaming(true);
+        logEvent('chat', `Query: "${text.trim().substring(0, 60)}${text.trim().length > 60 ? '...' : ''}"`);
 
         let assistantContent = '';
         setHistory(prev => [...prev, { type: 'assistant', content: '' }]);
@@ -480,7 +537,7 @@
             )}
 
             {activeTab === 'output' && (
-              <div className="terminal-output-empty">No output</div>
+              <OutputLog />
             )}
 
             {activeTab === 'terminal' && (
@@ -925,7 +982,9 @@
           list.sort((a, b) => (b.year || 0) - (a.year || 0));
           setAllPapers(list);
           setLoading(false);
-        }).catch(() => setLoading(false));
+          logEvent('system', `Loaded ${list.length} papers from /api/paper_data.json`);
+          logEvent('system', `Site data loaded: ${site.name}`);
+        }).catch(() => { setLoading(false); logEvent('error', 'Failed to load data'); });
       }, []);
 
       // Handle ?open=paperid from URL
@@ -999,6 +1058,7 @@
       const handleChatWithPaper = useCallback((paper) => {
         setChatPaper(paper);
         setTerminalOpen(true);
+        logEvent('chat', `Connected to paper: ${paper.title}`);
       }, []);
 
       // Expose global for peek widget "Chat with Paper" button
@@ -1006,6 +1066,7 @@
         window.__terminalSetChatPaper = (paper) => {
           setChatPaper(paper);
           setTerminalOpen(true);
+          logEvent('chat', `Connected to paper: ${paper.title}`);
         };
         return () => { delete window.__terminalSetChatPaper; };
       }, []);
@@ -1048,7 +1109,7 @@
           <button className="hamburger" onClick={() => setMobileSidebar(!mobileSidebar)}>{'\u2630'}</button>
           {mobileSidebar && <div className="mobile-overlay open" onClick={() => setMobileSidebar(false)}></div>}
 
-          <TitleBar name={siteData?.name} onCommandPalette={() => setCommandPaletteOpen(true)} />
+          <TitleBar name={siteData?.name} onCommandPalette={() => { setCommandPaletteOpen(true); logEvent('command', 'Command Palette opened'); }} />
           <ActivityBar active={activeActivity} onSelect={handleActivitySelect} />
           <SidebarComponent siteData={siteData} activePage="publications" />
 
@@ -1089,7 +1150,7 @@
                           type="text"
                           placeholder="Search titles, authors, venues, tags..."
                           value={search}
-                          onChange={e => setSearch(e.target.value)}
+                          onChange={e => { setSearch(e.target.value); if (e.target.value && e.target.value.length === 1) logEvent('search', `Searching: "${e.target.value}..."`); }}
                         />
                         <span className="result-count">{filtered.length}/{allPapers.length}</span>
                       </div>
@@ -1108,7 +1169,7 @@
                           <button
                             key={t}
                             className={`tag-btn ${activeTag === t ? 'active' : ''}`}
-                            onClick={() => setActiveTag(activeTag === t ? null : t)}
+                            onClick={() => { const newTag = activeTag === t ? null : t; setActiveTag(newTag); logEvent('filter', newTag ? `Filter by tag: ${newTag}` : 'Filter cleared'); }}
                           >
                             {t}
                           </button>
@@ -1132,7 +1193,7 @@
                         paper={p}
                         lineNum={idx + 1}
                         isExpanded={expandedId === p.id}
-                        onToggle={() => setExpandedId(expandedId === p.id ? null : p.id)}
+                        onToggle={() => { const opening = expandedId !== p.id; setExpandedId(opening ? p.id : null); if (opening) logEvent('paper', `Peek: ${p.title}`); }}
                         onChat={handleChatWithPaper}
                         isHovered={hoveredLine === idx + 1}
                         onHover={setHoveredLine}

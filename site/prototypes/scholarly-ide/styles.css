@@ -814,6 +814,35 @@ a:hover { text-decoration: underline; }
   padding: 8px 0;
 }
 
+.output-log {
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.output-log-line {
+  display: flex;
+  gap: 8px;
+  padding: 1px 0;
+  white-space: nowrap;
+}
+
+.output-log-ts {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.output-log-type {
+  flex-shrink: 0;
+  min-width: 72px;
+}
+
+.output-log-detail {
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* ---------- Command Palette (Feature 1) ---------- */
 .command-palette-backdrop {
   position: fixed;
