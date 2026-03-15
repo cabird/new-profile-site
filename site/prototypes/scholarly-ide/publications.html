@@ -6,7 +6,7 @@
   <title>Publications — Scholarly IDE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -264,6 +264,17 @@
     }
 
     /* ─── Terminal Panel ─── */
+    /* ─── ASCII Spinner (npm-style braille dots) ─── */
+    function AsciiSpinner() {
+      const frames = ['\u280B','\u2819','\u2839','\u2838','\u283C','\u2834','\u2826','\u2827','\u2807','\u280F'];
+      const [idx, setIdx] = useState(0);
+      useEffect(() => {
+        const id = setInterval(() => setIdx(i => (i + 1) % frames.length), 80);
+        return () => clearInterval(id);
+      }, []);
+      return <span className="terminal-text" style={{ color: '#6a9955' }}>{frames[idx]} querying paper...</span>;
+    }
+
     function TerminalPanel({ papers, chatPaper, setChatPaper, onClose }) {
       const [activeTab, setActiveTab] = useState('terminal');
       const [history, setHistory] = useState([]);
@@ -486,7 +497,8 @@
 
                 {streaming && (
                   <div className="terminal-line">
-                    <span className="terminal-spinner">{'\u2588'}</span>
+                    <span className="terminal-prompt">{'\u276F'}</span>
+                    <AsciiSpinner />
                   </div>
                 )}
 
@@ -702,6 +714,29 @@
             </button>
           </div>
           <div className="peek-content">
+            <div className="peek-actions">
+              {paper.mapped_pdf && (
+                <a className="pub-action-btn" href={paper.mapped_pdf} target="_blank" rel="noopener">
+                  <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><path d="M13.71 4.29l-3-3A1 1 0 0010 1H4a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V5a1 1 0 00-.29-.71zM12 14H4V2h5v3a1 1 0 001 1h3v8z"/></svg>
+                  PDF
+                </a>
+              )}
+              {paper.doi && (
+                <a className="pub-action-btn" href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener">
+                  DOI
+                </a>
+              )}
+              {paper.url && (
+                <a className="pub-action-btn" href={paper.url} target="_blank" rel="noopener">
+                  Link
+                </a>
+              )}
+              <button className="pub-action-btn chat-btn" onClick={(e) => { e.stopPropagation(); onChat(paper); }}>
+                <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><path d="M14 1H2a1 1 0 00-1 1v9a1 1 0 001 1h3l3 3 3-3h3a1 1 0 001-1V2a1 1 0 00-1-1zm0 10h-3.6L8 13.4 5.6 11H2V2h12v9z"/></svg>
+                Chat with Paper
+              </button>
+            </div>
+
             {tldr && (
               <div className="peek-tldr">
                 <div className="peek-comment">// tl;dr</div>
@@ -749,29 +784,6 @@
                 ))}
               </div>
             )}
-
-            <div className="peek-actions">
-              {paper.mapped_pdf && (
-                <a className="pub-action-btn" href={paper.mapped_pdf} target="_blank" rel="noopener">
-                  <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><path d="M13.71 4.29l-3-3A1 1 0 0010 1H4a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V5a1 1 0 00-.29-.71zM12 14H4V2h5v3a1 1 0 001 1h3v8z"/></svg>
-                  PDF
-                </a>
-              )}
-              {paper.doi && (
-                <a className="pub-action-btn" href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener">
-                  DOI
-                </a>
-              )}
-              {paper.url && (
-                <a className="pub-action-btn" href={paper.url} target="_blank" rel="noopener">
-                  Link
-                </a>
-              )}
-              <button className="pub-action-btn chat-btn" onClick={(e) => { e.stopPropagation(); onChat(paper); }}>
-                <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><path d="M14 1H2a1 1 0 00-1 1v9a1 1 0 001 1h3l3 3 3-3h3a1 1 0 001-1V2a1 1 0 00-1-1zm0 10h-3.6L8 13.4 5.6 11H2V2h12v9z"/></svg>
-                Chat with Paper
-              </button>
-            </div>
           </div>
         </div>
       );

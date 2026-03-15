@@ -948,7 +948,7 @@ a:hover { text-decoration: underline; }
 .md-meta .val { color: var(--string); }
 
 .md-paragraph {
-  font-family: 'Lora', Georgia, serif;
+  font-family: 'Fira Code', monospace;
   font-size: 0.95rem;
   line-height: 1.75;
   color: var(--text);
@@ -1036,7 +1036,7 @@ a:hover { text-decoration: underline; }
 
 .research-item-desc {
   padding: 4px 8px 10px 30px;
-  font-family: 'Lora', Georgia, serif;
+  font-family: 'Fira Code', monospace;
   font-size: 0.88rem;
   color: var(--text-muted);
   line-height: 1.6;
@@ -1079,7 +1079,7 @@ a:hover { text-decoration: underline; }
 }
 
 .pub-teaser-title {
-  font-family: 'Lora', Georgia, serif;
+  font-family: 'Fira Code', monospace;
   font-size: 0.9rem;
   color: var(--text);
   flex: 1 1 0;
@@ -1247,7 +1247,7 @@ a:hover { text-decoration: underline; }
 }
 
 .pub-title {
-  font-family: 'Lora', Georgia, serif;
+  font-family: 'Fira Code', monospace;
   font-size: 0.92rem;
   color: var(--text);
   margin-bottom: 1px;
@@ -1398,7 +1398,7 @@ a:hover { text-decoration: underline; }
 }
 
 .peek-tldr-text {
-  font-family: 'Lora', Georgia, serif;
+  font-family: 'Fira Code', monospace;
   font-size: 0.88rem;
   color: var(--text-muted);
   line-height: 1.7;
@@ -1460,7 +1460,7 @@ a:hover { text-decoration: underline; }
 }
 
 .pub-abstract {
-  font-family: 'Lora', Georgia, serif;
+  font-family: 'Fira Code', monospace;
   font-size: 0.88rem;
   color: var(--text-muted);
   line-height: 1.7;
