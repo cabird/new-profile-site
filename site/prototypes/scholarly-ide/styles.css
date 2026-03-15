@@ -1,359 +1,1115 @@
 /* ============================================================
-   Scholarly IDE — Vanilla CSS
+   Scholarly IDE — VS Code Dark+ Theme (Authentic)
    ============================================================ */
 
 /* ---------- Reset & Base ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:        #0D1117;
-  --surface:   #161B22;
-  --border:    #30363D;
-  --text:      #C9D1D9;
-  --text2:     #8B949E;
-  --link:      #58A6FF;
-  --tag:       #3FB950;
-  --ai:        #D29922;
-  --error:     #F85149;
-  --hover-bg:  #1F242C;
-  --sidebar-w: 250px;
-  --chat-w:    420px;
+  --vscode-editor-bg: #1e1e1e;
+  --vscode-sidebar-bg: #252526;
+  --vscode-activitybar-bg: #333333;
+  --vscode-statusbar-bg: #007acc;
+  --vscode-titlebar-bg: #3c3c3c;
+  --vscode-tab-inactive-bg: #2d2d2d;
+  --vscode-tab-active-bg: #1e1e1e;
+  --vscode-border: #2a2d2e;
+  --vscode-fg: #d4d4d4;
+  --vscode-fg-muted: #858585;
+  --vscode-accent: #007acc;
+  --vscode-link: #3794ff;
+
+  /* Aliases for backward compat */
+  --titlebar-bg:   var(--vscode-titlebar-bg);
+  --activitybar-bg: var(--vscode-activitybar-bg);
+  --sidebar-bg:    var(--vscode-sidebar-bg);
+  --editor-bg:     var(--vscode-editor-bg);
+  --panel-bg:      var(--vscode-editor-bg);
+  --tab-bg:        var(--vscode-tab-inactive-bg);
+  --tab-active-bg: var(--vscode-tab-active-bg);
+  --tab-inactive-bg: var(--vscode-tab-inactive-bg);
+  --statusbar-bg:  var(--vscode-statusbar-bg);
+  --border:        var(--vscode-border);
+  --border-light:  #3c3c3c;
+  --text:          var(--vscode-fg);
+  --text-muted:    var(--vscode-fg-muted);
+  --accent:        #569cd6;
+  --accent-bright: var(--vscode-link);
+  --string:        #ce9178;
+  --keyword:       #c586c0;
+  --number:        #b5cea8;
+  --comment:       #6a9955;
+  --function:      #dcdcaa;
+  --tag-color:     #4ec9b0;
+  --error:         #f85149;
+  --warning:       #d29922;
+  --hover-bg:      rgba(255,255,255,0.06);
+  --list-active:   rgba(255,255,255,0.06);
+  --focus-border:  var(--vscode-accent);
+
+  --activitybar-w: 48px;
+  --sidebar-w:     250px;
+  --statusbar-h:   22px;
+  --titlebar-h:    30px;
+  --tabbar-h:      35px;
+  --breadcrumb-h:  22px;
+  --gutter-w:      50px;
 }
 
-html { font-size: 15px; }
+html { font-size: 14px; }
 
 body {
-  background: var(--bg);
+  background: var(--editor-bg);
   color: var(--text);
-  font-family: 'Lora', Georgia, serif;
-  line-height: 1.6;
+  font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+  line-height: 1.5;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
-a { color: var(--link); text-decoration: none; }
+a { color: var(--vscode-link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 /* ---------- Custom Scrollbars ---------- */
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #484f58; }
-* { scrollbar-width: thin; scrollbar-color: var(--border) var(--bg); }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb { background: #424242; border-radius: 10px; border: 2px solid transparent; background-clip: content-box; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-corner { background: transparent; }
+* { scrollbar-width: thin; scrollbar-color: #424242 transparent; }
+
+/* ---------- VS Code Layout Shell ---------- */
+.vscode-shell {
+  display: grid;
+  grid-template-rows: var(--titlebar-h) 1fr var(--statusbar-h);
+  grid-template-columns: var(--activitybar-w) var(--sidebar-w) 1fr;
+  grid-template-areas:
+    "titlebar  titlebar  titlebar"
+    "activity  sidebar   editor"
+    "statusbar statusbar statusbar";
+  height: 100vh;
+  width: 100vw;
+}
+
+.vscode-shell.sidebar-collapsed {
+  grid-template-columns: var(--activitybar-w) 0px 1fr;
+}
+
+/* When copilot panel is open, editor shares space */
+.vscode-shell.copilot-open {
+  grid-template-columns: var(--activitybar-w) var(--sidebar-w) 1fr 400px;
+  grid-template-areas:
+    "titlebar  titlebar  titlebar  titlebar"
+    "activity  sidebar   editor    copilot"
+    "statusbar statusbar statusbar statusbar";
+}
+
+.vscode-shell.copilot-open.sidebar-collapsed {
+  grid-template-columns: var(--activitybar-w) 0px 1fr 400px;
+}
+
+/* ---------- Title Bar ---------- */
+.titlebar {
+  grid-area: titlebar;
+  background: var(--titlebar-bg);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--border);
+  -webkit-app-region: drag;
+  user-select: none;
+  z-index: 1000;
+}
+
+.titlebar-dots {
+  display: flex;
+  gap: 8px;
+  margin-right: 16px;
+}
+
+.titlebar-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.titlebar-dot.red { background: #ff5f57; }
+.titlebar-dot.yellow { background: #febc2e; }
+.titlebar-dot.green { background: #28c840; }
+
+.titlebar-text {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ---------- Activity Bar ---------- */
+.activitybar {
+  grid-area: activity;
+  background: var(--activitybar-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4px;
+  border-right: 1px solid var(--border);
+  z-index: 100;
+}
+
+.activity-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  transition: color 0.15s;
+  border: none;
+  background: none;
+}
+
+.activity-icon:hover { color: var(--text); }
+
+.activity-icon.active {
+  color: #fff;
+}
+
+.activity-icon.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: #fff;
+}
+
+.activity-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.activity-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: var(--statusbar-bg);
+  color: #fff;
+  font-size: 10px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
 
 /* ---------- Sidebar ---------- */
 .sidebar {
-  position: fixed;
-  top: 0; left: 0;
-  width: var(--sidebar-w);
-  height: 100vh;
-  background: var(--surface);
+  grid-area: sidebar;
+  background: var(--sidebar-bg);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  z-index: 100;
+  overflow: hidden;
+  z-index: 90;
+}
+
+.vscode-shell.sidebar-collapsed .sidebar {
+  display: none;
+}
+
+.sidebar-title {
+  padding: 0 20px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 400;
+  flex-shrink: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.sidebar-content {
+  flex: 1;
   overflow-y: auto;
 }
 
-.sidebar-header {
-  padding: 20px 16px 12px;
-  border-bottom: 1px solid var(--border);
-  font-family: 'Fira Code', monospace;
-  font-size: 0.8rem;
-  color: var(--text2);
+/* Tree sections */
+.tree-section {
+  border-top: none;
 }
 
-.sidebar-header .name {
-  color: var(--link);
-  font-size: 0.95rem;
-  display: block;
-  margin-bottom: 2px;
-}
-
-.sidebar-header .role {
-  font-size: 0.7rem;
-  color: var(--text2);
-}
-
-.sidebar-nav { padding: 12px 0; flex: 1; }
-
-.sidebar-nav a {
-  display: block;
-  padding: 6px 16px;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.8rem;
+.tree-section-header {
+  display: flex;
+  align-items: center;
+  padding: 0 8px 0 10px;
+  height: 22px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
   color: var(--text);
-  border-left: 2px solid transparent;
-  transition: background 0.15s, border-color 0.15s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  user-select: none;
+  background: var(--sidebar-bg);
+  border-top: 1px solid var(--border);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.sidebar-nav a:hover,
-.sidebar-nav a.active {
+.tree-section-header:hover {
   background: var(--hover-bg);
-  border-left-color: var(--link);
+}
+
+.tree-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  font-size: 8px;
+  color: var(--text);
+  transition: transform 0.15s;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.tree-chevron.open {
+  transform: rotate(90deg);
+}
+
+.tree-section-body {
+  display: none;
+}
+
+.tree-section-body.open {
+  display: block;
+}
+
+.tree-item {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px 0 26px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text);
+  transition: background 0.1s;
+  text-decoration: none;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tree-item:hover {
+  background: var(--hover-bg);
   text-decoration: none;
 }
 
-.sidebar-nav a.active { color: var(--link); }
-
-.sidebar-contact {
-  padding: 16px;
-  border-top: 1px solid var(--border);
-  font-family: 'Fira Code', monospace;
-  font-size: 0.7rem;
+.tree-item.active {
+  background: var(--list-active);
 }
 
-.sidebar-contact .prompt {
-  color: var(--text2);
-  margin-bottom: 6px;
+.tree-item-icon {
+  flex-shrink: 0;
+  font-size: 13px;
+  width: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.sidebar-contact a {
-  display: block;
-  padding: 2px 0;
-  color: var(--link);
-  font-size: 0.7rem;
+.tree-item-icon svg {
+  width: 16px;
+  height: 16px;
 }
 
-/* ---------- Main Content ---------- */
-.main {
-  margin-left: var(--sidebar-w);
-  padding: 40px 48px 60px;
-  max-width: 960px;
-  transition: margin-right 0.25s;
+.tree-item-icon.file svg { color: var(--accent); }
+.tree-item-icon.file-md svg { color: var(--vscode-link); }
+.tree-item-icon.file-pdf svg { color: #e06c75; }
+.tree-item-icon.folder svg { color: #dcb67a; }
+.tree-item-icon.file-link svg { color: var(--vscode-link); }
+.tree-item-icon.file-mail svg { color: var(--tag-color); }
+.tree-item-icon.file-chart svg { color: var(--tag-color); }
+
+.tree-item-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
 }
 
-.main.chat-open {
-  margin-right: var(--chat-w);
+.tree-sub-item {
+  padding-left: 34px;
 }
 
-/* ---------- Hero / README ---------- */
-.hero-prompt {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.85rem;
-  color: var(--tag);
+/* ---------- Editor Area ---------- */
+.editor-area {
+  grid-area: editor;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--editor-bg);
+  min-width: 0;
+}
+
+/* Tab bar */
+.tabbar {
+  display: flex;
+  align-items: stretch;
+  background: var(--tab-inactive-bg);
+  height: var(--tabbar-h);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--tab-inactive-bg);
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  white-space: nowrap;
+  min-width: 0;
+  position: relative;
+  text-decoration: none;
+  transition: background 0.1s;
+  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  border-top: 1px solid transparent;
+}
+
+.tab:hover {
+  background: var(--tab-active-bg);
+  text-decoration: none;
+}
+
+.tab.active {
+  background: var(--tab-active-bg);
+  color: var(--text);
+  border-top: 1px solid var(--vscode-accent);
+  border-bottom: 1px solid var(--tab-active-bg);
+  margin-bottom: -1px;
+}
+
+.tab-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tab-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.tab-close {
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 2px;
+  background: none;
+  border: none;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.tab:hover .tab-close,
+.tab.active .tab-close {
+  opacity: 1;
+}
+
+.tab-close:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--text);
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  height: var(--breadcrumb-h);
+  padding: 0 16px 0 calc(var(--gutter-w) + 16px);
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--editor-bg);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  gap: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.breadcrumb-sep { color: var(--text-muted); margin: 0 2px; }
+
+.breadcrumb a {
+  color: var(--text-muted);
+}
+
+.breadcrumb a:hover {
+  color: var(--text);
+}
+
+/* Editor content with gutter */
+.editor-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  position: relative;
+}
+
+.editor-gutter {
+  width: var(--gutter-w);
+  flex-shrink: 0;
+  background: var(--editor-bg);
+  text-align: right;
+  padding: 16px 12px 16px 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  user-select: none;
+}
+
+.editor-body {
+  flex: 1;
+  padding: 16px 24px 60px 16px;
+  min-width: 0;
+  line-height: 1.65;
+}
+
+/* ---------- Copilot Chat Side Panel ---------- */
+.copilot-panel {
+  grid-area: copilot;
+  display: flex;
+  flex-direction: column;
+  background: var(--sidebar-bg);
+  border-left: 1px solid var(--border);
+  height: 100%;
+  overflow: hidden;
+}
+
+.copilot-header {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 35px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.copilot-header-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.copilot-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.copilot-header-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.copilot-header-subtitle {
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.copilot-header-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.copilot-header-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 2px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+}
+
+.copilot-header-btn:hover {
+  background: var(--hover-bg);
+  color: var(--text);
+}
+
+/* Panel tabs */
+.copilot-tabs {
+  display: flex;
+  height: 28px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  padding: 0 12px;
+  background: var(--sidebar-bg);
+}
+
+.copilot-tab {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 11px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px;
+  user-select: none;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.copilot-tab:hover { color: var(--text); }
+
+.copilot-tab.active {
+  color: var(--text);
+  border-bottom-color: var(--vscode-accent);
+}
+
+/* Messages area */
+.copilot-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.copilot-welcome {
+  padding: 16px 0;
+  text-align: center;
+}
+
+.copilot-welcome-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #fff;
+  margin: 0 auto 10px;
+}
+
+.copilot-welcome-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
   margin-bottom: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.hero-name {
+.copilot-welcome-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Message bubbles */
+.copilot-msg {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.copilot-msg.user {
+  flex-direction: row-reverse;
+}
+
+.copilot-msg-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.copilot-msg.user .copilot-msg-avatar {
+  background: #3794ff;
+  color: #fff;
+}
+
+.copilot-msg.assistant .copilot-msg-avatar {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  font-size: 11px;
+}
+
+.copilot-msg.error .copilot-msg-avatar {
+  background: var(--error);
+  color: #fff;
+}
+
+.copilot-msg-content {
+  max-width: 85%;
+  min-width: 0;
+}
+
+.copilot-msg.user .copilot-msg-content {
+  background: #2a2d2e;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+.copilot-msg.assistant .copilot-msg-content {
+  padding: 4px 0;
+}
+
+.copilot-msg.error .copilot-msg-content {
+  color: var(--error);
+  padding: 4px 0;
+}
+
+.copilot-msg-text {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.copilot-msg.user .copilot-msg-text {
+  color: var(--text);
+}
+
+/* Thinking indicator */
+.copilot-thinking {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.copilot-thinking-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 11px;
+  color: #fff;
+}
+
+.copilot-thinking-dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.copilot-thinking-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: copilot-pulse 1.4s ease-in-out infinite;
+}
+
+.copilot-thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+.copilot-thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes copilot-pulse {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+/* Canned questions as chips */
+.copilot-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 12px;
+  flex-shrink: 0;
+  border-top: 1px solid var(--border);
+}
+
+.copilot-chip {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 11px;
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  line-height: 1.3;
+}
+
+.copilot-chip:hover {
+  border-color: var(--vscode-accent);
+  color: var(--text);
+}
+
+.copilot-chip:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.copilot-status {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 2px 12px;
+  flex-shrink: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Input area */
+.copilot-input-area {
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.copilot-input-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--tab-inactive-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 0 4px 0 12px;
+  transition: border-color 0.15s;
+}
+
+.copilot-input-wrap:focus-within {
+  border-color: var(--vscode-accent);
+}
+
+.copilot-input-wrap input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  padding: 8px 0;
+}
+
+.copilot-input-wrap input::placeholder { color: var(--text-muted); }
+
+.copilot-send-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.copilot-send-btn:hover { color: var(--text); }
+.copilot-send-btn:disabled { opacity: 0.3; cursor: default; }
+
+.copilot-send-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Status Bar ---------- */
+.statusbar {
+  grid-area: statusbar;
+  background: var(--statusbar-bg);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #fff;
+  z-index: 1000;
+  justify-content: space-between;
+  user-select: none;
+  height: var(--statusbar-h);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.statusbar-left,
+.statusbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.statusbar-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: default;
+  padding: 0 4px;
+  height: 100%;
+}
+
+.statusbar-item:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+/* ---------- Editor-Styled Content (Home) ---------- */
+
+/* Markdown-like headers */
+.md-h1 {
   font-family: 'Fira Code', monospace;
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: var(--text);
   font-weight: 700;
   margin-bottom: 4px;
 }
 
-.hero-title {
+.md-h1 .hash { color: var(--accent); margin-right: 8px; }
+
+.md-h2 {
   font-family: 'Fira Code', monospace;
-  font-size: 0.85rem;
-  color: var(--text2);
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin: 28px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.md-h2 .hash { color: var(--accent); opacity: 0.5; margin-right: 6px; }
+
+.md-meta {
+  font-size: 13px;
+  color: var(--text-muted);
   margin-bottom: 20px;
 }
 
-.hero-section {
-  display: flex;
-  gap: 36px;
-  align-items: flex-start;
-  margin-bottom: 40px;
-}
+.md-meta .key { color: var(--keyword); }
+.md-meta .val { color: var(--string); }
 
-.hero-text { flex: 1; }
-
-.hero-bio {
-  font-size: 1rem;
+.md-paragraph {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.95rem;
   line-height: 1.75;
   color: var(--text);
+  margin-bottom: 16px;
 }
 
-.hero-photo {
-  flex-shrink: 0;
-}
-
-.hero-photo img {
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-}
-
-/* ---------- Metrics Row ---------- */
+/* Metrics (telemetry panel) */
 .metrics-row {
   display: flex;
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
-  border-radius: 4px;
-  margin-bottom: 40px;
+  border-radius: 2px;
+  margin-bottom: 24px;
   overflow: hidden;
 }
 
 .metric {
   flex: 1;
-  background: var(--surface);
-  padding: 16px 20px;
+  background: var(--sidebar-bg);
+  padding: 14px 16px;
   text-align: center;
 }
 
 .metric-value {
   font-family: 'Fira Code', monospace;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: var(--link);
+  color: var(--number);
   font-variant-numeric: tabular-nums;
 }
 
 .metric-label {
   font-family: 'Fira Code', monospace;
-  font-size: 0.65rem;
-  color: var(--text2);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: 0.7rem;
+  color: var(--comment);
   margin-top: 4px;
 }
 
-/* ---------- Section Headers ---------- */
-.section-header {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.85rem;
-  color: var(--text2);
-  margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-
-.section-header span { color: var(--tag); }
-
-/* ---------- Research Areas (Directory Items) ---------- */
-.research-list { margin-bottom: 40px; }
+/* Research areas as tree */
+.research-list { margin-bottom: 24px; }
 
 .research-item {
-  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  margin-left: 8px;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.1s;
 }
-
-.research-item:last-child { border-bottom: 1px solid var(--border); }
 
 .research-item:hover { background: var(--hover-bg); }
 
 .research-item-header {
   display: flex;
   align-items: center;
-  padding: 10px 12px;
+  padding: 6px 8px;
   gap: 8px;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.85rem;
+  font-size: 13px;
   user-select: none;
 }
 
 .research-item-header .chevron {
-  color: var(--text2);
-  font-size: 0.7rem;
-  width: 14px;
-  transition: transform 0.2s;
+  color: var(--text-muted);
+  font-size: 8px;
+  width: 12px;
+  transition: transform 0.15s;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .research-item-header .chevron.open { transform: rotate(90deg); }
-
-.research-item-header .folder { color: var(--ai); }
-
+.research-item-header .folder-icon { color: #dcb67a; margin-right: 2px; }
 .research-item-header .title { color: var(--text); }
 
 .research-item-header .tag {
   margin-left: auto;
-  font-size: 0.65rem;
-  color: var(--tag);
-  background: rgba(63,185,80,0.1);
-  padding: 2px 8px;
-  border-radius: 3px;
-  border: 1px solid rgba(63,185,80,0.2);
+  font-size: 0.7rem;
+  color: var(--tag-color);
+  background: rgba(78,201,176,0.1);
+  padding: 1px 8px;
+  border-radius: 2px;
+  border: 1px solid rgba(78,201,176,0.2);
 }
 
 .research-item-desc {
-  padding: 0 12px 12px 36px;
-  font-size: 0.9rem;
-  color: var(--text2);
+  padding: 4px 8px 10px 30px;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.88rem;
+  color: var(--text-muted);
   line-height: 1.6;
   display: none;
 }
 
 .research-item-desc.open { display: block; }
 
-/* ---------- Publication Teaser (Homepage) ---------- */
-.pub-teaser { margin-bottom: 40px; }
+/* Featured publications */
+.pub-teaser { margin-bottom: 24px; }
 
 .pub-teaser-item {
-  border-top: 1px solid var(--border);
-  padding: 10px 12px;
   display: flex;
   align-items: baseline;
-  gap: 16px;
-  transition: background 0.15s, border-color 0.15s;
-  border-left: 2px solid transparent;
+  gap: 12px;
+  padding: 4px 0;
+  border-left: 1px solid var(--border);
+  padding-left: 8px;
+  margin-left: 8px;
+  transition: background 0.1s;
 }
 
-.pub-teaser-item:hover {
-  background: var(--hover-bg);
-  border-left-color: var(--link);
-}
-
-.pub-teaser-item:last-child { border-bottom: 1px solid var(--border); }
+.pub-teaser-item:hover { background: var(--hover-bg); }
 
 .pub-teaser-year {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.8rem;
-  color: var(--text2);
+  font-size: 13px;
+  color: var(--number);
   flex-shrink: 0;
   font-variant-numeric: tabular-nums;
 }
 
 .pub-teaser-title {
-  font-size: 0.95rem;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.9rem;
   color: var(--text);
   flex: 1;
+  min-width: 0;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .pub-teaser-venue {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.7rem;
-  color: var(--text2);
+  font-size: 12px;
+  color: var(--text-muted);
   flex-shrink: 0;
 }
 
 .pub-teaser-more {
   text-align: right;
-  margin-top: 12px;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.8rem;
+  margin-top: 8px;
+  font-size: 13px;
 }
 
-/* ---------- Publications Page ---------- */
+/* ---------- Publications Page Styles ---------- */
+
+/* Search bar - command palette style */
 .search-bar-container {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--bg);
-  padding: 16px 0;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 16px;
+  background: var(--editor-bg);
+  padding: 12px 0;
+  margin-bottom: 12px;
 }
 
 .search-bar {
   display: flex;
   align-items: center;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 4px;
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 2px;
   padding: 0 12px;
-  font-family: 'Fira Code', monospace;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.search-bar .prompt-prefix {
-  color: var(--tag);
-  font-size: 0.8rem;
+.search-bar .search-icon-prefix {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
   margin-right: 8px;
   flex-shrink: 0;
+}
+
+.search-bar .search-icon-prefix svg {
+  width: 14px;
+  height: 14px;
 }
 
 .search-bar input {
@@ -363,121 +1119,134 @@ a:hover { text-decoration: underline; }
   outline: none;
   color: var(--text);
   font-family: 'Fira Code', monospace;
-  font-size: 0.85rem;
-  padding: 10px 0;
+  font-size: 13px;
+  padding: 8px 0;
 }
 
-.search-bar input::placeholder { color: var(--text2); }
+.search-bar input::placeholder { color: var(--text-muted); }
 
 .search-bar .result-count {
-  font-size: 0.7rem;
-  color: var(--text2);
+  font-size: 12px;
+  color: var(--text-muted);
   flex-shrink: 0;
   margin-left: 12px;
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------- Tag Filters ---------- */
+/* Tag filters */
 .tag-filters {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+  padding: 0 var(--gutter-w);
+  padding-left: 0;
 }
 
 .tag-btn {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.65rem;
-  padding: 3px 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 11px;
+  padding: 2px 8px;
   background: transparent;
   border: 1px solid var(--border);
-  border-radius: 3px;
-  color: var(--text2);
+  border-radius: 2px;
+  color: var(--text-muted);
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .tag-btn:hover {
-  border-color: var(--tag);
-  color: var(--tag);
+  border-color: var(--tag-color);
+  color: var(--tag-color);
 }
 
 .tag-btn.active {
-  background: rgba(63,185,80,0.12);
-  border-color: var(--tag);
-  color: var(--tag);
+  background: rgba(78,201,176,0.1);
+  border-color: var(--tag-color);
+  color: var(--tag-color);
 }
 
-/* ---------- Publication List ---------- */
+/* Publication list header */
 .pub-list-header {
   display: flex;
   align-items: center;
-  padding: 6px 12px;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.7rem;
-  color: var(--text2);
+  padding: 4px 12px 4px 0;
+  font-size: 12px;
+  color: var(--text-muted);
   border-bottom: 1px solid var(--border);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-bottom: 2px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.pub-list-header .col-year { width: 60px; }
-.pub-list-header .col-title { flex: 1; }
-.pub-list-header .col-venue { width: 160px; }
-.pub-list-header .col-tags { width: 200px; }
+.pub-list-header .col-ln { width: var(--gutter-w); text-align: right; padding-right: 12px; }
+.pub-list-header .col-year { width: 50px; }
+.pub-list-header .col-title { flex: 1; min-width: 0; }
+.pub-list-header .col-venue { width: 150px; }
+.pub-list-header .col-tags { width: 180px; }
 
+/* Publication rows */
 .pub-row {
-  border-top: 1px solid var(--border);
-  border-left: 2px solid transparent;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.1s;
+  position: relative;
 }
 
-.pub-row:hover {
-  background: var(--hover-bg);
-  border-left-color: var(--link);
-}
+.pub-row:hover { background: var(--hover-bg); }
 
 .pub-row-main {
   display: flex;
   align-items: baseline;
-  padding: 10px 12px;
+  padding: 5px 12px 5px 0;
   cursor: pointer;
-  gap: 12px;
+  gap: 8px;
+}
+
+.pub-ln {
+  width: var(--gutter-w);
+  text-align: right;
+  padding-right: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  user-select: none;
 }
 
 .pub-year {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.8rem;
-  color: var(--text2);
-  width: 60px;
+  font-size: 13px;
+  color: var(--number);
+  width: 50px;
   flex-shrink: 0;
   font-variant-numeric: tabular-nums;
 }
 
-.pub-title-col { flex: 1; min-width: 0; }
+.pub-title-col {
+  flex: 1;
+  min-width: 0;
+}
 
 .pub-title {
-  font-size: 0.95rem;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.92rem;
   color: var(--text);
-  margin-bottom: 2px;
+  margin-bottom: 1px;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .pub-authors {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.65rem;
-  color: var(--text2);
+  font-size: 12px;
+  color: var(--text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .pub-venue {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.7rem;
-  color: var(--text2);
-  width: 160px;
+  font-size: 12px;
+  color: var(--string);
+  width: 150px;
   flex-shrink: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -488,291 +1257,200 @@ a:hover { text-decoration: underline; }
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  width: 200px;
+  width: 180px;
   flex-shrink: 0;
 }
 
 .pub-tag {
   font-family: 'Fira Code', monospace;
-  font-size: 0.6rem;
+  font-size: 10px;
   padding: 1px 6px;
-  border: 1px solid rgba(63,185,80,0.2);
-  background: rgba(63,185,80,0.08);
-  color: var(--tag);
+  border: 1px solid rgba(78,201,176,0.2);
+  background: rgba(78,201,176,0.08);
+  color: var(--tag-color);
   border-radius: 2px;
 }
 
-/* ---------- Expanded Row ---------- */
+/* Expanded row - code fold style */
 .pub-expanded {
   display: none;
-  padding: 0 12px 16px 84px;
-  border-top: 1px dashed var(--border);
+  padding: 8px 12px 16px calc(var(--gutter-w) + 58px);
+  background: rgba(37,37,38,0.5);
+  border-left: 1px solid var(--border-light);
+  margin-left: calc(var(--gutter-w) + 10px);
 }
 
 .pub-expanded.open { display: block; }
 
 .pub-abstract {
-  font-size: 0.9rem;
-  color: var(--text2);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.88rem;
+  color: var(--text-muted);
   line-height: 1.7;
-  margin-bottom: 12px;
-  max-width: 700px;
+  margin-bottom: 10px;
+  max-width: 650px;
 }
 
 .pub-abstract .label {
   font-family: 'Fira Code', monospace;
-  font-size: 0.7rem;
-  color: var(--text2);
+  font-size: 12px;
+  color: var(--comment);
   margin-bottom: 4px;
-  text-transform: uppercase;
 }
 
 .pub-actions {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
   flex-wrap: wrap;
 }
 
 .pub-action-btn {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.75rem;
-  padding: 5px 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+  padding: 4px 12px;
   border: 1px solid var(--border);
-  border-radius: 3px;
-  background: var(--surface);
+  border-radius: 2px;
+  background: var(--sidebar-bg);
   color: var(--text);
   cursor: pointer;
   transition: all 0.15s;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .pub-action-btn:hover {
-  border-color: var(--link);
-  color: var(--link);
+  border-color: var(--vscode-accent);
+  color: var(--vscode-link);
   text-decoration: none;
 }
 
 .pub-action-btn.chat-btn {
-  border-color: var(--ai);
-  color: var(--ai);
+  border-color: #7c3aed;
+  color: #a855f7;
 }
 
 .pub-action-btn.chat-btn:hover {
-  background: rgba(210,153,34,0.1);
-}
-
-/* ---------- Chat Drawer ---------- */
-.chat-drawer {
-  position: fixed;
-  top: 0; right: 0;
-  width: var(--chat-w);
-  height: 100vh;
-  background: var(--surface);
-  border-left: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  z-index: 200;
-  transform: translateX(100%);
-  transition: transform 0.25s ease;
-}
-
-.chat-drawer.open {
-  transform: translateX(0);
-}
-
-.chat-header {
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border);
-  font-family: 'Fira Code', monospace;
-  font-size: 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.chat-header .label {
-  color: var(--ai);
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.chat-header .close-btn {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--text2);
-  font-family: 'Fira Code', monospace;
-  font-size: 0.7rem;
-  padding: 3px 10px;
-  border-radius: 3px;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.chat-header .close-btn:hover {
-  border-color: var(--error);
-  color: var(--error);
-}
-
-.chat-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.chat-msg {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.78rem;
-  line-height: 1.65;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.chat-msg.user {
-  color: var(--text);
-}
-
-.chat-msg.user .prefix {
-  color: var(--tag);
-}
-
-.chat-msg.assistant {
-  color: var(--text2);
-  padding-left: 8px;
-  border-left: 2px solid var(--ai);
-}
-
-.chat-msg.error {
-  color: var(--error);
-  font-size: 0.75rem;
-}
-
-.chat-typing {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.75rem;
-  color: var(--ai);
-  padding-left: 8px;
-  border-left: 2px solid var(--ai);
-}
-
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-.chat-typing .cursor {
-  animation: blink 0.8s step-end infinite;
-}
-
-.chat-canned {
-  padding: 8px 16px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  flex-shrink: 0;
-}
-
-.canned-btn {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.6rem;
-  padding: 4px 10px;
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  color: var(--text2);
-  cursor: pointer;
-  transition: all 0.15s;
-  text-align: left;
-}
-
-.canned-btn:hover {
-  border-color: var(--ai);
-  color: var(--ai);
-}
-
-.chat-input-area {
-  padding: 12px 16px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.chat-input-area .prompt-prefix {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.8rem;
-  color: var(--tag);
-  flex-shrink: 0;
-}
-
-.chat-input-area input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--text);
-  font-family: 'Fira Code', monospace;
-  font-size: 0.8rem;
-}
-
-.chat-input-area input::placeholder { color: var(--text2); }
-
-.chat-input-area .send-btn {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.7rem;
-  padding: 4px 12px;
-  background: transparent;
-  border: 1px solid var(--ai);
-  border-radius: 3px;
-  color: var(--ai);
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.chat-input-area .send-btn:hover { background: rgba(210,153,34,0.1); }
-.chat-input-area .send-btn:disabled { opacity: 0.4; cursor: default; }
-
-.chat-status {
-  padding: 4px 16px 8px;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.6rem;
-  color: var(--text2);
-  border-top: 1px solid var(--border);
-  flex-shrink: 0;
-}
-
-/* ---------- Footer ---------- */
-.page-footer {
-  margin-top: 48px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-  font-family: 'Fira Code', monospace;
-  font-size: 0.65rem;
-  color: var(--text2);
+  background: rgba(124,58,237,0.1);
 }
 
 /* ---------- Loading ---------- */
 .loading {
   font-family: 'Fira Code', monospace;
-  font-size: 0.85rem;
-  color: var(--text2);
-  padding: 40px 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 40px 16px;
 }
 
-/* ---------- Responsive fallback ---------- */
+/* ---------- Footer ---------- */
+.page-footer {
+  margin-top: 32px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ---------- Mobile Hamburger ---------- */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  width: 40px;
+  height: var(--titlebar-h);
+  background: var(--titlebar-bg);
+  border: none;
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 1500;
+}
+
+.mobile-overlay.open { display: block; }
+
+/* ---------- Responsive ---------- */
 @media (max-width: 900px) {
+  .vscode-shell,
+  .vscode-shell.copilot-open {
+    grid-template-columns: 0 0 1fr;
+    grid-template-areas:
+      "titlebar  titlebar  titlebar"
+      "editor    editor    editor"
+      "statusbar statusbar statusbar";
+  }
+
+  .activitybar { display: none; }
   .sidebar { display: none; }
-  .main { margin-left: 0; padding: 24px 20px; }
-  .hero-section { flex-direction: column; }
+  .copilot-panel { display: none; }
+
+  .hamburger { display: flex; }
+
+  /* Mobile sidebar overlay */
+  .vscode-shell.mobile-sidebar-open .sidebar {
+    display: flex;
+    position: fixed;
+    top: var(--titlebar-h);
+    left: 0;
+    width: 280px;
+    height: calc(100vh - var(--titlebar-h) - var(--statusbar-h));
+    z-index: 1600;
+  }
+
+  .vscode-shell.mobile-sidebar-open .activitybar {
+    display: flex;
+    position: fixed;
+    top: var(--titlebar-h);
+    left: 0;
+    width: 48px;
+    height: calc(100vh - var(--titlebar-h) - var(--statusbar-h));
+    z-index: 1700;
+  }
+
+  .vscode-shell.mobile-sidebar-open .sidebar {
+    left: 48px;
+  }
+
+  .breadcrumb { padding-left: 16px; }
+
+  .editor-gutter { display: none; }
+
+  .editor-body { padding: 16px; }
+
   .pub-venue, .pub-tags { display: none; }
   .pub-list-header .col-venue,
-  .pub-list-header .col-tags { display: none; }
-  .chat-drawer { width: 100vw; }
-  .main.chat-open { margin-right: 0; }
+  .pub-list-header .col-tags,
+  .pub-list-header .col-ln { display: none; }
+  .pub-ln { display: none; }
+
+  .pub-expanded {
+    margin-left: 0;
+    padding-left: 16px;
+  }
+
+  .search-bar { max-width: 100%; }
+
+  .metrics-row { flex-direction: column; }
+
+  .titlebar-dots { display: none; }
+}
+
+@media (max-width: 600px) {
+  .md-h1 { font-size: 1.2rem; }
+  .metric-value { font-size: 1.2rem; }
 }

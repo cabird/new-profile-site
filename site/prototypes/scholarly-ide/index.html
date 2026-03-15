@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dr. Christian Bird — Scholarly IDE</title>
+  <title>Christian Bird — Scholarly IDE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
@@ -19,29 +19,201 @@
   <script type="text/babel">
     const { useState, useEffect } = React;
 
+    /* ─── Inline SVG Icons (no emoji) ─── */
+    const FileIconSvg = ({ color = '#569cd6' }) => (
+      <svg viewBox="0 0 16 16" fill={color} width="16" height="16">
+        <path d="M13.71 4.29l-3-3A1 1 0 0010 1H4a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V5a1 1 0 00-.29-.71zM12 14H4V2h5v3a1 1 0 001 1h3v8z"/>
+      </svg>
+    );
+    const FileMdIcon = () => <FileIconSvg color="#3794ff" />;
+    const FilePdfIcon = () => <FileIconSvg color="#e06c75" />;
+    const FolderIcon = ({ open }) => (
+      <svg viewBox="0 0 16 16" fill="#dcb67a" width="16" height="16">
+        {open
+          ? <path d="M1.5 13h12L15 6H5.5l-1-2H1v9zM1 3h3l1 2h10v9H1V3z"/>
+          : <path d="M1 3h3l1 2h9v8H1V3zm1 1v8h11V6H4.5l-1-2H2z"/>
+        }
+      </svg>
+    );
+    const LinkIcon = () => (
+      <svg viewBox="0 0 16 16" fill="#3794ff" width="16" height="16">
+        <path d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25z"/>
+        <path d="M8.225 12.725a.75.75 0 01-1.06-1.06l-1.25 1.25a2 2 0 11-2.83-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25z"/>
+      </svg>
+    );
+    const MailIcon = () => (
+      <svg viewBox="0 0 16 16" fill="#4ec9b0" width="16" height="16">
+        <path d="M1 4v8h14V4H1zm1.2 1h11.6L8 8.5 2.2 5zM2 11V5.9l6 3.6 6-3.6V11H2z"/>
+      </svg>
+    );
+    const ChartIcon = () => (
+      <svg viewBox="0 0 16 16" fill="#4ec9b0" width="16" height="16">
+        <path d="M2 14V2h1v11h11v1H2zM5 10h1v3H5v-3zm3-3h1v6H8V7zm3-2h1v8h-1V5zm3-3h1v11h-1V2z"/>
+      </svg>
+    );
+
+    /* ─── Activity bar SVG icons ─── */
+    const ExplorerIcon = () => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/>
+      </svg>
+    );
+    const SearchIcon = () => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    );
+    const PubsIcon = () => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+      </svg>
+    );
+    const ChatIcon = () => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+    );
+
+    /* Tab file icon */
+    const TabFileIcon = ({ color = '#569cd6' }) => (
+      <svg viewBox="0 0 16 16" fill={color} width="14" height="14">
+        <path d="M13.71 4.29l-3-3A1 1 0 0010 1H4a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V5a1 1 0 00-.29-.71zM12 14H4V2h5v3a1 1 0 001 1h3v8z"/>
+      </svg>
+    );
+
+    /* ─── Title Bar ─── */
+    function TitleBar({ name }) {
+      return (
+        <div className="titlebar">
+          <div className="titlebar-dots">
+            <span className="titlebar-dot red"></span>
+            <span className="titlebar-dot yellow"></span>
+            <span className="titlebar-dot green"></span>
+          </div>
+          <div className="titlebar-text">{name || 'Scholarly IDE'} — Scholarly IDE</div>
+        </div>
+      );
+    }
+
+    /* ─── Activity Bar ─── */
+    function ActivityBar({ active, onSelect }) {
+      const items = [
+        { id: 'explorer', icon: <ExplorerIcon />, label: 'Explorer' },
+        { id: 'search', icon: <SearchIcon />, label: 'Search' },
+        { id: 'publications', icon: <PubsIcon />, label: 'Publications' },
+        { id: 'chat', icon: <ChatIcon />, label: 'Chat' },
+      ];
+      return (
+        <div className="activitybar">
+          {items.map(item => (
+            <button
+              key={item.id}
+              className={`activity-icon ${active === item.id ? 'active' : ''}`}
+              onClick={() => onSelect(item.id)}
+              title={item.label}
+            >
+              {item.icon}
+            </button>
+          ))}
+        </div>
+      );
+    }
+
     /* ─── Sidebar ─── */
-    function Sidebar({ siteData }) {
+    function Sidebar({ siteData, activePage }) {
+      const [openSections, setOpenSections] = useState({ editors: true, project: true });
+      const [openSubSections, setOpenSubSections] = useState({});
+
+      const toggleSection = (key) => {
+        setOpenSections(prev => ({ ...prev, [key]: !prev[key] }));
+      };
+
+      const toggleSub = (key) => {
+        setOpenSubSections(prev => ({ ...prev, [key]: !prev[key] }));
+      };
+
       const contact = siteData?.contact;
+
       return (
         <nav className="sidebar">
-          <div className="sidebar-header">
-            <span className="name">{siteData?.name || 'Loading...'}</span>
-            <span className="role">{siteData?.title || ''}</span>
-          </div>
-          <div className="sidebar-nav">
-            <a href="index.html" className="active">&#128193; ./home</a>
-            <a href="publications.html">&#128193; ./publications</a>
-            {siteData?.cv_link && <a href={siteData.cv_link} target="_blank" rel="noopener">&#128193; ./cv</a>}
-          </div>
-          {contact && (
-            <div className="sidebar-contact">
-              <div className="prompt">$ cat contact.txt</div>
-              {contact.email && <a href={`mailto:${contact.email}`}>{contact.email}</a>}
-              {contact.links?.map((l, i) => (
-                <a key={i} href={l.url} target="_blank" rel="noopener">{l.label}</a>
-              ))}
+          <div className="sidebar-title">Explorer</div>
+          <div className="sidebar-content">
+            {/* Open Editors */}
+            <div className="tree-section">
+              <div className="tree-section-header" onClick={() => toggleSection('editors')}>
+                <span className={`tree-chevron ${openSections.editors ? 'open' : ''}`}>{'\u25B8'}</span>
+                Open Editors
+              </div>
+              <div className={`tree-section-body ${openSections.editors ? 'open' : ''}`}>
+                <a href="index.html" className={`tree-item ${activePage === 'home' ? 'active' : ''}`}>
+                  <span className="tree-item-icon file-md"><FileMdIcon /></span>
+                  <span className="tree-item-label">home.md</span>
+                </a>
+              </div>
             </div>
-          )}
+
+            {/* Project Tree */}
+            <div className="tree-section">
+              <div className="tree-section-header" onClick={() => toggleSection('project')}>
+                <span className={`tree-chevron ${openSections.project ? 'open' : ''}`}>{'\u25B8'}</span>
+                CBIRD-SITE
+              </div>
+              <div className={`tree-section-body ${openSections.project ? 'open' : ''}`}>
+                <a href="index.html" className={`tree-item ${activePage === 'home' ? 'active' : ''}`}>
+                  <span className="tree-item-icon file-md"><FileMdIcon /></span>
+                  <span className="tree-item-label">home.md</span>
+                </a>
+                <a href="publications.html" className={`tree-item ${activePage === 'publications' ? 'active' : ''}`}>
+                  <span className="tree-item-icon file-md"><FileMdIcon /></span>
+                  <span className="tree-item-label">publications.md</span>
+                </a>
+                {siteData?.cv_link && (
+                  <a href={siteData.cv_link} target="_blank" rel="noopener" className="tree-item">
+                    <span className="tree-item-icon file-pdf"><FilePdfIcon /></span>
+                    <span className="tree-item-label">cv.pdf</span>
+                  </a>
+                )}
+
+                {/* Contact folder */}
+                <div className="tree-item" onClick={() => toggleSub('contact')} style={{cursor:'pointer'}}>
+                  <span className="tree-item-icon folder"><FolderIcon open={openSubSections.contact} /></span>
+                  <span className="tree-item-label">contact/</span>
+                </div>
+                {openSubSections.contact && contact && (
+                  <>
+                    {contact.email && (
+                      <a href={`mailto:${contact.email}`} className="tree-item tree-sub-item">
+                        <span className="tree-item-icon file-mail"><MailIcon /></span>
+                        <span className="tree-item-label">{contact.email}</span>
+                      </a>
+                    )}
+                    {contact.links?.map((l, i) => (
+                      <a key={i} href={l.url} target="_blank" rel="noopener" className="tree-item tree-sub-item">
+                        <span className="tree-item-icon file-link"><LinkIcon /></span>
+                        <span className="tree-item-label">{l.label}</span>
+                      </a>
+                    ))}
+                  </>
+                )}
+
+                {/* Research areas folder */}
+                {siteData?.research_areas?.length > 0 && (
+                  <>
+                    <div className="tree-item" onClick={() => toggleSub('research')} style={{cursor:'pointer'}}>
+                      <span className="tree-item-icon folder"><FolderIcon open={openSubSections.research} /></span>
+                      <span className="tree-item-label">research_areas/</span>
+                    </div>
+                    {openSubSections.research && siteData.research_areas.map((area, i) => (
+                      <div key={i} className="tree-item tree-sub-item" style={{cursor:'default'}}>
+                        <span className="tree-item-icon file-chart"><ChartIcon /></span>
+                        <span className="tree-item-label">{area.title}</span>
+                      </div>
+                    ))}
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
         </nav>
       );
     }
@@ -52,15 +224,15 @@
         <div className="metrics-row">
           <div className="metric">
             <div className="metric-value">{paperCount}</div>
-            <div className="metric-label">publications</div>
+            <div className="metric-label">// publications</div>
           </div>
           <div className="metric">
             <div className="metric-value">{areaCount}</div>
-            <div className="metric-label">research areas</div>
+            <div className="metric-label">// research areas</div>
           </div>
           <div className="metric">
             <div className="metric-value">{yearsActive}</div>
-            <div className="metric-label">years active</div>
+            <div className="metric-label">// years active</div>
           </div>
         </div>
       );
@@ -74,8 +246,8 @@
           {areas.map((a, i) => (
             <div className="research-item" key={i} onClick={() => setOpenIdx(openIdx === i ? null : i)}>
               <div className="research-item-header">
-                <span className={`chevron ${openIdx === i ? 'open' : ''}`}>&#9654;</span>
-                <span className="folder">&#128194;</span>
+                <span className={`chevron ${openIdx === i ? 'open' : ''}`}>{'\u25B8'}</span>
+                <span className="folder-icon"><FolderIcon open={openIdx === i} /></span>
                 <span className="title">{a.title}</span>
                 {a.tag && <span className="tag">{a.tag}</span>}
               </div>
@@ -100,8 +272,40 @@
             </div>
           ))}
           <div className="pub-teaser-more">
-            <a href="publications.html">→ view all publications</a>
+            <a href="publications.html">{'\u2192'} view all publications</a>
           </div>
+        </div>
+      );
+    }
+
+    /* ─── Status Bar ─── */
+    function StatusBar({ paperCount }) {
+      return (
+        <div className="statusbar">
+          <div className="statusbar-left">
+            <span className="statusbar-item">main</span>
+            <span className="statusbar-item">0 errors 0 warnings</span>
+          </div>
+          <div className="statusbar-right">
+            <span className="statusbar-item">Ln 1, Col 1</span>
+            <span className="statusbar-item">UTF-8</span>
+            <span className="statusbar-item">Markdown</span>
+            <span className="statusbar-item">{paperCount} pubs</span>
+            <span className="statusbar-item">v2.0.0</span>
+          </div>
+        </div>
+      );
+    }
+
+    /* ─── Gutter line numbers ─── */
+    function GutterNumbers({ count }) {
+      const lines = [];
+      for (let i = 1; i <= count; i++) {
+        lines.push(i);
+      }
+      return (
+        <div className="editor-gutter">
+          {lines.map(n => <div key={n}>{n}</div>)}
         </div>
       );
     }
@@ -111,6 +315,9 @@
       const [siteData, setSiteData] = useState(null);
       const [papers, setPapers] = useState([]);
       const [error, setError] = useState(null);
+      const [activeActivity, setActiveActivity] = useState('explorer');
+      const [sidebarOpen, setSidebarOpen] = useState(true);
+      const [mobileSidebar, setMobileSidebar] = useState(false);
 
       useEffect(() => {
         fetch('/site_data.json')
@@ -128,7 +335,30 @@
           .catch(e => setError('Failed to load papers'));
       }, []);
 
-      if (error) return <div className="main"><div className="loading">{error}</div></div>;
+      const handleActivitySelect = (id) => {
+        if (id === 'publications') {
+          window.location.href = 'publications.html';
+          return;
+        }
+        if (id === activeActivity) {
+          setSidebarOpen(!sidebarOpen);
+        } else {
+          setActiveActivity(id);
+          setSidebarOpen(true);
+        }
+      };
+
+      if (error) return (
+        <div className={`vscode-shell`}>
+          <TitleBar name="" />
+          <div className="activitybar"></div>
+          <div className="sidebar"></div>
+          <div className="editor-area">
+            <div className="loading">{error}</div>
+          </div>
+          <StatusBar paperCount={0} />
+        </div>
+      );
 
       const paperCount = papers.length;
       const areaCount = siteData?.research_areas?.length || 0;
@@ -136,48 +366,93 @@
       const yearsActive = years.length > 0 ? (Math.max(...years) - Math.min(...years)) : 0;
       const featured = papers.slice(0, 6);
 
+      // Count lines for gutter
+      const lineCount = 5 + (siteData ? 12 : 0) + (areaCount * 3) + (featured.length * 2) + 10;
+
       return (
-        <>
-          <Sidebar siteData={siteData} />
-          <main className="main">
-            {!siteData ? (
-              <div className="loading">Loading...</div>
-            ) : (
-              <>
-                <div className="hero-prompt">&gt; whoami</div>
-                <h1 className="hero-name">{siteData.name}</h1>
-                <div className="hero-title">{siteData.title} @ {siteData.affiliation}</div>
+        <div className={`vscode-shell ${!sidebarOpen ? 'sidebar-collapsed' : ''} ${mobileSidebar ? 'mobile-sidebar-open' : ''}`}>
+          <button className="hamburger" onClick={() => setMobileSidebar(!mobileSidebar)}>{'\u2630'}</button>
+          {mobileSidebar && <div className="mobile-overlay open" onClick={() => setMobileSidebar(false)}></div>}
 
-                <div className="hero-section">
-                  <div className="hero-text">
-                    <p className="hero-bio">{siteData.about || siteData.bio}</p>
-                  </div>
-                </div>
+          <TitleBar name={siteData?.name} />
+          <ActivityBar active={activeActivity} onSelect={handleActivitySelect} />
+          <Sidebar siteData={siteData} activePage="home" />
 
-                <div className="section-header"><span>#</span> telemetry</div>
-                <Metrics paperCount={paperCount} areaCount={areaCount} yearsActive={yearsActive} />
+          <div className="editor-area">
+            {/* Tab Bar */}
+            <div className="tabbar">
+              <a href="index.html" className="tab active">
+                <span className="tab-icon"><TabFileIcon color="#3794ff" /></span>
+                home.md
+                <span className="tab-close">{'\u00D7'}</span>
+              </a>
+              <a href="publications.html" className="tab">
+                <span className="tab-icon"><TabFileIcon color="#3794ff" /></span>
+                publications.md
+                <span className="tab-close">{'\u00D7'}</span>
+              </a>
+            </div>
 
-                {siteData.research_areas?.length > 0 && (
+            {/* Breadcrumb */}
+            <div className="breadcrumb">
+              <a href="#">cbird-site</a>
+              <span className="breadcrumb-sep">{'\u203A'}</span>
+              <span>home.md</span>
+            </div>
+
+            {/* Editor content */}
+            <div className="editor-content">
+              <GutterNumbers count={lineCount} />
+              <div className="editor-body">
+                {!siteData ? (
+                  <div className="loading">Loading...</div>
+                ) : (
                   <>
-                    <div className="section-header"><span>#</span> research_areas/</div>
-                    <ResearchAreas areas={siteData.research_areas} />
+                    <div className="md-h1">
+                      <span className="hash">#</span> {siteData.name}
+                    </div>
+                    <div className="md-meta">
+                      <span className="key">title</span>: <span className="val">"{siteData.title}"</span>
+                      &nbsp;&nbsp;
+                      <span className="key">affiliation</span>: <span className="val">"{siteData.affiliation}"</span>
+                    </div>
+
+                    <p className="md-paragraph">{siteData.about || siteData.bio}</p>
+
+                    <div className="md-h2">
+                      <span className="hash">##</span> Telemetry
+                    </div>
+                    <Metrics paperCount={paperCount} areaCount={areaCount} yearsActive={yearsActive} />
+
+                    {siteData.research_areas?.length > 0 && (
+                      <>
+                        <div className="md-h2">
+                          <span className="hash">##</span> Research Areas
+                        </div>
+                        <ResearchAreas areas={siteData.research_areas} />
+                      </>
+                    )}
+
+                    {featured.length > 0 && (
+                      <>
+                        <div className="md-h2">
+                          <span className="hash">##</span> Recent Publications
+                        </div>
+                        <FeaturedPubs papers={featured} />
+                      </>
+                    )}
+
+                    <footer className="page-footer">
+                      &copy; {new Date().getFullYear()} {siteData.name} — Scholarly IDE v2.0
+                    </footer>
                   </>
                 )}
+              </div>
+            </div>
+          </div>
 
-                {featured.length > 0 && (
-                  <>
-                    <div className="section-header"><span>#</span> recent_publications/</div>
-                    <FeaturedPubs papers={featured} />
-                  </>
-                )}
-
-                <footer className="page-footer">
-                  &copy; {new Date().getFullYear()} {siteData.name} — Scholarly IDE v1.0
-                </footer>
-              </>
-            )}
-          </main>
-        </>
+          <StatusBar paperCount={paperCount} />
+        </div>
       );
     }
 
