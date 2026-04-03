@@ -1,12 +1,12 @@
 /* ─── Activity Bar ─── */
-const { ExplorerIcon, SearchIcon, PubsIcon, TerminalIcon } = IDE;
+const { ExplorerIcon, SearchIcon, PubsIcon, ChatIcon } = IDE;
 
 IDE.ActivityBar = function ActivityBar({ active, onSelect }) {
   const items = [
     { id: 'explorer', icon: <ExplorerIcon />, label: 'Explorer' },
     { id: 'search', icon: <SearchIcon />, label: 'Search' },
     { id: 'publications', icon: <PubsIcon />, label: 'Publications' },
-    { id: 'terminal', icon: <TerminalIcon />, label: 'Terminal' },
+    { id: 'terminal', icon: <ChatIcon />, label: 'Chat' },
   ];
   return (
     <div className="activitybar">

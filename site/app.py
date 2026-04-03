@@ -282,25 +282,45 @@ def initialize_paper_data():
     return data
 
 
+def safe_dirname(paper_id):
+    """Sanitize paper ID for use as a directory name."""
+    return paper_id.replace("/", "_").replace(":", "_").replace(" ", "_")
+
+
 def load_paper_markdown(paper_id):
     paper = paper_data_cache['papers'].get(paper_id)
-    if not paper or not paper.get('chat_available'):
-        return None, None
+    if not paper:
+        return None, None, None
 
+    # Prefer extracted/ directory (from batch_extract.py)
+    extracted_dir = os.path.join('..', 'extracted', safe_dirname(paper_id))
+    extracted_md = os.path.join(extracted_dir, 'combined.md')
+    if os.path.exists(extracted_md):
+        try:
+            with open(extracted_md, 'r', encoding='utf-8') as f:
+                content = f.read()
+            if content.strip():
+                return paper, content, safe_dirname(paper_id)
+        except Exception as e:
+            logger.error(f"Failed to load extracted markdown for {paper_id}: {e}")
+
+    # Fall back to markdowns/ directory
+    if not paper.get('chat_available'):
+        return None, None, None
     markdown_filename = paper.get('markdown') or (paper.get('mapped_pdf') or '').replace('.pdf', '.md')
     if not markdown_filename:
-        return None, None
+        return None, None, None
 
     markdown_path = os.path.join('markdowns', markdown_filename)
     try:
         with open(markdown_path, 'r', encoding='utf-8') as f:
             content = f.read()
         if not content.strip():
-            return None, None
-        return paper, content
+            return None, None, None
+        return paper, content, None
     except Exception as e:
         logger.error(f"Failed to load markdown for paper {paper_id}: {e}")
-        return None, None
+        return None, None, None
 
 
 def load_canned_questions():
@@ -443,7 +463,7 @@ async def chat_with_paper(paper_id):
     conversation = chat_store.get_conversation(session_id, paper_id)
 
     if not conversation:
-        paper, content = load_paper_markdown(paper_id)
+        paper, content, _ = load_paper_markdown(paper_id)
         if not paper or not content:
             return jsonify({'error': 'Paper or markdown not found'}), 404
 
@@ -558,6 +578,35 @@ async def clear_paper_chat(paper_id):
     if chat_store:
         chat_store.delete_conversation(session_id, paper_id)
     return jsonify({'message': 'Chat cleared successfully'})
+
+
+@app.route('/api/papers/<path:paper_id>/markdown')
+async def get_paper_markdown(paper_id):
+    paper, content, extracted_dir = load_paper_markdown(paper_id)
+    if not paper or not content:
+        return jsonify({'error': 'Paper or markdown not found'}), 404
+    result = {'paper_id': paper_id, 'title': paper.get('title', ''), 'markdown': content}
+    if extracted_dir:
+        result['image_base'] = f'/extracted/{extracted_dir}'
+    return jsonify(result)
+
+
+@app.route('/extracted/<path:path>')
+async def serve_extracted(path):
+    return await send_from_directory(os.path.join('..', 'extracted'), path)
+
+
+@app.route('/ide')
+async def ide_redirect():
+    return redirect('/ide/')
+
+@app.route('/ide/')
+async def ide_index():
+    return await send_from_directory('prototypes/scholarly-ide', 'index.html')
+
+@app.route('/ide/<path:path>')
+async def ide_assets(path):
+    return await send_from_directory('prototypes/scholarly-ide', path)
 
 
 @app.route('/AI_where_it_matters/')

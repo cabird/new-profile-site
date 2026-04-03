@@ -2,15 +2,19 @@
 const { useState, useEffect, useMemo } = React;
 const { PubRow, SearchIconSmall, parseTags, logEvent } = IDE;
 
-IDE.PublicationsView = function PublicationsView({ papers, expandedId, setExpandedId, onChatWithPaper, hoveredLine, setHoveredLine }) {
+IDE.PublicationsView = function PublicationsView({ papers, onOpenPaper, hoveredLine, setHoveredLine }) {
   const [search, setSearch] = useState('');
   const [activeTag, setActiveTag] = useState(null);
 
+  const [showAllTags, setShowAllTags] = useState(false);
+
   const allTags = useMemo(() => {
-    const tagSet = new Set();
-    papers.forEach(p => parseTags(p.tags).forEach(t => tagSet.add(t)));
-    return [...tagSet].sort();
+    const tagCounts = {};
+    papers.forEach(p => parseTags(p.tags).forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
+    return Object.entries(tagCounts).sort((a, b) => b[1] - a[1]).map(([t]) => t);
   }, [papers]);
+
+  const visibleTags = showAllTags ? allTags : allTags.slice(0, 6);
 
   const filtered = useMemo(() => {
     let list = papers;
@@ -61,7 +65,7 @@ IDE.PublicationsView = function PublicationsView({ papers, expandedId, setExpand
             >
               all
             </button>
-            {allTags.map(t => (
+            {visibleTags.map(t => (
               <button
                 key={t}
                 className={`tag-btn ${activeTag === t ? 'active' : ''}`}
@@ -70,6 +74,11 @@ IDE.PublicationsView = function PublicationsView({ papers, expandedId, setExpand
                 {t}
               </button>
             ))}
+            {allTags.length > 6 && (
+              <button className="tag-btn tag-btn-more" onClick={() => setShowAllTags(!showAllTags)}>
+                {showAllTags ? 'less' : `+${allTags.length - 6} more`}
+              </button>
+            )}
           </div>
         )}
 
@@ -77,9 +86,7 @@ IDE.PublicationsView = function PublicationsView({ papers, expandedId, setExpand
         <div className="pub-list-header">
           <span className="col-ln">#</span>
           <span className="col-year">Year</span>
-          <span className="col-title">Title / Authors</span>
-          <span className="col-venue">Venue</span>
-          <span className="col-tags">Tags</span>
+          <span className="col-title">Title / Venue / Authors</span>
         </div>
 
         {/* Publication Rows */}
@@ -88,9 +95,7 @@ IDE.PublicationsView = function PublicationsView({ papers, expandedId, setExpand
             key={p.id}
             paper={p}
             lineNum={idx + 1}
-            isExpanded={expandedId === p.id}
-            onToggle={() => { const opening = expandedId !== p.id; setExpandedId(opening ? p.id : null); if (opening) { logEvent('paper', `Peek: ${p.title}`); onChatWithPaper(p); } }}
-            onChat={onChatWithPaper}
+            onClick={() => { logEvent('paper', `Open: ${p.title}`); if (onOpenPaper) onOpenPaper(p.id); }}
             isHovered={hoveredLine === idx + 1}
             onHover={setHoveredLine}
           />

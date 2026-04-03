@@ -2,7 +2,7 @@
 const { useState, useEffect, useMemo } = React;
 const { PubRow, SearchIconSmall, parseTags, logEvent } = IDE;
 
-IDE.TagView = function TagView({ papers, tag, expandedId, setExpandedId, onChatWithPaper, hoveredLine, setHoveredLine }) {
+IDE.TagView = function TagView({ papers, tag, onOpenPaper, hoveredLine, setHoveredLine }) {
   const [search, setSearch] = useState('');
 
   const filtered = useMemo(() => {
@@ -54,9 +54,7 @@ IDE.TagView = function TagView({ papers, tag, expandedId, setExpandedId, onChatW
         <div className="pub-list-header">
           <span className="col-ln">#</span>
           <span className="col-year">Year</span>
-          <span className="col-title">Title / Authors</span>
-          <span className="col-venue">Venue</span>
-          <span className="col-tags">Tags</span>
+          <span className="col-title">Title / Venue / Authors</span>
         </div>
 
         {/* Publication Rows */}
@@ -65,9 +63,7 @@ IDE.TagView = function TagView({ papers, tag, expandedId, setExpandedId, onChatW
             key={p.id}
             paper={p}
             lineNum={idx + 1}
-            isExpanded={expandedId === p.id}
-            onToggle={() => { const opening = expandedId !== p.id; setExpandedId(opening ? p.id : null); if (opening) { logEvent('paper', `Peek: ${p.title}`); onChatWithPaper(p); } }}
-            onChat={onChatWithPaper}
+            onClick={() => { logEvent('paper', `Open: ${p.title}`); if (onOpenPaper) onOpenPaper(p.id); }}
             isHovered={hoveredLine === idx + 1}
             onHover={setHoveredLine}
           />

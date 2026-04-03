@@ -1,11 +1,16 @@
 /* ─── Main App ─── */
-const { useState, useEffect, useCallback, useMemo } = React;
+const { useState, useEffect, useCallback, useMemo, useRef } = React;
 const {
   TitleBar, ActivityBar, Sidebar, StatusBar,
-  HomeView, PublicationsView, TagView, TerminalPanel, CommandPalette,
+  HomeView, PublicationsView, TagView, PaperView, TerminalPanel, CommandPalette,
   TabFileIcon, TabTagIcon, FileImgIcon, FileMdIcon, FileIconSvg,
   buildVirtualFS, parseTags, logEvent
 } = IDE;
+
+/* ─── Paper tab helpers ─── */
+const isPaperTab = (tab) => tab && tab.startsWith('paper:');
+const getPaperIdFromTab = (tab) => tab.slice(6);
+const makePaperTabId = (paperId) => 'paper:' + paperId;
 
 IDE.App = function App() {
   const [siteData, setSiteData] = useState(null);
@@ -26,9 +31,29 @@ IDE.App = function App() {
   const [homeClickedLine, setHomeClickedLine] = useState(null);
 
   // Publications view state
-  const [expandedId, setExpandedId] = useState(null);
   const [chatPaper, setChatPaper] = useState(null);
   const [pubHoveredLine, setPubHoveredLine] = useState(null);
+
+  // Paper markdown cache
+  const [paperMarkdownById, setPaperMarkdownById] = useState({});
+  const [paperLoadStateById, setPaperLoadStateById] = useState({});
+
+  // CV markdown
+  const [cvMarkdown, setCvMarkdown] = useState(null);
+  const [cvLoadState, setCvLoadState] = useState(null);
+
+  // Refs for stale-closure-safe access in fetchPaperMarkdown
+  const markdownRef = useRef(paperMarkdownById);
+  const loadStateRef = useRef(paperLoadStateById);
+  useEffect(() => { markdownRef.current = paperMarkdownById; }, [paperMarkdownById]);
+  useEffect(() => { loadStateRef.current = paperLoadStateById; }, [paperLoadStateById]);
+
+  // Papers lookup map
+  const papersById = useMemo(() => {
+    const map = {};
+    papers.forEach(p => { map[p.id] = p; });
+    return map;
+  }, [papers]);
 
   // Compute all unique tags from papers
   const allTags = useMemo(() => {
@@ -44,11 +69,15 @@ IDE.App = function App() {
     logEvent('tab', `Open: ${tab}`);
   }, []);
 
+  // Trigger CV fetch when cv tab opens
+  useEffect(() => {
+    if (activeEditorTab === 'cv') fetchCvMarkdown();
+  }, [activeEditorTab, fetchCvMarkdown]);
+
   // Close a tab
   const closeTab = useCallback((tab) => {
     setOpenTabs(prev => {
       const next = prev.filter(t => t !== tab);
-      // If we're closing the active tab, switch to an adjacent one
       if (tab === activeEditorTab) {
         const idx = prev.indexOf(tab);
         const newActive = next.length > 0
@@ -64,29 +93,52 @@ IDE.App = function App() {
   // Alias for compatibility
   const setActiveTab = openTab;
 
+  // Fetch CV markdown on first open
+  const fetchCvMarkdown = useCallback(() => {
+    if (cvMarkdown || (cvLoadState && cvLoadState.status === 'loading')) return;
+    setCvLoadState({ status: 'loading', error: null });
+    fetch('/cv/cv.md')
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); })
+      .then(text => { setCvMarkdown(text); setCvLoadState({ status: 'loaded', error: null }); })
+      .catch(err => { setCvLoadState({ status: 'error', error: err.message }); });
+  }, [cvMarkdown, cvLoadState]);
+
   // Open a tag tab
   const openTagTab = useCallback((tag) => {
     openTab('tag:' + tag);
   }, [openTab]);
 
-  // Select paper by id — opens publications tab, expands peek, connects terminal
-  const selectPaper = useCallback((paperId) => {
-    openTab('publications');
-    setExpandedId(paperId);
-    // Find the paper object and connect terminal
-    const paper = papers.find(p => p.id === paperId);
-    if (paper) {
-      setChatPaper(paper);
-      setTerminalOpen(true);
-      logEvent('chat', `Connected to paper: ${paper.title}`);
+  // Fetch paper markdown (reads cache via refs to avoid stale closures)
+  const fetchPaperMarkdown = useCallback((paperId) => {
+    if (markdownRef.current[paperId] || (loadStateRef.current[paperId] && loadStateRef.current[paperId].status === 'loading')) {
+      return; // already cached or loading
     }
-    setTimeout(() => {
-      const el = document.querySelector(`[data-paper-id="${paperId}"]`);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }, 200);
-  }, [papers, openTab]);
+    setPaperLoadStateById(prev => ({ ...prev, [paperId]: { status: 'loading', error: null } }));
+    fetch(`/api/papers/${paperId}/markdown`)
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then(data => {
+        setPaperMarkdownById(prev => ({ ...prev, [paperId]: data.markdown }));
+        setPaperLoadStateById(prev => ({ ...prev, [paperId]: { status: 'loaded', error: null, imageBase: data.image_base || null } }));
+      })
+      .catch(err => {
+        setPaperLoadStateById(prev => ({ ...prev, [paperId]: { status: 'error', error: err.message } }));
+      });
+  }, []);
+
+  // Open a paper as a file tab
+  const openPaperTab = useCallback((paperId) => {
+    const tabId = makePaperTabId(paperId);
+    openTab(tabId);
+    fetchPaperMarkdown(paperId);
+  }, [openTab, fetchPaperMarkdown]);
+
+  // Select paper by id — now opens paper tab instead of peek
+  const selectPaper = useCallback((paperId) => {
+    openPaperTab(paperId);
+  }, [openPaperTab]);
 
   // Load data
   useEffect(() => {
@@ -109,12 +161,10 @@ IDE.App = function App() {
     const params = new URLSearchParams(window.location.search);
     const openId = params.get('open');
     if (openId) {
-      setActiveTab('publications');
-      selectPaper(openId);
-      // Clean up URL
+      openPaperTab(openId);
       window.history.replaceState({}, '', window.location.pathname);
     }
-  }, [papers, setActiveTab, selectPaper]);
+  }, [papers, openPaperTab]);
 
   // Sync terminal height CSS variable
   useEffect(() => {
@@ -164,23 +214,30 @@ IDE.App = function App() {
     }
   };
 
-  const handleChatWithPaper = useCallback((paper) => {
-    setChatPaper(paper);
-    setTerminalOpen(true);
-    logEvent('chat', `Connected to paper: ${paper.title}`);
-  }, []);
+  // Helper: get short label for a paper tab
+  const getPaperTabLabel = (paperId) => {
+    const paper = papersById[paperId];
+    if (!paper) return paperId + '.md';
+    const title = paper.title || paperId;
+    return title.length > 30 ? title.substring(0, 28) + '….md' : title + '.md';
+  };
 
   // Helper: get tab display info for tab bar
   const getTabInfo = (tab) => {
     const staticInfo = {
       home: { label: 'home.md', icon: <TabFileIcon color="#3794ff" /> },
       publications: { label: 'publications.md', icon: <TabFileIcon color="#3794ff" /> },
-      profile: { label: 'profile.jpg', icon: <FileImgIcon /> },
+      cv: { label: 'cv.md', icon: <TabFileIcon color="#3794ff" /> },
+      profile: { label: 'profile.jpg', icon: <IDE.Codicon name="file-media" size={14} color="#a074c4" /> },
     };
     if (staticInfo[tab]) return staticInfo[tab];
     if (tab.startsWith('tag:')) {
       const tag = tab.slice(4);
       return { label: tag + '.md', icon: <TabTagIcon color="#4ec9b0" /> };
+    }
+    if (isPaperTab(tab)) {
+      const paperId = getPaperIdFromTab(tab);
+      return { label: getPaperTabLabel(paperId), icon: <TabFileIcon color="#e06c75" /> };
     }
     return { label: tab, icon: <TabFileIcon /> };
   };
@@ -200,11 +257,23 @@ IDE.App = function App() {
         </>
       );
     }
+    if (isPaperTab(activeEditorTab)) {
+      const paperId = getPaperIdFromTab(activeEditorTab);
+      return (
+        <>
+          <span style={{cursor:'default'}}>cbird-site</span>
+          <span className="breadcrumb-sep">{'\u203A'}</span>
+          <span>papers</span>
+          <span className="breadcrumb-sep">{'\u203A'}</span>
+          <span>{getPaperTabLabel(paperId)}</span>
+        </>
+      );
+    }
     return (
       <>
         <span style={{cursor:'default'}}>cbird-site</span>
         <span className="breadcrumb-sep">{'\u203A'}</span>
-        <span>{activeEditorTab === 'profile' ? 'profile.jpg' : activeEditorTab === 'publications' ? 'publications.md' : 'home.md'}</span>
+        <span>{activeEditorTab === 'profile' ? 'profile.jpg' : activeEditorTab === 'publications' ? 'publications.md' : activeEditorTab === 'cv' ? 'cv.md' : 'home.md'}</span>
       </>
     );
   };
@@ -217,7 +286,7 @@ IDE.App = function App() {
 
   if (error) return (
     <div className="vscode-shell">
-      <TitleBar name="" activeTab={activeEditorTab} onCommandPalette={() => setCommandPaletteOpen(true)} />
+      <TitleBar name="" activeTab={activeEditorTab} onCommandPalette={() => setCommandPaletteOpen(true)} papersById={papersById} />
       <div className="activitybar"></div>
       <div className="sidebar"></div>
       <div className="editor-area">
@@ -234,14 +303,18 @@ IDE.App = function App() {
     terminalOpen ? 'terminal-open' : '',
   ].filter(Boolean).join(' ');
 
+  // Determine if active tab is a paper tab
+  const activePaperTab = isPaperTab(activeEditorTab);
+  const activePaperId = activePaperTab ? getPaperIdFromTab(activeEditorTab) : null;
+
   return (
     <div className={shellClasses}>
       <button className="hamburger" onClick={() => setMobileSidebar(!mobileSidebar)}>{'\u2630'}</button>
       {mobileSidebar && <div className="mobile-overlay open" onClick={() => setMobileSidebar(false)}></div>}
 
-      <TitleBar name={siteData?.name} activeTab={activeEditorTab} onCommandPalette={() => { setCommandPaletteOpen(true); logEvent('command', 'Command Palette opened'); }} />
+      <TitleBar name={siteData?.name} activeTab={activeEditorTab} onCommandPalette={() => { setCommandPaletteOpen(true); logEvent('command', 'Command Palette opened'); }} papersById={papersById} />
       <ActivityBar active={activeActivity} onSelect={handleActivitySelect} />
-      <Sidebar siteData={siteData} activeTab={activeEditorTab} onSetTab={openTab} openTabs={openTabs} allTags={allTags} />
+      <Sidebar siteData={siteData} activeTab={activeEditorTab} onSetTab={openTab} openTabs={openTabs} allTags={allTags} papersById={papersById} onOpenPaper={openPaperTab} />
 
       <div className="editor-area">
         {/* Tab Bar */}
@@ -249,7 +322,7 @@ IDE.App = function App() {
           {openTabs.map(tab => {
             const info = getTabInfo(tab);
             return (
-              <div key={tab} className={`tab ${activeEditorTab === tab ? 'active' : ''}`} onClick={() => setActiveEditorTab(tab)}>
+              <div key={tab} className={`tab ${activeEditorTab === tab ? 'active' : ''}`} onClick={() => setActiveEditorTab(tab)} title={isPaperTab(tab) ? (papersById[getPaperIdFromTab(tab)]?.title || '') : ''}>
                 <span className="tab-icon">{info.icon}</span>
                 {info.label}
                 <span className="tab-close" onClick={(e) => { e.stopPropagation(); closeTab(tab); }}>{'\u00D7'}</span>
@@ -320,7 +393,7 @@ IDE.App = function App() {
             setActiveLine={setHomeActiveLine}
             setClickedLine={setHomeClickedLine}
             onNavigatePublications={() => openTab('publications')}
-            onSelectPaper={selectPaper}
+            onSelectPaper={openPaperTab}
             onSelectTag={openTagTab}
           />
         )}
@@ -329,9 +402,7 @@ IDE.App = function App() {
         {activeEditorTab === 'publications' && (
           <PublicationsView
             papers={papers}
-            expandedId={expandedId}
-            setExpandedId={setExpandedId}
-            onChatWithPaper={handleChatWithPaper}
+            onOpenPaper={openPaperTab}
             hoveredLine={pubHoveredLine}
             setHoveredLine={setPubHoveredLine}
           />
@@ -342,11 +413,34 @@ IDE.App = function App() {
           <TagView
             papers={papers}
             tag={activeEditorTab.slice(4)}
-            expandedId={expandedId}
-            setExpandedId={setExpandedId}
-            onChatWithPaper={handleChatWithPaper}
+            onOpenPaper={openPaperTab}
             hoveredLine={pubHoveredLine}
             setHoveredLine={setPubHoveredLine}
+          />
+        )}
+
+        {/* CV View */}
+        {activeEditorTab === 'cv' && (
+          <PaperView
+            paper={{ title: 'Curriculum Vitae — Christian Bird' }}
+            markdown={cvMarkdown}
+            loadState={cvLoadState}
+            onRetry={() => { setCvMarkdown(null); setCvLoadState(null); fetchCvMarkdown(); }}
+          />
+        )}
+
+        {/* Paper View */}
+        {activePaperTab && (
+          <PaperView
+            paper={papersById[activePaperId]}
+            markdown={paperMarkdownById[activePaperId]}
+            loadState={paperLoadStateById[activePaperId]}
+            imageBase={paperLoadStateById[activePaperId]?.imageBase}
+            onRetry={() => {
+              setPaperLoadStateById(prev => { const next = {...prev}; delete next[activePaperId]; return next; });
+              setPaperMarkdownById(prev => { const next = {...prev}; delete next[activePaperId]; return next; });
+              fetchPaperMarkdown(activePaperId);
+            }}
           />
         )}
       </div>

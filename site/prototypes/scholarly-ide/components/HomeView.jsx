@@ -84,10 +84,8 @@ IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, se
           </div>
         </ContentLine>
         <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
-          <div className="md-meta">
-            <span className="key">title</span>: <span className="val">"{siteData.title}"</span>
-            &nbsp;&nbsp;
-            <span className="key">affiliation</span>: <span className="val">"{siteData.affiliation}"</span>
+          <div className="md-subtitle">
+            {siteData.title} · {siteData.affiliation}
           </div>
         </ContentLine>
         <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
@@ -95,18 +93,6 @@ IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, se
         </ContentLine>
         <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
           <p className="md-paragraph" style={{margin: 0}}>{siteData.about || siteData.bio}</p>
-        </ContentLine>
-        <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
-          <span>&nbsp;</span>
-        </ContentLine>
-
-        <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
-          <div className="md-h2" style={{margin: 0, marginBottom: 12}}>
-            <span className="hash">##</span> Telemetry
-          </div>
-        </ContentLine>
-        <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
-          <Metrics paperCount={paperCount} areaCount={areaCount} yearsActive={yearsActive} />
         </ContentLine>
         <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
           <span>&nbsp;</span>

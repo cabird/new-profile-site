@@ -1,10 +1,31 @@
 /* ─── Sidebar ─── */
-const { useState } = React;
-const { FileMdIcon, FileIconSvg, FilePdfIcon, FolderIcon, LinkIcon, MailIcon, ChartIcon, TagIcon, TabTagIcon } = IDE;
+const { useState, useCallback } = React;
+const { FileMdIcon, FileIconSvg, FilePdfIcon, FolderIcon, LinkIcon, MailIcon, TagIcon } = IDE;
 
-IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTags }) {
+IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTags, papersById, onOpenPaper }) {
   const [openSections, setOpenSections] = useState({ editors: true, project: true });
   const [openSubSections, setOpenSubSections] = useState({});
+
+  const handleResizeStart = useCallback((e) => {
+    e.preventDefault();
+    const startX = e.clientX;
+    const shell = document.querySelector('.vscode-shell');
+    const startWidth = parseInt(getComputedStyle(shell).getPropertyValue('--sidebar-w')) || 250;
+    const onMove = (ev) => {
+      const newWidth = Math.max(140, Math.min(startWidth + (ev.clientX - startX), 500));
+      shell.style.setProperty('--sidebar-w', newWidth + 'px');
+    };
+    const onUp = () => {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  }, []);
 
   const toggleSection = (key) => {
     setOpenSections(prev => ({ ...prev, [key]: !prev[key] }));
@@ -21,12 +42,19 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTag
     const staticInfo = {
       home: { label: 'home.md', icon: <FileMdIcon /> },
       publications: { label: 'publications.md', icon: <FileMdIcon /> },
-      profile: { label: 'profile.jpg', icon: <FileIconSvg color="#a074c4" /> },
+      profile: { label: 'profile.jpg', icon: <IDE.Codicon name="file-media" size={16} color="#a074c4" /> },
     };
     if (staticInfo[tab]) return staticInfo[tab];
     if (tab.startsWith('tag:')) {
       const tag = tab.slice(4);
       return { label: tag + '.md', icon: <TagIcon /> };
+    }
+    if (tab.startsWith('paper:') && papersById) {
+      const paperId = tab.slice(6);
+      const paper = papersById[paperId];
+      const title = paper ? paper.title : paperId;
+      const label = title.length > 24 ? title.substring(0, 22) + '….md' : title + '.md';
+      return { label, icon: <FileMdIcon /> };
     }
     return { label: tab, icon: <FileMdIcon /> };
   };
@@ -34,6 +62,7 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTag
   return (
     <nav className="sidebar">
       <div className="sidebar-title">Explorer</div>
+      <div className="sidebar-resize-handle" onMouseDown={handleResizeStart}></div>
       <div className="sidebar-content">
         {/* Open Editors */}
         <div className="tree-section">
@@ -74,14 +103,12 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTag
               <span className="tree-item-icon file-md"><FileMdIcon /></span>
               <span className="tree-item-label">publications.md</span>
             </div>
-            {siteData?.cv_link && (
-              <a href={siteData.cv_link} target="_blank" rel="noopener" className="tree-item">
-                <span className="tree-item-icon file-pdf"><FilePdfIcon /></span>
-                <span className="tree-item-label">cv.pdf</span>
-              </a>
-            )}
+            <div className={`tree-item ${activeTab === 'cv' ? 'active' : ''}`} style={{cursor:'pointer'}} onClick={() => onSetTab('cv')}>
+              <span className="tree-item-icon file-md"><FileMdIcon /></span>
+              <span className="tree-item-label">cv.md</span>
+            </div>
             <div className="tree-item" style={{cursor:'pointer'}} onClick={() => onSetTab('profile')}>
-              <span className="tree-item-icon"><FileIconSvg color="#a074c4" /></span>
+              <span className="tree-item-icon"><IDE.Codicon name="file-media" size={16} color="#a074c4" /></span>
               <span className="tree-item-label">profile.jpg</span>
             </div>
 
