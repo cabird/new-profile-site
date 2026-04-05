@@ -1,0 +1,5 @@
+has pioneered a number of software mining techniques in an effort to empirically answer questions in that area. He has studied software development teams at Microsoft, IBM, and in the Open Source realm, examining the effects of distributed development, ownership policies, and the ways in which teams complete software tasks. He is the recipient of the ACM SIGSOFT distinguished paper award, and the “Best Graduate Student Researcher” at U.C. Davis where he received his Ph.D. under Prem Dévanbu. He has published in the top academic software engineering venues, has a Research Highlight in CACM, and was a National Merit Scholar at BYU, where he received his B.S. in computer science.
+
+![Portrait of a man wearing a bicycle helmet](page28_img_1.png)
+
+> **Prem Dévanbu** received his B.Tech from the Indian Institute of Technology in Chennai, India, before you were born, and his PhD from Rutgers in 1994. After spending nearly 20 years at Bell Labs and its various offshoots, he escaped New Jersey to join the CS faculty at UC Davis in late 1997. His research interests now are squarely in empirical software engineering.

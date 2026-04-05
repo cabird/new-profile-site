@@ -1,0 +1,29 @@
+IEEETRANSACTIONS ON SOFTWARE ENGINEERING, MANUSCRIPT ID 9
+
+TABLE 5(d): List of hypotheses and survey responses (in %). SA - Strongly Agree, A - Agree, N - Neutral, D - Disagree, SD - Strongly Disagree  
+Transition Outcomes (Developers’ Perception)  
+SA | A | N | D | SD | N/A
+
+![Table 5(d): List of hypotheses and survey responses (percentages)](page9_img_table_1.png)
+
+customers do. They don’t write these crazy MSBuilds, libraries such as all these awesome stuffs. It’s useful but I think it can be a bit of a barrier” (D4). 55.31% of the respondents mention that the build system now is simpler than the internal one (S27). TFS also has an automated build engine which was used by the project teams to build the project. As developers moved to a simple build system on GitHub, build breaks became less frequent. “Internally, the build breaks happen much more often. I would say much, much more often. I saw only like three build breaks on GitHub” (D5).
+
+### b) Agile Process:
+After the six projects were open sourced, they adopted the agile development methodology [23], which makes the development process faster and encourages flexibility. A significant percentage (82.61%) of developers agreed that the agile process made it easier for external developers to contribute to the project (S29). “I think it’s definitely a big benefit for us. Partially, because our toolset has changed and the new model is more agile than before which is [an] indirect effect of open source.” (D1).
+
+### c) Bug Quality:
+As open source developers have access to the source code, there are more people looking at the code which increases the chances of finding bugs. Developers reported that the quality of bugs filed by community members has increased. “I think there are more bugs reported” (D5), while another said, “Basically the turnaround and quality of bugs is clearly [an] improvement from open source” (D1), as supported by over 58% of the respondents (S31). Furthermore, there were high-quality bug fixes as one community member expressed, “I saw some high quality fixes. It is hard to imagine these huge technologies being re-written from scratch and being at the level of stability they are now without those bug fixes.” (O2)
+
+### d) Code Quality:
+As more people are reviewing the code, there is potential for higher code quality as well. As expressed by one of the external developers, “there won’t be a difference in quality between something that was contributed by community or something implemented internally..., because everything gets reviewed together by MS developers and also by community members, so you get this 4-eye check on every single change.” (O6). Similar views were expressed by Dabbish et al. [24], i.e., projects which get more attention are of higher quality. Microsoft developers also ensured that the code has comments and follows coding standards to make it easier for external developers to contribute as well as maintain the high-quality code on GitHub. An external developer pointed out, “I think the software has proven to be overall of very good quality. The code had comments and follows coding guidelines, and the coding standards used are popular. When I contributed, I tried to keep the same standards and conventions myself.” (O11)
+
+Developers inside organizations often face schedule constraints as they have to work under strict deadlines and deliver high-quality product to the customers. This leaves little time for them to perform code cleanup, which would increase the readability of the code. Organizations can leverage the strength of the open source community as there are large numbers of developers available who can contribute without the pressure of the same time constraints. A developer mentioned: “Letting the community take the low hanging fruit, I think it’s a benefit. We have had people who have done cleanup on our comments or clean up in the code or I ran a static analyzer and I found a bunch of warnings and I fixed them. From a business point of view, that doesn’t have a benefit but as a dev I think our codebase health is improving and we have a bunch of people who want to make little improvements.” (D2)
+
+### e) Increased Developer Awareness:
+The open source development community uses a wide array of tools for development and testing software. When a project is open sourced, it exposes internal developers to tools they may not use within the organization. Peer interaction, such as recommendation or observations, can help developers discover and adopt new tools [25], [26]. Thus, the transition helps make developers aware of available tools and provides opportunity to experiment with these tools. A developer mentioned, “Moving to open source world was [an] eye opening experience to alternative tool chains and some of them are better like the whole process of accepting pull requests. Initially, it was reserved for third party contributions but now we all go through pull requests because it’s just easier.” (D1)
+
+### f) Tool Support:
+Some open source tools have a large user base, which increases the support for these tools in terms of new features, improving the existing ones or finding bugs. With such community support tools are modified to run on various systems and platforms. One developer commented, “The open source workforce is standardized and several tools which are well-known. If they are not maintained by us, they are maintained by somebody because they are publicly released” (D1) while another commented “It is very unusual where open-source infrastructure breaks whereas closed source is fragile and complicated” (D1). However, developers also expressed their dissatisfaction about some internal tools which are not available in the open source world.
+
+### g) Discoverability:
+When any of the six projects was open-sourced, Microsoft announced it on several mediums such as Hacker News, Reddit, Microsoft Build etc., which made it easier for

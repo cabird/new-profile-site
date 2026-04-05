@@ -1,0 +1,17 @@
+*Established Projects* In the established projects, 538 developers made 678,551 commits. Of those developers, 71 made generic declarations (13%), 128 specified annotations (24%), and 141 used parameterized types (26%). Naturally, some developers commit more than others, which may give them more opportunity to use generics. Only 272 developers had more than 100 commits, averaging 2,467 commits. Within this group of more frequent committers, 66 used generic declarations (24%), 99 used annotations (36%), and 105 used parameterized types (38%).
+
+*Recent Projects* In the recent projects, 232 developers made 197,744 commits. Of those developers, 47 used generic declarations (20%), 138 used annotations (59%), and 142 used parameterized types (61%). Of the 102 more frequent committers in the recent projects, with an average 1,906 commits, 43 used generic declarations (42%), 83 used annotations (81%), and 87 used parameterized types (85%).
+
+The data suggests there were several forces shaping use of new features in Java by developers. In both established and recent projects, a small minority of developers (perhaps with more authority or involvement) used generic declarations. In most projects, a single member of a project (perhaps having an architect role) clearly introduces a disproportionate amount of the generic declarations (see, for example, Fig. 7). In established projects, developers demonstrated a modest use of generics and annotations. Potentially, inexperience with the new features, or difficulty in migrating existing code to fit in with the new features, hampered adoption. In more recent projects, these factors may have been ameliorated, as a larger percentage of developers have started to use generics and annotations in their code.
+
+In general, we observed that developers generally adopt usage of both features, although there were a handful of developers that only adopted use of either annotations or generics exclusively.
+
+## 5.3 Features Breakdown
+
+We characterize how different aspects of a feature were used to identify any differences between established and recent projects and between usage of aspects of those features. In both cases, these differences give insight into adoption factors, such as the difficulty in learning aspects of a new feature and whether those differences persist over time. We focus mostly on generics, simply because there are many more aspects of generics to investigate in comparison with annotations.
+
+### 5.3.1 Common Parameterized Types
+
+We classified parameterized types as either user-defined or from the standard Java Collections (java.util) based on name signatures. We found that on the whole, use of Collections types accounts for about 70% of parameterized types across all of the codebases that we examined. The most popular parameterized types across all projects were Lists, followed by Maps. Table 3 illustrates this finding by showing use of the top 14 parameterized types in the Squirrel-SQL project.
+
+In comparison, Table 4 illustrates how annotations were used in Squirrel-SQL, showing a similar usage distribution to generics. Annotations from the standard Java library, such as Override and Before, are the only annotations used by the majority of the 40 projects analyzed. Otherwise, in addition to unit testing, annotations were used for a variety of domain- and project-specific cases.

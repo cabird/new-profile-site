@@ -1,0 +1,38 @@
+{
+  "page6_img_2.png": {
+    "title": "Distribution of sampled pull requests by repository size",
+    "description": "A simple two-column table listing repository size categories and the number of pull requests sampled for the study: Large \u2014 220, Medium \u2014 200, Small \u2014 80. These counts sum to 500 and correspond to the stratified random sampling used in the user study (categories defined in the paper as Large: >100 developers, Medium: 25\u2013100 developers, Small: <25 developers). The table shows the relative emphasis on larger repositories in the sampled set."
+  },
+  "page3_img_1.png": {
+    "title": "CORAL architecture: socio-technical graph to reviewer recommendations",
+    "description": "A three-step pipeline diagram showing how CORAL converts software development data into reviewer suggestions. (1) \u201cGraph Building\u201d ingests development artifacts (icons for source control and code) and constructs a purple socio-technical graph with a central Pull Request node linked to File, Repository, WorkItem and User nodes. (2) \u201cGraph representation learning\u201d trains a graph convolutional model to produce distributed node embeddings (depicted as a small connected network of server-like nodes). (3) \u201cInductive inference\u201d uses those embeddings to score a New PR (embedding approximated from neighbors) and output Ranked/Recommended Reviewers (silhouette icons). The figure emphasizes the flow from historical data \u2192 learned node embeddings \u2192 online recommendations for unseen pull requests."
+  },
+  "page7_img_1.png": {
+    "title": "CORAL top-k accuracy and MRR for reviewer prediction",
+    "description": "A two-row table reporting accuracy and mean reciprocal rank (MRR) for CORAL\u2019s link-prediction recommender at four cutoffs (k = 1, 3, 5, 7). Accuracy improves from 0.50 at k=1 to 0.80 at k=7, with a top-3 accuracy of 0.73; MRR likewise increases from 0.49 to 0.72 across the same k values. The results indicate that CORAL often ranks a historically invited reviewer near the top of its recommendations (the reported 0.73 top-3 accuracy matches the paper\u2019s claim that CORAL replicates authors\u2019 reviewer choices in 73% of PRs)."
+  },
+  "page7_img_2.png": {
+    "title": "User-study recommendation precision by repo size: CORAL vs rule-based model",
+    "description": "Three-row comparison of recommendation precision (fraction of recommended reviewers who would engage) for Large, Medium, and Small repositories, with columns RM (rule-based model) and CORAL. Values are: Large \u2014 RM 0.19 vs CORAL 0.37; Medium \u2014 RM 0.31\u1d45 vs CORAL 0.36\u1d45; Small \u2014 RM 0.35\u1d5d vs CORAL 0.23\u1d5d. The superscripts (\u03b1, \u03b2) mark pairs where the difference between models is not statistically significant; only the Large-repo difference (CORAL 0.37 vs RM 0.19) was statistically significant (p = 0.013), while Medium and Small differences were not."
+  },
+  "page6_img_1.png": {
+    "title": "Relations used for generating embeddings in CORAL",
+    "description": "A two-column table listing the five relation types (numbered 1\u20135) that CORAL uses to build the relation set R for GCN-based embedding learning. The relations are: (1) PullRequest\u2013User \u2014 captures the author or reviewer relationship; (2) PullRequest\u2013File \u2014 captures files modified by a pull request; (3) PullRequest\u2013Word \u2014 captures a pull request\u2019s semantic description via tokens; (4) File\u2013Word \u2014 captures semantic description of a file; and (5) Word\u2013Word \u2014 captures related words co-occurring within a window of size 5 in PR titles/descriptions. These relations are used by the model to aggregate neighbor features and encode technical and semantic interactions among users, PRs, files, and words."
+  },
+  "page3_img_2.png": {
+    "title": "Socio-technical graph linking PRs, people, files, work items and token subgraph",
+    "description": "A schematic of the augmented socio-technical graph used by CORAL. The central Pull request node (annotated with properties such as title, description, target branch, created/closed dates and status) connects to File (file type, path) via a Changes edge, to Author via Creates/CommentsOn, to Reviewer via Reviews/CommentsOn, and to Work item via LinkedTo; Repository contains the pull request and work items can be ParentOf other work items. A dashed-box token subgraph (Token1..Token5) shows word tokens extracted from PR text and file names that are interlinked (co\u2011occurrence/PMI edges) and connected to PR and File nodes to capture semantics. The diagram emphasizes the heterogeneous, labeled relations (blue edge labels) and node attributes CORAL uses to form multi-hop paths like User\u2013PR\u2013Token and User\u2013PR\u2013File for graph convolutional learning."
+  },
+  "page4_img_table_1.png": {
+    "title": "Counts of nodes and edges in CORAL's socio-technical graph",
+    "description": "The table lists the exact node and edge counts used to build CORAL\u2019s socio-technical graph (data ingested from 332 repositories over the study period). Node counts: pull request 1,342,821; work item 542,866; file 2,809,805; author 18,001; reviewer 30,585; text (token) 1,104,427 \u2014 total nodes 5,858,834. Edge counts: creates 1,342,821; reviews 7,066,703; contains 1,342,821; changes 12,595,859; parentOf 148,422; linkedTo 1,252,901; commentsOn 53,506 \u2014 total edges 23,803,053. The numbers show that file and change relations dominate the graph (largest node and edge contributions), there are millions of reviewer\u2013PR and PR\u2013text links supporting the augmented semantic layer, and the overall scale explains the large training corpus used for the GCN-based recommendation model."
+  },
+  "page10_img_1.png": {
+    "title": "Ablation results: accuracy and MRR for Words/Files configurations",
+    "description": "Table of link-prediction results from the ablation study comparing four graph configurations: (1) No words or files, (2) Words only, (3) Files only, and (4) Words + Files. Metrics reported are top-k Accuracy (k=1,3,5,7) and MRR (k=1,3,5,7). Performance is very low when neither words nor files are present (Accuracy k=1..7 = 0.02, 0.08, 0.13, 0.16; MRR k=1..7 = 0.01\u20130.06). Adding words alone yields modest gains (Accuracy k=1 = 0.21, k=3 = 0.30; MRR k=1 = 0.21), while files alone improve results substantially (Accuracy k=1 = 0.29, k=3 = 0.69; MRR k=1 = 0.29). The best results come from combining words and files (Accuracy k=1..7 = 0.49, 0.73, 0.77, 0.80; MRR k=1..7 = 0.49, 0.61, 0.68, 0.72), supporting the paper\u2019s claim that file-change history and semantic (word) information together provide the largest performance boost."
+  },
+  "page9_img_1.png": {
+    "title": "User study \u2014 Negative feedback categories and counts",
+    "description": "Table VII classifies negative responses from the user study into three categories with their counts and percentages: I) \"This pull request is no longer relevant to me\" \u2014 71 responses (91.03%); II) \"Never participate in code review\" \u2014 5 responses (6.41%); III) \"Pull request does not need reviewer\" \u2014 2 responses (2.56%). These results quantify why recommended reviewers marked PRs as irrelevant and support the paper's observation that most negative feedback came from developers no longer working in the affected area or otherwise uninterested in reviewing."
+  }
+}

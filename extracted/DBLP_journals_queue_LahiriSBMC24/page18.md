@@ -1,0 +1,9 @@
+> CB At one point, one of our interns did a user study that pulled merge conflicts and their resolutions out of Microsoft’s historical repositories so they could then be compared with the resolutions our tool would have applied. As you might imagine, quite a few differences surfaced. To understand where our tool may have gone wrong, we went back to consult with those people who had been involved in the original merges and showed them a comparison between what they had done and how the tool had addressed the same merge conflicts.
+> 
+> We specifically focused on those conflicts that had been resolved over the preceding three months on the premise that people might still recall the reasoning behind those decisions. We learned a ton by going through that particular exercise. One of the lessons was that we had probably undercounted how often we were getting things right, since some of these developers would say things like, “Well, this may not exactly match the merge I did, but I would have accepted it anyway.”
+> 
+> The other major benefit of that study was the insight it provided into what the user experience for our tool should be. This all proved to be a major revelation for me, since it was the first time I’d been involved in a user study that was approached in quite this way—where developers were pulled in and presented with code they’d actually worked on.
+> 
+> Which is just to say this wasn’t at all like one of those lab studies where people are presented with a toy problem.
+> 
+> In this case, we were pulling in real-world merge conflicts and then talking with the developers who had worked to resolve them. We learned so much from taking this approach that I’d recommend other researchers consider

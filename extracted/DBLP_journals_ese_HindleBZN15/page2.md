@@ -1,0 +1,16 @@
+## 1 Introduction
+
+For many organizations requirements and specifications provide the foundation for the products that they produce. As requirements are implemented the links between requirements and implementation weaken, especially during maintenance. Later, development artifacts often stop referencing the requirements documents that they were derived from. Current research shows that there is a lack of traceability between requirements and implementation [20] whereas the managers we interviewed expected and wanted requirements and implementation to be in sync (Section 5.2). The volume of traceability research confirms its importance [8, 32, 38, 39]. In this paper we extract topics from a large body of requirements documents and then search for commits that mention these topics within the version control system. These topics are represented as word distributions. These topics provide some high-level traceability between requirements and implementation once they are labelled and interpreted. Yet these topics can be exploited to provide an overview of development effort relevant to each topic.
+
+In this paper we attempt to validate these topic-generated overviews by asking industrial developers, industrial program managers, and Free/Libre Open Source Software (FLOSS) developers if their perception of their own behaviour matches the behaviour highlighted by the topic. We do this by relating the topics extracted from requirements and issue reports to the commit log messages in version control systems. Thus we seek to validate if topics extracted from requirements and issue reports make sense to practitioners.
+
+Stakeholder based validation of topics in terms of relevance, labelling, and the recovery of behaviour [3] is critical, but to date has not been widely applied to the domain of software engineering [14]. We also ask how well non-experts, such as the authors of this paper, can label topics on projects that we did not write. The topics we study are extracted using Latent Dirichlet Allocation [5] (LDA) which has gained popularity in software engineering (SE) research [3, 9, 12, 13, 15, 22, 27, 36]. Our contributions include:
+
+- A technique for linking requirements to code commits via topics.
+- An evaluation of the relevance of topics extracted by LDA from requirements with developers and managers.
+- An analysis of whether topic highlighted behaviour matches the perception of industrial developers and managers as well as FLOSS developers.
+- Insight into the difficulties that practitioners face when labelling topics and the need for labelled topics.
+- Validation of non-expert topic labelling with practicing experts.
+- A FLOSS developer oriented replication of the industrial study on issue tracker topics.
+
+We are investigating if LDA topics make sense to practitioners, and whether practitioners can label LDA topics. We have at our disposal many skilled Microsoft developers who work on a very large software system that has many requirements documents. We also have the participation of 13 gracious and

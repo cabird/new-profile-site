@@ -1,0 +1,7 @@
+they would open the code reviews based on that data, and the reviews would tell them what code had been used and what part of the code was being reviewed. They would dig into that and quickly determine, "Oh, it looks like people are having a tough time reviewing code that uses this particular API." That's how they would determine that their next training session ought to be devoted to that API.
+
+TC: Have you developed any metrics for essentially grading the quality of code reviews?
+
+CB: Not as such, but I know some teams have built live dashboards around this data. Some development teams have mounted a massive TV monitor right on the wall where metrics like "Time since last bug" or "Time to delivery of next release" can be displayed. One team told us they also put code-review data up on their scoreboard so people could see how many code reviews are on backlog or how much time on average is required to complete a code review. From what they told us, it seems that having that data up on a real-time dashboard, mission-control style, has proved to be quite motivating.
+
+Delivering a new set of capabilities for managing and improving Microsoft's code-review process was the primary goal right from the start. In the course of accomplishing that, much was also learned about certain general code-review principles—guidelines that might also be applied to beneficial effect elsewhere. In fact, subsequent research has offered surprising evidence of just how similar the impact can be when many of these principles are followed

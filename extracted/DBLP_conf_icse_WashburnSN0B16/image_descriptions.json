@@ -1,0 +1,14 @@
+{
+  "page2_img_1.png": {
+    "title": "Gamasutra postmortem screenshot for Pangalore's Knightly Adventure",
+    "description": "Screenshot of the first page of a Gamasutra postmortem titled \u201cPostmortem: Pangalore\u2019s Knightly Adventure\u201d (by Doyon Kim). The image shows the Gamasutra header and a right-side feature artwork, followed by an introductory paragraph and the two main sections used throughout the paper\u2019s dataset: \u201cWhat Went Right\u201d (with a numbered item \u201cIt\u2019s Two, Two Things in One\u201d) and \u201cWhat Went Wrong\u201d (with a numbered item \u201cMultiplatform Launch Out of Sync\u201d). The paper cites this figure as an example of the typical multi-page postmortems they analyzed, illustrating the consistent structure (context, what went right/ wrong, and metadata) used to extract categories and themes."
+  },
+  "page8_img_1.png": {
+    "title": "Categories cited as \u201cwhat went wrong\u201d in game postmortems",
+    "description": "A vertical bar chart (Figure 3) reports the percentage of the analyzed Gamasutra postmortems that list each category as something that went wrong; the y\u2011axis is \u201cPercentage of Postmortems\u201d and the x\u2011axis lists 22 specific categories. Bars are color coded by higher\u2011level groups (maroon = Product, blue = Development, pale yellow = Resources, light blue = Customer\u2011facing, black = Other). The four most frequently cited pitfalls are Obstacles (\u224837%), Schedule (\u224825%), Development Process (\u224824%), and Game Design (\u224822%); several Development bars (Documentation, Team, Testing, Tools) and Resource/Customer bars (Budget, Marketing, Piracy/Licensing) appear at lower but non\u2011negligible percentages. Because postmortems mention multiple issues, the bars do not sum to 100% \u2014 the chart highlights which problem types recur across the 155 postmortems rather than exclusive failure categories."
+  },
+  "page7_img_1.png": {
+    "title": "What went right: categories cited in game postmortems",
+    "description": "A color\u2011coded bar chart (Figure 2) shows the percentage of the 155 Gamasutra postmortems that mention each topic under \u201cWhat went right.\u201d The most frequently cited strengths were Game Design (\u224850%), Development Process (\u224843%), Team (\u224840%), and Art (\u224839%), while other commonly noted positives include Tools, Testing, Gameplay and Features. Bars are grouped and colored by high\u2011level category (Product in maroon, Development in blue, Resources in pale yellow, Customer\u2011Facing in light blue, plus Other in black); values do not sum to 100% because each postmortem lists multiple items. Less frequently listed positives include Documentation, Product Evolution and Hardware, which have very small bars near the bottom of the axis."
+  }
+}

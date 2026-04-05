@@ -1,0 +1,9 @@
+![Graphs of raw and parameterized type usage over time](page18_img_1.png)
+
+Figure 4 – The number of raw types and parameterized types over time.
+
+### 5.5 RQ5: Do generics improve performance?
+
+As we explained in Section 4.1, generics may improve the overall performance of a project because when value types are used as generic type arguments, values do not have to be converted to and from objects. To estimate whether performance could actually be improved in open-source C# projects (RQ5), we analyzed how many value types are used as generic type arguments in a project.
+
+Figure 5 shows the percentage of value types used in parameterized types over time for three projects. In total, 17 out of 19 projects that used generics also used value types as generic type arguments. Of those 17, value types were used in 35.9% of parameterized types. After the project introduces generics, over time the overall usage of value types in each project remains more or less constant above 30% for most projects. According to the performance comparisons performed by Kennedy and Syme [KS01], use of value types with generics can provide a significant speedup compared to object conversion. For example, they showed that when int and double were used as generic type arguments in a small benchmark, they were able to achieve a speedup of 4.5 times and 5 times, respectively, compared to a similar benchmark without generics. This indicates that the performance of C# projects doubles while executing generic code that includes 30% value types in parameterized types, which are 4.5 times faster than reference types. Overall, our results suggest that C#’s

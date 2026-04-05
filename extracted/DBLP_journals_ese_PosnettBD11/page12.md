@@ -1,0 +1,17 @@
+with the dilemma metapatterns because DeMIMA does not identify all of the classes that would comprise the inter-pattern metapatterns.
+
+### 5.3 Tool Description
+
+Here we present some details of how we define metapatterns in Java such that they can be detected by Tool. We begin with Tourwé and Mens (2003) formal definition of Template/Hook relationships, and metapatterns. Tool identifies methods as a Hook via inheritance and overriding.
+
+Given a class M and a class or interface H such that either M is a subclass of H or M implements H, a method h ∈ H is a potential hook if there exists a method m ∈ M such that m and h share a common signature and h is protected or public. In other words there must exist at least one implementation m of a hook h in order to classify h as a hook method.
+
+Then, we find template methods t in class or interface T such that t invokes h through some variable v of type H. We take the definition of v from Tourwé and allow it to be either a field, a parameter, or a local variable. Tool then performs an intra-procedural data flow analysis using abstract interpretation to trace the type of sources used for method invocations. If the type of the source trace is a subtype of H then we consider the triplet (T, H, M) a basic metapattern with no specific metapattern type. Tool uses some minimal heuristics to identify certain types of composition references in arrays and Java Collections. Heuristics are also used to identify hook variable getters. If the call from t to h is made through some method f ∈ T such that f simply returns the value of a local field y of type H, then we identify y as the hook variable. Once hook and template instances are identified, we use inheritance relationships as described above to identify metapatterns.
+
+### 5.4 Pattern Counts
+
+The number of pattern and metapattern motifs of each type are identified in Table 3. For each of these patterns we count only motifs that are stable over at least two releases. Whenever the same classes (identified by the same name) play the same key roles, as identified in Table 4 by Di Penta et al., in multiple releases, we count the motif only once.
+
+For embedded metapattern instances, we consider two instances identical if the design pattern instances that they are derived from are identical across two releases as identified above. Thus the embedded metapattern instances are really a grouping of design pattern instances based on the expected underlying metapattern. The metapatterns are not associated with any design patterns so we use the template and hook roles as a basis for identification. Two Tool metapattern instances that have the same classes in template and hook roles across two releases are counted only once in the table.
+
+The Visitor, Prototype, Decorator, and Composite patterns are found quite infrequently in several projects; they are excluded from later analysis when there are too few for analysis. The large number of Abstract Factory and Factory Method instances are most likely due to the simplistic nature of the patterns themselves. Although we derive the embedded metapatterns from the DeMIMA design pattern results, we do not see the same high numbers mirrored in the associated metapattern motif count. This is because we filter metapattern instances based on the template and hook roles as described above.

@@ -1,0 +1,18 @@
+{
+  "page3_img_2.png": {
+    "title": "Hazard of promotion to core developer by membership time",
+    "description": "A smoothed estimate of the hazard (instantaneous rate) of being promoted to a core developer as a function of project membership time (x-axis: analysis time in years, 0\u20135). The curve rises from about 0.001\u20130.0012 at time zero to a peak near 0.0022\u20130.0023 around one year, then steadily declines, with a small secondary bump around year three, falling to roughly 0.0005 by year five. This visualization shows that the probability of promotion is highest near the first year of membership and decreases thereafter, with the peak rate roughly double the early and late rates."
+  },
+  "page4_img_1.png": {
+    "title": "Three subcommunities in an email social network with dense internal ties",
+    "description": "The diagram shows three detected subcommunities (red dashed boundaries), each containing a cluster of circular nodes densely connected by solid black lines, with only a few lighter gray lines linking nodes between clusters. Nodes represent individual email participants (developers) and links indicate frequent email interactions; the dense intra-cluster connectivity and sparse inter-cluster links emphasize tightly coordinated teams with limited cross-team communication. This schematic illustrates the paper\u2019s finding that large OSS projects self-organize into teams (subcommunities) whose members communicate more with each other and tend to collaborate on the same code artifacts, while a small number of bridge actors connect the groups."
+  },
+  "page4_img_2.png": {
+    "title": "Sociotechnical network: components, dependencies, and developer contributions",
+    "description": "A small example socio-technical graph where circles are software components (A\u2013G) and rounded rectangles are developers (Fred, Ram). Solid curved arrows between circles indicate dependency relationships among components (A is visually central and linked to B and C), while dashed arrows link developers to the components they contribute to (Fred connects to components on the left, Ram to those on the right, and both have dashed ties to component A). The diagram highlights a central component (A) that sits at the intersection of dependency edges and is touched by multiple developers, illustrating how combined dependency and contribution structure was used in the paper to reason about component risk and predict post-release failures."
+  },
+  "page3_img_1.png": {
+    "title": "Pruned Apache email social network (nodes \u2265150 messages)",
+    "description": "A directed network diagram of Apache mailing-list participants where each oval is a sender label and arrows indicate at least 150 message interactions (sent or replied-to). The plot shows a dense, tightly connected core (e.g., ben laurie, brian behlendorf, dean gaudet, randy terbush, jim jagielski and marc slemko) with many reciprocal arrows among them, and a smaller peripheral cluster anchored by ryan bloom linking to william a. rowe jr., bill stoddard, jeff trawick and justin erenkrantz. The layout highlights a few highly central individuals who bridge multiple others and several local subgroups, illustrating the paper\u2019s point that important developers occupy prominent network positions rather than a flat, \u201cbazaar\u201d-like structure."
+  }
+}

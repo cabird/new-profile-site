@@ -1,0 +1,18 @@
+Table 1. Overview of the teams and data sources.
+
+![Table 1: overview of the teams and data sources](page8_img_table_1.png)
+
+a. FT refers to newly formed “flash” teams, and PET refers to preexisting teams.  
+b. A0, B0, C0, D0, and E0 are the leaders of respective teams.
+
+Our study focuses on the largest hackathon site at Microsoft corporate headquarters in Redmond. This site, in 2017, hosted more than 6,700 participants working on more than 1,800 projects in two large tents. In order to have a better understanding about this hackathon, we conducted interviews with three hackathon organizers. These interviews focused on understanding what motivated them to organize such an event, how they designed the event, and what they expected to achieve from it. These interviews enabled us to better understand the event setup and interpret our results within this context. Around the event itself, we conducted an extensive data collection that included interviews and ethnographic observations. Figure 1 shows an overview of the data collection procedure. In the following, we will elaborate on the data sources that were used for this particular study including the respective setup as well as the methods for analysis.
+
+## 4.2. Data sources
+
+We collected data from two main sources: semi-structured interviews and ethnographic observations. We conducted three sets of interviews: 1) before with team contacts which were part of the team selection process described below (pre-interviews); 2) immediately after the event with all team members (post-interviews); and 3) 4 months after the events with at least one member (post-post-interviews). Table 1 summarizes an overview of the data sources and the degree of familiarity among members of each team.
+
+### 4.2.1. Case/team selection and pre-event interviews
+
+We selected five hackathon teams which participated in the 2017 Microsoft OneWeek Hackathon and regarded each team as a case. Although there is no ideal number of cases to be selected, we chose to study five teams and this number falls under the range of 4 to 10 cases recommended for multiple case study research (Eisenhardt, 1989; Sarker et al., 2013). First, a few days before Microsoft OneWeek Hackathon, we first analyzed team profiles, and initially identified 10 potentially appropriate teams, based on two main criteria: 1) Team size – we selected teams which consisted of three to seven (3–7) members. This size was typical of teams participating in the hackathon and small enough that we could observe all of their activities; and 2) Familiarity/diversity – we used the following dimensions as a proxy: current role, organizational unit, and the extent of prior experience of working together, all of which varied together. We wanted teams which were either high and low in these dimensions, and to have at least two teams in each category in order to observe similarities and differences between and within teams.
+
+Next, we contacted the leaders of these teams via e-mail to inquire about participating in our study. We then conducted semi-structured interviews (pre-interviews) with the team leaders who responded to our e-mail showing their willingness to participate in our study. A total of five pre-interviews were collected. The aim of these pre-interviews was to get an understanding about the team (e.g., “How did you find your team and when?”), their project and motivations (e.g., “Can you start by explaining what your project is about?”) as well as potential activities that had already taken place in preparation for the hackathon (e.g., “How much preparation did you do as a team?”)

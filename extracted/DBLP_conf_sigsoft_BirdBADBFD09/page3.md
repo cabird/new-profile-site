@@ -1,0 +1,23 @@
+![Diagram of source code repository and bug database](page3_img_1.png)
+
+Figure 1: Sources of bug data and commit data and their relationships
+
+Confirmation bias, where evidence and ideas are used only if they confirm an argument, is common in the marketplace of ideas, where informal statements compete for attention [39]. Sensationalist bias describes the increased likelihood that news is reported if it meets a threshold of “sensationalism” [21].
+
+Several types of bias are well-known: publication bias, where the non-publication of negative results strengthens incorrectly the conclusions of clinical meta-studies [17]; the omnipresent sample selection bias, where chosen samples preferentially include or exclude certain results [23, 9]; and ascertainment bias, where the random sample is not representative of the population mainly due to an incomplete understanding of the problem under study or technology used, and affects large-scale data in biology [47].
+
+The bias we study in this paper is closest to sample selection bias. Heckmann’s Nobel-prize winning work introduced a correction procedure for sample selection bias [23], which uses the difference between the sample distribution and the true distribution to offset the bias. Of particular interest to our work, and Computer Science in general, is the effect of biased data on automatic classifiers. Zadrozny [48] studies classifier performance under sample selection bias, and shows that proper correction is possible only when the bias function is known. Naturally, better understanding of the technologies and methods that produce the data yield better bias corrections when dealing with large data sets, e.g. in genomics [2]. We hope to apply such methods, including those described by Mockus [35], in future work.
+
+Next, we carefully define the kinds of bias of concern in bug-fix datasets, and seek evidence of this type of bias.
+
+## 3. BACKGROUND AND THEORY
+
+Figure 1 depicts a snapshot of the various sources of data that have been used for both hypothesis testing and bug prediction in the past [19]. Many projects use a bug database, with information about reported bugs (right of figure). We denote the entire set of bugs in the bug database as B. Some of these bugs have been fixed by making changes to the source code, and been marked fixed; we denote these as B_f. On the left we show the source code repository, containing every revision of every file. This records (for every revision) who made the commit, the time, the content of the change, and the log message. We denote the full set of commits as C. The subset of C which represents commits to fix bugs reported in the bug database is C_f. Unfortunately, there is not always a link between the fixed bugs in the bug database and the repository commits that contain those fixes: it’s up to developers to informally note this link using the log message. In general, therefore, C_f is only partially known. One can use commit meta-data (log message, committer id) to infer the relationship between the commits C_f and the fixed bugs B_f [46]. However, these techniques depend on developers recording identifiers, such as bug numbers in commit log messages. Typically, only some of the bug fixes in the source code repository are “linked” in this way to bug entries in the database. Likewise, only a portion of the fixed bugs in the database can be tied to their corresponding source code changes. We denote this set of “linked” bug-fix commits as C_fl and the set of linked bugs in the bug repository as B_fl.
+
+Unfortunately, |B_fl| is usually quite a bit smaller than |B_f|. Consequently, there are many bug fixes in C_f that are not in C_fl. Therefore we conclude also that |C_fl| < |C_f|. The critical issue is this: programmers fix bugs, but they only sometimes explicitly indicate (in the commit logs) which commits fix which bugs. While we can thus identify C_fl by pattern-matching, identifying C_f requires extensive post-mortem manual effort, and is usually infeasible.
+
+> Observation 3.1. Linked bug fixes C_fl can sometimes be found, amongst the commits C in a code repository by pattern-matching, but all the bug-fixing commits C_f cannot be identified without extensive, costly, post-hoc effort.
+
+Features Both experimental hypothesis testing, and bug prediction systems, make use of measurable features. Prediction models are usually cast as a classification problem; given a fresh commit c ∈ C, classify it as “Good” or “Bad”. Often, predictors use a set of commit features (such as size, complexity, churn, etc.) f_1 ... f_m, each with values drawn from domains D_1^c ... D_m^c, and perform the classification operation using a prediction function F_p:
+
+F_p : D_1^c × ... × D_m^c → {Good, Bad}

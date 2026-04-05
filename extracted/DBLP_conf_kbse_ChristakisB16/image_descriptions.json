@@ -1,0 +1,30 @@
+{
+  "page6_img_1.png": {
+    "title": "Developers' acceptable false-positive rates for program analyzers",
+    "description": "Reverse cumulative plot showing how tolerant developers are of false positives: the x\u2011axis is the percent of analyzer results that may be false positives, and the y\u2011axis is the percent of surveyed developers who find that level acceptable. The curve falls steeply at low rates: about 90% of respondents will tolerate up to a 5% false\u2011positive rate, roughly 47% tolerate up to 15%, and only about 24% tolerate a 20% rate. These results (from the paper's 375\u2011respondent Microsoft survey) indicate designers should aim for false\u2011positive rates well below ~15\u201320% for broad developer acceptance."
+  },
+  "page3_img_1.png": {
+    "title": "Developers' top pain points when using program analyzers",
+    "description": "Horizontal bar chart reporting aggregated survey weights for developers\u2019 ranked pain points with static analyzers (weights computed from reciprocals of rank). The largest complaint by far is that \u201cwrong checks are on by default\u201d (~80 weight), followed by poorly worded warnings (~65), \u201ctoo many false positives\u201d (~63), and \u201ctoo slow\u201d (~55); the next tier includes \u201cno suggested fixes\u201d and \u201cdifficult to fit into workflow.\u201d Less frequently cited issues include lack of custom-rule support, missing issues, and cross-platform problems, indicating developers prioritize relevance, clear messages, precision, speed, and workflow integration over extensibility or rare platform limitations."
+  },
+  "page4_img_1.png": {
+    "title": "Survey: Percent of Developers Using Each Language Category",
+    "description": "A horizontal bar chart showing the percent of survey respondents (375 total) who report using different language categories. The largest group is object\u2011oriented languages (OOP \u2014 e.g., C#, Java) at roughly 95%, followed by legacy compiled languages (C, C++, Objective\u2011C) at about 65\u201370%, JavaScript at ~33\u201335%, dynamic scripting languages (Python, Ruby, Perl) near 10%, and very small shares for Assembly (~2\u20133%) and functional languages (~1%). The paper notes this categorization is the authors\u2019 grouping and somewhat subjective, but the figure emphasizes that OOP and legacy compiled languages dominate usage among respondents."
+  },
+  "page4_img_3.png": {
+    "title": "Developer ranking of unsoundness sources (exceptional control flow highest)",
+    "description": "A horizontal bar chart of developers\u2019 rankings (x-axis shows cumulative weight computed as the sum of reciprocal ranks) for common sources of unsoundness in static analysis. Exceptional control flow is by far the highest-weighted concern, followed by aliasing and then arithmetic overflow; mid-ranked items include static initialization, iterators, multiple loop iterations, and reflection, with object invariants and non-null args to main lower still. Floating-point numbers and purity receive the least weight, indicating developers consider them the least critical to handle soundly. These results come from the survey question about which sources of unsoundness tool designers should not overlook."
+  },
+  "page5_img_figure_1.png": {
+    "title": "Developers' preferred locations for analyzer output (editor dominant)",
+    "description": "A horizontal bar chart of survey responses showing where developers want program-analysis warnings displayed: \u201cIn my editor\u201d is the strongest preference (\u2248250 responses), followed by \u201cIn the build output\u201d (\u2248160), \u201cIn the code review\u201d (\u2248120), and \u201cIn a browser\u201d (\u224880). The editor is the clear top choice, indicating a preference for inline, immediate feedback; build/compile output is a distant second while code-review and web dashboards are less favored. This visualization supports the paper\u2019s finding that analysts should integrate results into developers\u2019 workflows (IDE or build) to increase attention and adoption."
+  },
+  "page8_img_1.png": {
+    "title": "Distribution of live-site incidents by category",
+    "description": "A horizontal bar chart listing categories of code issues (Reliability, Performance, Dependencies, Concurrency, Maintainability, Best practices, Security, Portability, Memory corruption, Compliance, Style, Power consumption, Memory consumption) and their incident counts. Reliability dominates the chart, accounting for roughly 65% of the 256 live-site incidents examined across 17 services; Performance and Dependency issues are the next most frequent (about 14% and 12%, respectively). Concurrency and maintainability appear as small bars, while Style, Power consumption, and Memory consumption show no recorded live-site incidents in this sample."
+  },
+  "page4_img_2.png": {
+    "title": "Developers' ranked priorities for issues analyzers should detect",
+    "description": "Horizontal bar chart showing survey-based rankings of 13 types of code issues developers want program analyzers to detect. Security is the top priority (highest bar, ~120 weight units), followed closely by best-practices and concurrency; performance, memory consumption, and memory corruption occupy the mid-high ranks. Reliability, dependencies, and compliance appear in the middle of the list (reliability ranks notably lower than security), while style, portability, and especially power consumption are the least desired targets. The chart reflects the paper\u2019s weighted ranking method (sum of reciprocals of ranks) and helps explain the observed mismatch between developers\u2019 stated preferences (favoring security and best-practices) and the live-site incident data, which showed reliability errors to be the most frequent severe failures."
+  }
+}

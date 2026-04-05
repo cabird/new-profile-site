@@ -1,0 +1,29 @@
+## 2.2 Survey
+
+The second step in our methodology was to survey practitioners. While the interviews were exploratory, the goal of this step was to quantitatively assess, over a large and representative population, the qualitative information that we learned from the interviewees.
+
+### 2.2.1 Protocol
+
+We used Kitchenham and Pfleeger's guidelines for personal opinion surveys [27] and the results from coding the interviews to write 155 candidate statements. Each statement asks the survey respondent to either (1) rate their agreement with the statement on a 5-point Likert scale from Strongly Disagree to Strongly Agree, or (2) indicate, on a 5-point Likert scale from Never to Almost Always, how frequently the event described by the statement occurs. We then condensed the initial set of statements by removing statements that were redundant, ambiguous, or difficult for respondents to self-assess while ensuring that statements derived from each selective code were represented in the final list. This process reduced the set of candidate statements to 36 final statements, which we believed would keep the survey under our target of 15 minutes. Abbreviated versions of the final 36 statements are shown in Figures 2 to 7 and a complete copy is available online.1 In addition, we asked free response follow up questions for areas of particular interest when the response to a question indicated the respondent may have insight or evidence to share. For example, if a respondent indicated that their applications have energy usage goals or requirements, we asked them to provide an example.
+
+### 2.2.2 Participants
+
+We primarily recruited developers and testers as survey respondents because the statements we created reflected practices and concerns related to their work. Within each company, we recruited developers and testers who worked on applications for either mobile devices, data centers, embedded systems, or traditional PCs. To reach these groups, we selected employees based on their position in their company's organizational chart. In total, we sent invitations to 3,860 employees, 700 from ABB, 1,500 from Google, 160 from IBM, and 1,500 from Microsoft. The survey was anonymous, though we did ask respondents to provide their contact information if they were willing to let us follow up with them. At Microsoft, we offered a drawing for two $50 gift cards as this has been shown to improve participation at Microsoft in the past [54]. The overall response rate is 12% (464 responses) with per-company rates of 9% for ABB (62 responses), 9% for Google (134 responses), 13% for IBM (21 responses), and 16% for Microsoft (247 responses). Other online surveys in software engineering research have reported similar rates [47].
+
+1 https://surveys.research.microsoft.com/s3/DeveloperEnergySurvey
+
+## 2.3 Threats to Validity
+
+In our interviews and survey, we avoided practitioners with no interest in energy. Thus, we may be overestimating the importance of the area as a whole. However, we were not interested in contrasting experienced and inexperienced practitioners; instead we preferred to gain insights from experienced green software engineering practitioners.
+
+Due to the costs of interviewing practitioners, we contacted potential interviewees and provided them with a brief outline of the goals of our study. Knowing the high-level goals of the study allowed practitioners to assess whether they can provide useful information. However, because they were aware of the goals of the study, they may have provided information based on what they thought we wanted to know (hypothesis guessing) or they may have withheld information or opinions that they thought would be unpopular (evaluation apprehension) [57]. We reduced these threats by guiding the interview process and assuring the participants that their answers would be anonymized.
+
+The fact that one of the interviewers was not a Microsoft employee may have led to participants withholding information. We addressed this threat by ensuring that at least one interviewer was employed by Microsoft and clearly stating that all relevant non-disclosure agreements had been signed.
+
+Our interview participants were partially identified using the snowball process. One potential disadvantage of this recruitment strategy is that it may suffer from community bias (the potential for the first participants to impact the sample) [2]. The best defense against this is to begin with a group that is as diverse as possible [38]. Because we contacted our initial group of participants through multiple means (see Section 2.1.2), they show diversity by spanning organizational, product, and physical boundaries.
+
+Our survey participants are drawn wholly from the populations of ABB, Google, IBM, and Microsoft. As a result, our findings may not be representative of the opinions and experiences of all practitioners. However, each of these companies is diverse and develops a myriad of products in various domains that run on a spectrum of platforms. In addition, we purposely targeted respondents from different areas and teams to increase heterogeneity and maximize generalizability.
+
+We took care when creating our survey to address well-known design pitfalls [27]. In addition, we piloted the survey with a small initial set of practitioners and solicited suggestions on how to improve the survey. Based on their answers, we improved the survey before it was distributed, for example, by removing potential sources of ambiguity.
+
+When conducting surveys through invitation, avoiding the self-selection principle is difficult [53]. Consequently, practitioners with responsibilities related to energy usage may see more benefit from contributing than others. Since we are primarily concerned with the perspectives of green software engineers, this is unlikely to represent a threat.

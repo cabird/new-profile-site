@@ -1,0 +1,24 @@
+# Rex: Preventing Bugs and Misconfiguration in Large Services Using Correlated Change Analysis
+
+Sonu Mehta1, Ranjita Bhagwan1, Rahul Kumar1, Chetan Bansal1, Chandra Maddila1, B. Ashok1, Sumit Asthana1, Christian Bird2, and Aditya Kumar1  
+1 Microsoft Research India  
+2 Microsoft Research Redmond
+
+## Abstract
+
+Large services experience extremely frequent changes to code and configuration. In many cases, these changes are correlated across files. For example, an engineer introduces a new feature following which they also change a configuration file to enable the feature only on a small number of experimental machines. This example captures only one of numerous types of correlations that emerge organically in large services. Unfortunately, in almost all such cases, no documentation or specification guides engineers on how to make correlated changes and they often miss making them. Such misses can be vastly disruptive to the service.
+
+We have designed and deployed Rex, a tool that, using a combination of machine learning and program analysis, learns change-rules that capture such correlations. When an engineer changes only a subset of files in a change-rule, Rex suggests additional changes to the engineer based on the change-rule. Rex has been deployed for 14 months on 360 repositories within Microsoft that hold code and configuration for services such as Office 365 and Azure. Rex has so far positively affected 4926 changes without which, at the very least, code quality would have degraded and, in some cases, the service would have been severely disrupted.
+
+only to a small set of machines to test it further. Similarly, when an engineer renames a service API, they must also change firewall rule specifications so that the rules apply to the now renamed API rather than to the old one.
+
+Such correlations can occur between code files across components, between code and configuration files, or between configuration files. Unfortunately, unlike pure code, which goes through compilation, reviewing and systematic testing to weed out bugs, these correlations are often not specified, checked for, and are left undocumented. Consequently engineers, with no documentation or specification to go by, often miss making necessary changes to code or configuration files. This can delay deployment, increase security risks and, in some cases, even disrupt the service completely. Disruptions due to such correlations are surprisingly frequent [12]. For instance, an engineer recently caused a disruption at Salesforce because they did not perform all necessary dependent configuration changes related to a change they initiated [22].
+
+To address this problem, we present Rex, a tool that learns these correlations using a combination of machine learning and program analysis. Using association rule mining on many months of file changes, Rex determines sets of files that often change together. Rex also uses differential syntax analysis to learn change-rules: each change-rule captures a set of correlated changes across files. When an engineer makes a file change, Rex analyzes the change and uses the change-rules to suggest additional changes if required.
+
+While the idea of using association rule mining to determine correlations in code and configuration has been proposed before [6, 35, 37], previous work has not concentrated on generalizing the algorithm. To the best of our knowledge, Rex is the first tool that combines association rule mining with syntactic analysis to determine change-rules. Moreover, Rex takes the crucial step of making correlated change analysis generalize well to multiple file-types and services, and deploying it at a large-scale. We do this through three key observations made by studying the characteristics of services:
+1. Correlations occur in a multitude of unpredictable ways. Consequently, Rex’s algorithm should not rely on any hard-
+
+## 1 Introduction
+
+Large-scale services run on a foundation of very large code bases and configuration repositories. To run uninterrupted, a service not only depends on correct code, but also on correct network and security configuration, and suitable deployment specification. This causes various dependencies both within and across components/sources of the service which emerge organically. When an engineer changes a certain region of code or configuration, these dependencies require them to make changes to other code or configuration regions. For instance, when an engineer adds a new feature to a service, they may need to add a function to test the feature. Also, they may need to configure the service to deploy the new feature

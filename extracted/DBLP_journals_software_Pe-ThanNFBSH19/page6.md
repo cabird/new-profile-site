@@ -1,0 +1,23 @@
+platform where people post project ideas and advertise roles required for their projects. This first approach is likely to encourage new and innovative products since the participants are free to inject, discuss, and combine their own ideas. Encouraging participants to propose ideas before the event has the advantage that teams can be more prepared, hence more efficient at the hackathon. In fact, in the competitive events we have observed, the winning teams always have fairly extensive preparation.
+
+However, organizers always have to anticipate that some participants will come to the hackathon without a team and will need to pitch ideas and form teams at the event. Discouraging preparation, on the other hand, provides more opportunity to discuss and refine ideas with a larger
+
+The possibility that high-priority work will be neglected.
+
+Another important aspect is how to organize teams to have a desired mix of skills for each project. One possibility is to have a moderator assign participants to teams once their skills have been identified. Another, and more common, approach, is to allow teams to self-organize, running the risk that teams may end up with members with very similar backgrounds. In fact, homophily, the well-established tendency of people with similar traits to hang out together, tends to happen when there is no other basis for organizing teams, as we have observed in hackathons attended by distinct professional groups. Software tools that allow participants to pitch project ideas and a mix of skills required for the
+
+A hackathon we have studied holds a separate event only with minorities before they take part in a larger event with more diverse participants. We have also observed hackathons where novices are encouraged to spread themselves out among teams with more experienced members, who are encouraged to help bring the novices up to speed. Keeping a manageable ratio of (at least 3:1) novices to experienced team members facilitates learning without too great a sacrifice of technical progress.
+
+> A hackathon consisting of attendees with diverse skills can facilitate innovation and learning.
+
+## Prework and Postwork
+
+It is advisable for teams that aim to develop a fully functioning prototype during the hackathon to meet before the event and divide their project into manageable work packages, assign responsibilities, and pretest technologies that they are going to use. This allows them to be as efficient as possible during the hackathon. For teams that are not prepared to start with idea at the event, it is worthwhile to consider the best ways to facilitate ideation and brainstorming in teams.4
+
+set of people,4 and it encourages participants to meet people who they might not have a chance to meet otherwise and, hence, enrich one’s personal network. The second approach can be effective when a primary goal is learning,5 and the organizers can devise projects that address specific learning goals.9 It can also be very useful if the organizers’ primary goal is to accomplish specific, high-priority work. A key tradeoff here is the creativity and fun that developing and working on one’s own idea provides versus the difficulty that novices, in particular, may have in formulating a feasible project and the proposed project can foster skill diversity in self-organized teams. This can also allow someone to identify opportunities to sign on for roles in teams that will allow them to develop new skills.
+
+When teams are organized to have a mix of skills, they will most likely consist of both novices and experts. Here, mentoring and tutorial sessions will be helpful for novices. We found brainstorming to be a useful technique that allows everyone to feel their ideas are heard and seems particularly effective in helping those who identify as minorities to feel satisfied with the process.4,11
+
+For hackathon prototypes to have impact, follow-up activities have to be prepared by both organizers and participants. Organizers should provide opportunities for teams to promote their prototypes to a larger audience.6 At Microsoft’s OneWeek Hackathon, the organizers provided support for creating a video demonstrating each project and allowed participants to publicize their project and video through a web-based platform and a “science fair” at the end of the hackathon.
+
+We found that the continuation of a project beyond the hackathon mainly depends on a market need and a project’s fit to the existing products. Finding a suitable home

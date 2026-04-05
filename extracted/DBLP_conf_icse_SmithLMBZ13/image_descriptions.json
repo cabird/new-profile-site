@@ -1,0 +1,6 @@
+{
+  "page3_img_1.png": {
+    "title": "Persuasive factors in 11 survey invitation emails",
+    "description": "A binary matrix showing which of the persuasive cues (rows: Authority, Similarity, Compliment, Scarcity, Humor, Reward ($), Reward (Other), Direct) appeared in each of 11 invitation emails (columns labeled 1\u201311), with the weekday each was sent and the observed response rate listed on the bottom row. Authority is marked for every email; similarity cues and monetary rewards appear in many of the higher-performing emails. Response rates range from 6% (email 1) to two emails at 36% (emails 10 and 11); those two highest-rate messages both included similarity and a monetary reward, and email 11 also included an explicit compliment. Humor appears only in email 9 (which had a 30% response rate); scarcity appears in several emails but is not consistently associated with the top response rates."
+  }
+}

@@ -1,0 +1,21 @@
+of the reasons for this lack of dissemination was that the leader did not perceive the project as mature enough.
+
+## 10.3. Impacts on project continuation
+
+In order to answer our second research question (RQ2), we first identified the teams whose projects got continued through an analysis of interviews conducted four months after the hackathon (post-interviews). We contrasted teams with projects that got continued (teams A and E) with those that did not (teams B, C, and D), which revealed factors influencing project continuation.
+
+### 10.3.1. Career-oriented leadership
+
+This refers to the motivations of the project leader of getting work done and advancing their career. Having this style of leadership led the hackathon teams to focus on meticulous preparation and execution of their project to ensure a presentable outcome, as well as actively engage in promoting their project before and after the hackathon. Among the five teams we studied, team A (a FT) and team E (a PET) got their projects continued. Both teams were found to have leaders (A0 and E0) who participated in the hackathon for getting work done and career advancements.
+
+The leaders of the other two FTs (team B and C) did not mention these motivations as their reasons for participation; they instead mentioned networking and fun as important motivations. The leader of another PET (team D) shared the same motivation with team E, but their project did not sustain which could be attributed to a fatal attraction which we discuss below. It thus appears that having career-oriented leadership is important for hackathon teams to have their project continued, but depending on how the team was assembled (i.e., PETs or FTs), we found the leader practiced different coordination strategies which will also be discussed in the following sections.
+
+### 10.3.2. Expertise-focused learning
+
+This refers to the motivations of respective project members about learning something new related to their domain of expertise combined with an interest in the project idea. This allowed them to efficiently carry out their respective tasks during the hackathon. The members of both teams whose project got continued (teams A and E) were motivated mainly by the project ideas and learning. Looking deeper into the aspect of learning revealed that members of these teams aimed at learning new skills related to their specific area of expertise. It thus appears that a motivation for expertise-focused learning can positively influence the continuation of a project.
+
+With regards to PETs, the members of both teams D and E showed interest in their respective projects. The members of team E indicated that they were interested in learning new technology while working on their project (e.g., E1, E2), in turn showing their leadership that the team was capable of quickly learning and doing something. However, the members of another PET (team D) were motivated mainly by getting their project done while utilizing their existing skills.
+
+For FTs, the members of teams A and C showed an interest in the project idea they selected, but the motivation of the members of team B was rather diverse. The lack of a priori familiarity among members combined with diversity in motivation caused difficulty for team B in organizing their teamwork effectively as we discussed above. In addition to showing an interest in their project idea, the members of team A were mainly motivated by learning new technology as well as learning about other organizational aspects (e.g., learning about HR (A1)) while collaborating with team members from different organizational units which was what FTs afforded. The members of team B, however, were mainly interested in learning about other subject areas such as B2 being a project manager aiming to improve the participant’s technical skills and C1 being a developer aiming to refresh their wireframing skills.
+
+For PETs, learning new technology contributed to project continuation, and for FTs, learning about skills related to the participants’ specific area of expertise, including new technology and other organizational aspects such as HR, positively influenced project continuation. This appears

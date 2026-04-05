@@ -1,0 +1,9 @@
+looked at this as just another aspect of programming, practitioners have been more inclined to approach it as a social process—that is, as a problem best addressed by encouraging co-workers to figure out solutions together. Personally, I’ve always seen merge conflicts as more of a tooling challenge.
+
+ALEXEY SVYATKOVSKIY: For me, this just looked like an exciting software engineering problem to address with machine learning. I’ve spent years working on code completion, but this effort looked like something that would take that up to the next level of complexity, since it necessarily would involve aligning multiple sequences somehow and then complementing that with an understanding of where things ought to be inserted, deleted, or swapped. And, of course, there were also those special cases where the developer would be able to add new tokens during the merge.
+
+This took us on a journey where we ended up addressing program merge down at the line-and-token level. I found this fascinating, since a lot of people don’t have any idea about how merge actually works and so, by extension, don’t have a clear understanding about what leads to merge conflicts. Taking on this problem also seemed important in that, while merge conflicts are far less common than software bugs, they require considerably more time to resolve and can end up causing far more pain.
+
+TC: How did you initially attack the problem?
+
+SL: We realized that repositories (both open-source ones on GitHub and internal ones at Microsoft) contain data on merge conflicts and their resolution across several different programming languages. What’s more, Alexey

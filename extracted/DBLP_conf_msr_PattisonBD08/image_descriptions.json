@@ -1,0 +1,22 @@
+{
+  "page3_img_2.png": {
+    "title": "Talk vs. Work correlations (Cumulative vs 3\u2011Month)",
+    "description": "Table of Pearson correlations (and p-values) between keyterm occurrence counts in hunks (work) and in mailing\u2011list messages (talk) for four OSS projects. Cumulative correlations are high and significant: Ant 0.841, Python 0.763, Apache 0.681, Postgres 0.580 (all p = 0.000). When measured over 3\u2011month intervals the relationships are much weaker: Ant 0.435 (p = 0.000), Python 0.155 (p = 0.000), Apache \u22120.099 (p = 0.000), Postgres 0.067 (p = 0.000). This supports the paper\u2019s finding that a strong overall (cumulative) talk\u2013work relationship exists, but that the same relationship is substantially weaker and more variable when examined in short time windows."
+  },
+  "page2_img_1.png": {
+    "title": "Data\u2011mining workflow for extracting code and email keyterm counts",
+    "description": "A flowchart showing the data\u2011mining pipeline (Figure 1) with three parallel inputs and two final counters. From the source\u2011code side, \"Version Snapshots\" (step 3) and \"CVS/SVN Change Logs\" (step 4) feed keyterm extraction and hunk parsing: snapshots produce \"Keyterms\" (step 6) which are culled (step 10) and the change logs feed the \"Keyterm Hunk Use Counter\" (step 5) that outputs the CVS Hunk Use Count. From the communication side, raw mail data is cleaned to \"Cleaned Messages & Headers\" (step 7), then patch\u2011containing messages are removed to produce \"Filtered Messages\" (step 8) which are compared against the culled keyterms by the \"Keyterm Email Use Counter\" (step 9) to produce the Email Use Count. The figure encodes the authors' processing choices referenced in the text: keyterms are extracted from snapshots (using Understand), culled by occurrence thresholds (at least three hunks and three messages), and emails with embedded patches are filtered out before counting."
+  },
+  "page3_img_1.png": {
+    "title": "Cumulative keyterm counts: hunks vs. emails (Postgres, Apache, Python)",
+    "description": "Three side-by-side log\u2013log scatter plots (left: Postgres, center: Apache, right: Python) where each open circle is a software keyterm and its cumulative hunk count (x-axis, code changes) and message count (y-axis, email mentions) over the life of the project. All three plots show a clear upward trend with dense clustering at low counts and long tails of high-use keyterms; the reported Spearman correlations (left\u2192right) are \u22480.580, 0.681, and 0.763, indicating increasingly stronger positive association from Postgres to Python. Axes cover several orders of magnitude (roughly tens to 1e5), so many keyterms have small counts while a few are heavily used and discussed, supporting the paper\u2019s finding of a strong cumulative relationship between work (hunks) and talk (emails)."
+  },
+  "page4_img_1.png": {
+    "title": "Three-month interval scatter plots of hunk vs email counts (Postgres, Apache, Python)",
+    "description": "Three side-by-side log\u2013log scatter plots (left: Postgres, center: Apache, right: Python) plot keyterm occurrences in hunks on the x\u2011axis against occurrences in email messages on the y\u2011axis, aggregated in 3\u2011month intervals. Each point is one keyterm in one interval; most points cluster at low hunk counts while message counts vary widely (y up to >10,000), with points spreading rightward as hunk counts grow. The printed Spearman correlations under each panel show weak or negligible interval-level associations: Postgres = 0.0668, Apache = \u22120.0988, Python = 0.1546. These weak, mixed correlations illustrate that the strong cumulative talk\u2013work relationship reported elsewhere in the paper does not consistently hold when data are broken into short time intervals."
+  },
+  "page4_img_2.png": {
+    "title": "Time series of email-to-hunk mention ratio for apr_snprintf (1999\u20132005)",
+    "description": "Scatter plot of the talk/work ratio for the Apache portability function apr_snprintf over 3-month intervals from 1999 to 2005 (x-axis: Time; y-axis: Talk/Work). The ratio plotted is mentions in emails divided by (hunk mentions + 1); each circle is one interval. There is a very large early peak (around 2000) with a ratio near or above 100, after which the ratio falls sharply and remains at low values (mostly near zero to single digits) for the rest of the period, with only small occasional bumps between 2002\u20132005."
+  }
+}

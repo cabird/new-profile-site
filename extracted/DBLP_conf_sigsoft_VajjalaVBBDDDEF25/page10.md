@@ -1,0 +1,33 @@
+In contrast, non-AI enhancements were appreciated for their reliability and simplicity. The consolidated block-based UI streamlined navigation, while the progress bar and inbox-style views helped track tasks and organize labeling sessions. Features like flagging and priority-based ordering improved task management. Overall, AI-driven features were effective in reducing effort and accelerating workflows but required trust-building through better explainability. Non-AI enhancements were seen as intuitive and immediately impactful, addressing key usability pain points.
+
+Participants favored hybrid solutions that integrated AI-driven functionality with usability improvements. For example, the clustering feature, which combined machine learning for dynamic grouping with a user-friendly interface, was seen as a best-of-both-worlds solution. However, some participants hesitated to rely solely on AI for critical tasks. Together, each set of features complemented the other, delivering a balanced solution that met diverse OCE needs and encouraged broader adoption of AI-driven workflows.
+
+## 5 Related Works
+
+Differential testing is a key technique in software engineering that compares outputs from different system versions to detect regressions or inconsistencies [2, 11, 12, 21]. Early work by McKeeman et al. [19] and Zeller et al. [34] highlighted its role in quality assurance. Modern advancements have integrated differential testing into release engineering pipelines for production-like evaluations [1, 2, 20], though these processes still rely on manual interventions, leading to inefficiencies and errors [16].
+
+Recent developments have sought to automate several stages of release engineering by leveraging Artificial Intelligence (AI) and Machine Learning (ML) to streamline and enhance testing processes. These advancements have led to automated tools that prioritize test cases, classify defects, and even predict potential failures in the software [5, 8, 9, 14, 18, 21, 23, 25, 28]. Despite these successes in backend optimizations, much of the focus has been on the functionality of the tools rather than the user experience of the developers who use them [29, 30]. As these tools evolve, there is growing recognition of the importance of integrating Human–Computer Interaction (HCI) principles to enhance usability and developer productivity [1, 8].
+
+AI-driven advancements in differential testing have automated decision-making, but developer-tool interfaces remain static. Tools often lack feedback, adaptive support, and seamless integration into workflows, limiting their utility during high-stakes debugging. Research highlights the need for systems that combine automation with dynamic, intuitive, and interactive support [1, 3, 8, 30]. This has fueled demand for HCI innovations emphasizing contextual awareness, real-time feedback, and adaptive interfaces to meet developers’ evolving needs.
+
+In this context, research is beginning to focus on building systems that integrate both AI and HCI principles, thus allowing for more adaptive, context-aware interfaces that support developers at every stage of their work. By merging the power of AI in automating tedious backend processes with HCI’s emphasis on developer-centered design, it is possible to create systems that not only improve the efficiency and accuracy of differential testing but also ensure that these tools are usable and effective for developers.
+
+A holistic approach is critical in advancing the field, as it addresses not only the technical challenges of differential testing but also the human challenges, ultimately paving the way for more productive and effective software engineering practices.
+
+## 6 Conclusion
+
+### 6.1 Limitations
+
+Because the OCEs’ work is critical, time-sensitive, and laborious, conducting a study with this population is challenging. While the five participants provided valuable insights, their views and experiences may not represent the entire team, and their voluntary participation is subject to the typical selection bias. We conducted our study collaboratively with a single team, chosen because of its critical mission, its existing investment in differential testing, and its enthusiasm for improving work practices. Our findings may not generalize to other teams doing differential testing, particularly at other companies. Finally, while our prototype used up-to-date LLM models, fine-tuned on recent Diffs from the team’s databases, our early-stage prototype does not have the same usability or engineering quality of their established tool, which could have influenced participant feedback.
+
+### 6.2 Future Work
+
+Building on these findings, future work should focus on enhancing real-time collaboration features such as direct Diff delegation, team-based clustering, and shared annotations. Additionally, incorporating detailed metadata and rationales for AI predictions would address transparency concerns and foster greater trust. Advanced filtering options based on team ownership or historical patterns could further tailor the tool to individual workflows. Expanding the tool’s integration with other platforms, such as issue trackers and code repositories, would streamline transitions from debugging to resolution. Conducting longitudinal studies to measure the impact of the redesigned DiffViewer on productivity, developer satisfaction, and software quality over extended periods would provide valuable insights.
+
+### 6.3 Conclusions
+
+This study presents the potential of combining AI and HCI principles in the design of developer tools. By addressing core pain points such as cognitive overload, inefficiencies in manual labeling, and fragmented workflows, the redesigned DiffViewer represents a significant step forward in differential testing tooling. Features like clustering, AI-based predictions, and an intuitive block-based UI empower software engineers to make faster, more informed decisions. However, balancing automation with transparency and trust remains essential. By addressing current limitations and exploring further enhancements, future iterations of the DiffViewer can serve as a model for intelligent, developer-friendly tools that bridge the gap between technical automation and human usability, advancing release engineering and software development.
+
+## References
+
+[1] B. Adams, S. Bellomo, C. Bird, T. Marshall-Keim, F. Khomh, and K. Moir. The practice and future of release engineering: A roundtable with three release engineers. IEEE Software, 32(2):42–49, 2015.

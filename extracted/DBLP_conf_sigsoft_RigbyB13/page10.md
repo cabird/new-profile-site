@@ -1,0 +1,26 @@
+![Violin plots showing distribution of files seen per project](page10_img_1.png)
+
+Figure 8: On left, the number of files submitted for review. On right, the total number of files either submitted for review or reviewed
+
+## 6. THREATS TO VALIDITY
+
+We studied a large, diverse sample of projects; however, each project has different tools, processes, incentives, etc., so the data we collected is not as controlled and free from confounds as it would be in an experimental setting. We have attempted to clean and report the data using similar measures and methods and have discussed limitations throughout the paper.
+
+When a finding was unusual we would read the associated anomalous reviews and discuss them with developers. For example, we have removed reviews that received no activity from the Microsoft data sets (reviews that had no comments, no sign offs, and only one submitted changeset). Upon initially finding these in our data set, we inquired of the developers who created the reviews. They indicated that sometimes reviews are more for awareness (e.g., alerting a manager to a feature being implemented or showing a tester code that they should write a test for) than actually reviewing the changes and that the complete lack of activity represents reviews that are used for awareness purposes only. It is possible that a portion of these reviews were actually intended as actual code reviews rather than for awareness and simply received no attention from the invited reviewers. This type of review has also been removed from the Google-led projects and from the OSS projects studied by Rigby et al. [24] and used for comparison purposes in this paper. In some cases, we re-ran measures on Rigby’s raw data sets. The AMD and Lucent data sets presented further difficulties because we have summary instead of raw data. We have converted the raw data to make it comparable with the other data we collected; however, we are often missing the required data.
+
+## 7. CONCLUSION
+
+The variations in traditional, formal software inspections were found to have little impact on its effectiveness as a peer review process, with product and process factors being better predictors of the number of defects found in review [19, 27]. Furthermore, as Wiegers points out in his practical guide to peer review, the “similarities [in formal inspection process] outweigh their differences” [31].
+
+Contemporary peer review represents a lightweight, “stripped-down” version of software inspection that removes the rigidity of the formal inspection processes, while leaving the effective defect-finding technique of having an expert peer examine software artifacts before they are added to the shared version control repository.
+
+Contemporary peer review has evolved from the needs of practitioners and these practitioners have driven the development of review tools [6]. The large body of literature on software inspection has largely ignored these contemporary practices. In this paper, we have presented findings on the peer review practices used on three projects representative of development at Microsoft, AMD projects, and two Google-led OSS projects. We have compared parameters of review, such as review interval and the number of comments in review discussions, of these six projects with the data from Rigby’s study of six OSS projects [23]. We also use data from inspection at Lucent as a contrast. We found that while there were some minor divergences in contemporary practice, “their similarities outweighed their differences,” i.e., the findings converged.
+
+The convergent contemporary peer review practices can be described as the following.
+
+1. Contemporary review is performed regularly and quickly just before the code is committed instead of when a larger work product is complete as in inspection.
+2. Contemporary review usually involves two reviewers. However, the number of reviewers is not fixed and can vary to accommodate other factors, such as the complexity of a change.
+3. Contemporary reviewers prefer discussion and fixing code over reporting defects.
+4. Tool-supported review provides the benefits of traceability, when compared to email-based review, and can record implicit measures, when compared to traditional inspection. The rise in adoption of review tools provides an indicator of success.
+
+A final contribution of this paper was a novel measure of the degree to which reviews spread knowledge across the development team. This measure provides a quantification of knowledge spread that has previously only had experiential support. We find that review increases the number of distinct files a developer knows about by 66% to 150% depending on the project. We feel that future work is necessary to determine whether lightweight measures, such as the diversity and amount of discussion during review, can be used as new release quality measures. Instead of counting the number of defects found in a module, a manager might ask, “have developers with sufficiently diverse backgrounds discussed this new section of code enough for it to be released?”

@@ -1,0 +1,15 @@
+Fine-grained and local information about themselves, their teammates and their entire team. Example fine-grained and local topic-plots are depicted in Figure 5a which shows the topic-plots of 2 developers drawn only from commits made by those developers. By examining Figure 5a, we observe that the developers’ behaviour with respect to a particular topic does indeed change over time, and each developer exhibits a different focus. Plots like Figure 5a illustrate that different authors’ focus evolves over time.
+
+Analysis of groups of developers via topic-plots is possible. Figure 5b depicts different teams (developers with the same manager) rather than different authors. These plots can be generated based on the work of multiple authors or an organization; in this case we leveraged the organizational knowledge of teams (who manages who). This allows the attribution of effort relevant to requirements topics to teams. For Topic testing, metrics and milestones in Figure 5b, the trend was similar but the behaviour was not. This manager-level view provides a summary of a team’s development effort and allows one to compare teams and see the behaviour relevant to that team.
+
+In summary, we can track commits related to topics extracted from requirements over time. We are able to extract and plot global topic-plots depicting global trends, and produce local topic-plots of teams and developers that can be used to investigate more personally relevant and local trends. This information can help provide feedback to a manager who could augment their project dashboard with these topic-plots in order to observe global trends, personal trends or team-wise trends within these plots. The potential for dashboard use was later confirmed in interviews with program managers (see Section 5.1.1).
+
+In the next section we discuss the results of the surveys and interviews and the perceptions that developers and managers hold regarding these topic-plots.
+
+## 5 Qualitative Evaluation
+
+In this section we validate if developers and managers were able to label topics and if the topic-plots matched their perception of the effort that occurred relevant to that topic and its associated requirements.
+
+### 5.1 Interviews
+
+Initially, we needed to understand requirements use at Microsoft. Thus our initial interviews helped direct the rest of the study. We interviewed one program manager and one developer for one hour each. The interviewees were chosen specifically because they had participated in writing the requirements documents that we had access to. Later during the FLOSS extension of the Microsoft study we interviewed 5 developers over Skype, and IRC. In the following sections we discuss interviews with a program manager and a developer at Microsoft in 2011, and then we summarize the interviews with FLOSS developers in 2013.

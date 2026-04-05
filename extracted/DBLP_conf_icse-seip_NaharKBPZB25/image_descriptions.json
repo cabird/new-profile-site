@@ -1,0 +1,6 @@
+{
+  "page4_img_1.png": {
+    "title": "Interview participants by product and role",
+    "description": "The table enumerates participants grouped by product identifiers G1\u2013G12, listing participant IDs (P01\u2013P26) and their roles. It shows 24 named participants across 12 product groups, with some teams represented by multiple roles (e.g., G1: P01, P08, P18 \u2014 Manager, Engineer, Data Scientist; G3: P02, P09, P10, P17 \u2014 Manager, Data Scientist, Engineer) and other teams represented by a single role (e.g., G4: P04 \u2014 Engineer; G10: P19 \u2014 Manager). Several groups emphasize engineering representation (G2 and G11 list multiple engineers), while others combine managerial and data\u2011science perspectives (G9 and G12). The table therefore documents that the interview sample spans managers, engineers, data scientists, and researchers across multiple product teams."
+  }
+}

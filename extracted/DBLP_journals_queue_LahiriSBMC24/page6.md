@@ -1,0 +1,9 @@
+> TC I find it fascinating that it proved to be so difficult to scope this project correctly. Can you dig a bit deeper into that?
+>
+> AS To me, at least, as we were analyzing the different types of merges, it soon became clear that there are varying levels of complexity. Sometimes we'd find ourselves looking at two simple merge resolution strategies where it essentially came down to "Take ours or take theirs." Such cases are trivial to analyze, of course, and developers don't require much AI assistance when it comes to resolving these conflicts.
+>
+> But then there's another class of merge where a new interleaving line is introduced that involves more than just concatenation. There could also be token-level interleaving, where lines in the code have been broken and new tokens introduced in between. This leads to the notoriously complex case where a switch to token-level granularity proves to be crucial. Beyond that, there's a whole other class of merges where you find somebody has introduced some new tokens.
+>
+> EM How do you go about defining what you consider to be a correct merge? Doesn't that require you to make your own value judgments in some sense?
+>
+> SL Well, I'll just say we had a very semantic way of looking at merges. Essentially: "Forget about the syntax; instead, what does it mean for the merge to be correct?" In effect, this amounts to: If something was changed in one program, then that ought to be reflected in the merge. And, if that also changes a behavior, then that too ought to be included in the merge. But no other changes or altered behaviors should be introduced.

@@ -1,0 +1,9 @@
+precise limit, but it is useful to keep in mind.
+
+Also, if your organization has data from past reviews, I’d suggest investing in a recommender system that can help make some of the administrative steps a little less tedious. You can even use these systems to automatically address some of your maintainability issues, which is something we’re starting to get into these days. That is, you can imagine that some of these maintainability issues are essentially things that might be autodiscovered and flagged, which means you then don’t have to expend any human resources to get this accomplished.
+
+Another thing, as we just discussed, is the idea that two signoffs on every change might be too many. If you look at the distribution of comments made by either the first or the second reviewer, you’ll find that your first reviewer typically discovers the most egregious problems. In many cases, waiting for a second reviewer to corroborate those findings before allowing the commit into the main source tree might be less efficient.
+
+MG My biggest takeaway from the survey is to always make the burden of code reviews just as small as you possibly can. Part of that comes down to having a good code-review process that enables and encourages comments that can be easily reviewed.
+
+Another important consideration has to do with supporting the reviewers themselves by giving them advance notice about any reviews that might be coming up and giving them enough context so they’ll be able to dive right into a review without having first to figure all that out for themselves. Doing what you can to reduce the size of reviews can also be helpful. But I think what’s really

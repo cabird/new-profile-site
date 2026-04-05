@@ -1,0 +1,26 @@
+## Putting it All Together:  
+Using Socio-Technical Networks to Predict Failures
+
+Christian Bird1, Nachiappan Nagappan2, Harald Gall3, Brendan Murphy2, Premkumar Devanbu1
+
+1 University of California, Davis, USA  
+2 Microsoft Research  
+3 University of Zurich, Switzerland
+
+{cabird, ptdevanbu}@ucdavis.edu {nachin, bmurphy}@microsoft.com gall@ifi.uzh.ch
+
+### Abstract
+Studies have shown that social factors in development organizations have a dramatic effect on software quality. Separately, program dependency information has also been used successfully to predict which software components are more fault prone. Interestingly, the influence of these two phenomena have only been studied separately. Intuition and practical experience suggests, however, that task assignment (i.e., who worked on which components and how much) and dependency structure (which components have dependencies on others) together interact to influence the quality of the resulting software. We study the influence of combined socio-technical software networks on the fault-proneness of individual software components within a system. The network properties of a software component in this combined network are able to predict if an entity is failure prone with greater accuracy than prior methods which use dependency or contribution information in isolation. We evaluate our approach in different settings by using it on Windows Vista and across six releases of the Eclipse development environment including using models built from one release to predict failure-prone components in the next release. We compare this to previous work. In every case, our method performs as well or better and is able to more accurately identify those software components that have more post-release failures, with precision and recall rates as high as 85%.
+
+### 1. Introduction
+Software failures are becoming increasingly important and costly. A study by the National Institute of Standards and Technology in the U.S. estimated that the annual cost of software bugs is about $59.5 Billion [1]. At the corporate level, the ability to identify and correct software defects prior to release saves a company from increased cost, customer dissatisfaction, and loss of market share. As such, there is a rich history of tools which can automatically identify software defects before end-users encounter them. It can be very difficult and expensive to test all of the components of a large and complex system. However, the complexity inherent in large software systems can be leveraged to aid in locating those components which are particularly defect prone. Encouraging results in prior research indicate that it is possible to predict which components are likely locations of defect occurrence using a component’s development history, and dependency structure.
+
+In this paper, two key properties of software components in large systems are dependency relationships (which components depend on or are depended on by others), and development history (who made changes to the components and how many times). Thus we can link software components to other components a) in terms of their dependencies, and b) in terms of the developers that they have in common. This linkage has been used to construct software component networks. Prediction models based on the topological properties of components within them have proven to be quite accurate [2], [3], [4]. Components which play key roles and are central in these networks tend to be more failure prone than components in the surrounding areas.
+
+We argue that these forms of information should be used together. The intuition behind our approach is that software components may be related through important but different types of relationships. By aggregating these relationships our ability to predict failures will increase. We do this in two ways. First, we build each type of network separately and use network analysis on both to gather metrics for use in a predictive model. Second, we build a socio-technical network which combines the nodes and edges from both the dependency network and the contribution network and use metrics gathered from this network in a predictive model.
+
+We evaluate our approach by collecting data from Microsoft Windows Vista and Eclipse development and using logistic regression analysis. Our regression models relate social network centrality measures of components with the number of post-release failures. Results of our empirical study show a strong correlation between the centrality of software components and the number of post-release failures and indicate that combining dependency and contribution data results in prediction models that have higher recall and precision.
+
+We make the following contributions in this paper:
+1) We present (to the best of our knowledge) the first paper in the software engineering or Computer Supported Cooperative Work (CSCW) community that combines the developer and the code level view of software systems to predict code quality.  
+2) We present an approach for predicting failure prone software components using development history and

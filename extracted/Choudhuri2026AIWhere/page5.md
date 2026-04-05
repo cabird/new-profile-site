@@ -1,0 +1,38 @@
+steps, comprehension, collaboration, information retrieval). They, nonetheless, stressed retaining decision control, positioning AI as complementary rather than substitutive (see §5.2).
+
+Task Identity (H2) alignment showed a dual pattern: lower openness to AI support (β = −.09, p < .001) but higher usage (β = .15, p < .001), with medium effects (−.15, .20). Developers protected ownership of identity-defining work (see §5.2); yet used AI to refine their craft (e.g., learning, research, and exploration).
+
+Task Accountability (H3) was positively associated with openness to AI support (β = .07, p < .001) and use (β = .18, p < .001), with small–medium effects (.10, .21). Rather than avoiding AI, developers leveraged it as a safeguard in high-stakes tasks (e.g., to surface issues, verify solutions, or justify decisions), raising both support needs and use. Yet, heightened accountability increased vigilance: they insisted on deliberate review of AI outputs, maintained oversight, and decision control for these tasks (see §5.2).
+
+Finally, Task Demands (H4) positively associated with openness (β = .12, p < .001) and use (β = .09, p < .001), with small–medium effects (.18, .10). For demanding/effort-intensive work, developers were more inclined to use AI to offload rote steps, lower cognitive load, and sustain momentum. In these cases, AI functioned as a cognitive scaffold that freed attention for higher-order knowledge work [55].
+
+Experience: SE experience predicted lower AI use (β = −.09, p < .001). Experienced developers rely on established repertoires [30], reducing the perceived utility of AI delegation, whereas juniors use AI to offset skill gaps [25]. Openness to AI support did not differ significantly by SE experience. Prior AI experience increased both openness and use (β = .19, .41; both p < .001), consistent with familiarity-driven calibration of expectations and AI-usage habits [7].
+
+Group analysis (AI Dispositions): Stratifying by median splits on reported AI dispositions, risk-tolerant (RT) developers showed higher openness and use overall. They sought significantly more AI support for high-value (Δβ = .06, p = .035) and high-demand (Δβ = .09, p = .001) tasks, and used more in high-stakes and demanding situations (Accountability: Δβ = .07, p = .038; Demands: Δβ = .08, p = .002). Risk-averse (RA) peers remained more vigilant under accountability pressures [56,85]. Other associations were consistent across both groups. Technophiles, likewise, showed higher openness and use overall. Crucially, accountability appraisals (H3) predicted these outcomes only among high-technophiles (Support: β = 0.07, p < .001; Usage: β = 0.20, p < .001), indicating that technophily moderates AI adoption under high-stakes conditions.
+
+Consistent with human–AI teaming work [7], high-technophiles have the orchestration habits to use AI as a “second set of eyes,” which outweigh perceived error/coordination costs, whereas low-technophiles—lacking these routines—view AI as net-costly under accountability pressure. Other associations were comparable across both groups (no LT–HT differences; effects significant within each).
+
+> Takeaway: Task appraisals shape AI adoption: Value, Accountability, and Demands increase openness and use; Identity-alignment shows dual effects. Junior, AI-experienced, risk-tolerant, and technophilic developers are more receptive overall, especially for high-value, high-stakes, or demanding work.
+
+### 5.2 RQ1b: Where and why do developers seek or limit AI support?
+
+Given that appraisals predict AI use, we examined how it varied across tasks to locate where and why developers seek or limit support. First, we clustered tasks by their appraisal signatures (Table 4). For each task, we computed top-2 agreement proportion (share selecting 4–5 on a 5-point scale [52]) for the four appraisals, then standardized these values to z-scores (z = (x − x̄) / sd(x)) for cross-scale comparability [40]. We applied agglomerative hierarchical clustering (Ward linkage) [93] on Euclidean distances of these z-scores, selecting k = 3 optimal clusters via silhouette analysis [73] (see [1] for silhouette plot). We used precision-weighting (inverse-variance shrinkage to the grand mean) to address unequal task-Ns and validated cluster stability via stratified bootstraps (B = 1000) [40]. The analysis yielded the following clusters:
+
+- C1: Core work — High value and demands; moderate–high accountability; moderate–strong identity alignment.
+- C2: People & AI-building — Moderate value, demands, and accountability; strong identity alignment.
+- C3: Ops & Coordination — Moderate–high value, demands, and accountability; weak identity alignment.
+
+We simultaneously mapped tasks onto an Openness to AI Support (x) vs. AI Usage (y) plane (Fig. 1) to visualize gaps in tooling support. Axes show task-level z-scores for openness “need” (x) and reported use (y), with positive values above the sample mean and vice versa. Quadrants (mean-split: z = 0) highlight distinct opportunities/gaps:
+
+- Build (bottom-right; high need, low use): Clear need but limited adoption; reduce friction and prototype new support.
+- Improve (top-right; high need, high use): Strong need and adoption; focus on reliability and quality for gains.
+- Sustain (top-left; low need, high use): AI is used but not essential; maintain support without over-investment.
+- De-prioritize (bottom-left; low need, low use): Limited uptake; expect lower returns from additional investment.
+
+In what follows, we position tasks on this map and, by cluster, draw on qualitative analysis of free-text responses to explain which aspects may benefit (or suffer) from AI involvement and why.
+
+#### 5.2.1 Core work (C1)
+
+Core work (C1) comprised tasks central to development and systemic quality-management: coding, bug fixing, testing/QA, code review, system design, performance optimization, requirements engineering, security; alongside learning and research. Appraised as high-value, high-stakes, and high-demand, most C1 tasks concentrated in the Build/Improve (high-need) zones, indicating a strong appetite for AI support. Identity alignment, however, constrained delegation: participants sought AI primarily as an augmentation support while retaining ownership of core decisions, skills, and responsibilities. In contrast, system design and requirements fell in De-prioritize, due to AI’s contextual misfit and trust concerns.
+
+**Seek AI:** For core work, participants used AI to boost workflow efficiency, delegating tedious steps to reduce cognitive load: “generate boilerplate code, build configurations, test cases... which I know how to write, but I don’t want to write” (P353); freeing focus for creative problem solving: “Leave me to do the fun [parts]” (P319). They sought proactive performance and quality assurance, beyond standards enforcement, to catch “bugs, regressions, [performance] bottlenecks, and potential security issues early... where human review might miss patterns or edge cases” (P241). This required multi- and cross-context awareness—AI that integrates signals across codebases, documents, and related artefacts: “It needs to look at logs, performance counters, etc., understand runtime behavior... then make changes, inspect results, try again” (P195). As P201 noted, “We want/need AI to do a MUCH better job of analyzing a current codebase/architecture so it can understand how/where to add/extend.” (P201). Overall, they envisioned AI as a collaborator, aiding comprehension and pair programming/debugging/testing/review; without overriding human judgment: “The focus should be on AI making ME better at my job” (P213).

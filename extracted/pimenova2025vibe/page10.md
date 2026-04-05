@@ -1,0 +1,23 @@
+interviewee said, “vibe coding... is just conveying language through language, what you want to happen, or what you want to be done” (I1).
+
+The focus on natural language often extends to how the vibe coder engages with code artifacts. Vibe coding interactions are characterized by little to no code reading and writing. “Ideally, you should not have to interact with the code at all, ... you’re just guiding the tool” (I8). At times when, during traditional programming the programmer would read or modify the program, the vibe coder instead would ask the AI. “I think it’s basically telling, [the agent]... what you want to code, ... You want to fix something, maybe you’ll ask it again instead of, you know, fixing it yourself.” (I10)
+
+Vibe coding also has frequent fine-grained AI interactions, setting it apart from other AI-assisted programming paradigms. One interviewee contrasted it with agentic programming, explaining, “the distinction I make is how much interaction I need to have with the genie... The less I need to interact with the genie, the more agentic it becomes” (I7).
+
+### Paradigm Benefits
+
+Vibe coders perceive several benefits of high-interaction, natural language programming, including reduced cognitive effort, reduced unnecessary learning, increased software development accessibility, and increased flow and joy. Natural language interactions help reduce cognitive effort by offloading low-level concerns. “Having AI deal with the syntax and specifics frees up brain space for the more important work” (R2). This can also reduce unnecessary learning, of tools or languages they would rather not learn. One programmer, tasked with making a timer app in React, stated: “sometimes I literally do not want anything to do with learning how to program something... I fucking hate JavaScript in all [its] forms” (R63).
+
+As vibe coding often involves limited code reading or writing, it can increase accessibility to software development for those without formal programming training. For instance “vibe coding is dramatically lowering the barrier for non-technical users to create full web apps.” (L6). Another interviewee described showing this potential to a non-programmer: “When I explained... [that] you can just build an app on your phone that’s just like every other app, except it does exactly what you tell it to. That was a heavens opening up moment” (I7). This increase in accessibility enables a broader demographic to engage in development, democratizing the ability to innovate and create software.
+
+Finally, natural language programming combined with the short interaction feedback loop can help developers achieve and maintain flow and joy (a defining characteristic of the vibe coding developer experience, see Figure 1). We explore this further in section 4.4.
+
+### Interaction Pain Points and Barriers
+
+Vibe coding AI interaction is not without its challenges. As shown in Figure 2, we find that interviewees and commenters report five primary pain points relating to AI interaction and conversation when vibe coding with current platforms and tools.
+
+First, vibe coders can struggle to accurately specify their intent to the model as natural language is inherently imprecise. Mismatched abstractions can lead the model to “totally misinterpret[e] what I was saying” (I4). In addition, minor changes in phrasing or personas can have unexpected results. For example, one commenter noted “I put in my rules something along the line of being the best senior programmer... and the Agent stopped doing endpoints and session test and... acted like an arrogant know-it-all dev. That was... a problem” (R43). Conveying intent can be particularly challenging for those new to software development.
+
+Vibe coding agents can also suffer from inconsistent conversational memory, causing the agent to repeat incorrect suggestions and get stuck, resulting in a long, useless “prompt spiral” (L51) where “it will just keep re-giving you the same approach, again, and again... Yeah, I would say that’s frustrating” (I10). Vibe coders also report frustration when the agent responds with inaccurate self-assessments of its ability or past actions. “My personal favorite is discovering that what you’re asking relies on essential information from after [its] knowledge cutoff date despite it acting as if it’s an expert on the matter when you ask at the start” (R63).
+
+Manuscript submitted to ACM

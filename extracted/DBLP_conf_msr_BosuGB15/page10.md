@@ -1,0 +1,26 @@
+## VIII. IMPLICATIONS OF THE RESULTS
+
+The results of this study have several implications for both code review participants and researchers.
+
+### Reviewer Selection
+This study showed that experience with the code base is an important factor to increase the density of useful comments in code reviews. Therefore, we suggest that reviewers should be selected carefully. Automatic review suggestion systems can help to identify the right set of developers that should be involved in a review. Few studies [32], [33] have attempted to suggest reviewers for code changes, and in some popular code review tools such as Crucible and CodeFlow automatic reviewer suggestion features already exist.
+
+However, such tools should be used with caution. As our results suggest that new hires and reviewers with limited experience provide feedback with limited utility, one might be tempted to exclude them from the reviewing process. Due to the knowledge dissemination aspects of code review [6], we recommend including inexperienced reviewers so that they can gain the knowledge and experience required to provide useful comments to change authors. Rather than excluding the inexperienced, authors of changes should include at least one or two experienced reviewers to ensure useful feedback.
+
+### Managing changesets
+Our results suggest that review effectiveness decreases with the number of files in the change set. Therefore, we recommend that developers submit smaller and incremental changes whenever possible, in contrast to waiting for a large feature to be completed. Special care should be taken when non-code files, such as configuration or build files, are included in reviews, as these elicit less useful feedback. Reviewers should be encouraged to give them more attention and authors can be of help by providing more details of the changes to these files in the change description prior to sending the change out for review.
+
+### Identifying weak areas
+As comment usefulness density can be calculated and compared along various dimensions such as types of files or particular modules of a system, this measure can be used by teams to identify areas where code reviews are less effective. Teams can also continuously monitor themselves and address issues when they arise. For example, one team that we talked to indicated that they have been manually reading through the comments in reviews each week to see if there are patterns that need to be addressed. Our classifier can help by automatically identifying the less useful comments which can speed up the process of determining areas of code experiencing problems or can reduce the number of comments that team members need to read. Project management can also identify weak reviewers and take necessary steps to help them become efficient.
+
+## IX. RELATED WORK
+
+Prior studies exist that have examined the effects of different factors on the effectiveness of traditional Fagan-inspection [2]. Porter et al. studied the effect of three types of factors (i.e. code unit, reviewer, and team) on inspection effectiveness. They found code unit factors (e.g., code size, and functionality) and reviewer factors (e.g., presence of certain reviewers) as the most influential factors [28]. Although tool-based contemporary code review practices differ a lot from the traditional inspection techniques [7], we also observed the effect of changeset size and reviewer experience in this study.
+
+Most of the earlier studies examined traditional software inspection techniques; only a few recent studies have examined informal code review practices. Rigby has published a series of studies examining informal peer code review practices in OSS projects [34], [35], and comparing the review process between commercial and open source projects [7]. In the later study, Rigby and Bird found that despite differences between different projects, many of the characteristics of contemporary code review practices (i.e. review interval, number of comments, number of reviewers) were very similar [7]. Bacchelli and Bird investigated the purposes and outcomes (i.e., accept or reject) of modern code reviews and found that although finding defects is the primary motivation, only a fraction of review comments finds defects. On the other hand, code reviews provide additional benefits such as knowledge dissemination, team awareness, and identifying better solutions [6]. Baysal et al. found a variety of factors (such as review size, component, reviewer characteristics, or author experience) to have significant effects on code review response time and outcome [36].
+
+While most of the studies on modern code reviews have examined the code review process and factors that affect review interval or outcome, we are not aware of any study that has explored the factors influencing the effectiveness of modern code review.
+
+## X. CONCLUSION
+
+In this study, we have identified a set of factors affecting the usefulness of code reviews. We provided recommendations to both practitioners and researchers to improve code reviews. It is our hope that the insights discovered in this study will be helpful to improve code review process as well as to build better code review tools.

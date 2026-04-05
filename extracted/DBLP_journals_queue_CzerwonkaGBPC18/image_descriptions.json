@@ -1,0 +1,6 @@
+{
+  "page7_img_1.png": {
+    "title": "Pull-quote panel emphasizing maintainability over bug-finding in code reviews",
+    "description": "A decorative pull-out panel (originally an orange-bordered, beige box) that highlights a key takeaway from the article: although people associate code reviews with finding bugs, the more important outcome is improved long-term maintainability. The panel reiterates the paper\u2019s finding that only a small fraction of review comments relate to defects (the text elsewhere reports ~15%) while a much larger share address maintainability, style, documentation and API usage. In the supplied extraction most of the panel\u2019s text is not rendered (the image shows large white space and a dotted vertical rule at the right edge), but its role in the layout is to call attention to this counterintuitive result for readers."
+  }
+}

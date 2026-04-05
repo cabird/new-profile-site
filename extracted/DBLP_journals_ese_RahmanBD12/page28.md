@@ -1,0 +1,9 @@
+> Davis, he spent nearly 8 years developing large software solutions such as Online Banking Software and ERP Solutions along with some artificial intelligence projects for implementing intelligent multilingual input method. He studied many open source projects along with a few corporate projects at Cisco and published papers in top Software Engineering venues. His primary research interest is in Empirical Software Engineering which includes software process, product and people.
+
+![Portrait of a smiling man](page28_img_1.png)
+
+> Christian Bird is a researcher in the empirical software engineering group at Microsoft Research. He is primarily interested in the relationship between software design, social dynamics, and processes in large development projects. He has studied software development teams at Microsoft, IBM, and in the Open Source realm, examining the effects of distributed development, ownership policies, and the ways in which teams complete software tasks. He has published in the top software engineering venues and is the recipient of the ACM SIGSOFT distinguished paper award. Christian received his Ph.D. from U.C. Davis under Prem Devanbu and was a National Merit Scholar at BYU, where he received his B.S. in computer science.
+
+![Portrait of a man with glasses](page28_img_2.png)
+
+> Prem Devanbu received his B.Tech in Electronics Engineering from the Indian Institute of Technology in Chennai, India, before you were born, and his PhD in Computer Science from Rutgers University in 1994. After spending nearly 20 years at Bell Labs and its various offshoots, he escaped New Jersey to join the CS faculty at UC Davis in late 1997. His primary research interests are in empirical software engineering.

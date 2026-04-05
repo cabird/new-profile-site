@@ -1,0 +1,54 @@
+{
+  "page1_img_1.png": {
+    "title": "Abstract green banner with isometric blocks and dark arc",
+    "description": "A wide, horizontal decorative banner in mint-green tones dominated by a dark navy curved band offset slightly left of center. To the right of the arc are clusters of isometric, three-dimensional blocks and tiles in white and lighter greens\u2014arranged like a stylized cityscape or grouped users\u2014with subtle drop shadows; a bold white stepped outline appears at the far right edge. The image is an abstract header/graphic for the paper\u2019s abstract section and contains no labels, axes, or numeric data."
+  },
+  "page7_img_1.png": {
+    "title": "Histogram of scenario durations with 300 ms target and 21,000 ms timeout peak",
+    "description": "A density histogram of observed durations (milliseconds) for a single Lync scenario, with a bold vertical black line marking the target of 300 ms. Most measurements cluster at the left near the target, but a clear secondary peak appears around 21,000 ms and a long tail extend to ~40,000 ms; a magenta smooth curve overlays the histogram to show the overall distribution. In the paper this anomalous ~21,000 ms bump is described as an IPv6 timeout that did not appear in lab testing and that prompted further investigation and fixes in subsequent builds."
+  },
+  "page5_img_1.png": {
+    "title": "Histogram of scenario durations with three-Gaussian fit",
+    "description": "A density histogram of 22,036 timing events for a single Lync scenario (x-axis: Duration in ms, 0\u20134,000; y-axis: density up to ~0.0012) overlaid with three fitted Gaussian components (magenta, green, blue) and their summed fit (black dashed line). The green curve corresponds to the tallest, leftmost peak (roughly 700\u2013900 ms) representing the fastest user-experience group; the magenta curve captures a broader intermediate group centered around ~1,200\u20131,600 ms; a smaller blue component and the long right-hand tail represent the slowest experiences above ~2,000 ms. The dashed black line closely follows the histogram, showing the mixture model explains the multimodal distribution and highlighting a distinct worst-experience group that merits engineering attention."
+  },
+  "page6_img_2.png": {
+    "title": "Global Lync performance map by country for a single scenario and build",
+    "description": "A choropleth world map (example, not real) uses color to show how users experienced a single Lync scenario on one build: green indicates good/within-target performance, brown/orange indicates degraded performance, red indicates poor performance, and gray denotes no data/untested. Notable patterns in this example include the United States, Canada, Russia, much of northern Europe, and Brazil colored green, Iran shown in red, and large countries such as India, China, Mexico, and parts of Southeast Asia and South America colored brown/orange. Much of Africa and several smaller countries remain gray, indicating insufficient or no collected data from those regions for this scenario."
+  },
+  "page6_img_1.png": {
+    "title": "Build-over-build boxplot of scenario durations (ms) across five Lync builds",
+    "description": "A build-over-build comparison of a single scenario\u2019s durations (y axis in milliseconds) for five builds (x axis: 4,420; 4,485; 4,487; 4,488; 4,493). Each notched, colored boxplot shows the interquartile range and median (notch) while box width encodes the number of users for that build; the red line connects medians and red coloring denotes a statistically significant change from the previous build. The first build (4,420) has the largest sample and the greatest spread (whiskers approaching 4,000 ms), medians rise from about 1,200 ms to ~1,600 ms by builds 4,485\u20134,487, then decline to ~1,300\u20131,400 ms in later builds, indicating a temporary performance regression that partially recovered in subsequent builds."
+  },
+  "page5_img_2.png": {
+    "title": "Duration density: 32\u2011bit vs 64\u2011bit Lync (target 350 ms)",
+    "description": "Smoothed empirical density curves compare scenario durations for 64\u2011bit (green) and 32\u2011bit (blue) Lync clients, with the x\u2011axis labeled Duration (ms) and the y\u2011axis Density. A vertical red line marks the performance target at 350 ms; both distributions have their main modes left of this target (the 64\u2011bit curve reaches a peak near 0.006 density, the 32\u2011bit peak near 0.003\u20130.004), indicating most attempts complete under the target. Both curves have long right tails, but the 32\u2011bit curve shows relatively more mass between about 400\u2013900 ms, while the 64\u2011bit curve has several smaller bumps extending past 1,000 ms, showing that a subset of users on each build experience durations well above the 350 ms goal."
+  },
+  "page4_img_1.png": {
+    "title": "EI Analytics scenario tiles showing fails/trials for four Lync scenarios",
+    "description": "A screenshot of the EI Analytics entry page with four scenario tiles labeled perfLyncAddPowerPoint, perfLyncVideoPreview, perfLyncSignOut, and perfLyncVideoParticipantActiveSpeaker. Each tile shows three small circular icons (links to visualizations), a band of circular markers across the lower part of the tile, and an orange footer that reports failures and total attempts: 96 fails / 863 tries; 269 fails / 2426 tries; 550 fails / 7274 tries; and 5321 fails / 26611 tries. Per the paper, tile color encodes an overall prognosis (gray in these cells) and the footer\u2019s counts summarize unsuccessful attempts; the rightmost tile clearly has the highest traffic and absolute failures (about 20% failure rate), while the other scenarios show lower failure rates (roughly 7\u201311%). This high-level view is intended to help engineers prioritize which scenarios merit deeper investigation. "
+  },
+  "page8_img_1.png": {
+    "title": "Author biography header with bold name and portrait",
+    "description": "Cropped author-bio panel showing a large, bold uppercase name at the top, followed by a short biographical line and a partial contact-email fragment; beneath this is a framed black-and-white headshot with only the top of the portrait visible. The panel sits on a light beige background with diagonal stripes; the name uses a heavy serif display type while the body text uses a lighter face. Overall the image is a typical \u2018About the Authors\u2019 profile block from the paper, combining headline, brief bio text, and a small portrait."
+  },
+  "page8_img_2.png": {
+    "title": "Grayscale head-and-shoulders author portrait",
+    "description": "A grayscale head-and-shoulders portrait photograph, shown inside a thin black rectangular frame, of a smiling person with straight, shoulder-length hair. The face is centered against a soft, light background; the page\u2019s diagonal striped design and a column of adjacent text are visible at the right edge. This image is one of the author biography photos included on page 8 of the paper."
+  },
+  "page8_img_5.png": {
+    "title": "Grayscale headshot portrait of an author",
+    "description": "A grayscale, close-up author portrait from the paper\u2019s \u201cAbout the Authors\u201d page showing a middle\u2011aged man framed by a thin dark border. He is smiling, with short spiky hair and a trimmed mustache/goatee, and is photographed from the shoulders up looking slightly toward the camera. The background is softly out of focus, showing horizontal slats (like a bench or fence) and foliage; the image sits on a diagonally striped page background as part of the author bio layout."
+  },
+  "page8_img_4.png": {
+    "title": "Grayscale headshot of a smiling man from the authors section",
+    "description": "A square, black-and-white head-and-shoulders portrait of a young man wearing a collared shirt, smiling with teeth visible and eyes directed slightly off-center. The image is closely cropped around his face and shows short, dark hair and a smooth forehead; a high-contrast tonal range gives clear highlights on the face. Behind him is a diagonally striped or plank-like background and a thin dark border frames the photograph; the picture appears among the paper\u2019s \u201cAbout the Authors\u201d portraits. "
+  },
+  "page8_img_3.png": {
+    "title": "Grayscale headshot of male author wearing glasses",
+    "description": "A grayscale head-and-shoulders portrait of a man looking straight at the camera. He has short, slightly spiky dark hair, rectangular eyeglasses, and wears a dark collared shirt, with a neutral, professional expression. The photograph is framed with a thin dark border and sits against a beige, diagonally striped page background; it is presented as one of the author headshots in the paper\u2019s \"About the Authors\" section."
+  },
+  "page8_img_6.png": {
+    "title": "Grayscale framed headshot of a man wearing glasses",
+    "description": "A black-and-white, close-cropped head-and-shoulders portrait showing a man with short hair, rectangular eyeglasses, and a slight smile; he has light facial hair around the chin. The photo is presented with a thin dark border and is set against the article\u2019s pale, diagonally striped background; a curtain and an office chair are visible, softly out of focus, behind him. This image is one of the author portraits in the paper\u2019s \u201cAbout the Authors\u201d section (page 8) and is displayed as a small rectangular thumbnail."
+  }
+}

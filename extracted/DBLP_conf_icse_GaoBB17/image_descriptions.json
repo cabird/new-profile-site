@@ -1,0 +1,30 @@
+{
+  "page9_img_1.png": {
+    "title": "Per-bug annotation token and time tax: Flow vs TypeScript",
+    "description": "A two-row summary table comparing the per-bug annotation \"token tax\" and \"time tax\" for Flow and TypeScript (seconds). Columns report Token Tax (Mean, Median) and Time Tax in seconds (Mean, Median). Flow shows a token-tax mean of 1.7 and median of 2 tokens, with a time-tax mean of 231.4 s and median of 133 s; TypeScript shows a token-tax mean of 2.4 and median of 2 tokens, with a time-tax mean of 306.8 s and median of 262 s. These values are the authors\u2019 under-approximation of the annotation effort required to make a bug trigger a type error (measured only for bugs detected by either system)."
+  },
+  "page3_img_2.png": {
+    "title": "Automatic matching of commits and bug reports to produce linked fix candidates",
+    "description": "A simple flowchart showing how the study automatically finds candidate bug-fixing commits by cross-referencing version-control and issue-tracker data. The diagram depicts two inputs \u2014 \u2018Commit Logs\u2019 and the issue tracker \u2014 with boxes that extract issue numbers from commit messages and extract commit SHAs from issue reports; both streams feed into a central repository labeled \u201cLinked Fix Candidates.\u201d As described in the paper, these matches are cross-checked to produce triples (candidate commit SHA, parent SHA, bug-report ID) that are later manually validated to build the corpus of fixes."
+  },
+  "page4_img_table_1.png": {
+    "title": "Project and fix size statistics (LOC)",
+    "description": "Two-row table reporting LOC (lines of code) summary statistics (Max, Min, Mean, Median) for repository projects and for individual fixes. Projects (398 in the corpus) range from 32 to 1,144,440 LOC with a mean of 18,117.9 and a median of 1,736, indicating a highly skewed size distribution across repositories. Fixes range from 1 to 270 LOC with a mean of 16.2 and a median of 6, consistent with the paper\u2019s observation that typical bug-fixing commits modify only a few lines (about 48% touch five or fewer LOC)."
+  },
+  "page4_img_fig_1.png": {
+    "title": "Workflow for identifying and type\u2011checking historical JavaScript bug fixes",
+    "description": "A left-to-right pipeline diagram showing the study\u2019s workflow: GitHub (icon) supplies Projects, Issues, and Commit Logs into a \u201cLink Identification\u201d step that matches issue IDs and commit SHAs to produce candidate fixes. Candidates are passed to a human \u2018Filter\u2019 (person icon) to select buggy program versions, then to a human \u2018Annotate\u2019 step where type annotations are added, producing annotated programs. Those annotated programs go into a \u201cType Checking\u201d box (Flow/TypeScript) whose outcome (cylinder) is stored as Detectable Bugs. This diagram summarizes Procedure 1 in the paper and the data flow that produced the corpus of 400 sampled bugs later analyzed (resulting in \u224860 bugs detectable by each checker, about a 15% detection rate)."
+  },
+  "page3_img_1.png": {
+    "title": "Venn diagram of ts-detectable and patched public bugs",
+    "description": "A Venn-style schematic that situates the study\u2019s targets: the outer area represents all bugs, a nested region denotes public bugs, and a hatched circle inside that denotes patched (fixed) public bugs. A separate circle labeled \u201cts-detectable bugs\u201d overlaps the patched-public-bugs circle; the solid blue overlap marks the subset of fixed public bugs that become type-check errors after adding consistent annotations (i.e., bugs a static type system could have flagged). The hatched portion of the patched-public-bugs circle outside the blue area represents fixed public bugs that the type systems would not detect under the experiment\u2019s annotation model. The experiment quantifies the size of that blue overlap (Equation 1) and reports that Flow and TypeScript each detect about 15% of public bugs."
+  },
+  "page6_img_1.png": {
+    "title": "Venn diagram of Flow- and TypeScript-detectable bugs",
+    "description": "A two-circle Venn diagram comparing which public bugs are detected by Flow versus TypeScript. Out of the 400 assessed bugs, Flow and TypeScript each detect 60 bugs; the diagram shows an intersection of 57 bugs detected by both tools, with 3 bugs unique to Flow and 3 unique to TypeScript (63 distinct detectable bugs total). The figure supports the paper\u2019s claim that the two type systems largely overlap in the bugs they can detect (overall detection rate \u224815%)."
+  },
+  "page8_img_1.png": {
+    "title": "Histogram of undetectable public bugs by category",
+    "description": "Bar chart reporting the categories of public bugs that were undetectable by both Flow and TypeScript. Of the 400 bugs in the corpus, 63 were detected by at least one system, leaving 337 undetectable cases; the chart shows that SpecError is dominant with 186 occurrences (~55% of undetectable bugs). StringError is the second-largest category, followed by BranchError, PredError, UIError and RegExError with noticeably smaller counts, while APIError, SyntaxError, RangeError and ResError are rare. The paper highlights that errors implementing the specification (SpecError plus related logic categories such as BranchError and PredError) together make up roughly 78% of the undetectable bugs."
+  }
+}

@@ -1,0 +1,9 @@
+> how much information needed to be surfaced to convince the user that what was just done was even possible—never mind appropriate. Suddenly you've just introduced some new tokens over here, along with a new parsable tree over there. I think that can really throw some users off.
+> 
+> CB What did all this look like from the DevDiv perspective, Alexey? You deal with customers all the time. What proved to be the biggest challenges there?
+> 
+> AS Some of the most crucial design decisions came down to choosing between client-side or server-side implementation. Our chief concern had to do with the new merge algorithm we were talking about earlier. Customer feedback obtained from user studies and early adopters proved to be particularly crucial in terms of finding ways to smooth things out. Certainly, that helped in terms of identifying areas where improvements were called for, such as achieving better symmetries between what happens when you merge A to B versus when you merge B to A.
+> 
+> SL I'd like to add a couple of points. One is that some developers would prefer to handle these merges themselves. They just don't see the value of tooling when it's used to deal with something they could do themselves. But that just resulted in some inertia, which is always hard to overcome without a lot of usage. Still, from our empirical study we learned that, even when merges were not identical to the ground truth, users would accept them if they proved to be semantically equivalent. Ultimately, that proved to be a pleasant surprise, since it revealed we had previously been undercounting our wins according to our success metrics.
+> 
+> TC Did anything else interesting surface along the way?

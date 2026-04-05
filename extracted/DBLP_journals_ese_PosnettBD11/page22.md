@@ -1,0 +1,17 @@
+Interfaces that should be stable change more often relative to their size than the classes that implement them.
+
+The effect of participating in two distinct roles varies with project and pattern. When classes participate in three or more distinct roles the effect of that participation is fairly consistently positive. We might expect that classes playing many roles are going to be larger, but, even after controlling for size, classes that play more than two distinct roles in a particular pattern, e.g. a concrete strategy role in one instance may also be the context for another instance, are more change-prone. As Khomh points out, classes playing two distinct roles in the same pattern instance must be participating in a degenerate pattern (Khomh et al. 2009). It is not the case, however, that a class playing two distinct roles in the same pattern but different instances, as in the previous example, must be degenerate. A class playing more than two roles in the same pattern receives change pressure from multiple pattern instances so is likely to change more often. We note, however, that the multiple role predictors are included in the tiny improvement that roles contribute to the overall explanatory power of the model.
+
+With respect to RQ1, which asks if roles are significant predictors of change-proneness when controlling for size, the answer is twofold. First, the explanatory power of roles is so small when controlling for size that too few roles remain statistically significant to support the expected intuition for the effect of roles on change-proneness. Second, when roles are significant, their effect often runs counter to reported intuition. That is, hook classes are often more change prone after controlling for size. When controlling for class size, the role that a class plays in a pattern has little effect on change-proneness unless the class plays three or more distinct roles. Thus, with respect to RQ1 and RQ2:
+
+> Conclusion for RQ1 and RQ2
+> 
+> Size appears to be the strongest factor in explaining change-proneness. Beyond this, pattern and metapattern roles add very little additional explanatory power.
+
+### 6.4 RQ3
+
+Research question 3 is similar to RQ2 except that it pertains to the value of metapatterns in evaluating change-proneness. When controlling for size, do metapattern roles explain as much of the differences in change-proneness as well as pattern roles? In light of the answer to the first two research questions, the answer to the third becomes almost moot. However, we did contrast the effect of design pattern roles on change-proneness and metapattern roles when controlling for class size.
+
+In this case, we quantify the effect of pattern role as the difference in R^2 between the model including only class size, M_vs, and the model with class size and pattern role, M_vrs. In general, design pattern roles do not consistently have a greater effect on the percentage variance in change proneness to classes than metapattern roles. Although the percentage varies slightly it is consistently less than 2% across all patterns in all projects. So although we cannot conclude that metapattern roles offer any quantitative advantage over design pattern roles in evaluating pattern properties, we can observe some qualitative properties.
+
+First, whenever roles are significant after controlling for size we observe a similar trend in their associated design patterns. However, we observe that this trend is not particularly interesting, in short, hook classes change more often whereas template and

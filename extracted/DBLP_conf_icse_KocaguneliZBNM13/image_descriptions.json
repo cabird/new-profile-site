@@ -1,0 +1,38 @@
+{
+  "page5_img_fig1.png": {
+    "title": "Three-bin method for categorizing Hedges' g effect sizes",
+    "description": "A schematic showing how n calculated Hedges\u2019 g values are ordered and split into three equal-sized bins (each labeled n/3) labeled Small, Medium, and Large. The median of each bin is marked as m1, m2, and m3 respectively; these medians serve as the cut-points (mid-points) that Kampenes et al. use to define small, medium and large effect-size thresholds (reported in Table II). The figure illustrates the procedure the paper uses to derive contextual effect-size intervals from a collection of g-values."
+  },
+  "page5_img_table2.png": {
+    "title": "Hedges' g thresholds for effect-size categories",
+    "description": "A small table showing the Hedges\u2019 g mid-point thresholds used to classify effect sizes in software-engineering studies: Small = 0.17, Medium = 0.60, Large = 1.40. These values (from Kampenes et al.) are the reference points the paper uses to interpret standardized mean differences so that statistically significant differences can be judged for their practical (small/medium/large) importance."
+  },
+  "page7_img_fig_1.png": {
+    "title": "Percentile plot of file bug counts for collocated vs distributed files (BLD)",
+    "description": "The plot shows bug count by percentile (0th\u2013100th) for collocated (red circles) and distributed (blue triangles) files under the BLD scenario. For roughly the first 90+ percentiles both series overlap at or near zero (reflecting that most files have no post-release bugs), and the two curves only diverge in the extreme upper percentiles where distributed files show slightly higher bug counts than collocated files. This visual confirms the paper\u2019s point: although statistical tests find a significant difference, the distributions are nearly identical for the vast majority of files and the observable difference is confined to a small tail of high-percentile files."
+  },
+  "page6_img_2.png": {
+    "title": "P-values for H2 (MaDC = 0) across distribution scenarios",
+    "description": "A two-column table listing the Wilcoxon test p-values for hypothesis H2 (comparison of post-release bug counts for files with no major developer, MaDC = 0) across four collocated/distributed scenarios. The rows show: BLD = 0.65, CTY = 0.83, STT = 0.64, CNT = 0.38. All four p-values exceed the 0.05 threshold, so the statistical tests fail to reject H2\u2014there is no significant difference in post-release quality between collocated and distributed files when no major developer exists, across these scenario definitions."
+  },
+  "page6_img_3.png": {
+    "title": "P-values for bug-count comparison across collocated vs. distributed scenarios",
+    "description": "A small table listing p-values from Wilcoxon rank-sum tests comparing post-release bug counts of collocated and distributed files for four distribution scenarios: BLD (building), CTY (city), STT (state), and CNT (country). Reported p-values are 0.00 for BLD and CTY, 0.01 for STT, and 0.03 for CNT \u2014 all below the 0.05 significance threshold used in the paper. These results indicate statistically significant differences in bug counts between collocated and distributed files in every scenario (leading to rejection of H3), although the paper notes elsewhere that the observed effect sizes were very small and of limited practical importance."
+  },
+  "page6_img_1.png": {
+    "title": "P-values for bug-count comparison (MaDC > 0) across distribution scenarios",
+    "description": "A small table reporting p-values from Wilcoxon rank-sum tests that compare post-release bug counts for collocated versus distributed files that have at least one major developer (MaDC > 0). The four scenarios are BLD, CTY, STT, and CNT with p-values 0.24, 0.74, 0.47, and 0.41 respectively. All values exceed the common 0.05 significance threshold, so there is no statistically significant difference in bug counts between collocated and distributed files with a major developer (H1 failed to be rejected)."
+  },
+  "page6_img_5.png": {
+    "title": "P-values for ownership metrics (collocated vs distributed files)",
+    "description": "A 4x4 table of p-values from Wilcoxon rank-sum tests comparing ownership metrics between collocated and distributed files under four geographical scenarios (BLD, CTY, STT, CNT). Columns are EF (edit frequency), TOP (top ownership percentage), ToDC (total developer count) and MaDC (major developer count). Most cells are reported as 0.00 (very small p-values), with CTY\u00b7TOP = 0.04 and CTY\u00b7MaDC = 0.01, so every comparison is below the conventional 0.05 threshold and thus statistically significant. As the paper notes, these significant p-values led to rejecting H5, although the authors later show the effect sizes for these differences are generally small."
+  },
+  "page7_img_table_1.png": {
+    "title": "Hedges' g effect sizes for collocated vs. distributed file metrics",
+    "description": "Table VIII reports Hedges\u2019 g and the corresponding effect-size category (per Kampenes et al.) for multiple file-level metrics across four distribution scenarios (BLD, CTY, STT, CNT). For the Bug Count metric the g-values are near zero (BLD=0.05, CTY=0.05, STT=\u22120.01, CNT=0.00), all labeled \u201csmall,\u201d indicating negligible practical differences in defects between distributed and collocated files. Nearly every other metric (ALOC, DLOC, ELOC, EF, ToDC, MaDC>0 Bugs, MaDC=0 Bugs, NOC, NOF) also shows only small effect sizes across scenarios; the lone large effect is TOP in the BLD scenario (g=\u22121.09, labeled LARGE), meaning a substantial difference in top-ownership percentage at the building level (distributed files have much lower TOP than collocated files given the paper\u2019s sign convention). Overall the table supports the paper\u2019s claim that, despite some statistically significant tests, the magnitudes of most differences are practically small. "
+  },
+  "page6_img_4.png": {
+    "title": "P-values for change and size metrics comparing collocated vs distributed files",
+    "description": "Table of Wilcoxon rank-sum p-values for three change metrics (ALOC, DLOC, ELOC) and two size metrics (NOF, NOC) across four distribution scenarios (BLD, CTY, STT, CNT). Most cells are 0.00 (or very small), indicating statistically significant differences (p < 0.05) between collocated and distributed files for those metrics. Four exceptions (bolded in the table) have p > 0.05 and are therefore not significant: BLD ELOC = 0.40, BLD NOF = 0.89, BLD NOC = 0.19, and CTY ELOC = 0.56. The table supports the paper\u2019s claim that, aside from these four comparisons, collocated and distributed files differ on the measured change and size attributes (significance threshold = 0.05)."
+  }
+}

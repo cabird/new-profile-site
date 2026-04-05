@@ -1,0 +1,17 @@
+and often as an implementation of parts of the algorithm. The template is more strongly linked to the hook than in the non-recursive variant.
+
+In the Decorator pattern, the component class plays the hook role, providing the interface for both concrete component and decorator. The decorator plays the template role and often a default implementation role. The concrete component class also plays the implementation role. Because the decorator can be subclassed by a concrete decorator that must correctly invoke methods on the component classes that they decorate, the classes are more tightly bound than in many other patterns. The decorator class holds a reference to a concrete component that is also a descendant of the component (hook) and typically the decorator methods forward requests from one concrete decorator to the next. Changes in the base component role, and changes in forwarding logic, will induce changes across the decorator subtree. Thus, we expect the decorator, playing the template metapattern role, to be more change-prone than either its hook, or even the hook subclasses.
+
+We expect the 1-N-Recursive-Connection metapattern to show a similar pattern of change-proneness to the 1-1-Recursive-Connection metapattern.
+
+### 3.3 Unification Metapatterns
+
+The Unification metapatterns combine template and hook both roles in a single class. Most patterns of this form do not contain an explicit hook reference and the hook call is made implicitly through the this reference. The recursive form of this pattern combines template and hook methods into a single recursive method. Since no design patterns employ the Recursive Unification metapattern structure (see Table 1), we ignore it. The (non-recursive) Unification metapattern may be found in the Factory Method and Template Method design patterns. There is no strict mapping between these patterns and the Unification metapattern, however, and both can also be implemented with the Connection metapattern.
+
+## 4 Related Work
+
+There has been significant research effort focused on the validation of design pattern claims. The earliest results focused on comparing development efforts both with and without design patterns. In a controlled paper and pencil experiment on the effectiveness of design patterns, Prechelt and Unger found that while Decorator had a positive effect on program maintenance as compared to a simpler non-pattern based design solution, Observer had a negative effect; the benefits of Abstract Factory were small, and, contrary to expectation, the Visitor was neither beneficial nor detrimental (Prechelt et al. 2001). Vokáč replicated this experiment in a real programming environment and found similar effects for Decorator and Abstract Factory, a very strong negative effect for Visitor and a positive effect for Observer (Vokáč et al. 2004).
+
+Ng et al. found that the difficulty of performing maintenance tasks is dependent on whether the subjects are changing concrete participants, abstract participants, or client code (Ng et al. 2007) and that even inexperienced coders were more able to affect changes on a system re-factored to design patterns than on the original non-design-pattern-based system (Ng et al. 2006).
+
+Bieman et al. studied change-proneness in design pattern instances within five systems comparing classes participating in design patterns to those that played no

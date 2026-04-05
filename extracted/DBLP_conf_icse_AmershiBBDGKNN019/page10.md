@@ -1,0 +1,43 @@
+## IX. CONCLUSION
+
+Many teams at Microsoft have put significant effort into developing an extensive portfolio of AI applications and platforms by integrating machine learning into existing software engineering processes and cultivating and growing ML talent. In this paper, we described the results of a study to learn more about the process and practice changes undertaken by a number of Microsoft teams in recent years. From these findings, we synthesized a set of best practices to address issues fundamental to the large-scale development and deployment of ML-based applications. Some reported issues were correlated with the respondents’ experience with AI, while others were applicable to most respondents building AI applications. We presented a ML process maturity metric to help teams self-assess how well they work with machine learning and offer guidance towards improvements. Finally, we identified three aspects of the AI domain that make it fundamentally different than prior application domains. Their impact will require significant research efforts to address in the future.
+
+## REFERENCES
+
+[1] M. Salvaris, D. Dean, and W. H. Tok, “Microsoft AI Platform,” in Deep Learning with Azure. Springer, 2018, pp. 79–98.  
+[2] A. Begel and N. Nagappan, “Usage and perceptions of agile software development in an industrial context: An exploratory study,” in First International Symposium on Empirical Software Engineering and Measurement (ESEM 2007), Sept 2007, pp. 255–264.  
+[3] A. Begel and N. Nagappan, “Pair programming: What’s in it for me?” in Proc. of the Second ACM-IEEE International Symposium on Empirical Software Engineering and Measurement, 2008, pp. 120–128.  
+[4] B. Murphy, C. Bird, T. Zimmermann, L. Williams, N. Nagappan, and A. Begel, “Have agile techniques been the silver bullet for software development at microsoft?” in 2013 ACM/IEEE Intl. Symp. on Empirical Software Engineering and Measurement, Oct 2013, pp. 75–84.  
+[5] M. Senapathi, J. Buchan, and H. Osman, “DevOps capabilities, practices, and challenges: Insights from a case study,” in Proc. of the 22nd International Conference on Evaluation and Assessment in Software Engineering 2018, 2018, pp. 57–67.  
+[6] T. D. LaToza, G. Venolia, and R. DeLine, “Maintaining mental models: A study of developer work habits,” in Proc. of the 28th International Conference on Software Engineering, 2006, pp. 492–501.  
+[7] M. Kim, T. Zimmermann, R. DeLine, and A. Begel, “The emerging role of data scientists on software development teams,” in Proc. of the 38th International Conference on Software Engineering, 2016, pp. 96–107.  
+[8] M. Kim, T. Zimmermann, R. DeLine, and A. Begel, “Data scientists in software teams: State of the art and challenges,” IEEE Transactions on Software Engineering, vol. 44, no. 11, pp. 1024–1038, 2018.  
+[9] C. Hill, R. Bellamy, T. Erickson, and M. Burnett, “Trials and tribulations of developers of intelligent systems: A field study,” in Visual Languages and Human-Centric Computing (VL/HCC), 2016 IEEE Symposium on. IEEE, 2016, pp. 162–170.  
+[10] “Machine learning workflow,” https://cloud.google.com/ml-engine/docs/tensorflow/ml-solutions-overview, accessed: 2018-09-24.  
+[11] K. Patel, J. Fogarty, J. A. Landay, and B. Harrison, “Investigating statistical machine learning as a tool for software development,” in Proc. of the SIGCHI Conference on Human Factors in Computing Systems. ACM, 2008, pp. 667–676.  
+[12] “The Team Data Science Process,” https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/, accessed: 2018-09-24.  
+[13] U. Fayyad, G. Piatetsky-Shapiro, and P. Smyth, “The KDD process for extracting useful knowledge from volumes of data,” Communications of the ACM, vol. 39, no. 11, pp. 27–34, 1996.  
+[14] R. Wirth and J. Hipp, “CRISP-DM: Towards a standard process model for data mining,” in Proc. 4th Intl. Conference on Practical Applications of Knowledge Discovery and Data mining, 2000, pp. 29–39.  
+[15] J. E. Hannay, C. MacLeod, J. Singer, H. P. Langtangen, D. Pfahl, and G. Wilson, “How do scientists develop and use scientific software?” in Proc. of the 2009 ICSE workshop on Software Engineering for Computational Science and Engineering. IEEE Computer Society, 2009, pp. 1–8.  
+[16] G. De Michell and R. K. Gupta, “Hardware/software co-design,” Proc. of the IEEE, vol. 85, no. 3, pp. 349–365, 1997.  
+[17] D. Bohus, S. Andrist, and M. Jalobeanu, “Rapid development of multimodal interactive systems: a demonstration of platform for situated intelligence,” in Proc. of the 19th ACM International Conference on Multimodal Interaction. ACM, 2017, pp. 493–494.  
+[18] D. Sculley, G. Holt, D. Golovin, E. Davydov, T. Phillips, D. Ebner, V. Chaudhary, M. Young, J.-F. Crespo, and D. Dennison, “Hidden technical debt in machine learning systems,” in NIPS, 2015.  
+[19] B. Nushi, E. Kamar, E. Horvitz, and D. Kossmann, “On human intellect and machine failures: Troubleshooting integrative machine learning systems,” in AAAI, 2017, pp. 1017–1025.  
+[20] S. Andrist, D. Bohus, E. Kamar, and E. Horvitz, “What went wrong and why? diagnosing situated interaction failures in the wild,” in ICSR. Springer, 2017, pp. 293–303.  
+[21] R. Salay, R. Queiroz, and K. Czarnecki, “An analysis of ISO 26262: Using machine learning safely in automotive software,” arXiv preprint arXiv:1709.02435, 2017.  
+[22] D. Baylor, E. Breck, H.-T. Cheng, N. Fiedel, C. Y. Foo, Z. Haque, S. Haykal, M. Ispir, V. Jain, L. Koc et al., “TFX: A tensorflow-based production-scale machine learning platform,” in Proc. of the 23rd ACM SIGKDD. ACM, 2017, pp. 1387–1395.  
+[23] V. Sridhar, S. Subramanian, D. Arteaga, S. Sundararaman, D. Roselli, and N. Talagala, “Model governance: Reducing the anarchy of production ML,” in USENIX. USENIX Association, 2018, pp. 351–358.  
+[24] T. Wuest, D. Weimer, C. Irgens, and K.-D. Thoben, “Machine learning in manufacturing: advantages, challenges, and applications,” Production & Manufacturing Research, vol. 4, no. 1, pp. 23–45, 2016.  
+[25] J. Sillito and A. Begel, “App-directed learning: An exploratory study,” in 6th International Workshop on Cooperative and Human Aspects of Software Engineering (CHASE), May 2013, pp. 81–84.  
+[26] C. Weber, B. Curtis, and M. B. Chrissis, The capability maturity model, guidelines for improving the software process. Harlow: Addison Wesley, 1994.  
+[27] M. Alexander, Six Sigma: The breakthrough management strategy revolutionizing the world’s top corporations. Taylor & Francis, 2001.  
+[28] N. Polyzotis, S. Roy, S. E. Whang, and M. Zinkevich, “Data management challenges in production machine learning,” in Proc. of the 2017 ACM SIGMOD, 2017, pp. 1723–1726.  
+[29] T. Kulesza, M. Burnett, W.-K. Wong, and S. Stumpf, “Principles of explanatory debugging to personalize interactive machine learning,” in Proc. of the 20th International Conference on Intelligent User Interfaces, 2015, pp. 126–137.  
+[30] S. Amershi, M. Chickering, S. M. Drucker, B. Lee, P. Simard, and J. Suh, “Modeltracker: Redesigning performance analysis tools for machine learning,” in Proc. of the 33rd Annual ACM Conference on Human Factors in Computing Systems, 2015, pp. 337–346.  
+[31] B. Nushi, E. Kamar, and E. Horvitz, “Towards accountable AI: Hybrid human-machine analyses for characterizing system failure,” in HCOMP, 2018, pp. 126–135.  
+[32] D. Gunning, “Explainable artificial intelligence (XAI),” Defense Advanced Research Projects Agency (DARPA), 2017.  
+[33] D. S. Weld and G. Bansal, “Intelligible artificial intelligence,” arXiv preprint arXiv:1803.04263, 2018.  
+[34] T. Gebru, J. Morgenstern, B. Vecchione, J. W. Vaughan, H. M. Wallach, H. D. III, and K. Crawford, “Datasheets for datasets,” CoRR, vol. abs/1803.09010, 2018.  
+[35] C. Sutton, T. Hobson, J. Geddes, and R. Caruana, “Data diff: Interpretable, executable summaries of changes in distributions for data wrangling,” in Proc. of the 24th ACM SIGKDD. ACM, 2018, pp. 2279–2288.  
+[36] C. R. B. de Souza, D. Redmiles, and P. Dourish, ““Breaking the Code”, moving between private and public work in collaborative software development,” in Proc. of the 2003 International ACM SIGGROUP Conference on Supporting Group Work, 2003, pp. 105–114.  
+[37] C. R. B. de Souza, D. Redmiles, L.-T. Cheng, D. Millen, and J. Patterson, “Sometimes you need to see through walls: A field study of application programming interfaces,” in Proc. of the 2004 ACM Conference on Computer Supported Cooperative Work, 2004, pp. 63–71.

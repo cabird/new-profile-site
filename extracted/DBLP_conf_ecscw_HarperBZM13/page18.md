@@ -1,0 +1,24 @@
+- Cleidson R. B. de Souza, David F. Redmiles (2008) An Empirical Study of Software Developers’ Management of Dependencies and Changes, Proceedings ICSE ’08, pp. 241–250.
+- Cleidson R. B. de Souza, David F. Redmiles (2011) The Awareness Network, to Whom Should I Display my Actions, And, Whose Actions Should I Monitor?, IEEE Transactions on S.E., Vol. 37, No. 3, 325–339.
+- Coleman, S. & Hellerman, P. (2011) Multi-Sited Ethnography, Routledge, London.
+- Dittrich, Y., John, M., Singer, J., & Tessem (2007) Awareness in the Wild: Why Communication Breakdowns Occur, Global Software Engineering, ICGSE 2007, pp. 81–90.
+- Cleidson R. B. de Souza, Redmiles, D., Cheng, L., Millen, D., Patterson, J. (2004) Sometimes You Need to See Through Walls — A Field Study of Application Programming Interfaces, CSCW ’04, November 6–10, 2004, Chicago, Illinois, USA.
+- Foucault, M. (1966) The Order of Things, Chicago University Press, Chicago.
+- Garfinkel, H. (1967) Studies in Ethnomethodology, Englewood Cliffs, NJ: Prentice Hall.
+- Gutwin, C., and Greenberg, S. (2004) The importance of awareness for team cognition in distributed collaboration. In Team Cognition: Understanding the Factors that Drive Process and Performance, APA Press, 177–201.
+- Harper, R. (2011) Texture: human expression in the age of communications overload, MIT Press, Boston.
+- Hine, C. (2000) Virtual Ethnography, Sage, London.
+- Ingold, T. (2011) Being Alive: Essays on Movement, Knowledge and Description, Routledge, Abingdon, UK.
+- Kuhn, T. (1962) The Structure of Scientific Revolutions, Chicago.
+- Martin, D., J. Rooksby, M. Rouncefield, and I. Sommerville (2007) ’Good' Organisational Reasons for 'Bad' Software Testing: An Ethnographic Study of Testing in a Small Software Company. In Proceedings of ICSE ’07, pp. 602–611.
+- Mosse, D. (2006) Anti-Social Anthropology? Objectivity, Objection and the Ethnography of Public Policy and Professional Communities. Journal of the Royal Anthropological Institute 12 (4): 935–956.
+- Nagappan, N., Murphy, B. & Basili, V. (2008) The Influence of organizational structure on software quality: an empirical case study. In Proc. of the 30th international conference on Software engineering.
+- O’Connor, J. (2012) The Trolley Method of Moral Philosophy, Essays in Philosophy, Vol. 13, 1, 14.
+- Paul, S., and Reddy, M. (2010) Understanding together: sensemaking in collaborative information seeking. In CSCW ’10, ACM (New York, NY, USA, 2010), 321–330.
+- Phillips, S., Sillito, J., and Walker, R. (2011) Branching and merging: an investigation into current version control practices. In International workshop on Cooperative and human aspects of software engineering, CHASE ’11, ACM (2011), 9–15.
+- Rettberg, J. (2009) Blogging, Polity, Cambridge.
+- Rönkkö, K., Y. Dittrich, and D. Randall (2005) When Plans do not Work Out: How Plans are Used in Software Development Projects. Journal of Computer Supported Cooperative Work, vol. 14, no. 5, pp. 433–468.
+- Rorty, R. (1979) Philosophy and the Mirror of Nature, Princeton University Press: Princeton.
+- Schmidt, K. and L. Bannon (1992) Taking CSCW Seriously: Supporting Articulation Work. Journal of Computer Supported Cooperative Work, vol. 1, nos. 1–2, pp. 7–40.
+- Sharrock, W. & Read, R. (2002) Kuhn: Philosopher of Scientific Revolution, Polity, Cambridge.
+- Sommerville, I. (2007) Software engineering. 8th edition, Pearson Education.

@@ -1,0 +1,19 @@
+pull request is significantly changed in subsequent updates and ConE finds a different set of pull requests as candidates for notification.
+
+In a ConE comment, elements like pull request id, file names, author name are actually hyperlinks. The pull request id hyperlink points to the respective pull request’s page in Azure DevOps. The file name hyperlink points to a page that shows the diff between the versions of the file in the current and conflicting pull requests. The author name element, upon clicking, spins up a chat window with the author of the conflicting pull request instantly. When people interact with these elements by clicking them, we track those telemetry events (which is consented by the users of the Azure DevOps system, in Microsoft) to better understand the level of interaction developers are having with the ConE system.
+
+### 5.4 Scale
+
+The ConE system has been deployed on 234 repositories in Microsoft. The repositories have been picked based on maximizing the diversity and variety of the repositories in various dimensions as explained in Section 5.2. Since enabled in March 2020, until September 2020 (when we pulled the telemetry data) ConE evaluated 26,000 pull requests that were created in all the repositories on which ConE has been enabled. Within these 26,000 pull requests, an additional 156,000 update events (commits on the same branch, possibly affecting new files) occurred. Thus, ConE had to react to and process a total of 182,000 events that were generated, within Azure DevOps, in those six months. For every update, ConE has to compare the reference pull request with all active pull requests that match ConE’s filtering criteria. In total ConE made a total of approximately two million comparisons.
+
+The scale of operations and processing is expected to grow as we onboard new and larger repositories. The simple and lightweight nature of the ConE algorithm combined with the scalable architecture and efficient design, and its engineering on Azure cloud has given us the ability to process events at this scale with a response rate of less than four seconds per event. The time it takes to process an event end to end, i.e., receiving the pull request creation or update event, running the ConE algorithm and passing the recommendations back (if any) has never taken more than four seconds. ConE employed a single service bus queue and four worker roles in Azure to handle the current scale. As per our monitoring and telemetry (resource utilization on Azure infrastructure, processing latency, etc.), ConE still had bandwidth left to serve the next hundred repositories of similar scale with the current infrastructure setup.
+
+## 6 EVALUATION: DEVELOPERS PERCEPTIONS ABOUT CONE’S USEFULNESS
+
+Of the 26,000 pull requests under analysis during ConE’s six month deployment (Section 5.4), ConE’s filtering algorithm (Section 4.2) excluded 2,735 pull requests. In the remaining 23,265 pull requests, ConE identified 775 pull requests to send notifications to (3.33%). In this section, we evaluate the usefulness of these 775 notifications.
+
+All repositories were analyzed with the standard configuration; no adjustments were made to the parameters. Though the service is enabled to send notifications in 234 repositories, during the six-month observation period, ConE raised alerts on just 44 distinct repositories. As shown in Figure 6, the notification volume varies between repositories.
+
+### 6.1 Comment Resolution Percentage
+
+ConE offers an option for users to provide explicit feedback on every comment it placed, within their pull requests. Users can select the “Resolved” option if they like or agree with the notification, and the “Won’t fix” option if they think it is not useful. A subset of users were given instructions and training on how to use these options. The notification itself also contains instructions, as

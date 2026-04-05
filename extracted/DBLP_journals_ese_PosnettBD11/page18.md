@@ -1,0 +1,5 @@
+### Table 8 EclipseJDT in model labels: v = release, r = roles, s = size
+
+![Table 8: EclipseJDT table](page18_img_1.png)
+
+> Read patterns across the rows and models down the columns. See Table 2 for the specific design pattern role represented by the column. Role labels (T/H/M/2/N/mr) indicate the metapattern represented by the column (type labels). Roles: mr = remaining roles, N = more than 2 roles, 2 = two roles. Significance indicators: ↑, ⇑, ⇑ indicate positive significance (p ≤ 0.01, 0.05, 0.10, respectively); ↓, ⇓, ⇓ indicate negative significance (p ≤ 0.01, 0.05, 0.10, respectively). Concrete roles: subject (concrete): Observer; product (concrete): Factory Method; concrete decorator: Decorator; receiver: Client; command: Command; adapter: Adapter. Patterns with two rows have more than one set of metapattern roles; numeric results are the same for both rows. Look for the template/hook role in the template column.

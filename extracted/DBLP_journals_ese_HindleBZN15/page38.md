@@ -1,0 +1,15 @@
+if the extracted behaviours were accurate. We also confirmed the accuracy of extracted behaviours from issue-tracker-extracted topics with FLOSS developers. Many topics extracted from requirements and issue reports were relevant to features and development effort. Stakeholders who were familiar with the underlying requirements documents or issues tended to be comfortable labelling the topics and identifying behaviour, but those who were not showed some resistance to the task of topic labelling. Topics labelled by non-experts tended to be inaccurate compared with expert labels.
+
+Stakeholders indicated that many of the commit-topic plots were perceptually valid. The efforts depicted often met with their expectations or experiences. Managers could spot trends in the global plots while developers tended to spot trends in their personal topic-plots. We found evidence that topics and their relevant commits often match the practitioner’s perception of their own effort relevant to a topic. But we also found that some topics were confusing and not easy for practitioners to interpret and label. Our recommendations were that topics need to be interpreted, pruned, and labelled by experts; thus future topic-related research should use labelled topics.
+
+We have shown that topics extracted from requirements are relevant, that their version-control-inferred behaviour is perceptually valid. In short, we have provided evidence that validates some of the assumptions that researchers had previously made about LDA-derived topics and have shown that practitioners can interpret and label topics.
+
+## Acknowledgments
+
+Thanks to the many managers and developers at Microsoft who volunteered their time to participate in our research and provide their valuable insights and feedback. Abram Hindle performed some of this work as a visiting researcher at Microsoft Research. Thanks to the Natural Sciences and Engineering Research Council of Canada for partially funding this work. Thanks to Abram Hindle’s first student, Zhang Chenlei, for his feedback. Thanks to the FLOSS developers who chose to participate: Julian Harty, Lisa Milne, Tobias Leich, Ian Cordasco, Ricky Elrod, Anthony Grimes, Geoffrey Greer, Nicolas J. Bouliane, Drew DeVault, Daniel Huckstep, Chad Whitacre, Devin Joel Austin, and Gerson Goulart.
+
+## References
+
+1. Antoniol, G., Canfora, G., Casazza, G., De Lucia, A., Merlo, E.: Recovering traceability links between code and documentation. Software Engineering, IEEE Transactions on 28(10), 970–983 (2002)  
+2. Asuncion, A., Welling, M., Smyth, P., Teh, Y. W.: On smoothing and inference for topic models. In: Proceedings of the Twenty-Fifth Conference on Uncertainty in Artificial Intelligence, pp. 27–34. AUAI Press (2009)  
+3. Asuncion, H.U., Asuncion, A.U., Taylor, R.N.: Software traceability with topic modeling. In: Proceedings of the 32nd ACM/IEEE International Conference on Software

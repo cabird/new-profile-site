@@ -1,0 +1,13 @@
+directly, we extract topics from sets of requirements and then track those topics within the version control’s change history. Original requirements can be related to code changes by the topic-document association matrix as described in Figure 1. Next we describe our methodology.
+
+## 3 Methodology
+
+Our goal is to relate commits to topics of requirements and then validate if these topics and plots of topic-relevant commits make sense to stakeholders such as developers and managers. Our methodology is to extract requirements and issues, perform topic analysis on the documents and then infer and link these topics across all of the commit log messages in the source code repository. Then we present extracted topics to developers and managers and ask them to label the topics. After that, we show plots of topic-relevant commits to developers and managers and ask whether or not these plots actually match their perception of their effort related to the topic. Finally we analyze and present the results.
+
+### 3.1 Requirements Mining
+
+Microsoft stores requirements documents in their documentation repository. Requirements for a project are grouped by broad general topics. The documents are usually saved as Word documents within the specification repository. These requirements are usually written by program managers (PMs), developers and testers.
+
+We obtained all of the network component specifications from a popular Microsoft product that is used by millions of users and has several millions of lines of source code. We then saved each of these specifications as text files for later analysis. This large collection of requirements documents included 75 total requirements documents consisting of nearly 1,500 pages of documentation, 59,000 lines of text, 35,000 paragraphs, and 285,000 words. The average document was 20 pages long with an average word count of 3,800.
+
+Each requirements document has a title, a list of authors and small table of major revisions. The documents are then further broken down into sections much like IEEE documentation such as Software Requirements Specification (SRS) (the functional specifications), Software Design Description (SDD) (referred to internally as “dev specs”), and Software Test Documentation (referred to internally as “test specs”). Program managers that we interviewed indicated that requirements were generally written by the managers and the “dev specs” and “test specs” were written by developers and testers. The requirements were often the result of “quick specs” that had become “final specs” via a process of comment elicitation and discussion. Once a requirements document became a “final spec”, it could be scheduled for a milestone and assigned to a team.

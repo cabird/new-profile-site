@@ -1,0 +1,25 @@
+> Promise 5: Git explicitly records authorship information for contributors who are not part of the core set of developers.
+
+In traditional OSS projects that use a centralized SCM, there is an explicit group of developers that have write access to the source code repository. The repository logs indicate which of these developers made each change. However, OSS projects are heavily dependent on volunteerism [12] and many community members outside the explicit group of developers make contributions in the form of patches, often submitted to the development mailing lists.
+
+If a patch is accepted, it is committed to the repository by a core developer and the logs indicate that the change is attributed to that developer. Ideally, we would like to be able to attribute the source code changes to the person that contributed the change. Unfortunately, detecting the application of submitted patches is difficult [19]. In some projects such as Apache, it is commonplace for the developer applying a submitted patch to include attribution information in the commit message. However, accuracy of gathered attribution data is dependent on the project, the developers following the convention, and standardization of the log message format. Git repositories have more accurate author information due to its facilities for explicitly and automatically including information about the author of a change.
+
+Contributors to git-based projects are able to submit changes in two ways. Anyone with read access may clone a public git repository and commit to their own copy. Any contributor may ask a project developer to pull changes from his own repository into the main project repository. In addition, git provides a facility to turn a commit or sequence of commits into a specially formatted patch that may be emailed to a project developer and applied to the main project repository. Even in the case of a patch, the author information is automatically extracted and preserved when committed to an “official” repository. This record keeping is one of the reasons that a git commit has a committer field that identifies who committed a change to a repository and an author field, identifying the person who made the changes. The author information is tied to the commit as it is transferred from repository to repository. We empirically examine issues of attribution in section 5.
+
+![Two versions of a file code snippets](page7_img_1.png)
+
+Figure 9. Two versions of a file
+
+In our analysis of OSS projects where we have needed to analyze every version of each file in the repository, we have relied on third party tools such as CVSsuck [21] or svn::mirror [22] to create local mirrors so that we can checkout files quickly and without burdening the official public repository. Unfortunately, we have found these tools to be error prone and sometimes lossy. In some cases, we have needed to contact project maintainers to request a copy of their source code repository. Since all of the information about a git repository is stored locally, there is no need to make requests or use third party tools. This benefit is true of all distributed SCMs, and not unique to git. Of course, the metadata will differ as repositories in the same project diverge.
+
+> Promise 7: Git tracks content, so it can track the history of lines as they are moved or copied.
+
+Git tracks the history of the content of files. This means that it is able to tell automatically if a file is renamed because the content remains the same and the history follows the content. In SVN, a developer must explicitly rename a file in order to maintain the file’s history. In addition, git is able to track hunks of text within and between files. Consider the two versions of a file in figure 9. Alice writes the first version. Bob creates the second version when he moves the function sub above add without changing its contents.
+
+If svn blame is run to show who introduced each line, Bob would be indicated as the author of each line in the function sub. However, git blame -C -M, where -C finds code copies and -M finds code movement, would indicate that Alice had written each line of the file. Git also tracks text that moves between files and text that is copied multiple times as long as the number of lines moved is above a certain threshold (we observe the threshold to be around 4 or 5). Of course, if Bob were to modify a line in the implementation, even slightly, git would assign authorship of that line to Bob. Git’s origin analysis is not as accurate as recently introduced research techniques [23], but it is a dramatic improvement over SVN.
+
+## 4. Mining the Git Gold Vein
+
+> Promise 6: In git all metadata, notably history, is local.
+
+When a developer creates a local repository based on a pre-existing repository all information from the remote repository is transferred to the local repository. In past

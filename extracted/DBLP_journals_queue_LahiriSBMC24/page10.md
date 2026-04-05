@@ -1,0 +1,9 @@
+> Our user studies showed that, even after a merge has been produced, someone might want to know why the merge was accomplished in that particular way and may even want to see some evidence of what the reasoning was there. Well, that’s a thorny issue.
+>
+> But one of the nice things about these large foundational models is that they’re able to produce textual descriptions of what they’ve done. Still, we haven’t explored this capability in depth yet, since we don’t actually have the means available to us now to evaluate the veracity of these descriptions. That will have to wait until some user studies supply us with more data. Still, I think there are some fascinating possibilities here that ultimately should enable us to reduce some of the friction that seems to surface whenever these sorts of AI power tools are used to accomplish certain critical tasks.
+>
+> ![orange textured vertical bar](page10_img_1.png)
+>
+> In the event you regularly work with open-source code, you’re surely already familiar with some of the challenges that can arise in the course of trying to resolve merge conflicts. Many of these problems have been encountered for as long as people have collaborated on programs, and these have metastasized as the scale and complexity of software has multiplied many times over. Also, with thousands of developers sometimes now collaborating on projects, the potential for conflicts only continues to soar.
+>
+> Many of these are conflicts that can lead to program failures, of course. But even worse in some respects are the more subtle semantic merge conflicts that can fail the compiler, break a test, or introduce a regression. Despite

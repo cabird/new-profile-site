@@ -1,0 +1,19 @@
+in general, but engineers may require highly intense periods of focus work but also rely on tight collaboration to develop modern software.
+
+As such, the pandemic and the force to working from home provides an interesting opportunity to understand more about developer productivity, but also to find guidance for developers that work remotely or for developers that collaborate with remote team members. As many companies are anticipating supporting much more remote work in the future, some even declaring they will be entirely remote, the findings from our study are important. However, our study is focused on the study of remote work during the pandemic. We found many overlapping factors from those found in studies conducted before the pandemic, such as control over their work, time to complete work, focus time and work-life balance. But some new factors emerged that were specific to the pandemic context, such as commute time and reduced health risks.
+
+Before discussing our findings further, we remind the reader that the context for this study is a large multi-national software company, and that our study focuses on engineers working in the US.
+
+## 8.1 The Yin and Yang of Working from Home
+
+As we saw earlier in Tables 2 and 4, for some developers that previously worked in-office with their co-workers, certain factors that were described as a challenge by some, were described as a benefit by others. In the statistical analysis, we even found that for some factors the corresponding challenge was associated with statistically significant lower levels of productivity, while the corresponding benefit was associated with statistically significant higher levels of productivity. Examples are the ability to focus (B7, C11) and the home work environment (B12, C17).
+
+These dichotomous experiences are expected, which we see from extensive research around the world on people’s experiences of lock-down or social distancing during the pandemic. Furthermore, divergent experiences are expected given the varied family life, living conditions/location, job characteristics, and personality characteristics of our studied population. For employers and managers, knowing that “one size does not fit all” is critically important for the future of software development work.
+
+The main divergent factors were:
+
+- Ability to focus. The number and nature of interruptions and distractions varied considerably, with some reporting more focus time at home and higher levels of productivity, and others having less focus time, especially those facing interruptions with family members at home and lower productivity. But even for those that appreciated fewer “random interactions” from colleagues since working from home, at the same time, they missed the knowledge and awareness they gleaned from these and other informal interactions.
+- Work autonomy and motivation. Increased autonomy and control over tasks and timing increased motivation for some, but reduced motivation for others and also their reported productivity.
+- Work environment. Some appreciated the novelty of working from home, having natural light and more comfort at home, which was associated with higher productivity, while others missed their office work environment with extra amenities such as the cafeteria and reported lower levels of productivity.
+- Meetings. Some felt there were too many meetings since WFH, and they missed face-to-face social cues and whiteboards, but others liked the shorter meetings and the associated artifacts they could refer to later. We observed that people managers and product managers reported more frequently having too many meetings.
+- Work-life balance. Many appreciated having more time due to no commute and being able to use that for extra time with family or to do personal chores or for self care, but others

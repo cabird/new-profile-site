@@ -1,0 +1,34 @@
+{
+  "page7_img_3.png": {
+    "title": "Head-and-shoulders portrait of a professional woman",
+    "description": "Cropped color head-and-shoulders photograph of a middle-aged woman with short blonde hair, light freckles, and blue-green eyes looking toward the camera. She wears a light gray blazer over a dark blouse, a thin necklace with a small pendant, and small stud earrings; the framing shows her from the chest up against a soft, out-of-focus light background. The image appears in the paper as an author bio portrait, with the start of the caption text visible below the photo."
+  },
+  "page5_img_1.png": {
+    "title": "Mapping best practices to reviewer challenges",
+    "description": "A two-column table that maps reported code-review challenges to the specific best-practice items (coded A=Author, R=Reviewer, O=Organization) that may help. The lower, fully visible section titled \u201cTo address reviewer challenges:\u201d lists rows such as \u201cLarge reviews are hard to manage\u201d \u2192 A1.2; \u201cFinding time to do reviews\u201d \u2192 A1.1, A1.4, A1.5, A1.6, A2.1, R3.1, R3.2; \u201cUnderstanding a change and its motivation\u201d \u2192 A1.2, A1.3, A1.4; \u201cFinding relevant documentation\u201d \u2192 A1.4, A1.5; \u201cUnderstanding history of changes, decisions\u201d \u2192 O4, R4.2, A5.5; \u201cInsufficient training for reviews\u201d \u2192 O6, R3.5; \u201cReviewing not valued enough\u201d \u2192 O1, O3; and \u201cUnsure of impact on job evaluations\u201d \u2192 O3. The top of the image shows a partially visible author-focused mapping (e.g., \u201cReceiving insightful feedback\u201d \u2192 R3.4, R3.5; \u201cFind reviewers\u201d \u2192 A2.2\u2013A2.5), and the table uses alternating light-blue rows with a darker blue header to organize the challenge-to-practice mappings."
+  },
+  "page4_img_1.png": {
+    "title": "Infographic: Code Reviewing Best Practices for Authors, Reviewers, and Organizations",
+    "description": "A one-page infographic (Figure 2) divided down the center into an Author column (left) and Reviewer column (right) with icons and arrows showing an iterative review flow. The Author side lists labeled practices A1, A2, A5 and A6 (e.g., A1: \u201cPrepare code change for review\u201d with items like \u201cBe conscientious,\u201d \u201cAim for small, incremental changes,\u201d and \u201cTest/analyze before submitting\u201d; A2: \u201cSelect and notify reviewers\u201d with guidance on how many and who to notify; A5: \u201cRespond and iterate\u201d including \u201cShow gratitude\u201d and \u201cTrack and confirm suggested changes\u201d; A6: \u201cCommit code change\u201d urging documentation and reflection). The Reviewer side lists R3 and R4 (R3: \u201cAccept and conduct code review\u201d \u2014 e.g., \u201cSet dedicated, bounded time,\u201d \u201cReview frequently, fewer changes at a time,\u201d \u201cFocus on core issues first\u201d; R4: \u201cProvide feedback\u201d \u2014 e.g., choose communication channels carefully, give constructive reasons for rejections, use tools that provide decision traceability). A bottom Organization section enumerates seven recommendations (build positive review culture, develop/revise policies, count review time, provide appropriate tools, promote checklists, provide training, and monitor bottlenecks), reinforcing that these practices are intended to address the author- and reviewer-facing challenges identified in the paper."
+  },
+  "page7_img_2.png": {
+    "title": "Author headshot portrait (paper author)",
+    "description": "A small, color head-and-shoulders headshot used in the paper\u2019s author-bios section. It shows a smiling woman with long brown hair, looking toward the camera against a light, neutral background; she wears a dark top. The image is closely cropped around the face and is slightly low-resolution/pixelated. In the original page layout the portrait appears above the author\u2019s biographical text."
+  },
+  "page7_img_1.png": {
+    "title": "Head-and-shoulders author-bio portrait photograph",
+    "description": "A color head-and-shoulders portrait used in the paper\u2019s author biographies (page 7). The subject faces the camera and smiles, with long straight light-brown/blonde hair, wearing a dark top and a metallic necklace, set against a neutral gray background. The photo is framed with white margins and a caption area (author name) is visible beneath the image in the document layout."
+  },
+  "page7_img_4.png": {
+    "title": "Smiling author portrait in front of brick wall",
+    "description": "A close-up, cropped portrait photograph of a smiling man shown from the upper torso upward; he wears a navy V\u2011neck sweater over a dark collared shirt and displays a broad, toothed smile. The background is a brick wall rendered slightly out of focus, and the framing cuts off the very top of the head. In the paper this image appears in the author biographies section as one of the author portrait photographs on page 7."
+  },
+  "page2_img_1.png": {
+    "title": "Survey results: demographics, participation, motivations, and ranked challenges in Microsoft code reviews",
+    "description": "A vertically arranged infographic summarizing survey responses from 911 of 4,300 invited Microsoft developers, showing respondent experience and code-review activity. Key demographics: 87% have 2+ years in the software industry, 70% have 6+ years, 40% have 10+ years; 72% have worked at Microsoft 2+ years; 80.3% report 2\u20135 years of code-review experience (10+ years also reported by 22%). Participation over the previous week: 39% acted as a reviewer at least once per day (36% a couple times that week), whereas only 17% authored reviews daily (48% a couple times); motivations ranked highest are code improvement (1), finding defects (2), and knowledge transfer (3). Ranked challenges place receiving feedback in a timely manner as the top problem (1), followed by review size (2) and managing time constraints (3), with 13 specific challenge items listed in descending priority."
+  },
+  "page7_img_5.png": {
+    "title": "Cropped grayscale head-and-shoulders author portrait",
+    "description": "A cropped, slightly desaturated head-and-shoulders portrait of an adult male shown from the lower forehead to the collar, set against a dark, out-of-focus background. The subject has short hair, light facial stubble, and wears a light-colored T-shirt; only the right half of his face and shoulder are visible. The lower edge of the image shows part of the page caption area identifying the pictured author, indicating this photo is used as an author bio portrait in the paper."
+  }
+}

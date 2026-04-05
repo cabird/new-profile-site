@@ -1,0 +1,18 @@
+{
+  "page5_img_1.png": {
+    "title": "myCS publications portal subscription banner",
+    "description": "A horizontal dark\u2011gray promotional banner urging readers to use the myCS publications portal. At left is a stylized \u201cmyCS\u201d logo with the letters \u201cCS\u201d highlighted in light blue; to the right, stacked white text reads \u201cRead your subscriptions through the myCS publications portal at.\u201d A large, bold white URL, \u201chttp://mycs.computer.org,\u201d is emphasized across the lower portion as the call to action. The design uses high\u2011contrast type and simple layout to draw attention to the portal address."
+  },
+  "page3_img_1.png": {
+    "title": "Importance rankings of opinion sources (box plots)",
+    "description": "Box plots of respondents\u2019 importance rankings (0\u20135) for six sources of opinion: Personal experience, Peer opinion, Mentor or manager, Trade journal, Research paper, and Other. Personal experience has the highest median (near the top of the 0\u20135 scale) and a narrow interquartile range, indicating most developers rated it very important; Peer opinion and Mentor/Manager show intermediate medians with moderate spread. Trade journals sit slightly lower with wider whiskers, while Research papers and Other have the lowest medians and the greatest variability (many low-ranked responses and visible outliers). These visual results match the paper\u2019s finding that personal experience ranked first, then peer opinion, mentor/manager, trade journals, research papers, and other, with no significant demographic differences."
+  },
+  "page4_img_authors.png": {
+    "title": "Three author headshots with bios and contact emails",
+    "description": "A vertical list of three author entries on a pale yellow diagonally striped background; each entry pairs a left-aligned rectangular headshot with a bold, capitalized name and a one-line biography plus contact email on the right. The printed entries read: \u201cPREM DEVANBU is a professor in the Department of Computer Science at the University of California, Davis. Contact him at ptdevanbu@ucdavis.edu.\u201d; \u201cTHOMAS ZIMMERMANN is a senior researcher at Microsoft Research. Contact him at tzimmer@microsoft.com.\u201d; and \u201cCHRISTIAN BIRD is a senior researcher at Microsoft Research. Contact him at cbird@microsoft.com.\u201d The photos are cropped and aligned with their respective text blocks, creating a compact author-byline panel for the article."
+  },
+  "page5_img_2.png": {
+    "title": "IEEE Computer Society executive staff, offices, and board contact panel",
+    "description": "A two\u2011column informational panel headed by the IEEE Computer Society logo that summarizes the organization\u2019s purpose and membership information on the left and administrative contacts on the right. The left column lists the Executive Committee and Board of Governors (for example, President Hironori Kasahara, President\u2011Elect Cecilia Metra, and Past President Jean\u2011Luc Gaudiot) along with ombudsman and website details. The right column names Executive Staff (Executive Director Melissa Russell; Associate/Director, Governance Anne Marie Kelly; Director, Finance & Accounting Sunny Hwang; Director, IT & Services Sumit Kacker; Director, Membership Development Eric Berkowitz), gives office addresses for Washington, D.C. and Los Alamitos with phone/fax numbers and emails (hq.ofc@computer.org, help@computer.org), and provides Asia/Pacific contact details for Tokyo. An IEEE Board of Directors block (including President & CEO James Jefferies and President\u2011Elect Jose M.F. Moura) appears below, and the panel is marked \u201crevised 03 July 2018.\u201d"
+  }
+}

@@ -1,0 +1,31 @@
+showing that only two developers contribute to A and that they also work on a few other components. However, Figure 1c shows that the other binaries that Fred and Ram contribute to have many dependencies and dependents. These binaries play key roles in the system and a number of them are defect prone. The fact that Fred and Ram contribute to these components and A represents some form of latent relationship between A and D, E, F, and G. It is only after considering both kinds of relationships that the importance of A becomes apparent. We found many instances of this scenario (and also its dual, in which components developed by many developers were connected to another, defect-prone component via simple dependency relationships) in our manual inspections.
+
+We therefore lift the level of abstraction by claiming that binaries have a multitude of relationship types. Common developers and dependencies are two of a number of possible software component relationships. These relationships encode a multi-mode relationship graph [6], with different types of nodes (developers and software components in our case) and different types of edges: various forms of dependencies, and contributions from developers. While examining the relationships between software components separately has proven useful, we claim that they should be considered in concert.
+
+We create a socio-technical network by combining dependency and contribution relationships into one graph. Both of the above networks deal with information & control flow. The joint network then captures the interaction between the two.
+
+We refer to this network as the socio-technical network, G_a. One issue in aggregating the vertices and edges is the fact that G_c is weighted and undirected while G_d is directed and unweighted. To resolve directedness, we add two directed edges (one in either direction) between a developer d and a software component s if d contributed to s. To resolve the issue of weights, we include the number of commits from d to s as the weight on contribution edges and set the weight of software dependency edges to 1. Many social network measures (such as betweenness) convert the network to an unweighted network prior to analysis. For those that can operate on both weighted and unweighted networks, we perform the analysis on both versions of the network and use both measures in our model. For instance, degree on the unweighted contribution network represents the number of distinct developers who contributed to a component while the weighted degree is the number of actual commits.
+
+## 3.2. Social Network Analysis Measures
+
+We calculate network analysis measures on a per-component basis within the software component networks. These measures can be broadly divided into two categories. Global measures examine the position of the component within the context of the entire network and include betweenness, Bonacich Power, and eigenvector centrality. Local measures only take into account the neighborhood of nodes within one or two hops of a software component. These include measures such as degree, size of the network, and edge density. We refer the reader to a more thorough review of social network analysis measures by examining [7], [8], [9], [10] and the comprehensive online help in [17]. In these discussions, an edge between two components represents a relationship between the components and may represent different relationships in different types of networks.
+
+### Global Measures
+
+#### Betweenness centrality
+Betweenness centrality [7] is a measure of brokerage or information flow. A geodesic is the shortest path between two components in a network. Betweenness is the number of geodesics that a particular component lies on. In standard SNA, this measure quantifies the degree to which an individual in a network mediates information flow, and thus is a measure of social status. A component may have few links, but high betweenness, if a component acts as a bridge between two otherwise disconnected groups of components. This may represent a software component that acts as a point of contact or an interface. It could also represent a component that is contributed to by a developer who works on components in disparate parts of the system (e.g., a developer who makes minor contributions to the GUI, but works mainly on the Eclipse compiler and static analysis). In either case, if many paths of relationships "flow" through a component, this indicates that many components and/or developers have an interest in the component.
+
+#### Closeness centrality
+Closeness centrality [7] measures the distance from a component to all other components (and possibly developers) in the network. Lower values indicate that the component is farther away from all other nodes.
+
+#### Reachability
+Reachability [17] is a similar measure to closeness in that it uses the geodesics from a node to all other nodes. Higher values indicate a shorter average distance to other nodes in the network.
+
+#### Eigenvector Centrality
+Eigenvector centrality [8] is another measure of the importance of a component in a network. It is similar to Google’s PageRank [18] in that connections to high-valued nodes increase a node’s value more than connections to low-valued nodes.
+
+#### Bonacich Power
+Bonacich Power [9] measures centrality of a component based on the centrality of other nodes. A node may be considered central if it is connected to nodes that have connections to many other nodes. A node may be considered powerful if it is connected to nodes that have connections to few other nodes. Binaries that are more central may be more likely to have post-release failures. We use a positive Beta value of 0.2.
+
+#### Structural Holes
+Structural holes are gaps in a network. If a component A has a connection to a neighbor B that no other neighbors are connected to, then A is in a more powerful position over B than the other neighbors. The absence of an edge between B and A’s other neighbors represents structural holes. The following measures quantify properties of structural holes. We refer the reader to [10] for further detail.

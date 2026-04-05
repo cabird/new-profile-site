@@ -1,0 +1,1 @@
+![Stylized robot head with goggles surrounded by colorful halftone dot pattern on a black background](page2_img_1.png)

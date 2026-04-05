@@ -1,0 +1,7 @@
+However, there could be another possible explanation of the observed phenomenon in RQ3. Prolific clone groups by definition have many members. A developer may fix the same bug in multiple copies, but do so in multiple commits; he may not identify every commit as a fix of a bug and/or present the bug ID in the commit log. In such situations, our linking algorithm may miss some of the delayed fixes altogether. This will deflate bug density in prolific clone groups and poses a significant threat to RQ3 findings. However, Thummalapenta et al. (2009) found that developers are able to remember location of clone copies and propagate changes consistently. In only a small percentage of cases, usually less than 16%, they actually underwent late propagation. Similar findings were reported by Göde and Koschke (2011).
+
+We however want to stress that the above-mentioned threat to validity does not affect our findings in RQ1 and RQ2. In RQ1, we consider cloned code in buggy code, which is immune to the above-mentioned bug linking problem. Unless there is any systematic bias in bug linking that only links non-cloned bugs while leaving out others, our result is robust and statistically sound. Even if only one copy is linked with a bug, we adjust both numerator and denominator when calculating clone ratio.
+
+![Box plots of defect density for file scattering across projects](page16_img_1.png)
+
+Fig. 4 Defect density in clone groups of different file scattering for different projects (a) Apache (Conservative) (b) Apache (Liberal) (c) Gimp (Conservative) (d) Gimp (Liberal)

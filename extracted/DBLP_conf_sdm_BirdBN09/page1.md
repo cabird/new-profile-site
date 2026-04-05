@@ -1,0 +1,23 @@
+## Structure and Dynamics of Research Collaboration in Computer Science
+
+Christian Bird, Earl Barr, Andre Nash  
+Premkumar Devanbu, Vladimir Filkov, Zhendong Su  
+Department of Computer Science  
+University of California, Davis  
+{cabird, etbarr, alnash, ptdevanbu, vfilkov, su}@ucdavis.edu
+
+### Abstract
+
+Complex systems exhibit emergent patterns of behavior at different levels of organization. Powerful network analysis methods, developed in physics and social sciences, have been successfully used to tease out patterns that relate to community structure and network dynamics. In this paper, we mine the complex network of collaboration relationships in computer science, and adapt these network analysis methods to study collaboration and interdisciplinary research at the individual, within-area, and network-wide levels.
+
+We start with a collaboration graph extracted from the DBLP bibliographic database and use extrinsic data to define research areas within computer science. Using topological measures on the collaboration graph, we find significant differences in the behavior of individuals among areas based on their collaboration patterns. We use community structure analysis, betweenness centralization, and longitudinal assortativity as metrics within each area to determine how centralized, integrated, and cohesive they are. Of special interest is how research areas change with time. We longitudinally examine the area overlap and migration patterns of authors, and empirically confirm some computer science folklore.
+
+We also examine the degree to which the research areas and their key conferences are interdisciplinary. We find that data mining and software engineering are very interdisciplinary while theory and cryptography are not. Specifically, it appears that SDM and ICSE attract authors who publish in many areas while FOCS and STOC do not. We also examine isolation both within and between areas. One interesting discovery is that cryptography is highly isolated within the larger computer science community, but densely interconnected within itself.
+
+### 1 Background and Motivation
+
+Computer science is a diverse and growing area of scholarly activity, with many subareas, such as artificial intelligence (AI), computational biology (CBIO), cryptography (CRYPTO), databases (DB), graphics (GRAPH), programming languages (PL), software engineering (SE), security (SEC), theory (THEORY), among others. Some of these areas are quite old, rooted in the earliest stirrings of the field (e.g., THEORY) and others started much later (e.g., GRAPH). Some are quite large, attracting a large number of researchers (e.g., DB and GRAPH) and others are smaller (e.g., CRYPTO and SE). Some are in a stable phase (e.g., THEORY); others are growing rapidly (e.g., SEC).
+
+There are other, more subtle differences in character and style between areas. These differences, although they are currently not rigorously quantified, nevertheless may have important implications for the future of these areas. These differences are recognized by researchers working in the respective (or closely allied) areas, but have not been rigorously studied. For example, some of these areas are considered intellectually unified, while others are said to include several distinct, thriving groups. Some areas tend to interact strongly with others, with a tradition of mutual enrichment, and others are more stand-alone. Some areas are dominated by a few researchers, while others have a more diffuse collaborative structure. In some areas, older and younger researchers frequently collaborate, while in others, researchers collaborate primarily with others like them.
+
+These informal, folkloric differences between areas are worthy of study, because such properties clearly can have a strong influence on the intellectual vibrancy and diversity of an area. In this paper, we begin to quantify and study these differences to produce data that may provide "actionable intelligence" for interested parties. For example, researchers (students, new faculty) might well consider these factors when deciding whether to enter (or leave) an area. Funding agencies (industries, government foundations) might consider the status and style of a field, choose to formulate Broad Area Announcements (BAAs) and Calls for Proposals to influence a field, for example, to become more interdisciplinary, or more intellectually diverse, or to spread their funding more broadly to increase centers of influence; contrariwise, they could design funding initiatives to reverse such trends if that seems appropriate.

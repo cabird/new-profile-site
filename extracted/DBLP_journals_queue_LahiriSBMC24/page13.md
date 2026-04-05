@@ -1,0 +1,9 @@
+> CB We were immediately attracted to Tree-sitter because it lets you parse just about anything you can imagine right off the shelf. And it provides a consistent API, unlike most other parsers out there that each come with their own API and work only with one language or another. For all that, I was surprised to learn that Tree-sitter doesn’t provide a tokenizing API. As an example of why that proved to be an issue for us, we wanted to try Python, which basically lets everyone handle their own tokenizing. But, of course, Tree-sitter didn’t help there. We resorted to a Python tokenizing library.
+> 
+> Beyond that relatively small complaint, Tree-sitter is great in terms of letting you apply an algorithm to one language and then quickly scale that up for many other languages. In fact, between that capability and the Python tokenizing library, which made it possible for us to handle multiple languages, we were able to try out things with other languages without needing to invest a lot of upfront effort. Of course, there’s still the matter of obtaining all the data required to train the model, and that’s always a challenge. At least we didn’t need to write our own parsers, and the consistent interfaces have proved to be incredibly beneficial.
+> 
+> EM Once you finally managed to get all this deployed, what turned out to be your biggest surprise?
+> 
+> CB There were so many surprises. One I particularly remember came up when we were trying to figure out how people would even want to view merge conflicts and diffs. At first, some of us thought they’d want to focus only on the conflict itself—that is, with a view that let them see both their side and the other side. It turns out you also need to be able to see the base to understand the different
+
+acmqueue | july-august 2024 13

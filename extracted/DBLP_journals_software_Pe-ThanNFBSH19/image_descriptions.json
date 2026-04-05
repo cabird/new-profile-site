@@ -1,0 +1,42 @@
+{
+  "page1_img_1.png": {
+    "title": "Stylized illustration of collaborative innovation machinery and growth",
+    "description": "A wide, header-style illustration in muted greens, beiges, and reds shows a fanciful landscape of plant-like stalks topped with tiered platforms, small human silhouettes, and machinery. Conveyors, pulleys, ladders, and gear wheels carry and drop small red cubes between platforms; one platform includes tiny figures standing by a screen, and a factory-like skyline appears at the right edge. The composition reads as a visual metaphor for idea flow and prototyping\u2014people, tools, and production lines interacting to move small units (ideas or prototypes) through stages of assembly and display."
+  },
+  "page7_img_5.png": {
+    "title": "Author headshot portrait photograph (author bio)",
+    "description": "A head-and-shoulders color portrait photograph used as an author biography image. The cropped photo shows a young woman facing the camera with straight, light brown/blonde hair over her shoulders, light-colored eyes, and a neutral, slight smile; she wears a small pendant necklace and a dark top. The background is softly blurred and light-toned, and the image is presented within a thin dark frame against a pale, diagonal-striped page background. This image appears among the author portraits on the paper\u2019s contributor page."
+  },
+  "page3_img_1.png": {
+    "title": "Pull-quote emphasizing collaboration in hackathons",
+    "description": "A prominent pull-quote box on page 3, printed in large blue sans\u2011serif type, asserts that collaborative hackathons aim to increase interaction among participants. The quote is framed by yellow diagonal\u2011striped bars at the top and bottom and sits inline with the surrounding text and bullet list on fostering career and social goals. In context, the highlighted box underscores the paper\u2019s point that collaborative design choices (for example, unconference sessions or controlled team fluidity) are intended to build networks, facilitate learning, and encourage cross\u2011team interaction rather than purely competitive outcomes."
+  },
+  "page7_img_1.png": {
+    "title": "Smiling head-and-shoulders author portrait",
+    "description": "A close-cropped, color head-and-shoulders portrait photograph of a smiling adult that appears among the paper\u2019s author portraits. The subject faces slightly off-center toward the left, with straight dark hair that lightens toward the ends and a small necklace visible at the collar; the background shows soft-focus greenery. The image is vertically oriented, tightly framed around the face, and enclosed by a thin dark border."
+  },
+  "page7_img_2.png": {
+    "title": "Author biography heading for Christian Bird (Microsoft Research)",
+    "description": "Cropped close-up of an author-bio block showing the name \"CHRISTIAN BIRD\" in large bold uppercase type with the affiliation \"Microsoft Research\" immediately below. The image includes the first line(s) of his biographical blurb (partially visible) \u2014 in the paper this bio describes his work in empirical software engineering and using data to guide decisions in large software projects. The visible layout shows dark text on a light beige, diagonally striped background and only the top portion of the paragraph is shown."
+  },
+  "page7_img_3.png": {
+    "title": "Head-and-shoulders author portrait photograph",
+    "description": "A color, head-and-shoulders portrait photograph used in the paper\u2019s author bio section (third portrait on page 7). The subject faces the camera with a slight smile, short brown hair, trimmed sideburns and light facial stubble, wearing a dark jacket over a black shirt. The background is an out-of-focus green foliage scene; the image is cropped with a thin dark border and placed on a pale yellow, diagonal-striped page background."
+  },
+  "page4_img_table_1.png": {
+    "title": "Mapping hackathon design choices to strategies and goals",
+    "description": "A four\u2011column table that relates specific hackathon design choices (rows) to recommended strategies, the organizational goals those strategies support, and common personal goals of participants. For example, under \u201cCollaboration versus competition\u201d the table contrasts collaboration tactics (facilitate shared/interdependent goals, unconference sessions, timed team switching) which are tied to enriching intracompany networks, collaborative learning, culture change and personal aims like learning and networking, with competition tactics (compete for prizes, expert judges, awards that include continued development) which primarily support product innovation and entrants\u2019 desires to win or get work done. Other rows summarize attracting attendees (targeted invitations, promotional channels, selection tools to diversify skills), selection of projects (participant\u2011proposed to foster creativity and autonomy vs organizer\u2011proposed to target learning or business priorities), team formation (self\u2011organization with tools like Hackbox vs organizer assignment), prework (premeetings to overcome slow starts vs no premeetings to encourage ideation), and postwork (pitching outputs to increase visibility and chances of continuation). Across the table the authors map how each design choice aligns with tradeoffs between organizational aims (e.g., product innovation, workforce development, reducing stovepiping) and participants\u2019 personal goals (e.g., learn, expand network, foster career, have fun)."
+  },
+  "page8_img_1.png": {
+    "title": "IEEE Computer Society Digital Library subscription banner",
+    "description": "A landscape-oriented blue advertisement promoting the IEEE Computer Society Digital Library. Centered white text instructs readers to access their subscriptions and prominently displays the call-to-action URL computer.org/mysubscriptions in larger, bold type. A partial Digital Library/IEEE logo appears at the top and a dotted rule along the bottom frames the message, indicating this is a page-level promotional banner directing members to manage their subscriptions online."
+  },
+  "page7_img_4.png": {
+    "title": "Author biography panel with bold name header and role",
+    "description": "A cropped author bio card on a cream background with diagonal pale stripes; the top shows a large bold uppercase name (the leftmost character is partially cut off) and smaller paragraph text beneath. The visible biography lines state the person is a principal design researcher at Microsoft Garage, list research interests focused on tools and resources for hackathons, hack teams, and related projects, and mention academic credentials (a Ph.D.) and contact information. The graphic is the paper\u2019s standard author-profile layout, pairing a prominent name header with a concise professional bio."
+  },
+  "page7_img_6.png": {
+    "title": "Cropped author-bio block showing affiliation and research focus",
+    "description": "A close-up crop of an author biography panel with a light diagonal\u2011striped beige background. The top shows a partially visible bold, uppercase name heading, and beneath it smaller sans\u2011serif lines read fragments such as \u201cInstitute for Software,\u201d \u201cSchool of Computer Science,\u201d and \u201cUniversity.\u201d Lower lines partially display the start of a research summary mentioning \u201ccollaboration and co\u2026\u201d and \u201cdevelopment,\u201d indicating the author\u2019s research focus on collaboration and coordination in software development and their institutional affiliation in a computer\u2011science research institute."
+  }
+}

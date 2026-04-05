@@ -1,0 +1,35 @@
+> supervision and transparency” (P165). Performance lapses in current tools fueled caution on large-scale refactors—“AI should not perform any large-scale refactoring” (PID182)—with even small edits requiring review to prevent regressions. Finally, participants warned against over-automation that erodes operational intuition: “Engineers still need to learn how things work... AI should guide, not replace, or leave juniors without a pathway to operational knowledge” (PID16).
+>
+> Takeaway: Developers offload ops/coordination toil (H2, H4) only when AI is reliable, safe, and context-aware (H1, H3). Still, they resist over-automation that erodes intuition or adds debt. Relational work aspects are off-limits—empathy, intuition, and authenticity remain irreducibly human.
+
+### 5.3 RQ2: Which RAI design principles do developers prioritize in AI for SE tasks?
+
+Recall that participants selected five of eight RAI principles (see §4) for the task categories most relevant to their work; these choices reflect top priorities under forced trade-offs, not an absolute ranking or organizational stance.
+
+As shown in Fig. 2, participants most frequently selected Reliability & Safety (85%), Privacy & Security (77%), Transparency (72%), Goal Maintenance (68%), AI Accountability (67%), and Steerability (67%) across categories. Fairness (32%) and Inclusiveness (32%) followed. Participants' explanations indicated that, given the current maturity of AI tools in SE, they prioritize pre-requisites that ensure correctness, reduce harm, and keep the system aligned and under control, before expecting credible support for broader humanist principles: “Surely all of them are important but at which stage? Right now, the basics aren't even done well, so those are [what] I selected” (P43).
+
+To examine how RAI priorities varied, we fit logistic Generalized Linear Mixed Models (GLMMs) [12] per principle (Table 5). The models predicted whether a principle was prioritized (Outcome = 0/1) as a function of task categories, mean-centered SE & AI experience, risk tolerance, and technophilia, with random intercepts for participant to account for repeated measures.
+
+The intercept (baseline) represents a developer with average SE/AI experience and AI-dispositions (relative to their peers) prioritizing a principle in AI support for development-heavy work. Table 5 reports odds ratios (ORs) relative to this baseline (OR > 1 = higher odds and vice versa). For example, the baseline odds of prioritizing Privacy & Security in AI for development tasks were 8.19 (i.e., 8.19/(1+8.19) ≈ 89% probability). In quality/risk-management tasks, the odds increased by 1.91 (8.19 × 1.91 = 15.65, ≈94% probability).
+
+Next, we integrate qualitative accounts to explain why these patterns emerged and how priorities shifted across SE work categories.
+
+Interpretation guideline: These results reflect preferences under a forced-choice design; they neither prescribe policy nor imply that any RAI principle is optional. All remain essential. Read them as a pragmatic “order of operations” for current tools, varying by task category and individual dispositions, as detailed next.
+
+#### 5.3.1 How do priorities vary across task categories?
+
+1) For systems-facing work (development, infrastructure/ops, quality & risk)—concentrated in the Build/Improve zones of Fig. 1—participants imposed strict gating before AI could be trusted. Reliability & Safety (base odds: 18.15; ≈95%) and Privacy & Security (base odds: 8.19; ≈89%) were non‑negotiable. Participants stressed that for these tasks, AI errors do not “net to zero”—they waste time, send teams down unproductive paths, and amplify risk: “AI MUST BE correct for it to be useful. Incorrect AI may as well be throwing spaghetti at a wall—it's more work to fix it” (P83).
+
+![Bar chart showing participants selecting RAI principles across task categories](page8_img_1.png)
+
+Figure 2: Participants (%) selecting each RAI principle as their top-5 priority for AI support across SE task categories; percentages reflect frequency and do not sum to 100%.
+
+Privacy concerns intensified in infra/ops (OR = 1.38) and quality/risk (OR = 1.91), where artifacts are sensitive: “One privacy slip and trust collapses” (P313). Respondents demanded “absolute assurance that AI safeguards information, preventing leaks or unauthorized access” (P322) and declined tools “for security work unless [they’re] secure... and sources [are] clear” (P435).
+
+Participants next emphasized Transparency (base odds: 5.17; ≈84%), seeking clear explanations to verify assumptions, catch hallucinations, and justify (or revise) AI contributions. They tied this need to personal accountability and learning: “I feel accountable for my work, so I feel accountable for what the AI has done. I want it to explain why an action was taken. This also helps me grow as a developer” (P36).
+
+To keep tools aligned with shifting objectives, they highlighted Goal Maintenance (base odds: 4.68; ≈82%), stressing that AI must adapt as goals evolve; currently it chases tangents and/or resurfaces stale context, forcing rework: “The things I need to be giving my attention to are changing all the time, so if AI could keep up with that via Goal Maintenance, that would be huge” (P791). In cases where drift occurs, participants prioritized control surfaces to redirect AI (Steerability, base odds: 3.65; ≈79%) and provenance to backtrack/trace errors (AI Accountability, base odds: 3.03; ≈75%): “Lack of steerability & accountability makes it hard to use AI for tasks that require extensive time/detail... it's hard to put it back on track and/or tell where it went wrong... I often have to start new chats, which is frustrating, losing progress because the context is gone” (P495).
+
+In quality & risk work, Fairness surfaced as contextually salient (OR = 1.07). Fairness matters because reviews and audits affect releases and defect attribution. Participants stressed the need for unbiased evaluation: “Fairness of PR review is hard for humans, so I want it to be a success metric for AI reviewers” (P196); “It is important to have unbiased AI for quality-related tasks to ensure the integrity of the work is not compromised” (P461). Some saw fairness as nested within reliability/safety; others raised a tension between fairness and privacy, noting that bias checks might require “exposing personal attributes the AI shouldn’t know” (P476).
+
+2) For design and human-facing work (design/planning, meta-work)—concentrated in the De-prioritize zone of Fig. 1—participants elevated Fairness (OR = 1.48, 3.06) and Inclusiveness (OR = 1.61, 2.49). They wanted AI to broaden perspectives and avoid reinforcing bias in collaborative or client-facing contexts: “Inclusiveness and fairness of AI features should be baked into design planning from the start... it needs a grasp of business requirements and diversity of audiences” (P653). This was especially salient for documentation.

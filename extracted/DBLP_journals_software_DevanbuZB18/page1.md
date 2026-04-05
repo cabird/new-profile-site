@@ -1,0 +1,14 @@
+## Belief and Evidence
+
+### How Software Engineers Form Their Opinions
+
+Prem Devanbu, Thomas Zimmermann, and Christian Bird
+
+> **Call for Submissions**  
+> Do you have a surprising result or industrial experience? Something that challenges decades of conventional thinking in software engineering? If so, email a one-paragraph synopsis to timm@ieee.org (use the subject line “REDIRECTIONS: Idea: your idea”). If that looks interesting, I’ll ask you to submit a 1,000- to 2,400-word article (in which each figure or table counts as 250 words) for review for the Redirections department. Please note: heresies are more than welcome (if supported by well-reasoned industrial experiences, case studies, or other empirical results). —Tim Menzies
+
+After programming for a combined 90 years, and having studied industrial and/or open source software development for more than 60 of those years, we’ve learned (and then sometimes unlearned) a great many things about our profession and colleagues. However, one observation has firmly endured: developers are stubborn, with passionately held beliefs. Most developers hold certain truths (about programming or software engineering) to be self-evident. However, “self-evident” here (unlike in the US Declaration of Independence) doesn’t refer to eternal truths: it refers to individual developers and their self-directed notion of what they “know” to be true.
+
+You’ve surely heard many of these self-evident “truths.” For example, dynamic typing is inherently evil. Dynamic typing is the eternal salvation of humanity. Coding standards are soul-destroying and wasteful. Coding standards have prevented the downfall of Western (or Eastern) civilization. Assertions are for unit tests; injecting them elsewhere is mere superfluous sanctimony. Coding without prolific assertions is evidence of willful foolhardiness. You should hire the most experienced developers you can find. Experienced developers are rooted in old ways and lack creative energy. You probably hold some of these beliefs yourself … and you know you’re right.
+
+And that those who think otherwise are just, well, misinformed. Certainly, developers aren’t unique in this; it’s well known that changing people’s minds is difficult.1 However, shouldn’t people expect more from developers? Aren’t we supposed to take a professional, empirical perspective on our practice? Shouldn’t we be observing what works and what doesn’t, and continually revising our opinions? Sadly, over the many decades of our professional lives, we’ve rarely known this to be the case. Most engineers just seemed to know they were right; they pounced on data when it confirmed their biases and ignored it when it didn’t.

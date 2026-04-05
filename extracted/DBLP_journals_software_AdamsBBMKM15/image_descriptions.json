@@ -1,0 +1,54 @@
+{
+  "page4_img_1.png": {
+    "title": "Callout: Hire a release engineer early",
+    "description": "A beige rectangular callout contains large, centered blue type reading: \u201cA company needs to get a release engineer on board in the early stage, not the later stage.\u201d The graphic is a typographic pull-quote highlighting a key recommendation from the roundtable (notably voiced by Kim Moir) that release-engineering expertise should be introduced early to set up pipelines, automation, and integration practices. It visually underscores the article\u2019s point that involving release engineers sooner helps avoid last\u2011minute integration, testing, and deployment problems."
+  },
+  "page6_img_1.png": {
+    "title": "Callout: Release engineers are hard to find",
+    "description": "A large beige callout box with bold blue text stating that release engineers are hard to find because their skill set isn\u2019t taught in school. This graphic highlights a recurring theme from the roundtable: practitioners report a shortage of release engineers and criticize computer-science curricula for emphasizing theory over hands-on skills. The article links this claim to concrete gaps\u2014version control, continuous integration and delivery, release-pipeline tooling, and large-scale systems debugging\u2014that interviewees say make hireable release engineers rare and motivate changes in education and training."
+  },
+  "page2_img_1.png": {
+    "title": "Pull quote emphasizing canarying for web releases",
+    "description": "A large, stylized callout emphasizing that canary deployments are essential for Web services and servers. In the article this highlights the practice of gradually exposing a new build to a subset of users while collecting separate logs and monitoring core metrics (for example, time\u2011to\u2011interaction, error rates, and new production errors) to detect regressions. Canarying is described as a key safety step that informs whether to promote a candidate to wider rollout, block it, or take corrective action before full production exposure."
+  },
+  "page3_img_pullquote_1.png": {
+    "title": "Pull quote: Mobile deployments are more challenging than Web deployments",
+    "description": "A large, centered pull quote in blue type on a pale background reads that \"Mobile deployments are more challenging than Web deployments because we don't own the ecosystem.\" The image highlights the roundtable participants\u2019 point that app-store/platform control (Apple/Google) limits release engineers\u2019 options: they cannot run fine-grained canaries or push updates on demand, must monitor big canaries for crash rates, cold/warm starts and app size, and often lose users if they require manual re-downloads. It contrasts with Web services, where teams typically own the deployment environment and can use rapid continuous deployment and smaller canary rollouts."
+  },
+  "page8_img_3_author.png": {
+    "title": "Grayscale author headshot of smiling man in striped shirt",
+    "description": "Head-and-shoulders grayscale portrait of an adult man looking toward the camera and smiling. He has short, dark hair and wears a light-colored, collared shirt with horizontal stripes; the immediate background shows diagonal dark and light panels. The photo is cropped into a rectangular frame with a thin dark border and is placed on a pale, diagonally striped page background as part of the article\u2019s authors section."
+  },
+  "page1_img_1.png": {
+    "title": "Blue header with robotic bird, mechanical hand, and article title",
+    "description": "A blue-tinted header image that fills the left two-thirds of the page and is overlaid with the article title and author names on the right. The artwork shows a mechanical/robotic bird in flight near the center-left and several articulated robotic-finger assemblies and other machinery at the lower left, with a faint building silhouette in the background. Large white serif title text (the article name and subtitle) and a block of author credit text appear on the right over the blue overlay. The visual serves as a decorative, technology-themed banner for the roundtable on release engineering, emphasizing automation and mechanical systems."
+  },
+  "page8_img_2_author.png": {
+    "title": "Black-and-white author headshot of a smiling woman",
+    "description": "Grayscale, closely cropped portrait of a smiling woman shown from the shoulders up, with her hair pulled back and small stud earrings visible. Her face is centered in a thin dark rectangular frame and she looks directly at the camera with a wide smile. The photo is presented as an author headshot on the paper page, placed against a pale diagonal-striped background used for the author block. Overall the image is a professional, neutral portrait used to accompany an author biography in the article\u2019s \u201cAbout the Authors\u201d section."
+  },
+  "page8_img_1_author.png": {
+    "title": "Grayscale author headshot portrait",
+    "description": "A framed, grayscale head-and-shoulders portrait used in the article\u2019s author-bio block. The image shows a young adult male with short hair, thin-framed glasses, and light facial stubble, looking toward the camera with a neutral, slight smile; he wears a light-collared top. The photo is presented with a thin dark border set against a pale, diagonal-striped background consistent with the page\u2019s author section. This image appears alongside the \"ABOUT THE AUTHORS\" biographical text on page 8 of the article."
+  },
+  "page8_img_4_author.png": {
+    "title": "Grayscale author headshot portrait (female, three-quarter view)",
+    "description": "A black-and-white head-and-shoulders author photograph used in the paper\u2019s author-bio section. The portrait shows a woman facing the camera with shoulder-length straight hair and a slight, closed-mouth smile; she is centered in a thin dark frame against a light, diagonally striped background. The image is a formal, evenly lit professional headshot cropped to focus on the face and upper torso."
+  },
+  "page8_img_left_ad.png": {
+    "title": "Sidebar ad: \"Find us on Facebook & Twitter\" with social URLs",
+    "description": "A vertical, beige advertisement panel with dark, bold type announcing \u201cFIND US ON FACEBOOK & TWITTER!\u201d (using an ampersand and an exclamation mark). Centered beneath the heading are two plain-text URLs stacked one per line: facebook.com/ieeesoftware and twitter.com/ieeesoftware. The box is a page-side promotional call-to-action (the page 8 left advertisement) directing readers to the IEEE Software magazine\u2019s social-media accounts."
+  },
+  "page8_img_5_author.png": {
+    "title": "Grayscale author headshot of a man in a zip-neck sweater",
+    "description": "A close-up, head-and-shoulders grayscale portrait used as an author photo: a man faces the camera with a neutral, slight smile and short hair. He wears a dark zip-neck sweater with the zipper pulled partway up; lighting is even with minimal shadows. The photo is framed by a thin black rectangular border and set against a pale, diagonal\u2011striped panel typical of the paper\u2019s \u201cAbout the Authors\u201d page. The image is cropped tightly around the subject\u2019s head and upper torso, emphasizing facial features and expression."
+  },
+  "page8_img_multimedia_box.png": {
+    "title": "Multimedia callout linking to www.computer.org/software-multimedia",
+    "description": "A dark-gray rectangular callout box with white sans-serif text that directs readers to the article\u2019s online multimedia. The prominent URL shown is www.computer.org/software-multimedia, followed by the line \u201cfor multimedia content related to this article.\u201d Placed as a sidebar-style pointer (the journal labels it a \u201cMultimedia box\u201d), it tells readers where to find supplemental material\u2014videos, audio, or other related content\u2014associated with this issue\u2019s articles."
+  },
+  "page8_img_6_author.png": {
+    "title": "Grayscale author headshot of a smiling woman with glasses",
+    "description": "Black-and-white close-up portrait cropped at the shoulders, shown inside a thin dark rectangular frame against a pale diagonal-striped background typical of an author-bio box. The subject wears rectangular glasses, short hair, small hoop earrings, and a light smile; the photo has a slightly grainy texture. The composition and surrounding styling match the paper\u2019s author biographical images on the page."
+  }
+}

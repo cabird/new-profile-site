@@ -1,0 +1,9 @@
+for years. The difference is that these suggestions may be longer, sometimes spanning multiple lines of code, and ideally more contextually relevant and helpful. Copilot can currently be used in VS Code, Visual Studio, Neovim, and JetBrains IDEs, including PyCharm and IDEA.
+
+During these initial investigations of Copilot, developers showed they were unclear about how it worked. Among the most common misunderstandings was that while Copilot does learn from code, the learning happens during a general training phase, where OpenAI trains a general-purpose programming model (Codex) that is fine-tuned by using a selected set of public codebases on GitHub. (For more information about Codex, a model fine-tuned by OpenAI, refer to https://openai.com/blog/openai-codex/.)
+
+By contrast, when a developer uses Copilot to generate suggestions during a coding session, the code sent to Copilot to generate the suggestion is not used to make suggestions to other developers. Simply put, this model will not "leak" code to anyone else. In fact, such web requests are ephemeral, and the code is not logged, captured, or recorded (unless users agree to collection).
+
+## WHAT ARE PEOPLE USING COPILOT FOR?
+
+To get a better understanding of how people were using Copilot, we collected and analyzed users' self-reported experiences to uncover the challenges they faced and the opportunities this tool presented them, as well as to identify how the technology could evolve. The Copilot Discussion forum, available to all technical preview users, was a valuable resource. In this forum, Copilot users provided code snippets, links to blogs, and even live coding

@@ -1,0 +1,34 @@
+{
+  "page8_img_1.png": {
+    "title": "ECLIPSE contributions by organization (commits and percent)",
+    "description": "A table of organizations contributing to ECLIPSE (releases 1.0\u20133.3) showing commit counts and percentage share. IBM is dominant with 846,500 commits, accounting for 91.6% of the commits in the dataset. Other contributors are much smaller: MIT 13,174 (1.4%), self\u2011employed contributors 11,761 (1.3%), BEA 2,141 (0.2%), University of Victoria 1,902 (0.2%), Advanced Systems Concepts 1,729 (0.2%), and Prosyst 901 (0.1%), consistent with the paper\u2019s statement that IBM supplies roughly 91% of development activity."
+  },
+  "page9_img_2.png": {
+    "title": "Levels of geographic distribution of Eclipse plugins by release",
+    "description": "Table showing, for Eclipse releases 2.0 through 3.3 and for all releases combined, how many plugins were developed at a single site versus spread across a nation, continent, or worldwide. For release 3.3, 138 plugins (86%) are same-site, 9 (6%) same-nation, 11 (7%) same-continent, and 2 (1%) worldwide. Aggregating all releases, 642 plugins (82%) were same-site, 36 (5%) same-nation, 78 (10%) same-continent, and 29 (3%) worldwide\u2014illustrating that the vast majority of plugins are developed at a single site with only a small fraction distributed across continents or worldwide, with modest variation between releases."
+  },
+  "page8_img_2.png": {
+    "title": "Eclipse contributions by development site (percentage share)",
+    "description": "A vertical bar chart showing the percentage of source-code contributions to Eclipse by development location. The Ottawa site dominates with roughly 49% of commits, while the next two locations (Zurich \u224815% and Toronto \u224812%) bring the top three to about 75\u201376% of contributions. Remaining sites (including Portland, Winnipeg, Cambridge, San Francisco and others) each supply much smaller shares, generally from around 7% down to 1\u20132%, illustrating that most Eclipse development activity is concentrated in a few sites."
+  },
+  "page6_img_chart_figure4.png": {
+    "title": "Firefox contributions by location (percentage of commits)",
+    "description": "A horizontal bar chart titled \u201cContributions to Firefox by Location\u201d shows the percentage of commits originating from numerous geographic sites. The California Bay Area (labeled CA, USA) dominates with roughly 45% of commits, followed by the United Kingdom (~8%), Massachusetts, USA (~7%), and Texas, USA (~5%). Several other countries and regions (Finland, New Zealand, Australia, Switzerland, Sweden, Virginia/NY/DC in the USA, Canada, France, Spain, Israel, Germany, etc.) each contribute smaller shares (generally between about 0.5% and 4%), and many locations fall below 1%, illustrating that roughly half of contributions come from California while the remainder are distributed across North America, Europe, and other countries."
+  },
+  "page6_img_fig1_maps.png": {
+    "title": "Maps of Firefox contributor locations (Europe and worldwide module)",
+    "description": "Two side-by-side maps showing where Firefox development activity originated. The left panel is a zoomed map of Europe with blue circles (area proportional to number of commits) marking development hotspots in Western and Northern Europe (e.g., UK/Amsterdam, Switzerland, Sweden, France). The right panel is a world map of contributions specifically for the content-event handling module, with blue markers in North America, Europe and Asia; the paper notes this module was developed across three continents and contributions came from about 16 countries/states. The visual emphasizes that while many commits concentrate in a few locations, development for some modules is globally distributed rather than collocated."
+  },
+  "page7_img_2.png": {
+    "title": "Module geographic distribution in Firefox releases 1.5 and 2.0",
+    "description": "The table reports counts and percentages of Firefox modules classified by geographic distribution level (using the paper\u2019s 75% threshold) for releases 1.5 and 2.0 across four categories: Site, Nation, Continent, and WorldWide. For 1.5, 353 modules (53%) were same-site, 72 (11%) same-nation, 41 (6%) same-continent, and 202 (30%) worldwide; for 2.0, 354 (50%) were same-site, 43 (6%) same-nation, 59 (8%) same-continent, and 249 (35%) worldwide. The table shows a modest shift toward greater global distribution between the two releases (worldwide modules increasing from 30% to 35%) with a corresponding slight decline in same-site modules, consistent with the paper\u2019s finding that many modules are either largely collocated or broadly distributed."
+  },
+  "page7_img_1.png": {
+    "title": "Regression results: distribution effects on Firefox defects (Releases 1.5 & 2.0)",
+    "description": "Table of linear regression coefficients (with p-values) linking code and distribution factors to pre- and post-release defect counts for Firefox releases 1.5 and 2.0. Size (LOC) and churn (CHURN) show consistently positive and highly significant coefficients in all four models, indicating larger and more-churned modules are associated with more defects. Geographic dispersion measures (SPATIAL, NATION, WORLDWIDE) are positively associated with pre-release defects (many significant at p<<0.01) but are much less often significant for post-release defects; CONTINENT is significant only for pre-release 2.0. ORGANIZATIONAL OWNERSHIP unexpectedly has a positive association with pre-release defects in some models (significant or borderline), and adjusted R^2 ranges from 0.23 (post-2.0) to 0.44 (pre-release models), showing the models explain a moderate portion of variance."
+  },
+  "page9_img_1.png": {
+    "title": "Eclipse regression coefficients for distribution and defects (releases 2.0\u20133.3)",
+    "description": "A table of linear-regression coefficients predicting pre- and post-release defects for ECLIPSE across releases 2.0, 2.1, 3.0, 3.1, 3.2 and 3.3. Rows list predictor factors (LOC, CHURN, NATION, CONTINENT, WORLDWIDE, ORGANIZATIONS) and each release has a Pre and Post column showing the coefficient value (the paper notes bold/italic entries denote statistical significance). LOC and CHURN are positive in nearly every model (for example LOC=0.29 and CHURN=0.54 for 2.0 pre), indicating larger size and higher churn associate with more defects; several geographic measures (CONTINENT and NATION) show large positive coefficients in some pre-release models (e.g., CONTINENT=2.16 for 2.0 pre, NATION=1.41 for 3.0 pre), implying geographic distribution correlates with increased pre-release defects in certain releases. The bottom row gives adjusted R^2 per model (range \u22480.55\u20130.82), so model fit varies by release with the strongest fit for the 2.0 pre-release model."
+  }
+}

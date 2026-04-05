@@ -1,0 +1,21 @@
+![Bar charts showing responses (Figure 6)](page8_img_1.png)
+
+Response Strongly Disagree Disagree Undecided Agree Strongly Agree
+
+Figure 6: Finding and fixing issues-related statements and responses from experienced practitioners.
+
+![Bar charts showing responses (Figure 7)](page8_img_2.png)
+
+Response Never Rarely Sometimes Often Almost Always
+
+Figure 7: Maintenance-related statements and responses from experienced practitioners.
+
+about such issues is by profiling performance metrics and counters (e.g., CPU usage). User feedback is a close second with 69% of respondents answering Sometimes, Often, or Almost Always. While the frequency that practitioners learn about energy issues from profiling and user feedback was expected, the high number of respondents (41%) that indicated that they learn about energy issues from static analysis Sometimes, Often, or Almost Always was surprising. In our interviews, few participants were aware of static analysis tools for detecting energy issues.
+
+To learn more about the static analysis tools that these practitioners are using, we emailed the respondents who answered Sometimes, Often, or Almost Always to Statement S11a. We found that practitioners were using static analysis tools that do not identify energy issues directly, but rather look for code patterns (e.g., spawning lots of threads, polling frequently, bad data structures) that lead to bad CPU performance. Here the practitioners are proceeding under the assumption that such metrics correlate with energy usage that we reported when discussing practitioners’ perspectives on requirements (see Section 3.2).
+
+Practitioners want to learn about energy issues most frequently from profiling and static analysis. While static analysis is currently the least used technique for learning about energy usage issues, 93% of respondents indicated that they would Sometimes, Often, or Almost Always like it to be effective (Statement S12a). However, although many respondents are enthusiastic—"Having static analysis to point out deficiencies of efficiency would be awesome"—some are skeptical about its feasibility—"Good luck getting static analysis to work on this." The ability to detect energy issues via profiling is also highly desired with 96% of respondents indicating that they would Sometimes, Often, or Almost Always like it to be effective (Statement S12b). Finally, despite the fact that user feedback is currently one of the most commonly used approaches, practitioners are least enthusiastic about it. Although they would rather learn about issues than have them go undetected (68% of respondents answered Sometimes, Often, or Almost Always), it appears they would prefer to learn about such issues earlier in the development process, before users are impacted.
+
+Practitioners are unsure, but suspect that energy issues do not occur more frequently than other performance issues. The responses for Statement S13a indicate that, while 42% of respondents Strongly Disagree or Disagree with the statement, nearly as many (40%) are Undecided about whether energy issues occur more frequently than other types of performance issues. It is possible that this perception is true, however it may also be a reflection of the fact that there are few tools capable of detecting such issues and only the most egregious problems are reported by users.
+
+Practitioners believe that energy issues are more difficult to discover and diagnose than other performance issues. The responses to Statements S13b and S13c indicate that respondents believe that energy issues are more difficult to discover than performance issues (61% of respondents answered Agree or Strongly Agree) and more difficult to diagnose than performance issues (55% of respondents answered Agree or Strongly Agree). When asked to explain why they have these beliefs, respondents provided a wide range of answers. Many of them feel that energy issues are more difficult to discover because "current test suites are not equipped for them," they are "not sure what tools exist to discover such issues," and "performance issues are very

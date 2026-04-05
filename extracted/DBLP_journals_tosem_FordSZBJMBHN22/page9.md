@@ -1,0 +1,21 @@
+challenge because schools and day cares were closed), not all findings are specific to the pandemic. We discuss implications of our work for the future of remote work in Section 8.3.
+
+As with any survey, there may have been non-response bias, i.e., the results might not be representative of the population because the participants disproportionately possess certain traits which affect the outcome. In addition, our survey was advertised as a “Work From Home Survey” and therefore could have been subject to self-selection bias, e.g., participants might have been more likely to participate in the survey if they were more strongly affected by work from home (negatively or positively). To reduce non-response and self-selection bias, we kept the surveys as short as possible, were transparent about the survey length (single-page survey), provided an incentive to participate (raffle), and kept the surveys anonymous.
+
+### Construct Validity
+
+Although we could have used existing surveys that inquire about developer productivity and their experience working from home (see Section 2), we recognized from early reports that new factors specific to the pandemic were playing a bigger role in developer productivity and experience (such as not having child care, and the stress of the pandemic). Nothing like this has happened before and so we used an initial open-ended survey to study the factors emerging during this phenomenon, and then conducted a second survey to quantify the change in productivity and frequency/impact of challenges/benefits encountered.
+
+Measuring perceived productivity with a single question has limitations. We consider self-reported changes in their perceived productivity, as objective productivity metrics in software development remain elusive due to the creative and collaborative nature of development work. We chose single response items to keep the survey length reasonable because shorter questionnaires have been found to receive higher response rates [38]. Self-rated, single-item response items for productivity have also been found to correlate with objective productivity measures for software engineers [18]. Later in the paper (in Section 8) we show and discuss an analysis of productivity at the company by mining software data collected through the engineering systems to triangulate our findings from the surveys.
+
+### Internal Validity
+
+There are additional biases from our survey. Respondents may have shared what they wanted management to hear (in terms of suggested improvements in particular, but also for benefits and challenges), and the wording of our questions may have led to certain responses. Furthermore, our analysis may have been biased by our own experiences (as we were also working from home) and most of us shared the same employer as the respondents. We tried to offset these by using additional coders and by having experts review our survey from outside our team.
+
+Finally, our study involved a single research method (a survey). However, we tried to offset this limitation by considering the findings from other ongoing studies at the company using different methods (including objective quantitative analysis of system data).
+
+There was no overlap between the samples in both surveys to reduce survey fatigue among participants. As a result, the second survey was limited in capturing how things had changed since the first survey (although some extrapolation is possible). To study the long-term impact of work from home, other research designs have used diary studies [39]. The benefit of survey designs like ours is that they require less commitment and time from participants, and as a result, have more participants, which makes it easier to observe statistical effects.
+
+### Conclusion Validity
+
+The Lasso approach is designed to select the variables with the strongest relationship to the outcome and uses cross-validation to avoid over-fitting, but it is still possible to find a statistically significant relationship when there is none (since p-values below .01 are still greater than zero). There may also be other relationships in the data that are important but not captured in the results because the sample size is not large enough or there is too much noise.

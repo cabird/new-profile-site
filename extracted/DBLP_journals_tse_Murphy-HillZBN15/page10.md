@@ -1,0 +1,22 @@
+## Table 4
+FACTORS THAT INFLUENCE ENGINEERS’ BUG FIX DESIGN
+
+![Table 4: heatmap showing factors that influence engineers' bug fix design for Microsoft and Other Developers](page10_img_1.png)
+
+project. Specifically, participants noted that as software approaches release, their changes become more conservative. Conversely, participants reported taking more risks in earlier phases, so that if a risk materializes, they would have a longer period to compensate. Two commonly mentioned risks were the risk that new bugs would be introduced and the risk that spending significant time fixing one bug comes at the expense of fixing other bugs.
+
+P12 provided an example of taking a more conservative approach, when he had to fix a bug by either fixing an existing implementation of the double checked locking pattern, or replace the pattern with a simpler synchronization mechanism. He eventually chose to correct the pattern, even though he thought the use of the pattern was questionable, because it was the "least disruptive" way to fix the bug. He noted that if he had fixed the bug at the beginning of the development cycle, he would have removed the pattern altogether.
+
+As another example, P28 fixed a bug in which error messages would queue up before being shown to the user, and the engineer considered implementing a process to watch the queue to reorder the error messages within it. He stated that reordering these messages may have yielded a better user experience, but that making this change would have been too high a risk.
+
+In our survey, we asked engineers several questions relating to risk and development phase, as shown in Table 4A. Here we asked engineers "How often do the following factors influence which fix you choose?", where each factor is listed at left. The table lists the percentage of respondents who choose that frequency level, for both the original Microsoft survey and the replicated one. Note that the factors are not necessarily linked; for instance, an engineer could choose to change very few lines of code for a reason other than the product is late in development. However, our qualitative interviews suggested that these factors are typically linked together, and thus we feel justified in presenting these four factors as a whole. These results suggest that, for most respondents, risk mitigation usually plays an important role in choosing how to fix a bug.
+
+One of the findings that emerged from our interviews is that if engineers are frequently making conservative changes, then they may be incurring technical debt. As P15 put it:
+
+> I wish to do it better, but I'm doing it this way because blah, blah, blah. But then I don't know if we ever go back and kind of "Oh, okay, we had to do this, now we can change it." And I feel that code never goes away, right?
+
+We verified this statement by asking survey respondents how often they think bugs that are initially fixed "suboptimally" should be reconsidered for a more optimal fix in the future. We asked how many of these bugs actually are fixed optimally after the initial fix. Table 5 displays the results. These results suggest that engineers often feel that optimal fixes should be reconsidered in the future, but that those bugs rarely get fixed optimally. As one respondent noted, "although we talk about the correct fix in the next version, it never happens."
+
+One way that Microsoft has dealt with fixing bugs too late in the development process is by instituting "bug caps" in some software teams. A bug cap is a number X such that once a developer is assigned X bugs, she must fix one of her assigned bugs before she can continue any other development work. Bug caps have analogous concepts in other parts of software development, such as "bug bars" in the Microsoft Security Development Lifecycle [26]. The intuition here is that bug caps should ensure that bugs are being fixed continuously throughout the development process and that developers are not waiting until the product is near release to fix bugs. While this intuition seems reasonable, we had heard informally that some developers have subverted the bug cap policy by reducing the number of bugs assigned to them without actually fixing bugs.
+
+We set out to determine how developers subvert bug caps by asking Microsoft survey respondents, "have you

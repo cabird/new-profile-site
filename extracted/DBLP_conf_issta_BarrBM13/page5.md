@@ -1,0 +1,35 @@
+previously taken snapshots differ with respect to the components and the relations on these components, HeapDbg samples frequently; when no new information is discovered, it reduces the sampling rate. On smaller runs, we compared the results obtained by sampling uniformly at random with the results from the exponential backoff approach and found that the uniform sampling approach produced results that were no more useful.
+
+To compute the likely pre/post invariant heap states for each method in the analyzed program, our profiler 1) copies the current heap state, 2) computes the corresponding conceptual component graph, 3) compares this graph with the previously seen graphs to update the sample rates, and 4) if it is new, adds the graph to the accumulated set.
+
+### 3.1 Measurement
+
+A program may use some of its classes quite heavily; for example, instances of a point class usually dominate the heap of a ray tracer implementation. If we weighted our measurements by object frequency, our results would be heavily biased toward the features of such classes, which tend to be simple. To avoid this bias, we ignore object (and class use) frequency by discarding component graphs that are subgraphs of a larger, previously seen component graph. For each program, HeapDbg therefore produces a set of structurally distinct snapshots. Our analysis generates labeled graphs, over which checking for subgraphs is quadratic in the worst case [26]. In Figure 1(b), we discard the graph computed for the Const objects since it is a subgraph of the graph computed for the Add class. Finally, we take the set of component graphs produced by the runtime sampling and compute the measurements presented in Section 4.
+
+We measure properties both in terms of nodes/edges (for designing a static analysis) and types/fields (for constructing an annotation system). Our sampling methodology ensures that each retained snapshot is distinct. To compute a ratio for a single program, we compute the ratio of all nodes/edges that have a given property over the total number of nodes/edges across all the distinct snapshots that HeapDbg retained from an analysis run. For types, we report the ratio of the number of types to the total number of instantiated types. Depending on the property, its satisfaction may require any or all of the nodes that contain a given type to satisfy it.
+
+All of our properties obey a linear order: for edge category, tree ≼ cross ≼ back and, for sharing, injective ≼ non-injective. We use the convention that the property of a type/field is the least upper bound of all nodes/edges of that type/field. In Figure 1(b), the r field is associated with 2 edges, a TreeEdge and a CrossEdge; thus under our construction, r is a CrossField.
+
+Many of our research questions turn on whether two sample sets are drawn from different populations. To answer these questions, we first checked that our data was normal via a Kolmogorov–Smirnov test [10] and then performed a t-test using the standard threshold of p ≤ 0.05 for statistical significance. When we report a confidence interval on the average of a measure across all of the programs, we sum the measurements, computed as described above, for each program and divide by the number of programs. This unweighted average prevents a program with a disproportionately large heap from biasing the results. To avoid repetitive graphs, we do not show figures for all the statistical analyses we performed, as many questions are similar.
+
+## 4. EVALUATION
+
+HeapDbg, on which this study rests, was developed for use with .Net bytecode to understand memory usage and sharing problems in C# programs. Unfortunately, the C# programs that we initially considered for this study presented two problems. First, many of these programs are unfamiliar to the larger research community and some are proprietary. Second, since these programs have not been used in previous studies, it would have been prohibitively difficult to meaningfully compare our results with existing work on program optimization, analysis, specification, etc. Since we wanted to study programs both familiar and available to a broad segment of the research community so that our results could be meaningfully compared with previous work, we partially reworked HeapDbg to analyze programs from the well-known DaCapo [3] suite.
+
+The DaCapo suite is designed to be representative of realistic program workloads with an emphasis on client-side applications. Its authors selected programs and representative, real-world inputs to span a range of application domains, including text searching, database work, XML document processing, program analysis, etc. As a result, the DaCapo suite exhibits many different heap structures and code behaviors. To perform our study, we translated ten programs from the DaCapo suite into .Net bytecode using the ikvm compiler [20] (we only omit DaCapo programs that ikvm was unable to compile) and ran them on the DaCapo suite’s default inputs.
+
+### Shapes
+
+Here, we explore what sorts of heap structures conceptual components contain. For this purpose, we define the following predicates on the conceptual components. Given the abstract heap graph G = (N, E), the conceptual component n ∈ N has shape:
+
+- Atomic iff Shape(n) = none, i.e., there are no pointers between any of the objects in n.
+- Linear iff Shape(n) = tree ∨ Shape(n) = dag^3.
+- Cyclic iff ∃ an SCC of the objects in n.
+
+To clarify these examples, consider Figure 1. It contains three nodes with atomic shape — the nodes representing the Const, Var, and Var[] objects — and three corresponding atomic shape types. It contains one node whose shape is linear, the node with the self edges (labeled tree(l, r)) that represents the Add, Mult, and Sub objects. Since this node represents multiple types, there are three linear shape types. No nodes in Figure 1 have self-edges labeled any, so it has no cyclic nodes or types.
+
+Armed with these predicates, we can measure the proportion of components of each shape, and answer RQ1: What proportion of conceptual components are simple vs. recursive? Figure 2 shows the ratios of compositional data structures (Atomic), simple recursive data structures such as trees or dags (Linear), and more complex cyclic structures (Cyclic). We measure these ratios both in terms of the number of types that appear — at any time — in a recursive structure and the number of nodes that have the given shape. In our analysis, a type inherits its graph theoretic properties from the components in which it participates; for instance, the degree of a type is the maximum degree of all components in which it participates.
+
+As can be seen, atomic shapes dominate the other, more complex components. To assess the significance of this find-
+
+> 3 Linear does not reduce to Shape(n) = dag, since trees are undirected and a dag may contain an undirected cycle.

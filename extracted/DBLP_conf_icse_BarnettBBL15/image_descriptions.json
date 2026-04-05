@@ -1,0 +1,30 @@
+{
+  "page10_img_1.png": {
+    "title": "CLUSTERCHANGES workflow: cluster, author-validate, tag partitions for reviewers",
+    "description": "A left-to-right workflow diagram showing how a submitted changeset is processed by CLUSTERCHANGES. On the left an author\u2019s changeset is depicted as multiple document icons with colored diff highlights; an engine labeled \u201cCluster Changes\u201d (step 1) groups those diff-regions into separate boxes (partitions). The middle shows the author again with the grouped partitions and green checkmarks (step 2) indicating author inspection/approval; an arrow then leads to a larger structured package where partitions are labeled/tagged (e.g., \u201c@refactoring\u201d, \u201c@bugfix\u201d) (step 3). A reviewer icon at the right receives the organized, tagged partitions \u2014 illustrating the paper\u2019s intended flow: automatic decomposition, author review of partitions (steps 1\u20132 addressed in this work), and ordering/tagging for reviewer consumption (future work)."
+  },
+  "page4_img_1.png": {
+    "title": "CLUSTERCHANGES tree view with linked diff highlighting",
+    "description": "Screenshot of the CLUSTERCHANGES prototype showing the partitioned tree (left) and the linked textual diff view (right). The tree is headed \u201cPartitions\u201d and lists two non-trivial partitions (one highlighted in red, one in orange) with files and an enclosing method (e.g., Binder_Conversions.cs \u2192 MemberGroupFinalValidationAccessibilityChecks(...)) and a collapsed \u201cTrivial Partitions\u201d group containing Binder_Expressions.cs. The right pane displays the corresponding source lines (487\u2013500) with diff highlighting (red for removed lines, green for added lines, yellow for modified contexts) and a green outline indicating the currently selected diff-region, illustrating how a partition selection maps to specific diff-regions in the code."
+  },
+  "page7_img_1.png": {
+    "title": "Separated diff-regions: Regex change and corresponding test-string update",
+    "description": "A two-part code diff showing removed (red) and added (green) lines in two different classes. In MarkupHandler, the Regex initializer listRe is changed (old pattern with a digit prefix replaced by a pattern using \u2018#\u2019), while in MarkupTest the test string testStr is changed from \"1. this is a test\" to \"#. this is a test\". The snippet also shows MarkupList using listRe and MarkupTest calling MarkupHandler.MarkupList(testStr), so the regex change and the test update are semantically related via that method call; because MarkupList itself was not modified, CLUSTERCHANGES did not connect these two diff-regions, illustrating a missed use-use relationship. "
+  },
+  "page5_img_2.png": {
+    "title": "Histogram of trivial in-method partitions per review (1000 reviews)",
+    "description": "Bar chart (x-axis: number of trivial in-method partitions, 0\u201320; y-axis: number of reviews, up to 200) showing the distribution across 1000 changesets. Most reviews have very few trivial partitions: the mode is at 1 trivial partition (\u2248170\u2013180 reviews), with secondary peaks at 2 and 3 (\u2248150 and \u2248120 reviews respectively), and counts falling steadily for larger numbers. The distribution has a long right tail: by the 12\u201320 range counts are in the single digits, and the figure notes that about 4% of reviews have more than 20 trivial partitions (the paper additionally reports an extreme case with 326 trivial partitions). This indicates that while most changesets contain only a small number of trivial in-method partitions, a non-negligible minority contain many such trivial partitions."
+  },
+  "page5_img_1.png": {
+    "title": "Distribution of non-trivial partitions per review (1000 changesets)",
+    "description": "Histogram (from 1000 Office changesets) showing how many non-trivial partitions each review contains. The modal bin is 1 non-trivial partition (~45\u201347% of reviews); combining 0 and 1 yields ~58% of reviews (the set the authors manually examined). Reviews with 2\u20135 non-trivial partitions account for about 40% (the pool used for the user study), while reviews with six or more partitions are rare (~1.4%), producing a steeply declining tail as the partition count increases."
+  },
+  "page2_img_2.png": {
+    "title": "Boxplots of files, methods, and diff\u2011regions per changeset",
+    "description": "Three adjacent vertical boxplots summarize the distribution (from a 1000\u2011review sample) of: files changed (left), methods changed (center), and diff\u2011regions (right). The center lines show medians of roughly 4\u20135 files, 12 methods, and 24 diff\u2011regions; the method and diff\u2011region plots have substantially larger interquartile ranges and long right tails with many high outliers (axes reach \u224830, 50, and 100 respectively). These skewed distributions \u2014 with over 25% of reviews changing ~23 methods and ~45 diff\u2011regions as noted in the text \u2014 illustrate that a nontrivial fraction of reviews are large and composed of many scattered edit regions, motivating the need for automated decomposition."
+  },
+  "page2_img_1.png": {
+    "title": "Diff excerpt from BinderFactoryVisitor showing two added code regions",
+    "description": "A code-review diff of BinderFactory.BinderFactoryVisitor.cs (lines ~447\u2013461) showing two green-highlighted added regions separated by unchanged lines. The first added block (around line 450) inserts an if-check that calls VisitCore(...), while the second block (around lines 455\u2013461) adds a return to VisitPropertyOrIndexerExpressionBody(parent) and introduces a private Binder VisitPropertyOrIndexerExpressionBody(...) with a call to CreateBinderCacheKey. In the paper this snippet is used to illustrate def-use relationships: the call added at ~450 refers to a method introduced in another file in the same changeset, whereas the call added near ~455 refers to the helper method defined immediately below (line ~458), which makes the inter-file versus in-file relationships explicit for CLUSTERCHANGES\u2019 partitioning."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "page2_img_1.png": {
+    "title": "Spearman correlations between CVS changes and email network metrics",
+    "description": "A 6x6 cross-correlation table (Spearman\u2019s rho, n=25) with accompanying mean, min, and max columns for each variable: total changes, source changes (srcChanges), document changes (docChanges), relative out-degree, relative in-degree, and betweenness. Key values: total changes correlate very highly with srcChanges (0.974) and docChanges (0.936); srcChanges and docChanges correlate 0.885. Social-network measures are strongly associated with development activity (changes vs outdegree 0.768, vs indegree 0.782, vs betweenness 0.765), and the network measures are themselves highly intercorrelated (outdegree\u2013indegree 0.992, indegree\u2013betweenness 0.956, outdegree\u2013betweenness 0.948). Summary statistics show large numeric ranges for change counts (means: changes 3247, srcChanges 2016, docChanges 1231; max values up to 35883) and small fractional scales for the relative network metrics (means: outdegree 0.0115, indegree 0.0092, betweenness 0.0246), confirming the table\u2019s support for a strong relationship between mailing-list status and CVS activity, including document changes."
+  },
+  "page2_img_2.png": {
+    "title": "Directed social-network of highly active mailing-list participants",
+    "description": "A directed graph showing the mailing-list social network for highly active Postgres participants (labels are shown on each oval; roughly 30 labeled nodes). Arrows are directed reply ties (this figure uses a threshold of at least 150 messages between participants), and the layout shows a clear hub-and-spoke structure: two centrally placed oval nodes have dense incoming and outgoing edges to most other nodes, while many peripheral nodes connect primarily to one of those hubs. A small number of reciprocal links appear and one peripheral node has a self-loop, visually reinforcing the paper\u2019s finding that a few participants occupy highly central positions in the mailing-list network."
+  }
+}

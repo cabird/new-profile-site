@@ -1,0 +1,15 @@
+### Table 5. Weighted effects coding example
+
+![Weighted effects coding table](page15_img_1.png)
+
+C7  1  0  0  2/4  1/4
+
+Template is base, encoded as -n_k / n_base, and fractions are left unreduced for clarity
+
+Coding where 1 indicates that the class plays a role and 0 indicates that it does not. This coding is shown in the second through fourth columns of Table 5. We might choose template to be the base role and recode as shown in the two rightmost columns. It is necessary that the base coded role is left out of the model in order to avoid perfect collinearity. Since the model now includes only predictor variables for the hook and implementation classes, the model does not yield a coefficient for the template classes. To obtain this coefficient, each model is then repeated with a different base variable. This method produces the same coefficients for the non-base predictors and is the preferred method for obtaining coefficients for all coded predictors (Cohen et al. 1983).
+
+Table 3 shows for each project and each pattern how many classes play a single role, two distinct roles, or more than two distinct roles within the same pattern. A class may play, for example, a concrete strategy role in one instance while also playing the client role for a second state/strategy pattern. As Di Penta et al., we do not include cross-pattern participation in this study as we are looking at relative change-proneness of classes playing roles within patterns. That is, we do not exclude classes playing roles across multiple patterns; however, we do not control for their multiple pattern membership either. We do consider within-pattern role multiplicity, i.e. classes which play multiple roles within the same pattern, as it is not reasonable to arbitrarily assign role membership to a class when it plays multiple roles within the same pattern. For example, if a class plays a hook role in three patterns and an implementation role in eight more, we cannot choose either role arbitrarily to represent the role participation for the class.
+
+It has been shown that size often follows a log-normal distribution (Zhang and Tan 2007). We observe this distribution in all three projects and so we log-transform LOC to increase central tendency, reduce heteroskedasticity, and improve the model fit. In addition, due to skewness, we also log-transform the number of changes (Cohen et al. 1983).
+
+There are potentially many reasons that a class may change including defect corrections, foreseen design changes, unforeseen design changes, etc. In addition, there is no reason to expect that the relative frequency of these changes is consistent across all releases. We might, for example, expect significant between-release variation as a project moves from a development phase into a maintenance phase. In order to include all releases in the models while controlling for between-release variation we treat release as a time-fixed effect so that we are only looking at within-release, within-pattern variation of change-proneness (Brooks 2008). The between-release variance is captured by the coefficient of the release control variable. We do not

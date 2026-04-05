@@ -1,0 +1,30 @@
+{
+  "page4_img_1.png": {
+    "title": "Call\u2011graph illustration of parent, sibling, spouse and child sets for a query",
+    "description": "A schematic call\u2011graph centered on a single query function (orange circle in the middle) with directed call edges (black arrows) showing four labeled neighborhoods: Parent Set (nodes above with arrows into the query), Child Set (nodes below the query with arrows out from the query), Sibling Set (nodes at left that parents also call), and Spouse Set (nodes at right that call the query\u2019s children). The diagram encodes the relationships FRAN uses to build its base set: parents call the query, siblings are other functions called by those parents, children are called by the query, and spouses call those children. Orange circles are individual functions and arrow direction indicates caller\u2192callee; FRAN\u2019s base set is formed from the union of the parent, sibling and spouse sets to capture functions in the same or adjacent functional layer."
+  },
+  "page10_img_2.png": {
+    "title": "Cumulative F1 score by query for CAR-B, FRAN, FRIAR, and Suade",
+    "description": "Line plot of cumulative F1 scores (y-axis, 0\u201360) across sorted query functions (x-axis, ~0\u2013330) comparing four methods: CAR-B (brown), FRAN (red), FRIAR (blue) and Suade (green). All curves rise quickly for the early queries and then level off; Suade remains very low (flattening near a cumulative F1 \u2248 9), FRIAR levels off around \u2248 41, FRAN finishes higher at \u2248 46, and the combined CAR-B curve stays highest, reaching \u2248 54. FRAN and FRIAR are both well above Suade and cross near query index \u2248 200 where FRAN overtakes FRIAR; CAR-B consistently outperforms the individual algorithms by aggregating their strengths."
+  },
+  "page7_img_1.png": {
+    "title": "Counts of significant top-k recommendation sets (FDR 0.05)",
+    "description": "Table showing, for each algorithm, how many of the 330 query functions produced top-k recommendation sets that were statistically significant at adjusted p < 0.05 (Benjamini\u2013Hochberg FDR control). For Top-5 recommendations: FRAN = 206, FRIAR = 144, Suade = 10. For Top-10: FRAN = 232, FRIAR = 131, Suade = 9. For Top-15: FRAN = 228, FRIAR = 129, Suade = 8. These counts quantify how often each method\u2019s top-k returned more same-module (PL) functions than expected by chance under the hypergeometric test with multiple-test correction."
+  },
+  "page6_img_1.png": {
+    "title": "Call-graph neighborhood of apr_socket_listen showing parent and sibling functions",
+    "description": "The diagram centers on the query node apr_socket_listen (red rectangle) and its parent make_sock (left oval). Directed edges run from make_sock to apr_socket_listen and to a group of sibling nodes outlined in green: apr_socket_bind, apr_socket_close, apr_socket_opt_set, ap_sock_disable_nagle and ap_log_perror. An extra edge from ap_sock_disable_nagle also points to apr_socket_opt_set, illustrating that these functions are invoked by the same parent and thus form the sibling/spouse layer FRAN uses to recommend related API calls."
+  },
+  "page8_img_1.png": {
+    "title": "FRAN: number of queries with top\u2011k recommendation sets passing FDR thresholds",
+    "description": "A three\u2011by\u2011three table reporting how many FRAN queries produced top\u2011k recommendation sets that are statistically significant after Benjamini\u2013Hochberg FDR adjustment. Rows are Top\u20115 (13/39/52) for 272 queries, Top\u201110 (35/55/73) for 228 queries, and Top\u201115 (50/61/92) for 209 queries; columns are adjusted p\u2011value cutoffs p=0.05, p=0.1 and p=0.2 respectively. The counts show that more recommendation sets are judged significant as the recommendation set size (k) and the allowed p threshold increase (e.g., 13 of 272 top\u20115 sets meet p\u22640.05 versus 50 of 209 top\u201115 sets), indicating FRAN often ranks better than a random selection from its base set, especially for larger top\u2011k sizes."
+  },
+  "page10_img_1.png": {
+    "title": "Average F1 advantage vs base-set size (FRAN \u2212 FRIAR)",
+    "description": "Line plot of the average F1 advantage (FRAN minus FRIAR) as a function of base-set size (x-axis 0\u2013400, y-axis \u22120.5 to 0.2). For very small base sets (near 0\u201310) the advantage is positive (up to ~0.15\u20130.18), indicating FRAN outperforms FRIAR, but the curve crosses to negative values around the empirically identified switch point (~45) and shows large negative spikes in the 30\u2013100 range (a minimum near \u22120.5 around ~60). Beyond ~100 the advantage mostly stays near zero to slightly negative with modest fluctuations and a gentle upward trend toward ~\u22120.02 by base size 400; the plotted point markers and short vertical ticks indicate variability at each base-size value."
+  },
+  "page9_img_1.png": {
+    "title": "F1 score comparison: FRAN vs Suade and FRAN vs FRIAR (top\u201110)",
+    "description": "Two side-by-side scatter plots show per-query F1 scores (y-axis, 0\u20130.7) against query functions sorted by increasing F1 (x-axis) for top\u201110 recommendation sets. In both plots FRAN is the red '+' marker and the comparison algorithm is blue squares (left: Suade, right: FRIAR); vertical lines partition queries into regions where one method is favorable, tied, or the other is favorable. The left plot shows FRAN consistently above Suade for most queries (Suade has many zero-score cases and only a few small wins), indicating FRAN\u2019s clear overall advantage. The right plot is more mixed: FRAN dominates the early region, while FRIAR achieves higher F1 scores for a middle block of queries (peaking near 0.5), illustrating the complementary strengths the paper uses to motivate a combined algorithm."
+  }
+}

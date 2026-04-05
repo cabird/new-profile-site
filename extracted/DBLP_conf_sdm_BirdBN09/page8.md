@@ -1,0 +1,25 @@
+![Betweenness centralization plot for Security](page8_img_1.png)
+
+Figure 5: Centralization for Security shows an unusually rapid and continual growth in centralization, despite increasing number of researchers. Is this healthy?
+
+Individuals have an unusually high level of importance; the continuing rapid growth of centralization indicates that their importance is increasing. In a field so central to the security and well-being of people and businesses, such a high and growing level of importance focused on a small number of researchers at a single institution is perhaps a cause for concern, and certainly worth further examination.
+
+### 4.5 Community Structure
+
+In 2002, Newman and Girvan introduced a quantitative notion of the community structure of a network, as “the division of network vertices into groups within which the network connections are dense, but between which they are sparser” [15]. Community structure has been investigated in many types of networks in recent years [2, 3, 30, 34] due to advances in methods of identifying these structures [8, 31, 40]. In our author collaboration network, strong community structure in an area indicates that the area consists of several distinct subgroups, each pursuing their own agenda, with stronger collaborations within the groups than between them. Weaker community structure in an area indicates an integrated group of researchers.
+
+Community structure algorithms partition a network into groups of vertices, such that the connections within groups are dense and the connections between the groups are sparse. Newman & Girvan defined modularity, a measure that uses the density and sparsity of the groups’ intra- and inter-connections to quantify community structure strength [32]. We apply this measure to the research areas we are studying. Consider a partition of a network into k communities. Let us define a k × k matrix e whose element e_ij is the fraction of all edges in the network that link vertices in group i to vertices in group j. The row sum is a_i = ∑_j e_ij and the column sum is b_j = ∑_i e_ij. The modularity measure is
+
+(4.5) Q = ∑_i (e_ii − a_i b_i)
+
+Authorial collaboration is an undirected relationship. Thus our adjacency and partition matrices are symmetric and a_i = b_i. Q measures the fraction of the edges in the network that connect vertices within the same group minus the expected value of the same quantity in a network with the same community divisions, but random connections between the vertices (that is, the same division on a random network with the same degree distribution). Values for Q range from 0 (networks of essentially random structure) to 1.
+
+Finding the partition that maximizes the modularity for a given network is an NP-complete problem [10]. Newman & Girvan’s method is approximate, but empirically effective [31]. We refer the reader to their paper for details of their algorithm.
+
+Girvan & Newman’s original algorithm works well for binary networks, but not networks with weighted edges. Our networks contain weighted edges, representing the number of papers jointly authored by each pair of researchers. A weighted network can be represented as a parallel, or multi-edge, binary network. We modified their algorithm to handle such a parallel network, following the method described by Newman [29]. Our implementation is available to others wishing to use it.
+
+RESULTS: In Table 3, we show the modularity, or degree of community structure for different conferences as well as the size of the largest identified community (largest comm. in the table). In each case, the size of the largest community is proportional to the size of the network, adding validation to the modularity values. One striking observation is that theoretical conferences, including the core theory conferences (STOC, FOCS), the algorithms conference (SODA), computational geometry (SCG), learning theory (COLT) and cryptography (CRYPTO, EUROCRYPT) all show the lowest levels of modularity, and thus are the most integrated. This is perhaps reflective of the lower geographic and conceptual barriers to collaborative research in the more theoretical areas. In theoretical areas, the underlying topics tend to have precise definitions, claims and arguments that can be more readily communicated during short meetings at conferences, or even over email. In less theoretical areas, there is more folklore and intuition that is harder to communicate and share. Therefore, we can expect that subcommunities will coalesce around co-located, or otherwise socially connected individuals. However, there are a few instances that we find surprising. For example, we do not know why PODS, SIGMOD, and VLDB appear to be so tightly integrated.
+
+It should be noted that modularity is not simply a function of size; viz., larger communities aren’t naturally more modular than smaller ones. For example, while the cryptography community is quite small, both databases and theory are some of the largest communities. All of these are lower on the modularity scale.
+
+In general, we believe that the community structure of

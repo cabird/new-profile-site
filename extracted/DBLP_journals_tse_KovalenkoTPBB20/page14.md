@@ -1,0 +1,27 @@
+options. We did not filter out such responses. Respondents often make several different points in one response. Such responses are impossible to put in a single category, so we assigned 1 to 3 category tags to each response. In total, we have tagged 270 valid responses with 373 tags, yielding 1.38 tags per answer, on average. We report both the relative frequency of tags and the fraction of responses marked with a tag, while giving priority to the latter when explaining and discussing the results. We refer to individual responses by their ID, e.g. (#329).
+
+### Knowledge
+Almost 30% of responses indicate the importance of a potential reviewer's knowledge of one kind or another. These responses refer to knowledge of the area of code: "Person has expertise in the area, so can understand the algorithm changes. I work in [an area] where a lot of background is usually needed." (#54), to high-level or general knowledge: "I'll seek out opinion of known smart folks for some changes." (#498), knowledge of context: "Experts who have solved similar problems." (#192), and specific technical knowledge: "Area of expertise. If person is good in SQL, those types of changes will be reviewed better by that person." (#406).
+
+### None
+25% of the respondents said that they do not consider any specific information. A common assignment strategy described in such responses is to broadcast a review request to the immediate team, or to another mailing list: "I send [the review] to the whole team and whoever is available and sees the email/PR first completes it." (#158). Six respondents of 270 reported that they follow some policy to select a reviewer: "Team lead and two other team members are mandatory. Others are optional." (#480).
+
+### Seniority
+23% of the respondents mention seniority of a potential reviewer. The categories of reported selection strategies comprise preferring a person higher in hierarchy: "manager of person who owns the file or recently did changes" (#445); a more experienced or skilled person: "I tend to select who I believe are better developers." (#358); selecting a less experienced person to provide a learning opportunity: "I sometimes include new members of the team to review my change and to learn from it." (#349); and delegating the selection of reviewer to a colleague, often a more senior one: "Sometimes I add based on suggestions from other code reviewers, or from my manager." (#26).
+
+### Stakeholder
+22% of responses describe the potential reviewer as a stakeholder of code. Some of these responses vaguely mention involvement with a project or feature: "I consider who wrote the files I'm changing, and who is currently working with me on my project." (#382), or relation to change: "People working on deliverables for the same slice." (#466). More concrete answers mention the authorship of recent changes to code under review: "Generally it's who I see in git blame in that area of the code I'm changing." (#279); requesting the change under current review: "The (internal) customer who requested the change being made." (#491); authoring the code or helping with the current change: "If that person was involved in any way during investigation of the problem or he/she was involved in developing this fix." (#164); and working with code that depends on the changed code: "people that depend on that change or are impacted." (#191).
+
+### Reviewer qualities
+18.5% of responses refer to qualities of the reviewer without mentioning their relation to code.
+
+The most important quality, mentioned by 34 respondents, is thoroughness of the reviewer, usually known from the track record of quality reviews from their side: "Mostly I look for who can provide the best feedback on the set of changes." (#273). Other qualities include availability: "If the change is simple, I try to load balance based on other work they are doing." (#261) and swiftness of their responses: "I think area interest and responsiveness is most important. Sometimes people can be knowledgeable about an area but fail to respond in a timely way." (#356). Two people mention the physical proximity of the reviewer's workplace, and two more people prefer their changes reviewed by someone whom they see as a nice person: "Someone that I trust and that is not a jerk :)" (#13).
+
+### Ownership
+Despite code ownership being mentioned in the multiple-option question, 12.6% of responses refer to this concept at different levels. Most of such responses refer to ownership of the area under change: "Ownership of the area if you know is helpful in deciding whom to add for review." (#152). A few other respondents mention ownership of a feature: "It's mostly the person who is owning the functionality." (#325); predefined ownership of a file or component: "We have owners.txt files in all of our service repositories which identify a base set of reviewers." (#503). Several responses also mention ownership of a service or a repository.
+
+TABLE 1: Other information considered during reviewer selection, as reported by Microsoft developers in responses. Data from responses to an open question. Counts of tags and tagged responses are reported separately: each valid response was assigned one to three tags.
+
+Please describe other information that you consider when selecting reviewers.
+
+![Table of other information considered when selecting reviewers](page14_img_table_1.png)

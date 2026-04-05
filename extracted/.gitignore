@@ -1,0 +1,9 @@
+# Debug/annotation PNGs (page renders with bounding boxes)
+*_boxes.png
+
+# Layout detection JSON (intermediate LLM output)
+*_layout.json
+
+# Error logs
+errors.log
+batch_error.log

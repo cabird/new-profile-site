@@ -1,0 +1,27 @@
+Engineering managers who kept on producing technical output when they became managers described situations of exhaustion and burnout; they also recognized that when they continue to do technical work there are fewer opportunities for the engineers to grow. This highlighted that while a level of technical knowledge is required for an engineering manager—enough to cover the items in Figure 2—technical excellence is not the most critical factor for greatness.
+
+We explored this point further in our survey with the scenario-based question described in our methodology. The majority of respondents (75%) indicated they would hire someone with average technical skills and excellent social skills (social manager, henceforth for brevity), over the reverse (technical manager), as an engineering manager. When elaborating on their choice in their response, the reasons they gave are congruent with what was explained to us in the interviews, especially under the “tends to the motivational aspects” grouping. For example, the following quote from a survey participant’s response to the hiring question captures the general sentiment of the participants that chose the “social” manager:
+
+> “Even though he is not technically 100% great, this is something which he/she can learn fast. Inspiring others is not something you can learn overnight and this skill is precious.”
+
+We provide additional details from the survey about the being-technical attribute in the following section.
+
+![Violin plots of attribute importance distributions](page11_img_1.png)
+
+Fig. 3: Violin plots of the distributions of importance given to each attribute. For each attribute, the top portion shows data from engineers and the bottom from engineering managers. The thicker horizontal bar indicates the interquartile range and the vertical line indicates the mean.
+
+## 7 QUANTITATIVE SUPPORT THROUGH SURVEY RESULTS
+
+Here we provide survey results about the attributes’ relative importance, and the view of attributes across demographic groups. We only display statistically significant results (p < 0.05) in our tables and figures; in the text we provide coefficients in parentheses. Our analysis is based exclusively on the data from the software engineering survey.
+
+Figure 3 shows the distributions of the importance score for each of the attributes, in descending order of mean score. For each attribute, the top portion shows a violin plot for data from engineers and the bottom from managers. The thicker horizontal bar for both top and bottom indicates the interquartile range and the small vertical line indicates the mean.
+
+A Principal Component Analysis showed that while there is non-trivial personal tendency to responses (personal tendencies appear to account for 33% of the variance), the responses for the attribute ratings were largely independent [75]. 13 of the 15 principal components are required in order to capture 95% of the variance in the responses and (except for the first, which captured personal tendency) each component had exactly one dominant attribute that had a weight of over 0.5. This provides quantitative evidence that the attributes capture ideas with little overlap and they are largely independent. All attributes are rated quite high, with even the lowest, builds relationship with team members, receiving an average rating of 7.47. The information in Figure 3 corresponds to the views of all types of respondents in the engineering discipline. Ratings were fairly consistent as well, as the interquartile range for eleven attributes was only two units and for the others, three units.
+
+The highest rated attribute for great engineering managers is maintains a positive working environment (mean of 9.05), which was part of the motivational aspect of managers. Grows talent (8.98) and enables autonomy (8.91) follow in rating, demonstrating the importance of the engineering manager helping engineers develop their talents and allowing them to organize their work.
+
+Being technical (7.84) ranked as 14th of the 15 identified attributes for great engineering managers; agreeing with input from interviews that technical knowledge is important, but not the most important attribute.
+
+We also related the respondents’ hiring choice of a social manager (vs. a technical manager) with two logistic regression models. The first model related the hiring decision to demographics. Our results show that engineering managers (+1.17) are more strongly in favor of hiring a social manager as compared to engineers. The second model related the hiring decision to the attribute ratings. Here 5 attributes had significant coefficients. Positively linked to the choice of a social manager were inspires the team (+0.18), maintains a positive working environment (+0.24), builds team culture (+0.15), and being available (+0.17); that is, respondents with higher ratings for these attributes were more likely to hire a social manager. On the other hand, and not surprisingly, respondents who place more importance on the attribute being technical are less likely to hire a social manager (-0.71).
+
+The results of the interviews and survey taken together point to the following conclusion: great engineering managers need a sufficient level of technical knowledge—not excellence—while people management attributes are essential. We further discuss this finding and its implications.

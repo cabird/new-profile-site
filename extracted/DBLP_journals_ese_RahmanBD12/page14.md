@@ -1,0 +1,7 @@
+We define defect density as the fraction of cloned lines of that group that contribute to a bug. We compare defect density (number of buggy cloned lines per line of cloned code) in lines that are part of prolific clone groups against lines that are part of non-prolific clone groups. Since the total volume of buggy code mapped to a staging snapshot is a tiny fraction of the overall project code (and thereby many clone groups may not contribute any buggy code), we only consider those clone groups that contribute at least one line in some buggy code. Also, by normalizing contributed buggy cloned lines by the number of lines in that clone group we control for the disparity of total cloned lines contributed by clone groups of different sizes.
+
+One might expect that by dint of sheer size, prolific clone groups with more code, and more copying will be associated with more defects than non-prolific clone groups. As the copies proliferate, the defects will replicate in the copies, and thus we would naively expect that the defect density (buggy lines / total lines) would remain a constant. Figure 3 depicts our findings for Apache and Gimp. The rest of the projects are
+
+![Four boxplots showing defect density for Apache and Gimp by clone group size](page14_img_1.png)
+
+Fig. 3 Defect density in clone groups of different sizes for different projects (a) Apache (Conservative) (b) Apache (Liberal) (c) Gimp (Conservative) (d) Gimp (Liberal)

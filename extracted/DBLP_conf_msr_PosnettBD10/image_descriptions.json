@@ -1,0 +1,18 @@
+{
+  "page2_img_2.png": {
+    "title": "Java example of Template/Hook metapattern (1-1 and 1-N)",
+    "description": "This listing (Listing 1) shows a TEMPLATE class and a HOOK interface to illustrate both 1-1 and 1-N connection metapatterns. Class Template declares a Hook field h (the 1-1 relation) and a java.util.List hooks (the 1-N relation), and its templateMethod() invokes the hookMethod() in three ways: directly through the field (h), via a local variable assigned from h (v), and on a casted element from the hooks collection ((Hook) hooks.get(4)). The interface Hook declares hookMethod(), and HookImp implements it with a printing body, demonstrating a HOOK IMPLEMENTATION (HIMP) that overrides the hook method. The example also shows the need to handle casts and collections (pre-generics) when detecting metapatterns."
+  },
+  "page2_img_1.png": {
+    "title": "UML diagram of Template\u2013Hook metapattern",
+    "description": "A UML-style schematic showing a Template Class that contains members (member_A, member_B) and a templateMethod(...) which calls member_B.hookMethod(...). member_B is shown as an aggregation link to a Hook Class that declares hookMethod(), and the Hook Class is the parent of two Hook Implementation classes (X and Y) that override hookMethod(). A code snippet box is dashed-linked to the templateMethod to illustrate the call path (public void templateMethod(...) { ... member_B.hookMethod(...); ... }). The figure therefore depicts the structural metapattern where a TEMPLATE invokes a HOOK method via a field (aggregation) and different HIMP subclasses provide polymorphic implementations of that hook."
+  },
+  "page4_img_1.png": {
+    "title": "Summary of metapattern extraction results for JHotDraw 5.1",
+    "description": "A table of counts and summary statistics produced by THEX when run on JHotDraw 5.1. It reports 155 distinct classes and 149 distinct HOOK\u2013TEMPLATE class pairs, broken down into 115 CONNECTION, 19 RECURSIVE CONNECTION, and 15 UNIFICATION metapatterns. Aggregate measures show a mean of 6.03 HIMP classes per HOOK class, 4.34 HOOK methods per HOOK class, and 3.40 TEMPLATE methods per TEMPLATE class. Comparison with the P\u2011MARt design pattern annotations lists 21 design pattern instances (17 of which contain metapatterns) with THEX finding metapatterns in 16 of those instances; 138 classes participate in at least one metapattern versus 116 classes in at least one design pattern, with 25 classes appearing only in metapatterns and 3 appearing only in design patterns."
+  },
+  "page3_img_1.png": {
+    "title": "Mapping of Huston design patterns to TEMPLATE/HOOK/HIMP and metapattern types",
+    "description": "A four-column table that maps common GoF design patterns (left column) to their TEMPLATE role, HOOK role, HIMP (hook-implementing) classes, and the resulting metapattern classification (right column). For example, Command is shown as Invoker (TEMPLATE) \u2192 Command (HOOK) \u2192 ConcreteCommand (HIMP) and classified as a CONNECTION metapattern; Decorator maps to TEMPLATE=Decorator, HOOK=Component, HIMP={Decorator, Component, ConcreteDecorator} and is classified as a RECURSIVE CONNECTION; Factory Method is split into two rows showing Creator\u2192Creator\u2192ConcreteCreator (UNIFICATION) and Creator\u2192Product\u2192ConcreteProduct (CONNECTION). Most patterns in the table are labeled CONNECTION, with several RECURSIVE CONNECTIONs and a few UNIFICATION entries (Template Method is listed as two UNIFICATION instances). As reported in the paper, THEX detected all of these metapatterns in the Huston examples (100% recall and precision on this dataset)."
+  }
+}

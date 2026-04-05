@@ -1,0 +1,15 @@
+prioritizing usability, integration, and performance. In contrast, sectors such as finance and healthcare face stringent regulatory requirements, where even minor inaccuracies or opaque AI behavior can lead to compliance violations or safety concerns.
+
+In regulated domains, factors such as accuracy, explainability, and control over AI-generated output are not just preferred — they are mandated. Developers in these environments often require additional assurances, such as audit trails, certification of models, and full traceability of recommendations. We expect that the relative weight of PICSE dimensions will shift dramatically in these contexts, especially the dimensions for System (correctness, safety, performance), Control (autonomy, workflow integration), and Expectations (goal/context matching, transparent data practices). Table 9 illustrates some of the different weights that we would expect across the tech industry and finance and healthcare. Future research should identify whether other organizational domains have other trust factors and systematically study how the importance of the trust factors differs across organizational contexts. For the PICSE framework to be effectively applied across sectors, organizations must account for these constraints and tailor their trust-building strategies to align with both developer expectations and institutional obligations.
+
+Table 9. Relative Importance of PICSE factors across organizational contexts.
+
+![Table 9: Relative Importance of PICSE factors across organizational contexts.](page27_img_1.png)
+
+## 5 THREATS TO VALIDITY
+
+External. We conducted our interviews by selecting developers across Microsoft and working in industry, including those with experience in open source and small startups. We asked interviewees to refer others we should talk to, and endeavored to diversify the pool of developers in our study. While we continued to interview and code until saturation was reached, the extent to which our findings generalize across settings may be limited and warrant some future research. In large organizations such as Microsoft, factors such as internal resources availability for tool discovery, internal tool adoption processes (i.e., vetting and compliance), and the nature of software projects to use these tools, can give developers a very different perception of trust.
+
+Findings reported in this paper are based on a qualitative study conducted with a convenience sample of 18 engineers, mostly located in the US, and 368 survey respondents, all internal to Microsoft. We report our findings in the form of aggregated, emergent categories and the factors that our data from the interviews and survey suggest are relevant. While this may mean our framework is not fully exhaustive, our goal was to provide an empirical foundation upon which researchers and practitioners can build.
+
+Manuscript submitted to ACM

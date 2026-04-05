@@ -1,0 +1,14 @@
+{
+  "page1_img_1.png": {
+    "title": "Man holding Chicago Daily Tribune with headline \"DEWEY DEFEATS TRUMAN\"",
+    "description": "Black-and-white photograph of a smiling man holding up a copy of the Chicago Daily Tribune; the large banner headline reads \"DEWEY DEFEATS TRUMAN\" and smaller subheads about a GOP sweep are visible, with two other men partially shown at right. The ornate interior and the paper\u2019s prominent headline convey the dramatic (but incorrect) early reporting of the 1948 U.S. presidential result. In the paper\u2019s text this image illustrates the polling error driven by a biased telephone sample \u2014 the actual electoral outcome was 303 to 189 in favor of the other candidate."
+  },
+  "page2_img_1.png": {
+    "title": "Proportion of fixed bugs linked to commits by severity (five projects)",
+    "description": "Line plot comparing five projects (Eclipse_z in red, Apache in brown, GNOME in green, Eclipse_B in blue, AspectJ in purple) showing the proportion of fixed bugs for which a corresponding fixing commit was found, across severity categories: blocker, critical, major, normal, minor, trivial. Apache shows the largest severity-related difference (about 0.16 for blocker up to ~0.65 for minor and ~0.62 for trivial), illustrating the extreme bias noted in the paper. GNOME and Eclipse_B also trend upward from roughly 0.2\u20130.3 for blocker/critical to ~0.45\u20130.50 for minor/trivial, while Eclipse_z peaks near critical (~0.51) then declines toward minor (~0.35). AspectJ remains relatively flat and low (\u22480.20\u20130.30) across severities, indicating much less bias in link rates."
+  },
+  "page4_img_1.png": {
+    "title": "Boxplot of years of experience: Project vs Company",
+    "description": "A side-by-side boxplot comparing developer experience (y-axis: Years Experience) for the selected Project (left) and the overall Company (right). The Project median is about 6 years with an interquartile range roughly 4\u20138 years and whiskers extending to about 0\u201310 years (one extreme outlier near 22 years), whereas the Company median is lower (around 2\u20133 years) with a tighter central box but many outliers above 10 years. This visual shows the Project sample is not representative of the Company population (the paper reports a Kolmogorov\u2013Smirnov test confirmed the distributions differ), indicating the selected project is biased toward more experienced developers."
+  }
+}

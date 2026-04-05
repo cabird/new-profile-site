@@ -1,0 +1,42 @@
+{
+  "page7_img_author_1.png": {
+    "title": "Author portrait headshot from the article's about-authors section",
+    "description": "A close-up rectangular headshot of a smiling, bespectacled adult man shown from the shoulders up, wearing a white shirt and sporting short light-brown hair and a trimmed beard. The photo is framed with a thin dark border and set against a pale-yellow background with diagonal stripes; an orange vertical bar at the left edge shows the partial white vertical label \u201cAUTHOR.\u201d The image appears as one of the author portraits in the magazine\u2019s \u201cAbout the Authors\u201d section and focuses on the subject\u2019s face and upper torso with a neutral indoor backdrop."
+  },
+  "page7_img_author_3.png": {
+    "title": "Smiling male author portrait headshot with brick background",
+    "description": "A close-up, framed author headshot used in the article\u2019s \u201cAbout the Authors\u201d section. The cropped photo shows a smiling adult man with short dark hair and fair skin, wearing a dark top; only part of his face and shoulder are visible. A narrow dark border surrounds the rectangular image, and a brick wall is visible in the background. The photograph is placed on a cream background with diagonal pinstripes and a solid orange vertical bar at the left edge of the page."
+  },
+  "page3_img_1.png": {
+    "title": "Taxonomy of crowdsourcing tasks by emergence and contribution type",
+    "description": "A 2x2 matrix classifying crowdsourcing tasks along two dimensions: emergent versus nonemergent value (vertical) and homogeneous versus heterogeneous contributions (horizontal). The four quadrants are labeled Rating (top-left: many similar judgments aggregated \u2014 illustrated by red dots with arrows converging; example: user ratings of mobile apps), Creation (top-right: interdependent, diverse contributions combined \u2014 shown as different shapes with interconnected arrows; example: open source software), Processing (bottom-left: independent, uniform actions \u2014 parallel arrows from identical circles; example: bug reporting), and Problem solving (bottom-right: independent, diverse solutions \u2014 distinct shapes each producing a separate output arrow; example: Stack Overflow Q&A). The figure emphasizes how whether contributions are valued individually or only through combination, and whether they are qualitatively different, determines the appropriate crowdsourcing approach and typical outcomes."
+  },
+  "page4_img_1.png": {
+    "title": "Table mapping development phases to crowdsourcing challenges and research",
+    "description": "A three-column table that pairs six software-development phases (Onboarding, Requirements elicitation, Development, Testing, Maintenance, and Evolution) with a key challenge for each phase and the article(s) in this issue that address it. For Onboarding, Alexandre Zanatta and colleagues examine barriers newcomers face when joining crowdsourced projects; Requirements elicitation is linked to Eduard Groen et al.\u2019s vision for eliciting requirements from the crowd. Development cites Rabe Abdalkareem, Emad Shihab, and Juergen Rilling\u2019s study of how developers use Stack Overflow; Testing highlights the problem of exercising apps across diverse hardware and Niklas Leicht, Ivo Blohm, and Jan Marco Leimeister\u2019s three crowdsourced testing approaches. Maintenance notes Sahar Badihi and Abbas Heydarnoori\u2019s CrowdSummarizer for generating code summaries, and Evolution points to Mar\u00eda G\u00f3mez and colleagues\u2019 App Store 2.0 architecture for incorporating large-scale user feedback."
+  },
+  "page5_img_1.png": {
+    "title": "Callout: Crowdsourcing's potential to disrupt software development",
+    "description": "A full-width highlighted callout in teal type on a pale-orange background proclaims that many forms of crowdsourcing could further disrupt software development practice. The graphic is a visual emphasis in the issue\u2019s overview, reinforcing the editors\u2019 argument that beyond familiar examples (Stack Overflow, bug bounties, open source), additional and emerging crowdsourcing approaches deserve attention. Its prominent placement and large sans-serif typography draw the reader\u2019s eye to the theme that diverse crowdsourcing methods can affect multiple phases of software development covered by the selected articles."
+  },
+  "page7_img_author_2.png": {
+    "title": "Author headshot portrait (assistant professor)",
+    "description": "A color head-and-shoulders portrait photograph of an adult man with short light-brown hair and light facial stubble, facing the camera with a slight smile. He wears a blue collared shirt and is photographed against a soft, out-of-focus blue-gray background; the photo is framed with a thin dark border. The image appears in the magazine\u2019s \u201cAbout the Authors\u201d section as the second author\u2019s portrait, placed on a cream page with diagonal stripes and an orange vertical tab at the left. The photo visually accompanies the biographical blurb identifying this person as an assistant professor of computer science."
+  },
+  "page1_img_1.png": {
+    "title": "Developer workspace connected to dispersed crowd (crowdsourcing visualization)",
+    "description": "A top-down illustration shows a person seated at a desk with a laptop and tablet beside a window; a black-and-yellow header strip at the top reads \u201cFOCUS: GUEST EDITORS\u2019 INTRODUCTION.\u201d From the desk a turquoise, circuit-like schematic of lines and boxes extends through the window and down to a tiled outdoor plaza, where numerous pedestrians are circled as nodes, visually linking each individual to the workstation. Desktop items (coffee mug, stacked folders, smartphone, small printer) anchor the scene while the overlay conveys data or task flows between a single developer\u2019s environment and many remote contributors, symbolizing crowdsourcing and distributed participation."
+  },
+  "page7_img_multimedia_ad.png": {
+    "title": "Link to multimedia content for the article",
+    "description": "A dark-gray rectangular advertisement panel with white sans-serif text directing readers to the online multimedia page: \u201cSee www.computer.org/software-multimedia for multimedia content related to this article.\u201d The panel includes a faint abstract circuit-like background and a cropped white graphic at the left edge. Placed in the issue as a multimedia ad, it points readers to the IEEE Computer Society web page where supplementary audio/visual or interactive resources for the article can be found."
+  },
+  "page7_img_mycs_ad.png": {
+    "title": "myCS subscriptions portal advertisement banner",
+    "description": "A dark-gray rectangular banner promoting the myCS publications portal. At left is the myCS logo (lowercase \u201cmy\u201d and larger \u201cCS\u201d in pale blue), and to the right white text reads \u201cRead your subscriptions through the myCS publications portal at\u201d with a prominent bold URL beneath: \u201chttp://mycs.computer.org\u201d. The design uses high-contrast white and pale-blue text on a dark background to highlight the portal URL for readers."
+  },
+  "page7_img_call_for_articles.png": {
+    "title": "IEEE Software \u2014 Call for Articles advertisement",
+    "description": "A full\u2011page advertisement calling for article submissions to IEEE Software, split visually into a teal left panel with a close\u2011up of eyeglasses and bold white text reading \u201cCall for,\u201d and a white right panel dominated by a large turquoise \u201cArticles.\u201d The right panel states the magazine\u2019s aims \u2014 to publish practical, readable pieces for both experts and nonexperts \u2014 and gives submission constraints (original work, maximum 4,700 words, with up to 250 words allowed per table or figure). Contact and guidance information is provided (author guidelines at www.computer.org/software/author, email software@computer.org, and the magazine site www.computer.org/software), and the IEEE Software logo appears at the bottom of the left panel."
+  }
+}

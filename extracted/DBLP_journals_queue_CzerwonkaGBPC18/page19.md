@@ -1,0 +1,9 @@
+important is to make the reviews just as uncomplicated as possible, since, otherwise, you may end up with reviewers who have no clue about where even to start.
+
+Also, organizations need to show they recognize the value of code reviews since there’s no question that they take away from the time developers could otherwise be using to create code. But if developers are rewarded only for adding functionality, that’s going to end up crippling the code-review process, which in turn will almost certainly have an adverse effect on the maintainability of the code that’s generated.
+
+CB One thing I would like to add is that the code-review process we now have at Microsoft has more or less grown organically—through experimentation—from the grassroots. I mention this only because I think it might also work well for smaller companies, instead of having some process that’s mandated from the top down.
+
+Also, each product group at Microsoft does code reviews a little differently, with each group using its own set of policies that have essentially come together organically. While this probably won’t come as a groundbreaking revelation, it can definitely be said that there’s no one-size-fits-all solution for code reviews. This only serves to reinforce the importance of being willing to let your approach evolve organically such that it ends up fitting in with your work processes with the least amount of friction while putting the lightest burden possible on your developers.
+
+Another important point is something Michaela talked about earlier, which is that treating code review as a first-class citizen—just as many companies are likely to treat

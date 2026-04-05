@@ -1,0 +1,6 @@
+{
+  "page3_img_table_1.png": {
+    "title": "Patch submissions and acceptances for Apache, Python, Postgres, and MySQL",
+    "description": "A four-column table reports counts of patch activity the authors detected for Apache, Python, Postgres and MySQL. Rows give: total patches submitted (Apache 4267, Python 644, Postgres 1209, MySQL 185); how many of those were from non-developers (Apache 2101, Python 315, Postgres 856, MySQL 137); patches accepted (Apache 1087, Python 173, Postgres 591, MySQL NA); accepted patches from non-developers (Apache 448, Python 69, Postgres 407, MySQL NA); distinct people who submitted patches (Apache 253, Python 106, Postgres 172, MySQL 47); and distinct people with accepted patches (Apache 106, Python 44, Postgres 92, MySQL NA). The table shows Postgres had the highest acceptance proportion (591/1209 \u224849%), while MySQL acceptance counts are listed as NA because the authors could not access MySQL repository versions (BitKeeper) to check applications."
+  }
+}

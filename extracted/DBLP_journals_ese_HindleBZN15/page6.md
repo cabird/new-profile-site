@@ -1,0 +1,17 @@
+Since each LDA topic is a word distribution over many words, we must present an alternative representation to end-users such as developers and managers. These topics can be represented to end-users as a ranked list of words, from highest magnitude to lowest magnitude word relevance. Many researchers use top-10 lists of words; in this study we used 20 words. An example topic might be:
+
+> code improve change without functionality behaviour readability  
+> maintainability structure restructure modify reduce quality process complexity  
+> software refactoring performance maintain better
+
+How would you label this topic? Notice how this topic takes time to interpret. In this paper we investigate the difficulty practitioners have when labelling the topic as well as the relevance of the topic to practitioners.
+
+There is much software engineering research relevant to topics. Many techniques are used, ranging from LDA [15] to Latent Semantic Indexing (LSI) [24]. Researchers such as Poshyvanyk et al. [28] and Marcus et al. [24] often focus on the document relationships rather than the topic words. In terms of topics and traceability, Baldi et al. [4] labelled topics and then tried to relate topics to aspects in software. Asuncion et al. [3] used LDA on documentation and source code in order to provide traceability links. Gethers et al. [12] combine IR techniques such as Jensen and Shannon, vector space model, and relational topic model using LDA, together into one integrated approach in order to aid traceability link recovery. They found this integration of techniques achieved better performance than any technique alone.
+
+Grant et al. [13] have worked with LDA and topics before. Their 2010 paper suggests heuristics for determining the optimal number of topics to extract. Thomas et al. [36] statistically validated email to source code traceability using LDA. Panichella et al. [27] described LDA-GA, a genetic algorithm approach to search for appropriate LDA hyper-parameters and parameters. They evaluate these parameter choices against a range of software engineering tasks and thus evaluate the cost-effectiveness of this search approach. Both groups did not validate their results with practitioners.
+
+Our work builds up on the work of Lukins et al. [22] as they apply topic analysis to issue reports as well, but use the topics to query for existing issue reports.
+
+In this study we investigate human-generated labels for topics; while other researchers have investigated automatically generated labels for source code artifacts. De Lucia et al. [9] investigated using IR methods on source code artifacts in order to label software artifacts. They used multiple IR approaches, including LDA and LSI to see if they could label or summarize source code and if their approach matched human-generated labels. They found that labelling via simple heuristics best matched practitioner labels rather than LSI or LDA.
+
+These studies rely on assumptions about the applicability to practitioners. We investigate some of these assumptions by surveying practitioners in order to validate the value of topics extracted from requirements. Furthermore, instead of tracing individual requirements documents or sections of said documents

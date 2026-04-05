@@ -1,0 +1,9 @@
+> the isolated section of code where a change has been made. Instead, we show entire files so reviewers can get a better sense of the code around each change. We also wanted to provide some means for the author of a change to offer additional information so reviewers could better understand their reasoning. Toward that end, our system now lets authors put tags on files and regions to indicate which files are at the heart of a change and so should probably be given particular attention. For example, the tags can be used to quickly indicate which changes have been made to test cases as opposed to the product codes. Or they can be used to call out certain files or changes with potential security implications.
+> 
+> LP Do you have any other new capabilities in the works?
+> 
+> JC The fundamental underlying factor we’re trying to address is the size of code reviews since that affects both the time required to produce a review and the usefulness of the comments that come out of it. It’s a difficult problem to address because some of the issues are cultural in nature, and some relate to workflow. Still, there are times when two unrelated concerns end up getting crammed into a single review, so we’re hoping we’ll be able to untangle some reviews by automatically splitting those concerns into two smaller reviews. On average, that ought to lead to better turnaround times, as well as better outcomes.
+> 
+> LP Have you taken any steps to get development teams to focus their code-review time on correctness and content versus style? Have any tool changes or process changes been implemented toward that end?
+> 
+> JC We haven’t done a proper study of that, but there is a team here that’s done something along those lines. This

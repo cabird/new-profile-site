@@ -1,0 +1,20 @@
+Despite the enthusiasm for creating and disseminating new tools, we still struggle with building bridges between new tools and the engineers they are intended to support. Research suggests that many tools may go unnoticed and unused in practice [16, 26].
+
+As we continue to struggle with tool adoption and use in practice, the tool landscape continues to evolve with technology. With the advent of huge amounts of data and increasingly powerful artificial intelligence (AI) models, new types of software tools are being created that rely on AI for decision-making and recommendations [28, 46]. Most notably is GitHub Copilot [2], an AI-assisted software tool that uses code models to generate code snippets and subprograms that engineers can adapt and integrate into their codebases.
+
+There have been numerous efforts aimed at both improving the techniques and models that power software tools (both AI-assisted and traditional) and exploring what tasks they can support [4, 22, 43, 44]. However, there is a dearth of understanding about how to build and deploy these tools such that they will be adopted and then effectively used beyond adoption. We know from prior work that developers only use tools that they trust [36]; however, we know much less about how trust is formed and what factors affect its evolution over time in the context of software tools. We know even less about the relationship between trust, adoption, and use when it comes to AI-assisted software tools.
+
+To help fill this gap, we conducted a mixed methods investigation to better understand the key components of trust formation and evolution when adopting and using both traditional and AI-assisted software tools. Previously, we interviewed 18 engineers across and external to the Microsoft organization to answer the research question “What factors influence engineers’ trust in software tools?” [25]. Our findings identified important factors, along with concrete examples, and serve as guides for those seeking to foster trust around their tools.
+
+Based on these findings, we proposed the PICSE framework which organizes factors into five high-level categories: Personal, Interaction, Control, System, and Expectations. In this paper, we report findings from an extension of our previous work where we further investigate our PICSE framework. To better understand the importance of the various factors in our framework, and how that may differ with respect to AI-assisted tools, we administered a survey to Microsoft employees. Their responses indicate that there are indeed differences in factor importance and between factors that most affect trust in traditional versus AI-assisted software tools. More specifically, our findings suggest that the factors across our framework may be collectively important when building trust in AI-assisted tools. Our findings suggest the biggest difference lies in the influence that factors such as accuracy, context/goal matching, and control over application of recommendation have on traditional and AI-assisted tools.
+
+The main contributions of this paper are as follows:
+- We contribute a conceptual framework, called the PICSE framework, that outlines factors that impact the formation and evolution of trust in software tools (Section 3).
+- We provide practitioner perspectives and quantitative insights into the relative importance of the various factors in our proposed framework for both traditional and AI-assisted tools.
+- We outline guidance on considering and applying the PICSE framework in practice to build, sustain, and evolve trust (Section 4).
+
+## 2 METHODOLOGY
+
+The goal of our research is to better understand what factors influence developers’ trust in the tools they use to develop software and to what extent. We are particularly interested in the differences and similarities in trust when dealing with AI-assisted versus traditional software tools. For the purpose of this research, we define a software tool as any
+
+Manuscript submitted to ACM

@@ -1,0 +1,34 @@
+{
+  "page4_img_3.png": {
+    "title": "Dendrogram of 11 power-spike waveforms clustered for Sommerville.dll",
+    "description": "A hierarchical clustering dendrogram for 11 normalized power spikes (left) associated with module Sommerville.dll, with small waveform thumbnails aligned at the left and cluster branches on the right. Two major clusters are highlighted with red boxes: the top cluster contains spikes k1887, k17118, k4091, k8438 (which have relatively continuous, noisy waveforms), and the bottom cluster contains k2043, k8600, k959, k4241, k399, k17278 (which show repeated sharp peaks). The tree shows the join order (e.g., k1887 joins k17118 first) and illustrates how similar-shaped spikes are grouped for further analysis and anomaly detection."
+  },
+  "page2_img_1.png": {
+    "title": "Workflow: Aligning power traces and execution logs into a spike database for analysis",
+    "description": "A left-to-right flow diagram showing two input stacks labeled \"Power Trace(s)\" and \"Execution Log(s)\", an arrow labeled \"Align + Combine\" pointing to a column of extracted power waveforms (spikes), then an arrow labeled \"Store\" into a cylindrical database icon, and finally an arrow labeled \"Analyze\" that points to the outputs listed as \"Models, Clusters, Anomalies, Prediction\". The figure summarizes the paper's pipeline: raw high-frequency power traces are aligned with execution logs, individual power spikes are isolated and stored in a database with associated metadata (duration, average/peak power, active modules). The stored spike data are then analyzed using techniques described in the paper (decision trees and regression for models/prediction, hierarchical clustering for characteristic shapes, and outlier detection for anomalies) to produce the listed outputs."
+  },
+  "page3_img_1.png": {
+    "title": "12-hour power trace with zoomed spike (Spike 814)",
+    "description": "Top: a long-duration power trace labeled \u201cPower Trace\u201d showing multiple intermittent active regions (spikes) separated by near\u2011flat idle baselines (time progresses to the right). A dashed zoom focuses on one isolated event, labeled \u201cSpike 814,\u201d in the lower panel, where the y-axis is marked \u201cPower\u201d and the waveform reveals many rapid, fine\u2011grained fluctuations and multiple local peaks during a sustained elevated interval. This illustrates how the study isolates individual spikes (using idle periods) and inspects their internal shape \u2014 each spike is normalized in time (0 to 1) and later summarized by metrics such as duration, average and peak power for analysis."
+  },
+  "page4_img_2.png": {
+    "title": "Eleven normalized power spike waveforms for module Sommerville.dll",
+    "description": "The figure shows 11 small panels, each plotting a single power spike for module Sommerville.dll with normalized time (0\u20131 on the x-axis) versus instantaneous power (g1Power on the y-axis), and each panel labeled by spike ID (e.g., Spike814, Spike1887, Spike4091). Visually there are two dominant shape patterns: several spikes exhibit a long elevated plateau with noisy fluctuations (for example Spike814, Spike1887, Spike4091, Spike8438, Spike17118), while others show multiple short, discrete pulses separated by a near-zero baseline (for example Spike399, Spike959, Spike2043, Spike4241, Spike9600, Spike17278). The variety of normalized durations, amplitudes, and sub-peaks across these labeled spikes illustrates why the authors cluster spike shapes to identify characteristic patterns and outliers for that module."
+  },
+  "page3_img_2.png": {
+    "title": "Power spike waveform and metadata for Spike 2555",
+    "description": "Left: a time-normalized power trace for Spike 2555 showing a baseline near 3 mW, a gradual rise with a pronounced central peak and subsequent decay; the peak reaches about 80 mW and the waveform is plotted as discrete sample points over the spike duration. Right: the spike's stored metadata \u2014 ID 2555, Start 1:03:22.00, End 1:03:22.45, Duration 0.45 sec, Floor Power 3 mW, Avg. Power 45 mW, Peak Power 80 mW, Total Energy 0.0056 mWh \u2014 and the list of active modules (module1.dll, module2.dll, module3.dll). This image illustrates how individual spikes are isolated, normalized, and recorded (waveform plus numerical attributes) for later per-spike and per-module energy analyses described in the paper."
+  },
+  "page4_img_1.png": {
+    "title": "Decision tree of module presence vs. average power (mW)",
+    "description": "A decision tree built from 843 power spikes with the root average of 112.1 mW (n=843). The first split is on Mills.dll: when Mills.dll is absent (n=814) the average is 92.5 mW, while when Mills.dll is present (n=29) the average jumps to 664.6 mW (~6\u00d7 higher). The Mills-absent branch further splits on Leveson.dll (present: n=795, 85.9 mW; absent: n=19, 366.3 mW), and the Leveson-present node splits on Hamming.dll (Hamming absent: n=774, 72.8 mW; Hamming present: n=21, 202.0 mW), showing how combinations of module presence are associated with stepwise increases in average power consumption."
+  },
+  "page5_img_1.png": {
+    "title": "Anomalous power spike time-series (four examples)",
+    "description": "Four small time-series scatter plots (each titled with a Spike ID) showing per-sample power measurements (y-axis in milliwatts) across the duration of individual spikes. Each plot exhibits an unusually high or prolonged power pattern compared to typical spikes \u2014 e.g., the bottom-left (Spike21870) has samples exceeding ~5000 mW, while others show sustained baselines around several hundred mW with repeated bursts up to ~1,000\u20131,500 mW. These outlier waveforms were identified by the authors\u2019 clustering/outlier detection as anomalies and, as reported in the paper, corresponded to real defects (for example a client repeatedly waking and not closing a network socket), causing long or high-energy spikes."
+  },
+  "page5_img_2.png": {
+    "title": "Boxplots of Spearman correlations for prediction models (T1\u2013T4, T1234)",
+    "description": "Five side-by-side boxplots show the distribution of Spearman correlation values (predicted vs. observed spike-ranking) for datasets T1, T2, T3, T4 and the combined T1234, computed from repeated train/test runs. Each box shows the interquartile range and median, with whiskers showing minima and maxima; the annotated summary below lists per-dataset Min, Median (bold), and Max. Medians increase from 0.7495 (T1) to 0.8596 (T1234), with per-dataset ranges: T1 [0.6416,0.8251], T2 [0.7388,0.8535], T3 [0.7814,0.8762], T4 [0.7856,0.8691], and T1234 [0.8273,0.8835]. The plot therefore shows consistently strong positive Spearman correlations across datasets, highest for the combined dataset T1234."
+  }
+}

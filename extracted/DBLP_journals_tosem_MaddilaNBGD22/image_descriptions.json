@@ -1,0 +1,62 @@
+{
+  "page15_img_2.png": {
+    "title": "Distribution of pull requests by number of overlapping files",
+    "description": "A vertical bar chart (x: # of overlapping files, y: Count of PRs) showing how many pull requests share a given number of overlapping files with another active PR. The distribution is highly skewed: the largest bars are at 1 and 2 overlapping files (the vast majority of PRs), and the count drops sharply after two overlapping files. A long tail remains up to 43 overlapping files but with very low counts, which the authors cite as the reason for choosing a threshold of two overlapping files in their default ConE filtering. "
+  },
+  "page19_img_1.png": {
+    "title": "Distribution of ConE notifications per repository",
+    "description": "Bar chart showing how ConE\u2019s 775 notifications (y\u2011axis: number of notifications) are distributed across repository IDs (x\u2011axis). The chart labels individual repo IDs on the x\u2011axis and shows a steeply declining pattern: a handful of repositories (e.g., repo 5 with ~67 notifications, repo 55 with ~53, repo 57 with ~47) received the largest shares, while many repositories receive far fewer (often single\u2011digit) notifications. This visualization highlights a strongly skewed distribution and long tail\u2014notifications were concentrated in a small subset of the 44 repositories that received alerts during the deployment period."
+  },
+  "page12_img_1.png": {
+    "title": "File-type distribution in bug fixes and ConE allow list",
+    "description": "A three-column table reporting file types, their percentage among files seen in bug-fix pull requests, and whether each type is included on ConE\u2019s allow list. C# (.cs) dominates at 44.32%, followed by C++ (.cpp) 18.55%, C (.c) 11.27%, SQL (.sql) 6.20%, Java (.java) 5.36%, JavaScript (.js) 3.98% and TypeScript (.ts) 3.79% \u2014 all marked \u201cyes\u201d on the allow list. Small shares such as .ini (0.20%), .csproj (0.04%) and an aggregated \u201cothers\u201d category (6.29%) are marked \u201cno\u201d and thus excluded by ConE. This choice to focus on common source-code types removes roughly 6\u20136.5% of files (non-allow-listed types) to reduce false alarms when detecting concurrent edits."
+  },
+  "page15_img_1.png": {
+    "title": "Histogram: number of PRs by count of RCEs",
+    "description": "A purple bar chart showing how many pull requests (y-axis: Count of PRs) contain a given number of Rarely Concurrently Edited files (x-axis: # of RCEs). The tallest bars are at 0 and 1 RCE (roughly 400\u2013450 PRs each), with a smaller peak at 2 RCEs (~200 PRs) and a sharp decline in counts for higher RCE values, producing a long tail up to 40. This distribution illustrates that most PRs contain fewer than two RCEs, which the paper uses to justify choosing RCE >= 2 as a conservative threshold for flagging candidate conflicting pull requests."
+  },
+  "page21_img_1.png": {
+    "title": "Distribution of qualitative feedback on willingness to use ConE",
+    "description": "A three-row table summarizing 48 qualitative responses about continued use of ConE. Under \"Favorable,\" 25 respondents (52.08%) selected \"I'd love to use ConE\" and 20 (41.67%) selected \"I will use ConE.\" Under \"Unfavorable,\" 3 respondents (6.25%) selected \"I don't want to use ConE,\" yielding a combined favorable rate of 45/48 (93.75%)."
+  },
+  "page12_img_2.png": {
+    "title": "Bug-fix PRs with and without Rarely-Concurrently-Edited files (RCEs)",
+    "description": "Two-row table reporting counts and percentages of bug-fix pull requests that contain Rarely-Concurrently-Edited files (RCEs). Of 2,063 bug-fix PRs shown, 1,617 (78.3%) have no RCEs while 446 (21.7%) contain at least one RCE. This quantifies the paper\u2019s point that RCEs are relatively uncommon in bug-fix PRs (and, as noted in the text, RCE files themselves make up only about 2% of files in these repositories)."
+  },
+  "page23_img_1.png": {
+    "title": "Developer feedback on ConE notifications by repository size",
+    "description": "The table breaks down responses to 775 ConE notifications by repository size: 520 notifications in large repositories and 255 in small ones. For large repositories 404 of 520 responses were marked \u201cPositively resolved\u201d (77.69%), 33 were \u201cWon\u2019t fix\u201d (6.34%), and 83 had no response (15.96%); for small repositories 150 of 255 were \u201cPositively resolved\u201d (58.82%), 41 were \u201cWon\u2019t fix\u201d (16.08%), and 64 had no response (25.10%). Overall totals are 554 (71.48%) positively resolved, 74 (9.54%) won\u2019t fix, and 147 (18.96%) no response. The data shows a substantially higher positive-resolution rate for large repositories compared to small ones, while small repositories exhibit higher proportions of \u201cWon\u2019t fix\u201d and no-response outcomes."
+  },
+  "page17_img_1.png": {
+    "title": "Azure DevOps pull-request comment showing ConE overlapping-PR notification",
+    "description": "Screenshot of an Azure DevOps pull-request comment produced by ConE: the comment header shows the service avatar, repository/service name and date, and a \u201cResolved\u201d state control. The body contains a small table that lists the overlapping pull request (ID 4299575), the author (\u201cAlan\u201d), and the three files edited in both PRs (VideoPlayerMapper.cs, VideoJsViewModel.cs, VideoJsMetadataMapper.cs) \u2014 each presented as a hyperlink. Below the table is explanatory text that asks for feedback and invites users to mark the comment \u201cresolved\u201d or \u201cwon\u2019t fix\u201d; an inline reply box and a \u201cReactivate\u201d button are visible. In the paper\u2019s context, this figure illustrates the actionable, in-PR notification UI ConE uses to surface overlapping edits and collect interaction telemetry (clicks on PR IDs, file diffs, and author links) so developers can inspect and coordinate on potential conflicts."
+  },
+  "page20_img_1.png": {
+    "title": "Monthly notifications and interactions (Mar\u2013Aug 2020)",
+    "description": "A two-line time series (March\u2013August 2020) comparing ConE notifications (orange) and developer interactions with those notifications (blue). Notifications rise modestly from 70 in March to 175 in August, while interactions grow much faster from 48 to 645 over the same period. This implies an increase in engagement per notification: interactions per notification climb from about 0.7 in March to roughly 3.7 in August (the paper reports an overall average of 2.8 clicks per notification), showing developers increasingly click into ConE suggestions as they become familiar with the tool."
+  },
+  "page10_img_1.png": {
+    "title": "Percentage of files in bug fixes over time: concurrent vs non-concurrent edits",
+    "description": "Six small bar plots (Repo\u20111 through Repo\u20116) compare the percentage of files that later appear in bug\u2011fix pull requests within 1, 7, 14, and 30 days. In each plot blue bars show concurrently edited files and orange bars non\u2011concurrently edited files; the y\u2011axis is percentage (0\u2013100) and the x\u2011axis is the time window in days. Across all six repositories the blue bars are consistently higher than the orange bars and generally grow with longer windows (e.g., Repo\u20112\u2019s concurrent files are very high at ~75\u201385% while non\u2011concurrent remain low around ~5\u201315%, and Repo\u20113 shows concurrent rising from ~30% to ~80% versus non\u2011concurrent ~20% to ~40%). The figure therefore visually supports the paper\u2019s finding that files edited concurrently are more likely to be seen in subsequent bug\u2011fixes, and that this gap widens over longer observation windows."
+  },
+  "page19_img_2.png": {
+    "title": "Distribution of developer feedback on ConE notifications",
+    "description": "A three-bar chart showing how developers responded to 775 ConE notifications: blue \u201cResolved\u201d = 554 responses, orange \u201cWon\u2019t Fix\u201d = 74 responses, and gray \u201cActive\u201d (no explicit resolution) = 147 responses. The Y-axis is number of responses and the X-axis lists the three feedback categories; bar labels show the raw counts. In percentage terms, 71.48% of notifications were marked Resolved (positive), 9.5% were marked Won\u2019t Fix (negative), and 18.96% remained Active (no explicit feedback), indicating overwhelmingly more positive than negative responses to ConE\u2019s suggestions."
+  },
+  "page11_img_1.png": {
+    "title": "Spearman correlations of edits versus bug fixes across six repositories",
+    "description": "Table of Spearman rank correlation coefficients (\u03c1) between edit counts and how often files appear in bug-fix pull requests, shown per repository (Repo-1 through Repo-6). Three columns report correlations for total edits, concurrent edits, and non-concurrent edits respectively, with significance stars (*** p<0.001, ** p<0.01, * p<0.05). The concurrent-edits column shows consistently larger positive and highly significant correlations (roughly \u03c1\u22480.14\u20130.47 across repos), while non-concurrent edits produce much smaller correlations and are even strongly negative for Repo-4 (\u22120.461***). Total-edits correlations are mostly small positive values (except Repo-4, which is slightly negative), supporting the paper\u2019s claim that concurrent edits are more strongly associated with later bug fixes than non-concurrent edits."
+  },
+  "page16_img_1.png": {
+    "title": "ConE system architecture: Azure DevOps listener, cloud scanner, suggestion generator, and notification pipeline",
+    "description": "The figure diagrams ConE integrated with Azure DevOps (left) and running as a modular service in Azure Cloud (dashed box on the right). Pull request events from developers flow to a ConE listener which hands off to the ConE change scanner; the scanner dispatches work to the ConE Suggestion Generator (which contains the core algorithm and a Parameter Tuning component). The Suggestion Generator and the ConE Notification Engine produce recommendations that a ConE Decorator posts back into the original pull request in Azure DevOps, while telemetry/interaction feedback is fed back to the scanner \u2014 the pipeline is designed to be scalable and low-latency (paper reports sub-4 second processing per event)."
+  },
+  "page14_img_1.png": {
+    "title": "Distribution of pull requests by extent of file-overlap (EOO)",
+    "description": "Table 5 lists how 1,654 pull requests are distributed across ten Extent-of-Overlap bins (percentage ranges) between a reference PR and an active PR, with counts in each bin: 0\u201310:309, 11\u201320:223, 21\u201330:137, 31\u201340:87, 41\u201350:25, 51\u201360:359, 61\u201370:92, 71\u201380:21, 81\u201390:23, 91\u2013100:378. The distribution is concentrated toward both low and very high overlaps (notably 0\u201310 and 91\u2013100) and shows a large cluster at 51\u201360 as well; cumulatively, about half the PRs (781 of 1,654) have overlap \u226450%. This empirical shape motivated the authors\u2019 simple EOO threshold (\u226550%) because it removes roughly half of candidate PR pairs while retaining those with higher overlap that are more likely to warrant notifications."
+  },
+  "page9_img_table_1.png": {
+    "title": "Distribution of concurrent vs. non-concurrent edited files across six repositories",
+    "description": "Table of per-repository counts showing distinct files edited concurrently and non-concurrently, the number of bug-fix pull requests, and the share of files in each category. Across the six repositories there are 32,534 distinct concurrently edited files, 50,533 distinct non-concurrently edited files, and 54,127 bug-fix pull requests in total; overall 39.1% of files were seen edited concurrently and 60.9% non-concurrently. Per-repository concurrent-file share ranges from 35.2% (Repo-5) to 42.4% (Repo-4), and the number of bug-fix PRs per repo ranges from 4,781 (Repo-1) to 15,678 (Repo-2)."
+  }
+}

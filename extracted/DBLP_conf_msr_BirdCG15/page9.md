@@ -1,0 +1,32 @@
+never actually take any action, other than looking at the change. Some interviewees unaware of this practice were surprised to see very low participation rates for some teams. Also, some activities that are recorded in CFA are not performed by humans, but are automated tool activities. For example, in one case an engineer explained that most of the reviews contain comments that occur within the first few seconds of review creation (in this case, an automated system scans the change for common easy-to-detect errors). This prohibited them from looking at first response time, as they were unable to separate the tool from human activity. As another example, CodeFlow allows engineers to “like” others’ review comments with a “like” button similar to Facebook. Nevertheless, some people explained they didn't know what the like button was and how to use it, nor did they know how they should interpret likes of comments.
+
+> Using data without knowing the process that created it is fraught. Different teams may use the same tool in vastly different ways.
+
+## Deriving and interpreting useful indicators
+
+Several engineers explained that some of the indicators were straightforward to derive and interpret (e.g., average number of reviews authored or reviewed), whereby more sophisticated indicators were difficult to derive. The difficulty here did not lie in previously described points, but in the design and interpretation of the indicator itself: it was unclear whether the signal observed from the indicator is a good or a bad sign. One engineer formulated it like this: "A lot of metrics we want to use like an inquiry methodology. It's like, 'why does the data look like that?' We don't know if it's good or bad, but it would be good to take a look at that. A perfect example is signoff time. If we look at signoff time, it could take two hours, it could take 2 days, it could take 20 days, but which one is better, we don't know. It could be signoff one second blindly, which is not the behavior that we want to encourage, but a long signoff with a very simple code review is also something I don't want to encourage, so that's the kind of thing where we show some data, show some distribution and see the outliers and have people look at that."
+
+Many people understand that looking at metrics does not explain the causality for a phenomena or why they see a certain value. Several explained that they engaged in more thorough investigations for the outliers they saw or to understand why certain values occurred. In general, we observed that people were cautious about abusing metrics and wanted to avoid driving incorrect behaviors.
+
+### Getting to actionable outcomes
+
+Even though some people explained how they actively use the derived metrics and report to drive behavior, several explained that making the results actionable is difficult. This challenge is not specific to CFA, but applies in general to the analytics field [23]. On the other hand, during the interviews people explained that they had ideas of how to make this easier. First and foremost, they asked for a list of frequently asked questions and answers that detail common mistakes and also common uses/metrics/indicators. Another frequent suggestion was to make it easier for users to share their insights and metrics with others.
+
+## Unfamiliar with analytics
+
+Not everybody that wanted to use the data was experienced or familiar with data analytics. Some people explained that distributions and percentiles were missing, and that they had a hard time deriving them themselves. Also, normalization of the data was experienced as a challenge. They said that having better pre-defined Excel templates or other kinds of examples or queries would be really helpful. The optimal solution for them would be free analytics that didn't need any (or not much) customization. In general, if a user didn’t already have analysis skills, the required time investment to make CFA useful for their purpose was problematic, as the main responsibility of those using CFA was development and not data analysis.
+
+> Explicit analysts that take over consulting functionality could help product teams with various challenges described, e.g., to derive meaningful indicators, drive desired process improvements, or share insights and lessons learned from working with other teams.
+
+## Access and permissions
+
+Gaining access and permissions to use the CFA data was a problem for some people. In addition, several explained that it was unclear how they could share the data with a broader set of people (e.g., their entire team or management) if they used the direct database access. How could the larger team use it? In a few cases, people explained that they ran into permission issues when sharing the Excel files (e.g., others couldn't open them because they didn't have permissions). One person explained that initially he tried to access CFA, but because of permission problems, he gave up. As a result of early feedback from users, we modified our permissions policies to make access available to all Microsoft employees. A few months later he found himself trying again and by that time we had made the changes necessary, so he was able to access what he needed. However, it is unclear how many potential users tried, failed, and are not aware of the access changes.
+
+> access changes.  
+> Access and permission problems can quickly drive users away. Efforts should be taken to make the entry point as painless as possible.
+
+### Not everyone is a data expert
+
+One engineer explained that upper management had problems with the visualization in Excel, as column names might be truncated, and they would not know how to enlarge the columns to see the whole metrics name. Further he explained that the reports got so complex that he ran out of screen real estate (i.e., he could not add any more columns without creating the need for the users of his report to scroll within the Excel sheet). While this sounds trivial, this is actually a real problem. People should be able to create reports and pass them around to others that are not experts in analytics or our system.
+
+> It should be easy for someone using your data and analytics platform create a report that a non-expert can read and understand.

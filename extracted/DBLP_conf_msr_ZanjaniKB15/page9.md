@@ -1,0 +1,32 @@
+cases in which any of the other approaches were statistically advantageous over iHDev in terms of MRR. Therefore, we reject the hypothesis H2.
+
+In summary, the overall results suggest that iHDev generally performs better than xFinder, xFinder', and iMacPro in terms of both recall and MRR. Using the interaction history typically leads to improvements in accuracy. Not only does it identify the correct developers more often (as evident by the significant recall gains or no loss), but also at a high enough position in the list of recommended candidates (as evident by the significant MRR gains or no loss). For example, iHDev recorded recall gains over xFinder in the range [85%, 125%] for Eclipse Project. Also, on average, the correct developer would appear at the 3rd position (MRR = 0.34) for iHDev recommendations, whereas, in xFinder this value would be at the 6th position (MRR = 0.16). Thus, the MRR gain of over 112%. iHDev takes us a step forward toward achieving the ideal goal of a recommender that not only always identifies the correct developers, but also puts them in the top positions of the ranked list of candidates.
+
+### F. Discussion
+
+We discuss a few qualitative points that would help understand the rationale behind the improved performance with using interactions in iHDev.
+
+#### Multiple Attempts at Resolution
+Given the nature of OSS, there are often multiple attempts at resolving a given change request. For example, multiple (a few incomplete or incorrect) fixes are attempted by perhaps multiple developers. In the end, only a complete and correct resolution is accepted and/or merged into the source code repository (i.e., the main development trunk or branch). The interaction history records these attempts; however, the commit history only records the final outcome (i.e., only the things committed), if any. For example, Gousios et al. [13] observed that in GitHub some issues receive multiple pull-requests with solutions (all representing interaction and competence), but not all are accepted and merged. Our results show that past experiences (including failures) are important ingredients in shaping developer expertise. Interactions offer a valuable insight into these micro-level developers’ activities in building their expertise, whereas, the commit repositories would largely miss out on them. For example, the file UpdateAttachmentJob.java has 458 edit events; whereas, it has only 6 commits performed on it. Additionally, the developer Frank Becker contributed 50 edit events, but had only one commit. The interaction history shows that he attempted resolutions for 6 bugs, whereas, the commit shows that he contributed only one bug-fix. This example suggests there is quite a disparity between the micro and macro level perspectives of contributions.
+
+#### Resolutions and Peer Review
+The practice of peer review of proposed resolutions/patches exist in both Mylyn and Eclipse Project. We observed cases in which resolutions (even those that were correct in the sense of a technical fix for the problem at hand) were not merged to the source code repository (e.g., potential conflicts with other code elements or patches did not make it in time for the review process to go through or were out of luck as they arrived after something else was already accepted) or were revised and then merged (e.g., a few changes to a few files revised or not needed). The interaction history captures the resolutions while the commit history misses out on these alternative solutions.
+
+#### Interactions come first, Commits later
+In the typical workflow, interactions come first and commits later. Interactions are available much earlier than commits to mine and integrate the results. Our datasets show that for a given time period, there are more interactions than commits. Therefore, using interaction data may reduce the latency in building and deploying actionable models on a project, as the training data would become available sooner.
+
+#### Self-Serving Benefits
+We believe that the potential benefits shown to developers by converting the interactions into actionable support for their routine tasks could serve as a motivating factor in using Mylyn-type activity loggers. That is, developers would see the value in logging their activities now, so that they could benefit for concrete tasks in the future.
+
+#### Task Applicability
+Our work shows the potential value of interactions in improving the developer recommendation tasks; however, they could be use for other software maintenance and evolution tasks that have typically relied on commit histories. For example, we used interactions for impact analysis in our previous work [7], [8].
+
+In summary, our findings highlight many aspects that the developer recommendation methodology based on the commit history may not capture.
+
+## IV. THREATS TO VALIDITY
+
+We discuss internal, construct, and external threats to validity of the results of our empirical study.
+
+Accuracy measures and correctness of developer recommendations: We used the widely used metric recall in our study. We also calculated mean reciprocal rank. We considered a gold-set to be developers who contributed source code changes to address change requests. Of course, it is possible that other team members are also equally qualified to handle these change requests; however, such a gold-set would be very difficult to ascertain in practice. Nonetheless, our benchmark can be viewed as conservative bounds.
+
+Accuracy@k is another measure that is also used in the context of recommendation systems [14]–[16]. Accuracy@k generally considers only one correct answer to claim 100%. In our study, over 90% of cases had only one correct answer. Therefore, the differences in recall@k and accuracy@k values are negligibly small. Although, (as discussed in Section III-D) we deemed the precision metric to be unsuitable for our technique due to the ordered nature of responses, we summarize the results. In case of Mylyn and xFinder precision gain ranges between 12.76% and 136.36% and out of eight comparisons with ANOVA, iHDev was advantageous in four of them. In case of Mylyn and xFinder' precision gain ranges between 12% and 137.50% and out of eight comparisons with ANOVA, iHDev was advantageous in six of them. In case of Mylyn and iMacPro precision gain ranges between 6% and 136.36% and out of eight comparison with ANOVA, iHDev was advantageous in seven of them. Furthermore, should there be a

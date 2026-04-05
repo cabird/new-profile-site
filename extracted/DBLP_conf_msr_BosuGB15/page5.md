@@ -1,0 +1,33 @@
+Such a classifier could use are constrained (e.g., the status of the comment isn't known at the time a comment is made).
+
+In order to build a classifier, we have to first identify potential signals (metrics), then select a classification approach, and finally implement, train and evaluate the classifier. A crucial part of training and evaluating a classifier is obtaining a standard dataset which contains information about whether or not a code review comment is useful, a so called oracle. Relying on the 145 comments rated during the interviews is not sufficient as that dataset is too small to build a reliable classifier. To rectify this, we manually analyzed and separately validated an additional 844 comments to enhance the oracle. In the following, we describe the manual classification, the oracle generation process, the selected signals and their calculation, the classifier, and the validation of our model. We end this section by highlighting the results of the classification approach.
+
+### A. Manual Classification
+
+Based on our insights from the developer interviews, we manually classified 844 review comments from five projects across Microsoft: Azure, Bing, Exchange, Office, and Visual Studio.
+
+We classified each of the comments into one of the two categories: Not Useful, and Useful. Although our exploratory interviews included three classifications, authors in those interviews indicated that Somewhat Useful comments still were valuable enough to improve their code. For example, as we observed disagreements between authors related to how they classify nit-picking comments (Section IV-B), we discussed with them how to rate nit-picking comments. Since nit-picking comments are useful for long-term project maintenance and often led to changes in the code, we agreed to rate them as 'Useful'. Similar discussions happened for the other types of somewhat useful comments, thus we consider comments that would fall into the Somewhat Useful category as described in Section IV-B to be useful.
+
+For the manual analysis, we randomly selected reviews with at least two iterations and two comments. Multiple iterations allow us to determine if a comment is in proximity to, and thus likely caused, a code change (i.e., we can tell if a comment in iteration 1 caused a code change or not based on the code submitted in iteration 2).
+
+We read each comment thread and examined the code that the comment thread was referring to in an effort to understand the question or concern raised by the reviewer and how the author responded to it. If the author did not participate in the comment thread, we also examined the subsequent iteration(s) to determine if the suggested changes were implemented by the author. Our assessment of comment usefulness was primarily based on insights drawn from interviews such as the categories that comments fell into, the topics addressed in the comments and the types of action that the comments suggested. For example, if the author pointed out a valid defect and a suggested fix, we classified it as useful, whereas a question about how the changed component was tested was termed not useful.
+
+To assess validity and subjectivity, we used inter-rater reliability. A sample of one hundred comments was selected randomly from the set of 844 comments and each of the three authors classified the hundred comments independently, using the findings from Section IV-B as a guide. Our classifications differed for only three out of the hundred. Since we used more than two raters for the transcriptions we calculated inter-rater reliability using Fleiss' Kappa [17] on the individually coded responses. The inter-rater reliability kappa κ value was 0.947, which Landis and Koch classify as "almost perfect agreement" [18]. Thus we have confidence that the ratings are valid and consistent.
+
+We combined the comment classifications from the interviews and the manual classification into one dataset that we used as our oracle to build our comment usefulness classifier.
+
+### B. Attributes of Useful Comments
+
+Based on the insights from the interviews and our manual analysis, we identified eight attributes of comments which we anticipate distinguish useful from not useful comments.
+
+Some of these attributes of comments are not known at the time that the comment is made such as whether a comment will be a change trigger. Using attributes that are not available until a review is complete would be a problem if we were trying to build a predictor of comment usefulness to be used at the time a comment was made. However, since our goal is to classify the usefulness of a large number of comments in an effort to enable an empirical investigation of what leads to useful comments, this is not an issue for our study.
+
+The first attribute we considered was the thread status (discussed in Section IV-B). Further, to measure the engagement and activity of a comment we count the number of participants commenting on one thread (including the author), the number of comments constituting the thread, whether or not there was a reply from the author to a comment, and the number of iterations in the code review.
+
+In addition, we hypothesize three more signals that may be good candidates for our classifier: from the interviews we saw that a comment that was a change trigger was often deemed useful. We also observed anecdotally that 'Useful' comments frequently contained a different set of keywords (e.g., 'fixed', 'bug' or 'remove') than 'Not useful' comments. Finally we believe that the sentiment of a comment (i.e., whether or not a comment is formulated in a positive or negative tone) may be related to comment usefulness.
+
+### C. Attributes calculation
+
+While the first set of signals can be derived easily from the code review data itself, the latter three signals (i.e. if a comment is a change trigger, the keywords in a comment, and comment sentiment) require additional work to compute. We briefly describe our approaches below.
+
+Change trigger. From the manual analysis and interviews, we observed that most changes triggered by a comment happen in close proximity to the comment-highlighted line(s). To see if a comment triggered a change we look at differences between the file containing the comment and versions of the file submitted in subsequent iterations of the code review. For example, if a comment is made on a particular line of code in foo.cs in the first iteration of a code review, then we track the position of that same line of code in subsequent versions of foo.cs in the

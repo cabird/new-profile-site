@@ -1,0 +1,22 @@
+{
+  "page3_img_1.png": {
+    "title": "Boxplots of employee tenure by toolbuilder status",
+    "description": "Two side-by-side boxplots compare Years at Microsoft (y\u2011axis) for employees who did not build homegrown tools (\u201cNo\u201d) and those who did (\u201cYes\u201d) (x\u2011axis label: ToolBuilder). The median tenure is about 2 years for non-toolbuilders versus 6 years for toolbuilders, and a Mann\u2013Whitney test reported in the paper found this difference significant (p < 0.01). The toolbuilder group shows a larger interquartile range and higher upper whisker, with many high-tenure outliers extending above 20\u201325 years, indicating greater variance and more long\u2011tenured employees among toolbuilders."
+  },
+  "page4_img_2.png": {
+    "title": "Median Big Five personality scores: toolbuilders vs non-toolbuilders",
+    "description": "Clustered bar chart comparing median OCEAN (Big Five) scores for non-toolbuilders (blue) and toolbuilders (green). For each trait the plot shows medians on a 0\u201350 scale with error bars: Openness \u224837 (No) vs 38 (Yes), Conscientiousness \u224836 vs 38, Extraversion \u224829 vs 31, Agreeableness \u224838 vs 39, and Neuroticism \u224824 vs 23. The differences are small and error bars overlap, matching the paper\u2019s report that toolbuilders are significantly more open, conscientious, and extraverted and slightly less neurotic (statistical p-values reported in the text), but with modest effect sizes."
+  },
+  "page5_img_1.png": {
+    "title": "Table of interviewed homegrown developer tools",
+    "description": "Table I summarizes twelve homegrown tools discussed in the interviews, giving each tool name and a one-line description. Examples include MemSpect (a memory debugger for hybrid managed/native applications), DiffButler (a Visual Studio extension that shows inline diffs), xAuto (a distributed, randomized \u201cchaos monkey\u201d testing system), and VSO Cortana (a Cortana-based app for Windows Phone to view build status and perform Visual Studio Online actions). Other entries cover IDE plugins (Suite Ninja), monitoring and build utilities (Build Status Monitor, Test Pass Manager), log and diagnostics viewers (Watchdog Video Viewer, MSMQ Viewer, CrunchNet), agile workflow aids (Agile Support Tools), and an environment-checking webservice (Damascus), illustrating the diversity of debugging, testing, monitoring, and automation tools produced by developers."
+  },
+  "page2_img_1.png": {
+    "title": "Three\u2011phase study workflow: surveys, interviews, and card sort",
+    "description": "A left-to-right schematic of the study design showing Phase 1 (an initial open-ended survey with 138 participants), Phase 2 (16 semi-structured interviews with selected toolbuilders), and Phase 3 (a quantitative personality survey with 797 participants). Arrows indicate that data from Phases 1 and 2 were combined into an open card-sort (pile of yellow and white cards) while Phase 2 informed the design of the larger personality survey; both qualitative (interview transcripts and Phase I responses) and quantitative results were distilled into the final research findings. This diagram summarizes how the authors moved from exploratory qualitative data to a larger, anonymous Big Five personality survey and categorical card sorts that underpinned their analyses."
+  },
+  "page4_img_1.png": {
+    "title": "Decision tree classifying toolbuilders by tenure, personality, and role",
+    "description": "A small decision tree that predicts whether a surveyed engineer built homegrown tools using Tenure at the root, then Extraversion and Conscientiousness (Big Five scores) and Development Role; each leaf box shows counts of \u201cNo\u201d and \u201cYes\u201d toolbuilder cases. The strongest split is Tenure at 1.8 years: employees with >=1.8 years are predominantly toolbuilders (No: 95, Yes: 497). For employees with <1.8 years the model first splits on Extraversion at 30: the low-extraversion branch (<30) then splits on Conscientiousness at 36 and again on Extraversion at 20, producing leaves where low conscientiousness predicts non-toolbuilding (No:32, Yes:9) while higher conscientiousness and moderate extraversion yields more toolbuilders (No:10, Yes:17). The high-extraversion branch (>=30) separates Developers (No:25, Yes:55) from Testers/Other, where only very high extraversion (>=38) corresponds to mostly toolbuilders (No:2, Yes:10) versus (No:16, Yes:7) for lower extraversion."
+  }
+}

@@ -1,0 +1,31 @@
+are judgements and are subjective” [52]. Being asked how many times one went out to eat last week, most people will likely count concrete instances, whereas if the reference period is last year, they will almost certainly estimate based on heuristics. Lastly, even if a respondent does recount concrete events, larger reference periods can fall prey to a phenomenon known as “telescoping” whereby a notable event is remembered as occurring more recently than it actually did [55], [56]. By using the period of a single day, events are less likely to cross a “night boundary” and be attributed to the wrong day [54].
+
+We encouraged participants in the interviews and survey to use their email clients, calendars, task lists, diaries etc. as “cues” [39] to improve their recall of their previous workday and reduce measurement errors [40], [41], [42], [43], [44]. Finally, we asked respondents to self-report the times spent in minutes rather than hours so that they were forced to recall the events in more detail, as the unit of time in response has shown to have an impact on recollection accuracy [44], [57].
+
+## 5 Conceptual Frameworks
+
+In this section, we answer RQ1 and present the results from investigating survey respondents’ self-reports of what made their previous workday good and typical. We organized the factors influencing developers’ workdays as conceptual frameworks and describe them using representative quotes and examples.
+
+### 5.1 Developers’ Good Workdays
+
+To identify factors that influence what a good workday is to developers, how they relate to each other, and how important each factor is, we asked survey respondents the following question: “Would you consider yesterday a good day? Why or why not?”.
+
+#### 5.1.1 Data Analysis
+
+We coded the responses to the question to a binary rating of either good or not good. Due to the formulation of the question, not good workdays could either refer to an average or a bad workday. From now on, we describe not good workdays as bad for better readability. 5,013 participants answered the question; 60.6% (N = 3,039) stated their previous workday was good and 39.4% (N = 1,974) stated it was bad.
+
+We qualitatively analyzed the cleaned responses from participants who provided an explanation for what made their workdays good or bad (21.1% did not provide an explanation). We developed a coding strategy, applying Open Coding, Axial Coding, and Selective Coding as defined by Corbin and Strauss’ Grounded Theory, as follows [58]. The first author Open Coded the entire set of 4,005 responses on what made participants’ previous workday good or bad, using a quote-by-quote strategy where multiple categories could be assigned to each quote. Responses that could not distinctively be mapped to a category were discussed with the other authors. Before starting the first Axial and Selective Coding iteration, the authors familiarized themselves with
+
+the categories that resulted from the Open Coding step, by looking at 10–30 representative responses (i.e., quotes) per category and the number of responses that the first author Open Coded to each category. We then discussed the relationships between these categories in the team (usually with three or all four authors present). This included drawing out the factors and their relationships on a whiteboard, which we collected as memos. During that process, we heavily relied on the quotes and regularly consulted them for additional context and details about the identified relationships. The process was iterative, meaning that whenever the Axial and Selective Coding steps resulted in updates to the Open Coding categories, the first author re-coded participants’ responses, and we did another iteration of Axial and Selective coding. After five iterations, we used the memos, factors that resulted from the Axial Coding and high-level factors (that resulted from the Selective Coding) to create a conceptual framework to characterize developers’ good workdays.
+
+### 5.1.2 Conceptual Framework
+
+From applying our coding strategy, we identified 11 factors impacting developers’ assessment of a good workday. We organized these factors into three high-level factors, (1) value creation, (2) efficient use of time, and (3) sentiment. The first two high-level factors were fairly obvious since respondents usually described good workdays when they considered their work as meaningful and/or did not waste their time on meaningless activities. A few important factors, however, did not fit into these two high-level factors. They are related to respondents’ personal feelings and perceptions of their overall work, which we grouped as the third high-level factor. Initially, we thought that quality is another important factor, since some respondents described good workdays as days they improved the quality of the software or did not break something. However, we realized that these statements on quality were very rare (0.3% of responses) and that respondents described them as one form of working on something of value.
+
+In Figure 1, we visualize the conceptual framework for good workdays. Each of the 11 factors (light gray) influences one of the three high-level factors (dark gray), and they in turn influence whether developers perceive a workday as good. The numbers in parentheses are counts for the number of responses that we categorized into each high-level factor (total N = 4,005). Since the identified factors are based on responses to an open question, the reported numbers and percentages in this section should only serve to give a feeling about how prevalent each factor is in respondents’ assessment of good workdays, rather than exact measures (reality might be higher).
+
+Now, we provide representative examples and quotes to describe the factors and explain how we derived the conceptual framework based on survey responses.
+
+#### Value Creation
+
+To decide whether their workday was good, respondents most often evaluated if they were effective and if they created something of value (68.0%, N = 2,725 of the 4,005 responses to the question). Creating value, however, means different things to developers. In 35.6% (N = 1,425) of the responses, developers considered their workday good when they managed to produce some form of outcome or accomplishment. Participants typically described a good

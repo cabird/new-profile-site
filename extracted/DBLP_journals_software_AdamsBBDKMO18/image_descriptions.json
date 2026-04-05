@@ -1,0 +1,38 @@
+{
+  "page3_img_bram.png": {
+    "title": "Head-and-shoulders portrait of a man with glasses",
+    "description": "A cropped color head-and-shoulders photograph of an adult man wearing rectangular eyeglasses and a gray hoodie, looking directly at the camera with a neutral expression. He has short light-brown hair, light facial stubble, and a fair complexion. The portrait is enclosed in a thin dark rectangular frame on a magazine page; the surrounding margin shows a pale diagonal striped background consistent with the issue\u2019s editorial layout. The image appears among the guest-editor biographical photos in the introduction section of the paper."
+  },
+  "page3_img_christian.png": {
+    "title": "Smiling headshot portrait of a man against a brick background",
+    "description": "Close-up color headshot of a smiling adult male cropped at the shoulders; he has short dark hair, light skin, and an open smile showing teeth. The photograph shows a brick wall behind the subject, is enclosed in a thin dark-blue rectangular frame, and is set on a pale beige page with diagonal stripes. The image appears to be a formal portrait used alongside the guest-editors\u2019 introductions in the issue."
+  },
+  "page3_img_boris.png": {
+    "title": "Head-and-shoulders portrait from guest-editors' biographies",
+    "description": "A close-up, head-and-shoulders studio-style portrait used on the guest-editors\u2019 biography page. The image shows an adult with short light-brown hair and light stubble, facing the camera with a neutral expression and wearing a maroon sweater; the background is a light, slightly textured wall. The photo is printed with a thin black rectangular border and set against the issue\u2019s pale yellow diagonal-striped page background, matching the other author headshots on the same page."
+  },
+  "page1_img_1.png": {
+    "title": "Stylized green release-engineering toolbox with butterfly",
+    "description": "A large, stylized teal\u2011green toolbox or machine dominates the lower half of the page with its hinged lid partly open; the front panel is perforated with many dark circular holes and populated by small colored square markers (yellow, red, and green) that suggest many discrete components. A dashed flight path leads from the box to a small orange butterfly in the upper right, visually linking the toolbox to a release or departure. The upper left of the image is overlaid by the guest editors\u2019 names (for example, Stephany Bellomo, Christian Bird, Boris Debi\u0107, Foutse Khomh, Kim Moir, and John O\u2019Duinn), indicating this illustration accompanies the Release Engineering 3.0 introduction and acts as a metaphor for toolchains, componentized systems, and delivery to users."
+  },
+  "page3_img_foutse.png": {
+    "title": "Head-and-shoulders portrait of a man in a maroon zippered top",
+    "description": "A close-up, head-and-shoulders photograph cropped on the right showing a dark-skinned man with short hair and a slight smile, wearing a maroon zip-up sweater. The subject is set against a neutral light-gray background and is contained within a thin dark border; to the right the magazine\u2019s beige diagonal-striped bio panel and article text are visible. The image functions as an author/guest-editor portrait accompanying the Release Engineering 3.0 introduction in the issue."
+  },
+  "page3_img_john.png": {
+    "title": "Head-and-shoulders portrait of a smiling, bald man",
+    "description": "Small, framed color headshot showing a smiling, bald adult man wearing a patterned, collared shirt against a light, neutral background. The photo is cropped to show shoulders and head, set inside a thin dark border, and appears on the page alongside other guest-editor biography portraits in the issue\u2019s introduction. The image is positioned next to a column of biographical text and aligned with diagonal, pale-striped page styling visible at the page edge."
+  },
+  "page3_img_kim.png": {
+    "title": "Smiling portrait of a woman wearing glasses and red pendant",
+    "description": "A cropped portrait photograph shows a smiling woman with shoulder-length light hair and eyeglasses, wearing small dangling earrings and a square red pendant on a short chain over a floral top. The image is inset with a thin dark border against the page\u2019s beige diagonal-striped background and appears among the guest-editors\u2019 portraits in the issue\u2019s introductory pages."
+  },
+  "page4_img_1.png": {
+    "title": "myCS publications portal advertisement",
+    "description": "A rectangular dark-gray banner promoting the myCS publications portal. At left is the myCS logo in pale blue and white, and to the right is the line \"Read your subscriptions through the myCS publications portal at\" in white text. The bottom of the banner prominently displays the portal URL in large bold white text: \"http://mycs.computer.org.\""
+  },
+  "page3_img_stephany.png": {
+    "title": "Head-and-shoulders portrait photograph accompanying a guest-editor biography",
+    "description": "A color, head-and-shoulders studio-style portrait of a smiling person with light brown hair pulled back and blue-green eyes. The subject wears small stud earrings and a light-gray top; the photo is tightly cropped on the right side and framed by a thin dark border. The inset portrait sits on a pale beige page background with subtle diagonal cream stripes, indicating it accompanies a biographical sidebar in the issue\u2019s guest-editors section."
+  }
+}

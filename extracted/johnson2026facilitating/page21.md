@@ -1,0 +1,15 @@
+Table 8. Categories of desired improvements to AI tools to build trust
+
+![Table of categories of desired improvements](page21_img_1.png)
+
+While some responses indicated the potential for the validation and verification process to increase trust, the need to constantly validate and verify negated the utility of AI-assisted tools for many users. As stated by one respondent, “AI has always done a poor job showing it is up to the task of complex code examples. They require way too much oversight and adjustments.” One theme that showed up repeatedly in responses that pointed to the potential for a decrease in trust was that many AI-assisted tools will always produce an answer with certainty, even if it’s wrong; for them, this is the reason rigorous validation and verification is even necessary. One respondent explained, “I still have to validate them myself, because I’ve experienced blatantly wrong answers from ChatGPT... ‘Confidently Incorrect’ answers.” Another noted that they actually assumed that a tool powered by AI would have some form of “self-reflection” and be “capable of expressing its level of certainty,” but to their dismay have not seen that be the case.
+
+Another fairly common theme was surrounding Tool Limitations, which we defined as “trust being affected by the limitations of AI tools in handling complex problems or understanding specific contexts.” One respondent complained about ChatGPT, stating “It doesn’t really ‘understand’ what it’s generating or if it’s correct (ie: it can’t actually execute the code or understand all the compiler rules).” Multiple respondents indicated that these tools are helpful for tasks that are small or relatively basic, but when working with the complex large codebases that they work on, they lack context and are not helpful.
+
+> “[for] a sort of "stackoverflow" like use cases can be completely replaced. However, if the case requires knowledge of higher education, AI-assisted tools should be extremely careful of setting forth a suggestion to the users.”
+
+Despite these negative sentiments, some respondents noted the utility of AI in specific, well-understood contexts or for routine tasks, suggesting a nuanced perspective on the tool’s value. They also provided insights into how we can facilitate increases in trust when it comes to using AI-assisted software tools, which we discuss next.
+
+### 3.3.3 Desired Improvements for Engendering Trust in AI Tools.
+
+Finally, in an effort to improve the trust in AI-assisted tools, we asked survey respondents what changes they would like to see in AI tools that would help them develop trust in and increase usage of these tools. We asked "What changes would you like to see to existing AI-assisted tools that would help build initial trust and lead to prolonged use?" 150 Respondents provided responses to this question. Again, Manuscript submitted to ACM

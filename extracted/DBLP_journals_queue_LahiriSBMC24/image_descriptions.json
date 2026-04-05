@@ -1,0 +1,10 @@
+{
+  "page1_img_decor_1.png": {
+    "title": "Yellow textured vertical brush-stroke decoration",
+    "description": "A narrow, slightly slanted vertical yellow brush-stroke graphic with a rough, speckled texture and irregular edges. It occupies a margin near the top of the article page (adjacent to the title and author lines) as a purely decorative element. The image does not convey data or labels and serves only to provide visual emphasis for the page header."
+  },
+  "page10_img_1.png": {
+    "title": "Orange textured vertical accent bar beside a pull-quote",
+    "description": "A narrow, tall, slightly right-tilted orange brush-stroke with a mottled texture and scattered white flecks, used as a decorative vertical accent on page 10. It appears at the left margin to mark and visually separate a highlighted passage (a pull-quote and surrounding discussion) about user studies, model-generated textual explanations, and the challenges of merge conflicts in the article. The graphic is purely ornamental and serves to draw the reader\u2019s eye to the adjacent quoted content rather than to convey data or additional information."
+  }
+}

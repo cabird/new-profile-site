@@ -1,0 +1,30 @@
+{
+  "page3_img_2.png": {
+    "title": "Spearman correlations of lower\u2011case letters with defects (Eclipse 3.0)",
+    "description": "A vertical bar chart showing the Spearman rank correlations between the count of each lower\u2011case letter (x\u2011axis: a through z) and post\u2011release defect counts in the Eclipse 3.0 dataset. The y\u2011axis ranges roughly from 0.310 to 0.345; every letter has a small but positive correlation (\u22480.31\u20130.34). The tallest bar is for \u2018p\u2019 (~0.345), and the letters \u2018i\u2019, \u2018r\u2019, \u2018o\u2019, and \u2018p\u2019 are among the highest (about 0.34\u20130.35), which the paper highlights (after p\u2011value correction, significance cutoff \u03b1=0.01). These measured correlations are the basis for the paper\u2019s IROP anecdote, though the text cautions about overinterpreting such small, project\u2011specific effects."
+  },
+  "page2_img_table_1.png": {
+    "title": "Eclipse releases: file/character counts and defect rates",
+    "description": "A three-row table comparing Eclipse 2.0, 2.1 and 3.0 by total characters, total source files, and number (with percent) of files that had post-release defects. Numbers shown are: Eclipse 2.0 \u2014 44,914,520 total chars, 6,728 files, 975 files with defects (14%); Eclipse 2.1 \u2014 56,068,650 chars, 7,887 files, 854 defects (11%); Eclipse 3.0 \u2014 76,193,482 chars, 10,593 files, 1,568 defects (15%). The table highlights that the code base grows substantially across releases and that the proportion of files with recorded defects ranges from 11% to 15%, with Eclipse 3.0 having both the largest code size and the highest defect count and percentage."
+  },
+  "page2_img_table_2.png": {
+    "title": "Precision for defect prediction across Eclipse releases",
+    "description": "A 4x4 table of precision scores where rows are the training release (Eclipse 2.0, 2.1, 3.0, Average) and columns are the testing release (Eclipse 2.0, 2.1, 3.0, Average). Diagonal (within-release) precision is highest: 0.74 for 2.0\u21922.0, 0.64 for 2.1\u21922.1, and 0.64 for 3.0\u21923.0. Cross-release precision varies (e.g., 2.0\u21922.1 = 0.39 and 3.0\u21922.1 = 0.40), and the overall column averages are 0.62 (test 2.0), 0.47 (test 2.1), 0.56 (test 3.0), with a grand average precision of 0.55 reported in the table."
+  },
+  "page3_img_1.png": {
+    "title": "Keyboard heatmap of keystroke\u2013defect correlations (IROP)",
+    "description": "A stylized QWERTY keyboard is shown with individual keys color-coded on a green\u2192yellow\u2192orange\u2192red scale (red = strongest correlation with post-release defects). White rectangular callouts highlight five keys with the highest correlation: the single key R and the cluster I, O, P on the top letter row, plus the Enter key. Most digit and punctuation keys are green/yellow (lower correlation), while many letter keys are orange-to-red, visually emphasizing the authors\u2019 finding that occurrences of I, R, O, and P (and Enter) in source files were most strongly associated with defects in the analyzed Eclipse 3.0 dataset."
+  },
+  "page2_img_table_3.png": {
+    "title": "Recall matrix for defect prediction across Eclipse releases",
+    "description": "A 4x4 table of recall values where rows are the training set (Eclipse 2.0, 2.1, 3.0, Average) and columns are the test set (Eclipse 2.0, 2.1, 3.0, Average). The diagonal (within-release) recall values are 0.32 for 2.0, 0.18 for 2.1, and 0.20 for 3.0, giving an overall cell-average of 0.19. Cross-release recall varies widely (e.g., training on 2.1 and testing on 2.0 yields only 0.03, while training on 2.0 and testing on 2.1/3.0 yields 0.27), illustrating that the character-count based predictor has limited and inconsistent ability to find all defect-prone files across releases (recall is much lower than the reported precision)."
+  },
+  "page2_img_fig_1.png": {
+    "title": "ASCII character frequency distribution in Eclipse 2.0 source files",
+    "description": "A bar chart of ASCII codes 1\u2013127 (x-axis ticked at 1,10,19,\u2026,127) showing total occurrence counts per character across all Eclipse 2.0 files; the y-axis is in millions (0E+0 to 5E+6). The plot is heavily skewed toward printable and blank characters, with the largest peak at the space character (ASCII 32) and prominent peaks in the lower\u2011case letter region \u2014 notably around ASCII 101 ('e') and 116 ('t') \u2014 as reported in the paper. Smaller but visible spikes occur at other common characters (e.g., newline around ASCII 10 and clusters for digit/letter codes), illustrating the bias toward 7\u2011bit printable characters mentioned in the text."
+  },
+  "page4_img_1.png": {
+    "title": "IROP keyboard with the letters I, R, O, P removed",
+    "description": "Grayscale photograph of a compact, Mac-style keyboard showing the standard rows (function keys and number row at the top, QWERTY and home rows, and modifiers like tab, caps lock, shift, return and delete). Several letter keys are deliberately absent\u2014specifically the four letters identified by the paper as failure-correlated (i, r, o, p)\u2014so the keyboard presents gaps where those keys would normally sit. The image illustrates the paper\u2019s proposed hardware intervention to make it harder to type the defect\u2011associated keystrokes and thus force programmers to use alternative identifiers or refactor code."
+  }
+}

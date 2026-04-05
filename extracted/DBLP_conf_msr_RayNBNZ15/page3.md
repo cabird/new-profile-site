@@ -1,0 +1,23 @@
+TABLE I: Example of Unique and non-unique changes adapted from Linux. The deleted and added statements start with ‘–’ and ‘+’ respectively; non-unique changes are marked in green. Lines A9, A10, and A11 are non-uniquely added w.r.t. B9, B10, B11 respectively. However, A7 and A8 are unique deletions since it does not resemble any of the corresponding deleted lines B6, B7 or B8.
+
+![Table I: Example of unique and non-unique changes](page3_img_1.png)
+
+Non-unique Changes (NUC) are a set of edited lines that are present in NEP. The rest of the changes in a project are unique changes. Thus, if C represents all the changed lines in a project, Unique Change (UC) is a set of edited lines that are present in C but not included in NUC, i.e., UC = C − NUC.
+
+In Equation 1, similarity (or non-uniqueness) between the edited statements is determined by a function clone. Although there is no precise definition of clone in the literature, it mostly relies on the computation of individual clone detectors. The most common one is textual similarity of two edits. It can also be modeled as n-gram similarity [12], AST-based similarity [28], [32], etc. In this work, we consider two edits as non-unique, if their contents have identical lexical and syntactic content [16] and they are also edited similarly (either both are added or both are deleted).
+
+Step 1 of Figure 1 summarizes the above stages. It takes five hunks as input. Edits -a2 and +a3 of Hunk_a are non-unique to -b2 and +b3 of Hunk_b. Hence, NEP_ab = {(-a2, -b2), (+a3, +b3)}. Likewise, NEP_bc = {(-b2, -c2), (+b3, +c4)}, NEP_cd = {(-c1, -d1)}, and NEP_ad = {(+a3, +d2)}. Thus, Non-unique Change set (NUC) = {-a2, +a3, -b2, +b3, -c2, +c4, -d1, +d2}. The rest of the changes of the input hunks are unique (UC) = {-a1, +a4, -b1, -c3, -e1, +e2}.
+
+Implementation: To detect the NEP, we adapt Repertoire [31], a lexical based change analysis tool that identifies non-unique changes. The basic steps are as follows:
+
+1. Repertoire pre-processes the hunks to eliminate diff-specific meta-information such as edit operations and commit dates. The meta-information is stored in a database for future use.
+2. Using CCFinderX [16], a lexical token based clone detection technique, Repertoire determines non-unique code content (clone) between the processed hunks. The output of CCFinderX is a set of line pairs having identical syntax. CCFinderX takes a token threshold as input, that ensures a minimum number of contiguous tokens that has to be non-unique between the cloned regions. In our experiment, we set this token threshold to 50, based on experimental analysis as discussed in RQ1 in Section III. This ensures at least 50 contiguous tokens (around 7–8 lines) are non-unique in the detected cloned region.
+3. For each identified cloned pair, Repertoire matches their edit operations. The clone pairs without identical edit operations are eliminated. Repertoire also disregards the clone pairs that has unmodified contexts. The final output is NEP — a set of edit pairs with similar edit content and edit operations. Note that, since CCFinderX outputs clones that have at least 7–8 lines of contiguous non-uniqueness, Repertoire marks only those changes as a non-unique edit pair that either belong to a larger non-unique change, or a small non-unique change that takes place in between two large unchanged contexts, with at least 7–8 lines of similarity. Such a large threshold helps us to focus only on significant non-unique changes and thus avoids unintended clones.
+
+In Table I, Repertoire identifies (A9, B9), (A10, B10), and (A11, B11) as non-uniquely added. The other edits (A7 and A8 in Commit A and B6 to B8 and B12 in Commit B) are marked as unique changes.
+
+### C. Categorizing Change Uniqueness
+
+In this step, we further categorize the non-unique changes to non-unique addition, deletion, and modification. Since it is difficult to establish one-to-one correspondence between an added and deleted line, we focus on the code region i.e. hunk instead.
+
+ND: non-unique Deletion. Between hunks (h_i, h_j), if there exists a non-unique edit pair (of 50 tokens in our implementation) where program statements are deleted (possibly with some unchanged context of program statements) in both h_i and h_j non-uniquely, but there is no addition of program statements. For example between Hunk_c and Hunk_d in Figure 1, only c1 is deleted non-uniquely to d1. Thus, Hunk_c and Hunk_d is categorized as ND. ND indicates that the code region corresponding to the hunk pair was non-unique before

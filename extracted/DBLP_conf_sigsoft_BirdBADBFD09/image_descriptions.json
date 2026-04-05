@@ -1,0 +1,14 @@
+{
+  "page3_img_1.png": {
+    "title": "Source repository vs. bug database: linked and unlinked bug-fix subsets",
+    "description": "A schematic comparing the source code repository (left, green) and the bug database (right, red) and the set relationships used in the paper. All commits are labeled C; the commits that actually fix bugs are shown as Cf (blue box) and the smaller subset of those that are explicitly linked to bug-tracker entries via commit log messages is Cfl (purple box). Likewise the bug database contains all bugs B, the fixed bugs Bf (orange), and the much smaller set of linked fixed bugs Bfl (yellow). Solid arrows show commits and bug records explicitly linked by log-message references, while dashed arrows indicate bug fixes that are related across the systems but are not linked, visually emphasizing that Cfl and Bfl are proper, substantially smaller subsets of Cf and Bf and thus capture only part of the true bug-fix population."
+  },
+  "page6_img_1.png": {
+    "title": "Proportion of fixed bugs linked to commits by severity across projects",
+    "description": "Line chart showing, for six projects, the fraction of fixed bug reports that could be linked to specific source-code commits (y-axis 0.0\u20130.7) broken down by severity categories (x-axis: blocker, critical, major, normal, minor, trivial). In most projects with manually verified linking (Apache, GNOME, Eclipse_B, AspectJ) the proportion linked rises as severity decreases \u2014 e.g., Apache rises from \u22480.15 for blocker bugs to \u22480.62 for minor/trivial bugs, and Eclipse_B rises from \u22480.15 to \u22480.50. Eclipse_Z is an outlier: linkage is highest at the critical level (\u22480.52) and falls toward the less severe categories (\u22480.35 at minor/trivial). These patterns illustrate that the linked subset B_fl often over-represents less-severe (minor/trivial) bugs relative to more severe ones."
+  },
+  "page9_img_1.png": {
+    "title": "BugCache recall by bug severity under different training biases",
+    "description": "Four side-by-side bar plots (panels a\u2013d) show BugCache recall (y-axis 0.0\u20131.0) for five severity categories (x-axis: blocker, critical, major, normal, minor) under different training-set choices. (a) When trained on all linked bugs, recall is uniformly high across severities (around 0.85\u20130.9). (b) Training only on minor bugs yields much higher recall for minor (~0.6\u20130.7) and substantially lower recall for blocker/critical/major (~0.35\u20130.45). (c) Training only on critical bugs produces the highest recall for critical (~0.7) but low recall for other severities (~0.3\u20130.45). (d) Training on a sample biased toward severe bugs shifts recall upward for severe categories (blocker/critical/major ~0.65\u20130.75) and downward for minor (~0.55), illustrating that BugCache\u2019s performance is sensitive to the severity composition of its training data."
+  }
+}

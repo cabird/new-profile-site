@@ -1,0 +1,21 @@
+increase trust over time is by creating mechanisms for providing feedback about the tool that are then used to improve both the underlying AI models and the user experience. This could be within the tool via some other mechanism for gathering user feedback. Given the importance of workflow integration, another important consideration is how we could best integrate these mechanisms into existing environments.
+
+As with building and sustaining trust, validation support is an important consideration when seeking to evolve trust. However, our findings suggest that this can have both positive and negative impacts on trust. Validation can serve a purpose in that you can leverage the AI along with their own control over the decision to use the output. For example, if more validation is needed than you want to put in maybe it is not worth using for that task. But this can be a double-edged sword, as our findings also suggest that the perceived need to validate occurring too often can lead to decreased trust and therefore decreased usage. One thing that was clear and consistent from our efforts is that when the contributions stop being accurate and appropriate, particularly over time, trust will almost inevitably decrease.
+
+### 4.4 Traditional vs. AI-assisted Tools
+
+One goal of this work is to better understand differences that may exist between trust in and use of traditional software development tools versus AI-assisted tools. Our findings suggest that there are in fact nuances to how engineers think about trust in AI-assisted tools, some of which are motivated by unique challenges to developing AI-assisted software tools.
+
+According to engineers in our study, it might be more difficult to develop a trustworthy AI-assisted tool in comparison to traditional software tools. One reason for this is that engineers view AI as “fundamentally closed source,” or less compatible with open source than traditional tools. While it is possible for the implementation of an AI-assisted tool to be made open source, the underlying model is much more difficult to make open source.
+
+AI-assisted and traditional tools are both affected by the factors outlined in the PICSE framework. However, our findings suggest that some factors may be more important with respect to AI-assisted tools than they are when it comes to trust in traditional software tools, such as safe and secure practices and user-facing validation support. Furthermore, while expectations may be initially low for any tool, engineers’ expectations are higher for the growth and evolution of AI-assisted tools. They expect AI-assisted tools to be smarter and therefore improve with time in comparison to traditional tools.
+
+Our findings also suggest that developers may trust AI-assisted tools more than they trust traditional tools when it comes to certain tasks. One common comparison was between the AI-assisted tool GitHub Copilot and the traditional tool IntelliSense. Because at that time GitHub Copilot was not aware of the user’s codebase but IntelliSense was, engineers may be more likely to trust tools like GitHub Copilot for “boilerplate things” that are not necessarily specific to the current project or domain and use IntelliSense for more project-specific tasks.
+
+Related to this is the fact that some tools may be especially ill-suited to AI-assistance in the eyes of engineers. In particular, our findings suggest debugging tools may be more difficult to make useful, and thereby trustworthy, for engineers. This is where factors such as goal matching and control become especially important.
+
+### 4.5 PICSE Across Organizational Contexts
+
+While the PICSE framework provides a structured lens for understanding trust in software tools, its adoption and impact can vary significantly across organizational contexts. Organizations differ in terms of culture, risk tolerance, and regulatory requirements — all of which influence how developers assess and adopt AI-assisted tools. For example, engineers at Microsoft operate in an environment that encourages experimentation and iterative adoption of tools, often
+
+Manuscript submitted to ACM

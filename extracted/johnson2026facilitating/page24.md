@@ -1,0 +1,21 @@
+System factors give tool creators more tangible ways to impact user trust. When Aisha’s team is designing and developing their new tool, our findings suggest they can have a positive impact on potential user trust by following safe and secure practices and making those practices visible. This includes things like privacy considerations, especially when developing AI-assisted tools.
+
+Another aspect of the PICSE✨ framework Aisha’s team can explicitly consider is the ease of installation and use. According to engineers in our study, this factor speaks to the complexity and steps involved in setting up the tool for initial use. More complexity means higher cost, which we already know can affect adoption and use [26].
+
+In some cases, factors can overlap across categories of the framework to impact user trust. As it pertains to ease of installation, our findings suggest that one place engineers may look to determine ease of installation and use is the community of users around the tool. So while working towards ease of installation and use is beneficial, it further helps to have a community of users that potential users can look to for these insights.
+
+Our findings suggest that another way Aisha’s team can work to further build initial trust is by working towards a polished presentation for the tool. This would start with the design of the tool, making considerations such as the aesthetics, flow, and usability of the tool. Also important, of course, is that the implementation reflects careful thought and consideration in the design phase of the tool.
+
+While not mentioned explicitly by engineers in our study, some of the other factors in the PICSE✨ framework that tool creators can consider for increasing the trustworthiness of their tools include user-facing validation support, feedback loops, correctness, consistency, performance, and transparent data practices (which relates closely to safe and secure practices, but specifically in the context of AI-assisted tool development).
+
+### 4.2 Applying the PICSE✨ framework in Science
+
+The PICSE framework makes several scientific contributions, including advancing theoretical understanding, inspiring novel decision models, and providing directions for further AI trust-related research in AI-assisted software engineering.
+
+As a structured framework of interrelated and validated constructs, the PICSE✨ framework allows researchers to move beyond description by facilitating the generation of testable hypotheses from its factors and their interactions, which supports the empirical validation of trust factors and their dynamics.
+
+The PICSE✨ framework can guide the experimental design of trust-calibration interfaces. For instance, researchers could explore how different ways of exposing “Transparent Data Practices” or “User-Facing Validation Support” (as identified by PICSE✨) impact a user’s ability to accurately assess a tool’s capabilities and limitations, leading to new decision models for explainable AI and informing broader design choices for developers aiming to build more trustworthy software tools.
+
+The PICSE✨ framework contributes to broader trust literature by detailing how established theoretical constructs—such as ability, benevolence, and integrity [34] or surface and reputed credibility [17]—manifest specifically within the socio-technical context of AI-assisted software engineering tools. It identifies new, salient factors (e.g., “Evolving Trust” through personalization, handling of hallucinations) that existing general models may not explicitly capture for this domain.
+
+The distinct factors identified within the PICSE framework offer a robust foundation for developing quantitative, predictive models of trust in AI-assisted tools. By operationalizing these factors, future research can empirically determine their relative weights, paving the way for a validated instrument capable of assessing and potentially forecasting the trustworthiness of new tools. The psychometric analysis of the PICSE framework by Choudhuri et al.

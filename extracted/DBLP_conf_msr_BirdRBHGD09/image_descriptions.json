@@ -1,0 +1,46 @@
+{
+  "page3_img_1.png": {
+    "title": "Implicit branching in git vs SVN linear history",
+    "description": "Two side-by-side schematic timelines contrast git\u2019s implicit branching with SVN\u2019s linear history. The left panel (t1\u2026t5) shows Alice and Bob making independent commits (black circles) on diverging lines (orange for Alice, green for Bob); when Alice pulls Bob\u2019s changes at t5 a merge commit is created, so Bob\u2019s codeline appears as an implicit branch in Alice\u2019s DAG even though Bob\u2019s repository still lacks Alice\u2019s commits. The right panel shows the equivalent sequence under SVN: all commits appear on a single vertical (green) line because developers must update the central repository before committing, so parallel work becomes an interleaved, linear history with no recorded merge. The figure highlights how git records merges and divergence that SVN\u2019s centralized workflow can obscure."
+  },
+  "page5_img_1.png": {
+    "title": "Crisscross merge in git DAG showing ambiguous commit origins",
+    "description": "A small git DAG with two colored lines (green = master, orange = feature) and six marked times t1\u2013t6. The right-hand labels map times to events: t1 first commit on master, t2 first commit on feature, t3 second commit on master, t4 merge commit, t5 second commit on feature, t6 third commit on master. The diagram illustrates a crisscross merge: after the merges at t4 both branches share the same ancestors, so commits prior to the merge become ancestors of both heads and the repository contains no explicit record of which branch those earlier commits were originally made on."
+  },
+  "page1_img_1.png": {
+    "title": "Debian projects using different SCMs (Jun 2006\u2013Dec 2008)",
+    "description": "Time series (x-axis Jun\u20112006 to Dec\u20112008) of the number of Debian packages reporting each SCM (y-axis). The green solid line (Subversion) dominates and rises steadily to roughly 3,000\u20133,300 projects by the end of 2008, while the blue dashed line (Git) shows rapid growth from late 2006 to about 1,000\u20131,200 projects at the same time, making Git clearly second to SVN. The remaining systems (Bazaar: purple dotted, CVS: red dash\u2011dot, Darcs: orange, Hg: grey) remain much lower and relatively flat (Bazaar around a few hundred at most; CVS, Darcs, and Hg near or below ~100). This visualization supports the paper\u2019s point that Git adoption was growing quickly and was the second most used SCM among Debian packages in this period."
+  },
+  "page5_img_2.png": {
+    "title": "Fast\u2011forward versus explicit merge in git histories",
+    "description": "Two side\u2011by\u2011side timelines compare an explicit merge (left) with a fast\u2011forward merge (right). In the left panel Alice makes commits at t1 and t2 (green line), Bob adds commits at t3 and t4 on a separate codeline (orange), and at t5 Alice pulls and a merge commit is created that records the two parents. In the right panel Alice\u2019s history is unchanged since Bob pulled, so when she incorporates Bob\u2019s t3\u2013t4 commits her HEAD is simply advanced (t1\u2192t4) with no merge commit created; this illustrates how fast\u2011forward integrates commits linearly and can leave no explicit merge record for miners to detect."
+  },
+  "page2_img_1.png": {
+    "title": "Decentralized git collaboration among four developers",
+    "description": "The diagram depicts four developers (Tom, Bob, Alice, Ram) each adjacent to a local \"git repo\" cylinder, with developer avatars and names. Single-headed arrows run between the repositories in multiple directions (many-to-many), visually indicating that developers can pull from or push to each other's repositories rather than using a single central server. The figure illustrates the paper\u2019s point that git enables decentralized, sideways sharing of commits and divergent local histories that become visible only when repositories are exchanged."
+  },
+  "page8_img_1.png": {
+    "title": "Monthly distinct authors for Ruby on Rails around Git migration",
+    "description": "A line chart plotting the number of distinct monthly authors for the Ruby on Rails repository from 2005 through early 2009 (y-axis labeled \u201cNumber of Distinct Authors\u201d, x-axis by year). Before the blue dot labeled \u201cSwitch to Git\u201d (around mid\u20112008) monthly counts mostly stay below about 12 authors with small peaks in 2006; immediately after the marked migration the series rises sharply to a peak near 70 authors and then stabilizes in the ~40\u201360 range with a brief dip to about 35 before rising again. The paper points out this abrupt rise coincides with the move to git and is likely due largely to git\u2019s superior facilities for tracking authorship rather than solely a sudden surge of new contributors."
+  },
+  "page4_img_2.png": {
+    "title": "Rebasing flattening a branched commit DAG into a linear history",
+    "description": "The figure has two panels: (a) Before Rebasing shows a green mainline (Alice) and an orange divergent codeline (Bob) with commits at times t1..t4 and a merge commit at t5 (the orange line joins the green line at the merge). (b) After Rebasing shows a single linear green history with commits ordered t1, t3, t2, t4 and no merge commit marker. The diagram illustrates that rebasing can remove the explicit branch and merge node and reorder commits\u2014preserving commit content but changing the DAG structure and commit identities\u2014so the repository\u2019s visible history no longer records the original branch-and-merge events."
+  },
+  "page4_img_1.png": {
+    "title": "Subgraph of Samba git commit DAG showing branches and merges before 4.0 alpha3",
+    "description": "A small subgraph of the Samba project\u2019s git DAG: colored vertical lines (green, pink, orange, light blue) are different codelines, white-circled nodes are commits, and slanted horizontal connectors show merges between those lines. Commit log excerpts are aligned to nodes on the right and include several merge messages (e.g. multiple \u201cMerge branch 'v4-0-test' \u2026\u201d and \u201cMerge branch 'v4-0-local' \u2026\u201d), ordinary commits like \u201ctorture: fix compiler warnings\u201d and the release head \u201cThis is Samba4 alpha3!\u201d. The diagram therefore illustrates the non-linear history created by branching and repeated merges into the mainline in the lead-up to the release, highlighting how multiple test and feature branches were integrated."
+  },
+  "page7_img_1.png": {
+    "title": "Side-by-side file versions showing a function moved (Alice vs Bob)",
+    "description": "Two side-by-side code snapshots are shown: (a) \"original by Alice\" (left) contains #include <math.h>, an add function, then a sub function and main; (b) \"modified by Bob\" (right) has identical contents but the sub function has been moved above add. The ellipses indicate the function bodies are unchanged \u2014 only the order was modified. The paper uses this example to illustrate Promise 7: because git tracks content (not just filenames/locations), tools like git blame -C -M can identify Alice as the original author of the moved lines, whereas svn blame would typically attribute those lines to Bob after the reorder."
+  },
+  "page6_img_1.png": {
+    "title": "Alice\u2013Bob\u2013Carol commit timeline illustrating lost merge source",
+    "description": "A vertical timeline diagram for three developers (green = Alice, light blue = Bob, orange = Carol) showing commits at times t1\u2026t5 (black circled nodes) with annotated commit messages on the right: \u201cfix null pointer bug\u201d, \u201cadd caching\u201d, \u201cmerge git://carol.com/project.git\u201d, \u201coptimize list traversal\u201d, and \u201cgrabbed changes\u201d. An orange arrow at t3 shows Carol\u2019s content being merged into Bob (Bob records \u201cmerge git://carol.com/project.git\u201d), and a light-blue arrow at t5 shows Alice pulling Bob\u2019s repository (\u201cgrabbed changes\u201d). The figure illustrates that Alice\u2019s repository contains the merged content from Carol but no explicit provenance linking Bob as the intermediate source, so a miner of only Alice\u2019s logs could incorrectly infer that Alice pulled directly from Carol (the issue discussed as Peril 6)."
+  },
+  "page9_img_1.png": {
+    "title": "Signed-off-by network (Linux kernel, key members)",
+    "description": "A directed graph of developer sign-off relationships in the Linux kernel: each node is a developer label and a directed edge A\u2192B means A signed off on a commit immediately after B. The visualization shows two prominent hub nodes (one center-left and one center-right) with many incoming and outgoing arrows connecting numerous peripheral developers, indicating those hubs frequently appear in sign-off sequences. Smaller chains and star-like clusters (for example a three-node chain at the bottom and several single-hop edges) show local reviewer relationships; the figure is a focused subset displaying key community members and the highest-weighted sign-off edges to illustrate the hierarchical reviewer/integrator structure uncovered in the paper."
+  }
+}

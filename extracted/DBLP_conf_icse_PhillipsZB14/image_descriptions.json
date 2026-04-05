@@ -1,0 +1,26 @@
+{
+  "page4_img_figure_1.png": {
+    "title": "Research process flow: interviews \u2192 survey \u2192 focus group",
+    "description": "A left-to-right flow diagram summarizing the three-study research process. On the left is the guiding \u201cFramework (Cohen and Bailey)\u201d listing four team-effectiveness dimensions; an arrow points to an Interviews box labeled \u201c7 engineers.\u201d The interviews feed a centered list of four findings (Role ambiguity; Knowledge sharing; Intergroup dynamics; Build failure management), which then point to a Survey box labeled \u201c132 responses.\u201d An arrow from the survey leads to four implications (Role redefinition; Social knowledge sharing; Intergroup process transparency; Reduce intergroup conflict) and finally to a Focus Group box labeled \u201c8 participants.\u201d The figure makes explicit how the Cohen & Bailey framework structured the interviews, how interview findings were validated and quantified by the 132-response survey, and how those results informed four actionable implications evaluated with an 8-person focus group."
+  },
+  "page5_img_table_1.png": {
+    "title": "Survey results: Frequency of builder tasks",
+    "description": "A table of survey responses (proportion answering \u201cfrequently\u201d or \u201cvery frequently\u201d) showing which tasks Microsoft builders perform most often. The top tasks are running build operations (71%) and developing build automation (68%), followed by managing code flow (52%), desktop build support (49%), and developing desktop build tools (47%). Less frequent duties include product development (30%), hardware management (18%), and testing (9%), illustrating that builders commonly span both operational/project-management and development/automation responsibilities, which supports the paper\u2019s finding of role ambiguity."
+  },
+  "page6_img_table_1.png": {
+    "title": "Information sources for diagnosing build failures (usefulness vs frequency)",
+    "description": "A survey-derived table reporting how useful and how frequently builders access seven information sources when investigating build failures (percentages reflect respondents who rated items 4\u20135 on 1\u20135 scales; survey N=132). Build logs top both lists (92% useful, 92% frequent), followed by tribal knowledge (undocumented experience: 89% useful, 81% frequent), source control history (82% useful, 78% frequent), and lists of new changes (74% useful, 67% frequent). Check-in systems (43% useful, 26% frequent), external context such as email or hallway conversations (42% useful, 32% frequent), and loop/rolling build results (40% useful, 25% frequent) are used much less often, highlighting builders\u2019 strong reliance on logs, version history, and informal \u201ctribal\u201d knowledge."
+  },
+  "page3_img_table_2.png": {
+    "title": "Survey respondents by Microsoft division (n=132)",
+    "description": "A two-column table showing how the 132 survey respondents are distributed across Microsoft divisions. Counts are: Server and Tools 35, Windows and Windows Live 33, Business 25, Other 15, Entertainment and Devices 13, and Online Services 11. Server and Tools (~26.5%) and Windows and Windows Live (~25%) supplied the largest shares (together about 51% of responses), with Business providing ~19% and the remaining divisions contributing the rest."
+  },
+  "page3_img_table_1.png": {
+    "title": "Interview participants by product group and Microsoft experience",
+    "description": "Table of the seven interview participants (P1\u2013P7) showing their primary product group and coarse Microsoft experience ranges (column header: \u201cMS Exp. (yrs)\u201d). Participants represent four major product areas: Visual Studio (P1, P4), Windows (P2), Office (P3, P5, P6), and Xbox (P7). Reported experience spans three bands\u20145\u201310 years (P4, P6), 10\u201315 years (P2, P3, P5), and 15\u201320 years (P1, P7)\u2014with ranges used to protect participant anonymity."
+  },
+  "page4_img_table_1.png": {
+    "title": "Focus-group participant demographics (division and Microsoft experience)",
+    "description": "The table enumerates the eight anonymized focus-group participants (F1\u2013F8), giving each participant\u2019s primary Microsoft division and a rounded range of Microsoft experience in years. Participants come from four divisions: Business (2 participants), Server and Tools (2), Entertainment and Devices (1), and Windows and Windows Live (3). Experience is concentrated in mid-level ranges (four participants with 10\u201315 years, three with 5\u201310 years) with one senior outlier at 25\u201330 years, indicating the group mixes junior, mid-career, and long-tenured staff to provide diverse perspectives while preserving anonymity."
+  }
+}

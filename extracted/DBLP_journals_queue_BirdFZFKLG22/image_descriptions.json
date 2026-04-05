@@ -1,0 +1,22 @@
+{
+  "page23_img_contents.png": {
+    "title": "Contents icon with left-pointing red arrow",
+    "description": "A small decorative navigation icon showing the word \"CONTENTS\" in bold, uppercase type inside a light-gray rectangular frame. To the left of the text is a textured, red left-pointing arrow graphic; the icon sits on a white background and in the page crop the partial text \"Copyright \u00a9\" appears above it. In the paper this graphic is used as a page/section marker (the file is named page23_img_contents.png) rather than conveying quantitative data."
+  },
+  "page10_img_1.png": {
+    "title": "Red triangular section icon from study protocol",
+    "description": "A small decorative red icon with a roughly triangular/flag shape and an irregular, paint\u2011like lower edge on a white background. The graphic is a section marker that appears beside the \u201cStudy Protocol\u201d heading on page 10 of the paper; it contains no labels, numbers, or data. The provided crop shows the icon at left with nearby lines of body text visible to the right, indicating it is purely a visual element used for layout or emphasis."
+  },
+  "page5_img_1.png": {
+    "title": "IDE screenshot showing Copilot multi-line TypeScript suggestion",
+    "description": "A dark\u2011themed editor (file tab sentiments.ts) displaying a TypeScript async function isPositive(text: string): Promise<boolean>. A multi-line Copilot suggestion is highlighted in blue and inserts a fetch call to 'http://text-processing.com/api/sentiment/' with options (method: \"POST\", body: `text=${text}`, headers including \"Content-Type\": \"application/x-www-form-urlencoded\"). The code continues with const json = await response.json(); return json.label === \"pos\"; and a Copilot badge is visible in the bottom-left, illustrating that the tool can produce context-aware, multi-line completions in the IDE. Other open tabs (write_sql.go, parse_expenses.py, addresses.rb) hint at multi-language use."
+  },
+  "page9_img_table_1.png": {
+    "title": "Three-column summary of early Copilot user experiences",
+    "description": "A three-column table titled \u201cTHE GOOD / THE BAD / THE MIXED\u201d that condenses early Copilot forum feedback into short, stacked entries (rows separated by dotted red lines). The Good column highlights perceived benefits such as reported productivity improvements, comparisons of Copilot to a human pair programmer, Copilot \u201cremoving the ceiling on creativity,\u201d and suggestions users would have otherwise overlooked. The Bad column lists concrete concerns: Copilot getting stuck in loops of repeated suggestions, failing to write defensive checks (e.g., null-pointer checks), sometimes suggesting inappropriate text, and occasionally leaking PII in header files. The Mixed column captures ambiguous trade-offs users noted: less manual coding but more time spent reviewing suggestions, reduced reliance on Stack Overflow paired with less understanding of why code works, and limited API discoverability that doesn\u2019t give enough information to choose the best solution."
+  },
+  "page4_img_table_1.png": {
+    "title": "Three-study summary of Copilot research and key findings",
+    "description": "A three-column summary table that compares the paper\u2019s three empirical studies: Study 1 (Forum analysis, Oct\u2013Nov 2021) reviewed 279 GitHub Discussions posts to answer \u201cWhat are people using Copilot for?\u201d and found users spent less time on Stack Overflow but reported having less understanding of how or why suggested code works. Study 2 (Case study, Dec\u2013Jan 2022) used a think\u2011aloud protocol with five expert Python developers to explore how first\u2011timers engage with Copilot and found participants accepted suggestions for efficiency while relinquishing a small amount of autonomy/control and visibly wrestling with that tradeoff in real time. Study 3 (Survey, Feb\u2013Mar 2022) analyzed 2,047 survey responses to assess productivity, correlating 11 usage metrics with perceived productivity and reporting that acceptance rate showed the strongest positive relationship (acceptance rate had the highest positive correlation to aggregate perceived productivity; reported in the text as \u03c1 \u2248 0.24, P < 0.0001). The table layout highlights each study\u2019s question, approach (in red), and concise key finding (in red) beneath dotted separators."
+  }
+}

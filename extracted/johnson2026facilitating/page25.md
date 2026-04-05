@@ -1,0 +1,21 @@
+[12] represents a significant first step in this direction, demonstrating the empirical clustering and validation of core trust-building elements necessary for such quantitative modeling.
+
+## 4.3 Building, Sustaining, and Evolving Trust in AI Tools
+
+As implied by the diversity and volume of factors in the PICSE framework, trust is built, broken, and re-built beyond initial adoption and use. The factors discussed regarding pre-adoption trust building would apply beyond adoption, but there are additional factors that can only be assessed upon use. Less obvious are some of the possible distinctions between factors as they pertain to building, sustaining, and evolving trust, which we discuss next.
+
+### 4.3.1 Building Trust
+
+Our findings suggest that the experience developers have in their “first exposure” to an AI-assisted tool is central to the building of initial trust. In this first experience, we found that when aiming to acquire trust and possible use from a developer, it is vital that the tool is able to produce correct and useful outputs. This is especially the case given the fact that developers have existing and pervasive concerns regarding the “hallucinations” AI tools are known for. One consideration for tool designers would be to provide clear instructions for reducing the risk of hallucinations and achieving the most appropriate and accurate information. Another consideration that emerged from our efforts is finding ways to best communicate the rationale and confidence behind the outputs AI tools provide. Insights from our study suggest that this can be as simple as communicating certainty, or lack thereof, in a given contribution but can also involve providing explanations or citing sources of information to help developers better understand (and ultimately build trust in) AI tools.
+
+This also relates to concerns around data privacy, security, and transparency, where participants in our study expressed concerns regarding where the data used by the AI tool comes from and is going. Therefore, when facilitating trust building with AI tools it is also important to provide visibility to users regarding data usage policies that are in place to ensure that personal or proprietary data is not misused or exposed. This includes transparency regarding data sources used by AI tools and how the tools work (what code bases they are trained on, what assumptions they make, how deterministic they are, etc.).
+
+### 4.3.2 Sustaining Trust
+
+Establishing trust is one thing but maintaining it is another. While concerns such as accuracy and transparency play a significant role in the initial interactions, our findings suggest that the ability to assess and deal with output quality are essential to sustaining trust in AI tools. Given the known issues around AI tools’ accuracy and output relevance, it is not surprising that users may be putting in the extra effort to verify the quality of the output provided. However, our study demonstrates the role this process can play in sustaining trust where initial attempts at validating or verifying outputs can sustain trust in ways that could even reduce validation efforts over time. In fact, we found that the most common reason for trust going up or down was related to the ongoing performance of AI tools, emphasizing the importance of consistency in the production of reliable, high-quality output. This also highlights the importance of validation and verification mechanisms that make it easier to assess output quality over time, thereby more effectively sustaining user trust.
+
+### 4.3.3 Evolving Trust
+
+While it may seem sufficient to sustain initial trust for prolonged use, our findings emphasize the dynamic nature and fragility of trust in AI tools. As with people, trust in AI tools can increase, as well as decrease, over time. And while trust can be slow to build, it can be quickly and easily broken. We found that central to the evolution of trust is the evolution of the tool itself over time. More specifically, once adopted users may be inclined to trust AI tools more over time as they see the AI tools adapt and even become personalized (e.g., adapt to a particular user’s naming style) based on prior interactions. One way our findings suggest AI tools can become more adaptive, and thereby
+
+Manuscript submitted to ACM

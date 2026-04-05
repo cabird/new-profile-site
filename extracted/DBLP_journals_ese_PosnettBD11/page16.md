@@ -1,0 +1,5 @@
+## Table 6 JHotDraw in model labels: v = release, r = role, s = size
+
+![Large rotated table showing patterns, roles and numeric results](page16_img_1.png)
+
+Read patterns across the rows and down the columns (see individual columns in Table 2 for the specific roles in the role labels (T/H/M/2/N/mr)). For design patterns see Table 2. Change is response for all except M_v->s where size is response. Role indicators (↑, ⇑, ⇑) indicate positive significance (levels 0.1, 0.05, 0.01 respectively), and negative indicators (↓, ⇓, ⇓) indicate significance (levels 0.1, 0.05, 0.01 respectively). · indicates not significant. Remaining roles (mr) in order: Adapter: adaptee, Command: client, Receiver: receiver, Decorator: concrete decorator, Factory Method: product, Observer: concrete subject. Patterns with two rows have more than one set of metapattern roles and numeric results are the same for both rows. Unification pattern indicates template/hook role in the template column.

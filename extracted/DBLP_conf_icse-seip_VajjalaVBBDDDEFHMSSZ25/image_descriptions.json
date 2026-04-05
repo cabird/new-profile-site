@@ -1,0 +1,66 @@
+{
+  "page4_img_table_2.png": {
+    "title": "Initial dataset label distribution (train/val/test)",
+    "description": "Table II reports the breakdown of the initial diff dataset (3,981 diffs) by label and data split. Counts per label are: UserMarkedNoise 2,541 (train 1,524 / val 508 / test 509), NewFeature 1,372 (train 823 / val 274 / test 275), and Regression 68 (train 41 / val 14 / test 13). The three splits sum to 2,388 training, 796 validation, and 797 test diffs. The table highlights a strong class imbalance (UserMarkedNoise dominant, Regression very rare), which the paper cites as a challenge for early model training and explains low Regression performance in initial experiments."
+  },
+  "page6_img_2.png": {
+    "title": "Dynamic few\u2011shot in\u2011context learning accuracy (Table V)",
+    "description": "Table V reports accuracy for the dynamic few\u2011shot in\u2011context LLM approach: overall accuracy is 71.27% (568 correct of 797). Per\u2011label recall-style accuracies are shown with counts: NewFeature 69.45% (191/275), UserMarkedNoise 72.30% (368/509), and Regression 69.23% (9/13). Compared with the static few\u2011shot result reported earlier (~50.19%), this dynamic retrieval approach yields roughly a 20 percentage\u2011point lift in overall accuracy, though the Regression metric is based on very few examples (13) and therefore less statistically reliable."
+  },
+  "page2_img_1.png": {
+    "title": "Differential testing flow: forked requests produce behavior diffs",
+    "description": "A simple flow diagram showing a single production request being duplicated (forked) and sent to two parallel boxes labeled \u201cTest Environment\u201d and \u201cProduction Environment,\u201d whose outputs are then combined into a single box labeled \u201cBehavior Difference (Diff).\u201d In the paper\u2019s context this represents forking a fraction of real production traffic (1%) to run against a new test build and the live build, with both sides instrumented to collect telemetry and logs; the comparison of those outputs yields diffs containing log and telemetry signals. Those diffs are the artifacts OCEs inspect and label (e.g., UserMarkedNoise, NewFeature, Regression) as part of the release validation workflow."
+  },
+  "page6_img_3.png": {
+    "title": "Fine-tuned GPT-3.5 accuracy by label (Table VI)",
+    "description": "Table showing accuracy of the fine-tuned GPT-3.5 model on a test set of 797 diffs. The model achieves a total accuracy of 91.47% (729/797). Per-label results are: NewFeature 89.09% (245/275), UserMarkedNoise 95.09% (484/509), and Regression 0.00% (0/13). The breakdown reveals that the high overall accuracy is driven by strong performance on the two majority labels while the model failed to predict any of the 13 Regression cases in this test set."
+  },
+  "page6_img_1.png": {
+    "title": "Static few-shot in-context learning accuracy (Table IV)",
+    "description": "A summary table reporting labeling accuracy for the static few-shot in-context LLM experiment on a test set of 797 diffs. The model achieved a total accuracy of 50.19% (400/797). Per-class recall-style accuracies and counts are: NewFeature 41.09% (113/275), UserMarkedNoise 54.81% (279/509), and Regression 61.54% (8/13). The table highlights a strong class imbalance (509 noise vs. 13 regression examples), so the Regression figure is based on very few samples; the paper notes this static few-shot result (~50%) is moderate and insufficient for reliable OCE automation compared to later dynamic and fine-tuned approaches."
+  },
+  "page5_img_1.png": {
+    "title": "Dynamic few\u2011shot retrieval via cosine similarity",
+    "description": "A schematic showing how a single Test Diff is compared against many Train Diffs to retrieve per-diff few\u2011shot examples. The diagram illustrates computing cosine similarity between the test diff\u2019s embedding and embeddings of all training diffs (the paper uses OpenAI\u2019s text-embedding-ada-002), then selecting the most similar training examples to produce three dynamic few\u2011shot examples\u2014one labeled Regression, one NewFeature, and one UserMarkedNoise\u2014for the LLM prompt. The paper reports this dynamic retrieval strategy meaningfully improved in\u2011context learning performance (raising overall accuracy from ~50% with static examples to ~71.3% with dynamic examples)."
+  },
+  "page3_img_1.png": {
+    "title": "Attributes used to represent diffs for auto-labeling",
+    "description": "A two-column table lists the seven attributes the authors use to represent each behavioral diff: Category (high-level diff type such as ErrorCode or MaskedResponse), Description (diagnostic details from log entries), Calls (the request calls involved), Tags (identifiers for tracking), Comments (engineer-provided context), Test Logs and Prod Logs (detailed log entries from each environment), and OCE Insight (automatically extracted comparisons emulating on-call engineers\u2019 tribal knowledge). These attributes were fed to the LLM classifier as the input features; the paper notes that Comments are especially informative (an ablation without Comments reduced accuracy and caused the model to miss Regression labels in live snapshots), while Test/Prod Logs and OCE Insight capture the concrete differences the model must reason about."
+  },
+  "page7_img_table_1.png": {
+    "title": "Fine-tuned GPT-4 accuracy and confusion metrics on larger diff dataset",
+    "description": "Table of evaluation metrics for the GPT\u20114 model fine-tuned on the expanded dataset (1,910 ground-truth diffs). Overall accuracy is 97.38% (1,860 correct predictions out of 1,910). Per-label: NewFeature \u2014 96.27% accuracy (361 TP / 375 true), precision 0.9475 and recall 0.9627; UserMarkedNoise \u2014 98.18% accuracy (1,460 TP / 1,487 true), precision 0.9885 and recall 0.9818; Regression \u2014 81.25% accuracy (39 TP / 48 true), precision 0.75 and recall 0.8125. The confusion counts show few false positives/negatives for NewFeature and UserMarkedNoise (FP 20/17, FN 14/27), while Regression still has more errors (13 FP, 9 FN) despite marked improvement over earlier experiments."
+  },
+  "page4_img_table_3.png": {
+    "title": "Label distribution in second diff dataset (train/val/test)",
+    "description": "Table III tabulates the second dataset of 12,683 diffs and its train/validation/test splits. The dataset is split into 10,145 training, 635 validation, and 1,903 test examples. Label counts are highly imbalanced: UserMarkedNoise = 9,887 (\u224877.9%), NewFeature = 2,477 (\u224819.5%), and Regression = 319 (\u22482.5%); the training set contains 7,909 noise, 1,981 new-feature, and 255 regression examples. The paper notes this increase in Regression training examples (from ~41 to 255) was a deliberate effort to improve model performance on the critical Regression class."
+  },
+  "page4_img_1.png": {
+    "title": "Diff Auto-Labeler Pipeline: data, LLM methods, and evaluation",
+    "description": "Diagrammatic overview of the Diff Auto-Labeler: diffs collected from IDNA (each labeled by on-call engineers as Regression, NewFeature, or UserMarkedNoise) are first split into train/validation/test sets. The pipeline then follows two directions for the auto-labeler \u2014 in\u2011context learning with few-shot examples and fine\u2011tuning of LLMs \u2014 before producing predictions. Outputs are validated via both offline test sets and online weekly snapshots (comparing model predictions to OCE labels); the paper further describes in-context retrieval strategies and fine-tuning (LoRA on GPT-4) used to maximize accuracy."
+  },
+  "page6_img_4.png": {
+    "title": "Fine-tuned GPT-4 accuracy by label (initial test set)",
+    "description": "Results from the fine-tuned GPT-4 model on the initial test split of 797 diffs: total accuracy 95.48% (761/797). Per-label performance: NewFeature 95.27% (262/275), UserMarkedNoise 96.66% (492/509), and Regression 53.85% (7/13). The high overall accuracy is driven by excellent performance on the two majority classes (NewFeature and UserMarkedNoise), while Regression accuracy is much lower because there are very few regression examples in the test set (only 13), yielding only seven correct predictions."
+  },
+  "page8_img_5.png": {
+    "title": "Ablation results (no comments): GPT-4 labeling accuracy by label",
+    "description": "Table of the fine-tuned GPT\u20114 model performance when the user comments attribute is removed (ablation). For 1,910 ground-truth diffs the model made 1,773 correct predictions for an overall accuracy of 92.83%; per-label accuracies are 76.53% (NewFeature, 287/375), 97.78% (UserMarkedNoise, 1,454/1,487) and 66.67% (Regression, 32/48). Reported precision/recall pairs are: NewFeature 0.9025 / 0.7653, UserMarkedNoise 0.9399 / 0.9778, and Regression 0.7273 / 0.6667. These results show high robustness for UserMarkedNoise despite removing comments, while NewFeature and especially Regression labeling degrade compared to the full-feature model (as discussed in the paper)."
+  },
+  "page8_img_4.png": {
+    "title": "Snapshot #4 labeling accuracy and confusion counts for three labels",
+    "description": "This table reports Snapshot #4 evaluation over 61 diffs: total accuracy is 91.8% with 56 correct predictions out of 61. Per-label results show NewFeature: 22/23 correct (accuracy 95.65%), precision 0.88 and recall 0.9565 (TP=22, FP=3, FN=1, TN=1). UserMarkedNoise: 34/37 correct (accuracy 91.89%), precision 0.9714 and recall 0.9189 (TP=34, FP=1, FN=3, TN=1). Regression had 1 ground-truth case that the model missed (TP=0), giving 0.0% accuracy and precision/recall of 0.0, though the model correctly identified 59 non-regression examples (TN=59) and produced 1 FP for Regression."
+  },
+  "page8_img_1.png": {
+    "title": "Snapshot #1 diff-labeling metrics (NewFeature & UserMarkedNoise)",
+    "description": "Table shows the model\u2019s Snapshot #1 performance on 65 diffs: overall accuracy 89.23% with 58 correct predictions. For NewFeature the model predicted 16 of 19 correctly (accuracy 84.21%), with TP=16, FP=4, FN=3, precision=0.80 and recall=0.8421. For UserMarkedNoise it predicted 42 of 46 correctly (accuracy 91.30%), with TP=42, FP=3, FN=4, precision\u22480.9333 and recall\u22480.913. Regression metrics are marked N.D. because there were zero ground-truth Regression diffs in this snapshot (TP=FP=FN=0, TN=65)."
+  },
+  "page8_img_3.png": {
+    "title": "Snapshot #3 labeling results (accuracy, precision, recall)",
+    "description": "This table reports online-evaluation results for Snapshot #3 (fine-tuned GPT-4). Out of 57 diffs, the model made 52 correct predictions for an overall accuracy of 91.23%. For NewFeature it correctly labeled 18 of 20 cases (90.0% accuracy) with precision 0.8571 and recall 0.90 (3 false positives, 2 false negatives). For UserMarkedNoise it correctly labeled 34 of 37 cases (91.89% accuracy) with precision 0.9444 and recall 0.9189 (2 false positives, 3 false negatives). The Regression column is marked N.D. because no ground-truth Regression examples were present in this snapshot (model produced 0 Regression true positives and 57 true negatives)."
+  },
+  "page8_img_2.png": {
+    "title": "Snapshot #2: Diff-labeler performance (accuracy, confusion counts, precision/recall)",
+    "description": "This table reports the fine-tuned GPT-4 model\u2019s Snapshot #2 results on 45 diffs (39 correct predictions, overall accuracy 86.67%). Per-class accuracy is 80.0% for NewFeature (4 correct of 5), 91.18% for UserMarkedNoise (31/34), and 66.67% for Regression (4/6). Confusion counts show NewFeature had 4 TP, 5 FP and 1 FN (precision 0.4444, recall 0.80), UserMarkedNoise had 31 TP, 1 FP and 3 FN (precision 0.9688, recall 0.9118), and Regression had 4 TP, 0 FP and 2 FN (precision 1.00, recall 0.6667), indicating the model rarely mislabels non-regressions as regressions but misses some regression cases."
+  }
+}

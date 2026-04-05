@@ -1,0 +1,18 @@
+merge branches, and especially when a conflict arises during the merge. Their studies report that the majority of the developers (75%) prefer collaborative merging (as opposed to merging and taking decisions alone). This reiterates the fact that tools that facilitate collaboration, by providing early warnings, are important in handling merge conflict situations.
+
+## 3 CONCURRENT VERSUS NON-CONCURRENT EDITS IN PRACTICE
+
+The differences in the fashion in which edits are made to source code files (concurrent versus non-concurrent) can cause various unintended consequences (as explained in Section 1). We performed large-scale empirical analysis of source code edits to understand the ability of concurrent edits to cause bugs. We picked bugs as a candidate for our case study, because it is relatively easy to mine and generate massive amounts of ground-truth data about bugs and map them back to the changes that induced the bugs, by leveraging some of the techniques proposed by Wang et al. [44], at Microsoft’s scale. Understanding the extent of the problem, i.e., the side effects caused by concurrent source code edits in a systematic way, is an essential first step toward making a case for building an early intervention service like ConE. This allows us to quickly sign up customers inside the company and deploy the ConE system on thousands of repositories, for tens of thousands of developers, across Microsoft. To that extent, we formulate two research questions that we would like to find answers for.
+
+- RQ1: How do concurrent and non-concurrent edits to files compare in the number of bugs introduced in these files?
+- RQ2: To what extent are concurrent, non-concurrent, and all edits correlated with subsequent bug fixes to these files?
+
+Answering the questions above allows us to assess the urgency of the problem. The methods, techniques and outcomes used can also be employed to inform decision makers, when investments in the adoption of techniques like ConE need to be made.
+
+We performed an empirical study on data that is collected from multiple, differently sized repositories. For our study, we focused on one of the important side effects that is induced by collaborative software development, i.e., the “number of bugs introduced by concurrent edits.” We chose this scenario as we have an option to generate an extensive set of ground-truth data, by leveraging techniques proposed by Wang et al. [44], to tag pull requests as bug fixes. They employ two simple heuristics to tag bug fixes: the commit message should contain the words “bug” or “fix” but not “test case” or “unit test.” Tagging changes that introduce bugs is not a practice that is followed very well in organizations. Studies have shown that files changed in bug fixes can be considered as a good proxy to files that introduced the bugs in the first place [33, 45]. Combining both ideas, we created a ground-truth data set that we used in our empirical analysis. We broadly classify our empirical study into three main steps.
+
+1. Data collection: Collect data using the data ingestion framework that we have built, which ingests metadata about pull requests (author, created/closed dates, commits, reviewers, etc.), iterations/updates of pull requests, file changes in pull requests, and intent of the pull request (feature work, bug fix, refactoring, etc.).
+2. Use the data collected in Step 1 to analyze the impact of concurrent edits on bugs or bug fixes in comparison to non-concurrent edits.
+3. Explain the differences in correlations between concurrently versus non-concurrently edited files to the number of bugs that they introduce.
+
+For the purpose of the empirical analysis, we define concurrently and non-concurrently edited files as follows:

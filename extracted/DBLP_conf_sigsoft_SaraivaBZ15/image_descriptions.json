@@ -1,0 +1,14 @@
+{
+  "page3_img_1.png": {
+    "title": "Cross-entropy comparison: application-specific vs office-wide language models",
+    "description": "Bar chart comparing cross-entropy (lower is better) for application-specific (dark bars) and Office-wide (light bars) 3-gram language models on Excel, Word, and PowerPoint test corpora. Application-specific models have lower cross-entropies in all three cases: Excel 13.86 vs 15.52, Word 11.84 vs 15.37, and PowerPoint 14.75 vs 15.33. The largest improvement is for Word (\u22483.53 reduction) and the smallest for PowerPoint (\u22480.58), supporting the paper\u2019s finding that application-specific models outperform a general Office model for RQ1."
+  },
+  "page3_img_2.png": {
+    "title": "Cross-entropy: last milestone vs entire development cycle (RQ3)",
+    "description": "Grouped bar chart comparing cross-entropy (y-axis; lower is better) for four test corpora \u2014 Excel, Word, PowerPoint, and Office \u2014 with two bars per group: dark bars for models trained on the entire development cycle and light-gray bars for models trained only on the last milestone. For Excel, PowerPoint, and the overall Office corpus the two bars are very close (small differences), and in those cases the last-milestone model is slightly better in the figure. For Word there is a clear gap: the entire-development-cycle model (dark bar) has substantially lower cross-entropy than the last-milestone model, indicating the whole-cycle model performs markedly better for Word."
+  },
+  "page3_img_table_1.png": {
+    "title": "Cross-Entropy of Developer LMs by Application",
+    "description": "Table of cross-entropy values (lower is better) comparing, for five developers (D1\u2013D5), language models built from a developer\u2019s changes restricted to an application versus a developer\u2019s general, office-wide model. For every developer and application shown, the application-specific model has a substantially lower cross-entropy (for example, D1 on Excel: 3.57 vs 11.04; D1 on Word: 1.72 vs 11.01; D3 on Excel: 2.02 vs 10.09), indicating better predictive performance. All 15 application-specific vs. general comparisons favor the application-specific model; the paper reports this improvement is statistically significant (paired t-test, p < 0.01)."
+  }
+}

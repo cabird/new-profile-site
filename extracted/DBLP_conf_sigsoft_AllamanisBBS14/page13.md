@@ -1,0 +1,3 @@
+[75] C. Zhang, J. Yang, Y. Zhang, J. Fan, X. Zhang, J. Zhao, and P. Ou. Automatic parameter recommendation for practical API usage. In Proceedings of the 34th International Conference on Software Engineering, pages 826–836. IEEE Press, 2012.
+
+[76] H. Zhong, T. Xie, L. Zhang, J. Pei, and H. Mei. MAPO: Mining and recommending API usage patterns. In ECOOP 2009–Object-Oriented Programming, pages 318–343. Springer, 2009.

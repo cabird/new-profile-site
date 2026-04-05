@@ -1,0 +1,9 @@
+quantitative data we could get our hands on that had to do with the code-review tooling and process already in place at Microsoft. That’s how we started on this journey of trying to understand where the process originated and how it has evolved over time. What are the factors that drove that evolution? How is the process currently applied? How does it work with open source? How does it work within Microsoft? And what happens when we find ourselves collaborating with others?
+
+LP: What did you end up initially focusing on?
+
+CHRISTIAN BIRD: In general, we wanted to find out what prompted people to do code reviews in the first place. How many people were usually involved? What types of issues were being raised? What was it that led people to make changes? And what typically led people not to make changes?
+
+TERRY COATTA: Were the engineering teams themselves pushing for this line of inquiry? That is, were people coming to you to say, “We’re sure spending a lot of time with code reviews, but it doesn’t seem like we’re getting all that much out of it”?
+
+CB: Mostly it was because this was an area where the data was both plentiful and readily available. With that being said, once people found out what we were doing, they proved to be quite receptive. It wasn’t like they wondered why we were doing this research. In fact, it was just the opposite. People generally were very supportive of improving the code-review process and, if anything, said they wished it was treated as a first-class citizen. Also, many were pretty excited to learn there was data available they would be able to track themselves.

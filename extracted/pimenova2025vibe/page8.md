@@ -1,0 +1,18 @@
+and refine emerging themes. Our emphasis on discussion, memoing, and consensus-building provides methodological rigor while remaining faithful to the interpretive aims of our work.
+
+### Stage 3—Iterative Axial Coding
+We used axial coding to synthesize key themes by merging and connecting analytic codes into abstract categories and conceptual relationships [55]. We mapped themes to vibe coding practices and experiences. We used Miro [35] for organizing codes and facilitating the axial coding process, enabling effective merging and connecting of codes into abstract categories and conceptual relationships. Reddit data was used to develop the initial codebook and groupings. We then applied this codebook to the interview and LinkedIn data, adding new codes as needed, followed by a final round of axial coding. This approach supported both cross-platform theme triangulation and identification of platform-specific differences.
+
+In this qualitative research, our focus is on investigating diverse perspectives rather than quantifying occurrences. As a result, we do not enumerate the frequency of themes across participant responses to avoid implying statistical significance. Instead, we emphasize the richness of individual insights, highlighting patterns and offering deeper explanatory narratives.
+
+## 4 Findings
+We present the findings from our qualitative analysis of social media posts on vibe coding and interviews with vibe coders. Section 4.1 introduces a theory and a definition of vibe coding. Sections 4.2–4.5 explore the four core components of our theory: AI interaction, co-creation, flow and trust. Quotes are in dark purple italics, and are labeled with their data source (Reddit, LinkedIn, or Interview). Dark blue italics denote key code groupings from axial coding (see Section 3.3).
+
+### 4.1 Findings—Definition: What is Vibe Coding?
+When he coined the term in February 2025, Andrej Karpathy defined vibe coding as a “new kind of coding... where you fully give in to the vibes, embrace exponentials, and forget that the code even exists”.3 New terms, however, are not ultimately defined by their originator. Terms evolve indexically, meaning their social meaning depends on who uses them and how [52]. This can be especially true of phrases that become memes that are then shaped by who adopts them and how they circulate in online and cultural discourse [51]. We find that practitioners define vibe coding in a variety of ways. For instance
+
+*“Vibe coding is the idea of using LLMs to generate code from natural language”* (L33)
+
+*“Vibe coding is... you don’t care what the code looks like. All you care is that it behaves the way that you expect it to behave. And if you have an error, you take the error message and you feed it back into the genie.”* (I7)
+
+Despite these varied phrasings, we find that most definitions of vibe coding share key characteristics and constructs. Figure 1 presents our proposed theory of what practitioners perceive vibe coding to be and how they experience it. We identify four core, interconnected components: Conversational Interactions with AI (the paradigm), AI Co-creation (the central activity), Flow and Joy (the developer experience), and AI Trust (a key enabling and mediating factor). While we present these four theoretical components as distinct components, it is important to acknowledge that they are closely related and cannot be completely isolated from one another. Our choice to use these specific component boundaries stems from the need to conduct and present our analysis in a structured and coherent way, despite their

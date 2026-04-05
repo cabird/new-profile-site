@@ -1,0 +1,10 @@
+> How many people should you include in a code review? Is there a number beyond which it becomes counterproductive?  
+> —Jacek Czerwonka
+
+right people to look over their code. Chris started working on a tool that would deliver a listing of people with the expertise to match the sorts of problems addressed by your code, along with suggestions as to which of these people you might want to add to a review.
+
+Something else Chris and I studied for a while was code-review usefulness. That wasn’t a problem we were trying to solve, of course, but we did want to understand which aspects of code reviews tend to be most valued by engineers—that is, by both reviewers and programmers. What did they see as being most useful? It didn’t take us long to conclude that it was not the mere decision to accept or rework the code that the reviewers were interested in; it was the comments that added to the value of the review. On the other hand, some comments just increase the burden of the code review and slow down the development process. So then we wanted to know what kinds of comments they found most useful, since we could then start thinking about how to encourage and lend greater emphasis to those.
+
+JC Just as this interesting question of usefulness led to practical implications later on, the same might be said of the work that was done to look into other process-related questions. For example, how many people should you include in a code review? Is there a number beyond which it becomes counterproductive? We all intuitively feel that smaller reviews are better, but where exactly to draw that line? And what’s the optimal amount of time to allow for a review?
+
+MG Another interesting thing we found is that, while the popular notion is that code reviews are mostly about finding bugs, only a very small percentage of the code-

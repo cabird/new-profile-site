@@ -1,0 +1,28 @@
+that leverages Large Language Models (LLMs) to classify behavior differences. Recent work has demonstrated the strong reasoning capabilities of LLMs across various tasks and their ability to adapt to different domains [8], [9]. By utilizing these models, we show that LLMs can effectively serve as classifiers for behavior differences between the test and production environments. To the best of our knowledge, this is the first piece of work where LLMs have been introduced as classifiers in the release engineering domain. Through extensive experimentation, including in-context learning and fine-tuning for LLMs [10], [11], we demonstrate that LLMs perform exceptionally well in classifying behavior differences between the test and production environments.
+
+By automating the process of classifying behavior differences, our approach helps engineers save time and reduce mistakes, leading to more reliable software updates. This means companies like Microsoft can deliver stable and high-quality updates to users faster and with fewer issues. As a result, millions of users benefit from smoother experiences with less downtime. In the bigger picture, this solution makes release processes more efficient, allowing engineers to focus on more important tasks, while ensuring software is delivered quickly and reliably. This helps create a better and more dependable digital experience for everyone.
+
+To summarize, the contributions in this paper are as follows:
+- We introduce a novel method to automate the classification of behavior differences between test and production environments using LLMs, which reduces the reliance on manual labeling by on-call engineers.
+- To the best of our knowledge, we introduce the first work that uses LLMs as classifiers in the domain of release engineering.
+- We provide a comprehensive evaluation of LLM performance, demonstrating that through in-context learning and fine-tuning, LLMs can effectively and accurately classify behavior differences between test and production environments.
+
+## II. LABELING DIFFERENCES PROBLEM
+
+The reliability and robustness of production systems is important [4]. Every time a team wants to roll out a new feature, they must ensure that it works under real production conditions [12], making the need for sophisticated methods to validate the integrity of these systems increasingly critical for large organizations [13]. To achieve this, it is important to test the new change with actual production traffic before it is fully deployed. By doing so, the team can catch any potential bugs or issues that might arise, which allows them to resolve these problems before the feature reaches the live production environment. This approach enhances the quality of the software and minimizes the risk of introducing errors that could disrupt the user experience or impact system performance.
+
+One such method that achieves this is called differential testing (see Figure 1). Many teams at Microsoft leverage this technique to ensure the new change is robust and resilient before pushing it to the live production environment.
+
+![Differential testing process diagram](page2_img_1.png)
+
+Fig. 1. Differential Testing Process for Evaluating Test Features
+
+The differential testing process works by first placing the new feature in a test environment that is similar to the production environment. Once the new feature is in this test environment, 1% of the real-world production traffic is sent to both the production and test environments simultaneously. Each request within this 1% is duplicated so that the same request is sent to both environments. Both versions are instrumented with telemetry to record their behavior on the system. The behavioral difference, such as differences in logs and telemetry data, between the outputs of the production and test environments is called a diff. A diff contains information about the build’s outputs, including behavioral signals, various telemetry data, and output logs that provide details about what occurred in the backend leading to the difference. Given that 1% of real-world production traffic is forked into the two environments, there can be thousands of diffs created.
+
+To analyze the diffs and understand why differences occurred between the two environments, on-call engineers (OCEs) must review hundreds of diffs and manually label them. Each diff is assigned one of three labels: UserMarkedNoise, NewFeature, or Regression.
+
+- UserMarkedNoise is applied when the behavior difference between the test and production environments is expected, anticipated, or caused by non-deterministic effects or processes that do not impact the overall outcome. Essentially, it is used when the difference does not matter to the system's performance.
+- NewFeature is used when the behavioral difference in the test environment is expected and due to a feature that is absent in the production environment.
+- Regression is assigned when the behavior difference is caused by a developer change or a critical issue.
+
+To label a diff, OCEs must manually sift through extensive logs, consult with team members for guidance, and rely on tribal knowledge — a very challenging task for new OCEs. Each on-call session lasts many hours, and labeling hundreds of diffs can be a mind-numbing, time-consuming task, making it an inefficient use of developers' time. Since on-call engineers are also software engineers, they must spend an additional 6–18 hours each week manually labeling these diffs, which negatively impacts their productivity.

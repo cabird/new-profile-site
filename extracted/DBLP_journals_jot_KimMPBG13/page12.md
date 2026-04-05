@@ -1,0 +1,17 @@
+As was the general trend in all projects, in nhibernate we found that the percentage of collections used that were only available generically (64.2%) is higher than that of collections that are available in both generic and non-generic versions (35.8%). An asterisk (*) next to a type name in Table 2 denotes the collections that are only available generically.
+
+While the usage patterns of different generics vary from one project to the next, the List-family of types is the most used overall in the projects we studied. Similarly, in open-source Java projects we found that List-family types were the most popular [PBMH12].
+
+We also investigated which type arguments were used. The int type is the most common argument in mono (36.0%) while string is the most common in nhibernate (53.9%) and mediaportal (39.9%). Overall, the string type is used widely in all projects, similar to our findings for Java [PBMH12].
+
+## 5 Investigating C# generics
+
+We next answer our six research questions (Section 4.1). Although we focus our discussion on C# generics, we also relate these results to Java generics [PBMH12].
+
+### 5.1 RQ1: Do generics reduce casts?
+
+To answer RQ1, we analyzed our data to determine whether an increase in generics coincides with a decrease in casts.
+
+We first did this by analyzing plots that compare the number of generics against the number of casts. Figure 2 shows four lines: two dotted lines which represent the raw numbers of casts, and two solid lines which represent normalized values of casts and generics. The top two lines (in red) depict casts, while the bottom two represent generics (in blue). As in previous work [PBMH12], normalized values are calculated by finding the number of casts and generics and dividing that number by Halstead’s program length. Halstead’s program length is the sum of the total number of operators and operands in a program [Hal77]. To determine the number of operators and operands in the program we analyzed, we obtain the abstract syntax tree of each C# file. Then, each abstract syntax tree node is classified as either an operator, if it is defined as such in the C# language specification [C#12], or an operand otherwise. We used a Halstead metric rather than a lines-of-code metric, because Halstead’s program length is a measure of program size that abstracts away code formatting, whitespace, and comments, allowing us to more fairly compare projects that use different coding styles. Normalizing allows us to compare cast and generic usage across each project’s lifetime as each project grows. We have multiplied the normalized values by constants so that trends are more apparent in Figure 2. Because the absolute y-axis values are not themselves meaningful, we leave the y-axis unlabeled.
+
+- The normalized value of casts tends to decrease consistently over time after a period of initial fluctuation. In some cases there are fluctuations in the middle of the graphs. For example, the nhibernate project has a big jump of the normalized value of casts in the middle of 2009 due to unusually high usage of casts and the mediaportal project has a small jump in the middle of 2006. However, the overall decrease in casts does not appear to be directly related to generics, since the

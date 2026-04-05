@@ -1,0 +1,10 @@
+{
+  "page3_img_2.png": {
+    "title": "Heatmap of branch developer vs. file similarity in Windows Vista",
+    "description": "A grayscale density heatmap plotting pairwise branch similarities: x-axis shows file (goal) cosine similarity (0.1\u20130.9) and y-axis shows developer (virtual team) cosine similarity (0.1\u20130.9). Darker cells indicate many branch pairs falling in that similarity bin; the single darkest cell is near the lowest similarities (both \u22480.1), showing most branch pairs are dissimilar in both files and developers. Importantly, the plot has more dark cells above the x=y diagonal (higher y than x), indicating developer similarity is often greater than file similarity for branch pairs. This visual pattern matches the paper\u2019s quantitative results (Spearman \u03c1\u22480.47, p\u226a0.01) and the finding that in Vista ~75% of branch pairs have higher team similarity than goal/file similarity."
+  },
+  "page3_img_1.png": {
+    "title": "Heatmap of branch developer vs. file similarity (Windows 7)",
+    "description": "A density heatmap showing pairwise branch similarities for Windows 7 where the x\u2011axis is file (goal) similarity (0.1\u20130.9) and the y\u2011axis is developer (virtual team) similarity (0.1\u20130.9); darker cells indicate many branch pairs falling in that similarity bin. The single darkest cell is near the low\u2011low corner (\u22480.1,0.1), indicating most branch pairs have very low similarity in both files and developers. There is noticeably more density above the diagonal (top\u2011left region) than below it, showing many branch pairs with higher developer similarity than file similarity (i.e., the same developers working on different goals), while relatively few pairs have high file similarity but low developer similarity. This visual pattern supports the paper\u2019s quantitative findings (Spearman \u03c1 \u2248 0.39 for Windows 7) and the reported result that about 68% of comparable branch pairs have greater team than goal similarity."
+  }
+}

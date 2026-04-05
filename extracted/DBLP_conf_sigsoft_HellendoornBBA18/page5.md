@@ -1,0 +1,29 @@
+![Experimental setup diagram](page5_img_diagram_1.png)
+
+Figure 3: Overview of the experimental setup, consisting of three phases: data gathering, learning from aligned types, and evaluation.
+
+Three categories of identifiers that allow optional^7 type annotations: function return types, function parameters and variables. DeepTyper learns to suggest these by learning to assign a probability distribution over types, denoted a type vector, to each identifier occurrence in a file. To improve training, we do not only learn to assign types to definition sites, where the annotation would be added, but to all occurrences of an identifier. This helps the deep learner include more context in its type judgements and allows us to enforce its additional consistency constraint as described in Section 3.
+
+The model is presented with the code as sequential data, with each token aligned with a type. Each token and type are encoded in their respective vocabularies (see Section 4.2) as a one-hot vector (with a one at the index of the correct token/type and zeros otherwise). The type may be a (deterministically assignable) no-type for tokens such as punctuation and keywords; we do not train the algorithms to assign these. Given a sequence of tokens, the model is tasked to predict the corresponding sequence of types.
+
+At training time, the model's accuracy is measured in terms of the cross-entropy between its produced type vector and the true, one-hot encoded type vector. At test time, the model is tasked with inferring the correct annotations at the locations where developers originally added type annotations that we removed to produce our aligned data. Although the model infers types for all occurrences of every identifier (because of the way it is trained), we report our results on the true original type annotations both because this is the most realistic test criterion and to avoid confusion.^8
+
+We evaluate the model primarily in terms of prediction accuracy: the likelihood that the most activated element of the type vector is the correct type. We focus on assigning non-any types (recall that any expresses uncertainty about a type), since those will be most useful to a developer. We furthermore distinguish between evaluating the accuracy at all identifier locations (including non-definition sites, as we do at training time) and inferring only at those positions where developers actually added type annotations in our dataset. For more details, see Section 4.4.
+
+Table 1: Statistics of the dataset used in this study.
+
+![Dataset statistics table](page5_img_table_1.png)
+
+## 4.2 Data
+
+Data Collection. We collected the 1,000 top-starred open-source projects on Github that predominantly consisted of TypeScript code on February 28, 2018; this is a similar approach to Ray et al.'s study of programming languages [27]. Each project was parsed with the TypeScript compiler tsc, which infers type information (possibly any) for all occurrences of each identifier. We removed all files containing more than 5,000 tokens for the sequences to fit within a minibatch used in our deep learner. This removed only a small portion of both files (ca. 0.9%) and tokens (ca. 11%). We also remove all projects containing only TypeScript header files, which especially includes all projects from the 'DefinitelyTyped' eco-system. After these steps, our dataset contains 776 TypeScript projects, with statistics listed in Table 1.
+
+Our dataset was randomly split by project into 80% training data, 10% held-out (or validation) data and 10% test data. Among the largest projects included were Karma-TypeScript (a test framework for TS), Angular and projects related to Microsoft's VS Code. We focus only on inter-project type suggestion, because we believe this to be the most realistic use of our tool. That is, the model is trained on a pre-existing set of projects and then used to provide suggestions in a different/new project that was not seen during training. Future work may study an intra-project setting, in which the model can benefit from project-specific information, which will likely improve type suggestion accuracy.
+
+Token and Type Vocabularies. As is common practice in natural language processing, we estimate our vocabularies on the training split and replace all the rare tokens (in our case, those seen less than 10 times) and all unseen tokens in the held-out and test data with a generic UNKNOWN token. Note that we still infer types for these tokens, even though their name provides no useful information to the deep learner. To reduce vocabulary size, we also replaced all numerals with '0', all strings with 's' and all templates with a simple 'template', none of which affects the types of the code. The type vocabulary is similarly estimated on the types of the training data, except that rare types (again, those seen less than 10 times in the training data) and unseen types are simply treated as any. The number of tokens and types strongly correlates with the complexity of the model, so we set the vocabulary cut-off as low as was possible while still making training feasible in reasonable time and memory. The resulting vocabularies consist of 40,195 source tokens and 11,830 types.
+
+Aligning Data. To create an oracle and aligned corpus, we use the compiler to add type annotations to every identifier. We then remove all type annotations from the TS code, in order to create code that more closely resembles JS code. Note that this does not always produce actual JS code since TS includes a richer syntax
+
+7 Here, any is implicit if no annotation is added.
+
+8 In brief, across all identifiers, DeepTyper reaches accuracies close to that of the compiler's type inference and a hybrid of the two was able to yield superior results.

@@ -1,0 +1,32 @@
+new results, we found that the real issue was not distributed vs collocated development. Rather the real issue was to correctly communicate effects to industry for the right interpretation:
+
+- It is possible to be misled by the statistically significant difference between collocated and distributed development as indicated by the standard statistical tests.
+- However, on reflection, the size of that effect was negligibly small. That is, at least for the software studied here, distributed development is not considered harmful.
+
+The rest of this paper is organized as follows. A summary of related work will offer the standard conclusion; i.e. that distributed and collocated development produces different kinds of software of different quality. We will summarize that work as five hypotheses. These hypotheses will be expressed in such a way that (according to the related work, as reported in Section II), we expect them all to be rejected. However, our experiments and analysis of effect size will accept them all; i.e. we can find no major differences between software quality and the kinds of software built by collocated and distributed processes. This will be followed by a discussion on threats to validity. Finally, our future work section poses a question that deserves much attention: Just how many other research “results” are just tiny effects that need not concern industrial practitioners?
+
+## II. RELATED WORK
+
+The two aspects explored by this paper are code ownership and distributed development. This section presents our case that these two factors are worthy of exploration.
+
+### A. Code Ownership
+
+Human factors play a considerable role in software development [5], [8], [24]. Hence, it is no surprise that there is a considerable literature built around the investigation of code ownership and its relation to software quality.
+
+Rahman and Davenbu use a fine-grained level of analysis on the level of fix-inducing code-fragments to investigate effects of ownership properties on the quality of multiple open-source projects [26]. Their study shows that developer contribution is related to the implicated code in the sense that a developer’s specialized experience in a target file is more important than general experience. Bird et al. investigate the ownership properties in two large commercial software products [5] and report that the measures of ownership in both products have a significant relationship with both pre-release and post-release faults. Meneely and Williams investigate Red Hat Enterprise Linux 4 kernel [19], where they empirically investigate the relationship between security vulnerabilities and the developer activities. Their study reports the finding that files with edits from more than 9 developers are 16 times more likely to be vulnerable to security related errors, which is counter intuitive to Linus' law, which states that given enough beta-testers and co-developers, all the problems can easily be characterized [30].
+
+Boh et al. investigate the data archives of the development work of a telecommunication product for a large time frame of 14 years [6]. They report the interesting finding that specialized experience has the greatest impact on the productivity of individual developers for the modification request completion time. Mockus and Weiss also report a similar finding [21]. They show that changes made by developers who are more experienced with a software component are less likely to cause failures. Other examples where the previous development activity of a developer is used as a proxy for ownership and expertise are the “Expertise Browser” tool introduced by Mockus et al. [20] and the “Expertise Recommender” tool by McDonald et al. [18]. These tools use the number of times a developer has changed a component to measure the amount of ownership and expertise for that particular component.
+
+While the above results are widely cited, they are not universally accepted. There are several counter examples to the relation between software quality and ownership. Weyuker et al. examine the team size information for prediction model performance [33] and report that the addition of ownership related metrics (e.g. cumulative number of developers) only provide a negligible performance improvement. A similar finding is also reported by Graves et al. [11], who show that the number of different developers who have worked on a file does not improve the prediction performance.
+
+### B. Distributed Development
+
+For large organizations distributed development is a strategic decision issue related to skill-set availability; the cost of labor; governmental restrictions [4]; various resource constraints [7], [14] and so on. Besides being a good solution for such issues, distributed development turns software development into a more interactive process, where a number of remote development teams have to collaborate in a complementary manner. The collaboration of remote teams brings out a whole set of new problems. There is a wealth of literature defining and tackling the problems associated with distributed development [3], [4], [12], [13], [17], [22], [28]. Some previously studied aspects of distributed development:
+
+- Communication and coordination issues [12], [28];
+- Organizational structures of development [22];
+- Effects of geographical dispersion [3], [31];
+- Possible development strategies (e.g. agile) [29], [32];
+- Effects on software quality [9], [27];
+
+Ramasubbu et al. investigate the specific coordination schemes for distributed development [28]. Their claim is that the process frameworks adopted by distributed teams have been developed for collocated contexts, whereas distributed projects require schemes specific for distributed development. Herbsleb et al. investigate the delays of collocated and distributed work items [12] and show that distributed work items take 1.5 to 2 times longer than collocated work items. Bird investigates the organizational structure associated with open source software [5], focusing on the coordination and collaboration schemes between developers. Unlike the prevailing belief, Bird reports that distributed open source collaboration patterns are not haphazard. Spinellis investigates the effects of geographical dispersion in distributed development.

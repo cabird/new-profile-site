@@ -1,0 +1,14 @@
+{
+  "page3_img_1.png": {
+    "title": "Open card-sort mapping PICSE trust factors",
+    "description": "A photograph of a physical open card-sort used to derive the PICSE categories: yellow sticky notes serve as category headers and small white printed cards list candidate trust factors placed beneath them. Visible headers include (from top-left clockwise) \u201cTool does what expects/wants\u201d (with cards Meeting expectations, Goal matching, Style matching, Data visibility), \u201cTool properties\u201d (Performance, Correctness, Consistency), \u201cDev\u2194tool interaction\u201d (Feedback loops, Contribution validation support, Educational value), and a \u201cDev \u2018power\u2019 over tool and its usage\u201d group (Ease of use, Autonomy, Ownership); a separate small card reads \u201cVisible benefits.\u201d This snapshot documents how interview-derived themes were grouped into the high-level categories that later became the PICSE framework (Expectations, System, Interaction, Control, Personal)."
+  },
+  "page2_img_1.png": {
+    "title": "Participant demographics table: roles, gender, and race (P1\u2013P18)",
+    "description": "A three-column table listing 18 interviewees (P1\u2013P18) with their role, reported gender, and reported race. Roles are mostly software-engineering positions (e.g., Software Engineer, Software Engineer II, Senior/Principal Engineer, SE Lead, Systems Engineer, Senior Security Engineer, and one Software Engineer/Product Owner). The sample includes 11 males and 7 females, and racial self-identification of 2 Black, 7 Asian, and 9 White participants, consistent with the paper's demographic summary. The table is used to support the qualitative study sample described in the text."
+  },
+  "page4_img_figure_1.png": {
+    "title": "PICSE framework diagram: Five categories of trust factors for software tools",
+    "description": "A wide, multicolored infographic that summarizes the PICSE framework by grouping trust-related factors into five vertical columns: Personal (green) \u2014 Community, Source reputation, Clear advantages; Interaction (teal) \u2014 Contribution validation support, Feedback loops, Educational value; Control (orange) \u2014 Ownership, Control (final say), Workflow integration; System (pink) \u2014 Ease of installation & use, Polished presentation, Safe and secure practices, Correctness, Consistency, Performance; and Expectations (purple) \u2014 Meeting expectations, Transparent data practices, Style matching, Goal matching. Each listed factor is accompanied by a one-line explanatory phrase; the diagram visually organizes factors the authors derived from interviews with 18 engineers to show which considerations influence initial adoption (e.g., Personal, System) versus ongoing use and trust (e.g., Interaction, Control, Expectations)."
+  }
+}

@@ -1,0 +1,15 @@
+> Unlabelled topics are not enough! It took respondents 1 to 4 minutes to interpret a topic from its top topic words. Thus multiple topics multiply the cost of interpretation.
+>
+> Tokenization matters! Depending on the source text, how tokens are kept or not matters. Splitting on punctuation naively can harm accented words and hamper the interpretation of a topic.
+>
+> Relationships are safer than content! The relationships between documents and topics extracted by LDA are much safer to rely upon than the content of the topic. The content of the topic can be interpreted many different ways and LDA does not look for the same patterns that people do. Focusing on relationships between topics and documents avoids errors in topic interpretation and attribution.
+>
+> SE researchers should be careful about interpreting topics! Repeatedly in this study we found that small innocuous words and acronyms often had important project-specific meanings that were only clarified by the developers themselves.
+>
+> Topics linked to effort can provide some form of overview! Based on the results of the original study and its replication we feel confident that topics can be leveraged for the purposes of overview, summary, and dashboard visualization.
+
+## 8 Threats to Validity
+
+Relevant construct validity threats include the fact we used only one large project and 13 smaller projects and that personal topic-plots are relevant only to a single person. We were able to partially mitigate this threat by evaluating with multiple people and multiple FLOSS projects. However, the largest threat facing the construct validity of this work is that we did not have enough respondents. Thus we need to rely on qualitative evidence. Our surveys showed topics in a random order to avoid order bias. Training and verbal administration of surveys can also bias results. Although we administered the survey from a script, the fact that we did so verbally and answered questions about our methodology could introduce bias. Showing FLOSS developers a preview of their project in the IRC channel could have biased their results. Commits evaluated were not filtered if they had a small number of tokens which could lead to low quality topics. Furthermore we rely on LDA topic relevance to associate commits with topics and thus assign effort to topics: construct validity is potentially weakened by the use of commits as a proxy for effort.
+
+In terms of internal validity, we built explanations and theories based on the feedback we received from respondents. Since we lacked a large number of respondents we were not able to do statistical analysis, but Ko et al. have argued that this size of result is still relevant [17] qualitatively, as we observed repeated answers. Some inconsistency could arise from our use of two different LDA implementations, a CVB0 implementation at Microsoft and the FLOSS Vowpal Wabbit, but both methods use a variational Bayes LDA implementa-

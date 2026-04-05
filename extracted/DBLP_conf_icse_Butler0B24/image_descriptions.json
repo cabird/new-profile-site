@@ -1,0 +1,10 @@
+{
+  "page3_img_1.png": {
+    "title": "Interview participant breakdown by role, seniority, and count",
+    "description": "A three-column table showing the disciplines interviewed, their level of seniority, and the number of people interviewed in each cell. Software Engineers are the largest group: Entry Level 4, Senior 1, Principal and Above 4, Manager 5, Upper Management 11 (25 total). Product Managers appear as Principal and Above 3, Manager 3, Upper Management 11 (17 total); additional participants include Designer (Principal and Above: 2), Data Science (Principal and Above: 1), and Architect (Principal and Above: 3). The table entries sum to 48 interviewees, while the paper text reports 47 interviews, indicating a one-person discrepancy."
+  },
+  "page7_img_1.png": {
+    "title": "Top challenges in adopting OKRs (percentage of mentions)",
+    "description": "Horizontal bar chart showing the frequency with which survey respondents mentioned particular challenges when working with OKRs. The most-cited problem is \u201cCreating OKRs/Goals\u201d (about 35\u201340% of responses), followed by \u201cData Issues\u201d (roughly 20\u201325%). Other commonly reported challenges include \u201cWorking With Others,\u201d \u201cPriorities,\u201d and \u201cAlignment, Accountability, Clarity & Transparency\u201d (each \u224815\u201318%), with \u201cLack of Process,\u201d \u201cOverall Frustration,\u201d \u201cGoals Across Levels,\u201d and \u201cGoal Review & Communication\u201d mentioned less often (roughly 8\u201315% each). The figure visualizes open-text themes from the survey, and totals exceed 100% because respondents could report multiple challenges."
+  }
+}

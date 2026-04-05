@@ -1,0 +1,14 @@
+{
+  "page6_img_1.png": {
+    "title": "Pull quote: ~70% of merges drop one side",
+    "description": "A full-page pull-quote attributed to Shuvendu Lahiri stating that \u201cperhaps 70%\u201d of merges chose one side of an edit and dropped the other. The quote appears in very large olive\u2011green sans\u2011serif type across multiple lines on a white background, with the author\u2019s name in smaller uppercase above and short gray rule bars at the top and bottom. In the article\u2019s context, this emphasized finding explains a major surprise in the training data\u2014many real-world merges are one\u2011sided, which affected how the researchers curated and modeled merge resolutions."
+  },
+  "page1_img_1.png": {
+    "title": "Abstract geometric pattern of intersecting arcs and grid suggesting alignment",
+    "description": "A tall, decorative illustration composed of lime-green concentric arcs at the upper left that intersect a rectangular grid of vertical and horizontal lime-green bars across the right and lower areas, all set on a bright turquoise background. Two horizontal sequences of soft, yellow\u2011white, blurred oval highlights run across the center and lower center, aligning with the grid lines and creating a visual rhythm of repeated nodes. The image includes a narrow margin at the bottom showing the article text and a vertical image credit at the right; visually, the overlapping arcs, grid and aligned highlights echo themes of intersection, alignment and merging that accompany the article on program-merge (DeepMerge)."
+  },
+  "page2_img_1.png": {
+    "title": "Neural-chip graphic with intersecting code-path lines",
+    "description": "A flat, stylized illustration on a bright cyan background showing a grid of thin green horizontal and vertical lines that intersect across the canvas. A yellow square near the left-center, outlined in green, contains an orange schematic of connected nodes representing a neural network or chip. To the right those parallel lines bend into concentric arcs and several vertical tracks show small glowing white\u2011yellow ovals, suggesting points of signal or attention. In the context of the article, the image visually ties many parallel \u2018paths\u2019 or branches into a central ML model, echoing the paper\u2019s theme of using neural models to mediate and resolve code merges."
+  }
+}
