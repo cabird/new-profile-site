@@ -392,12 +392,17 @@ async def handle_500(error):
 
 @app.route('/')
 async def index():
+    return redirect('/ide/')
+
+@app.route('/classic')
+@app.route('/classic/')
+async def classic_site():
     return await send_file('index.html')
 
 @app.route('/pages/about/')
 @app.route('/pages/about')
 async def redirect_old_about():
-    return redirect('/', code=301)
+    return redirect('/classic', code=301)
 
 @app.route('/publications')
 async def redirect_publications():
