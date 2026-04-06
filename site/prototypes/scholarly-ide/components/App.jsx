@@ -147,8 +147,8 @@ IDE.App = function App() {
   // Load data
   useEffect(() => {
     Promise.all([
-      fetch('/site_data.json').then(r => r.json()),
-      fetch('/api/paper_data.json').then(r => r.json()),
+      fetch(`/site_data.json?v=${window.__v}`).then(r => r.json()),
+      fetch(`/api/paper_data.json?v=${window.__v}`).then(r => r.json()),
     ]).then(([site, paperData]) => {
       setSiteData(site);
       const list = Object.entries(paperData.papers || {}).map(([id, p]) => ({ id, ...p }));
