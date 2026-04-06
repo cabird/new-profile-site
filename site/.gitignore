@@ -10,7 +10,6 @@ env/
 *.log
 .DS_Store
 
-# Files copied during build (ignore in git, they come from parent)
-paper_data.json
+# Large binary directories (served from extracted/ instead)
 pdfs/
 markdowns/
