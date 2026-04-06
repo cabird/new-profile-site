@@ -2,7 +2,7 @@
 const { useState, useEffect, useCallback, useMemo, useRef } = React;
 const {
   TitleBar, ActivityBar, Sidebar, StatusBar,
-  HomeView, PublicationsView, TagView, PaperView, TerminalPanel, CommandPalette,
+  HomeView, PublicationsView, TagView, PaperView, TerminalPanel, ChatPanel, CommandPalette,
   TabFileIcon, TabTagIcon, FileImgIcon, FileMdIcon, FileIconSvg,
   buildVirtualFS, parseTags, logEvent
 } = IDE;
@@ -21,6 +21,7 @@ IDE.App = function App() {
   const [mobileSidebar, setMobileSidebar] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [terminalOpen, setTerminalOpen] = useState(false);
+  const [lightTheme, setLightTheme] = useState(true);
 
   // Tab management
   const [openTabs, setOpenTabs] = useState(['home']);
@@ -31,8 +32,11 @@ IDE.App = function App() {
   const [homeClickedLine, setHomeClickedLine] = useState(null);
 
   // Publications view state
-  const [chatPaper, setChatPaper] = useState(null);
   const [pubHoveredLine, setPubHoveredLine] = useState(null);
+
+  // Chat panel state
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatPaper, setChatPaper] = useState(null);
 
   // Paper markdown cache
   const [paperMarkdownById, setPaperMarkdownById] = useState({});
@@ -174,6 +178,21 @@ IDE.App = function App() {
     }
   }, [terminalOpen]);
 
+  // Sync chat panel width CSS variable
+  useEffect(() => {
+    const shell = document.querySelector('.vscode-shell');
+    if (shell) {
+      shell.style.setProperty('--chatpanel-w', chatOpen ? '340px' : '0px');
+    }
+  }, [chatOpen]);
+
+  // Open chat for a paper
+  const openChatForPaper = useCallback((paper) => {
+    setChatPaper(paper);
+    setChatOpen(true);
+    logEvent('chat', `Chat opened: ${paper.title}`);
+  }, []);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handler = (e) => {
@@ -195,6 +214,10 @@ IDE.App = function App() {
   const handleActivitySelect = (id) => {
     if (id === 'publications') {
       setActiveTab('publications');
+      return;
+    }
+    if (id === 'chat') {
+      setChatOpen(prev => !prev);
       return;
     }
     if (id === 'terminal') {
@@ -301,6 +324,7 @@ IDE.App = function App() {
     !sidebarOpen ? 'sidebar-collapsed' : '',
     mobileSidebar ? 'mobile-sidebar-open' : '',
     terminalOpen ? 'terminal-open' : '',
+    lightTheme ? 'light-theme' : '',
   ].filter(Boolean).join(' ');
 
   // Determine if active tab is a paper tab
@@ -436,6 +460,7 @@ IDE.App = function App() {
             markdown={paperMarkdownById[activePaperId]}
             loadState={paperLoadStateById[activePaperId]}
             imageBase={paperLoadStateById[activePaperId]?.imageBase}
+            onChat={openChatForPaper}
             onRetry={() => {
               setPaperLoadStateById(prev => { const next = {...prev}; delete next[activePaperId]; return next; });
               setPaperMarkdownById(prev => { const next = {...prev}; delete next[activePaperId]; return next; });
@@ -444,6 +469,13 @@ IDE.App = function App() {
           />
         )}
       </div>
+
+      {/* Chat Panel — right sidebar */}
+      <ChatPanel
+        paper={chatPaper}
+        onClose={() => setChatOpen(false)}
+        visible={chatOpen}
+      />
 
       {/* Terminal Panel — always mounted, hidden via CSS grid */}
       <TerminalPanel
@@ -460,6 +492,8 @@ IDE.App = function App() {
         activeTab={activeEditorTab}
         terminalOpen={terminalOpen}
         onToggleTerminal={() => setTerminalOpen(prev => !prev)}
+        lightTheme={lightTheme}
+        onToggleTheme={() => setLightTheme(prev => !prev)}
       />
 
       {commandPaletteOpen && (

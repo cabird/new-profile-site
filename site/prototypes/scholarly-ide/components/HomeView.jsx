@@ -65,7 +65,7 @@ IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, se
   const areaCount = siteData?.research_areas?.length || 0;
   const years = papers.map(p => p.year).filter(Boolean);
   const yearsActive = years.length > 0 ? (Math.max(...years) - Math.min(...years)) : 0;
-  const featured = papers.slice(0, 6);
+  const featured = papers.slice(0, 10);
 
   const currentLine = clickedLine || activeLine;
   let lineNum = 0;

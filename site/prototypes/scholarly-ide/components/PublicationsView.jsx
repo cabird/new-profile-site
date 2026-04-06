@@ -22,14 +22,14 @@ IDE.PublicationsView = function PublicationsView({ papers, onOpenPaper, hoveredL
       list = list.filter(p => parseTags(p.tags).includes(activeTag));
     }
     if (search.trim()) {
-      const q = search.toLowerCase();
-      list = list.filter(p =>
-        (p.title || '').toLowerCase().includes(q) ||
-        (p.authors || '').toLowerCase().includes(q) ||
-        (p.venue || '').toLowerCase().includes(q) ||
-        (p.journal || '').toLowerCase().includes(q) ||
-        parseTags(p.tags).some(t => t.toLowerCase().includes(q))
-      );
+      const words = search.toLowerCase().split(/\s+/).filter(Boolean);
+      list = list.filter(p => {
+        const haystack = [
+          p.title || '', p.authors || '', p.venue || '',
+          p.journal || '', ...parseTags(p.tags)
+        ].join(' ').toLowerCase();
+        return words.every(w => haystack.includes(w));
+      });
     }
     return list;
   }, [papers, search, activeTag]);
@@ -41,7 +41,7 @@ IDE.PublicationsView = function PublicationsView({ papers, onOpenPaper, hoveredL
 
   return (
     <div className="editor-content">
-      <div className="editor-body" style={{ flex: 1 }}>
+      <div className="editor-body" style={{ flex: 1 }} onMouseLeave={() => setHoveredLine(null)}>
         {/* Search Bar */}
         <div className="search-bar-container">
           <div className="search-bar">

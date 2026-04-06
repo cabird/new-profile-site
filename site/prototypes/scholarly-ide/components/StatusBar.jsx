@@ -1,7 +1,7 @@
 /* ─── Status Bar ─── */
 const { useState, useEffect } = React;
 
-IDE.StatusBar = function StatusBar({ paperCount, activeLine, activeTab, terminalOpen, onToggleTerminal }) {
+IDE.StatusBar = function StatusBar({ paperCount, activeLine, activeTab, terminalOpen, onToggleTerminal, lightTheme, onToggleTheme }) {
   const fileType = activeTab === 'profile' ? 'JPEG' : 'Markdown';
   const [filteredCount, setFilteredCount] = useState(paperCount);
   const [tagFilteredCount, setTagFilteredCount] = useState(0);
@@ -44,9 +44,11 @@ IDE.StatusBar = function StatusBar({ paperCount, activeLine, activeTab, terminal
         <span className="statusbar-item">Ln {activeLine || 1}, Col 1</span>
         <span className="statusbar-item">UTF-8</span>
         <span className="statusbar-item">{fileType}</span>
-        <span className="statusbar-item">{getPubsDisplay()}</span>
         <span className="statusbar-item clickable" onClick={onToggleTerminal} title="Toggle Terminal (Ctrl+`)">{terminalOpen ? 'Terminal: On' : 'Terminal: Off'}</span>
-        <span className="statusbar-item">v2.0.0</span>
+        <span className="statusbar-item clickable" onClick={onToggleTheme} title="Toggle Light/Dark Theme">
+          <IDE.Codicon name={lightTheme ? 'color-mode' : 'color-mode'} size={14} />
+          {lightTheme ? ' Light' : ' Dark'}
+        </span>
       </div>
     </div>
   );

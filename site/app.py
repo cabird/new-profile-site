@@ -228,6 +228,8 @@ paper_chat_client = None
 chat_store = None
 paper_data_cache = None
 canned_questions = []
+terminal_filesystem = ""
+terminal_bio_info = ""
 
 
 # ============================================================================
@@ -335,11 +337,86 @@ def load_canned_questions():
         canned_questions = []
 
 
+def build_terminal_filesystem(paper_data):
+    """Build a fake filesystem string from paper data for the terminal LLM."""
+    papers = paper_data.get('papers', {})
+    by_year = {}
+    for pid, p in papers.items():
+        year = p.get('year', 'unknown')
+        title = p.get('title', 'Untitled')
+        # Create a slug filename from the title
+        slug = title.lower()[:60].strip()
+        for ch in [':', '?', '!', '"', "'", ',', ';', '(', ')', '[', ']']:
+            slug = slug.replace(ch, '')
+        slug = slug.replace(' ', '-').replace('--', '-').strip('-')
+        by_year.setdefault(year, []).append(f"    {slug}.md ({title})")
+
+    lines = ["/home/cbird/", "  papers/"]
+    for year in sorted(by_year.keys(), reverse=True):
+        lines.append(f"    {year}/")
+        for entry in sorted(by_year[year]):
+            lines.append(f"  {entry}")
+    lines.extend([
+        "  cv.pdf",
+        "  about.txt",
+        "  README.md",
+        "  .bashrc",
+        "  .env",
+        "  .gitconfig",
+        "  .ssh/",
+        "    authorized_keys",
+        "    id_ed25519.pub",
+        "  .git/",
+        "  .research_notes/",
+        "    ideas.txt",
+        "    reading_list.txt",
+        "  todo.txt",
+        "  scripts/",
+        "    analyze_papers.py",
+        "    build_site.sh",
+        "    sync_bib.py",
+        "  data/",
+        "    collaboration_network.csv",
+        "    citation_counts.json",
+        "    yearly_stats.csv",
+        "  drafts/",
+        "    untitled-2026.md",
+        "    review-response-draft.md",
+        "  playlists/",
+        "    coding.m3u",
+        "    writing.m3u",
+        "    deep-focus.m3u",
+    ])
+    return "\n".join(lines)
+
+
+def build_terminal_bio(site_data):
+    """Build bio info string for the terminal system prompt."""
+    return (
+        f"Name: {site_data.get('name', 'Christian Bird')}\n"
+        f"Title: {site_data.get('title', 'Senior Principal Researcher')}\n"
+        f"Affiliation: {site_data.get('affiliation', 'Microsoft Research')}\n"
+        f"Bio: {site_data.get('bio', '')}\n"
+    )
+
+
 def initialize_app():
     global paper_chat_client, chat_store, paper_data_cache
+    global terminal_filesystem, terminal_bio_info
 
     paper_data_cache = initialize_paper_data()
     load_canned_questions()
+
+    # Build terminal filesystem and bio
+    terminal_filesystem = build_terminal_filesystem(paper_data_cache)
+    try:
+        with open('site_data.json', 'r', encoding='utf-8') as f:
+            site_data = json.load(f)
+        terminal_bio_info = build_terminal_bio(site_data)
+    except Exception as e:
+        logger.error(f"Failed to load site_data.json for terminal: {e}")
+        terminal_bio_info = "Name: Christian Bird\nTitle: Senior Principal Researcher\nAffiliation: Microsoft Research\n"
+    logger.info(f"Terminal filesystem built ({len(terminal_filesystem)} chars)")
 
     try:
         paper_chat_client = AsyncAzureOpenAI(
@@ -455,15 +532,6 @@ async def chat_with_paper(paper_id):
 
     client_ip = get_client_ip()
 
-    # Check rate limit
-    allowed, remaining, reset_time = chat_store.check_rate_limit(session_id)
-    if not allowed:
-        return jsonify({
-            'error': f'Rate limit exceeded. Limit resets at {reset_time.strftime("%H:%M")}',
-            'type': 'rate_limit',
-            'remaining': 0
-        }), 429
-
     # Get or initialize conversation
     conversation = chat_store.get_conversation(session_id, paper_id)
 
@@ -533,7 +601,8 @@ async def chat_with_paper(paper_id):
             stream = await paper_chat_client.chat.completions.create(
                 model=os.getenv('AZURE_OPENAI_PAPER_CHAT_DEPLOYMENT'),
                 messages=conv['messages'],
-                stream=True
+                stream=True,
+                reasoning_effort='medium'
             )
 
             full_response = ""
@@ -565,6 +634,189 @@ async def chat_with_paper(paper_id):
         except Exception as e:
             logger.error(f"Chat error: {e}")
             yield f"data: {json.dumps({'type': 'error', 'message': 'An error occurred. Please try again.'})}\n\n"
+
+    return Response(
+        generate_sse(),
+        mimetype='text/event-stream',
+        headers={
+            'Cache-Control': 'no-cache',
+            'X-Accel-Buffering': 'no',
+            'Connection': 'keep-alive',
+        }
+    )
+
+
+# ============================================================================
+# Terminal API Endpoint
+# ============================================================================
+
+TERMINAL_MAX_COMMANDS_PER_HOUR = 20
+TERMINAL_MAX_RESPONSE_TOKENS = 500
+
+# Rate limits for terminal (separate from chat)
+terminal_rate_limits = {}  # {session_id: {count, window_start}}
+
+
+def check_terminal_rate_limit(session_id):
+    now = datetime.now()
+    if session_id not in terminal_rate_limits:
+        terminal_rate_limits[session_id] = {'count': 0, 'window_start': now}
+    data = terminal_rate_limits[session_id]
+    if now - data['window_start'] > timedelta(hours=1):
+        data['count'] = 0
+        data['window_start'] = now
+    if data['count'] >= TERMINAL_MAX_COMMANDS_PER_HOUR:
+        reset_time = data['window_start'] + timedelta(hours=1)
+        return False, 0, reset_time
+    return True, TERMINAL_MAX_COMMANDS_PER_HOUR - data['count'], None
+
+
+def increment_terminal_rate_limit(session_id):
+    if session_id in terminal_rate_limits:
+        terminal_rate_limits[session_id]['count'] += 1
+
+
+@app.route('/api/terminal', methods=['POST'])
+async def terminal_command():
+    """LLM-powered fake terminal that simulates a bash shell."""
+
+    session_id = get_session_id()
+
+    if not paper_chat_client:
+        return jsonify({'error': 'Terminal service unavailable'}), 503
+
+    data = await request.get_json()
+    command = data.get('command', '').strip()
+    history = data.get('history', [])
+    client_datetime = data.get('datetime', '')
+    client_timezone = data.get('timezone', '')
+
+    if not command:
+        return jsonify({'error': 'Command is required'}), 400
+
+    paper_count = len(paper_data_cache.get('papers', {}))
+    years = sorted(set(p.get('year', '') for p in paper_data_cache.get('papers', {}).values() if p.get('year')))
+    year_range = f"{years[0]}-{years[-1]}" if years else "2006-2026"
+    venues = set(p.get('venue', '') for p in paper_data_cache.get('papers', {}).values() if p.get('venue'))
+
+    system_prompt = f"""You are a bash shell running on Christian Bird's research server. You must act EXACTLY like a real bash terminal.
+
+CRITICAL RULES:
+- Respond ONLY with terminal output. No explanations, no markdown formatting, no commentary.
+- Do NOT wrap output in code blocks or backticks.
+- Maintain filesystem state based on conversation history (track cd commands, etc.)
+- Never run interactive programs that need a TUI (vim, nano, top, htop, less, etc.) — print "This terminal does not support interactive programs. Try a non-interactive alternative."
+- One-shot commands ARE allowed: python3 -c "...", node -e "...", perl -e "...", etc. Simulate their output realistically.
+- python3, node, gcc, git, curl, wget, jq, awk, sed, sort, uniq, etc. are all "installed" — simulate their output.
+- For truly unknown commands, output "bash: <cmd>: command not found"
+- Keep responses concise and realistic.
+- IMPORTANT: At the very end of EVERY response, append TWO hidden markers on their own lines. The user will not see them.
+  1. Current working directory: __CWD__/current/path__CWD__
+  2. Files in the current directory: __LS__file1.md,file2.txt,subdir/,another-dir/__LS__
+  Directories MUST end with /. Separate entries with commas. Include hidden files (dotfiles).
+  Example after cd ~/papers/2024:
+  __CWD__/home/cbird/papers/2024__CWD__
+  __LS__paper-one.md,paper-two.md,paper-three.md__LS__
+  These MUST be the last two lines of every response.
+
+SYSTEM INFO:
+- User: cbird
+- Hostname: research
+- Home: /home/cbird
+- OS: Ubuntu 24.04 LTS (Research Edition)
+- Kernel: 6.8.0-research
+- Shell: bash 5.2.21
+- Current date/time: {client_datetime}
+- Timezone: {client_timezone}
+
+USER BIO:
+{terminal_bio_info}
+
+VIRTUAL FILESYSTEM:
+{terminal_filesystem}
+
+STATS:
+- {paper_count} papers
+- {len(venues)} venues
+- Year range: {year_range}
+
+FILE CONTENTS (available for cat/less/head/etc.):
+- about.txt contains the user's bio text
+- README.md: "# Christian Bird's Research Server\nWelcome! This server hosts my research papers, data, and tools.\nRun `help` to see what you can do."
+- cv.pdf is a binary file (show "binary file" message if cat'd, suggest "see cv.pdf online")
+- .bashrc contains typical bash config with aliases like ll='ls -la', research='cd ~/papers', alias papers='ls ~/papers', a PS1 prompt, and export EDITOR=code
+- .env: Show "# Nice try ;)\nSECRET_KEY=definitely-not-a-real-key\nOPENAI_API_KEY=sk-fake-nice-try-though"
+- .gitconfig: Show realistic git config with name "Christian Bird", email, default branch main, some aliases
+- .ssh/authorized_keys: "# You really thought you'd find real keys here? :)"
+- .ssh/id_ed25519.pub: "ssh-ed25519 AAAA... cbird@research (this is not a real key)"
+- Papers are markdown files with title, authors, abstract, content
+- .research_notes/ideas.txt: Generate 4-6 realistic but interesting research ideas each time. Mix of half-baked shower thoughts and serious directions. Should feel like a real researcher's scratchpad — some are exciting, some have "???" next to them.
+- .research_notes/reading_list.txt: Generate a short reading list of classic and recent SE papers. Mix real-sounding titles. Vary each time.
+- todo.txt: Generate ~10 items each time (mix of [ ] and [x]). Mix of real-sounding research tasks and funny mundane ones. Examples of the VIBE to aim for: finishing camera-ready papers, reviewing intern proposals, writing blog posts, replying to Reviewer 2, fixing the office coffee machine, figuring out why the CI is flaky, updating slides for a talk, reading that paper someone recommended 3 months ago, organizing the desk (again), submitting expense reports. Be creative — vary it every time, keep it funny and human.
+- scripts/analyze_papers.py: A short Python script that imports pandas, loads citation_counts.json, and prints stats
+- scripts/build_site.sh: A bash script that runs the scholarly IDE build
+- scripts/sync_bib.py: A script that syncs BibTeX from DBLP
+- data/collaboration_network.csv: CSV with columns "author1,author2,paper_count" showing a few co-author pairs
+- data/citation_counts.json: JSON with a few papers and their citation counts
+- data/yearly_stats.csv: CSV with year, paper_count, venue_count
+- drafts/untitled-2026.md: Generate a funny incomplete paper draft. Has a vague title placeholder, a TODO abstract, and an intro that trails off. Should feel like a real "I'll finish this later" draft.
+- drafts/review-response-draft.md: Generate a funny half-written reviewer response. Polite but with snarky TODO comments to self about being more diplomatic. Vary each time.
+- playlists/coding.m3u: Generate a playlist of ~8 tracks. Draw from artists Christian actually likes: Depeche Mode, Erasure, Duran Duran, Fall Out Boy, Keen, Panic at the Disco, Information Society, Pet Shop Boys. Mix in some electronic/synthwave. Use real track names. Vary each time.
+- playlists/writing.m3u: Generate a playlist of ~8 tracks. Draw from: Enya, Norah Jones, Adele, Toad the Wet Sprocket, REM, Taylor Swift. More chill/contemplative picks. Use real track names. Vary each time.
+- playlists/deep-focus.m3u: Generate a playlist of ~8 tracks. Mix from all the above artists plus lo-fi and ambient. The vibe is "deep work at 2am." Use real track names. Vary each time.
+- .git/: git log should show recent papers as commits with realistic messages, git status shows "nothing to commit, working tree clean", git branch shows "main"
+
+SPECIAL COMMANDS (make these fun):
+- neofetch: Show ASCII art penguin + system info (user, host, OS, kernel, shell, papers count, venues, career span)
+- fortune: Show a random witty quote about research/academia/software engineering
+- cowsay <text>: Show a cow saying the text (ASCII art)
+- sl: Show a small ASCII steam locomotive animation (just a static frame since we can't animate)
+- help: Show a list of "interesting" commands to try
+- date: Show current date/time
+- whoami: cbird
+- hostname: research
+- uname -a: Linux research 6.8.0-research #1 SMP x86_64 GNU/Linux
+- uptime: show realistic uptime with load averages
+- df -h: show filesystem with /home/cbird having realistic sizes
+- free -h: show memory info
+- ps aux: show a few fake processes (bash, python app.py, quart, etc.)
+- cat /etc/os-release: Ubuntu 24.04 LTS research edition info
+- grep/find/wc on papers directory should give realistic results
+- ls should list files appropriately based on the filesystem above
+- cat on paper .md files should show a brief realistic snippet (title, authors, abstract)
+- tree: show directory tree structure
+
+When listing papers, use the real titles from the filesystem above."""
+
+    # Build messages: system + last 10 exchanges from history
+    messages = [{'role': 'system', 'content': system_prompt}]
+    # History is alternating user/assistant messages; keep last 10 exchanges (20 messages)
+    trimmed = history[-20:] if len(history) > 20 else history
+    for msg in trimmed:
+        messages.append({'role': msg.get('role', 'user'), 'content': msg.get('content', '')})
+    # Add the current command
+    messages.append({'role': 'user', 'content': command})
+
+    async def generate_sse():
+        try:
+            stream = await paper_chat_client.chat.completions.create(
+                model=os.getenv('AZURE_OPENAI_PAPER_CHAT_DEPLOYMENT'),
+                messages=messages,
+                stream=True,
+                max_completion_tokens=TERMINAL_MAX_RESPONSE_TOKENS,
+                reasoning_effort='low'
+            )
+
+            async for chunk in stream:
+                if chunk.choices and chunk.choices[0].delta.content:
+                    content = chunk.choices[0].delta.content
+                    yield f"data: {json.dumps({'type': 'terminal_chunk', 'content': content})}\n\n"
+
+            yield f"data: {json.dumps({'type': 'terminal_complete'})}\n\n"
+
+        except Exception as e:
+            logger.error(f"Terminal error: {e}")
+            yield f"data: {json.dumps({'type': 'error', 'message': 'Terminal error. Please try again.'})}\n\n"
 
     return Response(
         generate_sse(),

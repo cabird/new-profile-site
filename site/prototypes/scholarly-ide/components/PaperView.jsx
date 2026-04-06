@@ -8,6 +8,7 @@ IDE.PaperView = function PaperView({ paper, markdown, loadState, onRetry, onChat
   const gutterRef = useRef(null);
   const [lineCount, setLineCount] = useState(0);
   const [bibtexCopied, setBibtexCopied] = useState(false);
+  const [bibtexOpen, setBibtexOpen] = useState(false);
 
   const renderedHtml = useMemo(() => {
     if (!markdown) return '';
@@ -105,6 +106,12 @@ IDE.PaperView = function PaperView({ paper, markdown, loadState, onRetry, onChat
                 <div className="paper-header-authors">{paper.authors}</div>
               )}
               <div className="paper-header-actions">
+                {onChat && (
+                  <button className="paper-action-btn" onClick={() => onChat(paper)}>
+                    <Codicon name="comment-discussion" size={14} />
+                    <span>Chat</span>
+                  </button>
+                )}
                 {pdfUrl && (
                   <a href={pdfUrl} target="_blank" rel="noopener" className="paper-action-btn">
                     <Codicon name="file-pdf" size={14} color="#e06c75" />
@@ -117,23 +124,37 @@ IDE.PaperView = function PaperView({ paper, markdown, loadState, onRetry, onChat
                     <span>DOI</span>
                   </a>
                 )}
-                {onChat && (
-                  <button className="paper-action-btn" onClick={() => onChat(paper)}>
-                    <Codicon name="comment-discussion" size={14} />
-                    <span>Chat</span>
-                  </button>
-                )}
                 {paper.raw_bibtex && (
-                  <button className="paper-action-btn" onClick={() => {
-                    navigator.clipboard.writeText(paper.raw_bibtex);
-                    setBibtexCopied(true);
-                    setTimeout(() => setBibtexCopied(false), 2000);
-                  }}>
+                  <button className={`paper-action-btn ${bibtexOpen ? 'active' : ''}`} onClick={() => setBibtexOpen(prev => !prev)}>
                     <Codicon name="references" size={14} />
-                    <span>{bibtexCopied ? 'Copied!' : 'BibTeX'}</span>
+                    <span>BibTeX</span>
                   </button>
                 )}
               </div>
+              {bibtexOpen && paper.raw_bibtex && (
+                <div className="bibtex-peek">
+                  <div className="bibtex-peek-header">
+                    <span className="bibtex-peek-title">
+                      <Codicon name="references" size={12} />
+                      BibTeX
+                    </span>
+                    <div className="bibtex-peek-actions">
+                      <button className="bibtex-peek-btn" onClick={() => {
+                        navigator.clipboard.writeText(paper.raw_bibtex);
+                        setBibtexCopied(true);
+                        setTimeout(() => setBibtexCopied(false), 2000);
+                      }}>
+                        <Codicon name={bibtexCopied ? 'check' : 'copy'} size={14} />
+                        <span>{bibtexCopied ? 'Copied!' : 'Copy'}</span>
+                      </button>
+                      <button className="bibtex-peek-btn" onClick={() => setBibtexOpen(false)}>
+                        <Codicon name="close" size={14} />
+                      </button>
+                    </div>
+                  </div>
+                  <pre className="bibtex-peek-content"><code>{paper.raw_bibtex}</code></pre>
+                </div>
+              )}
               <hr className="paper-header-sep" />
             </div>
           )}

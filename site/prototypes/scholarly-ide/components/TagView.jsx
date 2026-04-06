@@ -8,14 +8,14 @@ IDE.TagView = function TagView({ papers, tag, onOpenPaper, hoveredLine, setHover
   const filtered = useMemo(() => {
     let list = papers.filter(p => parseTags(p.tags).includes(tag));
     if (search.trim()) {
-      const q = search.toLowerCase();
-      list = list.filter(p =>
-        (p.title || '').toLowerCase().includes(q) ||
-        (p.authors || '').toLowerCase().includes(q) ||
-        (p.venue || '').toLowerCase().includes(q) ||
-        (p.journal || '').toLowerCase().includes(q) ||
-        parseTags(p.tags).some(t => t.toLowerCase().includes(q))
-      );
+      const words = search.toLowerCase().split(/\s+/).filter(Boolean);
+      list = list.filter(p => {
+        const haystack = [
+          p.title || '', p.authors || '', p.venue || '',
+          p.journal || '', ...parseTags(p.tags)
+        ].join(' ').toLowerCase();
+        return words.every(w => haystack.includes(w));
+      });
     }
     return list;
   }, [papers, tag, search]);

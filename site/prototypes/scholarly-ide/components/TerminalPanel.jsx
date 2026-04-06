@@ -1,4 +1,4 @@
-/* ─── Terminal Panel (includes AsciiSpinner and OutputLog) ─── */
+/* ─── Terminal Panel (includes OutputLog and fake bash terminal) ─── */
 const { useState, useEffect, useRef, useCallback, useMemo } = React;
 const { useEventLog, logEvent } = IDE;
 
@@ -38,28 +38,30 @@ IDE.OutputLog = function OutputLog() {
   );
 };
 
-/* ─── ASCII Spinner ─── */
-IDE.AsciiSpinner = function AsciiSpinner() {
-  const frames = ['\u280B','\u2819','\u2839','\u2838','\u283C','\u2834','\u2826','\u2827','\u2807','\u280F'];
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setIdx(i => (i + 1) % frames.length), 80);
-    return () => clearInterval(id);
-  }, []);
-  return <span className="terminal-text" style={{ color: '#6a9955' }}>{frames[idx]} querying paper...</span>;
-};
-
 /* ─── Terminal Panel ─── */
-IDE.TerminalPanel = function TerminalPanel({ papers, chatPaper, setChatPaper, onClose, visible }) {
-  const { OutputLog, AsciiSpinner } = IDE;
+IDE.TerminalPanel = function TerminalPanel({ papers, onClose, visible }) {
+  const { OutputLog } = IDE;
   const [activeTab, setActiveTab] = useState('terminal');
-  const [history, setHistory] = useState([]);
+
+  // Terminal state
+  const [termLines, setTermLines] = useState([]);       // Array of {type: 'command'|'output'|'error'|'welcome', content: string}
   const [input, setInput] = useState('');
   const [streaming, setStreaming] = useState(false);
+  const [conversationHistory, setConversationHistory] = useState([]); // {role, content} pairs
+  const [commandCount, setCommandCount] = useState(0);
+  const [remaining, setRemaining] = useState(20);
+  const [cmdHistory, setCmdHistory] = useState([]);      // Command history for up/down
+  const [cmdHistoryIdx, setCmdHistoryIdx] = useState(-1);
+  const [cwd, setCwd] = useState('/home/cbird');
+  const [dirListing, setDirListing] = useState([
+    'papers/', 'cv.pdf', 'about.txt', 'README.md', '.bashrc', '.env', '.gitconfig',
+    '.ssh/', '.git/', '.research_notes/', 'todo.txt', 'scripts/', 'data/', 'drafts/', 'playlists/'
+  ]);
   const inputRef = useRef(null);
   const bodyRef = useRef(null);
   const abortRef = useRef(null);
 
+  // Problems tab
   const warningCount = useMemo(() => {
     return papers.filter(p => !p.doi || !p.mapped_pdf).length;
   }, [papers]);
@@ -73,45 +75,87 @@ IDE.TerminalPanel = function TerminalPanel({ papers, chatPaper, setChatPaper, on
     return problems;
   }, [papers]);
 
+  const welcomeBanner = useMemo(() => {
+    return [
+      '',
+      'Welcome to cbird@research',
+      "Christian Bird's Research Server",
+      '',
+      "Type 'help' for available commands.",
+      '',
+    ].join('\n');
+  }, [papers]);
+
+  // Show welcome banner on mount
+  useEffect(() => {
+    setTermLines([{ type: 'welcome', content: welcomeBanner }]);
+  }, [welcomeBanner]);
+
+  // Auto-scroll
   useEffect(() => {
     if (bodyRef.current) {
       bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
     }
-  }, [history, streaming]);
+  }, [termLines, streaming]);
 
+  // Auto-focus
   useEffect(() => {
-    if (activeTab === 'terminal' && visible) {
+    if (activeTab === 'terminal' && visible && !streaming) {
       inputRef.current?.focus();
     }
-  }, [activeTab, visible]);
+  }, [activeTab, visible, streaming]);
 
-  // Reset history when paper changes
+  // Cleanup abort on unmount
   useEffect(() => {
-    setHistory([]);
-    setInput('');
     return () => {
       if (abortRef.current) abortRef.current.abort();
     };
-  }, [chatPaper?.id]);
+  }, []);
 
-  const sendMessage = useCallback(async (text) => {
-    if (!text.trim() || streaming) return;
-    if (!chatPaper) return;
+  const sendCommand = useCallback(async (cmd) => {
+    if (!cmd.trim() || streaming) return;
+    const trimmed = cmd.trim();
 
-    setHistory(prev => [...prev, { type: 'user', content: text.trim() }]);
+    // Add to command history
+    setCmdHistory(prev => {
+      const next = [...prev, trimmed];
+      return next.slice(-50); // Keep last 50 commands
+    });
+    setCmdHistoryIdx(-1);
     setInput('');
-    setStreaming(true);
-    logEvent('chat', `Query: "${text.trim().substring(0, 60)}${text.trim().length > 60 ? '...' : ''}"`);
 
-    let assistantContent = '';
-    setHistory(prev => [...prev, { type: 'assistant', content: '' }]);
+    logEvent('command', trimmed.substring(0, 80));
+
+    // Add command line to display (store prompt at time of command)
+    setTermLines(prev => [...prev, { type: 'command', content: trimmed, prompt }]);
+
+    // Handle client-side commands
+    if (trimmed === 'clear') {
+      setTermLines([]);
+      return;
+    }
+
+    setStreaming(true);
+    setCommandCount(prev => prev + 1);
+
+    // Add an empty output line that we'll stream into
+    setTermLines(prev => [...prev, { type: 'output', content: '' }]);
 
     try {
       abortRef.current = new AbortController();
-      const resp = await fetch(`/api/papers/${chatPaper.id}/chat`, {
+
+      // Build history: last 10 exchanges (20 messages)
+      const historyToSend = conversationHistory.slice(-20);
+
+      const resp = await fetch('/api/terminal', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text.trim() }),
+        body: JSON.stringify({
+          command: trimmed,
+          history: historyToSend,
+          datetime: new Date().toString(),
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        }),
         signal: abortRef.current.signal,
       });
 
@@ -123,6 +167,7 @@ IDE.TerminalPanel = function TerminalPanel({ papers, chatPaper, setChatPaper, on
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();
       let buffer = '';
+      let fullOutput = '';
 
       while (true) {
         const { done, value } = await reader.read();
@@ -133,41 +178,130 @@ IDE.TerminalPanel = function TerminalPanel({ papers, chatPaper, setChatPaper, on
         buffer = lines.pop() || '';
 
         for (const line of lines) {
-          const trimmed = line.trim();
-          if (!trimmed.startsWith('data:')) continue;
-          const jsonStr = trimmed.slice(5).trim();
+          const trimmedLine = line.trim();
+          if (!trimmedLine.startsWith('data:')) continue;
+          const jsonStr = trimmedLine.slice(5).trim();
           if (!jsonStr || jsonStr === '[DONE]') continue;
 
           try {
             const evt = JSON.parse(jsonStr);
-            if (evt.type === 'chat_chunk') {
-              assistantContent += evt.content;
-              setHistory(prev => {
+            if (evt.type === 'terminal_chunk') {
+              fullOutput += evt.content;
+              setTermLines(prev => {
                 const next = [...prev];
-                next[next.length - 1] = { type: 'assistant', content: assistantContent };
+                next[next.length - 1] = { type: 'output', content: fullOutput };
                 return next;
               });
-            } else if (evt.type === 'chat_complete') {
-              setHistory(prev => [...prev, { type: 'status', content: `${evt.message_count} messages \u00B7 ${evt.remaining_messages} remaining` }]);
+            } else if (evt.type === 'terminal_complete') {
+              setRemaining(prev => Math.max(0, prev - 1));
             } else if (evt.type === 'error') {
-              setHistory(prev => [...prev, { type: 'error', content: evt.message }]);
+              setTermLines(prev => [...prev, { type: 'error', content: evt.message }]);
             }
           } catch {}
         }
       }
+
+      // Parse CWD and LS markers from output and strip them
+      const cwdMatch = fullOutput.match(/__CWD__(.+?)__CWD__/);
+      const lsMatch = fullOutput.match(/__LS__(.+?)__LS__/);
+      if (cwdMatch) setCwd(cwdMatch[1]);
+      if (lsMatch) setDirListing(lsMatch[1].split(',').filter(Boolean));
+      if (cwdMatch || lsMatch) {
+        const cleanOutput = fullOutput
+          .replace(/__CWD__.*?__CWD__/g, '')
+          .replace(/__LS__.*?__LS__/g, '')
+          .trimEnd();
+        setTermLines(prev => {
+          const next = [...prev];
+          for (let i = next.length - 1; i >= 0; i--) {
+            if (next[i].type === 'output') {
+              next[i] = { type: 'output', content: cleanOutput };
+              break;
+            }
+          }
+          return next;
+        });
+        fullOutput = cleanOutput;
+      }
+
+      // Update conversation history
+      setConversationHistory(prev => [
+        ...prev,
+        { role: 'user', content: trimmed },
+        { role: 'assistant', content: fullOutput },
+      ]);
+
     } catch (err) {
       if (err.name !== 'AbortError') {
-        setHistory(prev => [...prev, { type: 'error', content: err.message }]);
+        setTermLines(prev => [...prev, { type: 'error', content: err.message }]);
       }
     }
+
     setStreaming(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [streaming, chatPaper]);
+  }, [streaming, conversationHistory]);
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === 'Enter') {
       e.preventDefault();
-      sendMessage(input);
+      sendCommand(input);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (cmdHistory.length === 0) return;
+      const newIdx = cmdHistoryIdx === -1 ? cmdHistory.length - 1 : Math.max(0, cmdHistoryIdx - 1);
+      setCmdHistoryIdx(newIdx);
+      setInput(cmdHistory[newIdx] || '');
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (cmdHistoryIdx === -1) return;
+      const newIdx = cmdHistoryIdx + 1;
+      if (newIdx >= cmdHistory.length) {
+        setCmdHistoryIdx(-1);
+        setInput('');
+      } else {
+        setCmdHistoryIdx(newIdx);
+        setInput(cmdHistory[newIdx] || '');
+      }
+    } else if (e.key === 'c' && e.ctrlKey) {
+      // Ctrl+C to cancel streaming or clear input
+      if (streaming && abortRef.current) {
+        abortRef.current.abort();
+        setStreaming(false);
+        setTermLines(prev => [...prev, { type: 'output', content: '^C' }]);
+      } else {
+        setInput('');
+        setTermLines(prev => [...prev, { type: 'command', content: input + '^C' }]);
+      }
+    } else if (e.key === 'l' && e.ctrlKey) {
+      e.preventDefault();
+      setTermLines([]);
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      // Tab completion on the last "word" (the part after the last space)
+      const parts = input.split(' ');
+      const partial = parts[parts.length - 1];
+      if (!partial) return;
+      const matches = dirListing.filter(f => f.startsWith(partial));
+      if (matches.length === 1) {
+        // Single match — auto-complete
+        parts[parts.length - 1] = matches[0];
+        setInput(parts.join(' '));
+      } else if (matches.length > 1) {
+        // Multiple matches — find common prefix and show options
+        let common = matches[0];
+        for (const m of matches) {
+          while (!m.startsWith(common)) common = common.slice(0, -1);
+        }
+        if (common.length > partial.length) {
+          parts[parts.length - 1] = common;
+          setInput(parts.join(' '));
+        }
+        // Show matches in terminal
+        setTermLines(prev => [...prev,
+          { type: 'command', content: input, prompt },
+          { type: 'output', content: matches.join('  ') },
+        ]);
+      }
     }
   };
 
@@ -204,6 +338,9 @@ IDE.TerminalPanel = function TerminalPanel({ papers, chatPaper, setChatPaper, on
     document.addEventListener('mouseup', onUp);
   }, []);
 
+  const cwdDisplay = cwd === '/home/cbird' ? '~' : cwd.replace('/home/cbird', '~');
+  const prompt = `cbird@research:${cwdDisplay}$ `;
+
   return (
     <div className="terminal-panel" ref={panelRef}>
       <div className="terminal-resize-handle" onMouseDown={handleDragStart}></div>
@@ -230,6 +367,17 @@ IDE.TerminalPanel = function TerminalPanel({ papers, chatPaper, setChatPaper, on
           </button>
         </div>
         <div className="terminal-panel-actions">
+          {activeTab === 'terminal' && (
+            <span className="terminal-rate-counter" title="Commands remaining this hour" style={{
+              fontSize: '11px',
+              marginRight: '8px',
+              fontFamily: 'var(--ui-font)',
+              color: remaining <= 3 ? 'var(--error)' : remaining <= 7 ? 'var(--warning)' : 'var(--text-muted)',
+              fontWeight: remaining <= 3 ? 700 : 400,
+            }}>
+              {remaining} remaining
+            </span>
+          )}
           <button className="terminal-panel-action-btn" onClick={onClose} title="Close panel">
             <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
               <path d="M8 8.71l3.65 3.64a.5.5 0 00.7-.7L8.71 8l3.64-3.65a.5.5 0 00-.7-.7L8 7.29 4.35 3.65a.5.5 0 00-.7.7L7.29 8l-3.64 3.65a.5.5 0 00.7.7L8 8.71z"/>
@@ -260,46 +408,32 @@ IDE.TerminalPanel = function TerminalPanel({ papers, chatPaper, setChatPaper, on
         )}
 
         {activeTab === 'terminal' && (
-          <>
-            <div className="terminal-welcome">{`Welcome to Scholarly IDE Terminal\nChat with any paper — click a paper and select "Chat with Paper",\nor press Ctrl+P to search and open one.\n---`}</div>
-
-            {chatPaper && (
-              <div className="terminal-connected">Connected to: {chatPaper.title}</div>
-            )}
-
-            {!chatPaper && history.length === 0 && (
-              <div className="terminal-line">
-                <span className="terminal-text" style={{ color: '#858585' }}>No paper selected. Click a paper above and select "Chat with Paper", or press Ctrl+P to search.</span>
-              </div>
-            )}
-
-            {history.map((entry, i) => {
-              if (entry.type === 'user') {
+          <div className="terminal-shell">
+            {termLines.map((line, i) => {
+              if (line.type === 'welcome') {
+                return (
+                  <pre className="terminal-welcome-banner" key={i}>{line.content}</pre>
+                );
+              }
+              if (line.type === 'command') {
                 return (
                   <div className="terminal-line" key={i}>
-                    <span className="terminal-prompt">{'\u276F'}</span>
-                    <span className="terminal-text">{entry.content}</span>
+                    <span className="terminal-prompt-text">{line.prompt || prompt}</span>
+                    <span className="terminal-cmd-text">{line.content}</span>
                   </div>
                 );
               }
-              if (entry.type === 'assistant') {
+              if (line.type === 'output') {
                 return (
-                  <div className="terminal-line assistant-line" key={i}>
-                    <span className="terminal-text">{entry.content}</span>
-                  </div>
+                  <pre className="terminal-output-text" key={i}>{line.content}</pre>
                 );
               }
-              if (entry.type === 'error') {
+              if (line.type === 'error') {
                 return (
                   <div className="terminal-line error-line" key={i}>
-                    <span className="terminal-text">Error: {entry.content}</span>
-                  </div>
-                );
-              }
-              if (entry.type === 'status') {
-                return (
-                  <div className="terminal-line" key={i} style={{ color: '#858585', fontSize: '11px' }}>
-                    <span className="terminal-text">{entry.content}</span>
+                    <span className="terminal-text" style={{ color: 'var(--vscode-errorForeground, #f85149)' }}>
+                      {line.content}
+                    </span>
                   </div>
                 );
               }
@@ -307,29 +441,118 @@ IDE.TerminalPanel = function TerminalPanel({ papers, chatPaper, setChatPaper, on
             })}
 
             {streaming && (
-              <div className="terminal-line">
-                <span className="terminal-prompt">{'\u276F'}</span>
-                <AsciiSpinner />
+              <div className="terminal-line" style={{ opacity: 0.6 }}>
+                <span className="terminal-prompt-text">{prompt}</span>
+                <span className="terminal-spinner-dots">...</span>
               </div>
             )}
 
-            {chatPaper && !streaming && (
+            {!streaming && remaining > 0 && (
               <div className="terminal-input-row">
-                <span className="terminal-prompt">{'\u276F'}</span>
+                <span className="terminal-prompt-text">{prompt}</span>
                 <input
                   ref={inputRef}
                   type="text"
+                  className="terminal-shell-input"
                   value={input}
                   onChange={e => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Type a question..."
-                  disabled={streaming}
+                  spellCheck={false}
+                  autoComplete="off"
+                  autoCorrect="off"
+                  autoCapitalize="off"
                 />
+                <span className="terminal-cursor-blink" />
               </div>
             )}
-          </>
+            {!streaming && remaining <= 0 && (
+              <div className="terminal-line" style={{ color: 'var(--error)', marginTop: 8, fontFamily: 'var(--ui-font)', fontSize: 12 }}>
+                Session limit reached (20 commands/hour). Try again later.
+              </div>
+            )}
+          </div>
         )}
       </div>
+
+      <style>{`
+        .terminal-shell {
+          font-family: var(--font-mono, 'Cascadia Code', 'Fira Code', 'Consolas', monospace);
+          font-size: 13px;
+          line-height: 1.4;
+          padding: 4px 8px;
+          min-height: 100%;
+        }
+        .terminal-welcome-banner {
+          color: var(--comment);
+          margin: 0;
+          font-family: inherit;
+          font-size: inherit;
+          line-height: inherit;
+          white-space: pre-wrap;
+        }
+        .terminal-prompt-text {
+          color: var(--comment);
+          font-weight: bold;
+          white-space: pre;
+          user-select: none;
+        }
+        .terminal-cmd-text {
+          color: var(--text);
+        }
+        .terminal-output-text {
+          color: var(--text);
+          margin: 0;
+          font-family: inherit;
+          font-size: inherit;
+          line-height: inherit;
+          white-space: pre-wrap;
+          word-break: break-word;
+        }
+        .terminal-line {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: baseline;
+        }
+        .terminal-input-row {
+          display: flex;
+          align-items: baseline;
+          position: relative;
+        }
+        .terminal-shell-input {
+          flex: 1;
+          background: transparent;
+          border: none;
+          outline: none;
+          color: var(--text);
+          font-family: inherit;
+          font-size: inherit;
+          line-height: inherit;
+          padding: 0;
+          margin: 0;
+          caret-color: var(--text);
+        }
+        .terminal-cursor-blink {
+          display: inline-block;
+          width: 7px;
+          height: 14px;
+          background: var(--text-muted);
+          animation: terminal-blink 1s step-end infinite;
+          vertical-align: text-bottom;
+          margin-left: -7px;
+          pointer-events: none;
+        }
+        @keyframes terminal-blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+        .terminal-spinner-dots {
+          color: var(--vscode-terminal-ansiYellow, #dcdcaa);
+          animation: terminal-blink 0.8s step-end infinite;
+        }
+        .terminal-rate-counter {
+          color: var(--vscode-descriptionForeground, #858585);
+        }
+      `}</style>
     </div>
   );
 };

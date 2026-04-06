@@ -62,6 +62,58 @@
   --panel-header-h: 35px;
 }
 
+/* ---------- VS Code Light+ Theme ---------- */
+.light-theme {
+  --vscode-editor-bg: #ffffff;
+  --vscode-sidebar-bg: #f3f3f3;
+  --vscode-activitybar-bg: #e8e8e8;
+  --activity-active: #333333;
+  --vscode-statusbar-bg: #007acc;
+  --vscode-titlebar-bg: #dddddd;
+  --vscode-tab-inactive-bg: #ececec;
+  --vscode-tab-active-bg: #ffffff;
+  --vscode-border: #e5e5e5;
+  --vscode-fg: #333333;
+  --vscode-fg-muted: #616161;
+  --vscode-accent: #007acc;
+  --vscode-link: #006ab1;
+
+  --border-light: #d4d4d4;
+  --accent: #0000ff;
+  --accent-bright: #006ab1;
+  --string: #a31515;
+  --keyword: #af00db;
+  --number: #098658;
+  --comment: #008000;
+  --function: #795e26;
+  --tag-color: #267f99;
+  --error: #d32f2f;
+  --warning: #bf8803;
+  --hover-bg: rgba(0,0,0,0.04);
+  --list-active: rgba(0,0,0,0.06);
+  --selection-bg: #add6ff;
+}
+
+/* Re-declare aliases so children inherit the light values */
+.light-theme {
+  --titlebar-bg:   var(--vscode-titlebar-bg);
+  --activitybar-bg: var(--vscode-activitybar-bg);
+  --sidebar-bg:    var(--vscode-sidebar-bg);
+  --editor-bg:     var(--vscode-editor-bg);
+  --panel-bg:      var(--vscode-editor-bg);
+  --tab-bg:        var(--vscode-tab-inactive-bg);
+  --tab-active-bg: var(--vscode-tab-active-bg);
+  --tab-inactive-bg: var(--vscode-tab-inactive-bg);
+  --statusbar-bg:  var(--vscode-statusbar-bg);
+  --border:        var(--vscode-border);
+  --border-light:  #d4d4d4;
+  --text:          var(--vscode-fg);
+  --text-muted:    var(--vscode-fg-muted);
+}
+
+.light-theme *::-webkit-scrollbar-thumb { background: #c1c1c1; border: 2px solid transparent; background-clip: content-box; }
+.light-theme * { scrollbar-color: #c1c1c1 transparent; }
+
 html { font-size: 14px; }
 
 body {
@@ -88,18 +140,18 @@ a:hover { text-decoration: underline; }
 .vscode-shell {
   display: grid;
   grid-template-rows: var(--titlebar-h) 1fr var(--terminal-current-h, 0px) var(--statusbar-h);
-  grid-template-columns: var(--activitybar-w) var(--sidebar-w) 1fr;
+  grid-template-columns: var(--activitybar-w) var(--sidebar-w) 1fr var(--chatpanel-w, 0px);
   grid-template-areas:
-    "titlebar  titlebar  titlebar"
-    "activity  sidebar   editor"
-    "activity  sidebar   terminal"
-    "statusbar statusbar statusbar";
+    "titlebar  titlebar  titlebar  titlebar"
+    "activity  sidebar   editor    chatpanel"
+    "activity  sidebar   terminal  chatpanel"
+    "statusbar statusbar statusbar statusbar";
   height: 100vh;
   width: 100vw;
 }
 
 .vscode-shell.sidebar-collapsed {
-  grid-template-columns: var(--activitybar-w) 0px 1fr;
+  grid-template-columns: var(--activitybar-w) 0px 1fr var(--chatpanel-w, 0px);
 }
 
 /* When terminal is closed, the CSS variable is 0px */
@@ -177,7 +229,7 @@ a:hover { text-decoration: underline; }
 .activity-icon:hover { color: var(--text); }
 
 .activity-icon.active {
-  color: #fff;
+  color: var(--activity-active, #fff);
 }
 
 .activity-icon.active::before {
@@ -187,7 +239,7 @@ a:hover { text-decoration: underline; }
   top: 6px;
   bottom: 6px;
   width: 2px;
-  background: #fff;
+  background: var(--activity-active, #fff);
 }
 
 .activity-icon svg {
@@ -634,10 +686,10 @@ a:hover { text-decoration: underline; }
 .welcome-link-shortcut {
   font-size: 11px;
   color: var(--text-muted);
-  background: #2d2d2d;
+  background: var(--tab-inactive-bg);
   padding: 1px 6px;
   border-radius: 2px;
-  border: 1px solid #3c3c3c;
+  border: 1px solid var(--border-light);
   flex-shrink: 0;
 }
 
@@ -963,9 +1015,9 @@ a:hover { text-decoration: underline; }
 .command-palette {
   width: 640px;
   max-width: calc(100vw - 40px);
-  background: #252526;
-  border: 1px solid #3c3c3c;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.25);
   border-radius: 6px;
   display: flex;
   flex-direction: column;
@@ -979,7 +1031,7 @@ a:hover { text-decoration: underline; }
   display: flex;
   align-items: center;
   padding: 0 12px;
-  border-bottom: 1px solid #3c3c3c;
+  border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }
 
@@ -1406,8 +1458,8 @@ a:hover { text-decoration: underline; }
 .pub-row:focus { outline: 1px solid var(--vscode-accent); outline-offset: -1px; }
 .pub-row:focus:not(:focus-visible) { outline: none; }
 
-.pub-row.line-active { background: rgba(255,255,255,0.04); }
-.pub-row.line-active .pub-ln { color: #c6c6c6; }
+.pub-row.line-active { background: var(--hover-bg); }
+.pub-row.line-active .pub-ln { color: var(--text); }
 
 .pub-row-main {
   display: flex;
@@ -1521,8 +1573,8 @@ a:hover { text-decoration: underline; }
   justify-content: space-between;
   height: 28px;
   padding: 0 8px 0 10px;
-  background: #252526;
-  border-bottom: 1px solid #3c3c3c;
+  background: var(--sidebar-bg);
+  border-bottom: 1px solid var(--border-light);
   flex-shrink: 0;
   user-select: none;
 }
@@ -1576,11 +1628,11 @@ a:hover { text-decoration: underline; }
 }
 
 .peek-content {
-  background: #1e1e1e;
+  background: var(--editor-bg);
   padding: 12px 16px;
   max-height: 220px;
   overflow-y: auto;
-  border-left: 2px solid #3794ff;
+  border-left: 2px solid var(--vscode-link);
 }
 
 .peek-tldr {
@@ -1727,6 +1779,243 @@ a:hover { text-decoration: underline; }
   color: var(--text-muted);
 }
 
+/* ---------- Chat Panel (right sidebar) ---------- */
+.chat-panel {
+  grid-area: chatpanel;
+  background: var(--sidebar-bg);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  position: relative;
+}
+
+.chat-resize-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: col-resize;
+  z-index: 200;
+}
+
+.chat-resize-handle:hover,
+.chat-resize-handle:active {
+  background: var(--vscode-accent);
+}
+
+.chat-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--panel-header-h);
+  padding: 0 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.chat-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text);
+}
+
+.chat-panel-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.chat-panel-close:hover {
+  color: var(--text);
+}
+
+.chat-panel-context {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  font-family: var(--ui-font);
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--editor-bg);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.chat-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-family: var(--ui-font);
+  font-size: 13px;
+  flex: 1;
+}
+
+.chat-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.chat-suggestion {
+  background: var(--editor-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: var(--ui-font);
+  font-size: 12px;
+  padding: 6px 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.chat-suggestion:hover {
+  background: var(--hover-bg);
+  border-color: var(--vscode-accent);
+}
+
+.chat-msg {
+  display: flex;
+  gap: 8px;
+  font-family: var(--ui-font);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.chat-msg-avatar {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: var(--hover-bg);
+  color: var(--text-muted);
+}
+
+.chat-msg-user {
+  flex-direction: row-reverse;
+}
+
+.chat-msg-user .chat-msg-content {
+  text-align: right;
+}
+
+.chat-msg-user .chat-msg-avatar {
+  background: var(--vscode-accent);
+  color: #fff;
+}
+
+.chat-msg-content {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.chat-msg-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--error, #f85149);
+  font-size: 12px;
+  font-family: var(--ui-font);
+}
+
+.chat-msg-status {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--ui-font);
+  text-align: center;
+}
+
+.chat-typing {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.chat-panel-input {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  background: var(--sidebar-bg);
+  flex-shrink: 0;
+}
+
+.chat-panel-input input {
+  flex: 1;
+  background: var(--editor-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: var(--ui-font);
+  font-size: 13px;
+  padding: 6px 10px;
+  outline: none;
+}
+
+.chat-panel-input input:focus {
+  border-color: var(--vscode-accent);
+}
+
+.chat-send-btn {
+  background: none;
+  border: none;
+  color: var(--vscode-accent);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+}
+
+.chat-send-btn:hover:not(:disabled) {
+  opacity: 1;
+}
+
+.chat-send-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
 /* ---------- Paper View ---------- */
 .paper-view {
   display: flex;
@@ -1807,6 +2096,83 @@ a:hover { text-decoration: underline; }
   background: var(--hover-bg);
   border-color: var(--vscode-accent);
   text-decoration: none;
+}
+
+.paper-action-btn.active {
+  background: var(--hover-bg);
+  border-color: var(--vscode-accent);
+}
+
+.bibtex-peek {
+  margin-top: 10px;
+  border: 1px solid var(--vscode-accent);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bibtex-peek-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 10px;
+  background: var(--sidebar-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.bibtex-peek-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bibtex-peek-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.bibtex-peek-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--ui-font);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.bibtex-peek-btn:hover {
+  color: var(--text);
+  background: var(--hover-bg);
+}
+
+.bibtex-peek-content {
+  padding: 10px 12px;
+  background: var(--editor-bg);
+  font-family: var(--editor-font);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text);
+  overflow-x: auto;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border-left: 2px solid var(--vscode-accent);
+}
+
+.bibtex-peek-content code {
+  font-family: inherit;
+  background: none;
+  padding: 0;
 }
 
 .paper-header-sep {
