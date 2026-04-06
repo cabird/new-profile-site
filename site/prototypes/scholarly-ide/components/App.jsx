@@ -488,6 +488,7 @@ IDE.App = function App() {
 
       <StatusBar
         paperCount={papers.length}
+        warningCount={papers.filter(p => !p.doi || !p.mapped_pdf).length}
         activeLine={activeLine}
         activeTab={activeEditorTab}
         terminalOpen={terminalOpen}

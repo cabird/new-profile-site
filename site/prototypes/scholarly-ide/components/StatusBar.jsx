@@ -1,7 +1,7 @@
 /* ─── Status Bar ─── */
 const { useState, useEffect } = React;
 
-IDE.StatusBar = function StatusBar({ paperCount, activeLine, activeTab, terminalOpen, onToggleTerminal, lightTheme, onToggleTheme }) {
+IDE.StatusBar = function StatusBar({ paperCount, warningCount = 0, activeLine, activeTab, terminalOpen, onToggleTerminal, lightTheme, onToggleTheme }) {
   const fileType = activeTab === 'profile' ? 'JPEG' : 'Markdown';
   const [filteredCount, setFilteredCount] = useState(paperCount);
   const [tagFilteredCount, setTagFilteredCount] = useState(0);
@@ -38,7 +38,7 @@ IDE.StatusBar = function StatusBar({ paperCount, activeLine, activeTab, terminal
     <div className="statusbar">
       <div className="statusbar-left">
         <span className="statusbar-item">main</span>
-        <span className="statusbar-item">0 errors 0 warnings</span>
+        <span className="statusbar-item">{warningCount > 0 ? `0 errors ${warningCount} warnings` : '0 errors 0 warnings'}</span>
       </div>
       <div className="statusbar-right">
         <span className="statusbar-item">Ln {activeLine || 1}, Col 1</span>

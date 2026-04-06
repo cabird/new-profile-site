@@ -206,23 +206,27 @@ IDE.TerminalPanel = function TerminalPanel({ papers, onClose, visible }) {
       const lsMatch = fullOutput.match(/__LS__(.+?)__LS__/);
       if (cwdMatch) setCwd(cwdMatch[1]);
       if (lsMatch) setDirListing(lsMatch[1].split(',').filter(Boolean));
-      if (cwdMatch || lsMatch) {
-        const cleanOutput = fullOutput
-          .replace(/__CWD__.*?__CWD__/g, '')
-          .replace(/__LS__.*?__LS__/g, '')
-          .trimEnd();
-        setTermLines(prev => {
-          const next = [...prev];
-          for (let i = next.length - 1; i >= 0; i--) {
-            if (next[i].type === 'output') {
+      // Strip markers from output
+      const cleanOutput = fullOutput
+        .replace(/__CWD__.*?__CWD__/g, '')
+        .replace(/__LS__.*?__LS__/g, '')
+        .trimEnd();
+      setTermLines(prev => {
+        const next = [...prev];
+        for (let i = next.length - 1; i >= 0; i--) {
+          if (next[i].type === 'output') {
+            if (!cleanOutput) {
+              // Empty output (e.g. cd command) — remove the output line entirely
+              next.splice(i, 1);
+            } else {
               next[i] = { type: 'output', content: cleanOutput };
-              break;
             }
+            break;
           }
-          return next;
-        });
-        fullOutput = cleanOutput;
-      }
+        }
+        return next;
+      });
+      fullOutput = cleanOutput;
 
       // Update conversation history
       setConversationHistory(prev => [
