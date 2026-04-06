@@ -91,9 +91,18 @@ IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, se
         <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
           <span>&nbsp;</span>
         </ContentLine>
-        <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
-          <p className="md-paragraph" style={{margin: 0}}>{siteData.about || siteData.bio}</p>
-        </ContentLine>
+        {(siteData.about || siteData.bio || '').split('\n\n').map((para, pi) => (
+          <React.Fragment key={pi}>
+            <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+              <p className="md-paragraph" style={{margin: 0}}>{para}</p>
+            </ContentLine>
+            {pi < (siteData.about || siteData.bio || '').split('\n\n').length - 1 && (
+              <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                <span>&nbsp;</span>
+              </ContentLine>
+            )}
+          </React.Fragment>
+        ))}
         <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
           <span>&nbsp;</span>
         </ContentLine>

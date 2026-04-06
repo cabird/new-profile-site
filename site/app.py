@@ -396,7 +396,7 @@ def build_terminal_bio(site_data):
         f"Name: {site_data.get('name', 'Christian Bird')}\n"
         f"Title: {site_data.get('title', 'Senior Principal Researcher')}\n"
         f"Affiliation: {site_data.get('affiliation', 'Microsoft Research')}\n"
-        f"Bio: {site_data.get('bio', '')}\n"
+        f"Bio: {site_data.get('about', '') or site_data.get('bio', '')}\n"
     )
 
 
