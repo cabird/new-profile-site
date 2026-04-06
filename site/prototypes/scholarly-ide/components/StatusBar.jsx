@@ -49,6 +49,7 @@ IDE.StatusBar = function StatusBar({ paperCount, warningCount = 0, activeLine, a
           <IDE.Codicon name={lightTheme ? 'color-mode' : 'color-mode'} size={14} />
           {lightTheme ? ' Light' : ' Dark'}
         </span>
+        <span className="statusbar-item" style={{ opacity: 0.6 }}>{window.__v || ''}</span>
       </div>
     </div>
   );
