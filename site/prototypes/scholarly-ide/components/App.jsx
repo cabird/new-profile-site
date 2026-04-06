@@ -152,7 +152,7 @@ IDE.App = function App() {
     ]).then(([site, paperData]) => {
       setSiteData(site);
       const list = Object.entries(paperData.papers || {}).map(([id, p]) => ({ id, ...p }));
-      list.sort((a, b) => (b.year || 0) - (a.year || 0));
+      list.sort((a, b) => (b.year || 0) - (a.year || 0) || (a.priority || 50) - (b.priority || 50));
       setPapers(list);
       logEvent('system', `Loaded ${list.length} papers from /api/paper_data.json`);
       logEvent('system', `Site data loaded: ${site.name}`);
