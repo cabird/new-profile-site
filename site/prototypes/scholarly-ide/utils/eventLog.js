@@ -20,4 +20,4 @@ IDE.useEventLog = function useEventLog() {
   return log;
 };
 
-IDE.logEvent('system', 'Scholarly IDE initialized');
+IDE.logEvent('system', 'Research IDE initialized');

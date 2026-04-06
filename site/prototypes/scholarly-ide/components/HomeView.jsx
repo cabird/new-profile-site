@@ -144,7 +144,7 @@ IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, se
         </ContentLine>
         <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
           <footer className="page-footer" style={{margin: 0}}>
-            &copy; {new Date().getFullYear()} {siteData.name} — Scholarly IDE v2.0
+            &copy; {new Date().getFullYear()} {siteData.name} — Research IDE v2.0
           </footer>
         </ContentLine>
       </div>

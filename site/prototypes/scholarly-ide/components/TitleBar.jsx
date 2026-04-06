@@ -23,7 +23,7 @@ IDE.TitleBar = function TitleBar({ name, activeTab, onCommandPalette, papersById
         <span className="titlebar-dot yellow"></span>
         <span className="titlebar-dot green"></span>
       </div>
-      <div className="titlebar-text" onClick={onCommandPalette}>{name || 'Scholarly IDE'} — {fileLabel}</div>
+      <div className="titlebar-text" onClick={onCommandPalette}>{name || 'Research IDE'} — {fileLabel}</div>
     </div>
   );
 };

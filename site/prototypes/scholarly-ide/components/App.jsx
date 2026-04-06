@@ -365,7 +365,7 @@ IDE.App = function App() {
         {/* Welcome screen when no tabs are open */}
         {!activeEditorTab && (
           <div className="welcome-screen">
-            <div className="welcome-title">Scholarly IDE</div>
+            <div className="welcome-title">Research IDE</div>
             <div className="welcome-subtitle">{siteData?.name || ''}</div>
             <div className="welcome-actions">
               <div className="welcome-section">Start</div>
