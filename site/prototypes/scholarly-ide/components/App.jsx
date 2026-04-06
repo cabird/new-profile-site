@@ -401,8 +401,7 @@ IDE.App = function App() {
               <img src="/images/profile_pic_medium.jpeg" alt="Profile" />
             </div>
             <div className="image-viewer-info">
-              profile.jpg —
-              <span style={{color: '#858585'}}> Click to zoom</span>
+              profile.jpg
             </div>
           </div>
         )}

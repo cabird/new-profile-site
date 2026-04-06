@@ -484,7 +484,6 @@ IDE.TerminalPanel = function TerminalPanel({ papers, onClose, visible }) {
                   autoCorrect="off"
                   autoCapitalize="off"
                 />
-                <span className="terminal-cursor-blink" />
               </div>
             )}
             {!streaming && remaining <= 0 && (
