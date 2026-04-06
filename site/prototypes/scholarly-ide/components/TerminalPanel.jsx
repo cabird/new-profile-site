@@ -38,6 +38,25 @@ IDE.OutputLog = function OutputLog() {
   );
 };
 
+/* ─── Terminal Spinner ─── */
+IDE.TerminalSpinner = function TerminalSpinner() {
+  const phases = [
+    'Connecting to research-srv-01.internal...',
+    'Authenticating session...',
+    'Executing in sandbox...',
+    'Waiting for response...',
+  ];
+  const [phase, setPhase] = React.useState(0);
+  React.useEffect(() => {
+    const delays = [600, 800, 1200, 2000];
+    const timer = setTimeout(() => {
+      setPhase(prev => Math.min(prev + 1, phases.length - 1));
+    }, delays[phase] || 2000);
+    return () => clearTimeout(timer);
+  }, [phase]);
+  return <span className="terminal-spinner-msg">{phases[phase]}</span>;
+};
+
 /* ─── Terminal Panel ─── */
 IDE.TerminalPanel = function TerminalPanel({ papers, onClose, visible }) {
   const { OutputLog } = IDE;
@@ -445,9 +464,8 @@ IDE.TerminalPanel = function TerminalPanel({ papers, onClose, visible }) {
             })}
 
             {streaming && (
-              <div className="terminal-line" style={{ opacity: 0.6 }}>
-                <span className="terminal-prompt-text">{prompt}</span>
-                <span className="terminal-spinner-dots">...</span>
+              <div className="terminal-line" style={{ opacity: 0.7 }}>
+                <IDE.TerminalSpinner />
               </div>
             )}
 
@@ -549,9 +567,24 @@ IDE.TerminalPanel = function TerminalPanel({ papers, onClose, visible }) {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
         }
-        .terminal-spinner-dots {
-          color: var(--vscode-terminal-ansiYellow, #dcdcaa);
-          animation: terminal-blink 0.8s step-end infinite;
+        .terminal-spinner-msg {
+          color: var(--text-muted);
+          font-style: italic;
+          font-size: 12px;
+        }
+        .terminal-spinner-msg::before {
+          content: '⠋';
+          margin-right: 6px;
+          display: inline-block;
+          animation: terminal-spin 0.6s steps(6) infinite;
+        }
+        @keyframes terminal-spin {
+          0% { content: '⠋'; }
+          16% { content: '⠙'; }
+          33% { content: '⠹'; }
+          50% { content: '⠸'; }
+          66% { content: '⠼'; }
+          83% { content: '⠴'; }
         }
         .terminal-rate-counter {
           color: var(--vscode-descriptionForeground, #858585);
