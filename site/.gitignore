@@ -10,6 +10,5 @@ env/
 *.log
 .DS_Store
 
-# Large binary directories (served from extracted/ instead)
-pdfs/
+# Large binary directories
 markdowns/

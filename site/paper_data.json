@@ -6079,7 +6079,8 @@
       ],
       "raw_bibtex": "@misc{miller2025maybeneedexamples,\n  author    = {Courtney Miller and Rudrajit Choudhuri and Mara Ulloa and Sankeerti Haniyur and Robert DeLine and Margaret{-}Anne Storey and Emerson Murphy{-}Hill and Christian Bird and Jenna L. Butler},\n  title     = {{\\\"Maybe We Need Some More Examples:\\\" Individual and Team Drivers of Developer GenAI Tool Use}},\n  year      = {2025},\n  note      = {Manuscript under submission. Preprint available at arXiv:2507.21280},\n  url       = {https://arxiv.org/abs/2507.21280}\n}",
       "under_submission": true,
-      "priority": 50
+      "priority": 50,
+      "url": "https://arxiv.org/abs/2507.21280"
     },
     "Choudhuri2026AIWhere": {
       "status": "MAPPED",
@@ -6187,7 +6188,8 @@
         "tool-adoption-and-trust"
       ],
       "venue": "arXiv Preprint",
-      "priority": 50
+      "priority": 50,
+      "url": "https://cabird.com/pdfs/dearstyne2026revealing.pdf"
     },
     "johnson2026facilitating": {
       "status": "MAPPED",
@@ -6221,7 +6223,8 @@
         "interviews",
         "surveys"
       ],
-      "priority": 50
+      "priority": 50,
+      "url": "https://cabird.com/pdfs/johnson2026facilitating.pdf"
     }
   }
 }
