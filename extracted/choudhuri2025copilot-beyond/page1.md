@@ -1,0 +1,30 @@
+## To Copilot and Beyond:
+22 AI Systems Developers Want Built
+
+Rudrajit Choudhuri 1 Christian Bird 2 Carmen Badea 2 Anita Sarma 1  
+1 Oregon State University, OR, USA. Email: {choudhru, anita.sarma}@oregonstate.edu  
+2 Microsoft Research, WA, USA. Email: {cbird, cabadea}@microsoft.com
+
+## Abstract
+Developers spend roughly one-tenth of their workday writing code, yet most AI tooling targets that fraction. This paper asks what should be built for the rest. We surveyed 860 Microsoft developers to understand where they want AI support, and where they want it to stay out. Using a human-in-the-loop, multi-model council-based thematic analysis, we identify 22 AI systems that developers want built across five task categories. For each, we describe the problem it solves, what makes it hard to build, and the constraints developers place on its behavior.
+
+Our findings point to a growing right-shift burden in AI-assisted development: developers wanted systems that embed quality signals earlier in their workflow to keep pace with accelerating code generation, while enforcing explicit authority scoping, provenance, uncertainty signaling, and least-privilege access throughout. This tension reveals a pattern we call “bounded delegation”: developers wanted AI to absorb the assembly work surrounding their craft, never the craft itself. That boundary tracks where they locate professional identity, suggesting that the value of AI tooling may lie as much in where and how precisely it stops as in what it does.
+
+supposed to deliver. The downstream costs compound: developer fatigue and burnout [20, 36], and a growing accumulation of AI-induced technical debt [18, 34].
+
+Designing tools that address this problem requires knowing what developers actually need, and that requires their voice. Decades of work-design research show that automation-first approaches cap gains at labor arbitrage; augmentation is what expands them [3–5, 12]. When workers’ perspectives inform tool design, organizations achieve more sustainable improvements in both productivity and well-being [24, 49].
+
+Yet most studies of AI in software engineering examine current adoption patterns, productivity effects, or task-level exposure [2, 13, 17, 20, 28, 29, 31, 44]. They tell us where developers use AI and why they adopt or resist it. They do not tell us what should be built next, what those systems should do, or what they should never do on their own. This paper provides that study. We ask:
+
+> RQ: What AI systems do developers want built, and what conditions do they place on those systems for them to be acceptable?
+
+The data comes from a large-scale survey of 860 Microsoft developers reported in [16], which investigated how developers’ cognitive appraisals of their daily work shape their openness to and use of AI. This paper asks the complementary question: what, concretely, should be built? Using a human-in-the-loop, multi-model council-based thematic analysis [48, 52] of the survey’s open-ended responses, we identified 22 AI systems across five software development task categories that developers want built. For each, we describe the problem developers want solved, what makes it hard to build, and the constraints developers place on its behavior.
+
+Developers’ needs fell overwhelmingly on the verification side of the workflow: they wanted systems to embed quality signals earlier, at authorship time, at the point of change, to keep pace with accelerating code generation. Across these systems, developers enforced four guardrails: (1) explicit authority scoping, (2) provenance, (3) uncertainty signaling, and (4) least-privilege access.
+
+Our findings reveal an underlying pattern we call “bounded delegation”: developers wanted AI to absorb the assembly work surrounding their craft, never the craft itself. That boundary reflected where they located professional identity, accountability, and ownership in their work. It did not reflect capability; developers drew it even for tasks they acknowledged AI could plausibly handle, suggesting it is unlikely to move simply because models improve. This paper helps chart where that boundary lies and why developers defend it, and leaves with the question: what, then, should AI systems for software engineering be designed to protect?
+
+## 1 Introduction
+When asked what software developers do, most people picture someone writing code. AI tooling ventures have largely followed the same intuition, concentrating investment on code generation [14, 54]. But studies of how developers actually spend their time tell a different story: writing code accounts for roughly one-tenth of their day [29, 35]. The rest, spent debugging production incidents, navigating compliance, onboarding teammates, keeping documentation from drifting, reviewing changes, and translating technical decisions for non-technical stakeholders, is where most of the work lives [29, 38], and where AI support remains comparatively sparse.
+
+This mismatch is creating a compounding problem in software development: AI-assisted code generation is accelerating the part of the lifecycle that was already comparatively fast, while expanding the parts that are slow, messy, and human-intensive (e.g., review, verification, testing, incident triage) [6]. Reviewers face more code with less provenance [18]. On-call engineers debug systems whose logic was never fully understood by the team that shipped them [39]. Documentation falls further behind because the code it describes changes faster than anyone can track [53]. Emerging evidence suggests this dynamic is already producing measurable strain. AI-generated “workslop,” output that appears useful but lacks substance, forces recipients to interpret, correct, or redo the work [37], undermining the very productivity gains that AI was

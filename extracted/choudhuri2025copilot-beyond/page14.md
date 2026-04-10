@@ -1,0 +1,33 @@
+outpacing existing verification practices [40], increasing the cognitive cost of review and, increasingly, contributing to developer fatigue and burnout [20, 36]. Over time, this imbalance can also lead to the accumulation of AI-induced technical debt [18, 34], making systems harder to reason about, maintain, and trust.
+
+The systems identified in this study respond to this imbalance by moving verification earlier in the workflow. Developers consistently asked for systems that surface quality signals at the point of change: be it change-aware testing that highlights coverage gaps at the diff, or pre-merge security analysis that identifies risks before deployment. Each targets the same moment: exposing context and intent during authorship, while the developer still has enough proximity to act.
+
+This emphasis on left-shifting can also be seen as a work-design intervention. Embedding earlier, more targeted feedback loops into daily work can keep developers closer to the consequences of their decisions, preserving quality judgment over time.
+
+> Key implication: AI systems should be designed to scale verification commensurate with generation by left-shifting quality signal provision. Without corresponding support, impetus on faster production causes sustained pressure on developers and makes systems harder to understand, maintain, and trust.
+
+5.1.3 Cross-Cutting Guardrails. All 22 systems came with constraints under which developers would accept it. Across all categories, four constraints recurred often enough that we treat them as guardrails for acceptable system behavior: (1) explicit authority scoping: operate within a declared boundary and halt when judgment is required; (2) provenance: trace outputs to sources; (3) uncertainty signaling: surface when evidence is missing or confidence is low; and (4) least-privilege access with strict boundaries around sensitive data.
+
+These guardrails reflect a view of how agency should be structured, regardless of what any AI system can do. As developers offload assembly work to AI, they require that responsibility remain visible, attributable, and interruptible. In this sense, guardrails operationalize bounded delegation: they define how work can be delegated without relinquishing ownership of outcomes. This also bears directly on the right-shift problem. As AI produces more outputs, provenance and uncertainty signaling are what let humans keep up with verifying them.
+
+What remains an open question is calibration. Too little constraint and developers lose meaningful control and trust. Too much, and they route around the systems entirely. Where this boundary lies likely varies by context and task criticality. We see getting this right as a priority for future work.
+
+> Key implication: Authority scoping, provenance, uncertainty signaling, and least-privilege access should be treated as design requirements. The challenge is calibration: enough to preserve agency, not so much that developers bypass the tools.
+
+## 5.2 Implications for research
+
+Using generative AI models in a qualitative analysis pipeline sits in tension with traditional reflexive thematic analysis, which depends on human interpretation, theoretical sensitivity, and judgment [10, 11]. Our pipeline does not claim that these models can replace interpretive qualitative work. Instead, it separates two activities that are often intertwined in large-scale analysis: (1) pattern discovery across a large corpus and (2) interpretive judgment about what those patterns mean. The models supported the first; the researchers retained authority over the second.
+
+This distinction was enforced throughout the pipeline. Models proposed candidate themes with supporting participant IDs, but every theme in the final codebook passed through a human review gate in which two researchers examined the cited responses, assessed fit, clarified boundaries, split or merged themes, and added concepts the models missed. During systematic coding, models were restricted to the approved codebook and required to provide rationales before assigning codes, making their decisions reviewable rather than opaque. In this sense, the models served as discovery and coding instruments under human supervision; interpretive authority was never delegated.
+
+From this experience, we draw three practical design principles for researchers considering similar workflows. First, separate discovery from interpretation: allow models to discover candidate themes from the data, but finalize the codebook under human supervision before systematic coding begins. Second, require evidence and rationale before codes: models should cite supporting responses during theme discovery and provide rationale during coding so that researchers can inspect whether outputs are actually grounded in the data. Third, use model diversity as a safeguard: models from different provider families surfaced different blind spots and failure modes, making agreement more meaningful and disagreement more diagnostically useful.
+
+These practices offer a practical path for using generative AI models in large-scale qualitative studies without collapsing responsibility for interpretation or rigor. They, however, do not resolve the deeper epistemological question of whether machines can interpret human meaning [45], nor do we sidestep it. What we argue is that making the boundary between AI assistance and human interpretation explicit and auditable at every stage in qualitative analysis is, itself, a methodological contribution.
+
+> Key implication: Separate theme discovery from coding, keep interpretive authority human-gated at every stage, require auditable rationale throughout, and use model diversity as a convergent validity check when using generative AI in qualitative analysis pipelines.
+
+## 6 Conclusion
+
+We surveyed 860 Microsoft developers to identify what AI systems they want built for their daily work. The result is a catalog of 22 systems across five task categories, each described in terms of the problem it solves, what makes it hard to build, and the constraints developers place on its behavior. These systems sit overwhelmingly on the verification side of the workflow, reflecting the current bottlenecks in AI-assisted development. Across these systems, developers enforced four recurring constraints: explicit authority scoping, provenance, uncertainty signaling, and least-privilege access.
+
+Our findings reveal an underlying pattern we call bounded delegation: developers drew a consistent line between the overhead they wanted AI to absorb and the craft they refused to let go. We

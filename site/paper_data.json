@@ -6225,6 +6225,20 @@
       ],
       "priority": 50,
       "url": "https://cabird.com/pdfs/johnson2026facilitating.pdf"
+    },
+    "choudhuri2025copilot-beyond": {
+      "status": "found",
+      "type": "inproceedings",
+      "title": "To Copilot and Beyond: 22 AI Systems Developers Want Built",
+      "authors": "Rudrajit Choudhuri and Christian Bird and Carmen Badea and Anita Sarma",
+      "year": 2025,
+      "venue": "arXiv Preprint",
+      "mapped_pdf": "to-copilot-and-beyond.pdf",
+      "tags": "['ai-for-software-engineering', 'developer-productivity', 'surveys']",
+      "doi": "",
+      "url": "https://arxiv.org/abs/2604.07830",
+      "raw_bibtex": "@article{choudhuri2025copilot,\n  title={To Copilot and Beyond: 22 AI Systems Developers Want Built},\n  author={Choudhuri, Rudrajit and Bird, Christian and Badea, Carmen and Sarma, Anita},\n  journal={arXiv preprint arXiv:2604.07830},\n  year={2025}\n}",
+      "priority": 1
     }
   }
 }
