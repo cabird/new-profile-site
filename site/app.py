@@ -342,7 +342,7 @@ def build_terminal_filesystem(paper_data):
     papers = paper_data.get('papers', {})
     by_year = {}
     for pid, p in papers.items():
-        year = p.get('year', 'unknown')
+        year = str(p.get('year', 'unknown'))
         title = p.get('title', 'Untitled')
         # Create a slug filename from the title
         slug = title.lower()[:60].strip()
