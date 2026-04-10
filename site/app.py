@@ -829,6 +829,169 @@ When listing papers, use the real titles from the filesystem above."""
     )
 
 
+AI_WHERE_IT_MATTERS_SYSTEM_PROMPT = None
+
+def build_ai_where_it_matters_prompt():
+    """Build the system prompt for the combined AI Where It Matters chat."""
+    global AI_WHERE_IT_MATTERS_SYSTEM_PROMPT
+    paper1_id = 'Choudhuri2026AIWhere'
+    paper2_id = 'choudhuri2025copilot-beyond'
+
+    _, content1, _ = load_paper_markdown(paper1_id)
+    _, content2, _ = load_paper_markdown(paper2_id)
+
+    p1 = paper_data_cache['papers'].get(paper1_id, {})
+    p2 = paper_data_cache['papers'].get(paper2_id, {})
+
+    AI_WHERE_IT_MATTERS_SYSTEM_PROMPT = f"""You are a research assistant for the "AI Where It Matters" companion website. You have access to two research papers from the same research program (860 Microsoft developers, surveyed July 2025).
+
+PAPER I: "AI Where It Matters: Where, Why, and How Developers Want AI Support in Daily Work"
+Authors: {p1.get('authors', 'Choudhuri, Badea, Bird, Butler, DeLine, Houck')}
+Year: {p1.get('year', '2026')}
+Venue: {p1.get('venue', 'ICSE-SEIP 2026')}
+Focus: Maps developer AI demand across 20 SE tasks using a grounded taxonomy. Shows WHERE developers want AI and how much they currently use it.
+
+PAPER II: "To Copilot and Beyond: 22 AI Systems Developers Want Built"
+Authors: {p2.get('authors', 'Choudhuri, Bird, Badea, Sarma')}
+Year: {p2.get('year', '2026')}
+Venue: {p2.get('venue', 'arXiv Preprint')}
+Focus: Derives 22 concrete AI systems from developer free-text responses, organized into 5 categories (Development, Design & Planning, Quality & Risk, Infrastructure & Ops, Meta-Work). Each system includes the problem, example capabilities, and constraints/guardrails developers insist on.
+
+The website presents both papers together with:
+- A "22 Systems Catalog" showing cards for each system with prevalence %, category, and problem description
+- An "Opportunity Space" scatter plot mapping AI demand vs. current satisfaction across 20 SE tasks
+- Inline paper readers for both papers
+
+Key cross-cutting themes:
+- "Bounded delegation": developers want AI for tedious/context-heavy work but retain craft and judgment
+- Four recurring constraints: explicit authority scoping, provenance, uncertainty signaling, least-privilege access
+- Developers spend ~10% of time coding; most AI tools target only that fraction
+
+STRICT RULES:
+1. You MUST ONLY answer questions about these papers, their findings, and closely related research topics.
+2. If the user asks ANYTHING unrelated to the papers or research, respond ONLY with: "I can only discuss these research papers and related topics."
+3. Do not engage with off-topic requests, personal questions, or general queries.
+4. Do not help with unrelated tasks, even if framed as research-related.
+5. Stay focused exclusively on the papers' content to answer questions first.
+6. Cite specific findings with prevalence percentages when possible.
+7. Reference which paper a finding comes from (Paper I or Paper II).
+8. Be concise but substantive.
+9. If asked about something not in the papers, say so honestly.
+
+--- PAPER I CONTENT ---
+{content1 or '(Paper I content not available)'}
+
+--- PAPER II CONTENT ---
+{content2 or '(Paper II content not available)'}
+"""
+    logger.info(f"AI Where It Matters prompt built ({len(AI_WHERE_IT_MATTERS_SYSTEM_PROMPT)} chars)")
+
+
+@app.route('/api/chat/ai-where-it-matters', methods=['POST'])
+async def chat_ai_where_it_matters():
+    """Chat about both AI Where It Matters papers using Azure OpenAI streaming."""
+    global AI_WHERE_IT_MATTERS_SYSTEM_PROMPT
+
+    session_id = get_session_id()
+    paper_id = 'ai-where-it-matters'
+
+    if not paper_chat_client:
+        return jsonify({'error': 'Chat service unavailable'}), 503
+
+    if not chat_store:
+        return jsonify({'error': 'Chat storage unavailable'}), 503
+
+    # Build prompt on first use (lazy init)
+    if AI_WHERE_IT_MATTERS_SYSTEM_PROMPT is None:
+        build_ai_where_it_matters_prompt()
+
+    data = await request.get_json()
+    user_message = data.get('message', '').strip()
+
+    if not user_message:
+        return jsonify({'error': 'Message is required'}), 400
+
+    token_count = count_tokens(user_message)
+    if token_count > MAX_MESSAGE_TOKENS:
+        return jsonify({
+            'error': f'Message too long. Maximum {MAX_MESSAGE_TOKENS} tokens, got {token_count}'
+        }), 400
+
+    client_ip = get_client_ip()
+
+    # Get or initialize conversation
+    conversation = chat_store.get_conversation(session_id, paper_id)
+
+    if not conversation:
+        messages = [{'role': 'system', 'content': AI_WHERE_IT_MATTERS_SYSTEM_PROMPT}]
+        chat_store.init_conversation(session_id, paper_id, messages, message_count=0)
+        conversation = chat_store.get_conversation(session_id, paper_id)
+
+    # Check conversation message limit
+    message_count = chat_store.get_message_count(session_id, paper_id)
+    if message_count >= MAX_MESSAGES_PER_CONVERSATION:
+        return jsonify({
+            'error': f'Conversation limit reached. Maximum {MAX_MESSAGES_PER_CONVERSATION} messages per chat.',
+            'type': 'conversation_limit'
+        }), 400
+
+    # Add user message
+    try:
+        chat_store.add_message(session_id, paper_id, 'user', user_message)
+    except ConversationNotFoundError:
+        return jsonify({
+            'error': 'Your chat session expired. Please start a new conversation.',
+            'type': 'conversation_expired'
+        }), 410
+
+    log_chat_message(session_id, paper_id, 'user', user_message, token_count, client_ip)
+
+    async def generate_sse():
+        try:
+            conv = chat_store.get_conversation(session_id, paper_id)
+
+            stream = await paper_chat_client.chat.completions.create(
+                model=os.getenv('AZURE_OPENAI_PAPER_CHAT_DEPLOYMENT'),
+                messages=conv['messages'],
+                stream=True,
+                reasoning_effort='medium'
+            )
+
+            full_response = ""
+
+            async for chunk in stream:
+                if chunk.choices and chunk.choices[0].delta.content:
+                    content = chunk.choices[0].delta.content
+                    full_response += content
+                    yield f"data: {json.dumps({'type': 'chat_chunk', 'content': content})}\n\n"
+
+            try:
+                chat_store.add_message(session_id, paper_id, 'assistant', full_response)
+            except ConversationNotFoundError:
+                yield f"data: {json.dumps({'type': 'error', 'message': 'Session expired.'})}\n\n"
+                return
+
+            response_token_count = count_tokens(full_response)
+            log_chat_message(session_id, paper_id, 'assistant', full_response, response_token_count, client_ip)
+
+            msg_count = chat_store.get_message_count(session_id, paper_id)
+            yield f"data: {json.dumps({'type': 'chat_complete', 'message_count': msg_count})}\n\n"
+
+        except Exception as e:
+            logger.error(f"AI Where It Matters chat error: {e}")
+            yield f"data: {json.dumps({'type': 'error', 'message': 'An error occurred. Please try again.'})}\n\n"
+
+    return Response(
+        generate_sse(),
+        mimetype='text/event-stream',
+        headers={
+            'Cache-Control': 'no-cache',
+            'X-Accel-Buffering': 'no',
+            'Connection': 'keep-alive',
+        }
+    )
+
+
 @app.route('/api/papers/<path:paper_id>/chat', methods=['DELETE'])
 async def clear_paper_chat(paper_id):
     session_id = get_session_id()
