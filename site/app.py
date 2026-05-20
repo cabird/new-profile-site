@@ -325,6 +325,80 @@ def load_paper_markdown(paper_id):
         return None, None, None
 
 
+blog_posts_cache = {}  # slug -> {title, date, tags, description, slug}
+
+
+def parse_frontmatter(text):
+    """Parse simple YAML-ish frontmatter. Returns (metadata_dict, body_text)."""
+    if not text.startswith('---'):
+        return {}, text
+    end = text.find('\n---', 3)
+    if end == -1:
+        return {}, text
+    fm_text = text[3:end].strip()
+    body = text[end + 4:].lstrip('\n')
+
+    metadata = {}
+    for line in fm_text.split('\n'):
+        line = line.strip()
+        if not line or ':' not in line:
+            continue
+        key, _, value = line.partition(':')
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        # Handle list values like [tag1, tag2]
+        if value.startswith('[') and value.endswith(']'):
+            value = [v.strip().strip('"').strip("'") for v in value[1:-1].split(',') if v.strip()]
+        metadata[key] = value
+    return metadata, body
+
+
+def load_blog_posts():
+    """Scan blog/ directory and cache post metadata."""
+    global blog_posts_cache
+    blog_posts_cache = {}
+    blog_dir = os.path.join('..', 'blog')
+    if not os.path.isdir(blog_dir):
+        logger.info("No blog/ directory found")
+        return
+
+    for slug in sorted(os.listdir(blog_dir)):
+        post_dir = os.path.join(blog_dir, slug)
+        post_md = os.path.join(post_dir, 'post.md')
+        if not os.path.isfile(post_md):
+            continue
+        try:
+            with open(post_md, 'r', encoding='utf-8') as f:
+                text = f.read()
+            metadata, _ = parse_frontmatter(text)
+            blog_posts_cache[slug] = {
+                'slug': slug,
+                'title': metadata.get('title', slug),
+                'date': metadata.get('date', ''),
+                'tags': metadata.get('tags', []) if isinstance(metadata.get('tags'), list) else [],
+                'description': metadata.get('description', ''),
+            }
+        except Exception as e:
+            logger.error(f"Failed to load blog post {slug}: {e}")
+
+    logger.info(f"Loaded {len(blog_posts_cache)} blog posts")
+
+
+def load_blog_post_markdown(slug):
+    """Return (metadata, body) for a single blog post, or (None, None)."""
+    blog_dir = os.path.join('..', 'blog', slug)
+    post_md = os.path.join(blog_dir, 'post.md')
+    if not os.path.isfile(post_md):
+        return None, None
+    try:
+        with open(post_md, 'r', encoding='utf-8') as f:
+            text = f.read()
+        return parse_frontmatter(text)
+    except Exception as e:
+        logger.error(f"Failed to load blog post {slug}: {e}")
+        return None, None
+
+
 def load_canned_questions():
     global canned_questions
     try:
@@ -406,6 +480,7 @@ def initialize_app():
 
     paper_data_cache = initialize_paper_data()
     load_canned_questions()
+    load_blog_posts()
 
     # Build terminal filesystem and bio
     terminal_filesystem = build_terminal_filesystem(paper_data_cache)
@@ -1014,6 +1089,37 @@ async def get_paper_markdown(paper_id):
 @app.route('/extracted/<path:path>')
 async def serve_extracted(path):
     return await send_from_directory(os.path.join('..', 'extracted'), path)
+
+
+@app.route('/api/blog')
+async def get_blog_index():
+    """List all blog posts sorted by date descending."""
+    posts = list(blog_posts_cache.values())
+    posts.sort(key=lambda p: p.get('date', ''), reverse=True)
+    return jsonify({'posts': posts})
+
+
+@app.route('/api/blog/<slug>')
+async def get_blog_post(slug):
+    """Return markdown content and metadata for a single blog post."""
+    metadata, body = load_blog_post_markdown(slug)
+    if not metadata and not body:
+        return jsonify({'error': 'Post not found'}), 404
+    return jsonify({
+        'slug': slug,
+        'title': metadata.get('title', slug),
+        'date': metadata.get('date', ''),
+        'tags': metadata.get('tags', []) if isinstance(metadata.get('tags'), list) else [],
+        'description': metadata.get('description', ''),
+        'markdown': body,
+        'image_base': f'/blog/{slug}',
+    })
+
+
+@app.route('/blog/<path:path>')
+async def serve_blog_asset(path):
+    """Serve blog assets (images, etc.) from blog/<slug>/<filename>."""
+    return await send_from_directory(os.path.join('..', 'blog'), path)
 
 
 @app.route('/ide')

@@ -2,7 +2,7 @@
 const { useState, useCallback } = React;
 const { FileMdIcon, FileIconSvg, FilePdfIcon, FolderIcon, LinkIcon, MailIcon, TagIcon } = IDE;
 
-IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTags, papersById, onOpenPaper }) {
+IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTags, papersById, blogPostsBySlug, blogPosts, onOpenPaper, onOpenBlogPost }) {
   const [openSections, setOpenSections] = useState({ editors: true, project: true });
   const [openSubSections, setOpenSubSections] = useState({});
 
@@ -42,6 +42,8 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTag
     const staticInfo = {
       home: { label: 'home.md', icon: <FileMdIcon /> },
       publications: { label: 'publications.md', icon: <FileMdIcon /> },
+      cv: { label: 'cv.md', icon: <FileMdIcon /> },
+      posts: { label: 'posts.md', icon: <FileMdIcon /> },
       profile: { label: 'profile.jpg', icon: <IDE.Codicon name="file-media" size={16} color="#a074c4" /> },
     };
     if (staticInfo[tab]) return staticInfo[tab];
@@ -53,6 +55,13 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTag
       const paperId = tab.slice(6);
       const paper = papersById[paperId];
       const title = paper ? paper.title : paperId;
+      const label = title.length > 24 ? title.substring(0, 22) + '….md' : title + '.md';
+      return { label, icon: <FileMdIcon /> };
+    }
+    if (tab.startsWith('blog:') && blogPostsBySlug) {
+      const slug = tab.slice(5);
+      const post = blogPostsBySlug[slug];
+      const title = post ? post.title : slug;
       const label = title.length > 24 ? title.substring(0, 22) + '….md' : title + '.md';
       return { label, icon: <FileMdIcon /> };
     }
@@ -107,6 +116,10 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTag
               <span className="tree-item-icon file-md"><FileMdIcon /></span>
               <span className="tree-item-label">cv.md</span>
             </div>
+            <div className={`tree-item ${activeTab === 'posts' ? 'active' : ''}`} style={{cursor:'pointer'}} onClick={() => onSetTab('posts')}>
+              <span className="tree-item-icon file-md"><FileMdIcon /></span>
+              <span className="tree-item-label">posts.md</span>
+            </div>
             <div className="tree-item" style={{cursor:'pointer'}} onClick={() => onSetTab('profile')}>
               <span className="tree-item-icon"><IDE.Codicon name="file-media" size={16} color="#a074c4" /></span>
               <span className="tree-item-label">profile.jpg</span>
@@ -131,6 +144,27 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTag
                     <span className="tree-item-label">{l.label}</span>
                   </a>
                 ))}
+              </>
+            )}
+
+            {/* Posts folder — shows recent blog posts */}
+            {blogPosts && blogPosts.length > 0 && (
+              <>
+                <div className="tree-item" onClick={() => toggleSub('posts')} style={{cursor:'pointer'}}>
+                  <span className="tree-item-icon folder"><FolderIcon open={openSubSections.posts} /></span>
+                  <span className="tree-item-label">posts/</span>
+                </div>
+                {openSubSections.posts && blogPosts.slice(0, 10).map((post) => {
+                  const tabId = 'blog:' + post.slug;
+                  const title = post.title || post.slug;
+                  const label = title.length > 22 ? title.substring(0, 20) + '….md' : title + '.md';
+                  return (
+                    <div key={post.slug} className={`tree-item tree-sub-item ${activeTab === tabId ? 'active' : ''}`} style={{cursor:'pointer'}} onClick={() => onOpenBlogPost && onOpenBlogPost(post.slug)}>
+                      <span className="tree-item-icon file-md"><FileMdIcon /></span>
+                      <span className="tree-item-label">{label}</span>
+                    </div>
+                  );
+                })}
               </>
             )}
 

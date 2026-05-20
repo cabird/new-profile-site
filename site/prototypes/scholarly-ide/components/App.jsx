@@ -12,6 +12,10 @@ const isPaperTab = (tab) => tab && tab.startsWith('paper:');
 const getPaperIdFromTab = (tab) => tab.slice(6);
 const makePaperTabId = (paperId) => 'paper:' + paperId;
 
+const isBlogTab = (tab) => tab && tab.startsWith('blog:');
+const getBlogSlugFromTab = (tab) => tab.slice(5);
+const makeBlogTabId = (slug) => 'blog:' + slug;
+
 IDE.App = function App() {
   const [siteData, setSiteData] = useState(null);
   const [papers, setPapers] = useState([]);
@@ -46,6 +50,11 @@ IDE.App = function App() {
   const [cvMarkdown, setCvMarkdown] = useState(null);
   const [cvLoadState, setCvLoadState] = useState(null);
 
+  // Blog posts (index + per-post cache)
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [blogMarkdownBySlug, setBlogMarkdownBySlug] = useState({});
+  const [blogLoadStateBySlug, setBlogLoadStateBySlug] = useState({});
+
   // Refs for stale-closure-safe access in fetchPaperMarkdown
   const markdownRef = useRef(paperMarkdownById);
   const loadStateRef = useRef(paperLoadStateById);
@@ -78,6 +87,13 @@ IDE.App = function App() {
     if (activeEditorTab === 'cv') fetchCvMarkdown();
   }, [activeEditorTab, fetchCvMarkdown]);
 
+  // Trigger blog post fetch when a blog tab opens
+  useEffect(() => {
+    if (activeEditorTab && activeEditorTab.startsWith('blog:')) {
+      fetchBlogPost(activeEditorTab.slice(5));
+    }
+  }, [activeEditorTab, fetchBlogPost]);
+
   // Close a tab
   const closeTab = useCallback((tab) => {
     setOpenTabs(prev => {
@@ -106,6 +122,36 @@ IDE.App = function App() {
       .then(text => { setCvMarkdown(text); setCvLoadState({ status: 'loaded', error: null }); })
       .catch(err => { setCvLoadState({ status: 'error', error: err.message }); });
   }, [cvMarkdown, cvLoadState]);
+
+  // Blog: lookup by slug
+  const blogPostsBySlug = useMemo(() => {
+    const map = {};
+    blogPosts.forEach(p => { map[p.slug] = p; });
+    return map;
+  }, [blogPosts]);
+
+  // Fetch blog post markdown on demand
+  const fetchBlogPost = useCallback((slug) => {
+    if (blogMarkdownBySlug[slug]) return;
+    if (blogLoadStateBySlug[slug] && blogLoadStateBySlug[slug].status === 'loading') return;
+    setBlogLoadStateBySlug(prev => ({ ...prev, [slug]: { status: 'loading', error: null } }));
+    fetch(`/api/blog/${slug}?v=${window.__v}`)
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+      .then(data => {
+        setBlogMarkdownBySlug(prev => ({ ...prev, [slug]: data.markdown }));
+        setBlogLoadStateBySlug(prev => ({ ...prev, [slug]: { status: 'loaded', error: null, imageBase: data.image_base } }));
+      })
+      .catch(err => {
+        setBlogLoadStateBySlug(prev => ({ ...prev, [slug]: { status: 'error', error: err.message } }));
+      });
+  }, [blogMarkdownBySlug, blogLoadStateBySlug]);
+
+  // Open a blog post as a file tab
+  const openBlogTab = useCallback((slug) => {
+    const tabId = makeBlogTabId(slug);
+    openTab(tabId);
+    fetchBlogPost(slug);
+  }, [openTab, fetchBlogPost]);
 
   // Open a tag tab
   const openTagTab = useCallback((tag) => {
@@ -149,12 +195,15 @@ IDE.App = function App() {
     Promise.all([
       fetch(`/site_data.json?v=${window.__v}`).then(r => r.json()),
       fetch(`/api/paper_data.json?v=${window.__v}`).then(r => r.json()),
-    ]).then(([site, paperData]) => {
+      fetch(`/api/blog?v=${window.__v}`).then(r => r.json()).catch(() => ({ posts: [] })),
+    ]).then(([site, paperData, blogData]) => {
       setSiteData(site);
       const list = Object.entries(paperData.papers || {}).map(([id, p]) => ({ id, ...p }));
       list.sort((a, b) => (b.year || 0) - (a.year || 0) || (a.priority || 50) - (b.priority || 50));
       setPapers(list);
+      setBlogPosts(blogData.posts || []);
       logEvent('system', `Loaded ${list.length} papers from /api/paper_data.json`);
+      logEvent('system', `Loaded ${(blogData.posts || []).length} blog posts`);
       logEvent('system', `Site data loaded: ${site.name}`);
     }).catch(e => { setError('Failed to load data'); logEvent('error', 'Failed to load data'); });
   }, []);
@@ -251,6 +300,7 @@ IDE.App = function App() {
       home: { label: 'home.md', icon: <TabFileIcon color="#3794ff" /> },
       publications: { label: 'publications.md', icon: <TabFileIcon color="#3794ff" /> },
       cv: { label: 'cv.md', icon: <TabFileIcon color="#3794ff" /> },
+      posts: { label: 'posts.md', icon: <TabFileIcon color="#3794ff" /> },
       profile: { label: 'profile.jpg', icon: <IDE.Codicon name="file-media" size={14} color="#a074c4" /> },
     };
     if (staticInfo[tab]) return staticInfo[tab];
@@ -261,6 +311,13 @@ IDE.App = function App() {
     if (isPaperTab(tab)) {
       const paperId = getPaperIdFromTab(tab);
       return { label: getPaperTabLabel(paperId), icon: <TabFileIcon color="#e06c75" /> };
+    }
+    if (isBlogTab(tab)) {
+      const slug = getBlogSlugFromTab(tab);
+      const post = blogPostsBySlug[slug];
+      const title = post ? post.title : slug;
+      const label = title.length > 30 ? title.substring(0, 28) + '….md' : title + '.md';
+      return { label, icon: <TabFileIcon color="#dcb67a" /> };
     }
     return { label: tab, icon: <TabFileIcon /> };
   };
@@ -292,11 +349,32 @@ IDE.App = function App() {
         </>
       );
     }
+    if (isBlogTab(activeEditorTab)) {
+      const slug = getBlogSlugFromTab(activeEditorTab);
+      const post = blogPostsBySlug[slug];
+      const title = post ? post.title : slug;
+      const label = title.length > 30 ? title.substring(0, 28) + '….md' : title + '.md';
+      return (
+        <>
+          <span style={{cursor:'default'}}>cbird-site</span>
+          <span className="breadcrumb-sep">{'\u203A'}</span>
+          <span>posts</span>
+          <span className="breadcrumb-sep">{'\u203A'}</span>
+          <span>{label}</span>
+        </>
+      );
+    }
+    const staticBreadcrumb = {
+      profile: 'profile.jpg',
+      publications: 'publications.md',
+      cv: 'cv.md',
+      posts: 'posts.md',
+    };
     return (
       <>
         <span style={{cursor:'default'}}>cbird-site</span>
         <span className="breadcrumb-sep">{'\u203A'}</span>
-        <span>{activeEditorTab === 'profile' ? 'profile.jpg' : activeEditorTab === 'publications' ? 'publications.md' : activeEditorTab === 'cv' ? 'cv.md' : 'home.md'}</span>
+        <span>{staticBreadcrumb[activeEditorTab] || 'home.md'}</span>
       </>
     );
   };
@@ -338,7 +416,7 @@ IDE.App = function App() {
 
       <TitleBar name={siteData?.name} activeTab={activeEditorTab} onCommandPalette={() => { setCommandPaletteOpen(true); logEvent('command', 'Command Palette opened'); }} papersById={papersById} />
       <ActivityBar active={activeActivity} onSelect={handleActivitySelect} />
-      <Sidebar siteData={siteData} activeTab={activeEditorTab} onSetTab={openTab} openTabs={openTabs} allTags={allTags} papersById={papersById} onOpenPaper={openPaperTab} />
+      <Sidebar siteData={siteData} activeTab={activeEditorTab} onSetTab={openTab} openTabs={openTabs} allTags={allTags} papersById={papersById} blogPostsBySlug={blogPostsBySlug} blogPosts={blogPosts} onOpenPaper={openPaperTab} onOpenBlogPost={openBlogTab} />
 
       <div className="editor-area">
         {/* Tab Bar */}
@@ -451,6 +529,34 @@ IDE.App = function App() {
             onRetry={() => { setCvMarkdown(null); setCvLoadState(null); fetchCvMarkdown(); }}
           />
         )}
+
+        {/* Blog index */}
+        {activeEditorTab === 'posts' && IDE.BlogListView && (
+          <IDE.BlogListView
+            posts={blogPosts}
+            onOpenPost={openBlogTab}
+          />
+        )}
+
+        {/* Blog post */}
+        {isBlogTab(activeEditorTab) && (() => {
+          const slug = getBlogSlugFromTab(activeEditorTab);
+          const post = blogPostsBySlug[slug];
+          const state = blogLoadStateBySlug[slug];
+          return (
+            <PaperView
+              paper={post ? { title: post.title, authors: post.tags && post.tags.length ? post.tags.join(' · ') : '', year: post.date, venue: '' } : { title: slug }}
+              markdown={blogMarkdownBySlug[slug]}
+              loadState={state}
+              imageBase={state?.imageBase}
+              onRetry={() => {
+                setBlogMarkdownBySlug(prev => { const next = {...prev}; delete next[slug]; return next; });
+                setBlogLoadStateBySlug(prev => { const next = {...prev}; delete next[slug]; return next; });
+                fetchBlogPost(slug);
+              }}
+            />
+          );
+        })()}
 
         {/* Paper View */}
         {activePaperTab && (
