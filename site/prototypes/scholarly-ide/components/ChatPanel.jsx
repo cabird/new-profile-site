@@ -175,10 +175,10 @@ IDE.ChatPanel = function ChatPanel({ paper, onClose, visible }) {
         {paper && history.length === 0 && !streaming && paper.kind !== 'blog' && (
           <div className="chat-empty">
             <Codicon name="comment-discussion" size={32} style={{ opacity: 0.3 }} />
-            <div>Ask a question about this paper.</div>
+            <div>Try one of these, or ask your own:</div>
             <div className="chat-suggestions">
-              <button className="chat-suggestion" onClick={() => sendMessage('Explain this paper like I\'m a 5th grader')}>
-                Explain like I'm a 5th grader
+              <button className="chat-suggestion" onClick={() => sendMessage('Explain this paper to a 5th grader')}>
+                Explain to a 5th grader
               </button>
               <button className="chat-suggestion" onClick={() => sendMessage('What\'s the surprising or counterintuitive finding in this paper?')}>
                 What's the surprising part?
@@ -199,8 +199,11 @@ IDE.ChatPanel = function ChatPanel({ paper, onClose, visible }) {
         {paper && history.length === 0 && !streaming && paper.kind === 'blog' && (
           <div className="chat-empty">
             <Codicon name="comment-discussion" size={32} style={{ opacity: 0.3 }} />
-            <div>Ask a question about this post.</div>
+            <div>Try one of these, or ask your own:</div>
             <div className="chat-suggestions">
+              <button className="chat-suggestion" onClick={() => sendMessage('Explain this post to a 5th grader')}>
+                Explain to a 5th grader
+              </button>
               <button className="chat-suggestion" onClick={() => sendMessage('TL;DR — what\'s the main argument?')}>
                 TL;DR
               </button>
@@ -208,13 +211,13 @@ IDE.ChatPanel = function ChatPanel({ paper, onClose, visible }) {
                 What's the spicy take?
               </button>
               <button className="chat-suggestion" onClick={() => sendMessage('What evidence does the author give for their position?')}>
-                What\'s the evidence?
+                What's the evidence?
               </button>
               <button className="chat-suggestion" onClick={() => sendMessage('What\'s the strongest counter-argument to this post?')}>
                 Counter-argument?
               </button>
               <button className="chat-suggestion" onClick={() => sendMessage('Who would disagree with this and why?')}>
-                Who\'d disagree?
+                Who'd disagree?
               </button>
             </div>
           </div>

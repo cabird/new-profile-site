@@ -91,8 +91,11 @@ IDE.BlogListView = function BlogListView({ posts, onOpenPost }) {
               <span className="pub-year">{(p.date || '').slice(0, 10) || '—'}</span>
               <div className="pub-title-col">
                 <div className="pub-title">{p.title}</div>
+                {p.authors && (
+                  <div className="pub-venue">{p.authors}</div>
+                )}
                 {p.description && (
-                  <div className="pub-venue">{p.description}</div>
+                  <div className="pub-authors" style={{ fontStyle: 'italic' }}>{p.description}</div>
                 )}
                 {p.tags && p.tags.length > 0 && (
                   <div className="pub-authors">{p.tags.join(' · ')}</div>

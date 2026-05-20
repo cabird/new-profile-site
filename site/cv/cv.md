@@ -1,5 +1,3 @@
-[Download CV as PDF](/cv/cv.pdf)
-
 # Christian Bird
 
 Senior Principal Researcher

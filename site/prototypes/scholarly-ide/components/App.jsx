@@ -16,6 +16,10 @@ const isBlogTab = (tab) => tab && tab.startsWith('blog:');
 const getBlogSlugFromTab = (tab) => tab.slice(5);
 const makeBlogTabId = (slug) => 'blog:' + slug;
 
+/* URL routing helpers live in utils/routing.js (IDE.tabToPath, IDE.pathToTab). */
+const tabToPath = (tab) => IDE.tabToPath(tab);
+const pathToTab = (pathname) => IDE.pathToTab(pathname);
+
 IDE.App = function App() {
   const [siteData, setSiteData] = useState(null);
   const [papers, setPapers] = useState([]);
@@ -75,11 +79,24 @@ IDE.App = function App() {
     return [...tagSet].sort();
   }, [papers]);
 
-  // Open a tab (add if not already open, switch to it)
+  // Open a tab (add if not already open, switch to it). Pushes a new browser history entry.
   const openTab = useCallback((tab) => {
     setOpenTabs(prev => prev.includes(tab) ? prev : [...prev, tab]);
     setActiveEditorTab(tab);
+    const url = tabToPath(tab);
+    if (window.location.pathname !== url) {
+      window.history.pushState({ tab }, '', url);
+    }
     logEvent('tab', `Open: ${tab}`);
+  }, []);
+
+  // Switch to an already-open tab (no add). Pushes history entry.
+  const switchToTab = useCallback((tab) => {
+    setActiveEditorTab(tab);
+    const url = tabToPath(tab);
+    if (window.location.pathname !== url) {
+      window.history.pushState({ tab }, '', url);
+    }
   }, []);
 
   // Trigger CV fetch when cv tab opens
@@ -104,6 +121,12 @@ IDE.App = function App() {
           ? (next[Math.min(idx, next.length - 1)])
           : null;
         setActiveEditorTab(newActive);
+        // Sync URL to the new active tab (or home if no tabs left).
+        // Use replaceState — closing a tab isn't a forward navigation.
+        const url = tabToPath(newActive || 'home');
+        if (window.location.pathname !== url) {
+          window.history.replaceState({ tab: newActive || 'home' }, '', url);
+        }
       }
       return next;
     });
@@ -208,16 +231,82 @@ IDE.App = function App() {
     }).catch(e => { setError('Failed to load data'); logEvent('error', 'Failed to load data'); });
   }, []);
 
-  // Handle ?open=paperid from URL
+  // Handle initial URL on mount: open the tab corresponding to the current path
+  const didInitRoute = useRef(false);
   useEffect(() => {
-    if (papers.length === 0) return;
+    if (didInitRoute.current) return;
+
     const params = new URLSearchParams(window.location.search);
     const openId = params.get('open');
+    const initialTab = openId ? makePaperTabId(openId) : pathToTab(window.location.pathname);
+
+    // Only block on paper data if the initial route actually needs it
+    const needsPapers = !!openId || initialTab.startsWith('paper:');
+    if (needsPapers && papers.length === 0) return;
+
+    didInitRoute.current = true;
+
     if (openId) {
       openPaperTab(openId);
-      window.history.replaceState({}, '', window.location.pathname);
+      const cleanUrl = tabToPath(makePaperTabId(openId));
+      window.history.replaceState({ tab: makePaperTabId(openId) }, '', cleanUrl);
+      return;
     }
-  }, [papers, openPaperTab]);
+
+    if (initialTab && initialTab !== 'home') {
+      // Add to open tabs and make active without pushing a new history entry
+      setOpenTabs(prev => prev.includes(initialTab) ? prev : [...prev, initialTab]);
+      setActiveEditorTab(initialTab);
+      // Trigger lazy fetches if applicable
+      if (initialTab.startsWith('paper:')) fetchPaperMarkdown(initialTab.slice(6));
+      if (initialTab.startsWith('blog:')) fetchBlogPost(initialTab.slice(5));
+      if (initialTab === 'cv') fetchCvMarkdown();
+      window.history.replaceState({ tab: initialTab }, '', tabToPath(initialTab));
+    } else {
+      window.history.replaceState({ tab: 'home' }, '', tabToPath('home'));
+    }
+  }, [papers, openPaperTab, fetchPaperMarkdown, fetchBlogPost, fetchCvMarkdown]);
+
+  // Update document.title when active tab changes
+  useEffect(() => {
+    const base = 'Christian Bird';
+    let title = base;
+    if (!activeEditorTab || activeEditorTab === 'home') title = base;
+    else if (activeEditorTab === 'publications') title = `Publications — ${base}`;
+    else if (activeEditorTab === 'cv') title = `CV — ${base}`;
+    else if (activeEditorTab === 'posts') title = `Posts — ${base}`;
+    else if (activeEditorTab === 'profile') title = `Profile — ${base}`;
+    else if (activeEditorTab.startsWith('paper:')) {
+      const p = papersById[activeEditorTab.slice(6)];
+      title = (p?.title ? p.title + ' — ' : '') + base;
+    } else if (activeEditorTab.startsWith('blog:')) {
+      const p = blogPostsBySlug[activeEditorTab.slice(5)];
+      title = (p?.title ? p.title + ' — ' : '') + base;
+    } else if (activeEditorTab.startsWith('tag:')) {
+      title = activeEditorTab.slice(4) + ' — ' + base;
+    }
+    document.title = title;
+  }, [activeEditorTab, papersById, blogPostsBySlug]);
+
+  // Browser back/forward: update active tab based on URL
+  useEffect(() => {
+    const onPop = () => {
+      const tab = pathToTab(window.location.pathname);
+      // If the URL doesn't match the canonical form for this tab, fix it up
+      const canonical = tabToPath(tab);
+      if (window.location.pathname !== canonical) {
+        window.history.replaceState({ tab }, '', canonical);
+      }
+      setOpenTabs(prev => prev.includes(tab) ? prev : [...prev, tab]);
+      setActiveEditorTab(tab);
+      // Lazy fetch if needed
+      if (tab.startsWith('paper:')) fetchPaperMarkdown(tab.slice(6));
+      if (tab.startsWith('blog:')) fetchBlogPost(tab.slice(5));
+      if (tab === 'cv') fetchCvMarkdown();
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, [fetchPaperMarkdown, fetchBlogPost, fetchCvMarkdown]);
 
   // Sync terminal height CSS variable
   useEffect(() => {
@@ -431,7 +520,7 @@ IDE.App = function App() {
           {openTabs.map(tab => {
             const info = getTabInfo(tab);
             return (
-              <div key={tab} className={`tab ${activeEditorTab === tab ? 'active' : ''}`} onClick={() => setActiveEditorTab(tab)} title={isPaperTab(tab) ? (papersById[getPaperIdFromTab(tab)]?.title || '') : ''}>
+              <div key={tab} className={`tab ${activeEditorTab === tab ? 'active' : ''}`} onClick={() => switchToTab(tab)} title={isPaperTab(tab) ? (papersById[getPaperIdFromTab(tab)]?.title || '') : ''}>
                 <span className="tab-icon">{info.icon}</span>
                 {info.label}
                 <span className="tab-close" onClick={(e) => { e.stopPropagation(); closeTab(tab); }}>{'\u00D7'}</span>
@@ -552,12 +641,13 @@ IDE.App = function App() {
           const state = blogLoadStateBySlug[slug];
           return (
             <PaperView
+              kind="blog"
               paper={post ? {
                 title: post.title,
                 subtitle: post.subtitle,
-                authors: post.tags && post.tags.length ? post.tags.join(' · ') : '',
+                authors: post.authors || '',
                 year: post.date,
-                venue: ''
+                venue: post.tags && post.tags.length ? post.tags.join(' · ') : ''
               } : { title: slug }}
               markdown={blogMarkdownBySlug[slug]}
               loadState={state}

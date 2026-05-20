@@ -2,6 +2,7 @@
 title: "The Conversation We're Not Having About AI in Peer Review"
 subtitle: "What We Do, What We Learned, and Why We're Telling You"
 filename: AI-in-peer-review
+authors: Emerson Murphy-Hill and Christian Bird
 date: 2026-05-20
 tags: [peer-review, ai, research]
 description: "What we do, what we learned, and why we're telling you."

@@ -11,14 +11,14 @@
     })(window, document, "clarity", "script", "w7o7gbp0e3");
   </script>
   <title>Christian Bird — Research IDE</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/ide/favicon.svg" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <style>
     @font-face { font-family: 'Monaspace Argon'; font-style: normal; font-display: swap; font-weight: 400; src: url(https://cdn.jsdelivr.net/fontsource/fonts/monaspace-argon@latest/latin-400-normal.woff2) format('woff2'); }
     @font-face { font-family: 'Monaspace Argon'; font-style: normal; font-display: swap; font-weight: 500; src: url(https://cdn.jsdelivr.net/fontsource/fonts/monaspace-argon@latest/latin-500-normal.woff2) format('woff2'); }
     @font-face { font-family: 'Monaspace Argon'; font-style: normal; font-display: swap; font-weight: 700; src: url(https://cdn.jsdelivr.net/fontsource/fonts/monaspace-argon@latest/latin-700-normal.woff2) format('woff2'); }
   </style>
-  <link rel="stylesheet" href="styles.css?v=1.0.52" />
+  <link rel="stylesheet" href="/ide/styles.css?v=1.0.60" />
 </head>
 <body>
   <div id="root"></div>
@@ -41,41 +41,46 @@
   <!-- Initialize namespace and cache-bust version -->
   <script>
     window.IDE = {};
-    window.__v = '1.0.52';
+    window.__v = '1.0.60';
   </script>
 
   <!-- Utils (no component dependencies) -->
-  <script type="text/babel" src="utils/helpers.js?v=1.0.52"></script>
-  <script type="text/babel" src="utils/eventLog.js?v=1.0.52"></script>
+  <script type="text/babel" src="/ide/utils/helpers.js?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/utils/eventLog.js?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/utils/routing.js?v=1.0.60"></script>
 
   <!-- Icons (no component dependencies) -->
-  <script type="text/babel" src="components/Icons.jsx?v=1.0.52"></script>
+  <script type="text/babel" src="/ide/components/Icons.jsx?v=1.0.60"></script>
 
   <!-- Leaf components -->
-  <script type="text/babel" src="components/StatusBar.jsx?v=1.0.52"></script>
-  <script type="text/babel" src="components/PubRow.jsx?v=1.0.52"></script>
-  <script type="text/babel" src="components/CommandPalette.jsx?v=1.0.52"></script>
-  <script type="text/babel" src="components/TerminalPanel.jsx?v=1.0.52"></script>
-  <script type="text/babel" src="components/ChatPanel.jsx?v=1.0.52"></script>
+  <script type="text/babel" src="/ide/components/StatusBar.jsx?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/components/PubRow.jsx?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/components/CommandPalette.jsx?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/components/TerminalPanel.jsx?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/components/ChatPanel.jsx?v=1.0.60"></script>
 
   <!-- View components -->
-  <script type="text/babel" src="components/HomeView.jsx?v=1.0.52"></script>
-  <script type="text/babel" src="components/PublicationsView.jsx?v=1.0.52"></script>
-  <script type="text/babel" src="components/TagView.jsx?v=1.0.52"></script>
-  <script type="text/babel" src="components/PaperView.jsx?v=1.0.52"></script>
-  <script type="text/babel" src="components/BlogListView.jsx?v=1.0.52"></script>
+  <script type="text/babel" src="/ide/components/HomeView.jsx?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/components/PublicationsView.jsx?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/components/TagView.jsx?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/components/PaperView.jsx?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/components/BlogListView.jsx?v=1.0.60"></script>
 
   <!-- Layout components -->
-  <script type="text/babel" src="components/Sidebar.jsx?v=1.0.52"></script>
-  <script type="text/babel" src="components/TitleBar.jsx?v=1.0.52"></script>
-  <script type="text/babel" src="components/ActivityBar.jsx?v=1.0.52"></script>
+  <script type="text/babel" src="/ide/components/Sidebar.jsx?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/components/TitleBar.jsx?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/components/ActivityBar.jsx?v=1.0.60"></script>
 
-  <!-- Main App -->
-  <script type="text/babel" src="components/App.jsx?v=1.0.52"></script>
+  <!-- Main App (desktop) -->
+  <script type="text/babel" src="/ide/components/App.jsx?v=1.0.60"></script>
+
+  <!-- Mobile shell + root chooser -->
+  <script type="text/babel" src="/ide/components/MobileApp.jsx?v=1.0.60"></script>
+  <script type="text/babel" src="/ide/components/RootApp.jsx?v=1.0.60"></script>
 
   <!-- Render -->
   <script type="text/babel">
-    ReactDOM.createRoot(document.getElementById('root')).render(<IDE.App />);
+    ReactDOM.createRoot(document.getElementById('root')).render(<IDE.RootApp />);
   </script>
 </body>
 </html>

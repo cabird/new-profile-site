@@ -2,7 +2,7 @@
 const { useEffect, useRef, useMemo, useState, useCallback } = React;
 const { Codicon } = IDE;
 
-IDE.PaperView = function PaperView({ paper, markdown, loadState, onRetry, onChat, imageBase }) {
+IDE.PaperView = function PaperView({ paper, markdown, loadState, onRetry, onChat, imageBase, kind }) {
   const contentRef = useRef(null);
   const bodyRef = useRef(null);
   const gutterRef = useRef(null);
@@ -112,7 +112,7 @@ IDE.PaperView = function PaperView({ paper, markdown, loadState, onRetry, onChat
                 {onChat && (
                   <button className="paper-action-btn" onClick={() => onChat(paper)}>
                     <Codicon name="comment-discussion" size={14} />
-                    <span>Chat</span>
+                    <span>{kind === 'blog' ? 'Ask about this post' : 'Ask about this paper'}</span>
                   </button>
                 )}
                 {pdfUrl && (

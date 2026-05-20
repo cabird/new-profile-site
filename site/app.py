@@ -397,6 +397,7 @@ def load_blog_posts():
                 'title': metadata.get('title', slug),
                 'subtitle': metadata.get('subtitle', ''),
                 'filename': metadata.get('filename', slug),
+                'authors': metadata.get('authors', ''),
                 'date': metadata.get('date', ''),
                 'tags': metadata.get('tags', []) if isinstance(metadata.get('tags'), list) else [],
                 'description': metadata.get('description', ''),
@@ -1262,6 +1263,7 @@ async def get_blog_post(slug):
         'title': metadata.get('title', slug),
         'subtitle': metadata.get('subtitle', ''),
         'filename': metadata.get('filename', slug),
+        'authors': metadata.get('authors', ''),
         'date': metadata.get('date', ''),
         'tags': metadata.get('tags', []) if isinstance(metadata.get('tags'), list) else [],
         'description': metadata.get('description', ''),
@@ -1286,7 +1288,20 @@ async def ide_index():
 
 @app.route('/ide/<path:path>')
 async def ide_assets(path):
-    return await send_from_directory('prototypes/scholarly-ide', path)
+    # If the path resolves to a real file inside the IDE directory, serve it.
+    # Otherwise return index.html so the client-side router takes over.
+    # Defense-in-depth: explicitly contain the path inside the IDE directory.
+    ide_root = os.path.realpath(os.path.join('prototypes', 'scholarly-ide'))
+    try:
+        requested = os.path.realpath(os.path.join(ide_root, path))
+    except Exception:
+        return await send_from_directory('prototypes/scholarly-ide', 'index.html')
+
+    inside = (requested == ide_root) or requested.startswith(ide_root + os.sep)
+    if inside and os.path.isfile(requested):
+        rel = os.path.relpath(requested, ide_root)
+        return await send_from_directory('prototypes/scholarly-ide', rel)
+    return await send_from_directory('prototypes/scholarly-ide', 'index.html')
 
 
 @app.route('/AI_where_it_matters/')
