@@ -41,19 +41,27 @@ IDE.ResearchAreas = function ResearchAreas({ areas, onSelectTag }) {
   const [openIdx, setOpenIdx] = useState(null);
   return (
     <div className="research-list">
-      {areas.map((a, i) => (
-        <div className="research-item" key={i} onClick={() => setOpenIdx(openIdx === i ? null : i)}>
-          <div className="research-item-header">
-            <span className={`chevron ${openIdx === i ? 'open' : ''}`}>{'\u25B8'}</span>
-            <span className="folder-icon"><FolderIcon open={openIdx === i} /></span>
-            <span className="title">{a.title}</span>
-            {a.tag && <span className="tag" style={{cursor: 'pointer'}} onClick={(e) => { e.stopPropagation(); if (onSelectTag) onSelectTag(a.tag); }}>{a.tag}</span>}
+      {areas.map((a, i) => {
+        const open = openIdx === i;
+        return (
+          <div className="research-item" key={i} onClick={() => setOpenIdx(open ? null : i)}>
+            <div className="research-item-header">
+              <span className={`chevron ${open ? 'open' : ''}`}>{'\u25B8'}</span>
+              <span className="folder-icon"><FolderIcon open={open} /></span>
+              <span className="title">{a.title}</span>
+              {a.tag && <span className="tag" style={{cursor: 'pointer'}} onClick={(e) => { e.stopPropagation(); if (onSelectTag) onSelectTag(a.tag); }}>{a.tag}</span>}
+            </div>
+            <div className={`research-item-desc ${open ? 'open' : ''}`}>
+              {a.tag && (
+                <div className="research-item-link" onClick={(e) => { e.stopPropagation(); if (onSelectTag) onSelectTag(a.tag); }}>
+                  → View papers in this area
+                </div>
+              )}
+              <div className="research-item-desc-text">{a.description}</div>
+            </div>
           </div>
-          <div className={`research-item-desc ${openIdx === i ? 'open' : ''}`}>
-            {a.description}
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

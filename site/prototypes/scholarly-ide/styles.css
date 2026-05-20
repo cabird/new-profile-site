@@ -1285,6 +1285,20 @@ a:hover { text-decoration: underline; }
 
 .research-item-desc.open { display: block; }
 
+.research-item-link {
+  display: block;
+  margin: 0 0 10px 0;
+  color: var(--vscode-link);
+  font-family: var(--ui-font);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.research-item-link:hover {
+  text-decoration: underline;
+}
+
 /* Featured publications */
 .pub-teaser { margin-bottom: 24px; }
 
