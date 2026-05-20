@@ -2058,6 +2058,15 @@ a:hover { text-decoration: underline; }
   line-height: 1.3;
 }
 
+.paper-header-subtitle {
+  font-family: var(--editor-font);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin: -2px 0 8px 0;
+  line-height: 1.4;
+}
+
 .paper-header-venue {
   font-size: 13px;
   color: var(--string);

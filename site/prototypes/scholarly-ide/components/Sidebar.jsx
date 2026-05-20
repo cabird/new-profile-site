@@ -61,8 +61,8 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTag
     if (tab.startsWith('blog:') && blogPostsBySlug) {
       const slug = tab.slice(5);
       const post = blogPostsBySlug[slug];
-      const title = post ? post.title : slug;
-      const label = title.length > 24 ? title.substring(0, 22) + '….md' : title + '.md';
+      const name = (post && post.filename) ? post.filename : (post ? post.title : slug);
+      const label = name.length > 24 ? name.substring(0, 22) + '….md' : name + '.md';
       return { label, icon: <FileMdIcon /> };
     }
     return { label: tab, icon: <FileMdIcon /> };
@@ -156,8 +156,8 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTag
                 </div>
                 {openSubSections.posts && blogPosts.slice(0, 10).map((post) => {
                   const tabId = 'blog:' + post.slug;
-                  const title = post.title || post.slug;
-                  const label = title.length > 22 ? title.substring(0, 20) + '….md' : title + '.md';
+                  const name = post.filename || post.title || post.slug;
+                  const label = name.length > 22 ? name.substring(0, 20) + '….md' : name + '.md';
                   return (
                     <div key={post.slug} className={`tree-item tree-sub-item ${activeTab === tabId ? 'active' : ''}`} style={{cursor:'pointer'}} onClick={() => onOpenBlogPost && onOpenBlogPost(post.slug)}>
                       <span className="tree-item-icon file-md"><FileMdIcon /></span>

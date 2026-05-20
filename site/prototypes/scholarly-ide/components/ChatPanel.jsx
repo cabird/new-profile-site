@@ -69,7 +69,10 @@ IDE.ChatPanel = function ChatPanel({ paper, onClose, visible }) {
 
     try {
       abortRef.current = new AbortController();
-      const resp = await fetch(`/api/papers/${paper.id}/chat`, {
+      const endpoint = paper.kind === 'blog'
+        ? `/api/blog/${paper.id}/chat`
+        : `/api/papers/${paper.id}/chat`;
+      const resp = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: text.trim() }),
@@ -169,7 +172,7 @@ IDE.ChatPanel = function ChatPanel({ paper, onClose, visible }) {
           </div>
         )}
 
-        {paper && history.length === 0 && !streaming && (
+        {paper && history.length === 0 && !streaming && paper.kind !== 'blog' && (
           <div className="chat-empty">
             <Codicon name="comment-discussion" size={32} style={{ opacity: 0.3 }} />
             <div>Ask a question about this paper.</div>
@@ -188,6 +191,30 @@ IDE.ChatPanel = function ChatPanel({ paper, onClose, visible }) {
               </button>
               <button className="chat-suggestion" onClick={() => sendMessage('What would a good follow-up study look like?')}>
                 What's next?
+              </button>
+            </div>
+          </div>
+        )}
+
+        {paper && history.length === 0 && !streaming && paper.kind === 'blog' && (
+          <div className="chat-empty">
+            <Codicon name="comment-discussion" size={32} style={{ opacity: 0.3 }} />
+            <div>Ask a question about this post.</div>
+            <div className="chat-suggestions">
+              <button className="chat-suggestion" onClick={() => sendMessage('TL;DR — what\'s the main argument?')}>
+                TL;DR
+              </button>
+              <button className="chat-suggestion" onClick={() => sendMessage('What\'s the most controversial claim in this post?')}>
+                What's the spicy take?
+              </button>
+              <button className="chat-suggestion" onClick={() => sendMessage('What evidence does the author give for their position?')}>
+                What\'s the evidence?
+              </button>
+              <button className="chat-suggestion" onClick={() => sendMessage('What\'s the strongest counter-argument to this post?')}>
+                Counter-argument?
+              </button>
+              <button className="chat-suggestion" onClick={() => sendMessage('Who would disagree with this and why?')}>
+                Who\'d disagree?
               </button>
             </div>
           </div>
@@ -242,7 +269,7 @@ IDE.ChatPanel = function ChatPanel({ paper, onClose, visible }) {
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder={streaming ? 'Waiting for response…' : 'Ask about this paper…'}
+            placeholder={streaming ? 'Waiting for response…' : (paper && paper.kind === 'blog' ? 'Ask about this post…' : 'Ask about this paper…')}
             disabled={streaming}
           />
           <button

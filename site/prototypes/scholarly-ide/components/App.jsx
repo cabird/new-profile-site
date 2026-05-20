@@ -242,6 +242,13 @@ IDE.App = function App() {
     logEvent('chat', `Chat opened: ${paper.title}`);
   }, []);
 
+  // Open chat for a blog post — passes a blog target to ChatPanel
+  const openChatForBlogPost = useCallback((post) => {
+    setChatPaper({ kind: 'blog', id: post.slug, title: post.title });
+    setChatOpen(true);
+    logEvent('chat', `Chat opened: ${post.title}`);
+  }, []);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handler = (e) => {
@@ -315,8 +322,8 @@ IDE.App = function App() {
     if (isBlogTab(tab)) {
       const slug = getBlogSlugFromTab(tab);
       const post = blogPostsBySlug[slug];
-      const title = post ? post.title : slug;
-      const label = title.length > 30 ? title.substring(0, 28) + '….md' : title + '.md';
+      const name = (post && post.filename) ? post.filename : (post ? post.title : slug);
+      const label = name.length > 30 ? name.substring(0, 28) + '….md' : name + '.md';
       return { label, icon: <TabFileIcon color="#dcb67a" /> };
     }
     return { label: tab, icon: <TabFileIcon /> };
@@ -352,8 +359,8 @@ IDE.App = function App() {
     if (isBlogTab(activeEditorTab)) {
       const slug = getBlogSlugFromTab(activeEditorTab);
       const post = blogPostsBySlug[slug];
-      const title = post ? post.title : slug;
-      const label = title.length > 30 ? title.substring(0, 28) + '….md' : title + '.md';
+      const name = (post && post.filename) ? post.filename : (post ? post.title : slug);
+      const label = name.length > 30 ? name.substring(0, 28) + '….md' : name + '.md';
       return (
         <>
           <span style={{cursor:'default'}}>cbird-site</span>
@@ -545,10 +552,17 @@ IDE.App = function App() {
           const state = blogLoadStateBySlug[slug];
           return (
             <PaperView
-              paper={post ? { title: post.title, authors: post.tags && post.tags.length ? post.tags.join(' · ') : '', year: post.date, venue: '' } : { title: slug }}
+              paper={post ? {
+                title: post.title,
+                subtitle: post.subtitle,
+                authors: post.tags && post.tags.length ? post.tags.join(' · ') : '',
+                year: post.date,
+                venue: ''
+              } : { title: slug }}
               markdown={blogMarkdownBySlug[slug]}
               loadState={state}
               imageBase={state?.imageBase}
+              onChat={post ? () => openChatForBlogPost(post) : null}
               onRetry={() => {
                 setBlogMarkdownBySlug(prev => { const next = {...prev}; delete next[slug]; return next; });
                 setBlogLoadStateBySlug(prev => { const next = {...prev}; delete next[slug]; return next; });

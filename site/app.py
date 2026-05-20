@@ -54,6 +54,27 @@ Paper Content:
 """
 
 
+BLOG_SYSTEM_PROMPT_TEMPLATE = """You are an AI assistant for discussing a specific blog post written by Christian Bird.
+
+STRICT RULES:
+1. You MUST ONLY answer questions about this blog post and closely related topics (e.g., "what is the author's take on X" where X is discussed in the post).
+2. If the user asks ANYTHING unrelated to the post or its topic area, respond ONLY with: "I can only talk about this blog post."
+3. Do not engage with off-topic requests, personal questions, or general queries.
+4. Do not help with unrelated tasks, even if framed as research-related.
+5. Stay focused on the post content. Use it as the primary source for answers.
+6. Be substantive and concrete. Quote or reference specific parts of the post when helpful.
+
+Post Metadata:
+- Title: {title}
+- Subtitle: {subtitle}
+- Date: {date}
+- Tags: {tags}
+
+Post Content:
+{content}
+"""
+
+
 # ============================================================================
 # In-Memory Chat Store
 # ============================================================================
@@ -374,6 +395,8 @@ def load_blog_posts():
             blog_posts_cache[slug] = {
                 'slug': slug,
                 'title': metadata.get('title', slug),
+                'subtitle': metadata.get('subtitle', ''),
+                'filename': metadata.get('filename', slug),
                 'date': metadata.get('date', ''),
                 'tags': metadata.get('tags', []) if isinstance(metadata.get('tags'), list) else [],
                 'description': metadata.get('description', ''),
@@ -708,6 +731,135 @@ async def chat_with_paper(paper_id):
             yield f"data: {json.dumps({'type': 'error', 'message': 'Your chat session expired. Please start a new conversation.', 'error_type': 'conversation_expired'})}\n\n"
         except Exception as e:
             logger.error(f"Chat error: {e}")
+            yield f"data: {json.dumps({'type': 'error', 'message': 'An error occurred. Please try again.'})}\n\n"
+
+    return Response(
+        generate_sse(),
+        mimetype='text/event-stream',
+        headers={
+            'Cache-Control': 'no-cache',
+            'X-Accel-Buffering': 'no',
+            'Connection': 'keep-alive',
+        }
+    )
+
+
+@app.route('/api/blog/<slug>/chat', methods=['POST'])
+async def chat_with_blog_post(slug):
+    """Chat with a specific blog post using Azure OpenAI streaming."""
+
+    session_id = get_session_id()
+    # Use a distinct namespace for the conversation key
+    conv_key = f'blog:{slug}'
+
+    if not paper_chat_client:
+        return jsonify({'error': 'Chat service unavailable'}), 503
+
+    if not chat_store:
+        return jsonify({'error': 'Chat storage unavailable'}), 503
+
+    data = await request.get_json()
+    user_message = data.get('message', '').strip()
+
+    if not user_message:
+        return jsonify({'error': 'Message is required'}), 400
+
+    token_count = count_tokens(user_message)
+    if token_count > MAX_MESSAGE_TOKENS:
+        return jsonify({
+            'error': f'Message too long. Maximum {MAX_MESSAGE_TOKENS} tokens, got {token_count}'
+        }), 400
+
+    client_ip = get_client_ip()
+
+    conversation = chat_store.get_conversation(session_id, conv_key)
+
+    if not conversation:
+        metadata, body = load_blog_post_markdown(slug)
+        if not metadata or not body:
+            return jsonify({'error': 'Blog post not found'}), 404
+
+        tags = metadata.get('tags', [])
+        if not isinstance(tags, list):
+            tags = []
+
+        system_message = BLOG_SYSTEM_PROMPT_TEMPLATE.format(
+            title=metadata.get('title', slug),
+            subtitle=metadata.get('subtitle', ''),
+            date=metadata.get('date', ''),
+            tags=', '.join(tags) if tags else 'none',
+            content=body
+        )
+
+        messages = [{'role': 'system', 'content': system_message}]
+        chat_store.init_conversation(session_id, conv_key, messages, message_count=0)
+        conversation = chat_store.get_conversation(session_id, conv_key)
+
+    message_count = chat_store.get_message_count(session_id, conv_key)
+    if message_count >= MAX_MESSAGES_PER_CONVERSATION:
+        return jsonify({
+            'error': f'Conversation limit reached. Maximum {MAX_MESSAGES_PER_CONVERSATION} messages per chat.',
+            'type': 'conversation_limit'
+        }), 400
+
+    last_activity = conversation.get('last_activity')
+    if isinstance(last_activity, str):
+        last_activity = datetime.fromisoformat(last_activity)
+
+    inactive_duration = datetime.now() - last_activity
+    if inactive_duration > timedelta(minutes=INACTIVITY_TIMEOUT_MINUTES):
+        chat_store.delete_conversation(session_id, conv_key)
+        return jsonify({
+            'error': 'Chat ended due to inactivity',
+            'type': 'timeout'
+        }), 408
+
+    try:
+        chat_store.add_message(session_id, conv_key, 'user', user_message)
+    except ConversationNotFoundError:
+        return jsonify({
+            'error': 'Your chat session expired. Please start a new conversation.',
+            'type': 'conversation_expired'
+        }), 410
+
+    log_chat_message(session_id, conv_key, 'user', user_message, token_count, client_ip)
+    chat_store.increment_rate_limit(session_id)
+
+    async def generate_sse():
+        try:
+            conv = chat_store.get_conversation(session_id, conv_key)
+
+            stream = await paper_chat_client.chat.completions.create(
+                model=os.getenv('AZURE_OPENAI_PAPER_CHAT_DEPLOYMENT'),
+                messages=conv['messages'],
+                stream=True,
+                reasoning_effort='medium'
+            )
+
+            full_response = ""
+
+            async for chunk in stream:
+                if chunk.choices and chunk.choices[0].delta.content:
+                    content = chunk.choices[0].delta.content
+                    full_response += content
+                    yield f"data: {json.dumps({'type': 'chat_chunk', 'content': content})}\n\n"
+
+            try:
+                chat_store.add_message(session_id, conv_key, 'assistant', full_response)
+            except ConversationNotFoundError:
+                yield f"data: {json.dumps({'type': 'error', 'message': 'Session expired.'})}\n\n"
+                return
+
+            response_token_count = count_tokens(full_response)
+            log_chat_message(session_id, conv_key, 'assistant', full_response, response_token_count, client_ip)
+
+            _, remaining, _ = chat_store.check_rate_limit(session_id)
+            msg_count = chat_store.get_message_count(session_id, conv_key)
+
+            yield f"data: {json.dumps({'type': 'chat_complete', 'remaining_messages': remaining, 'message_count': msg_count})}\n\n"
+
+        except Exception as e:
+            logger.error(f"Blog chat error: {e}")
             yield f"data: {json.dumps({'type': 'error', 'message': 'An error occurred. Please try again.'})}\n\n"
 
     return Response(
@@ -1108,6 +1260,8 @@ async def get_blog_post(slug):
     return jsonify({
         'slug': slug,
         'title': metadata.get('title', slug),
+        'subtitle': metadata.get('subtitle', ''),
+        'filename': metadata.get('filename', slug),
         'date': metadata.get('date', ''),
         'tags': metadata.get('tags', []) if isinstance(metadata.get('tags'), list) else [],
         'description': metadata.get('description', ''),

@@ -97,6 +97,9 @@ IDE.PaperView = function PaperView({ paper, markdown, loadState, onRetry, onChat
           {paper && (
             <div className="paper-header">
               <h1 className="paper-header-title">{paper.title}</h1>
+              {paper.subtitle && (
+                <div className="paper-header-subtitle">{paper.subtitle}</div>
+              )}
               {(paper.venue || paper.journal) && (
                 <div className="paper-header-venue">
                   {paper.venue || paper.journal}{paper.year ? `, ${paper.year}` : ''}
