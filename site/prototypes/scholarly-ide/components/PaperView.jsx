@@ -28,24 +28,61 @@ IDE.PaperView = function PaperView({ paper, markdown, loadState, onRetry, onChat
     }
   }, [markdown, imageBase]);
 
-  // After render, measure body height and compute line count to fill it
+  // Keep the gutter long enough to cover the body height. Re-measures whenever
+  // the body resizes (images load, fonts reflow, window resize) and overshoots
+  // generously so the gutter never visibly runs out.
   useEffect(() => {
-    if (!bodyRef.current) return;
+    const body = bodyRef.current;
+    if (!body) return;
+    const lineHeight = 1.65 * 14;
     const measure = () => {
-      const bodyHeight = bodyRef.current.scrollHeight;
-      const lineHeight = 1.65 * 14; // line-height * font-size (from CSS)
-      setLineCount(Math.ceil(bodyHeight / lineHeight));
+      const h = body.scrollHeight;
+      // Always render at least bodyHeight worth of lines plus a healthy buffer.
+      // We track the max we've seen so we never shrink the gutter below the
+      // body height even if a transient layout reports it smaller.
+      const needed = Math.ceil(h / lineHeight) + 30;
+      setLineCount(prev => Math.max(prev, needed));
     };
-    // Measure after DOM settles
-    const raf = requestAnimationFrame(measure);
-    return () => cancelAnimationFrame(raf);
+    measure();
+
+    let ro = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      ro = new ResizeObserver(measure);
+      ro.observe(body);
+    }
+
+    // Re-measure when web fonts finish loading (they reflow the body)
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(measure).catch(() => {});
+    }
+
+    // Re-measure when images inside the body finish loading
+    const imgs = body.querySelectorAll('img');
+    const onImgLoad = () => measure();
+    imgs.forEach(img => {
+      if (!img.complete) img.addEventListener('load', onImgLoad);
+    });
+
+    // And on window resize (viewport changes)
+    window.addEventListener('resize', measure);
+
+    // Safety net: a few delayed re-measurements catch late layout shifts
+    const timers = [200, 600, 1500, 3000].map(ms => setTimeout(measure, ms));
+
+    return () => {
+      if (ro) ro.disconnect();
+      imgs.forEach(img => img.removeEventListener('load', onImgLoad));
+      window.removeEventListener('resize', measure);
+      timers.forEach(clearTimeout);
+    };
   }, [renderedHtml]);
 
-  // Scroll to top when paper changes
+  // Scroll to top + reset gutter when paper changes
   useEffect(() => {
     if (contentRef.current) {
       contentRef.current.scrollTop = 0;
     }
+    setLineCount(0);
   }, [paper?.id]);
 
   const skeletonWidths = [72, 58, 83, 64, 77, 49, 68, 81, 55, 74, 62, 79, 51, 66, 70];
