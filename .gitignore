@@ -10,3 +10,9 @@ env/
 *.log
 .DS_Store
 
+
+# Private CV variants are maintained outside this repository and must never be
+# committed here. This repo is public and site/ is web-served, so anything added
+# under site/cv/ becomes publicly fetchable.
+cv_consulting*
+*_consulting.pdf

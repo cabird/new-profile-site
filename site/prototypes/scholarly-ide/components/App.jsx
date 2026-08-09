@@ -140,7 +140,7 @@ IDE.App = function App() {
   const fetchCvMarkdown = useCallback(() => {
     if (cvMarkdown || (cvLoadState && cvLoadState.status === 'loading')) return;
     setCvLoadState({ status: 'loading', error: null });
-    fetch('/cv/cv.md')
+    fetch('/cv/cv_academic.md')
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); })
       .then(text => { setCvMarkdown(text); setCvLoadState({ status: 'loaded', error: null }); })
       .catch(err => { setCvLoadState({ status: 'error', error: err.message }); });

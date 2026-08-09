@@ -1082,7 +1082,7 @@ Focus: Maps developer AI demand across 20 SE tasks using a grounded taxonomy. Sh
 PAPER II: "To Copilot and Beyond: 22 AI Systems Developers Want Built"
 Authors: {p2.get('authors', 'Choudhuri, Bird, Badea, Sarma')}
 Year: {p2.get('year', '2026')}
-Venue: {p2.get('venue', 'arXiv Preprint')}
+Venue: {p2.get('venue', 'ICSME 2026 Industry Track')}
 Focus: Derives 22 concrete AI systems from developer free-text responses, organized into 5 categories (Development, Design & Planning, Quality & Risk, Infrastructure & Ops, Meta-Work). Each system includes the problem, example capabilities, and constraints/guardrails developers insist on.
 
 The website presents both papers together with:

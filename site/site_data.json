@@ -21,7 +21,7 @@
       "description": "Code review has become a cornerstone of modern software development, yet its practices and impacts are not well understood. This research characterizes how contemporary code review has evolved into a lightweight, tool-intensive practice that delivers value well beyond defect detection—including knowledge sharing, maintainability improvements, and team coordination. The work includes building and deploying reviewer recommendation systems at scale, identifying what makes code review comments useful, and uncovering challenges like reviewers' lack of context. It synthesizes evidence-based best practices for authors, reviewers, and organizations. The findings show that modern code review consumes 10-15% of developer time but produces substantial technical and social benefits when properly supported by tools and processes."
     }
   ],
-  "cv_link": "cv/cv.pdf",
+  "cv_link": "cv/cv_academic.pdf",
   "contact": {
     "email": "cbird@microsoft.com",
     "links": [

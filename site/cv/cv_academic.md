@@ -25,7 +25,7 @@ Advisor: Premkumar Devanbu
 **Distinguished Scientist** — Association for Computing Machinery (ACM), 2024
 
 **ACM SIGSOFT Distinguished Paper Award** — International Conference on Software Engineering, 2026
-"AI Where It Matters: Where, Why, and How Developers Want AI Support in Daily Work"
+"Maybe We Need Some More Examples: Individual and Team Drivers of Developer GenAI Tool Use"
 
 **ACM SIGSOFT Impact Paper Award (11+ years)** — Awarded at ICSE 2025, 2025
 "Expectations, Outcomes, and Challenges of Modern Code Review"
@@ -109,6 +109,32 @@ Advisor: Premkumar Devanbu
 
 See Publications tab for full list.
 
+## Patents
+
+Thirteen granted U.S. patents; inventor on all, assigned to Microsoft. Listed in reverse chronological order by grant date.
+
+1. **Automated Merge Conflict Resolution.** U.S. Patent No. 12,524,647. Granted January 13, 2026.
+2. **Automated Merge Conflict Resolution with Transformers.** U.S. Patent No. 12,159,211. Granted December 3, 2024.
+3. **Concurrent Edit Detection.** U.S. Patent No. 11,822,518. Granted November 21, 2023.
+4. **Natural Language Code Search.** U.S. Patent No. 11,715,006. Granted August 1, 2023.
+5. **Frequent Source Code Pattern Mining.** U.S. Patent No. 11,662,984. Granted May 30, 2023.
+6. **Detecting Misconfiguration and/or Bug(s) in Large Service(s) Using Correlated Change Analysis.** U.S. Patent No. 11,599,354. Granted March 7, 2023.
+7. **Concurrent Edit Detection.** U.S. Patent No. 11,550,758. Granted January 10, 2023.
+8. **Frequent Source Code Pattern Mining.** U.S. Patent No. 11,392,354. Granted July 19, 2022.
+9. **Techniques to Identify Idiomatic Code in a Code Base.** U.S. Patent No. 10,042,740. Granted August 7, 2018.
+10. **Predicting Software Build Errors.** U.S. Patent No. 9,542,176. Granted January 10, 2017.
+11. **Analyzing Power Consumption in Mobile Computing Devices.** U.S. Patent No. 9,400,541. Granted July 26, 2016.
+12. **Analyzing Power Consumption in Mobile Computing Devices.** U.S. Patent No. 8,965,718. Granted February 24, 2015.
+13. **Software Development Automated Analytics.** U.S. Patent No. 8,745,572. Granted June 3, 2014.
+
+Additional U.S. patent application pending (filed 2025; not yet published).
+
+## Academic Service
+
+**Funding Review Panels** — Review panelist, National Science Foundation (NSF), software engineering programs (multiple panels); review panelist, Natural Sciences and Engineering Research Council of Canada (NSERC) (multiple panels)
+
+See the full CV PDF for program committees, editorial boards, and reviewing.
+
 ## Invited Talks
 
 **Lessons and Insights from Tech Transfers at Microsoft** — Keynote, The 27th IEEE International Conference on Software Analysis, Evolution and Reengineering, London, Ontario Canada, 2020
@@ -181,7 +207,7 @@ See Publications tab for full list.
 
 ## Thesis Committees
 
-Katherine Dearstyne, Ph.D., Notre Dame University, 2025
+Katherine Dearstyne, Ph.D., University of Notre Dame, 2025
 Farhshad Kazemi, Ph.D., University of Waterloo, 2024
 Emad Aghayi, Ph.D., George Mason University, 2020
 Motahareh (Sara) Bahrami Zanjani, Ph.D., Wichita State University, 2017

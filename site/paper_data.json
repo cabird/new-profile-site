@@ -6080,7 +6080,10 @@
       "raw_bibtex": "@misc{miller2025maybeneedexamples,\n  author    = {Courtney Miller and Rudrajit Choudhuri and Mara Ulloa and Sankeerti Haniyur and Robert DeLine and Margaret{-}Anne Storey and Emerson Murphy{-}Hill and Christian Bird and Jenna L. Butler},\n  title     = {{\\\"Maybe We Need Some More Examples:\\\" Individual and Team Drivers of Developer GenAI Tool Use}},\n  year      = {2025},\n  note      = {Manuscript under submission. Preprint available at arXiv:2507.21280},\n  url       = {https://arxiv.org/abs/2507.21280}\n}",
       "under_submission": true,
       "priority": 50,
-      "url": "https://arxiv.org/abs/2507.21280"
+      "url": "https://arxiv.org/abs/2507.21280",
+      "awards": [
+        "ACM SIGSOFT Distinguished Paper Award, ICSE 2026"
+      ]
     },
     "Choudhuri2026AIWhere": {
       "status": "MAPPED",
@@ -6118,9 +6121,6 @@
       "url": "https://arxiv.org/abs/2510.00762",
       "chat_available": true,
       "markdown": "AI-Where-It_Matters.md",
-      "awards": [
-        "ACM SIGSOFT Distinguished Paper Award, ICSE 2026"
-      ],
       "priority": 50
     },
     "pimenova2025vibe": {
@@ -6160,13 +6160,12 @@
     },
     "dearstyne2026revealing": {
       "status": "MAPPED",
-      "type": "misc",
+      "type": "inproceedings",
       "title": "Revealing the Dark Matter: Connecting Tacit and System Knowledge in Human-AI Collaborations",
       "authors": "Katherine R. Dearstyne and Carmen Badea and Christian Bird and Robert DeLine",
       "year": "2026",
-      "raw_bibtex": "@misc{dearstyne2026revealing,\n  author    = {Katherine R. Dearstyne and Carmen Badea and Christian Bird and Robert DeLine},\n  title     = {Revealing the Dark Matter: Connecting Tacit and System Knowledge in Human-AI Collaborations},\n  year      = {2026},\n  note      = {Under submission.}\n}",
+      "raw_bibtex": "@inproceedings{dearstyne2026revealing,\n  title={Revealing the Dark Matter: Connecting Tacit and System Knowledge in Human-AI Collaborations},\n  author={Dearstyne, Katherine R. and Badea, Carmen and Bird, Christian and DeLine, Robert},\n  booktitle={Proceedings of the 48th International Conference on Software Engineering, New Ideas and Emerging Results Track},\n  year={2026},\n  publisher={ACM}\n}",
       "note": "Under submission.",
-      "under_submission": true,
       "mapped_pdf": "dearstyne2026revealing.pdf",
       "extracted_paper_info": {
         "tldr": "Proposes and prototyped a knowledge-network approach that links tacit human knowledge and structured system artifacts to improve human–AI collaboration in software engineering, using differential testing as a motivating case.",
@@ -6187,9 +6186,11 @@
         "ai-for-software-engineering",
         "tool-adoption-and-trust"
       ],
-      "venue": "arXiv Preprint",
+      "venue": "International Conference on Software Engineering, New Ideas and Emerging Results Track",
       "priority": 50,
-      "url": "https://cabird.com/pdfs/dearstyne2026revealing.pdf"
+      "url": "https://cabird.com/pdfs/dearstyne2026revealing.pdf",
+      "booktitle": "Proceedings of the 48th International Conference on Software Engineering, New Ideas and Emerging Results Track",
+      "publisher": "ACM"
     },
     "johnson2026facilitating": {
       "status": "MAPPED",
@@ -6232,13 +6233,18 @@
       "title": "To Copilot and Beyond: 22 AI Systems Developers Want Built",
       "authors": "Rudrajit Choudhuri and Christian Bird and Carmen Badea and Anita Sarma",
       "year": "2026",
-      "venue": "arXiv Preprint",
+      "venue": "International Conference on Software Maintenance and Evolution, Industry Track",
       "mapped_pdf": "to-copilot-and-beyond.pdf",
       "tags": "['ai-for-software-engineering', 'developer-productivity', 'surveys']",
       "doi": "",
       "url": "https://arxiv.org/abs/2604.07830",
-      "raw_bibtex": "@article{choudhuri2025copilot,\n  title={To Copilot and Beyond: 22 AI Systems Developers Want Built},\n  author={Choudhuri, Rudrajit and Bird, Christian and Badea, Carmen and Sarma, Anita},\n  journal={arXiv preprint arXiv:2604.07830},\n  year={2025}\n}",
-      "priority": 1
+      "raw_bibtex": "@inproceedings{choudhuri2026copilotbeyond,\n  title={To Copilot and Beyond: 22 AI Systems Developers Want Built},\n  author={Choudhuri, Rudrajit and Bird, Christian and Badea, Carmen and Sarma, Anita},\n  booktitle={Proceedings of the International Conference on Software Maintenance and Evolution, Industry Track},\n  year={2026},\n  publisher={IEEE}\n}",
+      "priority": 1,
+      "booktitle": "Proceedings of the International Conference on Software Maintenance and Evolution, Industry Track",
+      "publisher": "IEEE",
+      "awards": [
+        "Distinguished Paper Award, Industry Track"
+      ]
     }
   }
 }

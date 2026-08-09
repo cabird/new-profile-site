@@ -328,7 +328,7 @@ IDE.MobileApp = function MobileApp() {
     const s = cvStateRef.current;
     if (s && s.status === 'loading') return;
     setCvState({ status: 'loading' });
-    fetch('/cv/cv.md')
+    fetch('/cv/cv_academic.md')
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); })
       .then(text => { setCvMd(text); setCvState({ status: 'loaded' }); })
       .catch(err => setCvState({ status: 'error', error: err.message }));
