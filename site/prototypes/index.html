@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prototype Gallery — cabird.com</title>
+<meta name="robots" content="noindex" />
+<style>
+  :root{
+    --bg:#f7f6f2; --ink:#1c1a17; --soft:#5b554c; --faint:#8b8478;
+    --line:#e0dbd0; --navy:#1a3a5c; --oxblood:#6e2429;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+  .wrap{max-width:46rem;margin:0 auto;padding:3.5rem 1.5rem 5rem}
+  h1{font-family:var(--serif);font-weight:500;font-size:1.875rem;margin:0 0 .4rem}
+  .sub{color:var(--faint);font-size:.9375rem;margin:0 0 2.5rem}
+  h2{font-size:.71875rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);
+     margin:2.5rem 0 .9rem;border-bottom:1px solid var(--line);padding-bottom:.5rem}
+  .card{
+    display:block;border:1px solid var(--line);background:#fff;border-radius:6px;
+    padding:1.1rem 1.35rem;margin-bottom:.8rem;text-decoration:none;color:inherit;
+    transition:border-color .12s, box-shadow .12s;
+  }
+  .card:hover{border-color:var(--navy);box-shadow:0 2px 10px rgba(26,58,92,.08)}
+  .card-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+  .card-name{font-family:var(--serif);font-size:1.125rem}
+  .card-name .letter{font-family:var(--mono);font-size:.75rem;color:var(--oxblood);margin-right:.5rem}
+  .badge{font-family:var(--mono);font-size:.625rem;letter-spacing:.08em;color:var(--faint);white-space:nowrap}
+  .badge.live{color:#2a6e3f}
+  .card-desc{font-size:.84375rem;color:var(--soft);margin:.3rem 0 0}
+  .note{font-size:.8125rem;color:var(--faint);border-left:2px solid var(--line);padding-left:1rem;margin-top:2.5rem;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Prototype Gallery</h1>
+  <p class="sub">Candidate directions for the professional site — private working index.</p>
+
+  <h2>Current direction</h2>
+  <a class="card" href="/prototypes/v4/index.html">
+    <div class="card-top"><span class="card-name"><span class="letter">V4</span>The Merged Site</span><span class="badge live">REACT · LIVE DATA · ASK-AI</span></div>
+    <p class="card-desc">v3.1's bones and voice + our agreed sections, corrected facts, in-browser React. One long page (news, about + un-boxed Ask, expertise, timeline, selected pubs, patents, honors, service, cv, contact) plus a full <a href="/prototypes/v4/publications.html" style="border-bottom:1px solid var(--line)">publications page</a> — search, subject facets, and per-paper PDF / readable full text / BibTeX.</p>
+  </a>
+
+  <h2>Static — CV as a page</h2>
+  <a class="card" href="/prototypes/prof-record/index.html">
+    <div class="card-top"><span class="card-name"><span class="letter">A</span>The Record</span><span class="badge">STATIC</span></div>
+    <p class="card-desc">Traditional academic/legal document. Centered serif masthead, hairline rules, single column. Reads like a journal offprint — maximum gravitas, prints beautifully.</p>
+  </a>
+  <a class="card" href="/prototypes/prof-chambers/index.html">
+    <div class="card-top"><span class="card-name"><span class="letter">B</span>Chambers</span><span class="badge">STATIC</span></div>
+    <p class="card-desc">Modern professional-services. Navy sans, sticky nav, credential strip under the name. Closest to what boutique technical-consulting firms look like today.</p>
+  </a>
+  <a class="card" href="/prototypes/prof-dossier/index.html">
+    <div class="card-top"><span class="card-name"><span class="letter">C</span>Dossier</span><span class="badge">STATIC</span></div>
+    <p class="card-desc">Fixed dark left rail with photo, credential ledger, and nav; serif content column with numbered sections and monospaced patent numbers. Dense, forensic, scannable.</p>
+  </a>
+
+  <h2>Interactive — full corpus, live data</h2>
+  <a class="card" href="/prototypes/prof-monograph/index.html">
+    <div class="card-top"><span class="card-name"><span class="letter">D</span>The Monograph</span><span class="badge live">LIVE DATA · CHAT</span></div>
+    <p class="card-desc">The career as an annotated catalogue raisonné — six roman-numeraled chapters, every paper an expandable annotated entry with TL;DR, findings, PDF, and a "Colloquy" Q&amp;A. Blog as Commentary; patents as Letters Patent. Margin search.</p>
+  </a>
+  <a class="card" href="/prototypes/prof-ledger/index.html">
+    <div class="card-top"><span class="card-name"><span class="letter">E</span>The Record (Ledger)</span><span class="badge live">LIVE DATA · CHAT</span></div>
+    <p class="card-desc">A working index of twenty years: clickable per-year histogram, subject chips, full-text search, award toggle. Row click opens the Dossier pane — structured brief, full text, DOI, and Inquiry chat.</p>
+  </a>
+
+  <h2>Front page + navigation architecture</h2>
+  <a class="card" href="/prototypes/fp-foyer/index.html">
+    <div class="card-top"><span class="card-name"><span class="letter">F1</span>The Foyer</span><span class="badge live">ASK-AI WIRED</span></div>
+    <p class="card-desc">Minimal front page: intro, credential marquee, and the Ask-AI box as the centerpiece with suggested-question chips. Quiet top nav; everything else lives on subpages.</p>
+  </a>
+  <a class="card" href="/prototypes/fp-longscroll/index.html">
+    <div class="card-top"><span class="card-name"><span class="letter">F2</span>The Long Scroll</span><span class="badge live">ASK-AI WIRED</span></div>
+    <p class="card-desc">Condensed version of every section on one page — expertise, selected pubs, patents strip, honors, service — each with a "full list →" link. Sticky anchor nav; Ask-AI as one section among the rest.</p>
+  </a>
+  <a class="card" href="/prototypes/fp-coverindex/index.html">
+    <div class="card-top"><span class="card-name"><span class="letter">F3</span>Cover + Index</span><span class="badge live">ASK-AI WIRED</span></div>
+    <p class="card-desc">Two columns: intro and Ask-AI on the left; an annotated table of contents on the right where each section carries a one-line description and a live count. The counts do the marquee's work and the navigation's work at once.</p>
+  </a>
+
+  <h2>Current site</h2>
+  <a class="card" href="/ide/">
+    <div class="card-top"><span class="card-name">Research IDE</span><span class="badge">IN PRODUCTION</span></div>
+    <p class="card-desc">The VS Code–styled site currently at the front door.</p>
+  </a>
+  <a class="card" href="/classic">
+    <div class="card-top"><span class="card-name">Classic site</span><span class="badge">LEGACY</span></div>
+    <p class="card-desc">The previous plain profile page.</p>
+  </a>
+
+  <p class="note">D and E fetch the real paper data and blog, and stream chat through the existing backend — chat answers require the Azure keys, so locally they show the fallback notice. All five share the same content sources; nothing here is linked from the public site.</p>
+</div>
+</body>
+</html>

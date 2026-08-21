@@ -1,0 +1,173 @@
+/* ============================================================
+   v4, merged prototype. Charter, oxblood, hairline rules.
+   One page + a publications page. No trackers, no boxes.
+   ============================================================ */
+/* Self-hosted Bitstream Charter (Butterick distribution); license in /fonts/charter/ */
+@font-face { font-family:Charter; font-style:normal; font-weight:normal;
+  src:url('/fonts/charter/charter_regular.woff2') format('woff2'); font-display:swap; }
+@font-face { font-family:Charter; font-style:italic; font-weight:normal;
+  src:url('/fonts/charter/charter_italic.woff2') format('woff2'); font-display:swap; }
+@font-face { font-family:Charter; font-style:normal; font-weight:bold;
+  src:url('/fonts/charter/charter_bold.woff2') format('woff2'); font-display:swap; }
+@font-face { font-family:Charter; font-style:italic; font-weight:bold;
+  src:url('/fonts/charter/charter_bold_italic.woff2') format('woff2'); font-display:swap; }
+
+:root {
+  --ink:#22211f; --paper:#fdfcfa; --muted:#6b6862; --accent:#7d2b25;
+  --rule:#e2dfd8; --panel:#f6f4ef;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink:#e5e2dc; --paper:#1a1917; --muted:#98948c; --accent:#d08a80;
+          --rule:#38352f; --panel:#22211e; }
+}
+* { box-sizing:border-box; }
+html { font-size:17px; }
+body { margin:0; background:var(--paper); color:var(--ink);
+       font-family: Charter, "Bitstream Charter", "Source Serif 4", Georgia, serif;
+       line-height:1.55; }
+.page { max-width:46rem; margin:0 auto; padding:2.75rem 1.25rem 3.5rem; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.loading { color:var(--muted); font-style:italic; padding:2rem 0; }
+
+/* ---------- Masthead ---------- */
+.mast { display:flex; gap:1.5rem; align-items:center; }
+.headshot { width:104px; height:124px; object-fit:cover; object-position:center 20%;
+            flex-shrink:0; background:var(--rule); border-radius:2px;
+            filter:grayscale(100%) contrast(1.03); }
+h1 { font-size:1.9rem; margin:0 0 .3rem; font-weight:600; letter-spacing:-.005em; }
+.identity { margin:0; color:var(--muted); font-size:1rem; font-style:italic; }
+.identity .dsci { font-style:normal; font-variant:small-caps; letter-spacing:.08em;
+                  color:var(--ink); }
+
+/* ---------- Nav ---------- */
+nav.topnav { position:sticky; top:0; z-index:10; background:var(--paper);
+      margin-top:1.7rem; padding:.55rem 0;
+      border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+      font-variant:small-caps; letter-spacing:.09em; font-size:.95rem;
+      display:flex; flex-wrap:wrap; align-items:baseline; gap:.15rem 1.35rem; }
+nav.topnav a { color:var(--ink); }
+nav.topnav a:hover { color:var(--accent); }
+nav.topnav a.here { color:var(--accent); }
+nav.topnav .ide { margin-left:auto; font-variant:normal; font-style:italic;
+           letter-spacing:0; font-size:.9rem; color:var(--accent); }
+
+section { margin-top:2.5rem; scroll-margin-top:3.2rem; }
+h2 { font-variant:small-caps; letter-spacing:.1em; font-weight:600;
+     font-size:1.05rem; margin:0 0 .9rem; }
+
+/* ---------- Hanging-date lists (news, timeline, pubs) ---------- */
+.hang { margin:0; padding:0; }
+.hang li { list-style:none; display:flex; gap:1.1rem; padding:.25rem 0; }
+.hangdate { width:5.2rem; flex-shrink:0; color:var(--muted); font-size:.88rem;
+            font-style:italic; padding-top:.08rem; white-space:nowrap; }
+.hang .sub { color:var(--muted); font-size:.93rem; }
+
+/* ---------- About ---------- */
+#about p { margin:0 0 .9rem; }
+details summary { cursor:pointer; color:var(--accent); font-style:italic; font-size:.95rem; }
+details p { margin:.8rem 0 0; }
+
+/* ---------- Ask (unboxed) ---------- */
+.ask { margin-top:1.4rem; }
+.ask-line { display:flex; gap:.8rem; align-items:baseline;
+            border-bottom:1px solid var(--rule); padding-bottom:.35rem; }
+.ask-line input { flex:1; border:none; background:transparent; outline:none;
+                  font-family:inherit; font-style:italic; font-size:1rem; color:var(--ink); }
+.ask-line input::placeholder { color:var(--muted); }
+.ask-line button { all:unset; cursor:pointer; font-variant:small-caps;
+                   letter-spacing:.08em; font-size:.92rem; color:var(--accent); }
+.ask-try { margin:.5rem 0 0; font-size:.88rem; font-style:italic; color:var(--muted); }
+.ask-try a { font-style:italic; }
+.ask-log { margin-top:1rem; }
+.ask-turn { margin-bottom:.9rem; }
+.ask-q { font-style:italic; color:var(--accent); }
+.ask-q::before { content:"Q.\2002"; font-style:normal; color:var(--muted); font-size:.88rem; }
+.ask-a { white-space:pre-wrap; }
+.ask-a::before { content:"A.\2002"; color:var(--muted); font-size:.88rem; }
+.ask-note { font-size:.82rem; font-style:italic; color:var(--muted); margin-top:.3rem; }
+
+/* ---------- Expertise ---------- */
+.exp { margin:0; padding:0; columns:2; column-gap:2.4rem; }
+.exp li { list-style:none; break-inside:avoid; padding:.22rem 0 .22rem 1rem;
+          position:relative; font-size:.95rem; }
+.exp li::before { content:"·"; position:absolute; left:0; color:var(--muted); }
+@media (max-width:600px){ .exp { columns:1; } }
+
+/* ---------- Credibility sentence ---------- */
+.cred { margin-top:2.5rem; padding:1rem 0; border-top:1px solid var(--rule);
+        border-bottom:1px solid var(--rule); font-style:italic; color:var(--muted);
+        text-align:center; font-size:.98rem; }
+.cred b { color:var(--ink); font-style:normal; font-weight:600; }
+
+/* ---------- Publications (selected + full) ---------- */
+.pubs { margin:0; padding:0; }
+.pubs li { list-style:none; display:flex; gap:1.1rem; padding:.75rem 0;
+           border-bottom:1px solid var(--rule); }
+.pubs li:last-child { border-bottom:none; }
+.pubs .t { font-weight:600; }
+.pubs .v { color:var(--muted); font-size:.9rem; }
+.pubs .au { color:var(--muted); font-size:.9rem; display:block; margin-top:.05rem; }
+.pubs .honor { color:var(--accent); font-size:.9rem; font-variant:small-caps;
+               letter-spacing:.04em; }
+.pubs .note { display:block; color:var(--muted); font-size:.95rem; margin-top:.15rem; }
+.pubs .links { font-size:.88rem; margin-top:.25rem; display:flex; gap:1rem;
+               flex-wrap:wrap; align-items:center; }
+.pubs .links a { display:inline-flex; align-items:center; gap:.3rem; }
+.allpubs { margin-top:.9rem; font-style:italic; }
+
+/* expanded panels on the pubs page */
+.panel { margin-top:.7rem; border-left:2px solid var(--accent); padding:.2rem 0 .2rem 1rem; }
+.panel-close { float:right; font-size:.85rem; font-style:italic; }
+.bibtex pre { background:var(--panel); border:1px solid var(--rule); padding:.7rem .9rem;
+              font-size:.78rem; line-height:1.45; overflow-x:auto; white-space:pre-wrap; }
+.mdview { font-size:.95rem; max-height:34rem; overflow-y:auto; padding-right:.5rem; }
+.mdview h1,.mdview h2,.mdview h3 { font-size:1.05rem; margin:1.1rem 0 .4rem; }
+.mdview img { max-width:100%; border:1px solid var(--rule); }
+.mdview pre { background:var(--panel); border:1px solid var(--rule); padding:.6rem .8rem;
+              font-size:.78rem; overflow-x:auto; }
+.mdview table { border-collapse:collapse; font-size:.85rem; }
+.mdview td,.mdview th { border:1px solid var(--rule); padding:.25rem .5rem; }
+.mdview blockquote { border-left:2px solid var(--rule); margin:0.8rem 0; padding-left:.9rem;
+                     color:var(--muted); font-style:italic; }
+
+/* ---------- Pubs-page controls: text, not chips ---------- */
+.pubctl { margin:.4rem 0 1.2rem; }
+.pubctl .searchline { display:flex; gap:.8rem; align-items:baseline;
+                      border-bottom:1px solid var(--rule); padding-bottom:.3rem; }
+.pubctl input { flex:1; border:none; background:transparent; outline:none;
+                font-family:inherit; font-style:italic; font-size:1rem; color:var(--ink); }
+.pubctl input::placeholder { color:var(--muted); }
+.facets { margin-top:.6rem; font-size:.9rem; line-height:1.9; }
+.facets .lbl { font-variant:small-caps; letter-spacing:.07em; color:var(--muted);
+               margin-right:.6rem; }
+.facets a { margin-right:.9rem; white-space:nowrap; }
+.facets a.on { color:var(--ink); border-bottom:2px solid var(--accent); }
+.facets .n { color:var(--muted); font-size:.8rem; }
+.matchline { font-size:.88rem; font-style:italic; color:var(--muted); margin:.6rem 0 0; }
+.yearhead { font-variant:small-caps; letter-spacing:.1em; color:var(--muted);
+            font-size:.95rem; margin:1.6rem 0 .2rem; border-bottom:1px solid var(--rule);
+            padding-bottom:.25rem; }
+
+/* ---------- Book ---------- */
+.book { display:flex; gap:1.4rem; align-items:flex-start; }
+.bookcover { width:108px; height:auto; flex-shrink:0; border:1px solid var(--rule);
+             border-radius:2px; box-shadow:2px 3px 0 var(--rule); }
+@media (max-width:540px){ .book{flex-direction:column;} }
+
+.aside { margin-top:2.5rem; font-style:italic; color:var(--muted);
+         border-left:2px solid var(--accent); padding-left:1rem; font-size:.97rem; }
+
+footer { margin-top:2.6rem; padding-top:1rem; border-top:1px solid var(--rule);
+         color:var(--muted); font-size:.86rem; font-style:italic; }
+
+@media print {
+  body{background:#fff;color:#000;} nav.topnav,.aside,.ask,.pubctl{display:none;}
+  .page{padding:0;max-width:none;} a{color:#000;}
+  .pubs li,.hang li{break-inside:avoid;}
+}
+@media (max-width:540px){
+  .mast{flex-direction:column;align-items:flex-start;}
+  nav.topnav .ide{margin-left:0;}
+  .hangdate{width:4rem;}
+}

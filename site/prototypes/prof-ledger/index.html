@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Christian Bird — The Record</title>
+<meta name="description" content="The complete research record of Christian Bird, Ph.D. — 119 papers, 13 U.S. patents, twenty years of empirical software engineering. Searchable, indexed by subject, and open to inquiry." />
+<style>
+  :root{
+    --bg:#fcfcfb;
+    --panel:#f5f5f2;
+    --ink:#14212e;
+    --ink-soft:#465868;
+    --ink-faint:#7e8c99;
+    --line:#dfe3e6;
+    --line-dark:#14212e;
+    --navy:#1a3a5c;
+    --gold:#96721f;
+    --hl:#eef3f7;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(26,58,92,.25)}
+  a:hover{border-bottom-color:var(--navy)}
+  button{font:inherit}
+
+  /* ══ Masthead ══ */
+  header{border-bottom:2px solid var(--line-dark)}
+  .mast{max-width:88rem;margin:0 auto;padding:2.25rem 2rem 1.75rem;display:flex;flex-wrap:wrap;gap:1.5rem 3rem;align-items:baseline}
+  .mast h1{font-family:var(--serif);font-size:1.875rem;font-weight:500;letter-spacing:-.01em;margin:0}
+  .mast .role{color:var(--ink-faint);font-size:.875rem}
+  .mast .creds{margin-left:auto;display:flex;gap:1.75rem;font-size:.75rem;color:var(--ink-faint)}
+  .mast .creds b{display:block;font-family:var(--mono);font-size:1.0625rem;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+
+  /* ══ Intro strip ══ */
+  .intro{max-width:88rem;margin:0 auto;padding:1.5rem 2rem;font-family:var(--serif);font-size:1.0625rem;line-height:1.6;color:var(--ink-soft)}
+  .intro p{margin:0;max-width:60rem}
+
+  /* ══ Instrument panel ══ */
+  .panel{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+  .panel-inner{max-width:88rem;margin:0 auto;padding:1.25rem 2rem;display:grid;grid-template-columns:1fr auto;gap:1.5rem 3rem;align-items:end}
+
+  /* histogram */
+  .histo{display:flex;align-items:flex-end;gap:3px;height:56px}
+  .hbar{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;border:none;background:none;padding:0}
+  .hbar .bar{width:11px;background:#b9c4cd;transition:background .12s}
+  .hbar:hover .bar{background:var(--navy)}
+  .hbar.on .bar{background:var(--navy)}
+  .hbar .hy{font-family:var(--mono);font-size:.5625rem;color:var(--ink-faint);writing-mode:vertical-rl;transform:rotate(180deg);height:26px}
+  .hbar.on .hy{color:var(--navy);font-weight:700}
+
+  .controls{display:flex;flex-direction:column;gap:.75rem;align-items:flex-end}
+  .search{
+    width:22rem;max-width:100%;font-family:var(--serif);font-style:italic;font-size:.9688rem;
+    background:var(--bg);border:1px solid var(--line);border-radius:2px;
+    padding:.5rem .75rem;color:var(--ink);outline:none;
+  }
+  .search:focus{border-color:var(--navy)}
+  .toggles{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:flex-end}
+  .chip{
+    border:1px solid var(--line);background:var(--bg);border-radius:999px;
+    font-size:.71875rem;padding:.25rem .7rem;cursor:pointer;color:var(--ink-soft);
+  }
+  .chip:hover{border-color:var(--navy);color:var(--navy)}
+  .chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+
+  /* subject rail row */
+  .subjects{max-width:88rem;margin:0 auto;padding:.9rem 2rem;display:flex;gap:.5rem;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+  .subjects .lbl{font-size:.6563rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);align-self:center;margin-right:.5rem}
+
+  /* ══ Main grid ══ */
+  .main{max-width:88rem;margin:0 auto;padding:0 2rem 5rem;display:grid;grid-template-columns:minmax(0,1fr) 26rem;gap:0 3rem;align-items:start}
+
+  .countline{
+    font-family:var(--mono);font-size:.71875rem;color:var(--ink-faint);
+    padding:1rem 0 .6rem;border-bottom:1px solid var(--line-dark);
+    display:flex;justify-content:space-between;
+  }
+  .countline .clear{cursor:pointer;color:var(--navy);border:none;background:none;font:inherit;padding:0;display:none}
+  .countline .clear.show{display:inline}
+
+  /* ══ Ledger rows ══ */
+  .row{
+    display:grid;grid-template-columns:3rem 3.2rem minmax(0,1fr) auto;gap:0 1.1rem;
+    padding:.62rem 0;border-bottom:1px solid var(--line);cursor:pointer;align-items:baseline;
+  }
+  .row:hover{background:var(--hl)}
+  .row.sel{background:var(--hl);box-shadow:inset 3px 0 0 var(--navy)}
+  .rno,.ryr{font-family:var(--mono);font-size:.71875rem;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+  .rtitle{font-family:var(--serif);font-size:.9844rem;line-height:1.4}
+  .rsub{font-size:.71875rem;color:var(--ink-faint);margin-top:.1rem}
+  .rmark{font-size:.78125rem;color:var(--gold);white-space:nowrap}
+  .rmark .kind{color:var(--ink-faint);font-family:var(--mono);font-size:.625rem;letter-spacing:.08em}
+
+  /* ══ Dossier pane ══ */
+  .dossier{position:sticky;top:1.25rem;border:1px solid var(--line);background:#fff;max-height:calc(100vh - 2.5rem);overflow-y:auto}
+  .d-empty{padding:3rem 2rem;text-align:center;color:var(--ink-faint);font-family:var(--serif);font-style:italic}
+  .d-head{padding:1.4rem 1.5rem 1rem;border-bottom:1px solid var(--line)}
+  .d-kind{font-family:var(--mono);font-size:.625rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 .5rem}
+  .d-title{font-family:var(--serif);font-size:1.1875rem;line-height:1.32;margin:0 0 .5rem}
+  .d-authors{font-size:.78125rem;color:var(--ink-soft);margin:0 0 .3rem}
+  .d-venue{font-size:.75rem;color:var(--ink-faint)}
+  .d-award{margin-top:.6rem;font-size:.78125rem;color:var(--gold)}
+  .d-body{padding:1.1rem 1.5rem 1.4rem}
+  .d-tldr{font-family:var(--serif);font-style:italic;font-size:.9375rem;color:var(--ink-soft);border-left:2px solid var(--gold);padding-left:.9rem;margin:0 0 1rem;line-height:1.55}
+  .d-sec{font-size:.625rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin:1rem 0 .3rem}
+  .d-body p.tx{font-size:.84375rem;color:var(--ink-soft);margin:0;line-height:1.55}
+  .d-body ul{margin:.2rem 0 0;padding-left:1.05rem;font-size:.84375rem;color:var(--ink-soft)}
+  .d-body li{margin-bottom:.3rem}
+  .d-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem}
+  .d-links{display:flex;gap:1.25rem;margin-top:1.1rem;font-size:.78125rem;flex-wrap:wrap}
+  .d-md{font-family:var(--serif);font-size:.9375rem;color:var(--ink-soft);line-height:1.6}
+  .d-md img{max-width:100%;border:1px solid var(--line)}
+  .d-md pre{background:var(--panel);border:1px solid var(--line);padding:.7rem .9rem;overflow-x:auto;font-size:.75rem}
+  .d-md code{font-family:var(--mono);font-size:.85em}
+  .d-md blockquote{border-left:2px solid var(--gold);margin:1rem 0;padding-left:1rem;font-style:italic}
+
+  /* inquiry (chat) */
+  .inquiry{border-top:1px solid var(--line);background:var(--panel);padding:1rem 1.5rem 1.2rem}
+  .inq-head{font-family:var(--mono);font-size:.625rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 .6rem}
+  .inq-log{max-height:16rem;overflow-y:auto;font-size:.84375rem}
+  .inq-turn{margin-bottom:.8rem}
+  .inq-q{color:var(--navy);font-weight:600}
+  .inq-a{color:var(--ink-soft);white-space:pre-wrap;margin-top:.15rem}
+  .inquiry form{display:flex;gap:.6rem;margin-top:.4rem}
+  .inquiry input{
+    flex:1;font-family:var(--serif);font-style:italic;font-size:.875rem;
+    border:1px solid var(--line);border-radius:2px;background:#fff;padding:.45rem .65rem;outline:none;
+  }
+  .inquiry input:focus{border-color:var(--navy)}
+  .inquiry button[type=submit]{
+    border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:2px;
+    font-size:.71875rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    padding:0 .9rem;cursor:pointer;
+  }
+  .inq-note{font-size:.6875rem;color:var(--ink-faint);font-style:italic;margin-top:.4rem}
+
+  /* ══ Footer ══ */
+  footer{border-top:2px solid var(--line-dark)}
+  .foot{max-width:88rem;margin:0 auto;padding:1.75rem 2rem;display:flex;flex-wrap:wrap;gap:1rem 2rem;font-size:.8125rem;color:var(--ink-faint)}
+  .foot .links{display:flex;gap:1.75rem;flex-wrap:wrap;margin-left:auto}
+
+  .loading{padding:3rem 0;font-family:var(--serif);font-style:italic;color:var(--ink-faint)}
+
+  @media (max-width:1080px){
+    .main{grid-template-columns:1fr}
+    .dossier{position:fixed;inset:auto 0 0 0;max-height:78vh;z-index:30;border-radius:10px 10px 0 0;box-shadow:0 -12px 40px rgba(20,33,46,.25);display:none}
+    .dossier.open{display:block}
+    .d-close{display:block!important}
+    .panel-inner{grid-template-columns:1fr}
+    .controls{align-items:stretch}
+    .search{width:100%}
+    .toggles{justify-content:flex-start}
+  }
+  .d-close{display:none;position:sticky;top:0;margin-left:auto;border:none;background:none;font-size:1.1rem;color:var(--ink-faint);cursor:pointer;padding:.5rem .75rem;float:right}
+  @media (max-width:640px){
+    .mast{padding:1.5rem 1.25rem 1.25rem}
+    .mast .creds{margin-left:0;gap:1.25rem}
+    .intro,.panel-inner,.subjects,.main,.foot{padding-left:1.25rem;padding-right:1.25rem}
+    .row{grid-template-columns:3.2rem minmax(0,1fr)}
+    .rno,.rmark{display:none}
+    .histo{overflow-x:auto;padding-bottom:.25rem}
+  }
+  @media print{
+    .panel,.subjects,.dossier,.inquiry{display:none}
+    body{font-size:10pt}
+    .row{break-inside:avoid;cursor:default}
+    a{color:#000;border:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="mast">
+    <div>
+      <h1>Christian Bird, Ph.D.</h1>
+      <div class="role">Senior Principal Researcher, Microsoft Research · ACM Distinguished Scientist</div>
+    </div>
+    <div class="creds">
+      <div><b id="c-papers">—</b>papers</div>
+      <div><b>13</b>U.S. patents</div>
+      <div><b>8</b>test-of-time awards</div>
+      <div><b>20</b>years</div>
+    </div>
+  </div>
+</header>
+
+<div class="intro">
+  <p>Twenty years of empirical software engineering — the analysis of source code, version control history, and engineering practice at industrial scale. This page is the complete record: every paper, indexed by subject and year, each with a plain-language brief, the full text, and the means to question it. <a href="/cv/cv_academic.pdf">The formal CV is here.</a></p>
+</div>
+
+<div class="panel">
+  <div class="panel-inner">
+    <div class="histo" id="histo" aria-label="Publications per year — click to filter"></div>
+    <div class="controls">
+      <input class="search" id="q" type="search" placeholder="Search titles, authors, venues, findings…" autocomplete="off" />
+      <div class="toggles">
+        <button class="chip" id="t-awards">❧ Award-winning</button>
+        <button class="chip" id="t-commentary">Essays</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="subjects" id="subjects"><span class="lbl">Subject</span></div>
+
+<div class="main">
+  <div>
+    <div class="countline">
+      <span id="count">—</span>
+      <button class="clear" id="clear">clear filters</button>
+    </div>
+    <div id="rows"><p class="loading">Opening the record…</p></div>
+  </div>
+
+  <aside class="dossier" id="dossier">
+    <button class="d-close" id="d-close">✕</button>
+    <div class="d-empty">Select an entry to open its brief.</div>
+  </aside>
+</div>
+
+<footer>
+  <div class="foot">
+    <span>Christian Bird · Redmond, Washington</span>
+    <div class="links">
+      <a href="mailto:chris@cabird.com">chris@cabird.com</a>
+      <a href="/cv/cv_academic.pdf">CV</a>
+      <a href="https://scholar.google.com/citations?user=aDVlS-wAAAAJ">Google Scholar</a>
+      <a href="https://www.linkedin.com/in/christian-bird-1896494/">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const SUBJECTS=[
+  {key:'ai',      label:'AI & ML for code', tags:['ai-for-software-engineering']},
+  {key:'review',  label:'Code review', tags:['code-review']},
+  {key:'quality', label:'Defects & quality', tags:['defect-prediction-and-quality']},
+  {key:'vcs',     label:'Version control', tags:['version-control-and-branching','repository-mining']},
+  {key:'oss',     label:'Open source & networks', tags:['open-source-software','developer-social-networks','network-analysis']},
+  {key:'prod',    label:'Productivity & practice', tags:['developer-productivity','engineering-management','tool-adoption-and-trust','release-engineering']},
+  {key:'methods', label:'Methods & data', tags:['statistical-analysis','surveys','interviews','dataset-and-tooling','case-study']},
+];
+
+function parseTags(t){
+  if(Array.isArray(t))return t.map(x=>String(x).replace(/[\[\]']/g,'').trim()).filter(Boolean);
+  if(typeof t==='string')return t.split(',').map(x=>x.replace(/[\[\]']/g,'').trim()).filter(Boolean);
+  return [];
+}
+const fmtAuthors=a=>{if(!a)return'';const l=String(a).split(/\s+and\s+/);return l.length>1?l.slice(0,-1).join(', ')+' & '+l[l.length-1]:l[0];};
+const venueOf=p=>p.type==='inproceedings'?(p.booktitle||p.venue||''):p.type==='article'?(p.journal||p.venue||''):(p.venue||'');
+
+function md(src,imgBase){
+  const lines=src.split('\n');let out=[],para=[],inCode=false,code=[];
+  const flush=()=>{if(para.length){out.push('<p>'+inline(para.join(' '))+'</p>');para=[];}};
+  const inline=t=>esc(t)
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g,(m,alt,s)=>`<img alt="${alt}" src="${/^https?:|^\//.test(s)?s:(imgBase+'/'+s)}">`)
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/\*([^*]+)\*/g,'<i>$1</i>')
+    .replace(/`([^`]+)`/g,'<code>$1</code>');
+  for(const raw of lines){
+    if(raw.trim().startsWith('```')){if(inCode){out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');code=[];}else flush();inCode=!inCode;continue;}
+    if(inCode){code.push(raw);continue;}
+    const l=raw.trimEnd();
+    const h=l.match(/^(#{1,4})\s+(.*)/);
+    if(h){flush();out.push(`<h${h[1].length+1}>${inline(h[2])}</h${h[1].length+1}>`);continue;}
+    if(/^>\s?/.test(l)){flush();out.push('<blockquote>'+inline(l.replace(/^>\s?/,''))+'</blockquote>');continue;}
+    if(/^[-*]\s+/.test(l)){flush();out.push('<ul><li>'+inline(l.replace(/^[-*]\s+/,''))+'</li></ul>');continue;}
+    if(l==='')flush();else para.push(l);
+  }
+  flush();
+  return out.join('\n').replace(/<\/ul>\n<ul>/g,'\n');
+}
+
+/* ── state ── */
+let ENTRIES=[];           // unified: papers + posts
+let filter={q:'',year:null,subject:null,awards:false,commentary:false};
+let selected=null;
+
+function subjectsOf(tags){
+  const out=[];
+  for(const s of SUBJECTS)if(s.tags.some(t=>tags.includes(t)))out.push(s.key);
+  return out.length?out:['methods'];
+}
+
+function build(paperData,posts){
+  const papers=Object.entries(paperData.papers||{}).map(([id,p])=>({id,...p}));
+  papers.sort((a,b)=>(b.year||0)-(a.year||0)||(a.priority||50)-(b.priority||50));
+  ENTRIES=papers.map(p=>{
+    const tags=parseTags(p.tags);
+    return {
+      kind:'paper',id:p.id,year:+p.year||0,title:p.title,authors:p.authors,
+      venue:venueOf(p),awards:p.awards||[],tags,subs:subjectsOf(tags),
+      epi:p.extracted_paper_info||{},doi:p.doi,pdf:p.mapped_pdf,
+      hay:(p.title+' '+(p.authors||'')+' '+venueOf(p)+' '+((p.extracted_paper_info||{}).tldr||'')+' '+tags.join(' ')).toLowerCase()
+    };
+  });
+  for(const post of posts){
+    ENTRIES.push({
+      kind:'post',id:post.slug,year:+String(post.date||'').slice(0,4)||0,title:post.title,
+      authors:post.authors||'',venue:post.subtitle||'Essay',awards:[],tags:post.tags||[],subs:[],
+      hay:(post.title+' '+(post.subtitle||'')).toLowerCase()
+    });
+  }
+  ENTRIES.sort((a,b)=>b.year-a.year);
+  $('#c-papers').textContent=papers.length;
+}
+
+function visible(){
+  return ENTRIES.filter(e=>{
+    if(filter.commentary&&e.kind!=='post')return false;
+    if(filter.awards&&!e.awards.length)return false;
+    if(filter.year&&e.year!==filter.year)return false;
+    if(filter.subject&&e.kind==='paper'&&!e.subs.includes(filter.subject))return false;
+    if(filter.subject&&e.kind==='post')return false;
+    if(filter.q&&!e.hay.includes(filter.q))return false;
+    return true;
+  });
+}
+
+function renderRows(){
+  const vis=visible();
+  const total=ENTRIES.length;
+  $('#count').textContent=`${vis.length} of ${total} entries`;
+  const any=filter.q||filter.year||filter.subject||filter.awards||filter.commentary;
+  $('#clear').classList.toggle('show',!!any);
+  $('#rows').innerHTML=vis.map((e,i)=>`
+    <div class="row ${selected===e.kind+':'+e.id?'sel':''}" data-k="${e.kind}" data-id="${esc(e.id)}">
+      <span class="rno">${String(vis.length-i).padStart(3,'0')}</span>
+      <span class="ryr">${e.year||''}</span>
+      <span>
+        <div class="rtitle">${esc(e.title)}</div>
+        <div class="rsub">${esc(e.kind==='post'?(e.venue||'Essay'):e.venue)}</div>
+      </span>
+      <span class="rmark">${e.kind==='post'?'<span class="kind">ESSAY</span>':(e.awards.length?'❧':'')}</span>
+    </div>`).join('')||'<p class="loading">Nothing matches. Clear a filter.</p>';
+}
+
+function renderHisto(){
+  const counts={};let max=1;
+  for(const e of ENTRIES){if(!e.year)continue;counts[e.year]=(counts[e.year]||0)+1;max=Math.max(max,counts[e.year]);}
+  const years=Object.keys(counts).map(Number).sort((a,b)=>a-b);
+  $('#histo').innerHTML=years.map(y=>`
+    <button class="hbar ${filter.year===y?'on':''}" data-y="${y}" title="${y}: ${counts[y]} papers">
+      <span class="bar" style="height:${Math.max(3,Math.round(counts[y]/max*30))}px"></span>
+      <span class="hy">${String(y).slice(2)}</span>
+    </button>`).join('');
+}
+
+function renderSubjects(){
+  const el=$('#subjects');
+  el.querySelectorAll('.chip').forEach(c=>c.remove());
+  for(const s of SUBJECTS){
+    const n=ENTRIES.filter(e=>e.kind==='paper'&&e.subs.includes(s.key)).length;
+    const b=document.createElement('button');
+    b.className='chip'+(filter.subject===s.key?' on':'');
+    b.textContent=`${s.label} · ${n}`;
+    b.onclick=()=>{filter.subject=filter.subject===s.key?null:s.key;refresh();};
+    el.appendChild(b);
+  }
+}
+
+async function openDossier(kind,id){
+  selected=kind+':'+id;renderRows();
+  const d=$('#dossier');d.classList.add('open');
+  const e=ENTRIES.find(x=>x.kind===kind&&x.id===id);if(!e)return;
+  if(kind==='post'){
+    d.innerHTML=`<button class="d-close" onclick="this.parentNode.classList.remove('open')">✕</button>
+      <div class="d-head"><p class="d-kind">Essay</p><h2 class="d-title">${esc(e.title)}</h2>
+      <div class="d-venue">${esc(e.venue)}</div></div>
+      <div class="d-body"><div class="d-md">Fetching…</div></div>`;
+    try{
+      const r=await fetch(`/api/blog/${encodeURIComponent(id)}`);const data=await r.json();
+      d.querySelector('.d-md').innerHTML=md(data.markdown||'',data.image_base||'');
+    }catch(_){d.querySelector('.d-md').textContent='Could not load this essay.';}
+    return;
+  }
+  const det=e.epi.details||{};
+  const insights=(det.key_insights||[]).slice(0,4).map(i=>`<li>${esc(i)}</li>`).join('');
+  d.innerHTML=`<button class="d-close" onclick="this.parentNode.classList.remove('open')">✕</button>
+    <div class="d-head">
+      <p class="d-kind">Paper · Entry of Record</p>
+      <h2 class="d-title">${esc(e.title)}</h2>
+      <p class="d-authors">${esc(fmtAuthors(e.authors))}</p>
+      <div class="d-venue">${esc(e.venue)}, ${e.year}</div>
+      ${e.awards.length?`<div class="d-award">❧ ${esc(e.awards.join(' · '))}</div>`:''}
+    </div>
+    <div class="d-body">
+      ${e.epi.tldr?`<p class="d-tldr">${esc(e.epi.tldr)}</p>`:''}
+      ${det.problem?`<div class="d-sec">Problem</div><p class="tx">${esc(det.problem)}</p>`:''}
+      ${det.approach?`<div class="d-sec">Approach</div><p class="tx">${esc(det.approach)}</p>`:''}
+      ${insights?`<div class="d-sec">Findings</div><ul>${insights}</ul>`:''}
+      <div class="d-links">
+        ${e.pdf?`<a href="/pdfs/${encodeURIComponent(e.pdf)}">Full text (PDF)</a>`:''}
+        ${e.doi?`<a href="https://doi.org/${esc(e.doi)}">DOI</a>`:''}
+      </div>
+    </div>
+    <div class="inquiry">
+      <p class="inq-head">Inquiry — AI answers drawn from this paper's text</p>
+      <div class="inq-log"></div>
+      <form><input placeholder="Ask about methods, findings, scope…" maxlength="500" /><button type="submit">Ask</button></form>
+      <p class="inq-note">Answers are generated; verify against the paper itself.</p>
+    </div>`;
+  d.querySelector('.inquiry form').addEventListener('submit',ev=>{
+    ev.preventDefault();
+    const input=ev.target.querySelector('input');const q=input.value.trim();if(!q)return;
+    input.value='';ask(id,q,d.querySelector('.inq-log'));
+  });
+}
+
+async function ask(paperId,q,logEl){
+  const turn=document.createElement('div');turn.className='inq-turn';
+  turn.innerHTML=`<div class="inq-q">${esc(q)}</div><div class="inq-a"></div>`;
+  logEl.appendChild(turn);logEl.scrollTop=logEl.scrollHeight;
+  const aEl=turn.querySelector('.inq-a');
+  try{
+    const r=await fetch(`/api/papers/${encodeURIComponent(paperId)}/chat`,{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q})});
+    if(!r.ok){const e=await r.json().catch(()=>({}));aEl.textContent=e.error||'The inquiry service is not available right now.';return;}
+    const reader=r.body.getReader();const dec=new TextDecoder();let buf='';
+    for(;;){
+      const {done,value}=await reader.read();if(done)break;
+      buf+=dec.decode(value,{stream:true});
+      const parts=buf.split('\n\n');buf=parts.pop();
+      for(const part of parts){
+        const line=part.split('\n').find(l=>l.startsWith('data: '));if(!line)continue;
+        try{
+          const m=JSON.parse(line.slice(6));
+          if(m.type==='chat_chunk'){aEl.textContent+=m.content;logEl.scrollTop=logEl.scrollHeight;}
+          else if(m.type==='error'){aEl.textContent+=(aEl.textContent?'\n':'')+m.message;}
+        }catch(_){}
+      }
+    }
+  }catch(_){aEl.textContent='The inquiry service could not be reached.';}
+}
+
+function refresh(){renderHisto();renderSubjects();renderRows();}
+
+/* ── events ── */
+$('#q').addEventListener('input',e=>{filter.q=e.target.value.trim().toLowerCase();renderRows();});
+$('#t-awards').addEventListener('click',()=>{filter.awards=!filter.awards;$('#t-awards').classList.toggle('on',filter.awards);renderRows();});
+$('#t-commentary').addEventListener('click',()=>{filter.commentary=!filter.commentary;$('#t-commentary').classList.toggle('on',filter.commentary);renderRows();});
+$('#clear').addEventListener('click',()=>{
+  filter={q:'',year:null,subject:null,awards:false,commentary:false};
+  $('#q').value='';$('#t-awards').classList.remove('on');$('#t-commentary').classList.remove('on');
+  refresh();
+});
+$('#histo').addEventListener('click',ev=>{
+  const b=ev.target.closest('.hbar');if(!b)return;
+  const y=+b.dataset.y;filter.year=filter.year===y?null:y;refresh();
+});
+document.addEventListener('click',ev=>{
+  const row=ev.target.closest('.row');if(!row)return;
+  openDossier(row.dataset.k,row.dataset.id);
+});
+$('#d-close').addEventListener('click',()=>$('#dossier').classList.remove('open'));
+
+/* ── boot ── */
+(async function(){
+  let paperData;
+  try{paperData=await fetch('/api/paper_data.json').then(r=>{if(!r.ok)throw 0;return r.json();});}
+  catch(_){paperData=await fetch('/paper_data.json').then(r=>r.json()).catch(()=>({papers:{}}));}
+  let posts=[];
+  try{const b=await fetch('/api/blog').then(r=>r.json());posts=b.posts||[];}catch(_){}
+  build(paperData,posts);
+  refresh();
+})();
+})();
+</script>
+</body>
+</html>

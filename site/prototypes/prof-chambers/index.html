@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Christian Bird, Ph.D.</title>
+<meta name="description" content="Christian Bird, Ph.D. — Senior Principal Researcher at Microsoft Research. Empirical software engineering, source code and version control analysis, software authorship attribution, code review, and AI-assisted development." />
+<style>
+  :root{
+    --navy:#152a44;
+    --navy-deep:#0d1c2e;
+    --ink:#1c2530;
+    --ink-soft:#525f6e;
+    --ink-faint:#7d8895;
+    --line:#e2e6eb;
+    --line-soft:#eef1f4;
+    --bg:#ffffff;
+    --bg-tint:#f6f8fa;
+    --accent:#8a6a2f;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:64rem;margin:0 auto;padding:0 2rem}
+
+  /* ── Nav ── */
+  nav{
+    position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);
+    backdrop-filter:saturate(160%) blur(8px);border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:64rem;margin:0 auto;padding:0 2rem;height:60px;
+    display:flex;align-items:center;justify-content:space-between;gap:2rem;
+  }
+  .brand{font-weight:650;font-size:.9375rem;letter-spacing:-.01em;color:var(--navy);text-decoration:none}
+  .nav-links{display:flex;gap:1.75rem;list-style:none;margin:0;padding:0}
+  .nav-links a{
+    font-size:.8125rem;font-weight:520;color:var(--ink-soft);text-decoration:none;
+    letter-spacing:.01em;
+  }
+  .nav-links a:hover{color:var(--navy)}
+
+  /* ── Hero ── */
+  .hero{padding:4.5rem 0 3rem}
+  .hero-grid{display:grid;grid-template-columns:1fr 168px;gap:3.5rem;align-items:start}
+  .eyebrow{
+    font-size:.6875rem;font-weight:660;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 1rem;
+  }
+  h1{
+    font-size:3rem;font-weight:640;letter-spacing:-.028em;line-height:1.05;
+    margin:0 0 .875rem;color:var(--navy-deep);
+  }
+  .role{font-size:1.1875rem;color:var(--ink-soft);margin:0;font-weight:420;line-height:1.45}
+  .portrait{
+    width:168px;height:200px;object-fit:cover;object-position:center 20%;
+    border-radius:3px;filter:grayscale(100%) contrast(1.03);
+  }
+
+  /* ── Credential strip ── */
+  .creds{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    margin-top:3rem;
+  }
+  .cred{padding:1.5rem 1.5rem 1.5rem 0;border-right:1px solid var(--line-soft)}
+  .cred:last-child{border-right:none}
+  .cred-num{
+    font-size:1.75rem;font-weight:660;color:var(--navy);letter-spacing:-.02em;
+    line-height:1.1;display:block;font-variant-numeric:tabular-nums;
+  }
+  .cred-label{font-size:.8125rem;color:var(--ink-faint);line-height:1.35;display:block;margin-top:.3rem}
+
+  /* ── Sections ── */
+  section{padding:3.75rem 0;border-bottom:1px solid var(--line-soft)}
+  section:last-of-type{border-bottom:none}
+  .section-head{
+    font-size:.6875rem;font-weight:660;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0 0 2rem;
+  }
+  h2{font-size:1.625rem;font-weight:620;letter-spacing:-.018em;margin:0 0 1.5rem;color:var(--navy-deep)}
+  p{margin:0 0 1.15rem;max-width:42rem;color:var(--ink-soft)}
+  p:last-child{margin-bottom:0}
+  a{color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(21,42,68,.22)}
+  a:hover{border-bottom-color:var(--navy)}
+
+  /* ── Expertise cards ── */
+  .expertise{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line-soft)}
+  .exp{
+    padding:1.25rem 2rem 1.25rem 0;border-bottom:1px solid var(--line-soft);
+    font-size:.9375rem;line-height:1.55;color:var(--ink-soft);
+    display:flex;gap:.875rem;
+  }
+  .exp::before{
+    content:"";flex:0 0 3px;height:1.1em;background:var(--navy);opacity:.28;margin-top:.28em;
+  }
+
+  /* ── Patents table ── */
+  .ptable{width:100%;border-collapse:collapse;font-size:.9375rem}
+  .ptable th{
+    text-align:left;font-size:.6875rem;font-weight:660;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-faint);padding:0 1rem .75rem 0;
+    border-bottom:1px solid var(--line);
+  }
+  .ptable th:last-child,.ptable td:last-child{text-align:right;padding-right:0}
+  .ptable td{padding:.8rem 1rem .8rem 0;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  .ptable tr:hover td{background:var(--bg-tint)}
+  .ptable td:first-child{color:var(--ink-faint);font-variant-numeric:tabular-nums;width:2.5rem}
+  .pno{font-variant-numeric:tabular-nums;color:var(--ink-soft);white-space:nowrap}
+  .pyr{color:var(--ink-faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  /* ── Publications ── */
+  .pubgroup{margin-bottom:2rem}
+  .pubgroup:last-child{margin-bottom:0}
+  h3{font-size:.9375rem;font-weight:640;margin:0 0 .75rem;color:var(--navy-deep)}
+  .pubs{list-style:none;margin:0;padding:0}
+  .pubs li{
+    font-size:.9375rem;line-height:1.5;padding:.35rem 0;color:var(--ink-soft);
+    display:flex;justify-content:space-between;gap:2rem;align-items:baseline;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .pubs cite{font-style:normal;color:var(--ink)}
+  .venue{color:var(--ink-faint);font-size:.8125rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+  /* ── Honors ── */
+  .honors{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 2.5rem}
+  .honors li{padding:.85rem 0;border-bottom:1px solid var(--line-soft);display:flex;gap:1rem}
+  .yr{color:var(--ink-faint);font-size:.8125rem;font-variant-numeric:tabular-nums;flex:0 0 2.5rem;padding-top:.15em}
+  .honor-name{font-size:.9375rem;line-height:1.45}
+  .honor-for{display:block;color:var(--ink-faint);font-size:.8125rem;font-style:italic;margin-top:.1rem}
+
+  /* ── Background ── */
+  .bg-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+  .fact{padding:.85rem 0;border-bottom:1px solid var(--line-soft)}
+  .fact-role{font-size:.9375rem;font-weight:520}
+  .fact-org{display:block;color:var(--ink-faint);font-size:.875rem;font-weight:400;margin-top:.05rem}
+
+  /* ── Footer ── */
+  footer{background:var(--bg-tint);border-top:1px solid var(--line);padding:2.5rem 0;margin-top:2rem}
+  .foot-inner{max-width:64rem;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .foot-links{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.875rem}
+  .foot-note{font-size:.8125rem;color:var(--ink-faint)}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:2rem}
+    .portrait{width:132px;height:158px;order:-1}
+    .creds{grid-template-columns:1fr 1fr}
+    .cred{border-right:none;border-bottom:1px solid var(--line-soft)}
+    .expertise,.honors,.bg-grid{grid-template-columns:1fr}
+    .nav-links{display:none}
+  }
+  @media (max-width:640px){
+    body{font-size:16px}
+    .wrap,.nav-inner,.foot-inner{padding:0 1.25rem}
+    h1{font-size:2.125rem}
+    .hero{padding:2.75rem 0 2rem}
+  }
+  @media print{
+    nav,footer{display:none}
+    body{font-size:10.5pt;line-height:1.45;color:#000}
+    section{padding:1.25rem 0;break-inside:avoid}
+    a{color:#000;border:none}
+    .expertise,.honors,.bg-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="#top">Christian Bird, Ph.D.</a>
+    <ul class="nav-links">
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#patents">Patents</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#honors">Recognition</a></li>
+      <li><a href="/cv/cv_academic.pdf">CV</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+
+  <header class="hero">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Empirical Software Engineering</p>
+        <h1>Christian Bird, Ph.D.</h1>
+        <p class="role">Senior Principal Researcher, Microsoft Research. Twenty-five years analyzing source code, version control history, and how software is actually built at scale.</p>
+      </div>
+      <img class="portrait" src="/images/profile_pic_medium.jpeg" alt="Christian Bird" />
+    </div>
+
+    <div class="creds">
+      <div class="cred"><span class="cred-num">13</span><span class="cred-label">Granted U.S. patents</span></div>
+      <div class="cred"><span class="cred-num">120+</span><span class="cred-label">Peer-reviewed publications</span></div>
+      <div class="cred"><span class="cred-num">8</span><span class="cred-label">Test-of-time &amp; impact awards</span></div>
+      <div class="cred"><span class="cred-num">ACM</span><span class="cred-label">Distinguished Scientist, 2024</span></div>
+    </div>
+  </header>
+
+  <section id="profile">
+    <p class="section-head">Profile</p>
+    <p>Christian Bird is a Senior Principal Researcher at Microsoft Research, where he has spent sixteen years studying how software is built at scale. With more than twenty-five years of combined industrial software engineering and research experience, his work centers on the empirical analysis of source code, version control history, and software development practice.</p>
+    <p>He has authored more than 120 peer-reviewed publications on software authorship and ownership attribution, code cloning and reuse, version control forensics, code review, defect and reliability measurement, and AI-assisted code generation. Eight of his papers have received test-of-time, most-influential, or impact awards from ACM and IEEE. He is a named inventor on thirteen granted U.S. patents in source code analysis and developer tooling.</p>
+    <p>He received the ACM SIGSOFT Early Career Research Award in 2017, was named an ACM Distinguished Scientist in 2024, and is a Senior Member of the IEEE. Before his research career he spent five years as a software engineer at Motorola building embedded development tools. He holds a Ph.D. and M.S. in Computer Science from the University of California, Davis, and a B.S. in Computer Science from Brigham Young University.</p>
+  </section>
+
+  <section id="expertise">
+    <p class="section-head">Areas of Expertise</p>
+    <h2>Technical domains</h2>
+    <div class="expertise">
+      <div class="exp">Source code analysis and comparison; detection and characterization of code clones, copied code, and reused code</div>
+      <div class="exp">Software authorship, ownership, and contribution attribution derived from version control history</div>
+      <div class="exp">Version control forensics across centralized and distributed systems — Git, Subversion, CVS, Team Foundation Server</div>
+      <div class="exp">Reconstruction of development timelines from commit, branch, build, bug-tracking, and code review records</div>
+      <div class="exp">Integrity, completeness, and bias of software engineering records</div>
+      <div class="exp">Open source development practice, contributor provenance, and project governance</div>
+      <div class="exp">Code review practice and industrial software quality assurance</div>
+      <div class="exp">Software defect prediction, reliability measurement, and quality metrics at commercial scale</div>
+      <div class="exp">AI-assisted code generation, including GitHub Copilot and large language model coding tools</div>
+      <div class="exp">Machine learning applied to source code: naming, coding conventions, type inference, and program merge</div>
+      <div class="exp">Static and dynamic program analysis tooling and its adoption by professional developers</div>
+      <div class="exp">Large-scale statistical and qualitative analysis of software repositories and developer populations</div>
+    </div>
+  </section>
+
+  <section id="patents">
+    <p class="section-head">Patents</p>
+    <h2>Thirteen granted U.S. patents</h2>
+    <p>Named inventor on all thirteen, assigned to Microsoft. Subject matter spans source code pattern mining, code search, concurrent edit and merge conflict detection and resolution, idiomatic code identification, and build error prediction.</p>
+    <table class="ptable" style="margin-top:2rem">
+      <thead><tr><th></th><th>Title</th><th>Patent No.</th><th>Granted</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Automated Merge Conflict Resolution</td><td class="pno">12,524,647</td><td class="pyr">2026</td></tr>
+        <tr><td>2</td><td>Automated Merge Conflict Resolution with Transformers</td><td class="pno">12,159,211</td><td class="pyr">2024</td></tr>
+        <tr><td>3</td><td>Concurrent Edit Detection</td><td class="pno">11,822,518</td><td class="pyr">2023</td></tr>
+        <tr><td>4</td><td>Natural Language Code Search</td><td class="pno">11,715,006</td><td class="pyr">2023</td></tr>
+        <tr><td>5</td><td>Frequent Source Code Pattern Mining</td><td class="pno">11,662,984</td><td class="pyr">2023</td></tr>
+        <tr><td>6</td><td>Detecting Misconfiguration and/or Bugs in Large Services Using Correlated Change Analysis</td><td class="pno">11,599,354</td><td class="pyr">2023</td></tr>
+        <tr><td>7</td><td>Concurrent Edit Detection</td><td class="pno">11,550,758</td><td class="pyr">2023</td></tr>
+        <tr><td>8</td><td>Frequent Source Code Pattern Mining</td><td class="pno">11,392,354</td><td class="pyr">2022</td></tr>
+        <tr><td>9</td><td>Techniques to Identify Idiomatic Code in a Code Base</td><td class="pno">10,042,740</td><td class="pyr">2018</td></tr>
+        <tr><td>10</td><td>Predicting Software Build Errors</td><td class="pno">9,542,176</td><td class="pyr">2017</td></tr>
+        <tr><td>11</td><td>Analyzing Power Consumption in Mobile Computing Devices</td><td class="pno">9,400,541</td><td class="pyr">2016</td></tr>
+        <tr><td>12</td><td>Analyzing Power Consumption in Mobile Computing Devices</td><td class="pno">8,965,718</td><td class="pyr">2015</td></tr>
+        <tr><td>13</td><td>Software Development Automated Analytics</td><td class="pno">8,745,572</td><td class="pyr">2014</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="publications">
+    <p class="section-head">Publications</p>
+    <h2>Selected work by subject</h2>
+
+    <div class="pubgroup" style="margin-top:2rem">
+      <h3>Authorship, Ownership, and Contribution Attribution</h3>
+      <ul class="pubs">
+        <li><cite>Don't Touch My Code! Examining the Effects of Ownership on Software Quality</cite><span class="venue">FSE 2011</span></li>
+        <li><cite>Latent Social Structure in Open Source Projects</cite><span class="venue">FSE 2008</span></li>
+        <li><cite>Detecting Patch Submission and Acceptance in OSS Projects</cite><span class="venue">MSR 2007</span></li>
+        <li><cite>Validity of Network Analyses in Open Source Projects</cite><span class="venue">MSR 2010</span></li>
+      </ul>
+    </div>
+
+    <div class="pubgroup">
+      <h3>Version Control Forensics and Repository Evidence</h3>
+      <ul class="pubs">
+        <li><cite>The Promises and Perils of Mining Git</cite><span class="venue">MSR 2009</span></li>
+        <li><cite>Transition from Centralized to Decentralized Version Control Systems</cite><span class="venue">ICSE 2014</span></li>
+        <li><cite>Assessing the Value of Branches with What-if Analysis</cite><span class="venue">FSE 2012</span></li>
+        <li><cite>Linkster: Enabling Efficient Manual Mining</cite><span class="venue">FSE 2010</span></li>
+      </ul>
+    </div>
+
+    <div class="pubgroup">
+      <h3>Code Cloning, Reuse, and Change Similarity</h3>
+      <ul class="pubs">
+        <li><cite>Clones: What <em>is</em> that Smell?</cite><span class="venue">ESE 2012</span></li>
+        <li><cite>The Uniqueness of Changes: Characteristics and Applications</cite><span class="venue">MSR 2015</span></li>
+        <li><cite>Mining Semantic Loop Idioms from Big Code</cite><span class="venue">TSE 2018</span></li>
+      </ul>
+    </div>
+
+    <div class="pubgroup">
+      <h3>Integrity and Completeness of Software Records</h3>
+      <ul class="pubs">
+        <li><cite>Fair and Balanced? Bias in Bug-Fix Datasets</cite><span class="venue">FSE 2009</span></li>
+        <li><cite>The Missing Links: Bugs and Bug-fix Commits</cite><span class="venue">FSE 2010</span></li>
+        <li><cite>Belief and Evidence in Empirical Software Engineering</cite><span class="venue">ICSE 2016</span></li>
+      </ul>
+    </div>
+
+    <div class="pubgroup">
+      <h3>AI-Assisted Code Generation and Machine Learning for Code</h3>
+      <ul class="pubs">
+        <li><cite>Taking Flight with Copilot</cite><span class="venue">CACM 2023</span></li>
+        <li><cite>Program Merge: What's Deep Learning Got to Do with It?</cite><span class="venue">CACM 2025</span></li>
+        <li><cite>Software Engineering for Machine Learning: A Case Study</cite><span class="venue">ICSE 2019</span></li>
+        <li><cite>Learning Natural Coding Conventions</cite><span class="venue">FSE 2014</span></li>
+      </ul>
+    </div>
+
+    <p style="margin-top:1.75rem"><a href="/publications.html">Complete list of publications →</a></p>
+  </section>
+
+  <section id="honors">
+    <p class="section-head">Recognition</p>
+    <h2>Honors and awards</h2>
+    <ul class="honors" style="margin-top:1.5rem">
+      <li><span class="yr">2024</span><span class="honor-name">Distinguished Scientist, ACM</span></li>
+      <li><span class="yr">2025</span><span class="honor-name">ACM SIGSOFT Impact Paper Award<span class="honor-for">Expectations, Outcomes, and Challenges of Modern Code Review</span></span></li>
+      <li><span class="yr">2021</span><span class="honor-name">Test of Time Award, ESEC/FSE<span class="honor-for">Don't Touch My Code!</span></span></li>
+      <li><span class="yr">2019</span><span class="honor-name">Test of Time Award, ESEC/FSE<span class="honor-for">Fair and Balanced? Bias in Bug-Fix Datasets</span></span></li>
+      <li><span class="yr">2019</span><span class="honor-name">Most Influential Paper, MSR<span class="honor-for">The Promises and Perils of Mining Git</span></span></li>
+      <li><span class="yr">2018</span><span class="honor-name">Test of Time Award, ESEC/FSE<span class="honor-for">Latent Social Structure in Open Source Projects</span></span></li>
+      <li><span class="yr">2017</span><span class="honor-name">ACM SIGSOFT Early Career Research Award</span></li>
+      <li><span class="yr">2016</span><span class="honor-name">Most Influential Paper, MSR<span class="honor-for">Mining Email Social Networks</span></span></li>
+    </ul>
+  </section>
+
+  <section id="background">
+    <p class="section-head">Background</p>
+    <div class="bg-grid">
+      <div>
+        <h3>Education</h3>
+        <div class="fact"><span class="fact-role">Ph.D., Computer Science, 2010<span class="fact-org">University of California, Davis</span></span></div>
+        <div class="fact"><span class="fact-role">M.S., Computer Science, 2008<span class="fact-org">University of California, Davis</span></span></div>
+        <div class="fact"><span class="fact-role">B.S., Computer Science, 2003<span class="fact-org">Brigham Young University</span></span></div>
+      </div>
+      <div>
+        <h3>Experience</h3>
+        <div class="fact"><span class="fact-role">Senior Principal Researcher, 2022–present<span class="fact-org">Microsoft Research</span></span></div>
+        <div class="fact"><span class="fact-role">Principal Researcher, 2017–2022<span class="fact-org">Microsoft Research</span></span></div>
+        <div class="fact"><span class="fact-role">Software Engineer, 2000–2005<span class="fact-org">Motorola, Embedded Software Tools</span></span></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-links">
+      <a href="mailto:chris@cabird.com">chris@cabird.com</a>
+      <a href="/cv/cv_academic.pdf">Curriculum Vitae</a>
+      <a href="https://scholar.google.com/citations?user=aDVlS-wAAAAJ">Google Scholar</a>
+      <a href="https://www.linkedin.com/in/christian-bird-1896494/">LinkedIn</a>
+    </div>
+    <div class="foot-note">Redmond, Washington</div>
+  </div>
+</footer>
+
+</body>
+</html>

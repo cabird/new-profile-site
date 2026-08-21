@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Christian Bird, Ph.D.</title>
+<meta name="description" content="Christian Bird, Ph.D. — Senior Principal Researcher at Microsoft Research. Empirical software engineering: source code analysis, version control history, code review, and AI-assisted development." />
+<style>
+  :root{
+    --paper:#fbfaf7; --ink:#1a1714; --soft:#4a443d; --faint:#7d7568;
+    --rule:#ddd6c9; --rule-dark:#1a1714; --oxblood:#6e2429; --gold:#8a6a2f;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.62}
+  a{color:var(--oxblood);text-decoration:none;border-bottom:1px solid rgba(110,36,41,.28)}
+  a:hover{border-bottom-color:var(--oxblood)}
+  .wrap{max-width:44rem;margin:0 auto;padding:0 1.5rem}
+
+  /* sticky anchor nav */
+  nav{position:sticky;top:0;z-index:10;background:rgba(251,250,247,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule)}
+  nav .inner{max-width:44rem;margin:0 auto;padding:.7rem 1.5rem;display:flex;flex-wrap:wrap;gap:.3rem 1.25rem;
+    font-family:var(--sans);font-size:.71875rem;letter-spacing:.1em;text-transform:uppercase}
+  nav a{color:var(--faint);border-bottom:none}
+  nav a:hover{color:var(--oxblood)}
+
+  header{text-align:center;padding:3rem 0 2rem;border-bottom:2px solid var(--rule-dark)}
+  .portrait{width:100px;height:100px;border-radius:50%;object-fit:cover;filter:grayscale(100%) contrast(1.04);border:1px solid var(--rule);margin-bottom:1.25rem}
+  h1{font-size:2.5rem;font-weight:400;margin:0 0 .4rem;line-height:1.08}
+  .role{font-style:italic;color:var(--soft);font-size:1.0313rem;margin:0 0 1.25rem}
+  .marquee{font-family:var(--sans);font-size:.6875rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);
+    display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;justify-content:center}
+
+  section{padding:2.75rem 0 0;scroll-margin-top:3.25rem}
+  h2{font-family:var(--sans);font-size:.71875rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    margin:0 0 1.4rem;padding-bottom:.55rem;border-bottom:1px solid var(--rule);
+    display:flex;justify-content:space-between;align-items:baseline}
+  h2 .more{font-weight:400;letter-spacing:.04em;text-transform:none;font-size:.78125rem}
+  p{margin:0 0 1.1rem;color:var(--soft)}
+
+  .exp{margin:0;padding:0;list-style:none;columns:2;column-gap:2.5rem}
+  .exp li{break-inside:avoid;margin:0 0 .75rem;padding-left:.95rem;position:relative;font-size:.9063rem;line-height:1.5;color:var(--soft)}
+  .exp li::before{content:"";position:absolute;left:0;top:.6em;width:5px;height:5px;background:var(--faint)}
+
+  .pub{padding:.55rem 0 .55rem .95rem;border-left:2px solid var(--rule);margin-bottom:.45rem;font-size:.9375rem;color:var(--soft)}
+  .pub cite{font-style:normal;color:var(--ink)}
+  .pub .v{font-family:var(--sans);font-size:.75rem;color:var(--faint);white-space:nowrap}
+  .laurel{color:var(--gold);font-size:.8125rem}
+
+  .strip{display:flex;gap:2.5rem;flex-wrap:wrap}
+  .strip .cell b{display:block;font-size:1.5rem;font-weight:500}
+  .strip .cell span{font-family:var(--sans);font-size:.78125rem;color:var(--faint)}
+
+  .honor{display:grid;grid-template-columns:3.4rem 1fr;gap:1rem;padding:.5rem 0;border-bottom:1px solid var(--rule);font-size:.9375rem}
+  .honor .yr{font-family:var(--mono);font-size:.75rem;color:var(--faint);padding-top:.2em}
+  .honor i{color:var(--faint)}
+
+  /* ask — one section among the rest */
+  .ask{border:1px solid var(--rule);background:#fff;padding:1.4rem 1.6rem}
+  .ask-sub{font-size:.84375rem;font-style:italic;color:var(--faint);margin:0 0 .9rem}
+  .ask-log{max-height:18rem;overflow-y:auto;font-size:.9375rem}
+  .turn{margin-bottom:.9rem}
+  .q{font-style:italic;color:var(--oxblood)}
+  .q::before{content:"Q.  ";font-style:normal;font-family:var(--mono);font-size:.71875rem;color:var(--faint)}
+  .a{color:var(--soft);white-space:pre-wrap}
+  .a::before{content:"A.  ";font-family:var(--mono);font-size:.71875rem;color:var(--faint)}
+  .ask form{display:flex;gap:.9rem;border-top:1px solid var(--rule);padding-top:.8rem}
+  .ask-log:empty + form{border-top:none;padding-top:0}
+  .ask input{flex:1;font-family:var(--serif);font-style:italic;font-size:.9844rem;border:none;background:transparent;outline:none;color:var(--ink)}
+  .ask button{all:unset;cursor:pointer;font-family:var(--sans);font-size:.6875rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--oxblood)}
+  .chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.9rem}
+  .chip{font-family:var(--sans);font-size:.71875rem;color:var(--soft);border:1px solid var(--rule);border-radius:999px;padding:.28rem .75rem;cursor:pointer;background:transparent}
+  .chip:hover{border-color:var(--oxblood);color:var(--oxblood)}
+
+  footer{border-top:2px solid var(--rule-dark);margin-top:3rem;padding:1.75rem 0 3.5rem;text-align:center}
+  .foot-nav{font-family:var(--sans);font-size:.78125rem;display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;justify-content:center;margin-bottom:1rem}
+  .foot-note{font-size:.8125rem;color:var(--faint)}
+  @media (max-width:560px){h1{font-size:1.9rem}.exp{columns:1}}
+  @media print{nav,.ask{display:none}body{font-size:10.5pt}a{color:#000;border:none}section{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<nav><div class="inner">
+  <a href="#top">Home</a><a href="#expertise">Expertise</a><a href="#publications">Publications</a>
+  <a href="#patents">Patents</a><a href="#honors">Honors</a><a href="#service">Service</a>
+  <a href="#background">Background</a><a href="#ask">Ask</a>
+</div></nav>
+
+<div class="wrap" id="top">
+  <header>
+    <img class="portrait" src="/images/profile_pic_medium.jpeg" alt="Christian Bird" />
+    <h1>Christian Bird, Ph.D.</h1>
+    <p class="role">Senior Principal Researcher, Microsoft Research</p>
+    <div class="marquee">
+      <span>ACM Distinguished Scientist</span>
+      <span>8 papers honored 10+ years later</span>
+      <span>8 Distinguished &amp; Best Paper awards</span>
+      <span>120+ publications</span>
+    </div>
+  </header>
+
+  <section id="about">
+    <p style="margin-top:.5rem">For twenty years I have studied how software is actually built. My work centers on the empirical analysis of source code, version control history, and engineering practice at scale — mining repositories, reviews, builds, and telemetry; surveying and interviewing the engineers who produce them; and building tools that product teams genuinely adopt. I've worked on code review, branching and release strategy, build systems, developer productivity, and most recently AI-assisted software engineering.</p>
+  </section>
+
+  <section id="expertise">
+    <h2>Areas of Expertise <a class="more" href="#">full descriptions →</a></h2>
+    <ul class="exp">
+      <li>Source code analysis; detection and characterization of code clones and reused code</li>
+      <li>Software authorship, ownership, and contribution attribution from version control history</li>
+      <li>Version control forensics — Git, Subversion, CVS, Team Foundation Server</li>
+      <li>Reconstruction of development timelines from commit, build, and review records</li>
+      <li>Integrity, completeness, and bias of software engineering records</li>
+      <li>Code review practice and industrial software quality assurance</li>
+      <li>Defect prediction, reliability measurement, and quality metrics at commercial scale</li>
+      <li>AI-assisted code generation, including GitHub Copilot and LLM coding tools</li>
+    </ul>
+  </section>
+
+  <section id="publications">
+    <h2>Selected Publications <a class="more" href="/publications.html">all 119 papers →</a></h2>
+    <div class="pub"><cite>Expectations, Outcomes, and Challenges of Modern Code Review</cite> — <span class="v">ICSE 2013</span> <span class="laurel">❧ SIGSOFT Impact Paper Award</span></div>
+    <div class="pub"><cite>Don't Touch My Code! Examining the Effects of Ownership on Software Quality</cite> — <span class="v">FSE 2011</span> <span class="laurel">❧ Test of Time</span></div>
+    <div class="pub"><cite>The Promises and Perils of Mining Git</cite> — <span class="v">MSR 2009</span> <span class="laurel">❧ Most Influential Paper</span></div>
+    <div class="pub"><cite>Taking Flight with Copilot</cite> — <span class="v">CACM 2023</span></div>
+    <div class="pub"><cite>Learning Natural Coding Conventions</cite> — <span class="v">FSE 2014</span> <span class="laurel">❧ Distinguished Paper</span></div>
+  </section>
+
+  <section id="patents">
+    <h2>Patents <a class="more" href="#">all thirteen →</a></h2>
+    <div class="strip">
+      <div class="cell"><b>13</b><span>granted U.S. patents</span></div>
+      <div class="cell" style="flex:1;min-width:16rem"><p style="margin:0;font-size:.9063rem">Source code pattern mining, code search, merge conflict detection and resolution, idiomatic code identification, and build error prediction. All assigned to Microsoft.</p></div>
+    </div>
+  </section>
+
+  <section id="honors">
+    <h2>Honors <a class="more" href="#">complete list →</a></h2>
+    <div class="honor"><span class="yr">2024</span><span>Distinguished Scientist, Association for Computing Machinery</span></div>
+    <div class="honor"><span class="yr">2025</span><span>ACM SIGSOFT Impact Paper Award — <i>Expectations, Outcomes, and Challenges of Modern Code Review</i></span></div>
+    <div class="honor"><span class="yr">2021</span><span>Test of Time Award, ESEC/FSE — <i>Don't Touch My Code!</i></span></div>
+    <div class="honor"><span class="yr">2017</span><span>ACM SIGSOFT Early Career Research Award</span></div>
+  </section>
+
+  <section id="service">
+    <h2>Service <a class="more" href="#">full record →</a></h2>
+    <p style="font-size:.9375rem">Program committee chair (ASE 2023), editorial service, NSF and NSERC review panels, and doctoral committees at six universities. Full program-committee and reviewing history in the CV.</p>
+  </section>
+
+  <section id="background">
+    <h2>Background <a class="more" href="/cv/cv_academic.pdf">CV (PDF) →</a></h2>
+    <p style="font-size:.9375rem">Ph.D. and M.S. in Computer Science, University of California, Davis; B.S., Brigham Young University. Sixteen years at Microsoft Research; five years before that as a software engineer at Motorola building embedded development tools.</p>
+  </section>
+
+  <section id="ask">
+    <h2>Ask About My Work</h2>
+    <div class="ask">
+      <p class="ask-sub">Answers are AI-generated, grounded in my CV and publication record.</p>
+      <div class="ask-log" id="ask-log"></div>
+      <form id="ask-form">
+        <input id="ask-input" placeholder="Ask anything — research, career, specific papers…" maxlength="500" autocomplete="off" />
+        <button type="submit">Ask</button>
+      </form>
+      <div class="chips" id="chips">
+        <button class="chip">What is his most influential work?</button>
+        <button class="chip">What has he studied about code review?</button>
+        <button class="chip">What are Test of Time awards?</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-nav">
+      <a href="#expertise">Expertise</a><a href="/publications.html">Publications</a><a href="#patents">Patents</a>
+      <a href="#honors">Honors</a><a href="#service">Service</a><a href="#background">Background</a>
+      <a href="/cv/cv_academic.pdf">CV (PDF)</a><a href="mailto:chris@cabird.com">Email</a>
+    </div>
+    <div class="foot-note">Christian Bird · Redmond, Washington</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const log=document.getElementById('ask-log'),form=document.getElementById('ask-form'),input=document.getElementById('ask-input');
+async function ask(q){
+  const t=document.createElement('div');t.className='turn';
+  t.innerHTML=`<div class="q">${esc(q)}</div><div class="a"></div>`;
+  log.appendChild(t);log.scrollTop=log.scrollHeight;
+  const a=t.querySelector('.a');
+  try{
+    const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q})});
+    if(!r.ok){const e=await r.json().catch(()=>({}));a.textContent=e.error||'The service is not available right now.';return;}
+    const reader=r.body.getReader();const dec=new TextDecoder();let buf='';
+    for(;;){
+      const {done,value}=await reader.read();if(done)break;
+      buf+=dec.decode(value,{stream:true});
+      const parts=buf.split('\n\n');buf=parts.pop();
+      for(const p of parts){
+        const line=p.split('\n').find(l=>l.startsWith('data: '));if(!line)continue;
+        try{const m=JSON.parse(line.slice(6));
+          if(m.type==='chat_chunk'){a.textContent+=m.content;log.scrollTop=log.scrollHeight;}
+          else if(m.type==='error'){a.textContent+=(a.textContent?'\n':'')+m.message;}
+        }catch(_){}
+      }
+    }
+  }catch(_){a.textContent='The service could not be reached.';}
+}
+form.addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(!q)return;input.value='';ask(q);});
+document.getElementById('chips').addEventListener('click',e=>{
+  const c=e.target.closest('.chip');if(!c)return;ask(c.textContent);
+});
+})();
+</script>
+</body>
+</html>

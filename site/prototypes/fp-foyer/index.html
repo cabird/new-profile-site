@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Christian Bird, Ph.D.</title>
+<meta name="description" content="Christian Bird, Ph.D. — Senior Principal Researcher at Microsoft Research. Empirical software engineering: source code analysis, version control history, code review, and AI-assisted development." />
+<style>
+  :root{
+    --paper:#fbfaf7; --ink:#1a1714; --soft:#4a443d; --faint:#7d7568;
+    --rule:#ddd6c9; --rule-dark:#1a1714; --oxblood:#6e2429; --gold:#8a6a2f;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17.5px;line-height:1.65;text-rendering:optimizeLegibility}
+  a{color:var(--oxblood);text-decoration:none;border-bottom:1px solid rgba(110,36,41,.28)}
+  a:hover{border-bottom-color:var(--oxblood)}
+  .wrap{max-width:41rem;margin:0 auto;padding:0 1.5rem}
+
+  /* nav — deliberately quiet */
+  nav{padding:1.4rem 0}
+  nav .inner{max-width:41rem;margin:0 auto;padding:0 1.5rem;display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;justify-content:center;
+    font-family:var(--sans);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase}
+  nav a{color:var(--faint);border-bottom:none}
+  nav a:hover{color:var(--oxblood)}
+
+  header{text-align:center;padding:3.25rem 0 2.25rem}
+  .portrait{width:104px;height:104px;border-radius:50%;object-fit:cover;filter:grayscale(100%) contrast(1.04);border:1px solid var(--rule);margin-bottom:1.4rem}
+  h1{font-size:2.625rem;font-weight:400;margin:0 0 .4rem;line-height:1.08}
+  .role{font-style:italic;color:var(--soft);font-size:1.0625rem;margin:0 0 1.4rem}
+  .marquee{font-family:var(--sans);font-size:.71875rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);
+    display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;justify-content:center}
+  .marquee a{color:inherit;border-bottom:none}
+  .marquee a:hover{color:var(--oxblood)}
+
+  .intro{padding:1.25rem 0 .5rem;border-top:2px solid var(--rule-dark)}
+  .intro p{margin:0 0 1.1rem;color:var(--soft)}
+
+  /* ── Ask box: the centerpiece ── */
+  .ask{border:1px solid var(--rule);background:#fff;margin:2.25rem 0 2.5rem;padding:1.5rem 1.75rem}
+  .ask-head{font-family:var(--sans);font-size:.6875rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 .35rem}
+  .ask-sub{font-size:.875rem;font-style:italic;color:var(--faint);margin:0 0 1rem}
+  .ask-log{max-height:22rem;overflow-y:auto;font-size:.9688rem}
+  .turn{margin-bottom:1rem}
+  .q{font-style:italic;color:var(--oxblood)}
+  .q::before{content:"Q.  ";font-style:normal;font-family:var(--mono);font-size:.75rem;color:var(--faint)}
+  .a{color:var(--soft);white-space:pre-wrap}
+  .a::before{content:"A.  ";font-family:var(--mono);font-size:.75rem;color:var(--faint)}
+  .ask form{display:flex;gap:.9rem;border-top:1px solid var(--rule);padding-top:.9rem}
+  .ask-log:empty + form{border-top:none;padding-top:0}
+  .ask input{flex:1;font-family:var(--serif);font-style:italic;font-size:1.0313rem;border:none;background:transparent;outline:none;color:var(--ink)}
+  .ask input::placeholder{color:var(--faint)}
+  .ask button{all:unset;cursor:pointer;font-family:var(--sans);font-size:.71875rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--oxblood)}
+  .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+  .chip{font-family:var(--sans);font-size:.75rem;color:var(--soft);border:1px solid var(--rule);border-radius:999px;
+    padding:.3rem .8rem;cursor:pointer;background:transparent}
+  .chip:hover{border-color:var(--oxblood);color:var(--oxblood)}
+
+  footer{border-top:2px solid var(--rule-dark);margin-top:1.5rem;padding:1.75rem 0 3.5rem;text-align:center}
+  .foot-nav{font-family:var(--sans);font-size:.78125rem;display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;justify-content:center;margin-bottom:1rem}
+  .foot-note{font-size:.8125rem;color:var(--faint)}
+  @media (max-width:560px){h1{font-size:2rem}body{font-size:16.5px}}
+  @media print{nav,.ask{display:none}body{font-size:11pt}a{color:#000;border:none}}
+</style>
+</head>
+<body>
+
+<nav><div class="inner">
+  <a href="#">Expertise</a><a href="/publications.html">Publications</a><a href="#">Patents</a>
+  <a href="#">Honors</a><a href="#">Service</a><a href="#">Background</a>
+</div></nav>
+
+<div class="wrap">
+  <header>
+    <img class="portrait" src="/images/profile_pic_medium.jpeg" alt="Christian Bird" />
+    <h1>Christian Bird, Ph.D.</h1>
+    <p class="role">Senior Principal Researcher, Microsoft Research</p>
+    <div class="marquee">
+      <a href="#">ACM Distinguished Scientist</a>
+      <a href="#">8 papers honored 10+ years later</a>
+      <a href="#">8 Distinguished &amp; Best Paper awards</a>
+      <a href="/publications.html">120+ publications</a>
+    </div>
+  </header>
+
+  <section class="intro">
+    <p>For twenty years I have studied how software is actually built. My work centers on the empirical analysis of source code, version control history, and engineering practice at scale — mining repositories, reviews, builds, and telemetry; surveying and interviewing the engineers who produce them; and building tools that product teams genuinely adopt.</p>
+    <p>I've worked on code review, branching and release strategy, build systems, developer productivity, and most recently AI-assisted software engineering — always starting from how developers really work, and always with the aim of making that work better.</p>
+  </section>
+
+  <div class="ask" id="ask">
+    <p class="ask-head">Ask about my work</p>
+    <p class="ask-sub">Answers are AI-generated, grounded in my CV and publication record.</p>
+    <div class="ask-log" id="ask-log"></div>
+    <form id="ask-form">
+      <input id="ask-input" placeholder="Ask anything — research, career, specific papers…" maxlength="500" autocomplete="off" />
+      <button type="submit">Ask</button>
+    </form>
+    <div class="chips" id="chips">
+      <button class="chip">What is his most influential work?</button>
+      <button class="chip">What has he studied about code review?</button>
+      <button class="chip">What are Test of Time awards?</button>
+      <button class="chip">What has he done on AI for software engineering?</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="foot-nav">
+      <a href="#">Expertise</a><a href="/publications.html">Publications</a><a href="#">Patents</a>
+      <a href="#">Honors</a><a href="#">Service</a><a href="#">Background</a>
+      <a href="/cv/cv_academic.pdf">CV (PDF)</a><a href="mailto:chris@cabird.com">Email</a>
+    </div>
+    <div class="foot-note">Christian Bird · Redmond, Washington</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const log=document.getElementById('ask-log'),form=document.getElementById('ask-form'),input=document.getElementById('ask-input');
+async function ask(q){
+  const t=document.createElement('div');t.className='turn';
+  t.innerHTML=`<div class="q">${esc(q)}</div><div class="a"></div>`;
+  log.appendChild(t);log.scrollTop=log.scrollHeight;
+  const a=t.querySelector('.a');
+  try{
+    const r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q})});
+    if(!r.ok){const e=await r.json().catch(()=>({}));a.textContent=e.error||'The service is not available right now.';return;}
+    const reader=r.body.getReader();const dec=new TextDecoder();let buf='';
+    for(;;){
+      const {done,value}=await reader.read();if(done)break;
+      buf+=dec.decode(value,{stream:true});
+      const parts=buf.split('\n\n');buf=parts.pop();
+      for(const p of parts){
+        const line=p.split('\n').find(l=>l.startsWith('data: '));if(!line)continue;
+        try{const m=JSON.parse(line.slice(6));
+          if(m.type==='chat_chunk'){a.textContent+=m.content;log.scrollTop=log.scrollHeight;}
+          else if(m.type==='error'){a.textContent+=(a.textContent?'\n':'')+m.message;}
+        }catch(_){}
+      }
+    }
+  }catch(_){a.textContent='The service could not be reached.';}
+}
+form.addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(!q)return;input.value='';ask(q);});
+document.getElementById('chips').addEventListener('click',e=>{
+  const c=e.target.closest('.chip');if(!c)return;ask(c.textContent);
+});
+})();
+</script>
+</body>
+</html>

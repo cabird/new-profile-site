@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Christian Bird, Ph.D.</title>
+<meta name="description" content="Christian Bird, Ph.D. — Senior Principal Researcher at Microsoft Research. Empirical software engineering, source code and version control analysis, software authorship attribution, code review, and AI-assisted development." />
+<style>
+  :root{
+    --paper:#fbfaf7;
+    --ink:#1a1714;
+    --ink-soft:#4a443d;
+    --ink-faint:#7d7568;
+    --rule:#ddd6c9;
+    --rule-strong:#1a1714;
+    --link:#6b1d1d;
+    --measure:34rem;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,"Times New Roman",serif;
+    font-size:17px;
+    line-height:1.62;
+    text-rendering:optimizeLegibility;
+  }
+  .sheet{max-width:46rem;margin:0 auto;padding:4.5rem 2rem 6rem}
+
+  /* ── Masthead ── */
+  .masthead{text-align:center;padding-bottom:2rem;border-bottom:2px solid var(--rule-strong)}
+  .portrait{
+    width:112px;height:112px;border-radius:50%;object-fit:cover;
+    filter:grayscale(100%) contrast(1.04);
+    border:1px solid var(--rule);margin-bottom:1.5rem;
+  }
+  h1{
+    font-size:2.5rem;font-weight:400;letter-spacing:.005em;
+    margin:0 0 .5rem;line-height:1.1;
+  }
+  .standfirst{
+    font-style:italic;color:var(--ink-soft);font-size:1.0625rem;margin:0 0 1.25rem;
+  }
+  .credential-line{
+    font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--ink-faint);
+    display:flex;flex-wrap:wrap;gap:.4rem 1rem;justify-content:center;
+  }
+  .credential-line span{white-space:nowrap}
+
+  /* ── Sections ── */
+  section{margin-top:3.25rem}
+  h2{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink);margin:0 0 1.5rem;padding-bottom:.6rem;
+    border-bottom:1px solid var(--rule);
+  }
+  p{margin:0 0 1.15rem;max-width:var(--measure)}
+  p:last-child{margin-bottom:0}
+  a{color:var(--link);text-decoration:none;border-bottom:1px solid rgba(107,29,29,.28)}
+  a:hover{border-bottom-color:var(--link)}
+
+  /* ── Expertise ── */
+  .expertise{margin:0;padding:0;list-style:none;columns:2;column-gap:2.75rem}
+  .expertise li{
+    break-inside:avoid;margin:0 0 .85rem;padding-left:1rem;position:relative;
+    font-size:.9375rem;line-height:1.5;color:var(--ink-soft);
+  }
+  .expertise li::before{
+    content:"";position:absolute;left:0;top:.62em;
+    width:5px;height:5px;background:var(--ink-faint);
+  }
+
+  /* ── Patents ── */
+  .patent-note{font-size:.9375rem;color:var(--ink-soft);font-style:italic;margin-bottom:1.5rem}
+  .patents{margin:0;padding:0;list-style:none;counter-reset:pat}
+  .patents li{
+    display:grid;grid-template-columns:2.25rem 1fr auto;gap:.5rem 1rem;
+    padding:.7rem 0;border-bottom:1px solid var(--rule);align-items:baseline;
+  }
+  .patents li:first-child{border-top:1px solid var(--rule)}
+  .patents li::before{
+    counter-increment:pat;content:counter(pat) ".";
+    color:var(--ink-faint);font-size:.875rem;font-variant-numeric:tabular-nums;
+  }
+  .pat-title{font-size:.9375rem;line-height:1.45}
+  .pat-no{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:.8125rem;color:var(--ink-faint);white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ── Honors ── */
+  .honors{margin:0;padding:0;list-style:none}
+  .honors li{
+    display:grid;grid-template-columns:4rem 1fr;gap:1rem;
+    padding:.65rem 0;border-bottom:1px solid var(--rule);
+  }
+  .honors li:first-child{border-top:1px solid var(--rule)}
+  .yr{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:.8125rem;color:var(--ink-faint);font-variant-numeric:tabular-nums;
+    padding-top:.15em;
+  }
+  .honor-name{font-size:.9375rem;line-height:1.45}
+  .honor-for{display:block;color:var(--ink-faint);font-style:italic;font-size:.875rem;margin-top:.15rem}
+
+  /* ── Publications ── */
+  .pubgroup{margin-bottom:2.25rem}
+  .pubgroup:last-child{margin-bottom:0}
+  h3{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:.8125rem;font-weight:600;letter-spacing:.04em;
+    margin:0 0 .75rem;color:var(--ink);
+  }
+  .pubs{margin:0;padding:0;list-style:none}
+  .pubs li{
+    font-size:.9375rem;line-height:1.5;padding:.3rem 0 .3rem 1rem;
+    border-left:2px solid var(--rule);margin-bottom:.35rem;color:var(--ink-soft);
+  }
+  .pubs cite{font-style:normal;color:var(--ink)}
+  .venue{color:var(--ink-faint);white-space:nowrap;font-size:.875rem}
+
+  /* ── Two-col facts ── */
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
+  .facts h3{margin-bottom:.9rem}
+  .fact{margin-bottom:1.1rem}
+  .fact:last-child{margin-bottom:0}
+  .fact-role{font-size:.9375rem;line-height:1.4}
+  .fact-org{display:block;color:var(--ink-faint);font-size:.875rem;font-style:italic}
+
+  /* ── Contact ── */
+  .contact{
+    display:flex;flex-wrap:wrap;gap:.5rem 2rem;
+    font-size:.9375rem;
+  }
+
+  footer{
+    margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--rule);
+    font-size:.8125rem;color:var(--ink-faint);text-align:center;
+  }
+
+  @media (max-width:640px){
+    body{font-size:16px}
+    .sheet{padding:2.5rem 1.25rem 4rem}
+    h1{font-size:1.875rem}
+    .expertise{columns:1}
+    .facts{grid-template-columns:1fr;gap:2rem}
+    .patents li{grid-template-columns:1.75rem 1fr;}
+    .pat-no{grid-column:2}
+  }
+
+  @media print{
+    :root{--paper:#fff}
+    body{font-size:10.5pt;line-height:1.45}
+    .sheet{max-width:none;padding:0}
+    .portrait{display:none}
+    a{color:#000;border:none}
+    section{margin-top:1.5rem;break-inside:avoid}
+    h2{break-after:avoid}
+    .expertise{columns:2}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="masthead">
+    <img class="portrait" src="/images/profile_pic_medium.jpeg" alt="Christian Bird" />
+    <h1>Christian Bird, Ph.D.</h1>
+    <p class="standfirst">Senior Principal Researcher, Microsoft Research</p>
+    <div class="credential-line">
+      <span>ACM Distinguished Scientist</span>
+      <span>13 U.S. Patents</span>
+      <span>120+ Publications</span>
+      <span>IEEE Senior Member</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Profile</h2>
+    <p>Christian Bird is a Senior Principal Researcher at Microsoft Research, where he has spent sixteen years studying how software is built at scale. With more than twenty-five years of combined industrial software engineering and research experience, his work centers on the empirical analysis of source code, version control history, and software development practice.</p>
+    <p>He has authored more than 120 peer-reviewed publications on software authorship and ownership attribution, code cloning and reuse, version control forensics, code review, defect and reliability measurement, and AI-assisted code generation. Eight of his papers have received test-of-time, most-influential, or impact awards from ACM and IEEE. He is a named inventor on thirteen granted U.S. patents in source code analysis and developer tooling.</p>
+    <p>He received the ACM SIGSOFT Early Career Research Award in 2017, was named an ACM Distinguished Scientist in 2024, and is a Senior Member of the IEEE. Before his research career he spent five years as a software engineer at Motorola building embedded development tools. He holds a Ph.D. and M.S. in Computer Science from the University of California, Davis, and a B.S. in Computer Science from Brigham Young University.</p>
+  </section>
+
+  <section>
+    <h2>Areas of Expertise</h2>
+    <ul class="expertise">
+      <li>Source code analysis and comparison; detection and characterization of code clones, copied code, and reused code</li>
+      <li>Software authorship, ownership, and contribution attribution derived from version control history</li>
+      <li>Version control forensics across centralized and distributed systems — Git, Subversion, CVS, Team Foundation Server</li>
+      <li>Reconstruction of development timelines from commit, branch, build, bug-tracking, and code review records</li>
+      <li>Integrity, completeness, and bias of software engineering records</li>
+      <li>Open source development practice, contributor provenance, and project governance</li>
+      <li>Code review practice and industrial software quality assurance</li>
+      <li>Software defect prediction, reliability measurement, and quality metrics at commercial scale</li>
+      <li>AI-assisted code generation, including GitHub Copilot and large language model coding tools</li>
+      <li>Machine learning applied to source code: naming, coding conventions, type inference, and program merge</li>
+      <li>Static and dynamic program analysis tooling and its adoption by professional developers</li>
+      <li>Large-scale statistical and qualitative analysis of software repositories and developer populations</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Patents</h2>
+    <p class="patent-note">Named inventor on thirteen granted U.S. patents, all assigned to Microsoft. Subject matter spans source code pattern mining, code search, concurrent edit and merge conflict detection and resolution, idiomatic code identification, and build error prediction. Listed in reverse chronological order by grant date.</p>
+    <ol class="patents">
+      <li><span class="pat-title">Automated Merge Conflict Resolution</span><span class="pat-no">12,524,647 · 2026</span></li>
+      <li><span class="pat-title">Automated Merge Conflict Resolution with Transformers</span><span class="pat-no">12,159,211 · 2024</span></li>
+      <li><span class="pat-title">Concurrent Edit Detection</span><span class="pat-no">11,822,518 · 2023</span></li>
+      <li><span class="pat-title">Natural Language Code Search</span><span class="pat-no">11,715,006 · 2023</span></li>
+      <li><span class="pat-title">Frequent Source Code Pattern Mining</span><span class="pat-no">11,662,984 · 2023</span></li>
+      <li><span class="pat-title">Detecting Misconfiguration and/or Bugs in Large Services Using Correlated Change Analysis</span><span class="pat-no">11,599,354 · 2023</span></li>
+      <li><span class="pat-title">Concurrent Edit Detection</span><span class="pat-no">11,550,758 · 2023</span></li>
+      <li><span class="pat-title">Frequent Source Code Pattern Mining</span><span class="pat-no">11,392,354 · 2022</span></li>
+      <li><span class="pat-title">Techniques to Identify Idiomatic Code in a Code Base</span><span class="pat-no">10,042,740 · 2018</span></li>
+      <li><span class="pat-title">Predicting Software Build Errors</span><span class="pat-no">9,542,176 · 2017</span></li>
+      <li><span class="pat-title">Analyzing Power Consumption in Mobile Computing Devices</span><span class="pat-no">9,400,541 · 2016</span></li>
+      <li><span class="pat-title">Analyzing Power Consumption in Mobile Computing Devices</span><span class="pat-no">8,965,718 · 2015</span></li>
+      <li><span class="pat-title">Software Development Automated Analytics</span><span class="pat-no">8,745,572 · 2014</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Selected Publications by Subject</h2>
+
+    <div class="pubgroup">
+      <h3>Authorship, Ownership, and Contribution Attribution</h3>
+      <ul class="pubs">
+        <li><cite>Don't Touch My Code! Examining the Effects of Ownership on Software Quality</cite> — <span class="venue">FSE 2011</span></li>
+        <li><cite>Latent Social Structure in Open Source Projects</cite> — <span class="venue">FSE 2008</span></li>
+        <li><cite>Detecting Patch Submission and Acceptance in OSS Projects</cite> — <span class="venue">MSR 2007</span></li>
+        <li><cite>Validity of Network Analyses in Open Source Projects</cite> — <span class="venue">MSR 2010</span></li>
+      </ul>
+    </div>
+
+    <div class="pubgroup">
+      <h3>Version Control Forensics and Repository Evidence</h3>
+      <ul class="pubs">
+        <li><cite>The Promises and Perils of Mining Git</cite> — <span class="venue">MSR 2009</span></li>
+        <li><cite>Transition from Centralized to Decentralized Version Control Systems</cite> — <span class="venue">ICSE 2014</span></li>
+        <li><cite>Assessing the Value of Branches with What-if Analysis</cite> — <span class="venue">FSE 2012</span></li>
+        <li><cite>Linkster: Enabling Efficient Manual Mining</cite> — <span class="venue">FSE 2010</span></li>
+      </ul>
+    </div>
+
+    <div class="pubgroup">
+      <h3>Code Cloning, Reuse, and Change Similarity</h3>
+      <ul class="pubs">
+        <li><cite>Clones: What <em>is</em> that Smell?</cite> — <span class="venue">ESE 2012</span></li>
+        <li><cite>The Uniqueness of Changes: Characteristics and Applications</cite> — <span class="venue">MSR 2015</span></li>
+        <li><cite>Mining Semantic Loop Idioms from Big Code</cite> — <span class="venue">TSE 2018</span></li>
+      </ul>
+    </div>
+
+    <div class="pubgroup">
+      <h3>Integrity and Completeness of Software Records</h3>
+      <ul class="pubs">
+        <li><cite>Fair and Balanced? Bias in Bug-Fix Datasets</cite> — <span class="venue">FSE 2009</span></li>
+        <li><cite>The Missing Links: Bugs and Bug-fix Commits</cite> — <span class="venue">FSE 2010</span></li>
+        <li><cite>Belief and Evidence in Empirical Software Engineering</cite> — <span class="venue">ICSE 2016</span></li>
+      </ul>
+    </div>
+
+    <div class="pubgroup">
+      <h3>AI-Assisted Code Generation and Machine Learning for Code</h3>
+      <ul class="pubs">
+        <li><cite>Taking Flight with Copilot</cite> — <span class="venue">CACM 2023</span></li>
+        <li><cite>Program Merge: What's Deep Learning Got to Do with It?</cite> — <span class="venue">CACM 2025</span></li>
+        <li><cite>Software Engineering for Machine Learning: A Case Study</cite> — <span class="venue">ICSE 2019</span></li>
+        <li><cite>Learning Natural Coding Conventions</cite> — <span class="venue">FSE 2014</span></li>
+      </ul>
+    </div>
+
+    <p style="margin-top:1.75rem"><a href="/publications.html">Complete list of publications →</a></p>
+  </section>
+
+  <section>
+    <h2>Honors and Recognition</h2>
+    <ul class="honors">
+      <li><span class="yr">2024</span><span class="honor-name">Distinguished Scientist, Association for Computing Machinery</span></li>
+      <li><span class="yr">2025</span><span class="honor-name">ACM SIGSOFT Impact Paper Award<span class="honor-for">Expectations, Outcomes, and Challenges of Modern Code Review</span></span></li>
+      <li><span class="yr">2021</span><span class="honor-name">Test of Time Award, ESEC/FSE<span class="honor-for">Don't Touch My Code! Examining the Effects of Ownership on Software Quality</span></span></li>
+      <li><span class="yr">2019</span><span class="honor-name">Test of Time Award, ESEC/FSE<span class="honor-for">Fair and Balanced? Bias in Bug-Fix Datasets</span></span></li>
+      <li><span class="yr">2019</span><span class="honor-name">Most Influential Paper Award, MSR<span class="honor-for">The Promises and Perils of Mining Git</span></span></li>
+      <li><span class="yr">2018</span><span class="honor-name">Test of Time Award, ESEC/FSE<span class="honor-for">Latent Social Structure in Open Source Projects</span></span></li>
+      <li><span class="yr">2017</span><span class="honor-name">ACM SIGSOFT Early Career Research Award</span></li>
+      <li><span class="yr">2016</span><span class="honor-name">Most Influential Paper Award, MSR<span class="honor-for">Mining Email Social Networks</span></span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Background</h2>
+    <div class="facts">
+      <div>
+        <h3>Education</h3>
+        <div class="fact"><span class="fact-role">Ph.D., Computer Science, 2010<span class="fact-org">University of California, Davis</span></span></div>
+        <div class="fact"><span class="fact-role">M.S., Computer Science, 2008<span class="fact-org">University of California, Davis</span></span></div>
+        <div class="fact"><span class="fact-role">B.S., Computer Science, 2003<span class="fact-org">Brigham Young University</span></span></div>
+      </div>
+      <div>
+        <h3>Experience</h3>
+        <div class="fact"><span class="fact-role">Senior Principal Researcher, 2022–present<span class="fact-org">Microsoft Research</span></span></div>
+        <div class="fact"><span class="fact-role">Principal Researcher, 2017–2022<span class="fact-org">Microsoft Research</span></span></div>
+        <div class="fact"><span class="fact-role">Software Engineer, 2000–2005<span class="fact-org">Motorola, Embedded Software Tools</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <div class="contact">
+      <a href="mailto:chris@cabird.com">chris@cabird.com</a>
+      <a href="/cv/cv_academic.pdf">Curriculum Vitae (PDF)</a>
+      <a href="https://scholar.google.com/citations?user=aDVlS-wAAAAJ">Google Scholar</a>
+      <a href="https://www.linkedin.com/in/christian-bird-1896494/">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>Christian Bird · Redmond, Washington</footer>
+
+</div>
+</body>
+</html>
