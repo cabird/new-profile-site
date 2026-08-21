@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expertise – Christian Bird</title>
+<meta name="description" content="Christian Bird: empirical software engineering researcher at Microsoft Research. ACM Distinguished Scientist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340..600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=6.4">
+
+<!-- Pinned CDN dependencies (see IN_BROWSER_REACT_GUIDE) -->
+<script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.26.10/babel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
+
+</head>
+<body>
+<div id="root"></div>
+
+<script>window.V6 = {};</script>
+
+<script type="text/babel" src="components/shared.jsx?v=6.4"></script>
+<script type="text/babel" src="components/Expertise.jsx?v=6.4"></script>
+
+<script type="text/babel">
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.Fragment><V6.Expertise /><V6.ChatFab /></React.Fragment>
+  );
+</script>
+</body>
+</html>
