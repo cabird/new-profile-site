@@ -42,7 +42,14 @@ V6.About = function About() {
 
       <section id="service">
         <h2>Service</h2>
-        <p>Program co-chair, IEEE/ACM International Conference on Automated Software Engineering (2023). Advisory board, <a href="https://halab.nd.edu/">Human-centered Analytics Lab</a>, Mendoza College of Business, University of Notre Dame. Editor of five journal and magazine special issues, including two IEEE Software issues on release engineering. Review panelist for the National Science Foundation and NSERC. Doctoral committees at Notre Dame, Waterloo, George Mason, Wichita State, and Victoria. Program committees and reviewing: see the <a href="/cv/cv_academic.pdf">CV</a>.</p>
+        <ul className="exp">
+          <li>Program co-chair, IEEE/ACM International Conference on Automated Software Engineering (2023)</li>
+          <li>Advisory board, <a href="https://halab.nd.edu/">Human-centered Analytics Lab</a>, Mendoza College of Business, University of Notre Dame</li>
+          <li>Editor of five journal and magazine special issues, including two IEEE Software issues on release engineering</li>
+          <li>Review panelist for the National Science Foundation and NSERC</li>
+          <li>Doctoral committees at Notre Dame, Waterloo, George Mason, Wichita State, and Victoria</li>
+          <li>Program committees and reviewing: see the <a href="/cv/cv_academic.pdf">CV</a></li>
+        </ul>
       </section>
 
       <Footer />

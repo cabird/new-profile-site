@@ -26,6 +26,7 @@ V6.TopNav = function TopNav({ here }) {
     ['Expertise', 'expertise.html', 'expertise'],
     ['Publications', 'publications.html', 'pubs'],
     ['Recognition', 'recognition.html', 'recognition'],
+    ['Patents', 'patents.html', 'patents'],
     ['About', 'about.html', 'about'],
   ];
   return (

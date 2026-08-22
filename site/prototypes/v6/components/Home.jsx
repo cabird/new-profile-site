@@ -73,7 +73,8 @@ V6.Home = function Home() {
         </p>
         <p className="vitals">
           119 peer-reviewed publications &middot; 13 U.S. patents &middot;
-          16 years at Microsoft Research &middot; Redmond, WA
+          8 Distinguished or Best Papers &middot; 8 papers honored a decade later &middot;
+          Redmond, WA
         </p>
       </header>
 

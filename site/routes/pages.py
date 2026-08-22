@@ -12,7 +12,7 @@ bp = Blueprint('pages', __name__)
 # Which frontend the server-rendered paper pages pull their assets from.
 # When a prototype is promoted to the site root, change this to '/'.
 PAPER_PAGE_ASSET_BASE = '/prototypes/v6/'
-PAPER_PAGE_ASSET_VERSION = '6.4'
+PAPER_PAGE_ASSET_VERSION = '6.5'
 
 
 @bp.route('/papers/<slug>')
