@@ -5,6 +5,8 @@ const { PubRow, SearchIconSmall, parseTags, logEvent } = IDE;
 IDE.PublicationsView = function PublicationsView({ papers, onOpenPaper, hoveredLine, setHoveredLine }) {
   const [search, setSearch] = useState('');
   const [activeTag, setActiveTag] = useState(null);
+  const [awardsOnly, setAwardsOnly] = useState(false);
+  const awardCount = useMemo(() => papers.filter(p => Array.isArray(p.awards) && p.awards.length > 0).length, [papers]);
 
   const [showAllTags, setShowAllTags] = useState(false);
 
@@ -18,6 +20,9 @@ IDE.PublicationsView = function PublicationsView({ papers, onOpenPaper, hoveredL
 
   const filtered = useMemo(() => {
     let list = papers;
+    if (awardsOnly) {
+      list = list.filter(p => Array.isArray(p.awards) && p.awards.length > 0);
+    }
     if (activeTag) {
       list = list.filter(p => parseTags(p.tags).includes(activeTag));
     }
@@ -32,7 +37,7 @@ IDE.PublicationsView = function PublicationsView({ papers, onOpenPaper, hoveredL
       });
     }
     return list;
-  }, [papers, search, activeTag]);
+  }, [papers, search, activeTag, awardsOnly]);
 
   // Expose filtered count via a ref on the DOM for the status bar to read
   useEffect(() => {
@@ -65,6 +70,15 @@ IDE.PublicationsView = function PublicationsView({ papers, onOpenPaper, hoveredL
             >
               all
             </button>
+            {awardCount > 0 && (
+              <button
+                className={`tag-btn tag-btn-award ${awardsOnly ? 'active' : ''}`}
+                title="Only papers that received an award"
+                onClick={() => { setAwardsOnly(v => !v); logEvent('filter', awardsOnly ? 'Award filter cleared' : 'Filter: award-winning papers'); }}
+              >
+                <IDE.Codicon name="star-full" size={10} /> award-winning ({awardCount})
+              </button>
+            )}
             {visibleTags.map(t => (
               <button
                 key={t}

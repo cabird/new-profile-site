@@ -273,6 +273,7 @@ IDE.App = function App() {
     let title = base;
     if (!activeEditorTab || activeEditorTab === 'home') title = base;
     else if (activeEditorTab === 'publications') title = `Publications — ${base}`;
+    else if (activeEditorTab === 'honors') title = `Honors — ${base}`;
     else if (activeEditorTab === 'cv') title = `CV — ${base}`;
     else if (activeEditorTab === 'posts') title = `Posts — ${base}`;
     else if (activeEditorTab === 'profile') title = `Profile — ${base}`;
@@ -395,6 +396,7 @@ IDE.App = function App() {
     const staticInfo = {
       home: { label: 'home.md', icon: <TabFileIcon color="#3794ff" /> },
       publications: { label: 'publications.md', icon: <TabFileIcon color="#3794ff" /> },
+      honors: { label: 'honors.md', icon: <TabFileIcon color="#3794ff" /> },
       cv: { label: 'cv.md', icon: <TabFileIcon color="#3794ff" /> },
       posts: { label: 'posts.md', icon: <TabFileIcon color="#3794ff" /> },
       profile: { label: 'profile.jpg', icon: <IDE.Codicon name="file-media" size={14} color="#a074c4" /> },
@@ -463,6 +465,7 @@ IDE.App = function App() {
     const staticBreadcrumb = {
       profile: 'profile.jpg',
       publications: 'publications.md',
+      honors: 'honors.md',
       cv: 'cv.md',
       posts: 'posts.md',
     };
@@ -590,6 +593,7 @@ IDE.App = function App() {
             setActiveLine={setHomeActiveLine}
             setClickedLine={setHomeClickedLine}
             onNavigatePublications={() => openTab('publications')}
+            onNavigateHonors={() => openTab('honors')}
             onSelectPaper={openPaperTab}
             onSelectTag={openTagTab}
           />
@@ -614,6 +618,11 @@ IDE.App = function App() {
             hoveredLine={pubHoveredLine}
             setHoveredLine={setPubHoveredLine}
           />
+        )}
+
+        {/* Honors View */}
+        {activeEditorTab === 'honors' && IDE.HonorsView && (
+          <IDE.HonorsView siteData={siteData} papersById={papersById} onSelectPaper={openPaperTab} />
         )}
 
         {/* CV View */}

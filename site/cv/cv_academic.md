@@ -22,10 +22,13 @@ Advisor: Premkumar Devanbu
 
 ## Honors and Awards
 
-**Distinguished Scientist** — Association for Computing Machinery (ACM), 2024
+**Distinguished Scientist** — Association for Computing Machinery (ACM), 2020
 
 **ACM SIGSOFT Distinguished Paper Award** — International Conference on Software Engineering, 2026
 "Maybe We Need Some More Examples: Individual and Team Drivers of Developer GenAI Tool Use"
+
+**Distinguished Paper Award, Industry Track** — International Conference on Software Maintenance and Evolution, 2026
+"To Copilot and Beyond: 22 AI Systems Developers Want Built"
 
 **ACM SIGSOFT Impact Paper Award (11+ years)** — Awarded at ICSE 2025, 2025
 "Expectations, Outcomes, and Challenges of Modern Code Review"
@@ -132,6 +135,8 @@ Additional U.S. patent application pending (filed 2025; not yet published).
 ## Academic Service
 
 **Funding Review Panels** — Review panelist, National Science Foundation (NSF), software engineering programs (multiple panels); review panelist, Natural Sciences and Engineering Research Council of Canada (NSERC) (multiple panels)
+
+**Advisory Boards** — Advisory Board Member, Human-centered Analytics Lab (HAL), Mendoza College of Business, University of Notre Dame, 2026 - 2029
 
 See the full CV PDF for program committees, editorial boards, and reviewing.
 

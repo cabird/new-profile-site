@@ -6,6 +6,12 @@ IDE.TitleBar = function TitleBar({ name, activeTab, onCommandPalette, papersById
     fileLabel = 'profile.jpg';
   } else if (activeTab === 'publications') {
     fileLabel = 'publications.md';
+  } else if (activeTab === 'honors') {
+    fileLabel = 'honors.md';
+  } else if (activeTab === 'cv') {
+    fileLabel = 'cv.md';
+  } else if (activeTab === 'posts') {
+    fileLabel = 'posts.md';
   } else if (activeTab && activeTab.startsWith('tag:')) {
     fileLabel = activeTab.slice(4) + '.md';
   } else if (activeTab && activeTab.startsWith('paper:')) {

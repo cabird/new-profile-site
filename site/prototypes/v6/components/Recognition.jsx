@@ -2,7 +2,7 @@
 const { TopNav, Footer } = V6;
 
 const CAREER = [
-  ['2024', <span><b>Distinguished Scientist</b>, Association for Computing Machinery</span>],
+  ['2020', <span><b>Distinguished Scientist</b>, Association for Computing Machinery</span>],
   ['2017', <span><b>ACM SIGSOFT Early Career Research Award</b></span>],
   ['2009–25', <span>Work featured three times in <i>Communications of the ACM</i>, the flagship magazine of computing: the Windows Vista distributed-development study, selected as a Research Highlight and paired with a Technical Perspective (2009); an invited article, <i>Taking Flight with Copilot</i> (2023); and an interview on deep learning for program merge (2025)</span>],
 ];

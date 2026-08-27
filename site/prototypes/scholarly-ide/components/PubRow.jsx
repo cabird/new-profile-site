@@ -25,6 +25,13 @@ IDE.PubRow = function PubRow({ paper, lineNum, onClick, isHovered, onHover }) {
         <span className="pub-year">{paper.year || '\u2014'}</span>
         <div className="pub-title-col">
           <div className="pub-title">{paper.title}</div>
+          {Array.isArray(paper.awards) && paper.awards.length > 0 && (
+            <div className="pub-awards">
+              {paper.awards.map((a, i) => (
+                <span key={i} className="pub-award"><IDE.Codicon name="star-full" size={11} /> {a}</span>
+              ))}
+            </div>
+          )}
           {(paper.venue || paper.journal) && (
             <div className="pub-venue">{paper.venue || paper.journal}</div>
           )}

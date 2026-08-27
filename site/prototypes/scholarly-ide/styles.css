@@ -39,6 +39,7 @@
   --keyword:       #c586c0;
   --number:        #b5cea8;
   --comment:       #6a9955;
+  --award:         #e5c07b;
   --function:      #dcdcaa;
   --tag-color:     #4ec9b0;
   --error:         #f85149;
@@ -85,6 +86,7 @@
   --keyword: #af00db;
   --number: #098658;
   --comment: #008000;
+  --award: #9a6700;
   --function: #795e26;
   --tag-color: #267f99;
   --error: #d32f2f;
@@ -2634,3 +2636,91 @@ body.mobile-active {
   /* Mobile shell takes over completely — desktop chrome is never rendered */
   .vscode-shell { display: none; }
 }
+
+/* ---------- Honors and awards ---------- */
+.pub-awards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin: 2px 0 3px;
+}
+
+.pub-award {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--ui-font);
+  font-size: 11px;
+  color: var(--award);
+  white-space: nowrap;
+}
+
+.paper-header-awards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: -4px 0 10px;
+}
+
+.paper-header-awards .pub-award { font-size: 12px; }
+
+.tag-btn-award { color: var(--award); border-color: var(--award); }
+.tag-btn-award.active { background: var(--award); color: var(--editor-bg); border-color: var(--award); }
+.tag-btn-award .codicon { margin-right: 3px; }
+
+.honor-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 4px 0 4px 8px;
+  margin-left: 8px;
+  border-left: 1px solid var(--border);
+  transition: background 0.1s;
+}
+
+.honor-row.clickable { cursor: pointer; }
+.honor-row.clickable:hover { background: var(--hover-bg); }
+
+.honor-year {
+  font-size: 13px;
+  color: var(--number);
+  flex-shrink: 0;
+  min-width: 56px;
+  font-variant-numeric: tabular-nums;
+}
+
+.honor-main { flex: 1 1 0; min-width: 200px; font-family: var(--editor-font); font-size: 0.9rem; }
+
+.honor-title { color: var(--text); }
+
+.honor-org { color: var(--comment); font-size: 0.85em; }
+
+.honor-note, .honor-paper { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+.honor-paper-title { color: var(--string); }
+
+.honor-paper-year { color: var(--number); }
+
+.honor-row.clickable:hover .honor-paper-title { text-decoration: underline; }
+
+.honor-count {
+  margin-left: 10px;
+  font-size: 0.7rem;
+  color: var(--comment);
+  font-weight: normal;
+}
+
+.honor-group-desc {
+  font-family: var(--editor-font);
+  font-size: 12px;
+  color: var(--comment);
+  margin: 0 0 6px 16px;
+}
+
+.honor-teaser .pub-teaser-title { flex: 1 1 0; }
+
+.mob-award { font-size: 12px; color: #9a6700; margin: 2px 0; }
+
+.mob-honor-group h2 { font-size: 1.05rem; margin: 22px 0 6px; }
+
+.mob-list-static { cursor: default; }

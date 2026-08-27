@@ -73,7 +73,7 @@ IDE.TerminalPanel = function TerminalPanel({ papers, onClose, visible }) {
   const [cmdHistoryIdx, setCmdHistoryIdx] = useState(-1);
   const [cwd, setCwd] = useState('/home/cbird');
   const [dirListing, setDirListing] = useState([
-    'papers/', 'cv.pdf', 'about.txt', 'README.md', '.bashrc', '.env', '.gitconfig',
+    'papers/', 'patents/', 'honors.md', 'cv.pdf', 'about.txt', 'README.md', '.bashrc', '.env', '.gitconfig',
     '.ssh/', '.git/', '.research_notes/', 'todo.txt', 'scripts/', 'data/', 'drafts/', 'playlists/'
   ]);
   const inputRef = useRef(null);

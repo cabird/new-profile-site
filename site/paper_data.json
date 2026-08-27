@@ -2646,7 +2646,10 @@
       "doi": "10.1109/MS.2018.290110547",
       "url": "https://doi.org/10.1109/MS.2018.290110547",
       "raw_bibtex": "@article{DBLP:journals/software/Pe-ThanNFBSH19,\n  author       = {Ei Pa Pa Pe{-}Than and\n                  Alexander Nolte and\n                  Anna Filippova and\n                  Christian Bird and\n                  Steve Scallen and\n                  James D. Herbsleb},\n  title        = {Designing Corporate Hackathons With a Purpose: The Future of Software\n                  Development},\n  journal      = {{IEEE} Softw.},\n  volume       = {36},\n  number       = {1},\n  pages        = {15--22},\n  year         = {2019},\n  url          = {https://doi.org/10.1109/MS.2018.290110547},\n  doi          = {10.1109/MS.2018.290110547},\n  timestamp    = {Sun, 19 Jan 2025 00:00:00 +0100},\n  biburl       = {https://dblp.org/rec/journals/software/Pe-ThanNFBSH19.bib},\n  bibsource    = {dblp computer science bibliography, https://dblp.org}\n}",
-      "priority": 50
+      "priority": 50,
+      "awards": [
+        "First Runner Up, IEEE Software Best Paper Award"
+      ]
     },
     "DBLP:journals/tse/KalliamvakouBZB19": {
       "status": "MAPPED",
@@ -5570,7 +5573,7 @@
       "url": "https://doi.org/10.1109/ICSE.2009.5070550",
       "raw_bibtex": "@inproceedings{DBLP:conf/icse/BirdNDGM09,\n  author       = {Christian Bird and\n                  Nachiappan Nagappan and\n                  Premkumar T. Devanbu and\n                  Harald C. Gall and\n                  Brendan Murphy},\n  title        = {Does distributed development affect software quality? An empirical\n                  case study of Windows Vista},\n  booktitle    = {31st International Conference on Software Engineering, {ICSE} 2009,\n                  May 16-24, 2009, Vancouver, Canada, Proceedings},\n  pages        = {518--528},\n  publisher    = {{IEEE}},\n  year         = {2009},\n  url          = {https://doi.org/10.1109/ICSE.2009.5070550},\n  doi          = {10.1109/ICSE.2009.5070550},\n  timestamp    = {Thu, 23 Mar 2023 00:00:00 +0100},\n  biburl       = {https://dblp.org/rec/conf/icse/BirdNDGM09.bib},\n  bibsource    = {dblp computer science bibliography, https://dblp.org}\n}",
       "awards": [
-        "ACM Distinguished Paper"
+        "ACM SIGSOFT Distinguished Paper"
       ],
       "priority": 50
     },
@@ -5810,7 +5813,10 @@
       "url": "https://doi.org/10.1145/1453101.1453107",
       "editor": "Mary Jean Harrold and Gail C. Murphy",
       "raw_bibtex": "@inproceedings{DBLP:conf/sigsoft/BirdPDFD08,\n  author       = {Christian Bird and\n                  David S. Pattison and\n                  Raissa M. D'Souza and\n                  Vladimir Filkov and\n                  Premkumar T. Devanbu},\n  editor       = {Mary Jean Harrold and\n                  Gail C. Murphy},\n  title        = {Latent social structure in open source projects},\n  booktitle    = {Proceedings of the 16th {ACM} {SIGSOFT} International Symposium on\n                  Foundations of Software Engineering, 2008, Atlanta, Georgia, USA,\n                  November 9-14, 2008},\n  pages        = {24--35},\n  publisher    = {{ACM}},\n  year         = {2008},\n  url          = {https://doi.org/10.1145/1453101.1453107},\n  doi          = {10.1145/1453101.1453107},\n  timestamp    = {Tue, 01 Feb 2022 10:45:16 +0100},\n  biburl       = {https://dblp.org/rec/conf/sigsoft/BirdPDFD08.bib},\n  bibsource    = {dblp computer science bibliography, https://dblp.org}\n}",
-      "priority": 50
+      "priority": 50,
+      "awards": [
+        "Test of Time Award (10 years)"
+      ]
     },
     "DBLP:conf/apvis/OgawaMBDG07": {
       "status": "MAPPED",
@@ -6048,7 +6054,7 @@
     "Miller2026MaybeWe": {
       "status": "MAPPED",
       "type": "inproceedings",
-      "title": "``Maybe We Need Some More Examples:'' Individual and Team Drivers of Developer GenAI Tool Use",
+      "title": "“Maybe We Need Some More Examples:” Individual and Team Drivers of Developer GenAI Tool Use",
       "authors": "Courtney Miller and Rudrajit Choudhuri and Mara Ulloa and Sankeerti Haniyur and Robert DeLine and Margaret-Anne Storey and Emerson Murphy-Hill and Christian Bird and Jenna L. Butler",
       "year": "2026",
       "venue": "International Conference on Software Engineering",
@@ -6243,7 +6249,7 @@
       "booktitle": "Proceedings of the International Conference on Software Maintenance and Evolution, Industry Track",
       "publisher": "IEEE",
       "awards": [
-        "Distinguished Paper Award, Industry Track"
+        "Distinguished Paper Award, ICSME Industry Track"
       ]
     }
   }

@@ -134,6 +134,13 @@ IDE.PaperView = function PaperView({ paper, markdown, loadState, onRetry, onChat
           {paper && (
             <div className="paper-header">
               <h1 className="paper-header-title">{paper.title}</h1>
+              {Array.isArray(paper.awards) && paper.awards.length > 0 && (
+                <div className="paper-header-awards">
+                  {paper.awards.map((a, i) => (
+                    <span key={i} className="pub-award"><Codicon name="star-full" size={12} /> {a}</span>
+                  ))}
+                </div>
+              )}
               {paper.subtitle && (
                 <div className="paper-header-subtitle">{paper.subtitle}</div>
               )}

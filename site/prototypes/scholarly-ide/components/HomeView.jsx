@@ -17,21 +17,21 @@ IDE.ContentLine = function ContentLine({ num, active, onHover, onClick, children
 };
 
 /* ─── Metrics Row ─── */
-IDE.Metrics = function Metrics({ paperCount, areaCount, yearsActive }) {
+IDE.Metrics = function Metrics({ paperCount, patentCount, awardCount, yearsActive }) {
+  const items = [
+    [paperCount, 'publications'],
+    [patentCount, 'U.S. patents'],
+    [awardCount, 'paper awards'],
+    [yearsActive, 'years active'],
+  ].filter(([v]) => v > 0);
   return (
     <div className="metrics-row">
-      <div className="metric">
-        <div className="metric-value">{paperCount}</div>
-        <div className="metric-label">// publications</div>
-      </div>
-      <div className="metric">
-        <div className="metric-value">{areaCount}</div>
-        <div className="metric-label">// research areas</div>
-      </div>
-      <div className="metric">
-        <div className="metric-value">{yearsActive}</div>
-        <div className="metric-label">// years active</div>
-      </div>
+      {items.map(([value, label]) => (
+        <div className="metric" key={label}>
+          <div className="metric-value">{value}</div>
+          <div className="metric-label">// {label}</div>
+        </div>
+      ))}
     </div>
   );
 };
@@ -67,12 +67,21 @@ IDE.ResearchAreas = function ResearchAreas({ areas, onSelectTag }) {
 };
 
 /* ─── Home View ─── */
-IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, setActiveLine, setClickedLine, onNavigatePublications, onSelectPaper, onSelectTag }) {
+IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, setActiveLine, setClickedLine, onNavigatePublications, onNavigateHonors, onSelectPaper, onSelectTag }) {
   const { ContentLine, Metrics, ResearchAreas } = IDE;
   const paperCount = papers.length;
-  const areaCount = siteData?.research_areas?.length || 0;
+  const patentCount = siteData?.patents?.length || 0;
+  const awardCount = papers.reduce((n, p) => n + (Array.isArray(p.awards) ? p.awards.length : 0), 0);
   const years = papers.map(p => p.year).filter(Boolean);
   const yearsActive = years.length > 0 ? (Math.max(...years) - Math.min(...years)) : 0;
+  const honors = IDE.honorStats ? IDE.honorStats(siteData) : null;
+  const honorTeaser = honors ? [
+    ...honors.career.map(i => ({ year: i.year, text: i.title, sub: i.org })),
+    honors.impact.length ? { year: honors.impactSpan, text: `${honors.impact.length} test-of-time, most-influential, and impact paper awards`, sub: 'ESEC/FSE, MSR, ISSRE, ACM SIGSOFT' } : null,
+    honors.best.length ? { year: honors.bestSpan, text: `${honors.best.length} distinguished and best paper awards`, sub: 'ICSE, FSE, ISSTA, MSR, ICSME, IEEE Software' } : null,
+  ].filter(Boolean) : [];
+  const subtitle = [siteData?.distinction?.label, [siteData?.title, siteData?.affiliation].filter(Boolean).join(', ')]
+    .filter(Boolean).join(' \u00b7 ');
   const featured = papers.slice(0, 10);
 
   const currentLine = clickedLine || activeLine;
@@ -92,12 +101,15 @@ IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, se
           </div>
         </ContentLine>
         <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
-          <div className="md-subtitle">
-            {siteData.title} · {siteData.affiliation}
+          <div className="md-subtitle" title={siteData.distinction?.detail || ''}>
+            {subtitle}
           </div>
         </ContentLine>
         <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
           <span>&nbsp;</span>
+        </ContentLine>
+        <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+          <Metrics paperCount={paperCount} patentCount={patentCount} awardCount={awardCount} yearsActive={yearsActive} />
         </ContentLine>
         {(siteData.about || siteData.bio || '').split('\n\n').map((para, pi) => (
           <React.Fragment key={pi}>
@@ -114,6 +126,32 @@ IDE.HomeView = function HomeView({ siteData, papers, activeLine, clickedLine, se
         <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
           <span>&nbsp;</span>
         </ContentLine>
+
+        {honorTeaser.length > 0 && (
+          <>
+            <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+              <div className="md-h2" style={{margin: 0, marginBottom: 12}}>
+                <span className="hash">##</span> Honors
+              </div>
+            </ContentLine>
+            {honorTeaser.map((t, i) => (
+              <ContentLine key={i} num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+                <div className="pub-teaser-item honor-teaser" style={{marginLeft: 0, cursor: 'pointer'}} onClick={(e) => { e.stopPropagation(); if (onNavigateHonors) onNavigateHonors(); }}>
+                  <span className="pub-teaser-year">{t.year}</span>
+                  <span className="pub-teaser-title">{t.text}{t.sub ? <span className="honor-org"> {'\u00b7'} {t.sub}</span> : null}</span>
+                </div>
+              </ContentLine>
+            ))}
+            <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+              <div className="pub-teaser-more">
+                <span style={{cursor: 'pointer', color: 'var(--vscode-link)'}} onClick={(e) => { e.stopPropagation(); if (onNavigateHonors) onNavigateHonors(); }}>{'\u2192'} all honors and awards</span>
+              </div>
+            </ContentLine>
+            <ContentLine num={nextLine()} active={currentLine === lineNum} onHover={setActiveLine} onClick={setClickedLine}>
+              <span>&nbsp;</span>
+            </ContentLine>
+          </>
+        )}
 
         {siteData.research_areas?.length > 0 && (
           <>

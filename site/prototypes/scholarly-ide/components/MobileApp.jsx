@@ -26,6 +26,7 @@ IDE.MobileHeader = function MobileHeader({ navigateTo, currentTab }) {
     { tab: 'home', label: 'Home' },
     { tab: 'posts', label: 'Posts' },
     { tab: 'publications', label: 'Publications' },
+    { tab: 'honors', label: 'Honors' },
     { tab: 'cv', label: 'CV' },
   ];
   const isActive = (tab) => {
@@ -64,8 +65,46 @@ IDE.MobileHome = function MobileHome({ siteData }) {
   return (
     <article className="mob-article">
       <h1>{siteData.name}</h1>
-      <div className="mob-subtitle">{siteData.title} · {siteData.affiliation}</div>
+      <div className="mob-subtitle">{[siteData.distinction?.label, [siteData.title, siteData.affiliation].filter(Boolean).join(', ')].filter(Boolean).join(' \u00b7 ')}</div>
       {aboutParagraphs.map((p, i) => <p key={i}>{p}</p>)}
+    </article>
+  );
+};
+
+/* ─── Mobile Honors ─── */
+IDE.MobileHonors = function MobileHonors({ siteData, papersById, navigateToPaper }) {
+  if (!siteData) return <div className="mob-loading">Loading…</div>;
+  const groups = siteData.honors || [];
+  return (
+    <article className="mob-article">
+      <h1>Honors and Recognition</h1>
+      {siteData.distinction && <div className="mob-subtitle">{siteData.distinction.label} ({siteData.distinction.year})</div>}
+      {groups.map(g => (
+        <section key={g.key || g.group} className="mob-honor-group">
+          <h2>{g.group}</h2>
+          {g.desc && <p className="mob-list-meta">{g.desc}</p>}
+          <ul className="mob-list">
+            {(g.items || []).map((item, i) => {
+              const paper = item.paper_id ? papersById?.[item.paper_id] : null;
+              const body = (
+                <>
+                  <div className="mob-list-meta-year">{item.year}</div>
+                  <div className="mob-list-title">{item.title}</div>
+                  {item.org && <div className="mob-list-subtitle">{item.org}</div>}
+                  {paper && <div className="mob-list-meta">for “{paper.title}”</div>}
+                </>
+              );
+              return (
+                <li key={i} className="mob-list-item">
+                  {paper && navigateToPaper
+                    ? <button type="button" className="mob-list-hit" onClick={() => navigateToPaper(paper.id)}>{body}</button>
+                    : <div className="mob-list-hit mob-list-static">{body}</div>}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
     </article>
   );
 };
@@ -140,6 +179,9 @@ IDE.MobilePublicationsList = function MobilePublicationsList({ papers, navigateT
             <button type="button" className="mob-list-hit" onClick={() => navigateToPaper(paper.id)}>
               <div className="mob-list-meta-year">{paper.year || '—'}</div>
               <div className="mob-list-title">{paper.title}</div>
+              {Array.isArray(paper.awards) && paper.awards.length > 0 && (
+                <div className="mob-award">{'\u2605'} {paper.awards.join(' \u00b7 ')}</div>
+              )}
               {(paper.venue || paper.journal) && (
                 <div className="mob-list-subtitle">{paper.venue || paper.journal}</div>
               )}
@@ -282,6 +324,7 @@ IDE.MobileApp = function MobileApp() {
     const base = 'Christian Bird';
     let title = base;
     if (currentTab === 'publications') title = `Publications — ${base}`;
+    else if (currentTab === 'honors') title = `Honors — ${base}`;
     else if (currentTab === 'cv') title = `CV — ${base}`;
     else if (currentTab === 'posts') title = `Posts — ${base}`;
     else if (currentTab.startsWith('paper:')) {
@@ -379,6 +422,8 @@ IDE.MobileApp = function MobileApp() {
     content = <IDE.MobilePostsList posts={blogPosts} navigateToPost={navigateToPost} />;
   } else if (currentTab === 'publications') {
     content = <IDE.MobilePublicationsList papers={papers} navigateToPaper={navigateToPaper} />;
+  } else if (currentTab === 'honors') {
+    content = <IDE.MobileHonors siteData={siteData} papersById={papersById} navigateToPaper={navigateToPaper} />;
   } else if (currentTab === 'cv') {
     content = <IDE.MobileCV markdown={cvMd} loadState={cvState} />;
   } else if (currentTab.startsWith('blog:')) {

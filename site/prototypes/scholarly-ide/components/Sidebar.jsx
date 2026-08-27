@@ -42,6 +42,7 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTag
     const staticInfo = {
       home: { label: 'home.md', icon: <FileMdIcon /> },
       publications: { label: 'publications.md', icon: <FileMdIcon /> },
+      honors: { label: 'honors.md', icon: <FileMdIcon /> },
       cv: { label: 'cv.md', icon: <FileMdIcon /> },
       posts: { label: 'posts.md', icon: <FileMdIcon /> },
       profile: { label: 'profile.jpg', icon: <IDE.Codicon name="file-media" size={16} color="#a074c4" /> },
@@ -111,6 +112,10 @@ IDE.Sidebar = function Sidebar({ siteData, activeTab, onSetTab, openTabs, allTag
             <div className={`tree-item ${activeTab === 'publications' ? 'active' : ''}`} style={{cursor:'pointer'}} onClick={() => onSetTab('publications')}>
               <span className="tree-item-icon file-md"><FileMdIcon /></span>
               <span className="tree-item-label">publications.md</span>
+            </div>
+            <div className={`tree-item ${activeTab === 'honors' ? 'active' : ''}`} style={{cursor:'pointer'}} onClick={() => onSetTab('honors')}>
+              <span className="tree-item-icon file-md"><FileMdIcon /></span>
+              <span className="tree-item-label">honors.md</span>
             </div>
             <div className={`tree-item ${activeTab === 'cv' ? 'active' : ''}`} style={{cursor:'pointer'}} onClick={() => onSetTab('cv')}>
               <span className="tree-item-icon file-md"><FileMdIcon /></span>

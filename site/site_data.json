@@ -2,6 +2,187 @@
   "name": "Dr. Christian Bird",
   "title": "Senior Principal Researcher",
   "affiliation": "Microsoft Research",
+  "distinction": {
+    "label": "ACM Distinguished Scientist",
+    "year": 2020,
+    "detail": "Named an ACM Distinguished Member for Outstanding Scientific Contributions to Computing, 2020"
+  },
+  "honors": [
+    {
+      "key": "career",
+      "group": "Career recognition",
+      "items": [
+        {
+          "year": "2020",
+          "title": "ACM Distinguished Scientist",
+          "org": "Association for Computing Machinery",
+          "note": "Distinguished Member for Outstanding Scientific Contributions to Computing"
+        },
+        {
+          "year": "2017",
+          "title": "ACM SIGSOFT Early Career Research Award",
+          "org": "ACM SIGSOFT, presented at ICSE 2017"
+        }
+      ]
+    },
+    {
+      "key": "impact",
+      "group": "Lasting impact",
+      "desc": "Test-of-time, most-influential, and impact paper awards, given a decade or more after publication.",
+      "items": [
+        {
+          "year": "2025",
+          "title": "ACM SIGSOFT Impact Paper Award",
+          "org": "presented at ICSE 2025",
+          "paper_id": "DBLP:conf/icse/BacchelliB13"
+        },
+        {
+          "year": "2025",
+          "title": "Test of Time Honorable Mention",
+          "org": "ESEC/FSE",
+          "paper_id": "DBLP:conf/sigsoft/AllamanisBBS15"
+        },
+        {
+          "year": "2021",
+          "title": "Test of Time Award",
+          "org": "ESEC/FSE",
+          "paper_id": "DBLP:conf/sigsoft/BirdNMGD11"
+        },
+        {
+          "year": "2019",
+          "title": "Test of Time Award",
+          "org": "ESEC/FSE",
+          "paper_id": "DBLP:conf/sigsoft/BirdBADBFD09"
+        },
+        {
+          "year": "2019",
+          "title": "Most Influential Paper Award",
+          "org": "MSR",
+          "paper_id": "DBLP:conf/msr/BirdRBHGD09"
+        },
+        {
+          "year": "2019",
+          "title": "30-Year Highlight",
+          "org": "ISSRE, one of the 26 most influential papers in the conference's history",
+          "paper_id": "DBLP:conf/issre/BirdNGMD09"
+        },
+        {
+          "year": "2018",
+          "title": "Test of Time Award",
+          "org": "ESEC/FSE",
+          "paper_id": "DBLP:conf/sigsoft/BirdPDFD08"
+        },
+        {
+          "year": "2016",
+          "title": "Most Influential Paper Award",
+          "org": "MSR",
+          "paper_id": "DBLP:conf/msr/BirdGDGS06"
+        }
+      ]
+    },
+    {
+      "key": "best",
+      "group": "Distinguished and best papers",
+      "items": [
+        {
+          "year": "2026",
+          "title": "ACM SIGSOFT Distinguished Paper Award",
+          "org": "ICSE",
+          "paper_id": "Miller2026MaybeWe"
+        },
+        {
+          "year": "2026",
+          "title": "Distinguished Paper Award, Industry Track",
+          "org": "ICSME",
+          "paper_id": "choudhuri2025copilot-beyond"
+        },
+        {
+          "year": "2020",
+          "title": "First Runner-Up, Best Paper Award",
+          "org": "IEEE Software",
+          "paper_id": "DBLP:journals/software/Pe-ThanNFBSH19"
+        },
+        {
+          "year": "2019",
+          "title": "Best Paper Award, Software Engineering in Practice",
+          "org": "ICSE, sponsored by IEEE Software",
+          "paper_id": "DBLP:conf/icse/AmershiBBDGKNN019"
+        },
+        {
+          "year": "2014",
+          "title": "ACM SIGSOFT Distinguished Paper Award",
+          "org": "FSE",
+          "paper_id": "DBLP:conf/sigsoft/AllamanisBBS14"
+        },
+        {
+          "year": "2013",
+          "title": "ACM SIGSOFT Distinguished Paper Award and ISSTA Best Paper",
+          "org": "ISSTA",
+          "paper_id": "DBLP:conf/issta/BarrBM13"
+        },
+        {
+          "year": "2012",
+          "title": "ACM SIGSOFT Distinguished Paper Award",
+          "org": "FSE",
+          "paper_id": "DBLP:conf/sigsoft/BirdZ12"
+        },
+        {
+          "year": "2010",
+          "title": "Best Paper Award",
+          "org": "MSR",
+          "paper_id": "DBLP:conf/msr/RahmanBD10"
+        },
+        {
+          "year": "2009",
+          "title": "ACM SIGSOFT Distinguished Paper Award",
+          "org": "ICSE",
+          "paper_id": "DBLP:conf/icse/BirdNDGM09"
+        }
+      ]
+    },
+    {
+      "key": "reviewing",
+      "group": "Reviewing",
+      "items": [
+        {
+          "year": "2019",
+          "title": "Distinguished Reviewer",
+          "org": "ICSE"
+        },
+        {
+          "year": "2016",
+          "title": "Distinguished Reviewer",
+          "org": "ICSE"
+        },
+        {
+          "year": "2015",
+          "title": "Distinguished Reviewer",
+          "org": "ASE"
+        },
+        {
+          "year": "2011–12",
+          "title": "Distinguished Referee",
+          "org": "ACM Transactions on Software Engineering and Methodology"
+        }
+      ]
+    },
+    {
+      "key": "early",
+      "group": "Early career",
+      "items": [
+        {
+          "year": "2008–09",
+          "title": "Best Graduate Researcher Award",
+          "org": "UC Davis, Department of Computer Science"
+        },
+        {
+          "year": "1996",
+          "title": "National Merit Scholar",
+          "org": "awarded for the complete undergraduate career"
+        }
+      ]
+    }
+  ],
   "bio": "",
   "about": "I work at the intersection of software engineering, empirical studies, AI, and applied research. I'm motivated by finding what makes engineers' work painful and working on helping them feel more productive and happier in their work.\n\nMy approach starts with understanding how developers actually work — which can include mining data from repositories and databases (requirements, code, bugs, reviews, builds, tests, telemetry, docs, wikis, even team meeting transcripts), running large-scale surveys, and interviewing engineering teams, all to understand and explore the challenges they face. Our team then uses those insights to design and build tools, refine development processes, and drive changes that teams can actually adopt.\n\nI've explored code review, branching and release strategies, build systems, testing practices, developer productivity, and most recently, AI-assisted software engineering. At Microsoft Research, I've had the privilege of working directly with product teams at scale, understanding their workflows firsthand, prototyping solutions, and seeing them through to real adoption across organizations. I also share what I've tried and learned through publications, talks, and open collaboration with the broader software engineering community.\n\nI've worked with an incredible group of people over the course of my career, from amazing mentors to incredibly insightful colleagues, to talented interns. I've learned a lot from all of them (too many to list here). None of this is work I've done on my own.",
   "research_areas": [
@@ -42,5 +223,72 @@
         "url": "https://www.microsoft.com/en-us/research/people/cbird/"
       }
     ]
-  }
+  },
+  "patents": [
+    {
+      "title": "Automated Merge Conflict Resolution",
+      "number": "12,524,647",
+      "granted": "January 13, 2026"
+    },
+    {
+      "title": "Automated Merge Conflict Resolution with Transformers",
+      "number": "12,159,211",
+      "granted": "December 3, 2024"
+    },
+    {
+      "title": "Concurrent Edit Detection",
+      "number": "11,822,518",
+      "granted": "November 21, 2023"
+    },
+    {
+      "title": "Natural Language Code Search",
+      "number": "11,715,006",
+      "granted": "August 1, 2023"
+    },
+    {
+      "title": "Frequent Source Code Pattern Mining",
+      "number": "11,662,984",
+      "granted": "May 30, 2023"
+    },
+    {
+      "title": "Detecting Misconfiguration and/or Bug(s) in Large Service(s) Using Correlated Change Analysis",
+      "number": "11,599,354",
+      "granted": "March 7, 2023"
+    },
+    {
+      "title": "Concurrent Edit Detection",
+      "number": "11,550,758",
+      "granted": "January 10, 2023"
+    },
+    {
+      "title": "Frequent Source Code Pattern Mining",
+      "number": "11,392,354",
+      "granted": "July 19, 2022"
+    },
+    {
+      "title": "Techniques to Identify Idiomatic Code in a Code Base",
+      "number": "10,042,740",
+      "granted": "August 7, 2018"
+    },
+    {
+      "title": "Predicting Software Build Errors",
+      "number": "9,542,176",
+      "granted": "January 10, 2017"
+    },
+    {
+      "title": "Analyzing Power Consumption in Mobile Computing Devices",
+      "number": "9,400,541",
+      "granted": "July 26, 2016"
+    },
+    {
+      "title": "Analyzing Power Consumption in Mobile Computing Devices",
+      "number": "8,965,718",
+      "granted": "February 24, 2015"
+    },
+    {
+      "title": "Software Development Automated Analytics",
+      "number": "8,745,572",
+      "granted": "June 3, 2014"
+    }
+  ]
 }

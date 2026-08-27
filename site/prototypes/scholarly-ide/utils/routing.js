@@ -8,6 +8,7 @@ IDE.tabToPath = function tabToPath(tab) {
   const BASE_PATH = IDE.BASE_PATH;
   if (!tab || tab === 'home') return BASE_PATH + '/';
   if (tab === 'publications') return BASE_PATH + '/publications';
+  if (tab === 'honors') return BASE_PATH + '/honors';
   if (tab === 'cv') return BASE_PATH + '/cv';
   if (tab === 'posts') return BASE_PATH + '/posts';
   if (tab === 'profile') return BASE_PATH + '/profile';
@@ -28,6 +29,7 @@ IDE.pathToTab = function pathToTab(pathname) {
   const first = parts[0];
   const tail = parts.slice(1).join('/');
   if (first === 'publications' && parts.length === 1) return 'publications';
+  if (first === 'honors' && parts.length === 1) return 'honors';
   if (first === 'cv' && parts.length === 1) return 'cv';
   if (first === 'posts' && parts.length === 1) return 'posts';
   if (first === 'profile' && parts.length === 1) return 'profile';

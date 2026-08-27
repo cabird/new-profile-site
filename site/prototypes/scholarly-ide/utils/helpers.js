@@ -41,6 +41,7 @@ IDE.buildVirtualFS = function buildVirtualFS(siteData, papers, callbacks) {
 
   files.push({ name: 'home.md', path: 'home.md', ext: '.md', action: () => callbacks.setActiveTab('home') });
   files.push({ name: 'publications.md', path: 'publications.md', ext: '.md', action: () => callbacks.setActiveTab('publications') });
+  files.push({ name: 'honors.md', path: 'honors.md', ext: '.md', action: () => callbacks.setActiveTab('honors') });
   files.push({ name: 'profile.jpg', path: 'profile.jpg', ext: '.jpg', action: () => callbacks.setActiveTab('profile') });
 
   if (siteData?.cv_link) {
