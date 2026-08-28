@@ -18,7 +18,7 @@ import secrets
 
 from dotenv import load_dotenv
 from openai import AsyncAzureOpenAI
-from quart import Quart, jsonify
+from quart import Quart, jsonify, request
 from quart_cors import cors
 
 # Register .jsx MIME type before anything else
@@ -62,6 +62,22 @@ async def handle_500(error):
     return jsonify({'error': 'Internal server error'}), 500
 
 
+@app.before_request
+async def block_llm_routes_when_disabled():
+    """Kill switch: refuse every LLM-backed request unless LLM_ENABLED is set.
+
+    Runs before any handler, so it holds even if a client were initialized
+    elsewhere. GET/DELETE on these paths (e.g. clearing a conversation) are
+    harmless and stay allowed.
+    """
+    if config.llm_enabled() or request.method != 'POST':
+        return None
+    path = request.path
+    if path.startswith(config.LLM_ROUTE_PREFIXES) or (path.startswith('/api/') and path.endswith(config.LLM_ROUTE_SUFFIXES)):
+        return jsonify({'error': config.LLM_DISABLED_MESSAGE, 'type': 'llm_disabled'}), 503
+    return None
+
+
 def initialize_app():
     corpus.load_all()
     terminal.init()
@@ -72,16 +88,20 @@ def initialize_app():
     except Exception as e:
         logger.error(f"Failed to initialize research assistant: {e}")
 
-    try:
-        client = AsyncAzureOpenAI(
-            azure_endpoint=os.getenv('AZURE_OPENAI_PAPER_CHAT_ENDPOINT'),
-            api_key=os.getenv('AZURE_OPENAI_PAPER_CHAT_KEY'),
-            api_version=os.getenv('AZURE_OPENAI_PAPER_CHAT_API_VERSION', '2024-02-01')
-        )
-        chat_common.init(client)
-        logger.info("Azure OpenAI client initialized successfully")
-    except Exception as e:
-        logger.error(f"Failed to initialize Azure OpenAI client: {e}")
+    if not config.llm_enabled():
+        logger.warning("LLM features are DISABLED (set LLM_ENABLED=1 to turn them on); "
+                       "no Azure OpenAI client will be created")
+    else:
+        try:
+            client = AsyncAzureOpenAI(
+                azure_endpoint=os.getenv('AZURE_OPENAI_PAPER_CHAT_ENDPOINT'),
+                api_key=os.getenv('AZURE_OPENAI_PAPER_CHAT_KEY'),
+                api_version=os.getenv('AZURE_OPENAI_PAPER_CHAT_API_VERSION', '2024-02-01')
+            )
+            chat_common.init(client)
+            logger.info("Azure OpenAI client initialized successfully")
+        except Exception as e:
+            logger.error(f"Failed to initialize Azure OpenAI client: {e}")
 
     analytics.init_analytics_db()
 

@@ -27,6 +27,7 @@ The version displays in the status bar of the IDE.
 
 ## Environment Variables (on Render)
 
+- `LLM_ENABLED` — master switch for all LLM features (chat, ask, terminal). Off unless set to `1`; guard lives in `site/app.py`, flag in `site/config.py`
 - `AZURE_OPENAI_PAPER_CHAT_ENDPOINT` — Azure OpenAI endpoint URL
 - `AZURE_OPENAI_PAPER_CHAT_KEY` — API key
 - `AZURE_OPENAI_PAPER_CHAT_DEPLOYMENT` — model name (gpt-5.4-mini)

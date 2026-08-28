@@ -27,6 +27,7 @@ Configure these in Render rather than committing them:
 
 | Variable | Required | Purpose |
 |---|---|---|
+| `LLM_ENABLED` | No | **Off by default.** Set to `1` to enable chat, ask, and terminal. When unset, no Azure client is created and every LLM route returns 503. |
 | `AZURE_OPENAI_PAPER_CHAT_ENDPOINT` | For AI features | Azure OpenAI endpoint |
 | `AZURE_OPENAI_PAPER_CHAT_KEY` | For AI features | Azure OpenAI API key |
 | `AZURE_OPENAI_PAPER_CHAT_DEPLOYMENT` | For AI features | Model deployment, currently `gpt-5.4-mini` |
