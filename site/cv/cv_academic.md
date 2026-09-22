@@ -1,8 +1,8 @@
 # Christian Bird
 
 Senior Principal Researcher
-One Microsoft Way, Redmond, WA 98052
-cbird [at] microsoft [dot] com
+17609 NE 104th Way, Redmond, WA 98052
+cabird [at] gmail [dot] com
 www.cabird.com
 
 ## Research Interests
