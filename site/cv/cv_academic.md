@@ -2,7 +2,7 @@
 
 Senior Principal Researcher
 17609 NE 104th Way, Redmond, WA 98052
-cabird [at] gmail [dot] com
+cabird [at] acm [dot] org
 www.cabird.com
 
 ## Research Interests
