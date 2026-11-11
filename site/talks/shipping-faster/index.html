@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why aren’t we shipping faster now? · Christian Bird</title>
+  <meta name="description" content="A talk at the UC Irvine software engineering seminar, October 30, 2026: AI, activity, and outcomes in software engineering. Video, slides and script.">
+  <meta property="og:title" content="Why aren't we shipping faster now?">
+  <meta property="og:description" content="AI, activity, and outcomes in software engineering. A talk at UC Irvine, October 2026. Video and slides.">
+  <meta property="og:image" content="https://cabird.com/talks/shipping-faster/title.jpg">
+  <meta property="og:url" content="https://cabird.com/talks/shipping-faster/">
+  <meta property="og:type" content="video.other">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    :root {
+      --paper: #f5ede0;
+      --ink: #1d1a16;
+      --muted: #6b6257;
+      --rule: #d8cdbb;
+      --navy: #06336a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Charter, "Iowan Old Style", Georgia, "Times New Roman", serif;
+      font-size: 19px;
+      line-height: 1.5;
+    }
+    main { max-width: 860px; margin: 0 auto; padding: 48px 20px 80px; }
+    .kicker {
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+    h1 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+    .sub { font-size: 24px; margin: 0 0 6px; }
+    .byline { color: var(--muted); margin: 0 0 32px; }
+    .video {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border: 1px solid var(--rule);
+    }
+    .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    h2 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-top: 1px solid var(--rule);
+      padding-top: 18px;
+      margin: 40px 0 12px;
+    }
+    ul.files { list-style: none; padding: 0; margin: 0; }
+    ul.files li { padding: 8px 0; border-bottom: 1px solid var(--rule); }
+    ul.files li:last-child { border-bottom: 0; }
+    a { color: var(--navy); }
+    .size { color: var(--muted); font-size: 16px; margin-left: 8px; white-space: nowrap; }
+    p { margin: 0 0 16px; }
+    .sources { font-size: 16px; color: var(--muted); }
+    .sources p { margin: 0 0 8px; }
+    footer { margin-top: 48px; font-size: 15px; color: var(--muted); }
+    @media (max-width: 600px) {
+      body { font-size: 17px; }
+      h1 { font-size: 30px; }
+      .sub { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <p class="kicker">Talk · UC Irvine software engineering seminar · October 30, 2026</p>
+  <h1>Why aren’t we shipping faster now?</h1>
+  <p class="sub">AI, activity, and outcomes in software engineering</p>
+  <p class="byline">Christian Bird, Dryden Technology Group</p>
+
+  <div class="video">
+    <iframe src="https://www.youtube-nocookie.com/embed/0wumMeZsNsI" title="Why aren't we shipping faster now? (video of the talk)"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen loading="lazy"></iframe>
+  </div>
+  <p class="sources" style="margin-top:10px">21 minutes, with captions. Also on <a href="https://youtu.be/0wumMeZsNsI">YouTube</a>.</p>
+
+  <h2>Slides</h2>
+  <ul class="files">
+    <li><a href="why-arent-we-shipping-faster-now-handout.pdf">Handout</a><span class="size">19 pages, 3.8 MB</span><br>
+        <span class="sources">One page per picture. The version to read.</span></li>
+    <li><a href="why-arent-we-shipping-faster-now.pdf">Full deck</a><span class="size">41 pages, 4.0 MB</span><br>
+        <span class="sources">Every build step, as shown in the talk.</span></li>
+    <li><a href="why-arent-we-shipping-faster-now-script.pdf">Slides with the script</a><span class="size">41 pages, 8.6 MB</span><br>
+        <span class="sources">Each step with what is said during it underneath.</span></li>
+  </ul>
+
+  <h2>About the talk</h2>
+  <p>Across more than 500,000 developers, coding activity with autonomous agents rose by up to 240 percent. Software releases rose 30 percent. This talk is about where the rest went. It draws on interviews with 30 engineers, managers and product managers working on long-lived products, a survey of 448 developers about how much control they would hand to an AI, a benchmark of AI code reviewers built from real bugs in real pull requests, and 27 matched pairs of developers on the same teams who used the same tools very differently.</p>
+  <p>The short version: AI made it cheap to start work, so more work started, by more people. Review, testing, integration and deployment got no faster, and the people who do that work did not multiply. Expectations treated generating code and shipping it as the same thing, and that is where work got dropped. Better models help with part of it. The rest is how we measure, staff and protect the work after the diff.</p>
+
+  <h2>Sources</h2>
+  <div class="sources">
+    <p>Demirer, Musolff and Yang, "Writing Code vs. Shipping Code", NBER Working Paper 35275. <a href="https://www.nber.org/papers/w35275">nber.org/papers/w35275</a></p>
+    <p>The developer autonomy survey of 448 developers. <a href="https://arxiv.org/abs/2607.00533">arxiv.org/abs/2607.00533</a></p>
+    <p>Jensen Huang at Computex 2023, as reported by Reuters.</p>
+    <p>The interview study, the code review benchmark and the matched-pairs study are not yet published. Links will be added here as they appear.</p>
+  </div>
+
+  <footer><a href="/">cabird.com</a></footer>
+</main>
+</body>
+</html>

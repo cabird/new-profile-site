@@ -141,6 +141,15 @@ async def serve_ai_matters(path):
     return await send_from_directory('AI_where_it_matters', path)
 
 
+@bp.route('/talks/<slug>/')
+@bp.route('/talks/<slug>')
+async def talk_index(slug):
+    """A talk's page: talks/<slug>/index.html (the slides and the video); its files come through the catch-all."""
+    if not re.fullmatch(r'[a-z0-9-]+', slug) or not os.path.isfile(os.path.join('talks', slug, 'index.html')):
+        return jsonify({'error': 'Not found'}), 404
+    return await send_from_directory(os.path.join('talks', slug), 'index.html')
+
+
 @bp.route('/blog/<path:path>')
 async def serve_blog_asset(path):
     """Serve blog assets (images, etc.) from blog/<slug>/<filename>."""
